@@ -18,7 +18,8 @@ For example:
 There are a total of 2 courses to take. To take course 1 you should have finished course 0. So the correct course order is [0,1]
 
 4, [[1,0],[2,0],[3,1],[3,2]]
-There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0. So one correct course order is [0,1,2,3]. Another correct ordering is[0,2,1,3].
+There are a total of 4 courses to take. To take course 3 you should have finished both courses 1 and 2. 
+Both courses 1 and 2 should be taken after you finished course 0. So one correct course order is [0,1,2,3]. Another correct ordering is[0,2,1,3].
 
 Note:
 
@@ -87,9 +88,9 @@ public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
         vector<vector<int>>graph(numCourses,vector<int>());
         for(auto i: prerequisites)
-            graph[i.second].push_back(i.first);
+            graph[i.second].push_back(i.first);//second 是parent，first是children
         queue<int>q;
-        vector<int>degree(numCourses,0);
+        vector<int>degree(numCourses,0); //in degree
         vector<int>res;
         for(int i = 0; i<graph.size();i++){
             for(int j: graph[i])
