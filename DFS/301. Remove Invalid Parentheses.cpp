@@ -2,6 +2,9 @@
 
 301. Remove Invalid Parentheses
 
+Time	    Space	Difficulty
+O(C(n, c))	O(c)	Hard
+
 Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
 
 Note: The input string may contain letters other than the parentheses ( and ).
@@ -128,3 +131,99 @@ public:
 };
 
 
+
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        int left_removed = 0;
+        int right_removed = 0;
+        for(int i = 0; i<s.size();i++){
+            if(s[i]!='(' && s[i]!=')') continue;
+            if(s[i]== ')'){
+                if(left_removed>0) left_removed--;
+                else right_removed++;
+            }else{
+                left_removed++;
+            }
+        }
+        if(left_removed == 0 && right_removed == 0) return {s}; 
+        unordered_set<string> res;
+        dfs(s,res,"",0,left_removed,right_removed,0);
+        return vector<string>(res.begin(),res.end());
+    }
+    
+    void dfs(const string & s, unordered_set<string>& res, string cur, int index, int left_removed, int right_removed, int pair){
+        if(index == s.size()){
+            if(left_removed == 0 && right_removed == 0)
+                res.insert(cur);
+            return;
+        }
+        if(s[index] != '(' && s[index] != ')'){
+            dfs(s,res,cur+s[index],index+1,left_removed,right_removed, pair);
+        }
+        if(s[index]=='('){
+            if(left_removed>0)
+                dfs(s,res,cur,index+1,left_removed-1,right_removed, pair);
+            dfs(s,res,cur+s[index],index+1,left_removed,right_removed, pair+1);
+        }
+        else if(s[index]==')'){
+            if(right_removed>0)
+                dfs(s,res,cur,index+1,left_removed,right_removed-1, pair);
+            if(pair>0)
+                dfs(s,res,cur+s[index],index+1,left_removed,right_removed, pair-1);
+        }
+
+    }
+};
+
+
+
+//smart idea
+
+/*
+process redundant ")" from left to right, process redundant "(" from right to left
+*/
+
+class Solution {
+    private:
+        vector<string> res;
+        string p={'(',')'};
+    
+        void helper(string& s, int si, int sj, int rev){
+            //cout<<endl<<"s "<<s<<" si "<<si<<" sj "<<sj<<" rev  "<<rev<<endl;
+            int stn=0;
+            for(int i=si;i<s.size();i++){
+                if(s[i]==p[rev]) stn++;
+                else if(s[i]==p[1-rev]) stn--;
+                //cout<<"i "<<i <<" s[i] "<<s[i]<<" stk " <<stn<<endl;
+                if(stn<0){
+                    for(int j=sj;j<=i;j++){
+                        //cout<<"j "<<j<<" s[j] "<<s[j]<<"rev  "<<rev<<" p[1-rev ] "<<p[1-rev]<<" si "<<si<<" sj "<<sj<<endl;
+                        if(s[j]==p[1-rev] && (j==sj || s[j-1]!=p[1-rev])){
+                            
+                            string t=s.substr(0,j)+s.substr(j+1);
+                            //cout<<" t "<< t <<endl;
+                            helper(t, i, j, rev);
+                        }
+                    }
+                    return ;
+                }
+            }
+            string rs=s;
+            reverse(rs.begin(), rs.end());
+            //cout<<"reversed "<<rs<<endl;
+            if(p[rev]=='('){
+                //cout<<"go into another "<<endl;
+                helper(rs, 0, 0, 1-rev);
+            }else{
+                //cout<<"push back s "<<rs<<endl;
+                res.push_back(rs);
+            }
+        }    
+    public:
+        vector<string> removeInvalidParentheses(string s) {
+            res.clear();
+            helper(s, 0, 0, 0);
+            return res;
+        }
+    };
