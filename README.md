@@ -29,9 +29,9 @@
 | [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/)	|	_O(p + r \* n)_	|	_O(n)_ |	Medium |  |
 | [802. Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/description/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | 需要定义state 0：unvisited, 1 visited not safe, 2 visited safe |
 
-
-
-
+</br>
+</br>
+</br>
 
 ## Backtracking
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -62,9 +62,9 @@
 | [718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)	|	_O(m \* n)_	|	_O(min(m, n))_ |	Medium | DP  |
 | [784. Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/description/)	|	_O(n \* 2^n)	_	|	_O(1)_ |	Easy |  |
  
-
-
-
+</br>
+</br>
+</br>
 
  ## Dynamic Programming
  |Title | Time  | Space | Difficulty |  Algorithm Note|
