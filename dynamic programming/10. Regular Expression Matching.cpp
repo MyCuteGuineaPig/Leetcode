@@ -84,3 +84,27 @@ public:
         return dp[s.length()][p.length()];
     }
 };
+
+
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        vector<vector<int>>dp(p.size()+1, vector<int>(s.size()+1,0)); //dp[i+1][j+1] 代表s[i] p[j]位置情况
+        dp[0][0] = 1;
+        for(int i = 1; i<=p.size();i++){
+            for(int j = 0; j<=s.size(); j++){ // 
+                if(j == 0 && p[i-1] == '*') dp[i][0] = dp[i-2][j];
+                else if(j>0){
+                    if(p[i-1]!='*') dp[i][j] =  p[i-1] == s[j-1] || p[i-1] == '.' ? dp[i-1][j-1] : 0;
+                    else dp[i][j] = dp[i-2][j] || dp[i-1][j] || (j>1 && (p[i-2] == s[j-1] || p[i-2] == '.')  && dp[i][j-1] ); 
+                        // dp[j] 
+                        //dp[i-2][j] is zero preceding
+                        //dp[i-1][j] is one preceding 
+                        // dp[i][j-1] is two or more preceding
+                }
+            }
+        }
+        return dp[p.size()][s.size()];
+    }
+};
