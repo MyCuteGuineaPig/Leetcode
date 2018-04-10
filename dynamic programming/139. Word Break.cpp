@@ -67,3 +67,22 @@ public:
         return dp[s.size()-1];
     }
 };
+
+
+/*
+进一步优化 for(int j = i; j>=0 && !dp[i]; j--) 先从长度小的substring看，一旦到true，break，减小运行时间，
+
+*/
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string>dict(wordDict.begin(),wordDict.end());
+        vector<int>dp(s.size(),0);
+        for(int i = 0; i<s.size();i++)
+            for(int j = i; j>=0 && !dp[i]; j--)
+                if(dict.find(s.substr(j,i-j+1))!=dict.end())
+                    dp[i] = (j == 0)|| dp[j-1];
+        return dp[s.size()-1];
+    }
+};
