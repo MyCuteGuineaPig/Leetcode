@@ -84,8 +84,29 @@ public:
 
 
 
+/*
+Solution 2:
+https://www.quora.com/Given-n-how-many-structurally-unique-BSTs-binary-search-trees-that-store-values-1-to-n-are-there
+*/
 
 
-
-
+class Solution {
+public:
+    int numTrees(int n) {
+        return ((double)1/(n+1))*choose(2*n, n);
+    }
+    
+    unsigned long long choose(unsigned long long n, unsigned long long k) {
+        if (k > n) {
+            return 0;
+        }
+        unsigned long long r = 1;
+        for (unsigned long long d = 1; d <= k; ++d) {
+            r *= n--;
+            r /= d;
+            cout<<r<<endl;
+        }
+        return r;
+    }
+};
 

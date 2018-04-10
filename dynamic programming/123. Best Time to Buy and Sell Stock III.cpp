@@ -43,3 +43,30 @@ public:
    比如 price = 2, ff[1] = 7, 价格差5，再次基础上抛售上一个，买近下一个,现在利润是7，用现在利润7买进2，还剩下5，
 
 */
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()<=1) return 0;
+        vector<int>profit(prices.size(),0);
+        for(int k = 0; k<2; k++)
+            for(int i = 1, cost = -prices[0], prev_cost = -prices[0]; i<prices.size();prev_cost = cost,i++)
+                cost = max(profit[i]-prices[i],cost), profit[i] = max(profit[i-1],prices[i] + prev_cost);
+        
+        return profit[prices.size()-1];
+    }
+};
+
+/*
+         1   2   3    2   5  1 6
+i = 0
+    cost -1 -1  -1   -1  -1 -1 -1    到每个点用profit 价格，等于剩余的profit
+    dp   0   1   2    2   4  4  5
+i = 1
+    cost -1 -1  -1    0   0  3  0 
+    dp   0   1   2    2   5  5  9
+
+每个loop 都可以保证是最多i个transaction，因为每个loop的profit的 前提是基于i-1个transaction的,而每个loop 只会增加一个transaction，
+因为每个loop 的原则是找到新的最低点，然后买进，再卖出
+*/

@@ -126,7 +126,21 @@ public:
 };
 
 
-
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        if(obstacleGrid.size() == 0) return 0;
+        int m = obstacleGrid[0].size(), n = obstacleGrid.size();
+        if(obstacleGrid[n-1][m-1] || obstacleGrid[0][0]) return 0;
+        vector<int>dp(m,0);
+        dp[0] = 1;
+        for(int i = 0; i<n; i++)
+            for(int j = 0; j<m;j++)
+                if(!obstacleGrid[i][j])  dp[j] = i>0 && j>0 ? dp[j] + dp[j-1]: j == 0 ? dp[j]: dp[j-1];
+                else dp[j] = 0;
+        return dp[m-1];
+    }
+};
 
 
 

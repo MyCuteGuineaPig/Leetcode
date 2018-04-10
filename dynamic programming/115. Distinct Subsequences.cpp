@@ -62,3 +62,19 @@ public:
         return dp[m][n];
     }
 };  
+
+
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        if(s.length() == 0 || s.length()<t.length()) return 0;
+        vector<vector<int>>dp(2, vector<int>(s.length(),1));
+        for(int i = 0; i<t.length(); i++)
+            for(int j = 0, k = i%2; j<s.length();j++)
+                if(t[i] == s[j] && j>=i) dp[k][j] = (j==0 ? 1 : dp[k][j-1] + dp[k^1][j-1]);
+                else  dp[k][j] = (j == 0 ? 0 :  dp[k][j-1]);
+        
+        //  dp[k][j-1] + dp[k^1][j-1] :  dp[k][j-1] 删除s[j]，用s[0:j-1]作为t[0:i],  dp[k^1][j-1] 用 s[j] 做t[i] （不删除）
+        return dp[(t.length()-1)%2][s.length()-1];
+    }
+};    

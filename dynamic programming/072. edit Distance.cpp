@@ -48,3 +48,16 @@ public:
         return dp[word1.length()][word2.length()];
     }
 };
+
+
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int n = word1.size(), m = word2.size();
+        vector<vector<int>>dp(2,vector<int>(m +1,0));
+        for(int i = 0; i<=n; i++)
+            for(int  j = 0, k = i%2; j<=m;j++)
+                dp[k][j] = j == 0 || i == 0 ? (i == 0? j : i) : (word1[i-1] == word2[j-1] ? dp[k^1][j-1] : 1 + min((dp[k^1][j-1] < dp[k^1][j] ? dp[k^1][j-1]:dp[k^1][j] ), dp[k][j-1]));
+        return dp[n%2][m];
+    }
+};

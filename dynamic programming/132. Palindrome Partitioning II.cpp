@@ -60,33 +60,52 @@ public:
 class Solution {
 public:
     int minCut(string s) {
-        vector<int>d(s.size(),0);
-        vector<vector<bool>>ispal(s.size(),vector<bool>(s.size(),false));
-        for(int i = s.size()-1;i>=0; i--){
-            d[i] = s.size()-i-1;
-            cout<<"i "<<i<<endl;
-            for(int j = i; j<s.size();j++){
-                cout<<"substr "<<s.substr(i,j-i+1)<<"  d[i] "<<d[i];
-                if(s[i] == s[j] && (j-i<2 || ispal[i+1][j-1])){
-                    if (i+1<s.size() && j-1>=0)
-                        cout<<" ispal["<<i+1<<"]["<<j-1<<"] "<<ispal[i+1][j-1]<<endl;
-                    else cout <<endl;
-                    ispal[i][j] = true;
-                    if(j == s.size()-1){
-                        d[i] = 0; 
-                        cout<<" d[i] "<<d[i]<<endl;
-                    }
-                    else if(d[j+1]+1<d[i]){
-                         d[i]=d[j+1]+1;
-                         cout<<" d[j+1] "<<d[j+1]<<endl;
-                    }
-                       
+        int n = s.size();
+        vector<int>dp(n+1,0);
+        vector<vector<int>>ispal(n,vector<int>(n,0)); // represent substring is Palindrome from i to j 
+        dp[0] = -1;
+        for(int i = 0; i<n; i++){
+            dp[i+1] = i;
+            for(int j = 0; j<=i;j++){
+                if(s[i] == s[j] && (i-j<=1 || ispal[i-1][j+1])){
+                    ispal[i][j] = 1;
+                    dp[i+1] = min(dp[i+1],dp[j]+1);
                 }
             }
-            
         }
-        return d[0];
+        return dp[n];
     }
 };
 
 
+/*
+The Manancher-like solution scan the array from left to right (for i loop) and only check those sub-strings centered at s[i]; 
+once a non-palindrome string is found, it will stop and move to i+1. 
+Same as the DP solution, minCUTS[i] is used to save the minimum cuts for s[0:i-1].
+ For each i, we do two for loops (for j loop) to check if the substrings s[i-j … i+j] (odd-length substring) 
+ and s[i-j-1… i+j] (even-length substring) are palindrome. 
+ By increasing j from 0, we can find all the palindrome sub-strings centered at i and update minCUTS accordingly.
+  Once we meet one non-palindrome sub-string, we stop for-j loop since we know there no further palindrome substring centered at i. 
+  This helps us avoid unnecessary palindrome substring checks, as we did in the DP algorithm. Therefore, this version is faster.
+
+*/
+
+class Solution {
+public:
+    int minCut(string s) {
+        int n = s.size();
+        vector<int>dp(n+1,0);
+        for(int i = 0; i<=n; i++)
+            dp[i] = i-1;
+        for(int i = 0; i<n; i++){
+            for(int j = 0; i-j>=0 && i+j<n && s[i-j] == s[i+j];j++)
+                dp[i+j+1] = min(dp[i+j+1],dp[i-j]+1);
+                
+            for(int j = 0; i-j-1>=0 && i+j<n && s[i-j-1] == s[i+j];j++)
+                dp[i+j+1] = min(dp[i+j+1],dp[i-j-1]+1);
+
+            cout<<"dp[i+1] "<<dp[i+1]<<endl;
+        }
+        return dp[n];
+    }
+};

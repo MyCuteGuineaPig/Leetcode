@@ -39,3 +39,31 @@ public:
         return dp[n][n];
     }
 };
+
+
+
+/*
+dp[i] = dp[i] || (j == 0)|| dp[j-1];
+
+dp[i] = dp[i] 代表这次如果已经是true了，不要受这次而影响 比如 S = "leetcode" dict = ["le","etc","tc"]
+如果到le etc 是对的，但是要继续loop substring 从etc 变成et, 如果不加这个条件这样 leetc 就是false了，因为lee 不在dict里面，
+
+dp[i] =  (j == 0)|| dp[j-1];
+比如 S = "leetcode" dict = ["leet","code"]  
+(j == 0) apply for "leet"  then dp[3] = true
+dp[j-1] apply for "code" (dp[j-1] = dp[3] = true)
+
+*/
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string>dict(wordDict.begin(),wordDict.end());
+        vector<int>dp(s.size(),0);
+        for(int i = 0; i<s.size();i++)
+            for(int j = 0; j<=i; j++)
+                if(dict.find(s.substr(j,i-j+1))!=dict.end())
+                    dp[i] = dp[i] || (j == 0)|| dp[j-1];
+        return dp[s.size()-1];
+    }
+};
