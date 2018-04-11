@@ -18,7 +18,8 @@ Given a list of non-negative integers representing the amount of money of each h
 
 /*
 
-This problem is a little tricky at first glance. However, if you have finished the House Robber problem, this problem can simply be decomposed into two House Robber problems.
+This problem is a little tricky at first glance. However, if you have finished the House Robber problem, 
+this problem can simply be decomposed into two House Robber problems.
 Suppose there are n houses, since house 0 and n - 1 are now neighbors, we cannot rob them together and thus the solution is now the maximum of
 
 Rob houses 0 to n - 2;
@@ -64,5 +65,36 @@ private:
             cur = temp;
         }
         return cur;
+    }
+};
+
+
+/*
+
+有两个dp 一个是从0 到size-2
+另外一个 是从1 到size-1， 
+
+因为头尾相连， 比如 [5,4,1,3,2,7]
+用了5了，就不能用7
+同理用了4了，可以用7，但不能回过来用5
+一个dp是[5,4,1,3,2], 另一个dp是[4,1,3,2,7]
+*/
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.size()==0) return 0;
+        if(nums.size()==1) return nums[0];
+        int a1 = nums[0], profit1 = max(nums[0],nums[1]), b1 = 0, profit2= nums[1];
+        int a2, b2;
+        for(int i = 2; i<nums.size();i++){
+            a2 = a1; a1 = profit1;
+            if(i<nums.size()-1){
+                 profit1 = max(nums[i]+a2,a1);
+            }
+            b2 = b1; b1 = profit2;
+            profit2 = max(nums[i]+b2,b1);
+        }
+        return max(profit1, profit2);
     }
 };

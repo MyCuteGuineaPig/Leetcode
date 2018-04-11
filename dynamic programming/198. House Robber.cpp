@@ -53,3 +53,21 @@ public:
     return max(a, b);
     }
 };
+
+
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.size() == 0) return 0;
+        if(nums.size()==1) return nums[0];
+        if(nums.size()==2) return max(nums[0],nums[1]);
+        int p2 = nums[0], p1 = max(nums[1],nums[0]), tot = 0;
+        for(int i = 2; i<nums.size(); i++){
+            tot = max(nums[i]+p2, p1);
+            p2 = p1;
+            p1 = tot; 
+        }
+        return tot;
+    }
+};

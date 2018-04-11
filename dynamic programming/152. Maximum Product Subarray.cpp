@@ -61,3 +61,26 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int localmax = nums[0], localmin=nums[0], globalmax = nums[0];
+        for(int i = 1; i<nums.size();i++){
+            int temp = max(nums[i],nums[i]*localmax,nums[i]*localmin);
+            localmin = min(nums[i],nums[i]*localmax,nums[i]*localmin);
+            localmax = temp;
+            globalmax = std::max(localmax,globalmax);
+            
+        }
+        return globalmax;
+    }
+    
+    int max(int a, int b, int c){
+        return std::max(a,std::max(b,c));
+    }
+    int min(int a, int b, int c){
+        return std::min(a,std::min(b,c));
+    }
+};
