@@ -90,3 +90,4 @@ DFS 是看有没有path，DP是看有几个path
 | [198. House Robber](https://leetcode.com/problems/house-robber/)	|	_O(n)_	|	_O(1)_ |	Easy | 三个variables，一个记录现在profit,</br>一个记录上一个profit，</br> 一个记录上上一个profit |
 | [213. House Robber II](https://leetcode.com/problems/house-robber-ii/)	|	_O(n)_	|	_O(1)_ |	Medium | 分成另个house rob问题，<ul><li>Rob houses 0 to n - 2 </li> <li>Rob houses 1 to n - 1</li></ul> |
 | [221. Maximal Square](https://leetcode.com/problems/maximal-square/)	|	_O(n^2)_	|	_O(n)_ |	Medium | dp记录到（i,j) 最大正方形边长</br> d\[i,j] = min(d\[i-1,j]+ d\[i,j-1] + d\[i-1,j-1])+ 1 |
+| [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/)	|	_O(n \* sqrt(n))_	|	_O(n)_ |	Medium | static dynamic programming 会更快 |
