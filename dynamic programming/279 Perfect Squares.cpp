@@ -61,6 +61,24 @@ public:
         return cntPerfectSquares.back();
     }
 };
+
+class Solution {
+public:
+    int numSquares(int n) {
+        vector<int>dp(n,-1);
+        for(int i = 1; i<=sqrt(n); i++){
+            dp[i*i-1] = 1;
+            for(int j = i*i+1; j<=n;j++){
+                if (dp[j-1] == -1) dp[j-1] = j;
+                dp[j-1]= min(dp[j-1],dp[j-i*i-1]+1);
+            }
+        }
+        return dp[n-1];
+    }
+};
+
+
+
 2.Static Dynamic Programming: 12ms
 
 class Solution 
