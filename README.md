@@ -45,7 +45,7 @@
 | [047. Permutations II](https://leetcode.com/problems/permutations-ii/)	|	_O(\n * n!)_	|	_O(n)_ |	Medium |  <ul><li>可以用backtracking + swap, swap前</br>须check i是不是第一个从begin开始这样的数值</li> <li> 可以用recursive insert value, </br>insert前需要知道此数在list中第一个position index</li></ul>  |
 | [051. N-Queens	](https://leetcode.com/problems/n-queens/)	|	_O(n!)_	|	_O(n)_ |	Hard | not hard 经典backtracking |
 | [052. N-Queens-II](https://leetcode.com/problems/n-queens-ii/)	|	_O(n!)_	|	_O(n)_ |	Hard |  |
-| [077. Combinations](https://leetcode.com/problems/combinations/)	|	_O(O(k \* C(n, k)))_	|	_O(k)_ |	Medium | 经典backtracking 可recursive 可iterative |
+| [077. Combinations](https://leetcode.com/problems/combinations/)	|	_O(k \* C(n, k))_	|	_O(k)_ |	Medium | 经典backtracking 可recursive 可iterative |
 | [079. Word Search](https://leetcode.com/problems/word-search/description/)	|	_O(m \* n \* l)_	|	_O(l)_ |	Medium | smart way: 用bitmask 把visited的^ 变为为字母 |
 | [093. Restore IP Addresses](https://leetcode.com/problems/restore-ip-addresses/description/)	|	_O(1)_	|	_O(1)_ |	Medium | recursive & iterative |
 | [078. Subsets](https://leetcode.com/problems/subsets/)	|	_O(n \* 2^n)_	|	_O(1)_ |	Medium | recursive & iterative, 可以用bit trick</br>第一个数每2次出现1次，第二个数每4次出现2次，第二个数每8次出现4次 |
@@ -73,8 +73,8 @@ DFS 是看有没有path，DP是看有几个path
 | [062. Unique Paths](https://leetcode.com/problems/unique-paths/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [063. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [064. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium | |
-| [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)	|	_O(n)_	|	_O(1))_ |	Easy |  |
-| [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n))_ |	Hard |  |
+| [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)	|	_O(n)_	|	_O(1)_ |	Easy |  |
+| [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard |  |
 | [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | BackTrack with DP |
 | [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 📖 |
 | [096. Unique Binary Search Trees	](https://leetcode.com/problems/unique-binary-search-trees/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 📖 cartesian product</br> 作为root，sum(#left + #right) Catalan number |
@@ -90,4 +90,6 @@ DFS 是看有没有path，DP是看有几个path
 | [198. House Robber](https://leetcode.com/problems/house-robber/)	|	_O(n)_	|	_O(1)_ |	Easy | 三个variables，一个记录现在profit,</br>一个记录上一个profit，</br> 一个记录上上一个profit |
 | [213. House Robber II](https://leetcode.com/problems/house-robber-ii/)	|	_O(n)_	|	_O(1)_ |	Medium | 分成另个house rob问题，<ul><li>Rob houses 0 to n - 2 </li> <li>Rob houses 1 to n - 1</li></ul> |
 | [221. Maximal Square](https://leetcode.com/problems/maximal-square/)	|	_O(n^2)_	|	_O(n)_ |	Medium | dp记录到（i,j) 最大正方形边长</br> d\[i,j] = min(d\[i-1,j]+ d\[i,j-1] + d\[i-1,j-1])+ 1 |
-| [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/)	|	_O(n \* sqrt(n))_	|	_O(n)_ |	Medium | static dynamic programming 会更快 |
+| [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/)	|	_O(n \* sqrt(n)_	|	_O(n)_ |	Medium | static dynamic programming 会更快 |
+| [304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)	|	_ctor: O(m * n), lookup: O(1)_	|	_O(m+n)_ |	Medium |  |
+| [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/perfect-squares/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 两个vector，一个track最低买点</br>一个track最高卖点<ul><li>buy\[i] = max(sell\[i-2]-price, buy\[i-1])</li> <li>sell\[i] = max(buy\[i-1]+price, sell\[i-1])</li></ul>|
