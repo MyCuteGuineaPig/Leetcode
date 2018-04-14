@@ -1,12 +1,9 @@
 /*
 279. Perfect Squares
 https://leetcode.com/problems/perfect-squares/description/
-
 Given a positive integer n, find the least number of perfect square numbers 
 (for example, 1, 4, 9, 16, ...) which sum to n.
-
 For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
-
 */
 
 
@@ -38,11 +35,6 @@ class Solution
 public:
     int numSquares(int n) 
     {
-        if (n <= 0)
-        {
-            return 0;
-        }
-        
         // cntPerfectSquares[i] = the least number of perfect square numbers 
         // which sum to i. Note that cntPerfectSquares[0] is 0.
         vector<int> cntPerfectSquares(n + 1, INT_MAX);
@@ -51,7 +43,7 @@ public:
         {
             // For each i, it must be the sum of some number (i - j*j) and 
             // a perfect square number (j*j).
-            for (int j = 1; j*j <= i; j++)
+            for (int j = 1; j*j <= i; j++) // 这个会慢，因为有重复比如 13-9 = 4 又会做13-9 = 4, 做了两回的operation
             {
                 cntPerfectSquares[i] = 
                     min(cntPerfectSquares[i], cntPerfectSquares[i - j*j] + 1);
@@ -62,11 +54,32 @@ public:
     }
 };
 
-class Solution {
+class Solution {  // 它的complexity是 O(sqrt(n)/2)*O(n)
+public:
+    int numSquares(int n) 
+    {
+        // cntPerfectSquares[i] = the least number of perfect square numbers 
+        // which sum to i. Note that cntPerfectSquares[0] is 0.
+        vector<int> cntPerfectSquares(n + 1, INT_MAX);
+        cntPerfectSquares[0] = 0;
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j*j <= i/2; j++) // 这个会慢，因为有重复比如 13-9 = 4 又会做13-9 = 4, 做了两回的operation
+            {
+                cntPerfectSquares[i] = 
+                    min(cntPerfectSquares[i], cntPerfectSquares[i - j*j] + 1);
+            }
+        }
+        return cntPerfectSquares.back();
+    }
+};
+
+
+class Solution { //更快的解 比起上面的 这个是 O(sqrt(n))*O(n/2)
 public:
     int numSquares(int n) {
-        vector<int>dp(n,-1);
-        for(int i = 1; i<=sqrt(n); i++){
+        vector<int>dp(n,-1);  
+        for(int i = 1; i<=sqrt(n); i++){ 
             dp[i*i-1] = 1;
             for(int j = i*i+1; j<=n;j++){
                 if (dp[j-1] == -1) dp[j-1] = j;
@@ -78,90 +91,38 @@ public:
 };
 
 
-
 2.Static Dynamic Programming: 12ms
 
-class Solution 
-{
+class Solution { //用了static dynamic programming
 public:
-    int numSquares(int n) 
-    {
-        if (n <= 0)
-        {
-            return 0;
-        }
-        
-        // cntPerfectSquares[i] = the least number of perfect square numbers 
-        // which sum to i. Since cntPerfectSquares is a static vector, if 
-        // cntPerfectSquares.size() > n, we have already calculated the result 
-        // during previous function calls and we can just return the result now.
-        static vector<int> cntPerfectSquares({0});
-        
-        // While cntPerfectSquares.size() <= n, we need to incrementally 
-        // calculate the next result until we get the result for n.
-        while (cntPerfectSquares.size() <= n)
-        {
-            int m = cntPerfectSquares.size();
-            int cntSquares = INT_MAX;
-            for (int i = 1; i*i <= m; i++)
-            {
-                cntSquares = min(cntSquares, cntPerfectSquares[m - i*i] + 1);
+    int numSquares(int n) {
+        static vector<int>dp = {1};  
+        if(dp.size()<n){
+            int size = dp.size();
+            vector<int>temp(n-dp.size(),-1);
+            dp.insert(dp.end(),temp.begin(),temp.end());
+            for(int i = 1; i<=sqrt(n); i++){ 
+                dp[i*i-1] = 1;
+                for(int j = max(i*i+1,size); j<=n;j++){
+                    if (dp[j-1] == -1) dp[j-1] = j;
+                    dp[j-1]= min(dp[j-1],dp[j-i*i-1]+1);
+                }
             }
-            
-            cntPerfectSquares.push_back(cntSquares);
         }
-        
-        return cntPerfectSquares[n];
+        return dp[n-1];
     }
 };
-3.Mathematical Solution: 4ms
 
-class Solution 
-{  
-private:  
-    int is_square(int n)
-    {  
-        int sqrt_n = (int)(sqrt(n));  
-        return (sqrt_n*sqrt_n == n);  
-    }
-    
-public:
-    // Based on Lagrange's Four Square theorem, there 
-    // are only 4 possible results: 1, 2, 3, 4.
-    int numSquares(int n) 
-    {  
-        // If n is a perfect square, return 1.
-        if(is_square(n)) 
-        {
-            return 1;  
-        }
-        
-        // The result is 4 if and only if n can be written in the 
-        // form of 4^k*(8*m + 7). Please refer to 
-        // Legendre's three-square theorem.
-        while ((n & 3) == 0) // n%4 == 0  
-        {
-            n >>= 2;  
-        }
-        if ((n & 7) == 7) // n%8 == 7
-        {
-            return 4;
-        }
-        
-        // Check whether 2 is the result.
-        int sqrt_n = (int)(sqrt(n)); 
-        for(int i = 1; i <= sqrt_n; i++)
-        {  
-            if (is_square(n - i*i)) 
-            {
-                return 2;  
-            }
-        }  
-        
-        return 3;  
-    }  
-}; 
-4.Breadth-First Search: 80ms
+
+
+
+
+
+
+
+
+
+
 
 class Solution 
 {
@@ -246,3 +207,9 @@ public:
                 searchQ.pop();
             }
         }
+        
+        return 0;
+    }
+};
+
+

@@ -20,7 +20,8 @@ transactions = [buy, sell, cooldown, buy, sell]
 
 /*
 
-The series of problems are typical dp. The key for dp is to find the variables to represent the states and deduce the transition function.
+The series of problems are typical dp. The key for dp is to find the variables to represent the states and
+ deduce the transition function.
 
 Of course one may come up with a O(1) space solution directly, but I think it is better to be generous when you think and be greedy when you implement.
 
