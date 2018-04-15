@@ -98,4 +98,5 @@ DFS 是看有没有path，DP是看有几个path
 | [357. Count Numbers with Unique Digits](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)	|	_O(n)_	|	_O(1)_ |	Medium | DP, Static DP, backtracking |
 | [368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)	|	_O(n^2)_	|	_O(n)_ |	Medium | 先sort，然后后面的大的，只要除以subset中最大的数，就可以append进subset,再用一个parent vector,放新放数得上一个数的位置 |
 | [375. Guess Number Higher or Lower II](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium | dp\[i]\[j]存的是n从1到j，最小的guarantee cost|
-| [377	Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/)	|	_O(nlogn + n \* t)_	|	_O(t)_ |	Medium | backtracking会timeout，因为一个一个数|
+| [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/)	|	_O(nlogn + n \* t)_	|	_O(t)_ |	Medium | backtracking会timeout，因为一个一个数|
+| [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/)	|	_O(n)_	|	_O(n)_ |	Hard | 需要dp，普通DFS， backtracking 会 timeout|
