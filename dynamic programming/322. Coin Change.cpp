@@ -90,3 +90,26 @@ public:
         return -1;
     }
 };
+
+/*
+DFS
+*/
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.rbegin(),coins.rend());
+        long long ans = INT_MAX;
+        dfs(coins, 0, amount, 0, ans);
+        return ans == INT_MAX ? -1: ans;
+    }
+
+    void dfs(vector<int>& coins, int beg, long long remaining, long long count, long long& ans){
+        if(remaining == 0){
+            ans = min(ans, count);
+            return;
+        }
+        for(int i = beg; i<coins.size(); i++)
+            if (remaining >= coins[i] && remaining < (ans-count)*coins[i])
+                dfs(coins, i, remaining -coins[i], count+1, ans);
+    }
+};
