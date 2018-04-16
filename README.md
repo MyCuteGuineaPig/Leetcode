@@ -94,7 +94,7 @@ DFS 是看有没有path，DP是看有几个path
 | [304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)	|	_ctor: O(m * n), lookup: O(1)_	|	_O(m+n)_ |	Medium |  |
 | [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/perfect-squares/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 两个vector，一个track最低买点</br>一个track最高卖点, buy需要带着之前买的利润<ul><li>buy\[i] = max(sell\[i-2]-price, buy\[i-1])</li> <li>sell\[i] = max(buy\[i-1]+price, sell\[i-1])</li></ul>|
 | [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/)	|	_O(n^3)_	|	_O(n^2)_ |	Hard | dp\[i]\[j] 代表从i到jburst最大数 |
-| [322. Coin Change](https://leetcode.com/problems/coin-change/description/)	|	_O(n\*k)_	|	_O(k)_ |	Medium | similar to [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/) : DP or BFS |
+| [322. Coin Change](https://leetcode.com/problems/coin-change/description/)	|	_O(n\*k)_	|	_O(k)_ |	Medium | similar to [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/) : DP, BFS, DFS |
 | [357. Count Numbers with Unique Digits](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)	|	_O(n)_	|	_O(1)_ |	Medium | DP, Static DP, backtracking |
 | [368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)	|	_O(n^2)_	|	_O(n)_ |	Medium | 先sort，然后后面的大的，只要除以subset中最大的数，就可以append进subset,再用一个parent vector,放新放数得上一个数的位置 |
 | [375. Guess Number Higher or Lower II](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium | dp\[i]\[j]存的是n从1到j，最小的guarantee cost|
