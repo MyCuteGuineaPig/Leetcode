@@ -127,3 +127,36 @@ public:
   rest   0    0    0    2    4    4    4
 
 */
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()<=1 ) return 0;
+        vector<int>buy(prices.size()+1,INT_MAX);
+        vector<int>sell(prices.size()+1,0);
+        buy[1] = prices[0];
+        for(int i = 1; i<prices.size();i++){
+            buy[i+1] = min(buy[i],prices[i]-sell[i-1]);
+            sell[i+1] = max(sell[i],prices[i]-buy[i]);
+        }
+        return sell[prices.size()];
+    }
+};
+
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()<=1 ) return 0;
+        int buy(INT_MAX), sell(0), prev_sell(0), prev_buy(INT_MAX);
+        for(int i = 0; i<prices.size();i++){
+            prev_buy = buy;
+            buy = min(prices[i]-prev_sell, buy);
+            prev_sell = sell;
+            sell = max(sell,prices[i]-prev_buy);
+        }
+        return sell;
+    }
+};
