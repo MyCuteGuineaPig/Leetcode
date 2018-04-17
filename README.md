@@ -105,3 +105,4 @@ DFS 是看有没有path，DP是看有几个path
 | [466. Count The Repetitions](https://leetcode.com/problems/count-the-repetitions/description/)	|	_O(s1 \* min(s2, n1))_	|	_O(s2)_ |	Hard | 📖 |
 | [467. Unique Substrings in Wraparound String](https://leetcode.com/problems/count-the-repetitions/description/)	|	_O(n)_	|	_O(1)_ |	Medium |  |
 | [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/)	|	_O(n \* l^2)_	|	_O(l)_ |	Medium |  |
+| [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典knapsack |
