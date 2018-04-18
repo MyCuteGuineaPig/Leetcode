@@ -107,4 +107,4 @@ DFS 是看有没有path，DP是看有几个path
 | [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/)	|	_O(n \* l^2)_	|	_O(l)_ |	Medium |  |
 | [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典knapsack |
 | [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard | 记录ring每个字母的位置，字母位置push进</br>vector, loop key,把i-1的字母vector作为起始点，</br>把key\[i]字母vector作为现在点, loop，找到最小</br>移动距离，如果ring\[k] = key\[i], update dp\[k]的值 |
-
+| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | |
