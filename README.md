@@ -124,3 +124,4 @@ DFS 是看有没有path，DP是看有几个path
 | [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/)	|	_O(m*n)_	|	_O(m\*n)~O(n)_|	Medium | Edit Distance |
 | [730. Count Different Palindromic Subsequences](https://leetcode.com/problems/count-different-palindromic-subsequences/description/)	|	_O(n^2)_	|	_O(n)_|	Hard | dp\[len]\[i]\[x] 存的是在i 往后,starting index 为x, 长度为len的Palindromic |
 | [740. Delete and Earn](https://leetcode.com/problems/delete-and-earn/description/)	|	_O(n)_	|	_O(n)_|	Medium | 相当于house robbery，不能同时rob两个邻居的, dp\[i] = max(dp\[i-2]+dp\[i], dp\[i-1]); |
+| [746. Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/)	|	_O(n)_	|	_O(1)_|	Easy | take or skip |
