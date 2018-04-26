@@ -129,3 +129,4 @@ DFS 是看有没有path，DP是看有几个path
 | [764. Largest Plus Sign](https://leetcode.com/problems/largest-plus-sign/description/)	|	_O(n^2)_	|	_O(n^2)_|	Medium | Maximal Square, 从左到右，从上到下，从右到左，从下到上,更新最小的count |
 | [788. Rotated Digits](https://leetcode.com/problems/largest-plus-sign/description/)	|	_O(n)~O(logn)_	|	_O(n)~O(logn)_|	Easy |<ul><li>O(logn) 算所有比当前digit减1是good number的所有的数，比如24 i = 1, 算的是0-19是good number的，算所有valid的，减去自己rotate还是自己的 i=1 算20-24 </li><li> O(n), 记录if i==good number, dp\[i] = 2, i==self rotate, dp\[i]=1, else dp\[i]=0</li></ul> |
 | [790. Domino and Tromino Tiling](https://leetcode.com/problems/domino-and-tromino-tiling/)	|	_O(n)_	|	_O(n)~O(1)_|	Medium |  dp\[n]=2*dp\[n-1]+dp\[n-3] |
+| [799. Champagne Tower](https://leetcode.com/problems/champagne-tower/)	|	_O(n^2)_	|	_O(n^2)~O(n)_|	Medium | |
