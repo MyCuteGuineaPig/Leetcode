@@ -133,3 +133,4 @@ DFS 是看有没有path，DP是看有几个path
 | [801. Minimum Swaps To Make Sequences Increasing](https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/description/)	|	_O(n)_	|	_O(1)_|	Medium | |
 | [805. Split Array With Same Average](https://leetcode.com/problems/split-array-with-same-average/description/)	|	_O(n^4)_	|	_O(n^3)_|	Hard | totalSum/n = Asum/k = Bsum/(n-k), where k = A.size() and 1 <= k <= n/2; |
 | [808. Soup Servings](https://leetcode.com/problems/soup-servings/description/)	|	_O(1)_	|	_O(1)_|	Medium | Memoization |
+| [813. Largest Sum of Averages](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(k\*n^2)_	|	_O(n)_|	Hard | dp\[k]\[i] 表示在A\[:i] 中最多分k次 所得的平均数最大和 dp\[k]\[i] = max(dp\[k]\[i], dp\[k-1]\[j] + (sum\[i]-sum\[j])/(i-j))  |
