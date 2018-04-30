@@ -21,7 +21,25 @@ Note: The number of boxes n would not exceed 100.
 */
 
 
+/*
+dp[i][j][k] 代表从boxes[i:j] 之后k个与boxes[j] 一样color ball，所得最大的count数
 
+
+
+the memoization matrix to be memo[l][r][k], the largest number we can get using lth to rth (inclusive) 
+boxes with k same colored boxes as rth box appended at the end. Example, 
+memo[l][r][3] represents the solution for this setting: [b_l, ..., b_r, A,A,A] with b_r==A.
+
+The transition function is to find the maximum among all b_i==b_r for i=l,...,r-1:
+memo[l][r][k] = max(memo[l][r][k], memo[l][i][k+1] + memo[i+1][r-1][0])
+
+[1, 3, 2, 2, 2, 3, 4, 3, 1] 
+比如当j = 7, 与pos = 1, 5 都是3, call recursion, 
+call dfs(i=0, j = 1, k = 1)
+call dfs(i=0, j= 5, k = 1) 但是这里面还有recusion，因为j=5 和pos = 1 又相同， call dfs(i=0, j= 1, k = 2)  
+
+
+*/
 
 int dp[102][102][102];
 class Solutiaon {
@@ -117,3 +135,29 @@ public:
 };
 
 
+
+class Solution {
+public:
+    int n;
+    vector<vector<vector<int>>>dp;
+    int removeBoxes(vector<int>& boxes) {
+        n = boxes.size();
+        dp.resize(n, vector<vector<int>>(n, vector<int>(n)));
+        return helper(boxes, 0, n-1, 0);
+    }
+    
+    int helper(const vector<int>& boxes, int i, int j, int k){
+        if(i>j) return 0;
+        if(dp[i][j][k]>0)
+            return dp[i][j][k];
+        while(i<j && boxes[j-1] == boxes[j]){ k++; j--;}
+        dp[i][j][k] = helper(boxes, i, j-1, 0)+(k+1)*(k+1);
+        for(int x = i; x<j; x++){
+            if(boxes[j] == boxes[x]){
+                dp[i][j][k] = max(dp[i][j][k],helper(boxes, i, x, k+1)+helper(boxes, x+1, j-1, 0));
+            }
+        }
+        return dp[i][j][k];
+    }
+    
+};
