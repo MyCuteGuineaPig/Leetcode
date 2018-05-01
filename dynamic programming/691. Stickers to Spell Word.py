@@ -83,4 +83,33 @@ class Solution:
         
         return match(dp, mp, target)
                 
-            
+
+class Solution(object):
+    def minStickers(self, stickers, target):
+        t_count = collections.Counter(target)
+        A = [collections.Counter(sticker) & t_count
+             for sticker in stickers]
+
+        for i in range(len(A) - 1, -1, -1):
+            if any(A[i] == A[i] & A[j] for j in range(len(A)) if i != j):
+                A.pop(i)
+        dp = collections.defaultdict(lambda: 10**6)
+        dp[""] = 0
+        
+        def dfs(t):
+            if t in dp:
+                return dp[t]
+            t_map = collections.Counter(t)
+            for sticker in A:
+                if sticker & t_map:
+                    newstring = ""
+                    for k,v in t_map.items():
+                        if k in sticker and v>sticker[k]:
+                            newstring += k*(v-sticker[k])
+                        elif k not in sticker:
+                            newstring += k*v
+                    dp[t] = min(dp[t], dfs(newstring))
+            dp[t] = dp[t] + (1 if dp[t]!=10**6 else 0)
+            return dp[t]
+        res = dfs(target) 
+        return res if res != 10**6 else -1
