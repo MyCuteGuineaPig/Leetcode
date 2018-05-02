@@ -4,7 +4,7 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [220. Contains Duplicate III](https://leetcode.com/problems/contains-duplicate-iii/description/) | _O(nlogn)_ |	_O(n)_	| Medium | set/multiset lower_bound  |
 | [230	Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/) | _O(max(h, k))_ |	_O(min(h, k))_	| Medium | inorder traversals / stack  |
-
+| [235. Lowest Common Ancestor of a Binary Search Tree]https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/) | _O(h)_ |	_O(1)_	| Easy | 利用 binary search tree的性质 |
 
 ## Depth-First Search
 
