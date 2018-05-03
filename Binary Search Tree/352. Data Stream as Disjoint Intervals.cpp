@@ -63,6 +63,31 @@ public:
  */
 
 
+class SummaryRanges {
+public:
+    /** Initialize your data structure here. */
+    SummaryRanges() {}
+    vector<Interval> vec;
+    
+    void addNum(int val) {
+        auto cmp = [](Interval a, Interval b){return a.start<b.start;};
+        auto it = lower_bound(vec.begin(),vec.end(),Interval(val, val), cmp);
+        if (it!=vec.begin() && (it-1)->end >= val-1) it--;
+        int start = val, end = val;
+        while(it!=vec.end() && end+1>=it->start){
+            start = min(start, it->start);
+            end = max(end, it->end);
+            it = vec.erase(it);
+        }
+            
+        vec.insert(it,Interval(start, end));
+    }
+    
+    vector<Interval> getIntervals() {
+        return vec;
+    }
+};
+
 
 /*
 
