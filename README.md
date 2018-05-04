@@ -7,7 +7,7 @@
 | [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/) | _O(h)_ |	_O(1)_	| Easy | 利用 binary search tree的性质 |
 | [352. Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/description/) | _O(logn)_ |	_O(n)_	| Hard | |
 | [449. Serialize and Deserialize BST](https://leetcode.com/problems/serialize-and-deserialize-bst/) | _O(n)_ |	_O(h)_	| Medium | preorder traversals |
-| [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/description/) | _O(h)_ |	_O(h)_	| Medium | |
+| [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/description/) | _O(h)_ |	_O(h)_	| Medium | <ul><li>swap key 和比key的最小值，然后recursively 删除swap的值 </li><li> 把key的left tree 挂在key->right的leftmost tree下面（比key大的最小数下面）</li></ul>  |
 | [530. Minimum Absolute Difference in BST	](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/) | _O(n)_ |	_O(h)_	| Easy | 利用binary search tree的性质 或者inorder traversal 带着前面prev的node val |
 | [783. Minimum Distance Between BST Nodes](https://leetcode.com/problems/minimum-distance-between-bst-nodes/description/) | _O(n)_ |	_O(h)_	| Easy | 利用binary search tree的性质 或者inorder traversal 带着前面prev的node val(与530题 解法一样) |
 
