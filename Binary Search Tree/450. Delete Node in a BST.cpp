@@ -197,8 +197,7 @@ public:
                        
 
 
-*
-/
+*/
 
 
 class Solution {
@@ -223,10 +222,7 @@ public:
                     temp = temp->left;
 
                 temp->left = root->left;   
-                //temp = root;
                 root = root->right;
-                //delete temp;
-                //temp = nullptr;
             }
         }
         return root;
