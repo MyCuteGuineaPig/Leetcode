@@ -8,7 +8,7 @@
 | [352. Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/description/) | _O(logn)_ |	_O(n)_	| Hard | |
 | [449. Serialize and Deserialize BST](https://leetcode.com/problems/serialize-and-deserialize-bst/) | _O(n)_ |	_O(h)_	| Medium | preorder traversals |
 | [530. Minimum Absolute Difference in BST	](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/) | _O(n)_ |	_O(h)_	| Easy | 利用binary search tree的性质 或者inorder traversal 带着前面prev的node val |
-
+| [783. Minimum Distance Between BST Nodes](https://leetcode.com/problems/minimum-distance-between-bst-nodes/description/) | _O(n)_ |	_O(h)_	| Easy | 利用binary search tree的性质 或者inorder traversal 带着前面prev的node val(与530题 解法一样) |
 
 ## Depth-First Search
 
