@@ -155,7 +155,7 @@ public:
                 temp->left = root->left; //把root left 的接到temp的left
 
                 // let right subtree be the new root                
-                temp = root; 
+                temp = root;  //让temp = root 之后root = root->right 这样删除temp，就不会影响root的值
                 root = root->right; //删除原有root的左面
                 delete temp;
                 temp = nullptr;
@@ -199,3 +199,36 @@ public:
 
 *
 /
+
+
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root)
+            return root;
+        if(root->val > key)
+            root->left = deleteNode(root->left, key);
+        else if(root->val < key)
+            root->right = deleteNode(root->right, key);
+        else{
+            if(!root->left && !root->right) {
+                delete root;
+                root=nullptr;
+            }
+            else if(!root->left) root = root->right;
+            else if(!root->right) root = root->left;
+            else{
+                TreeNode *temp = root->right;
+                while(temp->left)
+                    temp = temp->left;
+
+                temp->left = root->left;   
+                //temp = root;
+                root = root->right;
+                //delete temp;
+                //temp = nullptr;
+            }
+        }
+        return root;
+    }
+};
