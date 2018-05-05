@@ -1,7 +1,7 @@
 ## Binary Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [004. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) | _O(log(min(m, n)))_ |	_O(1)_	| Medium | 更新A的ilow 和ihigh, j = (m+n+1)/2,<ul><li>if i<m && B[j-1]>A[i]: ilow=i+1(A\[i]太小)</li><li> if i>0 && A[i]>B[j]：ihigh = i-1 (A\[i]太大)</li></ul> |
+| [004. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) | _O(log(min(m, n)))_ |	_O(1)_	| Medium | 更新A的ilow 和ihigh, j = (m+n+1)/2-1,<ul><li>if i<m && B[j-1]>A[i]: ilow=i+1(A\[i]太小)</li><li> if i>0 && A[i]>B[j]：ihigh = i-1 (A\[i]太大)</li></ul> |
 
 
 </br>
