@@ -6,6 +6,8 @@
 | [034. Search for a Range](https://leetcode.com/problems/search-for-a-range/) | _O(log(n))_ |	_O(1)_	| Medium | lowerbound + upperbound |
 | [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/) | _O(log(n))_ |	_O(1)_	| Easy | lowerbound |
 | [069. Sqrt(x)](https://leetcode.com/problems/sqrtx/description/) | _O(log(n))_ |	_O(1)_	| Easy | Newton Method |
+| [074. search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/) | _O(logm + logn)_ |	_O(1)_	| Medium | 对row一次lowerbound， 对coloumn 一次lowerbound |
+
 
 </br>
 </br>
