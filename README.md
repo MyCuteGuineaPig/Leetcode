@@ -11,6 +11,7 @@
 | [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/) | _O(logn)_ |	_O(1)_	| Medium | 与033. Search in Rotated Sorted Array logic 类似 |
 | [154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/) | _O(logn) ~ O(n)_ |	_O(1)_	| Hard | 与081. Search in Rotated Sorted Array II logic 类似 |
 | [162. Find Peak Element](https://leetcode.com/problems/find-peak-element/description/) | _O(logn)_ |	_O(1)_	| Medium | find local maximum |
+| [222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/description/) | _O((logn)^2)_ |	_O(1)_	| Medium |  |
 
 </br>
 </br>
