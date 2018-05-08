@@ -12,6 +12,9 @@
 | [154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/) | _O(logn) ~ O(n)_ |	_O(1)_	| Hard | 与081. Search in Rotated Sorted Array II logic 类似 |
 | [162. Find Peak Element](https://leetcode.com/problems/find-peak-element/description/) | _O(logn)_ |	_O(1)_	| Medium | find local maximum |
 | [222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/description/) | _O((logn)^2)_ |	_O(1)_	| Medium |  |
+| [275. H-Index II](https://leetcode.com/problems/h-index-ii/description/) | _O(logn)_ |	_O(1)_	| Medium | citations\[index] >= length(citations) - index = h, 找符合的最小的index，最大的h |
+| [278. First Bad Version](https://leetcode.com/problems/first-bad-version/) | _O(logn)_ |	_O(1)_	| Easy | |
+| [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | _O(nlogn)_ |	_O(n)_	| Medium | tail\[i] 存的是长度为len = i+1，最小的increasing array 尾部数字, 比如tail = \[2,5] 代表当长度为1时, 当increasing subarray长度为2是，组成subarray 末尾最后一位数最小是5   |
 
 </br>
 </br>
