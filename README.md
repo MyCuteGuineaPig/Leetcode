@@ -16,6 +16,9 @@
 | [278. First Bad Version](https://leetcode.com/problems/first-bad-version/) | _O(logn)_ |	_O(1)_	| Easy | |
 | [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | _O(nlogn)_ |	_O(n)_	| Medium | tail\[i] 存的是递增subarray长度为i+1，组成该长度最小的尾部数字, 比如tail = \[2,5] 代表当increasing subarray长度为2是，组成递增subarray 末尾最后一位数最小是5   |
 | [354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) | _O(nlogn)_ |	_O(n)_	| Hard | 按照width由小到达排序，再把同样width，把height由大到小排序，dp\[i] 存组成递增subarray长度为i+1时，末尾最小数(也就是最小height) |
+| [363. Max Sum of Rectangle No Larger Than K](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/description/) | _O(min(m, n)^2 * max(m, n) * logn(max(m, n)))_ |	_O(max(m, n))_	| Hard | 如果row多，外面两个outer loop是col(vice versa), 利用binary search(set) |
+| [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | _O(logn)_ |	_O(1)_	| Easy | Newton Method |
+| [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/) | _O(logn)_ |	_O(1)_	| Easy | |
 
 </br>
 </br>
