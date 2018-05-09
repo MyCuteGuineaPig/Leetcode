@@ -23,6 +23,8 @@
 | [436. Find Right Interval](https://leetcode.com/problems/find-right-interval/) | _O(nlogn)_ |	_O(n)_	| Medium | 把每个interval start put in set, 然后interval找end的lower bound |
 | [475. Heaters](https://leetcode.com/problems/find-right-interval/) | _O((m + n) * logn)_ |	_O(1)_	| Easy | <ul><li>sort heater + lower_bound</li><li> sort house sort heaters,逐渐递增index</li></ul> |
 | [540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/description/) | _O(logn)_ |	_O(1)_	| Medium | |
+| [658. Find K Closest Elements](https://leetcode.com/problems/find-k-closest-elements/description/) | _O(logn+k)_ |	_O(1)_	| Medium | x-arr\[left-1]<=arr\[right]-x 保证left一定是起点，right是最后数后面一位 |
+
 
 </br>
 </br>
