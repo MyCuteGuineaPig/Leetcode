@@ -83,3 +83,38 @@ public:
         return left;
     }
 };
+
+/*
+Two pointer method 
+*/
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+    
+        int row = 0;          // we start from the upper-right corner
+        int col = n - 1;      
+
+        for (int cnt_le = 0, cnt_lt = 0; true; cnt_le = 0, cnt_lt = 0) {
+            //cout<<" compare number "<<matrix[row][col]<<endl;
+            for (int i = 0, j = n - 1, p = n - 1; i < n; i++) {
+                //cout<<i<<" row "<<row<<" col "<<col;
+                while (j >= 0 && matrix[i][j] > matrix[row][col]) j--;  // pointer j for counting cnt_le
+                cnt_le += (j + 1);
+                //cout<<" cntle "<<cnt_le;
+                while (p >= 0 && matrix[i][p] >= matrix[row][col]) p--;   // pointer p for counting cnt_lt
+                cnt_lt += (p + 1);
+                //cout<<" cntlt "<<cnt_lt<<endl;
+            }
+
+            if (cnt_le < k) {         // candidate solution too small so increase it
+                row++; 
+            } else if (cnt_lt >= k) { // candidate solution too large so decrease it
+                col--;
+            } else {                  // candidate solution equal to the kth smallest element so return
+                return matrix[row][col];
+            }
+            //cout<<" after i row "<<row<<" col "<<col<<endl;
+        }
+    }
+};
