@@ -32,9 +32,26 @@ All possible pairs are returned from the sequence:
 
 */
 
+/*
+Use priority queue, p
+*/
+
 class Solution {
 public:
     vector<pair<int, int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        
+        if(nums1.empty() || nums2.empty()) return {};
+        auto comp = [&](const pair<int,int>&a, const pair<int,int>&b){
+            return nums1[a.first]+nums2[a.second] > nums1[b.first]+nums2[b.second];
+        };
+        priority_queue<pair<int,int>, vector<pair<int,int>>,decltype(comp)>pq(comp);
+        for(int i = 0; i<nums1.size();i++)
+            pq.push({i,0});
+        vector<pair<int,int>>res;
+        while(--k>=0 && pq.size()){
+            auto it = pq.top(); pq.pop();
+            res.push_back({nums1[it.first],nums2[it.second]});
+            if(++it.second<nums2.size()) pq.push(it);
+        }
+        return res;
     }
 };
