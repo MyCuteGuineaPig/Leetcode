@@ -37,10 +37,8 @@ public:
         int l = matrix[0][0], r = matrix[n-1][n-1];
         while(l<r){
             int mid = (l+r)>>1;
-            //cout<<l<<"  r "<<r<<"  mid "<<mid<<endl;
             if(isValid(matrix, k, mid)) r = mid;
             else l = mid+1;
-            //cout<<" after "<<l<<"  r "<<r<<"  mid "<<mid<<endl;
         }
         return l;
     }
@@ -53,7 +51,6 @@ public:
             cnt += j+1;
             if(cnt>=k) return true;
         }
-        //cout<<cnt<<endl;;
         return false;
     }
 };
@@ -84,6 +81,38 @@ public:
     }
 };
 
+
+/*
+priority queue
+*/
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        auto cmp = [&](const pair<int,int>&a, const pair<int,int>&b){
+            return matrix[a.first][a.second] > matrix[b.first][b.second];
+        };
+        priority_queue<pair<int,int>, vector<pair<int,int>>, decltype(cmp)>pq(cmp);
+/*
+or use 
+priority_queue<pair<int,int>, vector<pair<int,int>>, function<bool(const pair<int,int>&a,const pair<int,int>&b)>>pq([&](const pair<int,int>&a, const pair<int,int>&b){return matrix[a.first][a.second] > matrix[b.first][b.second];});
+*/
+
+        //第一个存row index, 第二个存column index
+        for(int i = 0; i<n && i<k; i++) pq.push({0,i});
+        while(--k>0){
+            auto it = pq.top();
+            pq.pop();
+            if(++it.first<n){
+                pq.push(it);
+            }
+        }
+        return matrix[pq.top().first][pq.top().second];
+    }
+};
+
+
+
 /*
 Two pointer method 
 */
@@ -100,12 +129,7 @@ public:
             for (int i = 0, j = n - 1, p = n - 1; i < n; i++) {
                 //cout<<i<<" row "<<row<<" col "<<col;
                 while (j >= 0 && matrix[i][j] > matrix[row][col]) j--;  // pointer j for counting cnt_le
-                
                 cnt_le += (j + 1);
-                //比如说有三个与matrix[row][col] 一样的，比如k=5,这样可能已经得到正确答案了，因为三个一样，cnt_le = 7, 
-                //这时候需要cnt_lt,判断如果小于这个数，是不是到底真的是结果，如果去掉3个，7-3 = 4,在5个以内
-
-
                 //cout<<" cntle "<<cnt_le;
                 while (p >= 0 && matrix[i][p] >= matrix[row][col]) p--;   // pointer p for counting cnt_lt
                 cnt_lt += (p + 1);
@@ -121,5 +145,30 @@ public:
             }
             //cout<<" after i row "<<row<<" col "<<col<<endl;
         }
+    }
+};
+
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        int row = 0, col = n-1;
+        while(row<n && col >=0){
+            int cnt = 0, equal = 0;
+            for(int i = 0, j=n-1; j>=0 && i<n; i++){
+                while(j>=0 && matrix[i][j]>matrix[row][col]) j--;//j包括了等于的
+                cnt += j+1;
+                if(j>=0 && matrix[i][j] == matrix[row][col]){
+                    int m = j; 
+                    while(m>=0 && matrix[i][m]==matrix[row][col]) m--;
+                    equal += j-m;
+                }
+            }
+            if(cnt<k) row++;  //to much element less than or equal to A[r][c], need to increase A[r][c]
+            else if(cnt-equal>=k) col--; ////to much element bigger than  A[r][c], need to decrease A[r][c]
+            else break;
+        }
+        return matrix[row][col];
     }
 };

@@ -153,6 +153,22 @@ so g(x) will always repeat a sequnce for 5 times and +1 at the last number of th
 Some K is/are skipped if g(x)>1.
 For example, when x=25, g(x)=2, K=5 is skipped(there is no x that f(x)=5), and when x=125, g(x)=3, K=29, 30 are skipped.
 We can find that 5(=1*5), 11(=6*1+5), 17(=6*2+5), 23(=6*3+5), 29(=6*4+5), 30(=6*5), 36(=31+5), 42(=31+6+5), 48(=31+6*2+5), ... are skipped.
+
+比如48”
+
+48 sum[i] 61035156
+48 sum[i] 12207031
+48 sum[i] 2441406
+48 sum[i] 488281
+48 sum[i] 97656
+48 sum[i] 19531
+48 sum[i] 3906
+48 sum[i] 781
+48 sum[i] 156
+48 sum[i] 31
+17 sum[i] 6
+5 sum[i] 1 return 0
+
 Let me know if there are ambiguities.
 
 
@@ -175,6 +191,9 @@ public:
     int preimageSizeFZF(int K) {
         int sum[13]={1};
         for (int i=1; i<13; i++) sum[i]=sum[i-1]*5+1;
+        //for(auto i:sum){
+        //    cout<<i<<" ";
+        //}
         for (int i=12; i>=0; i--) {
             if (K/sum[i]==5) return 0;
             K=K%sum[i];
