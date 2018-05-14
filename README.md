@@ -9,7 +9,7 @@
 | [105. Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/) | _O(n)_ |	_O(h)_	| Medium | preorder 第一个是tree的root, inorder 中root->val左面root的left tree,右面root的right tree,  |
 | [106. Construct Binary Tree from Inorder and Postorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/) | _O(n)_ |	_O(h)_	| Medium | postorder 最后一个是tree的root,postorder从后往前是right tree, 再是left-tree, inorder 中root->val左面root的left tree,右面root的right tree,  |
 | [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/) | _O(n)_ |	_O(logn)_	| Medium | binary tree height 需要balanced |
-| [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/) | _O(n)_ |	_O(logn)_	| Medium | 📖 |
+| [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/) | _O(n)_ |	_O(logn)_	| Medium | 📖 Linked List找中间点用两个pointer，一个每次前进一步，另一个每次前进两部 |
 
 
 
