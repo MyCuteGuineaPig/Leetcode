@@ -13,6 +13,7 @@
 | [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/description/) | _O(n)_ |	_O(h)_	| Medium | 用bottom-up 比top-down 更efficient |
 | [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/) | _O(n)_ |	_O(h)_	| Medium | 线找到第一个点既没有left-tree, 也没有right-tree |
 | [114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/) | _O(n)_ |	_O(h)_	| Medium | preorder 的reverse |
+| [116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/) | _O(n)_ |	_O(1)_	| Medium | <ul><li> 检查有没有left，先把root left 和root right连了，如果root有next，把root right和next left 连了，然后横着走 </li><li> 或者是阶梯式向下connect root1 left和 root1 right & root1 right和root2 left & root2 left和root2 right </li></ul> |
 
 </br>
 </br>
