@@ -20,12 +20,6 @@ Note:
 K will be an integer in the range [0, 10^9].
 
 */
-class Solution {
-public:
-    int preimageSizeFZF(int K) {
-        
-    }
-};
 
 
 
