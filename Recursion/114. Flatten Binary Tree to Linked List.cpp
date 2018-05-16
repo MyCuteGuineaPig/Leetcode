@@ -56,3 +56,90 @@ public:
         return root;
     }
 };
+
+/*
+把右面的tree 弄到左边tree最大的node右测，然后root右面的等于左侧的。左侧等于null, root = root->right
+比如：
+    1             变成         1              ==》      1              =》 root从1等于2，再repeat以上的步骤
+   / \                       /  \                        \
+  2   5                     2   5                         2
+ / \   \                   / \    \                      /  \
+3   4   6                 3  4    6                     3    4
+                              \                                \
+                              5                                 5
+                               \                                 \
+                               6                                  6
+
+*/
+
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        while(root){
+            if(root->left && root ->right){
+                TreeNode *t = root->left;
+                while(t->right)
+                    t = t->right;
+                cout<<" t "<<t->val<<endl;
+                t->right = root->right;
+            }
+            if(root->left)
+                root->right = root->left; 
+            //root->right = root->left; //如果不加if，结果不对，因为假如右侧有，但是左侧没有，一append，右侧的就没了
+            root->left = NULL;
+            root = root->right;
+        }
+    }
+};
+
+
+class Solution {
+public:
+    void flatten(TreeNode* node) {
+        while (node) {
+            if (node->left) {
+                TreeNode *prev = node->left;
+                while (prev->right) {
+                    prev = prev->right;
+                }
+                prev->right = node->right;
+                node->right = node->left;
+                node->left = NULL;
+            }
+            node = node->right;
+        }
+    }
+};
+
+/*
+把右面的tree 弄到左边tree最大的node右测，然后root右面的等于左侧的。左侧等于null, root = root->right
+比如：
+    1             变成         1              ==》      1              =》    1             =>   1
+   / \                       /  \                     /  \                 /   \                \
+  2   5                     2   5                    2    5                2    5                2
+ / \   \                   /     \                    \     \               \    \                \ 
+3   4   6                 3      6                     3     6               3    6                3
+                           \                           \                      \                     \ 
+                            4                           4                      4                     4
+                                                                                \                     \
+                                                                                 5                     5 
+                                                                                  \                     \
+                                                                                   6                    6
+
+*/
+
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(!root) return;
+        flatten(root->left);
+        flatten(root->right);
+        if(!root->left) return;
+        TreeNode *t = root->left;
+        while(t->right)
+            t = t->right;
+        t->right = root->right;
+        root->right = root->left;
+        root->left = NULL;
+    }
+};
