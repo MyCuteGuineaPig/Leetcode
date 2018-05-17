@@ -16,6 +16,8 @@
 | [116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/) | _O(n)_ |	_O(1)_	| Medium | <ul><li> 检查有没有left，先把root left 和root right连了，如果root有next，把root right和next left 连了，然后横着走 </li><li> 或者是阶梯式向下connect root1 left和 root1 right & root1 right和root2 left & root2 left和root2 right </li></ul> |
 | [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | _O(n)_ |	_O(h)_	| Hard | 先找左面的最大的，再找右面最大的，然后结合看是 l大, or r大, or l+root+r 大，or root 大， 再跟max比 |
 | [129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/) | _O(n)_ |	_O(h)_	| Medium | 带着之前的root val然后到一点, 到leave就加上val |
+| [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/description/) | _O(n * 4^n / n^(3/2))	_ |	_O(n * 4^n / n^(3/2))_	| Medium | 算sign前的，算sign后的,然后做前和后的permutation和 |
+
 </br>
 </br>
 
