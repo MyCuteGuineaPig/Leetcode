@@ -1,4 +1,4 @@
-## Binary Search Tree
+## Recursion
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
