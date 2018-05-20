@@ -1,3 +1,12 @@
+</br>
+</br>
+
+## Sort
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BST |
+
+
 ## Recursion
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
