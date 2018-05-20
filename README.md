@@ -18,6 +18,7 @@
 | [129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/) | _O(n)_ |	_O(h)_	| Medium | 带着之前的root val然后到一点, 到leave就加上val |
 | [241. Different Ways to Add Parentheses](https://leetcode.com/problems/different-ways-to-add-parentheses/description/) | _O(n\* 4^n / n^(3/2))_ |	_O(n \* 4^n / n^(3/2))_	| Medium | 算sign前的，算sign后的,然后做前和后的permutation和 |
 | [337. House Robber III](https://leetcode.com/problems/house-robber-iii/) | _O(n)_ |	_O(h)_	| Medium | 返回vector, vector\[0]存的是用上一个最大的获取值，vector\[0]存的是不用上一个 最大的获取值 |
+| [395. Longest Substring with At Least K Repeating Characters](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/) | _O(n)_ |	_O(n)_	| Medium | Divide-conquer 一旦小于k, 就split成left和right,然后返回left和right的max值 |
 | [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/) | _O(n)_ |	_O(h)_	| Easy |  |
 | [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/) | _O(n)_ |	_O(h)_	| Easy | unorderedmap 存的在现在点之前的 <prefix sum, frequency> pairs. 从中间某点到现在sum = 从root到现在点sum - root到中间某点的sum |
 | [669. Trim a Binary Search Tree](https://leetcode.com/problems/trim-a-binary-search-tree/description/) | _O(n)_ |	_O(h)_	| Easy | |
