@@ -49,3 +49,18 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
+        int i = 0, n = intervals.size();
+        vector<Interval>res;
+        while(i<n && intervals[i].end < newInterval.start) res.push_back(intervals[i++]);
+        if(i<n) newInterval.start = min(newInterval.start, intervals[i].start);
+        while(i<n && intervals[i].start <= newInterval.end) newInterval.end = max(newInterval.end, intervals[i++].end);
+        res.push_back(newInterval);
+        while(i<n) res.push_back(intervals[i++]);
+        return res;
+    }
+};
