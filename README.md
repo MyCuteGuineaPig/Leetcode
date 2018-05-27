@@ -9,6 +9,7 @@
 | [075. Sort Colors](https://leetcode.com/problems/sort-colors/description/) | _O(n)_ | _O(1)_	| Medium | Tri Partition |
 | [088. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | _O(n)_ | _O(1)_	| Easy | 从后往前摆，不用swap |
 | [147. Insertion Sort List](https://leetcode.com/problems/insertion-sort-list/) | _O(n^2)_ | _O(1)_	| Medium | |
+| [148. Sort List](https://leetcode.com/problems/sort-list/description/) | _O(nlogn)_ | _O(logn)_	| Medium | 用两个pointer，一个慢，一个快，去split  |
 | [164. Maximum Gap](https://leetcode.com/problems/maximum-gap/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Bucket Sort, minstep = (max-min)/(n-1) = bucket_step, bucket_size = n (i=min, at bucket\[0], i = max, at bucket\[n-1], 结果max gap=相邻两个bucket的min\[i]-max\[i-1]  </li><li>radix sort, res = 最大两个相邻的点, 排序是从后往前loop，因为之前的digit的是sort，大的digit在最后面，count\[i]是从ith-digit的最后一个位置</li></ul> |
 | [179. Largest Number](https://leetcode.com/problems/largest-number/) | _O(nlogn)_ | _O(n)_	| Medium | 变成string再sort,string sort会从string的第0位开始比,比如"9">"0", "9">"89" |
 | [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BST |
