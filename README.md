@@ -1,5 +1,4 @@
 
-
 ## Sort
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -16,8 +15,10 @@
 | [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BST |
 | [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue |
 | [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BST |
-</br>
 priority_queue<pair<int,int>>pq 先对比first, top是first最大的
+
+</br>
+
 
 ## Recursion
 
