@@ -14,7 +14,7 @@
 | [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | _O(nlogn)_ | _O(logn)_	| Hard | priority_queue or multiset(看critical point) |
 | [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | counting Sort |
 | [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BST |
-| [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/ | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue |
+| [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue |
 | [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BST |
 
 </br>
