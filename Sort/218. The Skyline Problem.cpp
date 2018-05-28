@@ -61,6 +61,11 @@ public:
             { //first check if the current tallest building will end before the next timing point
                   // pop up the processed buildings, i.e. those  have height no larger than cur_H and end before the top one
                 while(!liveBlg.empty() && ( liveBlg.top().second <= cur_X) ) liveBlg.pop();
+                /*
+                    把小于当前的cur_x end的弄出去，且height小于当前cur_x的，cur_x的height一定是queue中最大的，
+                    remove后queue 剩下的就是落下之后的高度
+                
+                */
             }
             else
             { // if the next new building starts before the top one ends, process the new building in the vector
@@ -73,7 +78,49 @@ public:
             }
             cur_H = liveBlg.empty()?0:liveBlg.top().first; // outut the top one
             if(res.empty() || (res.back().second != cur_H) ) res.push_back(make_pair(cur_X, cur_H));
+            /*
+            加上(res.back().second != cur_H)是避免新的条件新加进queue中的height是小于queue最高的
+            [ [2 9 10], [3 7 15], [5 12 12]], 
+            cur_x = 2, cur_h = 10, queue {10,9}
+            cur_x = 3, cur_h = 15, queue {10,9} {15,7}
+            cur_x = 5, cur_h = 15, queue {10,9} {15,7}, {12,12}  此时不append 进res
+            */
         }
         return res;
+    }
+};
+
+
+
+/*
+explanation:
+https://www.youtube.com/watch?v=GSBLe8cKu0s&t=864s
+
+*/
+
+class Solution {
+public:
+    vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
+        pair<int,int> curr({0,0});
+        vector<pair<int,int>> result;
+        multiset<pair<int,int>> seq;
+        for(auto p:buildings){
+            seq.emplace(make_pair(p[0],-p[2]));
+            seq.emplace(make_pair(p[1],p[2]));
+        }
+        multiset<int> height({0});
+        for(auto p:seq){
+            cout<<" seq first "<<p.first<<" sec "<<p.second<<endl;
+            if(p.second<0)height.emplace(-p.second);
+            else height.erase(height.find(p.second));
+            if(*height.rbegin()!=curr.second){ //看最大的height是否发生了变化
+                curr.first=p.first;
+                curr.second=*height.rbegin();
+                cout<<" in curr.first "<<curr.first<<" curr.second "<<curr.second<<endl;
+                
+                result.push_back(curr);
+            }
+        }
+        return result;
     }
 };
