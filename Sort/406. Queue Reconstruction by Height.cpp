@@ -133,7 +133,9 @@ public:
 
 
 
-
+/*
+O(n^2)
+*/
 class Solution {
     static bool shorter(pair<int,int> p1,pair<int,int> p2){
         return (p1.first<p2.first)||(p1.first==p2.first && p1.second>p2.second);
@@ -158,6 +160,26 @@ public:
         return people;
     }
 };
+/*
+[[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]
+
+7-0
+ after (4,4), (5,2), (5,0), (6,1), (7,1), (7,0), 
+7-1
+ after (4,4), (5,2), (5,0), (6,1), (7,0), (7,1), 
+6-1
+ after (4,4), (5,2), (5,0), (7,0), (6,1), (7,1), 
+5-0
+ after (4,4), (5,2), (5,0), (7,0), (6,1), (7,1), 
+5-2
+ after (4,4), (5,0), (7,0), (5,2), (6,1), (7,1), 
+4-4
+ after (5,0), (7,0), (5,2), (6,1), (4,4), (7,1), 
+
+
+*/
+
+
 //for each element, others that are shorter are 'invisible'
 //ascending order,every k is zero
 // 1 2 3 4 7 7 7
