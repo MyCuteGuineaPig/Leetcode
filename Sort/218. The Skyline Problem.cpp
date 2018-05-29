@@ -46,7 +46,7 @@ For each iteration, we first find the current process time, which is either the 
 */
 
 
-
+//https://github.com/beckswu/Leetcode/blob/master/Sort/218.%20The%20Skyline%20Problem.jpg
 class Solution {
 public:
     vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
@@ -113,7 +113,7 @@ public:
             cout<<" seq first "<<p.first<<" sec "<<p.second<<endl;
             if(p.second<0)height.emplace(-p.second);
             else height.erase(height.find(p.second));
-            if(*height.rbegin()!=curr.second){ //看最大的height是否发生了变化
+            if(*height.rbegin()!=curr.second){ //看最大的height是否发生了变化,变化了就append结果
                 curr.first=p.first;
                 curr.second=*height.rbegin();
                 cout<<" in curr.first "<<curr.first<<" curr.second "<<curr.second<<endl;
