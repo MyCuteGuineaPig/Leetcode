@@ -2,6 +2,13 @@
 ## Sort
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
+| [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Easy | fast先前进n个，然后slow，fast同时前进，知道fast到null |
+
+</br>
+
+## Sort
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
 | [056. Merge Intervals](https://leetcode.com/problems/merge-intervals/) | _O(nlogn)_ | _O(n)_	| Medium |  |
 | [057. Insert Interval](https://leetcode.com/problems/insert-interval/) | _O(nlogn)_ | _O(n)_	| Hard | |
 | [075. Sort Colors](https://leetcode.com/problems/sort-colors/description/) | _O(n)_ | _O(1)_	| Medium | Tri Partition |
