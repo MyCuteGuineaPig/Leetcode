@@ -39,6 +39,10 @@ public:
 		比如现在head是[1,2], fast可以指导2的后面一个元素, slow 指的是2
 		而且会循环下去，一直是head[1,2]，
 		所以fast->next and fast->next->next, slow就会指向1
+		
+		条件也可以用fast and fast->next
+		但是在初始化fast时候 fast = head->next
+		
 		*/
             slow = slow->next;
             fast = fast->next->next;
