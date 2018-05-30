@@ -12,8 +12,9 @@
 | [179. Largest Number](https://leetcode.com/problems/largest-number/) | _O(nlogn)_ | _O(n)_	| Medium | 变成string再sort,string sort会从string的第0位开始比,比如"9">"0", "9">"89", python解定义sort class，因为python中'30'>'3', 而我们希望'3'>'30' |
 | [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | _O(nlogn)_ | _O(logn)_	| Hard | priority_queue or multiset(看critical point) |
 | [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | counting Sort |
-| [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BST |
-| [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BST |
+| [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BIT |
+| [324. Wiggle Sort II](https://leetcode.com/problems/count-of-range-sum/description/) | _O(n) average_ | _O(1)_	| Hard | (1 + 2\*index) \% (n \| 1)<ul><li>(1)elements smaller than the 'median' are put into the last even slots</li><li>(2) elements larger than the 'median' are put into the first odd slots</li><li>(3) the medians are put into the remaining slots.</li></ul> |
+| [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BIT |
 | [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue |
 | [406. Queue Reconstruction by Height](https://leetcode.com/problems/queue-reconstruction-by-height/) | _O(n \* sqrt(n))~O(n^2)_ | _O(n)_	| Medium | 先把height大的安排了，如果height一样再sort k有小到大。 sqrt(n)解是一样的sort，但是把sort之后的插入到不同的组中，每个组不超过sqrt(n)个元素 |
 | [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements) O(nlogn), priority_queue O(nlogn)  |
