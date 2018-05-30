@@ -33,6 +33,13 @@ public:
         if(!head || !head->next) return head;
         ListNode *fast = head, *slow = head;
         while(fast->next && fast->next->next){
+		/*
+		条件需要fast->next and fast->next->next
+		假如条件是 fast and fast->next: 
+		比如现在head是[1,2], fast可以指导2的后面一个元素, slow 指的是2
+		而且会循环下去，一直是head[1,2]，
+		所以fast->next and fast->next->next, slow就会指向1
+		*/
             slow = slow->next;
             fast = fast->next->next;
         }
