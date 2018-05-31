@@ -49,14 +49,21 @@ Because the total distance the fast pointer traveled is twice as the slow pointe
 
 It can be concluded that the distance between the head location and entry location is equal to the distance between the meeting location and the entry location along the direction of forward movement.
 
-So, when the slow pointer and the fast pointer encounter in the cycle, we can define a pointer "entry" that point to the head, 
+So, when the slow pointer and the fast pointer encounter in the cycle, 
+we can define a pointer "entry" that point to the head, 
 this "entry" pointer moves one step each time so as the slow pointer. 
 When this "entry" pointer and the slow pointer both point to the same location, 
 this location is the node where the cycle begins.
 
-my solution is like this: using two pointers, one of them one step at a time. another pointer each take two steps. Suppose the first meet at step k,the length of the Cycle is r. so..2k-k=nr,k=nr
-Now, the distance between the start node of list and the start node of cycle is s. the distance between the start of list and the first meeting node is k(the pointer which wake one step at a time waked k steps).the distance between the start node of cycle and the first meeting node is m, so...s=k-m,
-s=nr-m=(n-1)r+(r-m),here we takes n = 1..so, using one pointer start from the start node of list, another pointer start from the first meeting node, all of them wake one step at a time, the first time they meeting each other is the start of the cycle.
+my solution is like this: using two pointers, one of them one step at a time.
+ another pointer each take two steps. 
+ Suppose the first meet at step k,the length of the Cycle is r. so..2k-k=nr,k=nr
+Now, the distance between the start node of list and the start node of cycle is s. 
+the distance between the start of list and the first meeting node is k(the pointer which wake one step at a time waked k steps).
+the distance between the start node of cycle and the first meeting node is m, so...s=k-m,
+s=nr-m=(n-1)r+(r-m),here we takes n = 1..so, using one pointer start from the start node of list, 
+another pointer start from the first meeting node, all of them wake one step at a time, 
+the first time they meeting each other is the start of the cycle.
 
 */
 
