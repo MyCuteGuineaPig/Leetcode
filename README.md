@@ -6,6 +6,7 @@
 | [086. Partition List](https://leetcode.com/problems/partition-list/) | _O(n)_ | _O(1)_	| Medium |  <ul><li>先把head所有小于x的pass掉,slow,head=first大于等于x的node, loop fast 当fast小于x,把这个放在slow上,slow前进一位</li><li> 建两个node，一个small,一个big,把所有小于的head放在small，其他的放在big，最后把所有big挂在small的后面 </li></ul> |
 | [141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) | _O(n)_ | _O(1)_	| Easy | |
 | [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | |
+LinkedList 当head, cur 指向同一点, cur = cur->next; head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点
 
 </br>
 
