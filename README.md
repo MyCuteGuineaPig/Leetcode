@@ -11,6 +11,7 @@
 | [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) | _O(n)_ | _O(1)_	| Easy | |
 | [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | _O(n)_ | _O(1)_	| Easy | 类似[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) ,有duplicate一定会有cycle<ul><li> 每个数减去1,所有数都在\[0,n-1],从n开始，因为从n开始不会自己循环 </li><li>每个数数都在\[1,n],从0开始</li></ul> |
 | [344. Reverse String](https://leetcode.com/problems/reverse-string/) | _O(n)_ | _O(1)_	| Easy | 可以用bit来进行swap |
+| [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/) | _O(n)_ | _O(1)_	| Easy | <ul><li> 用hashmap, O(N) </li><li>binary search, 要sort两个vector,然后loop v1, 到v2中找有没有v1\[i]这个数</li><li>two pointer, sort两个vector,it1=v1.begin(), it2=v2.begin(),然后根据it1,it2大小,更新结果和自增it1和it2 </li></ul> |
 |LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 
 </br>
