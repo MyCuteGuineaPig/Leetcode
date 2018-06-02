@@ -8,8 +8,10 @@
 | [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | |
 | [143. Reorder List](https://leetcode.com/problems/reorder-list/) | _O(n)_ | _O(1)_	| Medium | 用fast & slow先找到medium的点，slow到结尾所有的点reverse, 然后p1 = head, p2 = middle后一点，一个p1, 一个p2 插进pointer，就是结果 |
 | [167.Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | _O(n)_ | _O(1)_	| Easy | two pointer, 一个从开始位置，一个从末尾的位置 |
-| [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/description/) | _O(n)_ | _O(1)_	| Easy | |
-LinkedList 当head, cur 指向同一点, cur = cur->next; head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点
+| [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) | _O(n)_ | _O(1)_	| Easy | |
+| [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | _O(n)_ | _O(1)_	| Easy | r类似142 Linked List Cycle II,有duplicate一定会有cycle<ul><li> 每个数减去1,所有数都在\[0,n-1],从n开始，因为从n开始不会自己循环 </li><li>每个数数都在\[1,n],从0开始</li></ul> |
+| [344. Reverse String](https://leetcode.com/problems/reverse-string/) | _O(n)_ | _O(1)_	| Easy | 可以用bit来进行swap |
+|LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 
 </br>
 
