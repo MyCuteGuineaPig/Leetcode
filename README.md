@@ -15,6 +15,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/) | _O(n+m)_ | _O(min(m, n))_	| Easy | <ul><li> 用hashmap, O(N) </li><li>binary search, 要sort两个vector,然后loop v1, 到v2中找有没有v1\[i]这个数</li><li>two pointer, sort两个vector,it1=v1.begin(), it2=v2.begin(),然后根据it1,it2大小,更新结果和自增it1和it2 </li></ul> |
 | [350.Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/) | _O(n+m)_ | _O(1)_	| Easy | 如果没有sort, space: O(1) complexity O(max(n,n)\*log(max(m,n))的解为binary search, two pointer,  如果有sort, space: O(1) complexity O(m+n)的解为two pointer |
 | [457. Circular Array Loop](https://leetcode.com/problems/circular-array-loop/) | _O(n)_ | _O(1)_	| Medium | array loop必须是单向的, 比如1->2, 2->1 不算是loop，循环array每次两个pointer检查有没有loop,如果没有loop,把这次所有走过的点都标成0,下次不用再走了 |
+| [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | sliding Window(长度为len(s1)), 每次移动框减去新来的，加上刚刚pass的，知道l长度为0 |
 |LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 
 </br>
