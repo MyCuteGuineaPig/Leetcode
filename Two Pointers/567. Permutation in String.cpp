@@ -64,8 +64,10 @@ public:
             if(m[s2[i]-'a']-->0) l--;
             if(l==0) return true;
             int start = i+1-s1.length();
-            if(start>=0 && ++m[s2[start]-'a']>0)
-                l++;
+            if(start>=0){
+                ++m[s2[start]-'a'];
+                if(m[s2[start]-'a']>0) l++;
+            }
         }
         return false;
     }
@@ -87,6 +89,8 @@ public:
     }
 };
 
+
+//3
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
@@ -107,6 +111,22 @@ public:
         return cnt == s1s;
     }
 };
+//4 方法3，4类似
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        vector<int>count(128);
+        for(int i = 0; i < s1.length(); i++) count[s1[i]]--;
+        for(int l = 0, r = 0; r < s2.length(); r++) {
+            if (++count[s2[r]] > 0)
+                while(--count[s2[l++]] != 0); 
+            else if ((r - l + 1) == s1.length()) return true;
+        }
+        return s1.length() == 0;
+    }
+};
+
+
 
 class Solution {
 public:
