@@ -23,6 +23,15 @@ Three Steps:
 3. Start reorder one by one  1->2->3->6->5->4 to 1->6->2->5->3->4
 */
 
+/*
+最后一步可以是 
+
+1. (p2 = prev)把next = p1->next 拿出来存着，然后把p1->next设为  p2->next, p2->next和p2->next->next 锻炼
+ 再把之前存的next放在p1->next->next后面，p1前进两位
+
+ 2. (p2 = prev->next) 先把下一个p2放在prev->next, 把P1->next 放在p2->next, p1->next = p2, p
+*/
+
 class Solution {
 public:
     void reorderList(ListNode* head){
@@ -58,6 +67,102 @@ public:
             p2->next = p2->next->next;
             p1->next->next = p1next;
             p1 = p1next;
+        }
+    }
+};
+
+
+
+class Solution {
+public:
+    void reorderList(ListNode* head){
+        if(!head ||!head->next) return ;
+        ListNode *fast = head;
+        ListNode *prev = head;
+        while(fast->next && fast->next->next){
+            fast = fast->next->next;
+            prev = prev->next;
+        }
+        ListNode *cur = prev->next;
+        while(cur->next){
+            ListNode *temp = prev->next;
+            prev->next = cur->next;
+            cur->next = cur->next->next;
+            prev->next->next = temp;
+        }
+        ListNode *p1 = head, *p2 = prev->next;
+        while(p1!=prev){ 
+            prev->next = p2->next; //先换pre
+            p2->next = p1->next; //p2 后面接p1-Next
+            p1->next = p2;  //p1 后面接p2
+            p1 = p1->next->next; //p1 往后走一位
+            p2 = prev->next; //p2 往后走一位
+        }
+    }
+};
+
+
+
+
+class Solution {
+public:
+    void reorderList(ListNode* head){
+        if (!head || !head->next) return;
+
+        // find the middle node: O(n)
+        ListNode *p1 = head, *p2 = head->next;
+        while (p2 && p2->next) {
+            p1 = p1->next;
+            p2 = p2->next->next;
+        }
+
+        // cut from the middle and reverse the second half: O(n)
+        ListNode *head2 = p1->next;
+        p1->next = NULL;
+    
+        p2 = head2->next;
+        head2->next = NULL;
+        /*
+        p1 = 3
+        p2 = 5->6
+        head2 = 4
+        */
+        while (p2) {
+            /*
+            p2 = 5-6
+
+            p1 = p2->next;   p1 = 6
+            p2->next = head2; p2 = 5-4
+            head2 = p2;     head2 = 5-4
+            p2 = p1;        p2 = 6
+
+            p2 = 6
+            p1 = p2->next;   p1 = null
+            p2->next = head2; p2 = 6-5-4
+            head2 = p2;     head2 = 6-5-4
+            p2 = p1;        p2 = null
+
+            
+            */
+            p1 = p2->next;
+            p2->next = head2; //head2在p2这个点之前存好的点（倒叙的）
+            head2 = p2;//head2 是包括现在的点，倒叙的
+            p2 = p1;
+        }
+
+        // merge two lists: O(n)
+        for (p1 = head, p2 = head2; p1; ) {
+            /*
+                p1 1 p2 6
+                p1 6 p2 2
+                p1 2 p2 5
+                p1 5 p2 3
+                p1 3 p2 4
+                p1 4 p2 null
+            */
+            auto t = p1->next;
+            p1 = p1->next = p2;
+            p2 = t;
         }
     }
 };
