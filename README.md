@@ -1,12 +1,22 @@
 
-## Sort
+Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
+## Two Pointer 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Easy | fast先前进n个，然后slow，fast同时前进，知道fast到null |
 | [086. Partition List](https://leetcode.com/problems/partition-list/) | _O(n)_ | _O(1)_	| Medium |  <ul><li>先把head所有小于x的pass掉,slow,head=first大于等于x的node, loop fast 当fast小于x,把这个放在slow上,slow前进一位</li><li> 建两个node，一个small,一个big,把所有小于的head放在small，其他的放在big，最后把所有big挂在small的后面 </li></ul> |
 | [141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) | _O(n)_ | _O(1)_	| Easy | |
 | [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | |
-LinkedList 当head, cur 指向同一点, cur = cur->next; head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点
+| [143. Reorder List](https://leetcode.com/problems/reorder-list/) | _O(n)_ | _O(1)_	| Medium | 用fast & slow先找到medium的点，slow到结尾所有的点reverse, 然后p1 = head, p2 = middle后一点，一个p1, 一个p2 插进pointer，就是结果 |
+| [167.Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | _O(n)_ | _O(1)_	| Easy | two pointer, 一个从开始位置，一个从末尾的位置 |
+| [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) | _O(n)_ | _O(1)_	| Easy | |
+| [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | _O(n)_ | _O(1)_	| Easy | 类似[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) ,有duplicate一定会有cycle<ul><li> 每个数减去1,所有数都在\[0,n-1],从n开始，因为从n开始不会自己循环 </li><li>每个数数都在\[1,n],从0开始</li></ul> |
+| [344. Reverse String](https://leetcode.com/problems/reverse-string/) | _O(n)_ | _O(1)_	| Easy | 可以用bit来进行swap |
+| [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/) | _O(n+m)_ | _O(min(m, n))_	| Easy | <ul><li> 用hashmap, O(N) </li><li>binary search, 要sort两个vector,然后loop v1, 到v2中找有没有v1\[i]这个数</li><li>two pointer, sort两个vector,it1=v1.begin(), it2=v2.begin(),然后根据it1,it2大小,更新结果和自增it1和it2 </li></ul> |
+| [350.Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/) | _O(n+m)_ | _O(1)_	| Easy | 如果没有sort, space: O(1) complexity O(max(n,n)\*log(max(m,n))的解为binary search, two pointer,  如果有sort, space: O(1) complexity O(m+n)的解为two pointer |
+| [457. Circular Array Loop](https://leetcode.com/problems/circular-array-loop/) | _O(n)_ | _O(1)_	| Medium | array loop必须是单向的, 比如1->2, 2->1 不算是loop，循环array每次两个pointer检查有没有loop,如果没有loop,把这次所有走过的点都标成0,下次不用再走了 |
+| [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | sliding Window(长度为len(s1)), 每次移动框,vector减去新来的，加上刚刚pass的，直到l长度为0 |
+|LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 
 </br>
 
