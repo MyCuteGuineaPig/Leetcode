@@ -19,7 +19,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [611. Valid Triangle Number](https://leetcode.com/problems/valid-triangle-number/) | _O(n^2)_ | _O(1)_	| Medium |先sort然后两个pointer,每一个都指向一个边 |
 | [777. Swap Adjacent in LR String](https://leetcode.com/problems/swap-adjacent-in-lr-string/) | _O(n)_ | _O(1)_	| Medium | R是向前走，L是向后走（swap R 和L都需要X）, 两个pointer，遇到X往前跳 |
 | [826. Most Profit Assigning Work](https://leetcode.com/problems/most-profit-assigning-work/) | _O(mlogm + nlogn)_ | _O(1)_	| Medium | <ul><li>sort jobs & work, 两个pt,一个指worker, 一个指jobs, profit记录到worker i之前最大的收益</li><li>用一个size=10001的vector, v\[i]表示第difficulty为i时，最大的profit </li></ul> |
-| [828. Unique Letter String](https://leetcode.com/problems/unique-letter-string/) | _O(n)_ | _O(1)_	| Hard |  |
+| [828. Unique Letter String](https://leetcode.com/problems/unique-letter-string/) | _O(n)_ | _O(1)_	| Hard | 与其算每个unique substring长度，不如算每一个char有多少种方法让它在substring种变成unique, 如果只有这个char是unique在substring中，其他的char不会再发现这个substring,所以结果只会加1 |
 | [844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | _O(m+n)_ | _O(1)_	| Easy | 两个pt，都从s,t的尾部开始起，从后往前，while一直到当前不能skip，然后对比两个点是否一样，一样继续往前，不一样return false |
 |LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 
