@@ -80,13 +80,20 @@ Space complexity O(1).
 vector存上一个这个字母出现位置，和上上次这个字母出现位置,
 
 (i - index[c][1]) * (index[c][1] - index[c][0]) 算的是在i之前, 
-上一个与s[i]一样字母 s[ii], 所有包含s[ii]的unique letter的长度
+上一个与s[i]一样字母 s[ii], 所有包含s[ii]的unique letter的个数, 
 
 s = "ABAB"
 i 0 index[c][1] -1 index[c][0] -1 res 0
 i 1 index[c][1] -1 index[c][0] -1 res 0
-i 2 index[c][1] 0 index[c][0] -1 res 2  "A"(i=0), "AB"(i=0,1)
-i 3 index[c][1] 1 index[c][0] -1 res 6  "B"(i=1), "AB", "BA"
+i 2 index[c][1] 0 index[c][0] -1 res 2  "A"(i=0), "AB"(i=0,1) 贡献了两个substring
+i 3 index[c][1] 1 index[c][0] -1 res 6  "ABA"(i=[0,2]), "BA"(i=[1,2]), "AB"  (i=[0,1]), "B"(i=1) 贡献了四个substring
+
+N
+c = A,  index[c][1] = 2 index[c][0] = 1,  "BAB" (i=[1,3]), "BA" (i=[1,2]), "AB" (i=[2,3]), "A" (i=2)贡献了四个substring
+C = B, index[c][1] = 3, index[c][0] = 2,  "AB" (i=[2,3]), B(i=3), 贡献了两个substring
+
+"AB" 都会算两次，因为“A","B"都是在这个区间里出现了一次
+"ABA" ”BAB" 会算一次，因为A出现了两回，B出现了两回，不会算
 
 */
 
@@ -107,4 +114,36 @@ public:
             res = (res + (N - index[c][1]) * (index[c][1] - index[c][0]) % mod) % mod;
         return res;
     }
+};
+
+
+/*
+DP 解
+
+showLastPosition是存的上一个以这个字母结束的最后一位
+contribution[x] 以x结束的贡献的长度
+
+cur[i] = cur[i - 1] - contribution[S.charAt(i)] + (i - showLastPosition[S.charAt(i)])
+*/
+class Solution {
+public:
+    int uniqueLetterString(string S) {
+        
+        int res = 0;
+        if (S.size() == 0)
+            return res;    
+        vector<int>showLastPosition(128,-1);
+        vector<int>contribution(128);
+        int cur = 0;
+        for (int i = 0; i < S.length(); i++) {
+            char x = S[i];
+            cur -= contribution[x]; 
+            contribution[x] = (i - showLastPosition[x]);
+            cur += contribution[x]; 
+            showLastPosition[x] = i ;
+            res += cur;
+        }   
+        return res;
+    }
+
 };
