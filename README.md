@@ -4,7 +4,7 @@
 | [002. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | _O(n)_ | _O(1)_	| Medium | |
 | [021. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | _O(n)_ | _O(1)_	| Easy | |
 | [023.	Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | _O(nklogk)_ | _O(1)_	| Hard | Heap, Divide Conquer, 注: 不能用一直用0作为l 和r比，这样的话，l的size会增加的很快，到最后l size快成位nk了 |
-
+| [024. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/) | _O(n)_ | _O(1)_	| Easy | 建dummy, 提取往后第二个为next，断第二，三链, next后接上当前的next, 把next接到当前的next, pt往后走两步|
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
 ## Two Pointer 
