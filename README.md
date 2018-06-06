@@ -7,6 +7,7 @@
 | [024. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/) | _O(n)_ | _O(1)_	| Easy | 建dummy, 提取往后第二个为nextnext，断第二，三链, nextnext后接上当前的next, 把nextnext接到当前的next, pt往后走两步|
 | [025. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | _O(n)_ | _O(1)_	| Hard | 类似[206	Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)|
 | [061. Rotate List](https://leetcode.com/problems/rotate-list/) | _O(n)_ | _O(1)_	| Medium | |
+| [083. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/) | _O(n)_ | _O(1)_	| Easy | 不能用recusion, recursion的话会用pass n回linked list，用O(n)space, iterative解space只用O(1),tree可以用recursion原因是它的stack space是O(logn) |
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
 ## Two Pointer 
