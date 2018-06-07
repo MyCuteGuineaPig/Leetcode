@@ -10,6 +10,7 @@
 | [082. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/) | _O(n)_ | _O(1)_	| Medium | |
 | [083. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/) | _O(n)_ | _O(1)_	| Easy | 不能用recusion, recursion的话会用pass n回linked list，用O(n)space, iterative解space只用O(1),tree可以用recursion原因是它的stack space是O(logn) |
 | [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/) | _O(n)_ | _O(1)_	| Medium | 1. 先把每个node复制一个，把复制的贴在被复制的后面</br> 2. loop node(现在长度是2n), 把cur->next->random = cur->random->next，因为cur->random->next是复制cur->random过来的</br> 3. 最后结果就是把每个偶数位的node连接起来，同时要消除偶数的node(长度由2n变回n)，否则结果是修改了原来的node</br> |
+| [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/) | _O(n+m)_ | _O(1)_	| Easy | 利用的是 lA + lB_1 =  lA_1 + lB (lenA + B交点前的长度 = lenB + A交点前的长度),</br> pA，pB 每次都前进一步，pA到end,pA设为Bhead, pB到end,pB设为Aend, </br>这种尾对头只换一次，第二次pA 或者pB到end 返回NULL(就是没有交点) |
 | [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/) | _O(n)_ | _O(1)_	| Easy | |
 | [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | _O(n)_ | _O(1)_	| Easy | |
 | [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) | _O(n)_ | _O(1)_	| Easy | 把node->next的val提到node val然后delete node->next |
