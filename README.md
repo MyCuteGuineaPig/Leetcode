@@ -13,6 +13,7 @@
 | [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/) | _O(n+m)_ | _O(1)_	| Easy | 利用的是 lA + lB_1 =  lA_1 + lB (lenA + B交点前的长度 = lenB + A交点前的长度),</br> pA，pB 每次都前进一步，pA到end,pA设为Bhead, pB到end,pB设为Aend, </br>这种尾对头只换一次，第二次pA 或者pB到end 返回NULL(就是没有交点) |
 | [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/) | _O(n)_ | _O(1)_	| Easy | |
 | [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | _O(n)_ | _O(1)_	| Easy | |
+| [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/) | _O(n)_ | _O(1)_	| Easy | revese list前面部分，然后reverse之后，逐个对比前半部分是否等于后半部分的值 |
 | [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) | _O(n)_ | _O(1)_	| Easy | 把node->next的val提到node val然后delete node->next |
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
