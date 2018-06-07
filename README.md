@@ -15,6 +15,11 @@
 | [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | _O(n)_ | _O(1)_	| Easy | |
 | [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/) | _O(n)_ | _O(1)_	| Easy | revese list前面部分，然后reverse之后，逐个对比前半部分是否等于后半部分的值 |
 | [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) | _O(n)_ | _O(1)_	| Easy | 把node->next的val提到node val然后delete node->next |
+two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
+
+
+
+
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
 ## Two Pointer 
