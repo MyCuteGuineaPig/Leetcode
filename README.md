@@ -17,6 +17,8 @@
 | [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) | _O(n)_ | _O(1)_	| Easy | 把node->next的val提到node val然后delete node->next |
 | [328. Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/description/) | _O(n)_ | _O(1)_	| Medium | <ul><li>把even = head->next, odd = head, 然后逐个先断odd和下个even链 和 even和下个odd链(顺序不能反)</li><li>把even顺序保留，把odd提出来， 断even和odd的链，然后evenhead 接在odd->next上</li></ul> |
 | [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/) | _O(n+m)_ | _O(m+n)_	| Medium | 用两个stack,把每个list值push 进stack，最后push进的先算 |
+| [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/) | _O(n)_ | _O(1)_	| Medium | 每次前进到此次push进vector的最后一位, 然后断链, 第i个vector长度为 n//k + (i< n%k) |
+| [817. Linked List Components](https://leetcode.com/problems/linked-list-components/) | _O(n+m)_ | _O(m)_	| Medium | 把vector转化成unordered_set, 然后判断每个val,是不是在unordered_set里面 |
 two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
 
 
@@ -43,7 +45,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [611. Valid Triangle Number](https://leetcode.com/problems/valid-triangle-number/) | _O(n^2)_ | _O(1)_	| Medium |先sort然后两个pointer,每一个都指向一个边 |
 | [777. Swap Adjacent in LR String](https://leetcode.com/problems/swap-adjacent-in-lr-string/) | _O(n)_ | _O(1)_	| Medium | R是向前走，L是向后走（swap R 和L都需要X）, 两个pointer，遇到X往前跳 |
 | [826. Most Profit Assigning Work](https://leetcode.com/problems/most-profit-assigning-work/) | _O(mlogm + nlogn)_ | _O(1)_	| Medium | <ul><li>sort jobs & work, 两个pt,一个指worker, 一个指jobs, profit记录到worker i之前最大的收益</li><li>用一个size=10001的vector, v\[i]表示第difficulty为i时，最大的profit </li></ul> |
-| [828. Unique Letter String](https://leetcode.com/problems/unique-letter-string/) | _O(n)_ | _O(1)_	| Hard | 与其算每个unique substring长度，不如算每一个char有多少种方法让它在substring种变成unique, 如果只有这个char是unique在substring中，其他的char不会再发现这个substring,所以结果只会加1 |
+| [828. Unique Letter String](https://leetcode.com/problems/unique-letter-string/) | _O(n)_ | _O(1)_	| Hard | <ul><li>与其算每个unique substring长度，不如算每一个char有多少种方法让它在substring种变成unique, 如果只有这个char是unique在substring中，其他的char不会再发现这个substring,所以结果只会加1</li><li>DP: 用contri记录此点贡献的值, last记录上次出现这个字母的位置，cur是到目前位置所有贡献值的和, 比如现在点为A,contri\[A]=现在点距离上次A出现的位置,contri保证了从上次A的后一位到现在A的位置，A只出现一次在每个substring中，贡献为i-last\[A]</li></ul> |
 | [844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | _O(m+n)_ | _O(1)_	| Easy | 两个pt，都从s,t的尾部开始起，从后往前，while一直到当前不能skip，然后对比两个点是否一样，一样继续往前，不一样return false |
 |LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 
