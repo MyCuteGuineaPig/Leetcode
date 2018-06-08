@@ -239,3 +239,27 @@ public:
         return true;
     }
 };
+
+//find anagram的起始位置
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        return findAnagrams(s2, s1).size();
+    }
+    
+    // Copied&pasted old problem's solution
+    vector<int> findAnagrams(string s, string p) {
+        int miss[256] = {}, missSum = p.size();
+        for (char c : p)
+            miss[c]++;
+        vector<int> result;
+        for (int i=0; i<s.size(); i++) {
+            missSum -= miss[s[i]]-- > 0;
+            int start = i+1 - p.size();
+            if (!missSum)
+                result.push_back(start);
+            missSum += start >= 0 && ++miss[s[start]] > 0;
+        }
+        return result;
+    }
+};
