@@ -16,6 +16,7 @@
 | [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/) | _O(n)_ | _O(1)_	| Easy | revese list前面部分，然后reverse之后，逐个对比前半部分是否等于后半部分的值 |
 | [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) | _O(n)_ | _O(1)_	| Easy | 把node->next的val提到node val然后delete node->next |
 | [328. Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/description/) | _O(n)_ | _O(1)_	| Medium | <ul><li>把even = head->next, odd = head, 然后逐个先断odd和下个even链 和 even和下个odd链(顺序不能反)</li><li>把even顺序保留，把odd提出来， 断even和odd的链，然后evenhead 接在odd->next上</li></ul> |
+| [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/) | _O(n+m)_ | _O(m+n)_	| Medium | 用两个stack,把每个list值push 进stack，最后push进的先算 |
 two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
 
 
