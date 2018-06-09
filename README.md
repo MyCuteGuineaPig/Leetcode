@@ -22,7 +22,10 @@
 two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
 
 
-
+## Queue
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | Monoqueue using Deque |
 
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
