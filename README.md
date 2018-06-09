@@ -25,7 +25,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 ## Queue
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | Monoqueue using Deque |
+| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | Monoqueue using Deque<ul><li>deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小</br> __push__: 跟back对比, 如果back小, count加上back.second, pop back, 直到比现在这个数大或deque为空, push({val, count}) </br> __pop__: 看top second如果大于0(比当前数小,在windows开始到top的数还存在),top.second-1, 如果是0, pop_front() </li><li>  __deque int__ : 只存单个index, deque中最大数的index存前面（deque是按大小排序的)，且前面index比后面index小，所以pop时候对比front是不是当前windows的 </li></ul> |
 
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
