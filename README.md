@@ -1,7 +1,8 @@
 ## Heap
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>__dp__: 每次用现有的最小乘以2，3，5，如果乘后的数 == 2，3，5 pointer值得数各自乘以 2，3，5，就前进2，3，5的pointer </li><li>__heap__的解： 每次top返回最小的数p,如果p可以整除2，就push p*2, else if可以整除3，push 3*p 和 2*p(否则18不会出现在queue), else push 5*p(否则25*2 = 50 不会出现在queue), 3*p, 2*p</li></ul>|
+| [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>__dp__: 每次用2,3,5指向的pt乘以2，3，5，如果乘后的数 == 2，3，5 pt值的数各自乘以 2，3，5，就前进2，3，5的pt一位</li><li> __heap__ 的解： 每次top返回最小的数p,如果p可以整除2，就push p*2, else if可以整除3，push 3*p 和 2*p(e.g. 否则18不会出现在queue), else push 5*p, 3*p, 2*p(e.g.否则25*2 = 50 不会出现在queue)</li></ul>|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | |
 
 
 ## Linked List
