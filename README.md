@@ -3,6 +3,7 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>__dp__: 每次用2,3,5指向的pt乘以2，3，5，如果乘后的数 == 2，3，5 pt值的数各自乘以 2，3，5，就前进2，3，5的pt一位</li><li> __heap__ 的解： 每次top返回最小的数p,如果p可以整除2，就push p*2, else if可以整除3，push 3*p 和 2*p(e.g. 否则18不会出现在queue), else push 5*p, 3*p, 2*p(e.g.否则25*2 = 50 不会出现在queue)</li></ul>|
 | [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 用两个heap, __small__: maxheap(返回最大值，存小于median),__big__: minheap(返回最大值，存大于median的)，保证small的size 只能是跟big的size一样或者比比big的size 大1 |
+| [313. Super Ugly Number](https://leetcode.com/problems/find-median-from-data-stream/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/),loop n次，每次寻找下个最小的ugly number, 并且记录获得最小ugly number pt的index, 最后把这些index++ |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | priority_queue\<int, vector\<int>, less\<int>> 是max_heap </br>multiset\<int, greater\<int>> 是max_heap </br>multiset和priority_queue用的default comparator相反   |
 
 
