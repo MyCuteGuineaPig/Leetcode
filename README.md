@@ -5,6 +5,7 @@
 | [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 用两个heap, __small__: maxheap(返回最大值，存小于median),__big__: minheap(返回最大值，存大于median的)，保证small的size 只能是跟big的size一样或者比比big的size 大1 |
 | [313. Super Ugly Number](https://leetcode.com/problems/find-median-from-data-stream/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/),loop n次，每次寻找下个最小的ugly number, 并且记录获得最小ugly number pt的index, 最后把这些index++. </br> __heap__ 的解：注意往heap推送，每次推得都要是unique的，不能推heap中已经有的 |
 | [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | |
+| [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | Binary Search, Heap, ZigZag Search |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | priority_queue\<int, vector\<int>, less\<int>> 是max_heap </br>multiset\<int, greater\<int>> 是max_heap </br>multiset和priority_queue用的default comparator相反   |
 
 
