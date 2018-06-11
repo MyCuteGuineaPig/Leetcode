@@ -1,4 +1,7 @@
-
+## Stack
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [020. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | _O(n)_ | _O(n)_	| Easy | |
 
 ## Linked List
 |Title | Time  | Space | Difficulty |  Algorithm Note|
