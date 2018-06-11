@@ -1,15 +1,3 @@
-## Heap
-|Title | Time  | Space | Difficulty |  Algorithm Note|
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>__dp__: 每次用2,3,5指向的pt乘以2，3，5，如果乘后的数 == 2，3，5 pt值的数各自乘以 2，3，5，就前进2，3，5的pt一位</li><li> __heap__ 的解： 每次top返回最小的数p,如果p可以整除2，就push p*2, else if可以整除3，push 3*p 和 2*p(e.g. 否则18不会出现在queue), else push 5*p, 3*p, 2*p(e.g.否则25*2 = 50 不会出现在queue)</li></ul>|
-| [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 用两个heap, __small__: maxheap(返回最大值，存小于median),__big__: minheap(返回最大值，存大于median的)，保证small的size 只能是跟big的size一样或者比比big的size 大1 |
-| [313. Super Ugly Number](https://leetcode.com/problems/find-median-from-data-stream/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/),loop n次，每次寻找下个最小的ugly number, 并且记录获得最小ugly number pt的index, 最后把这些index++. </br> __heap__ 的解：注意往heap推送，每次推得都要是unique的，不能推heap中已经有的 |
-| [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | |
-| [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | Binary Search, Heap, ZigZag Search |
-| [407. Trapping Rain Water II](https://leetcode.com/problems/trapping-rain-water-ii/) | _O(m \* n \* (logm + logn))_ | _O(m\*n)_	| Hard | 把长方形四边所有的cell push进min heap, 然后pop 当前最小的height的cell,loop它的四边,如果边高小于cell高，结果加上这个差，再push进queue(push的height是当前height和cell的最大值) [visualation](https://www.youtube.com/watch?time_continue=80&v=cJayBq38VYw) |
-| [632. Smallest Range](https://leetcode.com/problems/smallest-range/) | _O(nklogk)_ | _O(k)_	| Medium | 把所有vector\[i]\[0]的数push进minheap, 然后pop heap, 更新最大值和最小值,如果最大值-最小值<range, 更新range |
-| [846. Hand of Straights](https://leetcode.com/problems/hand-of-straights/) | _O(nlogn)_ | _O(n)_	| Medium | 先把所有数push进minheap(multiset), 然后进行m个W次loop,如果top+i不在minheap里，return false, 如果在则erase iterator, 直到把heap所有数都删了, return true |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | priority_queue\<int, vector\<int>, less\<int>> 是max_heap </br>multiset\<int, greater\<int>> 是max_heap </br>multiset和priority_queue用的default comparator相反   |
 
 
 ## Linked List
@@ -40,6 +28,21 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | Monoqueue using Deque<ul><li>deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小</br> __push__: 跟back对比, 如果back小, count加上back.second, pop back, 直到比现在这个数大或deque为空, push({val, count}) </br> __pop__: 看top second如果大于0(比当前数小,在windows开始到top的数还存在),top.second-1, 如果是0, pop_front() </li><li>  __deque int__ : 只存单个index, deque中最大数的index存前面（deque是按大小排序的，并且按照出现的前后顺序排序)，且front的index比backindex小，所以pop时候对比front是不是当前windows的 </li></ul> |
+
+
+## Heap
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>__dp__: 每次用2,3,5指向的pt乘以2，3，5，如果乘后的数 == 2，3，5 pt值的数各自乘以 2，3，5，就前进2，3，5的pt一位</li><li> __heap__ 的解： 每次top返回最小的数p,如果p可以整除2，就push p*2, else if可以整除3，push 3*p 和 2*p(e.g. 否则18不会出现在queue), else push 5*p, 3*p, 2*p(e.g.否则25*2 = 50 不会出现在queue)</li></ul>|
+| [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 用两个heap, __small__: maxheap(返回最大值，存小于median),__big__: minheap(返回最大值，存大于median的)，保证small的size 只能是跟big的size一样或者比比big的size 大1 |
+| [313. Super Ugly Number](https://leetcode.com/problems/find-median-from-data-stream/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/),loop n次，每次寻找下个最小的ugly number, 并且记录获得最小ugly number pt的index, 最后把这些index++. </br> __heap__ 的解：注意往heap推送，每次推得都要是unique的，不能推heap中已经有的 |
+| [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | |
+| [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | Binary Search, Heap, ZigZag Search |
+| [407. Trapping Rain Water II](https://leetcode.com/problems/trapping-rain-water-ii/) | _O(m \* n \* (logm + logn))_ | _O(m\*n)_	| Hard | 把长方形四边所有的cell push进min heap, 然后pop 当前最小的height的cell,loop它的四边,如果边高小于cell高，结果加上这个差，再push进queue(push的height是当前height和cell的最大值) [visualation](https://www.youtube.com/watch?time_continue=80&v=cJayBq38VYw) |
+| [632. Smallest Range](https://leetcode.com/problems/smallest-range/) | _O(nklogk)_ | _O(k)_	| Medium | 把所有vector\[i]\[0]的数push进minheap, 然后pop heap, 更新最大值和最小值,如果最大值-最小值<range, 更新range |
+| [846. Hand of Straights](https://leetcode.com/problems/hand-of-straights/) | _O(nlogn)_ | _O(n)_	| Medium | 先把所有数push进minheap(multiset), 然后进行m个W次loop,如果top+i不在minheap里，return false, 如果在则erase iterator, 直到把heap所有数都删了, return true |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | priority_queue\<int, vector\<int>, less\<int>> 是max_heap </br>multiset\<int, greater\<int>> 是max_heap </br>multiset和priority_queue用的default comparator相反   |
+
 
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
