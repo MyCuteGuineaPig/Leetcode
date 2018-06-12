@@ -2,6 +2,7 @@
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [020. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | _O(n)_ | _O(n)_	| Easy | |
+| [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard | <ul><li> __DP__: dp\[i] 代表以current index结束的最大valid substring的长 </li><li>__Stack__: push的是最近'('的index 和substring的起点 </li></ul>  |
 
 ## Linked List
 |Title | Time  | Space | Difficulty |  Algorithm Note|
