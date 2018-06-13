@@ -5,6 +5,7 @@
 | [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard | <ul><li> __DP__: dp\[i] 代表以current index结束的最大valid substring的长 </li><li>__Stack__: push的是最近'('的index 和substring的起点 </li></ul>  |
 | [071. Simplify Path](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Medium | getline可以当做stack, 遇到".." stack pop   |
 | [084. Largest Rectangle in Histogram](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Hard |  <ul><li>__stack__: stack要保证height是由小变大的,当遇到新的height小于stack.top(),pop stack，算area.</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
+| [085. Maximal Rectangle	](https://leetcode.com/problems/symmetric-tree/) | _O(n\*m)_ | _O(m)_	| Hard | __stack__:与[084. Largest Rectangle in Histogram](https://leetcode.com/problems/simplify-path/) 类似, matrix有n行，问题可以转换成n个Histogram的问题,每个问题就是一个以这一行为底的Histogram问题，上面连续的1的个数就是Height |
 | [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy | push时候先push 左面的，再push右面的, top先top 右面的，再top 左面的，注: left->right算右面，right->left算左面 |
 
 ## Linked List
