@@ -4,6 +4,7 @@
 | [020. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | _O(n)_ | _O(n)_	| Easy | |
 | [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard | <ul><li> __DP__: dp\[i] 代表以current index结束的最大valid substring的长 </li><li>__Stack__: push的是最近'('的index 和substring的起点 </li></ul>  |
 | [071. Simplify Path](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Medium | getline可以当做stack, 遇到".." stack pop   |
+| [084. Largest Rectangle in Histogram](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Hard |  <ul><li>__stack__: stack要保证height是由小变大的,当遇到新的height小于stack.top(),pop stack，算area.</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
 
 ## Linked List
 |Title | Time  | Space | Difficulty |  Algorithm Note|
