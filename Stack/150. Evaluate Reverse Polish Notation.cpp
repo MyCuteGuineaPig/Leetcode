@@ -61,3 +61,52 @@ public:
         return op.length() == 1 && string("+-*/").find(op) != string::npos;
     }
 };
+
+
+
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        int n = tokens.size();
+        if (n == 0) return 0;
+        
+        stack<int> nums;
+        for (string s : tokens) {
+            if (s != "+" && s != "-" && s != "*" && s != "/") nums.push(stoi(s));
+            else {
+                int n1 = nums.top();
+                nums.pop();
+                nums.top() = calculate(nums.top(), n1, s);
+            }
+        }
+        return nums.top();
+    }
+private:
+    int calculate(int n1, int n2, string op) {
+        if (op == "+") return n1+n2;
+        else if (op == "-") return n1-n2;
+        else if (op == "*") return n1*n2;
+        else if (op == "/") return n1/n2;
+    }
+};
+
+
+/*
+Recursive solution
+
+*/
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        string s = tokens.back(); tokens.pop_back();
+        //cout<<" s "<<s<<endl;
+        if(s != "+" && s != "-" && s != "*" && s != "/") return stoi(s);
+        
+        int r2 = evalRPN(tokens), r1 = evalRPN(tokens); //先r2, 因为r2 靠后面，后面的先pop out
+        //cout<<" r2 "<<r2<<" r1 "<<r1<<endl;
+        if(s == "+") return r1 + r2;
+        if(s == "-") return r1 - r2;
+        if(s == "*") return r1 * r2;
+        if(s == "/") return r1 / r2;
+    }
+};
