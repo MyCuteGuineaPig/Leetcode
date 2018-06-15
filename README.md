@@ -13,6 +13,7 @@
 | [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium | 先左后右，每次go left, push into stack, 每次go right 不用push into stack  |
 | [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/) | _O(n)_ | _O(n)_	| Hard | 用sign=1记录+, -1记录减, 碰到num乘以res,'('res,sign push进stack, ')'先乘以stack的top(是sign),再加上stack的top(sign之前的res)  |
 | [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | _O(n)_ | _O(n)_	| Medium | 用sign=1记录+, -1记录减, sign = 2 记录\*， 3记录除, 上一个sign是乘或除，先进行operation|
+| [331. Verify Preorder Serialization of a Binary Tree](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/description/) | _O(n)_ | _O(n)_	| Medium | 树的每个node要pop两回，一会是从left child上来，另一个从right child上来, 所以stack遇到新node push2,当# pop时，top为2减1，top为1 pop。 还设一个root node为1，为了保证root不变，可能input是两个valid tree，设root node,保证一遇到第二个tree  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | |
 
 ## Linked List
