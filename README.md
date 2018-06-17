@@ -18,7 +18,7 @@
 | [394. Decode String](https://leetcode.com/problems/decode-string/) | _O(n)_ | _O(h)_	| Medium | <ul><li>遇到num, push num 进num stack </li><li>遇到'\[',push “”进pat stack</li><li>遇到string，如果pat stack不为空，append top, 如果为空，append res </li><li> 遇到']',把pattern提出，若pat stack为空，append res, pat stack不为空append top </li></ul> |
 | [456. 132 Pattern](https://leetcode.com/problems/132-pattern/) | _O(n)_ | _O(h)_	| Medium | 寻找 s1 < s3 < s2，从后向前，stack是ascending stack, 寻找最大的s2, 一旦有数小于s2, 返回true |
 | [682. Baseball Game](https://leetcode.com/problems/baseball-game/) | _O(n)_ | _O(n)_	| Easy |  |
-| [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium |  |
+| [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium | 碰撞发生只能是新来的小于0，stack top > 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | |
 
 ## Linked List
