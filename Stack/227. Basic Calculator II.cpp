@@ -24,6 +24,13 @@ Do not use the eval built-in library function.
 
 */
 
+
+/*
+
+整体方法是把数push进stack，有乘除，先pop，进行operation，再push进
+最后结果是stack每个数的和
+*/
+
 class Solution {
 public:
     int calculate(string s) {
@@ -57,44 +64,67 @@ public:
 
 
 
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int>stk;
+        char operators='+';
+        int x = 0;
+        for(int i = 0; i<s.size();i++){
+            if(s[i] >= '0' && s[i]<='9'){
+                x = 0; 
+                while(i<s.size() && s[i]>='0'){
+                    x = x*10 + s[i]-'0';
+                    i++;
+                }
+                i--;
+                if(operators == '+') stk.push(x); 
+                else if(operators == '-') stk.push(-x); 
+                else if(operators == '*') {
+                    int tmp = stk.top() * x;
+                    stk.pop();
+                    stk.push(tmp);
+                }else{
+                    int tmp = stk.top() / x;
+                    stk.pop();
+                    stk.push(tmp);
+                }
+                operators = s[i];
+            }
+            else if(s[i] == ' ') continue;
+            else operators = s[i];
+        }
+        int res = 0;
+        while(!stk.empty()){
+            res += stk.top(); 
+            stk.pop();
+        }
+        return res;
+    }
+};
 
 
-classclass  SolutionSolution { {
- publicpublic:
-    :     intint  calculatecalculate((stringstring s) s)  {
-        {         stackstack<<intint> nums;
-        > nums;         intint num= num=00;
-        ;         charchar op =  op = '+''+';
-        ;         forfor((intint i= i=00; i<s.size(); i++){
-            ; i<s.size(); i++){     if (s[i]>='0' && s[i]<='9') {
-                num = num*10+(s[i]-'0');
+//省去stack,把之前的数存在res里面，pre是上一个数，或者是第一个开始乘或除的数，遇到* or /，对pre进行操作
+class Solution {
+public:
+    int calculate(string s) {
+        istringstream ss("+" + s + "+");
+        long pre = 0, num, res = 0;
+        char c;
+        while(ss >> c){
+            if(c == '+' || c == '-'){
+                res += pre;
+                ss >> pre;
+                if(c == '-')    pre = -pre; //or use pre = pre*(44-op)
             }
-            if ( (s[i] <'0' || s[i]>'9')&&(s[i]!=' ') || i==s.size()-1) {
-                if (op=='+') {
-                    nums.push(num);
-                }
-                else if(op=='-') {
-                    nums.push(-num);
-                }
-                else if (op=='*') {
-                    int tmp = nums.top() * num;
-                    nums.pop();
-                    nums.push(tmp);
-                }
-                else if (op=='/') {
-                    int tmp = nums.top()/num;
-                    nums.pop();
-                    nums.push(tmp);
-                }
-                op = s[i];
-                num=0;
+            else{
+                ss >> num;
+                if(c == '*')
+                    pre *= num;
+                else
+                    pre /= num;
             }
         }
-        int result = 0;
-        while(!nums.empty()) {
-            result += nums.top();
-            nums.pop();
-        }
-        return result;
+        return res;
     }
 };
