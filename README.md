@@ -21,7 +21,7 @@
 | [682. Baseball Game](https://leetcode.com/problems/baseball-game/) | _O(n)_ | _O(n)_	| Easy |  |
 | [726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/) | _O(n^2)_ | _O(n)_	| Hard | 用stack<map<string,int>>, 遇到'(': 把cur push进stack, 遇到')',把cur 与stack top merge|
 | [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium | 碰撞发生只能是新来的小于0，stack top > 0 |
-| [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | _O(n)_ | _O(n)_	| Medium | Ascending stack, 从后往前loop，遇到t\[i] > stack.top(), stack持续pop(), 如果stack不为空,则概数为第一个比t\[i]大的 |
+| [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | _O(n)_ | _O(n)_	| Medium | Ascending stack, 从后往前loop，遇到t\[i] >= stack.top(), stack持续pop(), 如果stack不为空,则概数为第一个比t\[i]大的 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | |
 
 ## Linked List
