@@ -19,6 +19,7 @@
 | [456. 132 Pattern](https://leetcode.com/problems/132-pattern/) | _O(n)_ | _O(h)_	| Medium | 寻找 s1 < s3 < s2，从后向前，stack是ascending stack, 寻找最大的s2, 一旦有数小于s2, 返回true |
 | [636. Exclusive Time of Functions](https://leetcode.com/problems/exclusive-time-of-functions/) | _O(n)_ | _O(n)_	| Medium | |
 | [682. Baseball Game](https://leetcode.com/problems/baseball-game/) | _O(n)_ | _O(n)_	| Easy |  |
+| [726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/) | _O(n)_ | _O(n)_	| Hard | 用stack<map<string,int>>, 遇到'(': 把cur push进stack, 遇到')',把cur 与stack top merge|
 | [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium | 碰撞发生只能是新来的小于0，stack top > 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | |
 
