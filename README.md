@@ -13,6 +13,16 @@
 | [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium | 先左后右，每次go left, push into stack, 每次go right 不用push into stack  |
 | [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/) | _O(n)_ | _O(n)_	| Hard | 用sign=1记录+, -1记录减, 碰到num乘以res,'('res,sign push进stack, ')'先乘以stack的top(是sign),再加上stack的top(sign之前的res)  |
 | [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | _O(n)_ | _O(n)_	| Medium | 用sign=1记录+, -1记录减, sign = 2 记录\*， 3记录除, 上一个sign是乘或除，先进行operation|
+| [331. Verify Preorder Serialization of a Binary Tree](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/) | _O(n)_ | _O(n)_	| Medium | <ul><li>__Stack__: 树的每个node要pop两回，一会是从left child上来，另一个从right child上来, 所以stack遇到新node push2,当# pop时，top为2减1，top为1 pop。 还设一个root node为1，为了保证root不变，可能input是两个valid tree，设root node,保证一遇到第二个tree </li><li>indegree(到parent的) = outdegree（到child的） 每个node 都有一个indegree, 只有不是NULL的node,才有outdegreee</li></ul>  |
+| [385. Mini Parser](https://leetcode.com/problems/mini-parser/) | _O(n)_ | _O(h)_	| Medium | 遇到',' ']' 把之前的integer add，  比如\[-1],  \[123,456], 遇到']',把现在这个nested list加入上个nested list |
+| [394. Decode String](https://leetcode.com/problems/decode-string/) | _O(n)_ | _O(h)_	| Medium | <ul><li>遇到num, push num 进num stack </li><li>遇到'\[',push “”进pat stack</li><li>遇到string，如果pat stack不为空，append top, 如果为空，append res </li><li> 遇到']',把pattern提出，若pat stack为空，append res, pat stack不为空append top </li></ul> |
+| [456. 132 Pattern](https://leetcode.com/problems/132-pattern/) | _O(n)_ | _O(h)_	| Medium | 寻找 s1 < s3 < s2，从后向前，stack是ascending stack, 寻找最大的s2, 一旦有数小于s2, 返回true |
+| [636. Exclusive Time of Functions](https://leetcode.com/problems/exclusive-time-of-functions/) | _O(n)_ | _O(n)_	| Medium | |
+| [682. Baseball Game](https://leetcode.com/problems/baseball-game/) | _O(n)_ | _O(n)_	| Easy |  |
+| [726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/) | _O(n^2)_ | _O(n)_	| Hard | 用stack<map<string,int>>, 遇到'(': 把cur push进stack, 遇到')',把cur 与stack top merge|
+| [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium | 碰撞发生只能是新来的小于0，stack top > 0 |
+| [736. Parse Lisp Expression](https://leetcode.com/problems/parse-lisp-expression/) | _O(n)_ | _O(n)_	| Hard | stack需要两个，一个是存string dict(用来储存let的字典), 一个存string vector(用来储存上个string的split), 遇到'(', 如果之前是let, 先存map, 然后push进两个stack, string vector清空，字典不清空 。 遇到')', 算当前的, 把结果push到上个string(stkstring.top()) 的结尾, pop两个stack|
+| [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | _O(n)_ | _O(n)_	| Medium | Ascending stack, 从后往前loop, 遇到t\[i] >= stack.top(), stack持续pop(), 如果stack不为空,则概数为第一个比t\[i]大的 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | |
 
 ## Linked List
@@ -106,6 +116,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [406. Queue Reconstruction by Height](https://leetcode.com/problems/queue-reconstruction-by-height/) | _O(n \* sqrt(n))~O(n^2)_ | _O(n)_	| Medium | 先把height大的安排了，如果height一样再sort k有小到大。 sqrt(n)解是一样的sort，但是把sort之后的插入到不同的组中，每个组不超过sqrt(n)个元素 |
 | [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements) O(nlogn), priority_queue O(nlogn)  |
 | [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) | _O(nlogk)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue  |
+| [853. Car Fleet](https://leetcode.com/problems/car-fleet/) | _O(nlogn)_ | _O(n)_	| Medium | sort postion又大到小，再sort从position\[i]到target的时间由小到大,一旦后面的时间比前面时间长，就不会catch前面的，再更新cur_time  |
 |C++priority_queue<pair<int,int>>pq 先对比first, top是first最大的，</br>constructor: greater\<int>是让top返回最小的数,大的数放后面 |  |	|  | python的heappop()先pop对比first,then second, top是first最小的  |
 
 
