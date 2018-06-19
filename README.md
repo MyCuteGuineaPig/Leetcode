@@ -1,3 +1,10 @@
+## Hash Table
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [001	Two Sum](https://leetcode.com/problems/two-sum/) | _O(n)_ | _O(n)_	| Easy | |
+
+
+
 ## Stack
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -14,6 +21,7 @@
 | [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/) | _O(n)_ | _O(n)_	| Hard | 用sign=1记录+, -1记录减, 碰到num乘以res,'('res,sign push进stack, ')'先乘以stack的top(是sign),再加上stack的top(sign之前的res)  |
 | [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | _O(n)_ | _O(n)_	| Medium | 用sign=1记录+, -1记录减, sign = 2 记录\*， 3记录除, 上一个sign是乘或除，先进行operation|
 | [331. Verify Preorder Serialization of a Binary Tree](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/) | _O(n)_ | _O(n)_	| Medium | <ul><li>__Stack__: 树的每个node要pop两回，一会是从left child上来，另一个从right child上来, 所以stack遇到新node push2,当# pop时，top为2减1，top为1 pop。 还设一个root node为1，为了保证root不变，可能input是两个valid tree，设root node,保证一遇到第二个tree </li><li>indegree(到parent的) = outdegree（到child的） 每个node 都有一个indegree, 只有不是NULL的node,才有outdegreee</li></ul>  |
+| [341. Flatten Nested List Iterator](https://leetcode.com/problems/flatten-nested-list-iterator/) | _O(n)_ | _O(h)_	| Medium | stack + recursion从最后往前loop, queue从前往后loop|
 | [385. Mini Parser](https://leetcode.com/problems/mini-parser/) | _O(n)_ | _O(h)_	| Medium | 遇到',' ']' 把之前的integer add，  比如\[-1],  \[123,456], 遇到']',把现在这个nested list加入上个nested list |
 | [394. Decode String](https://leetcode.com/problems/decode-string/) | _O(n)_ | _O(h)_	| Medium | <ul><li>遇到num, push num 进num stack </li><li>遇到'\[',push “”进pat stack</li><li>遇到string，如果pat stack不为空，append top, 如果为空，append res </li><li> 遇到']',把pattern提出，若pat stack为空，append res, pat stack不为空append top </li></ul> |
 | [456. 132 Pattern](https://leetcode.com/problems/132-pattern/) | _O(n)_ | _O(h)_	| Medium | 寻找 s1 < s3 < s2，从后向前，stack是ascending stack, 寻找最大的s2, 一旦有数小于s2, 返回true |
