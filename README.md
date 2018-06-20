@@ -3,7 +3,7 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [001	Two Sum](https://leetcode.com/problems/two-sum/) | _O(n)_ | _O(n)_	| Easy | |
 | [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | |
-
+sliding windows: windows都是看以当前字母结尾的window <ul><li>可以记录当前substring的开始位置，</li><li>用数字记录substring的长度 </li><li>用hashset和两个pointer记录当前windows的长度 </li></ul>
 
 
 ## Stack
