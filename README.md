@@ -2,7 +2,11 @@
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [001	Two Sum](https://leetcode.com/problems/two-sum/) | _O(n)_ | _O(n)_	| Easy | |
-
+| [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | |
+| [030. Substring with Concatenation of All Words	](https://leetcode.com/problems/substring-with-concatenation-of-all-words/) | _O((m+n)\*k)_ | _O(n\*k)_	| Hard | k = word\[0]长度, n = 整个words长度, m = S的长度。最快的解是两个map, map1记录words的每个string, | map2记录S的substr，substr每次移动k个, 直到当前window长度 == n\*k, res append(start) |
+| [036. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | _O(9\*9)_ | _O(9)_	| Medium | 用bit比较快，比如i在横着第2行出现, row\[2] |= 1<<i; 如果row\[i] & id == 1: return false |
+| [049. Group Anagrams](https://leetcode.com/problems/group-anagrams/) | _O(n * glogg)_ | _O(n)_	| Medium | 经典 面试题 |
+|sliding windows: windows都是看以当前字母结尾的window <ul><li>可以记录当前substring的开始位置，</li><li>用数字记录substring的长度 </li><li>用hashset和两个pointer记录当前windows的长度 </li></ul> |  |	|  | |
 
 
 ## Stack
