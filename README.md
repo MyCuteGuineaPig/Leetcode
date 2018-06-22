@@ -80,7 +80,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [407. Trapping Rain Water II](https://leetcode.com/problems/trapping-rain-water-ii/) | _O(m \* n \* (logm + logn))_ | _O(m\*n)_	| Hard | 把长方形四边所有的cell push进min heap, 然后pop 当前最小的height的cell,loop它的四边,如果边高小于cell高，结果加上这个差，再push进queue(push的height是当前height和cell的最大值) [visualation](https://www.youtube.com/watch?time_continue=80&v=cJayBq38VYw) |
 | [632. Smallest Range](https://leetcode.com/problems/smallest-range/) | _O(nklogk)_ | _O(k)_	| Medium | 把所有vector\[i]\[0]的数push进minheap, 然后pop heap, 更新最大值和最小值,如果最大值-最小值<range, 更新range |
 | [846. Hand of Straights](https://leetcode.com/problems/hand-of-straights/) | _O(nlogn)_ | _O(n)_	| Medium | 先把所有数push进minheap(multiset), 然后进行m个W次loop,如果top+i不在minheap里，return false, 如果在则erase iterator, 直到把heap所有数都删了, return true |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | priority_queue\<int, vector\<int>, less\<int>> 是max_heap </br>multiset\<int, greater\<int>> 是max_heap </br>multiset和priority_queue用的default comparator相反   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | priority_queue\<int, vector\<int>, less\<int>> 是max_heap </br>multiset\<int, greater\<int>> 是max_heap greater<int>是min_heap </br>multiset和priority_queue用的default comparator相反   |
 
 
 
