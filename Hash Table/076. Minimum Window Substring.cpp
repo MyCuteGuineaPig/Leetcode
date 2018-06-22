@@ -57,19 +57,27 @@ public:
 
 class Solution {
 public:
-string minWindow(string s, string t) {
-        vector<int> map(128,0);
-        for(auto c: t) map[c]++;
-        int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0;
-        while(end<s.size()){
-            if(map[s[end++]]-->0) counter--; //in t
-            while(counter==0){ //valid
-                if(end-begin<d)  d=end-(head=begin);
-                if(map[s[begin++]]++==0) counter++;  //make it invalid
-            }  
-        }
-        return d==INT_MAX? "":s.substr(head, d);
-    }
+string minWindow(string s, string t) 
+{
+	vector<int> vmap(128, 0);
+	int count = t.size(), beg = 0, end = 0, d = INT_MAX, head = 0;
+	for (int i = 0; i < t.size(); i++)
+		vmap[t[i]]++;
+	while (end < s.size())
+	{
+		if (vmap[s[end++]]-->0)	count--;//先判断vmap[s[end]]>0，字符是否在目标串中
+		while (count == 0)  //完成匹配
+		{
+			if (end - beg < d)  //判断串是否最短
+			{
+				d = end - beg;
+				head = beg;
+			}
+			if (vmap[s[beg++]]++ == 0) count++;  //让匹配的第一个起点字符失效，从而进行下一次匹配
+		}
+	}
+	return d == INT_MAX ? "" : s.substr(head, d);
+}
 };
 
 class Solution {
