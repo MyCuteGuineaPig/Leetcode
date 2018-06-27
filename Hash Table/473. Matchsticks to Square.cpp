@@ -23,3 +23,38 @@ The length sum of the given matchsticks is in the range of 0 to 10^9.
 The length of the given matchstick array will not exceed 15.
 
 */
+
+class Solution {
+public:
+    bool makesquare(vector<int>& nums) {
+        if(nums.empty()) return false;
+        int sum = accumulate(nums.begin(), nums.end(),0);
+        if(sum % 4)  return false;
+        sort(nums.begin(),nums.end(),[](int a, int b){return a>b;});
+        const int target = sum / 4;
+        vector<int>used(4);
+        return helper(used, nums, target, 0);
+    }
+    
+    bool helper(vector<int>& used, const vector<int>& nums, const int& target, int ind){
+        if(ind == nums.size()) {
+            return used[0] == used[1] && used[1] == used[2] && used[2] == used[3];
+        }
+        for(int i = 0; i<4; i++){
+            if(used[i] + nums[ind] <= target){
+                int j = i-1;
+                while(j>=0){
+                    if (used[j] == used[i]) break;
+                    j--;
+                }
+                if(j == -1){
+                    used[i] += nums[ind];
+                    if(helper(used, nums, target, ind+1))
+                        return true;
+                    used[i] -= nums[ind];
+                }
+            }
+        }
+        return false;
+    }
+};
