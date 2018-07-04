@@ -1,3 +1,15 @@
+## Bit Manipulation
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [136. Single Number](https://leetcode.com/problems/single-number/) | _O(n)_ | _O(1)_	| Easy | 用xor ^ |
+| [137. Single Number II](https://leetcode.com/problems/single-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>第一次出现-> save it in "ones", 第二次出现 -> clear "ones" but save it in "twos" for later check,  第三次出现 -> try to save in "ones" but value saved in "twos" clear it.</li><li>loop through 32个bit, 每个bit再loop nums, if bit & nums[i] => c++, 如果c不是3个倍数，最终结果在现在这个bit上位1</li></ul> |
+| [190. Reverse Bits](https://leetcode.com/problems/reverse-bits/) | _O(1)_ | _O(1)_	| Easy | 一位一位reverse bit, res每次向左移动一位，n向右移动一位 |
+| [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | _O(1)_ | _O(1)_	| Easy | n = n & (n-1); |
+| [231. Power of Two](https://leetcode.com/problems/power-of-two/) | _O(1)_ | _O(1)_	| Easy | n = n & (n-1); |
+|  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  |  |
+
+
+
 ## Hash Table
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -5,9 +17,9 @@
 | [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | |
 | [030. Substring with Concatenation of All Words	](https://leetcode.com/problems/substring-with-concatenation-of-all-words/) | _O((m+n)\*k)_ | _O(n\*k)_	| Hard | 🔍k = word\[0]长度, n = 整个words长度, m = S的长度。最快的解是两个map, map1记录words的每个string, | map2记录S的substr，substr每次移动k个, 直到当前window长度 == n\*k, res append(start) |
 | [036. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | _O(9\*9)_ | _O(9)_	| Medium | 用bit比较快，比如i在横着第2行出现, row\[2] |= 1<<i; 如果row\[i] & id == 1: return false |
-| [049. Group Anagrams](https://leetcode.com/problems/group-anagrams/) | _O(n * glogg)_ | _O(n)_	| Medium | 经典 面试题 |
+| [049. Group Anagrams](https://leetcode.com/problems/group-anagrams/) | _O(n * glogg)_ | _O(n)_	| Medium | 经典 面试题, python list不能作为字典的key,但是tuple可以 |
 | [076. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | _O(n)_ | _O(k)_	| Hard | 🔍sliding windows, 此题没有窗口的size，要去找最小的size，关键是如何确定window valid，记录每次滑到cur char也在T中出现的个数，当个数满足T.size(),证明window valid，然后逐步缩小start与i的距离，找最小点 |
-| [149. Max Points on a Line](https://leetcode.com/problems/max-points-on-a-line/) | _O(n^2)_ | _O(n)_	| Hard | 每到一点，算跟别的点的斜率，注意1. 重合的点，2.斜率没有的定义的点 |
+| [149. Max Points on a Line](https://leetcode.com/problems/max-points-on-a-line/) | _O(n^2)_ | _O(n)_	| Hard | 每到一点，算跟别的点的斜率，注意1. 重合的点，2.斜率没有的定义的点, 在每一点都重新建一个hashmap |
 | [187. Repeated DNA Sequences](https://leetcode.com/problems/repeated-dna-sequences/) | _O(n)_ | _O(n)_	| Medium |🔍 rolling hash (rabin-karp), <ul><li>A = 00, C = 01, G = 10, T = 11, i大于9后 t>>2 & 0xfffff(2^18-1) 做&运算</li><li>直接把A,C,G,T默认转化成ASCII，与&7, 后三位是unique的，i>9后做 t << 3 & 0x3FFFFFFF</li></ul> |
 | [202. Happy Number](https://leetcode.com/problems/happy-number/) | _O(k)_ | _O(k)_	| Easy | 要么是happy number，要么转化过程陷入循环 |
 | [204. Count Primes](https://leetcode.com/problems/count-primes/) | _O(n)_ | _O(n)_	| Easy | count从小往大后eliminate，注意要尽可能efficient |
@@ -39,8 +51,12 @@
 | [811. Subdomain Visit Count](https://leetcode.com/problems/subdomain-visit-count/) | _O(n)_ | _O(n)_	| Easy |  |
 | [822. Card Flipping Game](https://leetcode.com/problems/card-flipping-game/) | _O(n)_ | _O(n)_	| Medium | 先把front\[i]和end\[i] 一样的插入到hash set, 再loop front & end, 选取不在hash set中最小的 |
 | [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/) | _O(n+k^2)_ | _O(k)_	| Medium | 用hash map存age和count, loop两层hashmap, 判断内层和外层key是否满足条件, 满足的话更新结果 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | sliding windows: windows都是看以当前字母结尾的window <ul><li>可以记录当前substring的开始位置，</li><li>用数字记录substring的长度 </li><li>用hashset和两个pointer记录当前windows的长度 </li></ul> |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
+## sliding windows Summary
+|summary |
+| ------------- |
+| sliding windows: windows都是看以当前字母结尾的window <ul><li>可以记录当前substring的开始位置，</li><li>用数字记录substring的长度 </li><li>用hashset和两个pointer记录当前windows的长度 </li><li> 可以用两个map,一个map记录比较对象(T)，一个记录被比较对象(S), 还需要一个count记录S中T出现的个数, start记录windows起始点, 初始化count = len(T); </br>只有当sdict\[s\[i]] < tdict\[s\[i]], count--; 当count == 0, 满足情况,append to res; </br>移动窗口过程中,dict\[s\[start]]--, start++,只有当sdict\[s\[start]] < tdict\[s\[start]]时 ++count, </br>比如[30题 Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/), [76题 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)</br>两个题区别是30不能包括多余的string (不可以sdict\[s\[start]] > tdict\[s\[start]]), 76是允许的  </li></ul> |
 
 ## Stack
 |Title | Time  | Space | Difficulty |  Algorithm Note|
