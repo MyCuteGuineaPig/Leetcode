@@ -4,10 +4,11 @@
 | [136. Single Number](https://leetcode.com/problems/single-number/) | _O(n)_ | _O(1)_	| Easy | 用xor ^ |
 | [137. Single Number II](https://leetcode.com/problems/single-number-ii/) | _O(n)_ | _O(1)_	| Medium | <ul><li>第一次出现-> save it in "ones", 第二次出现 -> clear "ones" but save it in "twos" for later check,  第三次出现 -> try to save in "ones" but value saved in "twos" clear it.</li><li>loop through 32个bit, 每个bit再loop nums, if bit & nums[i] => c++, 如果c不是3个倍数，最终结果在现在这个bit上位1</li></ul> |
 | [190. Reverse Bits](https://leetcode.com/problems/reverse-bits/) | _O(1)_ | _O(1)_	| Easy | 一位一位reverse bit, res每次向左移动一位，n向右移动一位 |
-| [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | _O(1)_ | _O(1)_	| Easy | n = n & (n-1); |
+| [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | _O(n)_ | _O(1)_	| Easy | n = n & (n-1); |
 | [201. Bitwise AND of Numbers Range](https://leetcode.com/problems/bitwise-and-of-numbers-range/) | _O(1)_ | _O(1)_	| Medium | 一位一位比较digit，直到移动k位m=n, 那么此时的digit是bitwise and的结果, res = m<<k |
 | [231. Power of Two](https://leetcode.com/problems/power-of-two/) | _O(1)_ | _O(1)_	| Easy | n = n & (n-1); |
-| [260. Single Number III](https://leetcode.com/problems/single-number-iii/) | _O(1)_ | _O(1)_	| Medium | 两个pass,第一个pass, 通过Xor需要区分a 和 b的数 c(是a与b右面第一位不一样的数), 第二次pass, 通过c&nums\[i]判断做xor, 找到a和b |
+| [260. Single Number III](https://leetcode.com/problems/single-number-iii/) | _O(n)_ | _O(1)_	| Medium | 两个pass,第一个pass, 通过Xor需要区分a 和 b的数 c(是a与b右面第一位不一样的数), 第二次pass, 通过c&nums\[i]判断做xor, 找到a和b |
+| [268. Missing Number](https://leetcode.com/problems/single-number-iii/) | _O(n)_ | _O(1)_	| Medium | Math, Swap, Xor |
 |  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  |  |
 
 
