@@ -13,7 +13,7 @@
 | [342. Power of Four](https://leetcode.com/problems/power-of-four/) | _O(1)_ | _O(1)_	| Easy | 4^n = (3+1)^n, 除了判断(n&n-1) , 还要判断n-1 是不是可以整除3 |
 | [371. Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/) | _O(1)_ | _O(1)_	| Easy | （a&b)<<1 表示需要相加进位的（两个1相加）, a ^ b 表示相加不进位（保留单个1） |
 | [389. Find the Difference](https://leetcode.com/problems/find-the-difference/) | _O(1)_ | _O(1)_	| Easy | 🔍找两个string唯一不同不同的char可以通过 xor |
-|  注意运算顺序, << = 是优于&, 判断&, 需要加括号,比如(n& n-1) == 0， +, - 先于 &, 所以不用括号 |  |	|  |  |
+|  注意运算顺序, << >> = 是优于&,\| ; 判断&, 需要加括号,比如(n& n-1) == 0， +, - 先于 &, 所以不用括号 |  |	|  |  |
 
 
 
@@ -30,12 +30,13 @@
 | [187. Repeated DNA Sequences](https://leetcode.com/problems/repeated-dna-sequences/) | _O(n)_ | _O(n)_	| Medium |🔍 rolling hash (rabin-karp), <ul><li>A = 00, C = 01, G = 10, T = 11, i大于9后 t>>2 & 0xfffff(2^18-1) 做&运算</li><li>直接把A,C,G,T默认转化成ASCII，与&7, 后三位是unique的，i>9后做 t << 3 & 0x3FFFFFFF</li></ul> |
 | [202. Happy Number](https://leetcode.com/problems/happy-number/) | _O(k)_ | _O(k)_	| Easy | 要么是happy number，要么转化过程陷入循环 |
 | [204. Count Primes](https://leetcode.com/problems/count-primes/) | _O(n)_ | _O(n)_	| Easy | count从小往大后eliminate，注意要尽可能efficient |
-| [205.	Isomorphic Strings ](https://leetcode.com/problems/contains-duplicate/) | _O(n)_ | _O(1)_	| Easy | 可以记录相同位置字母出现的上一位，或者把s,t字母相互关联起来 |
+| [205.	Isomorphic Strings ](https://leetcode.com/problems/contains-duplicate/) | _O(n)_ | _O(1)_	| Easy | 可以记录相同位置字母出现的上一位，或者把s,t字母相互关联起来, python 可以用find+map or zip+set |
 | [217. Contains Duplicate ](https://leetcode.com/problems/contains-duplicate/) | _O(n)_ | _O(n)_	| Easy | easy one, 可以用sort + unique |
 | [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/) | _O(n)_ | _O(n)_	| Easy | easy one |
 | [290. Word Pattern](https://leetcode.com/problems/word-pattern/) | _O(n)_ | _O(n)_	| Easy | 思路和[205.	Isomorphic Strings ](https://leetcode.com/problems/contains-duplicate/)一样|
-| [299. Bulls and Cows](https://leetcode.com/problems/bulls-and-cows/) | _O(n)_ | _O(1)_	| Easy | One pass: 如果guess\[i] 和 secret\[i]一样, bull++, 不一样，++m\[sec\[i]], --m\[guess\[i]] |
-| [387. First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/) | _O(n)_ | _O(n)_	| Easy |  |
+| [299. Bulls and Cows](https://leetcode.com/problems/bulls-and-cows/) | _O(n)_ | _O(1)_	| Easy | One pass: 如果guess\[i] 和 secret\[i]一样, bull++, 不一样，++m\[sec\[i]], --m\[guess\[i]] python 可以用两个collectons.Counter相减, 得到重合的set|
+| [336. Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/) | _O(n \* k^2)_ | _O(n\*k)_	| Hard |  |
+| [387. First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/) | _O(n)_ | _O(n)_	| Easy | 需要 |
 | [388. Longest Absolute File Path](https://leetcode.com/problems/longest-absolute-file-path/) | _O(n)_ | _O(d)_	| Medium | map记录每一层现有的长度,到新的或者原来一层，更新map, res是max(map中含有“.”的一层), 用到string::find, string::find_first_not_of, std::find  |
 | [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/) | _O(n)_ | _O(1)_	| Easy | 可以用std::count, 或者可以来回flip map, 当map位true +2 |
 | [424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | _O(n)_ | _O(1)_	| Medium | 🔍sliding window: 记录window的初始点, 如果当前长度 - 最大count > k, ++start(保持windows的最大长度), 如果满足，start不变，结果是s.size()-start |
