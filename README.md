@@ -14,7 +14,8 @@
 | [371. Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/) | _O(1)_ | _O(1)_	| Easy | （a&b)<<1 表示需要相加进位的（两个1相加）, a ^ b 表示相加不进位（保留单个1） |
 | [389. Find the Difference](https://leetcode.com/problems/find-the-difference/) | _O(1)_ | _O(1)_	| Easy | 🔍找两个string唯一不同不同的char可以通过 xor |
 | [393. UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/) | _O(n)_ | _O(1)_	| Easy | 用count判断是不是起点, count==0 是起点 |
-| [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/) | _O(n)_ | _O(n)_	| Medium | 从第32位开始到第0位逐渐缩小范围, 比如第5位有a,b,c,d 四个数xor都是最大的，第四位就可能会缩减到a,c; 利用性质: a ^ b = c =>  a ^ c = b |
+| [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/) | _O(nlogn)_ | _O(n)_	| Medium | 从第32位开始到第0位逐渐缩小范围, 比如第5位有a,b,c,d 四个数xor都是最大的，第四位就可能会缩减到a,c; 利用性质: a ^ b = c =>  a ^ c = b |
+| [461. Hamming Distance](https://leetcode.com/problems/hamming-distance/) | _O(1)_ | _O(1)_	| Easy | 判断有多少bit, 与[191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)和 [231. Power of Two](https://leetcode.com/problems/power-of-two/)类似 |
 |  C++ 0b表示binary number，比如0b10 = 2, 0b111 = 7 <ul><li>注意运算顺序</li><li> +, - 先于 &, \|, 所以不用括号 n&n-1 </li><li> << >> == 是优于&,\| ; 判断&, 需要加括号,比如(n& n-1) == 0; </li><li> &,\|优于 && \|\| ; (1&2 && 2) = 0 && 2 = false; </li></ul>|  |	|  |  |
 
 
