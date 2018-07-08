@@ -1,4 +1,5 @@
 Wiki
+----
 Bit manipulation is the act of algorithmically manipulating bits or other pieces of data shorter than a word. Computer programming tasks that require bit manipulation include low-level device control, error detection and correction algorithms, data compression, encryption algorithms, and optimization. For most other tasks, modern programming languages allow the programmer to work directly with abstractions instead of bits that represent those abstractions. Source code that does bit manipulation makes use of the bitwise operations: AND, OR, XOR, NOT, and bit shifts.
 
 Bit manipulation, in some cases, can obviate or reduce the need to loop over a data structure and can give many-fold speed ups, as bit manipulations are processed in parallel, but the code can become more difficult to write and maintain.
@@ -7,8 +8,8 @@ Details
 Basics
 At the heart of bit manipulation are the bit-wise operators & (and), | (or), ~ (not) and ^ (exclusive-or, xor) and shift operators a << b and a >> b.
 
-There is no boolean operator counterpart to bitwise exclusive-or, but there is a simple explanation. The exclusive-or operation takes two inputs and returns a 1 if either one or the other of the inputs is a 1, but not if both are. That is, if both inputs are 1 or both inputs are 0, it returns 0. Bitwise exclusive-or, with the operator of a caret, ^, performs the exclusive-or operation on each pair of bits. Exclusive-or is commonly abbreviated XOR.
-```
+>There is no boolean operator counterpart to bitwise exclusive-or, but there is a simple explanation. The exclusive-or operation takes two inputs and returns a 1 if either one or the other of the inputs is a 1, but not if both are. That is, if both inputs are 1 or both inputs are 0, it returns 0. Bitwise exclusive-or, with the operator of a caret, ^, performs the exclusive-or operation on each pair of bits. Exclusive-or is commonly abbreviated XOR.
+```JS
 Set union A | B
 Set intersection A & B
 Set subtraction A & ~B
@@ -22,7 +23,7 @@ Get all 1-bits ~0
 ```
 Examples
 Count the number of ones in the binary representation of the given number
-```
+```C++
 int count_one(int n) {
     while(n) {
         n = n&(n-1);
@@ -32,24 +33,25 @@ int count_one(int n) {
 }
 ```
 Is power of four (actually map-checking, iterative and recursive methods can do the same)
-
+```C++
 bool isPowerOfFour(int n) {
     return !(n&(n-1)) && (n&0x55555555);
     //check the 1-bit location;
 }
+```
 ^ tricks
-Use ^ to remove even exactly same numbers and save the odd, or save the distinct bits and remove the same.
+Use ^ to remove even exactly same numbers and save the odd, or save the distinct bits and remove the same.保留两个bit不一样位的，比如第5位 a为1，b为0，c = a^b, 第5位为0
 
 Sum of Two Integers
 Use ^ and & to add two integers
-```
+```C++
 int getSum(int a, int b) {
     return b==0? a:getSum(a^b, (a&b)<<1); //be careful about the terminating condition;
 }
 ```
 Missing Number
-Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. For example, Given nums = [0, 1, 3] return 2. (Of course, you can do this by math.)
-```
+Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. For example, Given nums = \[0, 1, 3] return 2. (Of course, you can do this by math.)
+```C++
 int missingNumber(vector<int>& nums) {
     int ret = 0;
     for(int i = 0; i < nums.size(); ++i) {
@@ -63,7 +65,7 @@ int missingNumber(vector<int>& nums) {
 Keep as many 1-bits as possible
 
 Find the largest power of 2 (most significant bit in binary form), which is less than or equal to the given number N.
-
+```C++
 long largest_power(long N) {
     //changing all right side bits to 1.
     N = N | (N>>1);
@@ -73,9 +75,10 @@ long largest_power(long N) {
     N = N | (N>>16);
     return (N+1)>>1;
 }
+```
 Reverse Bits
 Reverse bits of a given 32 bits unsigned integer.
-```
+```C++
 Solution
 uint32_t reverseBits(uint32_t n) {
     unsigned int mask = 1<<31, res = 0;
@@ -100,15 +103,16 @@ uint32_t reverseBits(uint32_t n) {
 Just selecting certain bits
 
 Reversing the bits in integer
-
+```C++
 x = ((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1);
 x = ((x & 0xcccccccc) >> 2) | ((x & 0x33333333) << 2);
 x = ((x & 0xf0f0f0f0) >> 4) | ((x & 0x0f0f0f0f) << 4);
 x = ((x & 0xff00ff00) >> 8) | ((x & 0x00ff00ff) << 8);
 x = ((x & 0xffff0000) >> 16) | ((x & 0x0000ffff) << 16);
+```
 Bitwise AND of Numbers Range
 Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive. For example, given the range [5, 7], you should return 4.
-```
+```C++
 Solution
 int rangeBitwiseAnd(int m, int n) {
     int a = 0;
@@ -151,7 +155,7 @@ For example,
 Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
 Return: \["AAAAACCCCC", "CCCCCAAAAA"].
 
-```
+```C++
 Solution
 class Solution {
 public:
@@ -170,11 +174,11 @@ public:
     }
 };
 ```
-But the above solution can be invalid when repeated sequence appears too many times, in which case we should use unordered_map<int, int> keyMap to replace char keyMap[1<<21]{0}here.
+But the above solution can be invalid when repeated sequence appears too many times, in which case we should use unordered_map<int, int> keyMap to replace char keyMap\[1<<21]{0}here.
 
 Majority Element
 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. (bit-counting as a usual way, but here we actually also can adopt sorting and Moore Voting Algorithm)
-```
+```C++
 Solution
 int majorityElement(vector<int>& nums) {
     int len = sizeof(int)*8, size = nums.size();
@@ -191,7 +195,7 @@ int majorityElement(vector<int>& nums) {
 ```
 Single Number III
 Given an array of integers, every element appears three times except for one. Find that single one. (Still this type can be solved by bit-counting easily.) But we are going to solve it by digital logic design
-
+```C++
 Solution
 //inspired by logical circuit design and boolean algebra;
 //counter - unit of 3;
@@ -216,8 +220,9 @@ int singleNumber(vector<int>& nums) {
     return a | b;
 }
 ;
+```
 Maximum Product of Word Lengths
-Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
+Given a string array words, find the maximum value of length(word\[i]) * length(word\[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
 
 Example 1:
 Given \["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]
@@ -239,7 +244,7 @@ Since we are going to use the length of the word very frequently and we are to c
 
 using an array of int to pre-store the length of each word reducing the frequently measuring process;
 since int has 4 bytes, a 32-bit type, and there are only 26 different letters, so we can just use one bit to indicate the existence of the letter in a word.
-```
+```C++
 int maxProduct(vector<string>& words) {
     vector<int> mask(words.size());
     vector<int> lens(words.size());
@@ -259,13 +264,13 @@ Attention
 result after shifting left(or right) too much is undefined
 right shifting operations on negative values are undefined
 right operand in shifting should be non-negative, otherwise the result is undefined
-The & and | operators have lower precedence than comparison operators
+The & and \| operators have lower precedence than comparison operators
 Sets
 All the subsets
 A big advantage of bit manipulation is that it is trivial to iterate over all the subsets of an N-element set: every N-bit value represents some subset. Even better, if A is a subset of B then the number representing A is less than that representing B, which is convenient for some dynamic programming solutions.
 
 It is also possible to iterate over all the subsets of a particular subset (represented by a bit pattern), provided that you don’t mind visiting them in reverse order (if this is problematic, put them in a list as they’re generated, then walk the list backwards). The trick is similar to that for finding the lowest bit in a number. If we subtract 1 from a subset, then the lowest set element is cleared, and every lower element is set. However, we only want to set those lower elements that are in the superset. So the iteration step is just i = (i - 1) & superset.
-```
+```C++
 vector<vector<int>> subsets(vector<int>& nums) {
     vector<vector<int>> vv;
     int size = nums.size(); 
@@ -284,7 +289,7 @@ Actually there are two more methods to handle this using recursion and iteration
 Bitset
 A bitset stores bits (elements with only two possible values: 0 or 1, true or false, ...).
 The class emulates an array of bool elements, but optimized for space allocation: generally, each element occupies only one bit (which, on most systems, is eight times less than the smallest elemental type: char).
-```
+```C++
 // bitset::count
 #include <iostream>       // std::cout
 #include <string>         // std::string
