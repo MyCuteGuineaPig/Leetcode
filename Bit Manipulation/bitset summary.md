@@ -21,7 +21,7 @@ Extract last bit A&-A or A&~(A-1) or x^(x&(x-1))
 Remove last bit A&(A-1)
 Get all 1-bits ~0
 ```
-Examples
+__Examples__</br>
 Count the number of ones in the binary representation of the given number
 ```C++
 int count_one(int n) {
@@ -40,16 +40,17 @@ bool isPowerOfFour(int n) {
 }
 ```
 ^ tricks
-Use ^ to remove even exactly same numbers and save the odd, or save the distinct bits and remove the same.保留两个bit不一样位的，比如第5位 a为1，b为0，c = a^b, 第5位为0
+-----------
+> Use ^ to remove even exactly same numbers and save the odd, or save the distinct bits and remove the same.保留两个bit不一样位的，比如第5位 a为1，b为0，c = a^b, 第5位为0
 
-Sum of Two Integers
+__Sum of Two Integers__</br>
 Use ^ and & to add two integers
 ```C++
 int getSum(int a, int b) {
     return b==0? a:getSum(a^b, (a&b)<<1); //be careful about the terminating condition;
 }
 ```
-Missing Number
+__Missing Number__</br>
 Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. For example, Given nums = \[0, 1, 3] return 2. (Of course, you can do this by math.)
 ```C++
 int missingNumber(vector<int>& nums) {
@@ -62,7 +63,8 @@ int missingNumber(vector<int>& nums) {
 }
 ```
 | tricks
-Keep as many 1-bits as possible
+-----------
+>Keep as many 1-bits as possible
 
 Find the largest power of 2 (most significant bit in binary form), which is less than or equal to the given number N.
 ```C++
@@ -76,7 +78,7 @@ long largest_power(long N) {
     return (N+1)>>1;
 }
 ```
-Reverse Bits
+__Reverse Bits__</br>
 Reverse bits of a given 32 bits unsigned integer.
 ```C++
 Solution
@@ -100,9 +102,10 @@ uint32_t reverseBits(uint32_t n) {
 }
 ```
 & tricks
-Just selecting certain bits
+-----------
+>Just selecting certain bits
 
-Reversing the bits in integer
+__Reversing the bits in integer__</br>
 ```C++
 x = ((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1);
 x = ((x & 0xcccccccc) >> 2) | ((x & 0x33333333) << 2);
@@ -110,8 +113,8 @@ x = ((x & 0xf0f0f0f0) >> 4) | ((x & 0x0f0f0f0f) << 4);
 x = ((x & 0xff00ff00) >> 8) | ((x & 0x00ff00ff) << 8);
 x = ((x & 0xffff0000) >> 16) | ((x & 0x0000ffff) << 16);
 ```
-Bitwise AND of Numbers Range
-Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive. For example, given the range [5, 7], you should return 4.
+__Bitwise AND of Numbers Range__</br>
+Given a range \[m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive. For example, given the range \[5, 7], you should return 4.
 ```C++
 Solution
 int rangeBitwiseAnd(int m, int n) {
@@ -125,7 +128,7 @@ int rangeBitwiseAnd(int m, int n) {
 }
 ```
 
-Number of 1 Bits
+__Number of 1 Bits__</br>
 Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
 
 ```
@@ -148,11 +151,11 @@ int hammingWeight(uint32_t n) {
     return count;
 }
 ```
-Application
-Repeated DNA Sequences
-All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG". When studying DNA, it is sometimes useful to identify repeated sequences within the DNA. Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
-For example,
-Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
+Application</br>
+__Repeated DNA Sequences__</br>
+All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG". When studying DNA, it is sometimes useful to identify repeated sequences within the DNA. Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.</br>
+For example,</br>
+Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",</br>
 Return: \["AAAAACCCCC", "CCCCCAAAAA"].
 
 ```C++
@@ -174,9 +177,9 @@ public:
     }
 };
 ```
-But the above solution can be invalid when repeated sequence appears too many times, in which case we should use unordered_map<int, int> keyMap to replace char keyMap\[1<<21]{0}here.
+But the above solution can be invalid when repeated sequence appears too many times, in which case we should use unordered_map<int, int> keyMap to replace char keyMap\[1<<21]{0}here. </br>
 
-Majority Element
+__Majority Element__</br>
 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. (bit-counting as a usual way, but here we actually also can adopt sorting and Moore Voting Algorithm)
 ```C++
 Solution
@@ -193,7 +196,7 @@ int majorityElement(vector<int>& nums) {
     return ret;
 }
 ```
-Single Number III
+__Single Number III__</br>
 Given an array of integers, every element appears three times except for one. Find that single one. (Still this type can be solved by bit-counting easily.) But we are going to solve it by digital logic design
 ```C++
 Solution
@@ -221,28 +224,28 @@ int singleNumber(vector<int>& nums) {
 }
 ;
 ```
-Maximum Product of Word Lengths
+__Maximum Product of Word Lengths__</br>
 Given a string array words, find the maximum value of length(word\[i]) * length(word\[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
+</br>
+Example 1:</br>
+Given \["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]</br>
+Return 16</br>
+The two words can be "abcw", "xtfn".</br>
 
-Example 1:
-Given \["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]
-Return 16
-The two words can be "abcw", "xtfn".
+Example 2:</br>
+Given \["a", "ab", "abc", "d", "cd", "bcd", "abcd"]</br>
+Return 4</br>
+The two words can be "ab", "cd".</br>
 
-Example 2:
-Given \["a", "ab", "abc", "d", "cd", "bcd", "abcd"]
-Return 4
-The two words can be "ab", "cd".
+Example 3:</br>
+Given \["a", "aa", "aaa", "aaaa"]</br>
+Return 0</br>
+No such pair of words.</br>
 
-Example 3:
-Given \["a", "aa", "aaa", "aaaa"]
-Return 0
-No such pair of words.
+__Solution__</br>
+Since we are going to use the length of the word very frequently and we are to compare the letters of two words checking whether they have some letters in common:</br>
 
-Solution
-Since we are going to use the length of the word very frequently and we are to compare the letters of two words checking whether they have some letters in common:
-
-using an array of int to pre-store the length of each word reducing the frequently measuring process;
+using an array of int to pre-store the length of each word reducing the frequently measuring process;</br>
 since int has 4 bytes, a 32-bit type, and there are only 26 different letters, so we can just use one bit to indicate the existence of the letter in a word.
 ```C++
 int maxProduct(vector<string>& words) {
@@ -260,14 +263,15 @@ int maxProduct(vector<string>& words) {
     return result;
 }
 ```
-Attention
-result after shifting left(or right) too much is undefined
-right shifting operations on negative values are undefined
-right operand in shifting should be non-negative, otherwise the result is undefined
-The & and \| operators have lower precedence than comparison operators
-Sets
-All the subsets
-A big advantage of bit manipulation is that it is trivial to iterate over all the subsets of an N-element set: every N-bit value represents some subset. Even better, if A is a subset of B then the number representing A is less than that representing B, which is convenient for some dynamic programming solutions.
+__Attention__</br>
+<ul><li>
+<li>result after shifting left(or right) too much is undefined</li>
+<li>right shifting operations on negative values are undefined</li>
+<li>right operand in shifting should be non-negative, otherwise the result is undefined</li>
+<li>The & and \| operators have lower precedence than comparison operators</li></ul>
+__Sets__</br>
+All the subsets</br>
+A big advantage of bit manipulation is that it is trivial to iterate over all the subsets of an N-element set: every N-bit value represents some subset. Even better, if A is a subset of B then the number representing A is less than that representing B, which is convenient for some dynamic programming solutions.</br>
 
 It is also possible to iterate over all the subsets of a particular subset (represented by a bit pattern), provided that you don’t mind visiting them in reverse order (if this is problematic, put them in a list as they’re generated, then walk the list backwards). The trick is similar to that for finding the lowest bit in a number. If we subtract 1 from a subset, then the lowest set element is cleared, and every lower element is set. However, we only want to set those lower elements that are in the superset. So the iteration step is just i = (i - 1) & superset.
 ```C++
@@ -284,10 +288,10 @@ vector<vector<int>> subsets(vector<int>& nums) {
     return vv;
 }
 ```
-Actually there are two more methods to handle this using recursion and iteration respectively.
+Actually there are two more methods to handle this using recursion and iteration respectively.</br>
 
-Bitset
-A bitset stores bits (elements with only two possible values: 0 or 1, true or false, ...).
+__Bitset__</br>
+A bitset stores bits (elements with only two possible values: 0 or 1, true or false, ...).</br>
 The class emulates an array of bool elements, but optimized for space allocation: generally, each element occupies only one bit (which, on most systems, is eight times less than the smallest elemental type: char).
 ```C++
 // bitset::count
