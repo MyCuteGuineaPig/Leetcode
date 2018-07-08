@@ -264,12 +264,11 @@ int maxProduct(vector<string>& words) {
 }
 ```
 __Attention__</br>
-<ul><li>
-<li>result after shifting left(or right) too much is undefined</li>
+<ul>result after shifting left(or right) too much is undefined</li>
 <li>right shifting operations on negative values are undefined</li>
 <li>right operand in shifting should be non-negative, otherwise the result is undefined</li>
-<li>The & and \| operators have lower precedence than comparison operators</li></ul>
-__Sets__</br>
+<li>The & and \| operators have lower precedence than comparison operators</li></ul></br>
+Sets</br>
 All the subsets</br>
 A big advantage of bit manipulation is that it is trivial to iterate over all the subsets of an N-element set: every N-bit value represents some subset. Even better, if A is a subset of B then the number representing A is less than that representing B, which is convenient for some dynamic programming solutions.</br>
 
