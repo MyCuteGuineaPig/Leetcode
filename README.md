@@ -53,7 +53,7 @@
 | [523. Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) | _O(n)_ | _O(k)_	| Medium | 🔍求开始数到所有i的和的余数，如果现在这个的余数之前遇到过，表示，两个数之间有数的和正好整除k |
 | [532. K-diff Pairs in an Array](https://leetcode.com/problems/k-diff-pairs-in-an-array/) | _O(n)_ | _O(n)_	| Easy |  🔍one pass解: 两个hashset, lookup 和res, 找的时候既向上数又向下数, 为了避免重复, set(res)只push下限,结果就是res size |
 | [554. Brick Wall](https://leetcode.com/problems/brick-wall/) | _O(n)_ | _O(m)_	| Meidum | 相当于求最多经过砖头缝缝 |
-| [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | _O(n)_ | _O(k)_	| Medium | 🔍用hashmap记录每点的rolling sum(0,i)， 那么只需要找(0,i)的sum - k在不在map中，在的话， res += map\[sum-k] (可能一个sum出现很多遍) |
+| [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) | _O(n)_ | _O(k)_	| Medium | 🔍用hashmap记录每点的rolling sum(0,i)， 那么只需要找(0,i)的sum - k在不在map中，在的话 表示存在一点\[0,j] + k = (0,i)的sum， res += map\[sum-k] (可能一个sum出现很多遍) |
 | [561. Array Partition I](https://leetcode.com/problems/array-partition-i/) | _O(n)_ | _O(n)_	| Easy | Sort or Bucket Sort |
 | [575. Distribute Candies](https://leetcode.com/problems/distribute-candies/) | _O(n)_ | _O(n)_	| Easy | 对比set的长度和candies.size()/2的长度, C++可以用bitset |
 | [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/) | _O(n)_ | _O(n)_	| Easy |  |
