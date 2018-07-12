@@ -1,7 +1,14 @@
+## String
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [5.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 |
+
+
+
 ## Bit Manipulation
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [136. Single Number](https://leetcode.com/problems/single-number/) | _O(n)_ | _O(1)_	| Easy | 用xor ^ |
+| [136. Single Number](https://leetcode.com/problems/single-number/) | _O(n)_ | _O(1)_	| Easy | 用xor ^, Python Reduce one line |
 | [137. Single Number II](https://leetcode.com/problems/single-number-ii/) | _O(n)_ | _O(1)_	| Medium | 🔍<ul><li>第一次出现-> save it in "ones", 第二次出现 -> clear "ones" but save it in "twos" for later check,  第三次出现 -> try to save in "ones" but value saved in "twos" clear it.</li><li>loop through 32个bit, 每个bit再loop nums, if bit & nums[i] => c++, 如果c不是3个倍数，最终结果在现在这个bit上位1</li></ul> |
 | [190. Reverse Bits](https://leetcode.com/problems/reverse-bits/) | _O(1)_ | _O(1)_	| Easy | 一位一位reverse bit, res每次向左移动一位，n向右移动一位 |
 | [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | _O(n)_ | _O(1)_	| Easy | n = n & (n-1); |
