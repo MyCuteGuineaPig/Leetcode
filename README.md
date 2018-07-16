@@ -1,7 +1,8 @@
 ## String
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [5.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 |
+| [5.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, if i<mx, p\[i] = min(p\[2id-i], p\[i]) |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
 
@@ -23,8 +24,10 @@
 | [393. UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/) | _O(n)_ | _O(1)_	| Easy | 用count判断是不是起点, count==0 是起点 |
 | [421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/) | _O(nlogk)_ | _O(n)_	| Medium | 🔍<ul><li>从第32位开始到第0位逐渐缩小范围, 比如第5位有a,b,c,d 四个数xor都是最大的，第四位就可能会缩减到a,c; 利用性质: a ^ b = c =>  a ^ c = b </li><li> Trie </li></ul> |
 | [461. Hamming Distance](https://leetcode.com/problems/hamming-distance/) | _O(1)_ | _O(1)_	| Easy | 判断有多少bit, 与[191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)和 [231. Power of Two](https://leetcode.com/problems/power-of-two/)类似 |
+| [462	Minimum Moves to Equal Array Elements II](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/description/) | _O(nlogn)_ | _O(1)_	| Medium | 🔍Meeting point, 先sort，然后逐个用最大减去最小, e.g \[3,6,9], 不管中间点在哪，都要磨平9-3=6的差距 |
 | [477. Total Hamming Distance](https://leetcode.com/problems/total-hamming-distance/description/) | _O(nlogk)_ | _O(1)_	| Easy | 由第32位到第0位，loop每个bit，数当前bit位为1的个数为bitcount, 结果 res+= bitcount*(size-countsize), 与[421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)类似 |
 | [645. Set Mismatch](https://leetcode.com/problems/set-mismatch/) | _O(n)_ | _O(1)_	| Easy | <ul><li>bit Xor:与[260. Single Number III](https://leetcode.com/problems/single-number-iii/) 解法一样, 第一次pass,找到两个数的xor = c, c & (-c)是unique的digit, 第二次pass分别找到这两个数，第三次pass调整两个数return的顺序 </li><li>改变nums\[abs(nums\[i])-1] 为负数, 如果发现新找到的已经为负数, 证明是重复的，第二次pass, 如果发现某位为正数, 代表是missing的 </li></ul> |
+| [693. Binary Number with Alternating Bits](https://leetcode.com/problems/binary-number-with-alternating-bits/) | _O(1)_ | _O(1)_	| Easy | 🔍 |
 | [762. Prime Number of Set Bits in Binary Representation](https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/) | _O(R-L)_ | _O(1)_	| Easy | loop\[L,R],数每个数多少个bit，因为log2(10^6) < 16, 事先把所有的prime存到hash set里面, 看现在bit数是不是质数，if so res++, 还可以用 \__builtin_popcountl(n); bitset<32>(n).count() |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | C++ 0b表示binary number，比如0b10 = 2, 0b111 = 7</br> python 0b表示binary number，比如0b10 = 2, 0b111 = 7 <ul><li>注意运算顺序</li><li> +, - 先于 &, \|, <<, >>; 所以不用括号 n&n-1 </li><li> << >> == 是优于&,\| ; 判断&, 需要加括号,比如(n& n-1) == 0; </li><li> &,\|优于 && \|\| ; (1&2 && 2) = 0 && 2 = false; </li></ul> bit数1的个数，可以用 n&(n-1); \__builtin_popcountl(n); bitset<32>(n).count() |
 
