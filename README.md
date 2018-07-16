@@ -1,8 +1,8 @@
 ## String
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [5.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, if j<mx, p\[i] = min(p\[2id-i], p\[j]) |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
+| [5.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, if i<mx, p\[i] = min(p\[2id-i], p\[i]) |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
 
