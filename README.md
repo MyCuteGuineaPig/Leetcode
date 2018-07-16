@@ -3,6 +3,7 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, if i<mx, p\[i] = min(p\[2id-i], p\[i]) |
 | [006. ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/) | _O(n)_ | _O(n)_	| Medium | <ul><li>把string 循环push到一个长度为nrow的vector当中</li><li>用step = 2*nrows - 2 控制每次jump step, 到中间行看是否jump step之间有夹的元素</li></ul>|
+| [008. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) | _O(n)_ | _O(1)_	| Easy | C++可以用find_first_not_of |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
