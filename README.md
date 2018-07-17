@@ -7,6 +7,7 @@
 | [014. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | _O(n)_ | _O(1)_	| Easy | loop所有数第0位到第i位，直到不相同,返回str\[0].substr(0,i) |
 | [028. Implement strStr()](https://leetcode.com/problems/implement-strstr/) | _O(n+k)_ | _O(k)_	| Easy | kmp algorithm: prefix array\[i]表示i点的最长的prefix 也是suffix长度 比如"ABA", 第三个a的最长的prefix 也是suffix 的长度是1 A 而prefix array\[i], 作为index, 是当前最长prefix 也是suffix 的下一位|
 | [038. Count and Say](https://leetcode.com/problems/count-and-say/) | _O(n \* 2^n)_ | _O(n2^n)_	| Easy | C++ find_if + bind1st|
+| [043. Multiply Strings](https://leetcode.com/problems/multiply-strings/) | _O(m\*n)_ | _O(m+n)_	| Medium | C++ transform, 必须都从个位数(也就是string的最后一位开始算, 否则carry可能会超过10)|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
