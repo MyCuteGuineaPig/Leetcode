@@ -1,7 +1,18 @@
 ## String
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [5.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, if i<mx, p\[i] = min(p\[2id-i], p\[i]) |
+| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, if i<mx, p\[i] = min(p\[2id-i], p\[i]) |
+| [006. ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/) | _O(n)_ | _O(n)_	| Medium | <ul><li>把string 循环push到一个长度为nrow的vector当中</li><li>用step = 2*nrows - 2 控制每次jump step, 到中间行看是否jump step之间有夹的元素</li></ul>|
+| [008. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) | _O(n)_ | _O(1)_	| Easy | C++可以用find_first_not_of |
+| [014. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | _O(n)_ | _O(1)_	| Easy | loop所有数第0位到第i位，直到不相同,返回str\[0].substr(0,i) |
+| [028. Implement strStr()](https://leetcode.com/problems/implement-strstr/) | _O(n+k)_ | _O(k)_	| Easy | kmp algorithm: prefix array\[i]表示i点的最长的prefix 也是suffix长度 比如"ABA", 第三个a的最长的prefix 也是suffix 的长度是1 A 而prefix array\[i], 作为index, 是当前最长prefix 也是suffix 的下一位|
+| [038. Count and Say](https://leetcode.com/problems/count-and-say/) | _O(n \* 2^n)_ | _O(n2^n)_	| Easy | C++ find_if + bind1st|
+| [043. Multiply Strings](https://leetcode.com/problems/multiply-strings/) | _O(m\*n)_ | _O(m+n)_	| Medium | C++ transform, 必须都从个位数(也就是string的最后一位开始算, 否则carry可能会超过10), back_inserter, 相当于按照原来从头到尾顺序push back|
+| [058. Length of Last Word](https://leetcode.com/problems/length-of-last-word/) | _O(n)_ | _O(1)_	| Easy | C++ find if or find if + bind1st or string find_last_not_of + find_last_of |
+| [067. Add Binary	](https://leetcode.com/problems/add-binary/) | _O(n)_ | _O(1)_	| Easy | string 加法 |
+| [068. Text Justification](https://leetcode.com/problems/text-justification/) | _O(n)_ | _O(1)_	| Hard | not a hard question, 跟[725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/) 类似 |
+| [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | _O(n)_ | _O(1)_	| Easy | C++ 跳过非isalnum的 |
+| [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/) | _O(n)_ | _O(1)_	| Medium | 先reverse所有的, 再reverse单个每个词, 记录总共len,最后用来截取, C++ find_first_not_of + find_first_of |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
