@@ -14,6 +14,7 @@
 | [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | _O(n)_ | _O(1)_	| Easy | C++ 跳过非isalnum的 |
 | [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/) | _O(n)_ | _O(1)_	| Medium | 先reverse所有的, 再reverse单个每个词, 记录总共len,最后用来截取, C++ find_first_not_of + find_first_of |
 | [165. Compare Version Numbers](https://leetcode.com/problems/compare-version-numbers/) | _O(n)_ | _O(1)_	| Medium | c++ 算当前version1,2的substr的数，如果其中一个碰到结尾，设当前数位0。 c, 可以用c_str() + strtol |
+| [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/) | _O(n)_ | _O(1)_	| Easy | 经典面试题 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
