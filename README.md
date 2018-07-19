@@ -22,6 +22,7 @@
 | [405. Convert a Number to Hexadecimal](https://leetcode.com/problems/convert-a-number-to-hexadecimal/) | _O(n)_ | _O(1)_	| Easy | 最后结果需要reverse，因为先插入最小的，注意负数的, -1>>4 = -1, 所以while加个条件 res.length()!=sizeof(int)\*2 |
 | [415. Add Strings](https://leetcode.com/problems/add-strings/) | _O(n)_ | _O(1)_	| Easy | string加法，跟[067. Add Binary	](https://leetcode.com/problems/add-binary/) 和[306. Addictive Number](https://leetcode.com/problems/additive-number/) 类似 |
 | [420. Strong Password Checker](https://leetcode.com/problems/strong-password-checker/) | _O(n)_ | _O(1)_	| Hard | Brain Storm 详见C++ code 解释|
+| [434. Number of Segments in a String](https://leetcode.com/problems/number-of-segments-in-a-string/) | _O(n)_ | _O(1)_	| Easy | 🔍, 根据s\[i] 和 s\[i-1]判断, or s\[i] 和 s\[i+1]判断 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
