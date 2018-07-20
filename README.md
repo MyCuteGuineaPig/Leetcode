@@ -25,6 +25,7 @@
 | [434. Number of Segments in a String](https://leetcode.com/problems/number-of-segments-in-a-string/) | _O(n)_ | _O(1)_	| Easy | 🔍, 根据s\[i] 和 s\[i-1]判断, or s\[i] 和 s\[i+1]判断 |
 | [443. String Compression](https://leetcode.com/problems/string-compression/) | _O(n)_ | _O(1)_	| Easy | two pointer + num reverse |
 | [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/) | _O(n)_ | _O(n)_	| Easy | KMP |
+| [468. Validate IP Address](https://leetcode.com/problems/validate-ip-address/) | _O(1)_ | _O(1)_	| Medium | 注意IPv4 和IPv6的定义(c++ code里), 判断一个char是不是符合十六进制用isxdigit(c) |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
