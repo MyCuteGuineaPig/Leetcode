@@ -33,6 +33,7 @@
 | [539. Minimum Time Difference](https://leetcode.com/problems/minimum-time-difference/) | _O(nlogn)_ | _O(n)_	| Medium | C++ transform 把所有时间变分钟, 然后按minute sort, 答案就出自所有minute\[i+1] - minute\[i] or 1440 +minute\[0] -  minute.back() |
 | [541. Reverse String II](https://leetcode.com/problems/reverse-string-ii/) | _O(n)_ | _O(1)_	| Easy |  |
 | [551. Student Attendance Record I](https://leetcode.com/problems/student-attendance-record-i/) | _O(n)_ | _O(1)_	| Easy |  |
+| [556.	Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/) | _O(1)_ | _O(1)_	| Medium |  可以用ascending stack or 两个for loop, 寻找i点往后最后一个比i点大的数(也是比i大,最接近i的数)(index j), swap(s\[i], s\[j]), 这样s\[i]后面的数又大到小排序的, 把i往后的数到end全部reverse后变成Int, 就是答案|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
