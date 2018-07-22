@@ -38,6 +38,8 @@
 | [591. Tag Validator](https://leetcode.com/problems/tag-validator/) | _O(n)_ | _O(n)_	| Hard | cdata 必须以 已 ]]>结束, recursion 找是不是valid tag, valid cdata, valid tagname  |
 | [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), 在snew中 p\[i]表示以id为中心最长回文，到i点，res += p\[i] /2  |
 | [648. Replace Words](https://leetcode.com/problems/replace-words/) | _O(n)_ | _O(t)_	| Medium | 🔍 Trie  |
+| [657. Judge Route Circle](https://leetcode.com/problems/judge-route-circle/) | _O(n)_ | _O(1)_	| Easy |  |
+| [678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/) | _O(n)_ | _O(1)_	| Medium | 🔍<ul><li>用low 和high: low 表示把'\*' 当成')', high: 表示把 '\*' 当成'(', 如果high小于0，表示有太多的')' '(' + '\*' = high < ')' </li><li>用两个stack 分别记录 '(' 和 '\*'的位置, 如果当前是')', 先pop'(' 再pop'\*'; 最后看'(' 有没有对应index往后的的'\*'可以pop掉, </li><li> Two pass solution 从左向右看是不是所有的')' 都有对应的'(' 和'\*', 再从右向左看是不是所有的'(', 都有对应的')' 和'\*' </li></ul> |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
