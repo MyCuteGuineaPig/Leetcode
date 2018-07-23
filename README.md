@@ -45,7 +45,7 @@
 | [696.	Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/) | _O(n)_ | _O(1)_	| Easy | manacher(马拉车)算法的变形 |
 | [720. Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | _O(n)_ | _O(t)_	| Easy | Trie or 先按长度sort, 长度越短, 排前面, loop word, loop s\[i]\[0,len), 看是不是每个substr都在，都在话insert to hashset & update result |
 | [722. Remove Comments](https://leetcode.com/problems/remove-comments/) | _O(n)_ | _O(k)_	| Medium | |
-| [791. Custom Sort String](https://leetcode.com/problems/custom-sort-string/) | _O(n)_ | _O(k)_	| Medium | 可以当经典面试题, 三种解法: <ol><li>Custom Sort</li><li>Bucket Sort</li><li>Priority Queue</li></ol>|
+| [791. Custom Sort String](https://leetcode.com/problems/custom-sort-string/) | _O(n)_ | _O(k)_	| Medium | 可以当经典面试题, 三种解法: <ol><li>Custom Sort (or STL inserter + make_pair)</li><li>Bucket Sort</li><li>Priority Queue</li></ol>|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
