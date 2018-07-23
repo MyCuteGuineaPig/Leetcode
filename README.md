@@ -44,6 +44,7 @@
 | [686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/) | _O(n+m)_ | _O(n)_	| Easy | 🔍<ul><li>Kmp: 然后两个pointer, 一个pointer i 记录A的位置，一个pointer j记录B的位置，每次对比 A\[(i + j)%A.size()] 是否等于B\[j] 等于就++j., 直到 j =  b.size() return ceil((i+j)/a.size()) </li><li> rabin-karp algorithm, 寻找最短的长度一直到最大长度的hash </li></ul> |
 | [696.	Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/) | _O(n)_ | _O(1)_	| Easy | manacher(马拉车)算法的变形 |
 | [720. Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | _O(n)_ | _O(t)_	| Easy | Trie or 先按长度sort, 长度越短, 排前面, loop word, loop s\[i]\[0,len), 看是不是每个substr都在，都在话insert to hashset & update result |
+| [722. Remove Comments](https://leetcode.com/problems/remove-comments/) | _O(n)_ | _O(k)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
