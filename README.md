@@ -50,6 +50,7 @@
 | [804. Unique Morse Code Words](https://leetcode.com/problems/unique-morse-code-words/) | _O(n)_ | _O(n)_	| Easy | Easy one unordered_set  |
 | [806.Number of Lines To Write String](https://leetcode.com/problems/number-of-lines-to-write-string/) | _O(n)_ | _O(1)_	| Easy | Easy one but stupid question description  |
 | [809. Expressive Words](https://leetcode.com/problems/expressive-words/) | _O(n+s)_ | _O(1)_	| Medium | Two pointer: 如果word\[i]!=S\[j] 的时候， 看S的j-1, j, j+1是不是连续是三个，若不是，再看过去是不是连续三个，若不是，break |
+| [819. Most Common Word](https://leetcode.com/problems/most-common-word/) | _O(n+m)_ | _O(m+n)_	| Easy | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
