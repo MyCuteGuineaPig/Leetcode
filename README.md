@@ -54,7 +54,7 @@
 | [819. Most Common Word](https://leetcode.com/problems/most-common-word/) | _O(n+m)_ | _O(m+n)_	| Easy | |
 | [820. Short Encoding of Words](https://leetcode.com/problems/goat-latin/) | _O(n)_ | _O(t)_	| Medium | <ul><li> Trie: 看叶子有没有child </li><li>sort string vector, 只用对比s\[i] 和 s\[i+1]</li></ul>|
 | [824. Goat Latin](https://leetcode.com/problems/goat-latin/) | _O(n + w^2)_ | _O(l)_	| Easy | stringstream 作为string output  |
-| [831. Masking Personal Information](https://leetcode.com/problems/masking-personal-information/) | _O(1)_ | _O(1)_	| Easy | C++ transform 把所有字母都小写, s\[0] 变成string 可以用 s.substr(0,1)  |
+| [831. Masking Personal Information](https://leetcode.com/problems/masking-personal-information/) | _O(1)_ | _O(1)_	| Easy | C++ transform 把所有字母都小写, s\[0] 变成string 可以用 s.substr(0,1) or string(1,S\[0])  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
