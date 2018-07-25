@@ -39,3 +39,89 @@ S[0] = "(", S[S.length - 1] = ")", and the other elements in S are digits.
  
 
 */
+
+
+
+/*
+
+选择小数点的关键是 不能左面位0， 右面结束也是0，比如00.1230不可以，但是即使左面等于0， 右面最后也不可以是0
+*/
+class Solution {
+public:
+    vector<string> ambiguousCoordinates(string S) {
+        vector<string>res;
+        for(int i = 1; i<S.size()-1; i++){
+            vector<string>left = make(S, 1, i);
+            vector<string>right = make(S, i+1, S.size()-2);
+            for(auto l: left){
+                for(auto r: right){
+                    string cur = "(";
+                    cur = cur + l + ", " + r+")";
+                    res.push_back(move(cur));
+                }
+            }
+        }
+        return res;   
+    }
+    
+    vector<string> make(const string& s, int start, int end){
+        vector<string>res;
+        for(int i = start ; i <=end; i++){
+            string left = s.substr(start, i-start+1);
+            string right = s.substr(i+1, end-i);
+            if( (left.front()!='0' || left == "0") && (right.empty() || right.back() != '0')){
+                if(!right.empty()) left += ".";
+                left += right;
+                //cout<<" left "<<left<<" right "<<right<<endl;
+                res.push_back(left);
+            }
+        }
+        return res;
+    }
+};
+
+
+/*
+In sub functon f(S)
+if S == "": return []
+if S == "0": return [S]
+if S == "0XXX0": return []
+if S == "0XXX": return ["0.XXX"]
+if S == "XXX0": return [S]
+return [S, "X.XXX", "XX.XX", "XXX.X"...]
+
+
+
+*/
+
+class Solution {
+public:
+    vector<string> ambiguousCoordinates(string S) {
+        vector<string>res;
+        for(int i = 1; i<S.size()-1; i++){
+            vector<string>left = make(S.substr(1,i-1+1));
+            vector<string>right = make(S.substr(i+1,S.size()-i-2));
+            for(auto l: left){
+                for(auto r: right){
+                    string cur = "(";
+                    cur = cur + l + ", " + r+")";
+                    res.push_back(move(cur));
+                }
+            }
+        }
+        return res;   
+    }
+    
+    vector<string> make(string s){
+        //cout<<"in "<<s<<endl;
+        int n = s.size();
+        if (n  == 0 || n > 1 && s.front() == '0' && s.back() == '0') return {};
+        if (n == 1 || s.back() == '0') return {s};
+        if (s.front() == '0') return { "0."+s.substr(1)};
+        vector<string>res = {s};
+        for(int i = 0; i<s.size()-1; i++){
+            res.push_back(s.substr(0, i+1)+"."+s.substr(i+1));
+        }
+        return res;
+    }
+};
