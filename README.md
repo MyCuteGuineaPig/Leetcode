@@ -52,6 +52,7 @@
 | [809. Expressive Words](https://leetcode.com/problems/expressive-words/) | _O(n+s)_ | _O(1)_	| Medium | Two pointer: 如果word\[i]!=S\[j] 的时候， 看S的j-1, j, j+1是不是连续是三个，若不是，再看过去是不是连续三个，若不是，break |
 | [819. Most Common Word](https://leetcode.com/problems/most-common-word/) | _O(n+m)_ | _O(m+n)_	| Easy | |
 | [824. Goat Latin](https://leetcode.com/problems/goat-latin/) | _O(n + w^2)_ | _O(l)_	| Easy | stringstream 作为string output  |
+| [820. Short Encoding of Words](https://leetcode.com/problems/goat-latin/) | _O(n)_ | _O(t)_	| Medium | <ul><li> Trie: 看叶子有没有child </li><li>sort string vector, 只用对比s\[i] 和 s\[i+1]</li></ul>|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
