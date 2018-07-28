@@ -2,6 +2,7 @@
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [007. Reverse Integer](https://leetcode.com/problems/reverse-integer/) | _O(1)_ | _O(1)_	| Easy |  |
+| [009. Palindrome Number](https://leetcode.com/problems/palindrome-number/) | _O(1)_ | _O(1)_	| Easy |  |
 
 
 
@@ -35,8 +36,8 @@
 | [468. Validate IP Address](https://leetcode.com/problems/validate-ip-address/) | _O(1)_ | _O(1)_	| Medium | 注意IPv4 和IPv6的定义(c++ code里), 判断一个char是不是符合十六进制用isxdigit(c) |
 | [520. Detect Capital](https://leetcode.com/problems/detect-capital/) | _O(1)_ | _O(1)_	| Easy | C++ count_if; Python istitle()看是不是只有首字母大写 |
 | [521. Longest Uncommon Subsequence I](https://leetcode.com/problems/longest-uncommon-subsequence-i/) | _O(min(a, b))_ | _O(1)_	| Easy | 题出的神经病，逗你玩儿 |
-| [522. Longest Uncommon Subsequence II](https://leetcode.com/problems/longest-uncommon-subsequence-ii/) | _O(l \* n^2)	_ | _O(1)_	| Medium | 按照字母长度sort, 然后一个一个看str，有没有在list中有subsequence，没有的话, return 这个str长度,直到全部search完, return -1 or C++ equal_range + count_if |
-| [524.	Longest Word in Dictionary through Deleting](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/) | _O((d \* l) * logd)_ | _O(1)_	| Medium | 按照字母长度sort,如果长度一样，按照alphabet sort, 找到第一个符合的 |
+| [522. Longest Uncommon Subsequence II](https://leetcode.com/problems/longest-uncommon-subsequence-ii/) | _O(l \* n^2)	_ | _O(1)_	| Medium | 🔍按照字母长度sort, 然后一个一个看str，有没有在list中有subsequence，没有的话, return 这个str长度,直到全部search完, return -1 or C++ equal_range + count_if , python 可以iter()|
+| [524.	Longest Word in Dictionary through Deleting](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/) | _O((d \* l) * logd)_ | _O(1)_	| Medium | 按照字母长度sort,如果长度一样，按照alphabet sort, 找到第一个符合的  🔍python, max with key, min with key, filter,  iter + next with default |
 | [539. Minimum Time Difference](https://leetcode.com/problems/minimum-time-difference/) | _O(nlogn)_ | _O(n)_	| Medium | C++ transform 把所有时间变分钟, 然后按minute sort, 答案就出自所有minute\[i+1] - minute\[i] or 1440 +minute\[0] -  minute.back() |
 | [541. Reverse String II](https://leetcode.com/problems/reverse-string-ii/) | _O(n)_ | _O(1)_	| Easy |  |
 | [551. Student Attendance Record I](https://leetcode.com/problems/student-attendance-record-i/) | _O(n)_ | _O(1)_	| Easy |  |
@@ -44,7 +45,7 @@
 | [564. Find the Closest Palindrome](https://leetcode.com/problems/find-the-closest-palindrome/) | _O(l)_ | _O(l)_	| Hard | Brain Storm: 最接近的pal只可能5中选一, 100..001(l.size()+1), 99..99(l.size()-1), or string的前半部分 +1, +0, -1 加上前半部分的reverse(如果起始长度是奇数，reverse不包括前半部分最后一个，如果长度是偶数，都包括在内) |
 | [591. Tag Validator](https://leetcode.com/problems/tag-validator/) | _O(n)_ | _O(n)_	| Hard | cdata 必须以 已 ]]>结束, recursion 找是不是valid tag, valid cdata, valid tagname  |
 | [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), 在snew中 p\[i]表示以id为中心最长回文，到i点，res += p\[i] /2  |
-| [648. Replace Words](https://leetcode.com/problems/replace-words/) | _O(n)_ | _O(t)_	| Medium | 🔍 Trie  |
+| [648. Replace Words](https://leetcode.com/problems/replace-words/) | _O(n)_ | _O(t)_	| Medium | 🔍 Trie; python 可以用reduce + dict.\_\_getitem__ |
 | [657. Judge Route Circle](https://leetcode.com/problems/judge-route-circle/) | _O(n)_ | _O(1)_	| Easy |  |
 | [678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/) | _O(n)_ | _O(1)_	| Medium | 🔍Three Solutions<ul><li>用low 和high: low 表示把 '\*' 当成 ')', high: 表示把 '\*' 当成'(', 如果high小于0，表示有太多的')' '(' + '\*' = high < ')' </li><li>用两个stack 分别记录 '(' 和 '\*'的位置, 如果当前是')', 先pop '(' 再pop '\*'; 最后看'(' 有没有对应index往后的的 '\*'可以pop掉, </li><li> Two pass solution 从左向右看是不是所有的')' 都有对应的 '(' 和 '\*', 再从右向左看是不是所有的 '(', 都有对应的 ')' 和' \*' </li></ul> |
 | [680. Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) | _O(n)_ | _O(1)_	| Easy | 🔍两个pointer,  检查s\[i] == s\[j]?, 遇到不等时，再看s\[i+1, j], or s\[i, j-1]是不是pal |
