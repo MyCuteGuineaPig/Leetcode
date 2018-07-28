@@ -1,7 +1,7 @@
 ## Array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [015. 3 Sum](https://leetcode.com/problems/3sum/) | _O(n^2)_ | _O(1)_	| Medium | 问题关键是sort + skip duplicate |
+| [015. 3 Sum](https://leetcode.com/problems/3sum/) | _O(n^2)_ | _O(1)_	| Medium | 🔍问题关键是sort + skip duplicate |
 
 
 
