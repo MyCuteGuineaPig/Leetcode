@@ -3,6 +3,8 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [007. Reverse Integer](https://leetcode.com/problems/reverse-integer/) | _O(1)_ | _O(1)_	| Easy |  |
 | [009. Palindrome Number](https://leetcode.com/problems/palindrome-number/) | _O(1)_ | _O(1)_	| Easy |  |
+| [012. Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | _O(n)_ | _O(1)_	| Medium |  |
+| [013. Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | _O(n)_ | _O(1)_	| Easy |  |
 
 
 
