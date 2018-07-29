@@ -7,6 +7,7 @@
 | [026. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/) | _O(n)_ | _O(1)_	| Easy | Two pointer |
 | [027. Remove Element](https://leetcode.com/problems/remove-element/) | _O(n)_ | _O(1)_	| Easy | Two pointer |
 | [031. Next Permutation](https://leetcode.com/problems/next-permutation/) | _O(n)_ | _O(1)_	| Medium | 跟[556.	Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/) 思路类似, C++可以用is_sorted_until + upper_bound()  |
+| [041. First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | _O(n)_ | _O(1)_	| Hard | 🔍先置换, 把每个元素放在合适位置，再看A\[i] == i+1 ? 不等于 return i+1, 最后如果还没return, return size +1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
