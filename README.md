@@ -14,6 +14,7 @@ Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(
 | [059. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/) | _O(n^2)_ | _O(1)_	| Medium | 🔍思路跟[048. Rotate Image](https://leetcode.com/problems/rotate-image/)  和 [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) 类似 |
 | [066. Plus One](https://leetcode.com/problems/plus-one/) | _O(n)_ | _O(1)_	| Easy | |
 | [073. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/) | _O(m\*n)_ | _O(1)_	| Medium | 🔍two pass:1. 把如果matrix\[i]\[j] == 0, 把matrix\[i]\[0] 和matrix\[0]\[j] 设为0, 如果第一列设0之前，有数为0，设col0 = 0。 2.从下往上loop, 碰到matrix\[i]\[0]] or matrix\[0]\[j] 为0, matrix\[i]\[j] = 0, if col0 == 0, matrix\[i]\[0] = 0|
+| [080. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/) | _O(n)_ | _O(1)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
