@@ -12,6 +12,7 @@ Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(
 | [048. Rotate Image](https://leetcode.com/problems/rotate-image/) | _O(n^2)_ | _O(1)_	| Medium | 🔍<ul><li> 上下左右四个区域，每个区域相互置换 </li><li> 先以左下到右上对角线置换，然后上下换 </li></ul>|
 | [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) | _O(m\*n)_ | _O(1)_	| Medium | 🔍定义 up, down, left, right 四个边界，每次loop 在最外围的一圈 |
 | [059. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/) | _O(n^2)_ | _O(1)_	| Medium | 🔍思路跟[048. Rotate Image](https://leetcode.com/problems/rotate-image/)  和 [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) 类似 |
+| [066. Plus One](https://leetcode.com/problems/plus-one/) | _O(n)_ | _O(1)_	| Easy | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
