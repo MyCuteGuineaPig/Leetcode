@@ -17,6 +17,7 @@ Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(
 | [080. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/) | _O(n)_ | _O(1)_	| Medium | |
 | [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/) | _O(n^2)_ | _O(1)_	| Easy | |
 | [119. Pascal's Triangle II	](https://leetcode.com/problems/pascals-triangle-ii/) | _O(n^2)_ | _O(1)_	| Easy | Easy DP |
+| [121. Best Time to Buy and Sell Stock	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | _O(n)_ | _O(1)_	| Easy |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
