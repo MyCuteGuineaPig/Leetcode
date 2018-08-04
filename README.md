@@ -27,6 +27,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [228. Summary Ranges](https://leetcode.com/problems/summary-ranges/) | _O(n)_ | _O(1)_	| Medium |  |
 | [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/) | _O(n)_ | _O(1)_	| Medium | 🔍Boyer-Moore Majority Vote algorithm |
 | [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | _O(n)_ | _O(1)_	| Medium | 🔍res\[i]表示 nums\[0: i-1]的乘积，right 记录从结尾到nums\[i+1: end]的乘积. 最后res\[i] = res\[i] * right; 也可以用left, right One Pass |
+| [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) | _O(n+m)_ | _O(1)_	| Medium | 🔍sorted matrix题目的关键是从第一行最后一个开始，如果当前数比想要的大, --col, 如果当前数比想要的小，++row|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
