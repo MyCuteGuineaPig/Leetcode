@@ -31,6 +31,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [289. Game of Life](https://leetcode.com/problems/game-of-life/) | _O(m \* n)_ | _O(1)_	| Medium | 🔍跟[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)有一点点类似，先变化matrix到想要的格式, 然后再做transform到结果: 把下一代活的| 2, 个位为1表示现在是活的，十位为1表示下代活的，res把每个cell>>=2 |
 | [334. Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍用两个数表示b, c, c表示当前最小, b表示当前第二小, 当i都大于这两个数，return true, 不用担心i只更新更新c, 因为答案必须要迈过b |
 | [384. Shuffle an Array	](https://leetcode.com/problems/shuffle-an-array/) | _O(n)_ | _O(n)_	| Medium | C++ srand(time(NULL)); rand(); uniform_int_distribution |
+| [396. Rotate Function](https://leetcode.com/problems/rotate-function/) | _O(n)_ | _O(1)_	| Medium | 🔍mathematical induction F(k) = F(k-1) + sum - nBk\[-k] |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
