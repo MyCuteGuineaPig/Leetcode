@@ -102,7 +102,7 @@ priority_queue<pair<int,int>, vector<pair<int,int>>, function<bool(const pair<in
         for(int i = 0; i<n && i<k; i++) pq.push({0,i});
         while(--k>0){
             auto it = pq.top();
-            pq.pop();
+            pq.pop();//pop 最小的，每次pop是把pq中最小的pop 出去，所以matrix 中popk个最小的，就是答案
             if(++it.first<n){
                 pq.push(it);
             }
@@ -128,10 +128,10 @@ public:
             //cout<<" compare number "<<matrix[row][col]<<endl;
             for (int i = 0, j = n - 1, p = n - 1; i < n; i++) {
                 //cout<<i<<" row "<<row<<" col "<<col;
-                while (j >= 0 && matrix[i][j] > matrix[row][col]) j--;  // pointer j for counting cnt_le
+                while (j >= 0 && matrix[i][j] > matrix[row][col]) j--;  // pointer j for counting cnt_le 大于或等于的
                 cnt_le += (j + 1);
                 //cout<<" cntle "<<cnt_le;
-                while (p >= 0 && matrix[i][p] >= matrix[row][col]) p--;   // pointer p for counting cnt_lt
+                while (p >= 0 && matrix[i][p] >= matrix[row][col]) p--;   // pointer p for counting cnt_lt 只有大于的
                 cnt_lt += (p + 1);
                 //cout<<" cntlt "<<cnt_lt<<endl;
             }
