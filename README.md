@@ -5,7 +5,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [094. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) | _O(n)_ | _O(1)_	| Medium | 🔍Morris Traversal |
 | [099	Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/) | _O(n)_ | _O(1)_	| Hard | 🔍调换node 之间第一个最错误的（也是最大的prev），和最后一个错误（也是最小的cur） |
-
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
