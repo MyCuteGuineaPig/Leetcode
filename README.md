@@ -1,5 +1,19 @@
 Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
 join 可以直接加generator, 比如 "".join(map(func, S))
+## Tree
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [094. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) | _O(n)_ | _O(1)_	| Medium | 🔍Morris Traversal |
+| [099	Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/) | _O(n)_ | _O(1)_	| Hard | 🔍调换node 之间第一个最错误的（也是最大的prev），和最后一个错误（也是最小的cur） |
+| [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | 🔍Morris Traversal,注意preorder 与inorder push 进vector的顺序的区别 |
+| [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | 🔍Morris Traversal |
+| [208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) | _O(n)_ | _O(1)_	| Medium | Trie |
+| [211. Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design/) | _O(min(n, h))_ | _O(min(n, h))_	| Medium | 🔍Trie + DFS |
+| [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | 🔍swap root left 和right |
+| [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | 🔍 preorder 或者BFS |
+| [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _ctor: O(n), update: O(logn), query: O(logn)_ | _O(n)_	| Medium | 🔍 BIT & Segment Tree |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
+
 ## Array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -136,7 +150,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/) | _O(n)_ | _O(1)_	| Easy | n = n & (n-1); |
 | [201. Bitwise AND of Numbers Range](https://leetcode.com/problems/bitwise-and-of-numbers-range/) | _O(1)_ | _O(1)_	| Medium | 一位一位比较digit，直到移动k位m=n, 那么此时的digit是bitwise and的结果, res = m<<k |
 | [231. Power of Two](https://leetcode.com/problems/power-of-two/) | _O(1)_ | _O(1)_	| Easy | n = n & (n-1); |
-| [260. Single Number III](https://leetcode.com/problems/single-number-iii/) | _O(n)_ | _O(1)_	| Medium | 🔍两个pass,第一个pass, 通过Xor需要区分a 和 b的数 c(是a与b右面第一位不一样的数), 第二次pass, 通过c&nums\[i]判断做xor, 找到a和b |
+| [260. Single Number III](https://leetcode.com/problems/single-number-iii/) | _O(n)_ | _O(1)_	| Medium | 🔍两个pass,第一个pass, 通过Xor需要区分a 和 b的数 c(是a与b右面第一位不一样的数), 第二次pass, 通过c&nums\[i]判断做xor, 找到a和b (binary 负数) |
 | [268. Missing Number](https://leetcode.com/problems/missing-number/) | _O(n)_ | _O(1)_	| Medium | Math, Swap, Xor |
 | [318. Maximum Product of Word Lengths](https://leetcode.com/problems/maximum-product-of-word-lengths/) | _O(n^2)_ | _O(n)_	| Medium | 🔍可以用bit来判断两个string是不是有重合的字母, 用数字表示string, a是第一位被set，z是第26位被set, |
 | [342. Power of Four](https://leetcode.com/problems/power-of-four/) | _O(1)_ | _O(1)_	| Easy | 4^n = (3+1)^n, 除了判断(n&n-1) , 还要判断n-1 是不是可以整除3 |
