@@ -12,7 +12,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | 🔍swap root left 和right |
 | [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | 🔍 preorder 或者BFS |
 | [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _ctor: O(n), update: O(logn), query: O(logn)_ | _O(n)_	| Medium | 🔍 BIT & Segment Tree |
-| [525。 Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 🔍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0  |
+| [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 🔍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Array
