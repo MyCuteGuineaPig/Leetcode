@@ -14,6 +14,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _ctor: O(n), update: O(logn), query: O(logn)_ | _O(n)_	| Medium | 🔍 BIT & Segment Tree |
 | [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 🔍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0  |
 | [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium | recursion, 遇到数字时，停止，遇到blank持续dfs |
+| [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | postorder reverse的顺序，先loop 右侧的，然后node，然后左侧的 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Array
