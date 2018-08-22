@@ -28,6 +28,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
 | [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
 | [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | _O(n)_ | _O(t)_	| Medium | Trie 注意更新时候，要减去之前的val or map + lower_bound |
+| [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/) | _O(n)_ | _O(n)_	| Medium | 🔍Union Find 如果两个node 连接之前发现parent 已经一样，表示之前两个nodes已经连接，如果再连接edge，会构成cycle |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Array
