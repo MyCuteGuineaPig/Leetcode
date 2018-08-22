@@ -11,7 +11,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [211. Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design/) | _O(min(n, h))_ | _O(min(n, h))_	| Medium | 🔍Trie + DFS |
 | [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | 🔍swap root left 和right |
 | [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | 🔍 preorder 或者BFS |
-| [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _ctor: O(n), update: O(logn), query: O(logn)_ | _O(n)_	| Medium | 🔍 BIT & Segment Tree |
+| [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | 🔍 BIT & Segment Tree |
 | [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 🔍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0  |
 | [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium | recursion, 遇到数字时，停止，遇到blank持续dfs |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | postorder reverse的顺序，先loop 右侧的，然后node，然后左侧的 |
@@ -21,6 +21,14 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [606. Construct String from Binary Tree](https://leetcode.com/problems/construct-string-from-binary-tree/) | _O(n)_ | _O(h)_	| Easy | |
 | [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | _O(n)_ | _O(h)_	| Easy | |
 | [623. Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/) | _O(n)_ | _O(h)_	| Medium | |
+| [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | |
+| [652. Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/) | _O(n)_ | _O(n\*h)_	| Medium |🔍 把tree hash 或者serialize, 然后对比hash值或者 serialize是否只出现一次,  |
+| [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy |🔍two pointer or BST Iterator |
+| [654. Maximum Binary Tree](https://leetcode.com/problems/maximum-binary-tree/) | _O(n)_ | _O(h)_	| Easy |🔍💡 descending stack: <ul><li> 如果现在数 num\[i] 小于stack top，stack.top->right = new TreeNode(nums\[i]) </li><li> 如果现在num\[i] 大于stack top，就不断pop stack 找最后一个小于nums\[i]的node，把最后的node 作为nums\[i]的left child </li></ul>  |
+| [655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
+| [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
+| [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | _O(n)_ | _O(t)_	| Medium | Trie 注意更新时候，要减去之前的val or map + lower_bound |
+| [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/) | _O(n)_ | _O(n)_	| Medium | 🔍Union Find 如果两个node 连接之前发现parent 已经一样，表示之前两个nodes已经连接，如果再连接edge，会构成cycle |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Array
