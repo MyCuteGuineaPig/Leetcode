@@ -31,6 +31,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/) | _O(n)_ | _O(n)_	| Medium | 🔍Union Find 如果两个node 连接之前发现parent 已经一样，表示之前两个nodes已经连接，如果再连接edge，会构成cycle |
 | [685. Redundant Connection II](https://leetcode.com/problems/redundant-connection-ii/) | _O(n)_ | _O(n)_	| Hard | 🔍Union Find 注意构成tree 的条件, 不能有一个child 连上两个parent, 然后去掉这个child一个链，保证都是一个child对应一个parent, 再看有没有cycle, 没有cycle表示去链去成功了, 有cycle 表示去链去错了 |
 | [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/) | _O(n)_ | _O(h)_	| Easy | 🔍DFS |
+| [814. Binary Tree Pruning](https://leetcode.com/problems/binary-tree-pruning/) | _O(n)_ | _O(h)_	| Medium | 🔍DFS |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Array
