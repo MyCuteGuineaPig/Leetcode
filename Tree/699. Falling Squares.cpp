@@ -89,6 +89,34 @@ public:
 };
 
 
+class Solution {
+public:
+    vector<int> fallingSquares(vector<pair<int, int>>& pos) {
+        map<int, int> h;
+        vector<int> ans;
+        for (auto& sqr : pos) {
+            int x = sqr.first, y = sqr.first+sqr.second, hnow = sqr.second;
+            auto it = h.upper_bound(x);
+            
+            int crnt = it==h.begin() ? 0 : prev(it)->second;
+            int maxh = crnt;
+            while (it!=h.end() && it->first<y) {
+                crnt = it->second;
+                maxh = max(maxh, crnt);
+                it = h.erase(it);
+            }
+            
+            h[x] = maxh + hnow;
+            h[y] = crnt;
+            
+            ans.push_back( ans.empty() || ans.back()<maxh+hnow ? maxh+hnow : ans.back());
+        }
+        return ans;
+    }
+};
+
+
+
 /* 
 Solution 2  Offline Propagation, 
 到i点之后，再到后面的点看是不是与后面的点交叉, 如果交叉更新点,
@@ -283,3 +311,122 @@ public:
 
 
 
+
+
+class Solution {
+public:
+    vector<int> fallingSquares(vector<pair<int, int>>& positions) {
+        set<int>coordinate;
+        for(auto p: positions){
+            coordinate.insert(p.first); coordinate.insert(p.first+p.second-1);
+        }
+        SegmentTree sgt(coordinate.size()); 
+        int maxh = 0;
+        vector<int>res;
+        for(auto p: positions){
+            auto L = distance(coordinate.begin(), coordinate.find(p.first));
+            auto R = distance(coordinate.begin(), coordinate.find(p.first + p.second - 1));
+            int h = sgt.query(L,R) + p.second;
+            maxh = max(h, maxh);
+            sgt.update(L, R, h);
+            res.push_back(maxh);
+        }
+        
+        return res;
+    }
+private:
+    struct SegmentTreeNode{
+        int start, end, val;
+        SegmentTreeNode* left, *right;
+        SegmentTreeNode(int start_, int end_, int val): start(start_), end(end_), left(NULL), right(NULL), val(val){}
+    };
+    
+    class SegmentTree{
+    public:      
+        SegmentTreeNode* tree, *lazytree;
+        SegmentTree(int size){
+            buildTree(tree, lazytree, 0, size-1);
+        }
+        
+        void buildTree(SegmentTreeNode*& root, SegmentTreeNode*& lazy, int start, int end){
+            if(start > end) return;
+            root = new SegmentTreeNode(start, end, 0);
+            lazy = new SegmentTreeNode(start, end, 0);
+            if(start == end) return;
+            int mid = start + (end-start)/2;
+            buildTree(root->left, lazy->left, start, mid);
+            buildTree(root->right, lazy->right, mid+1, end);
+        }
+        
+        int query(int L, int R){
+            return queryutil(L,R, tree, lazytree);
+        }
+        
+        int queryutil(int L, int R, SegmentTreeNode* root, SegmentTreeNode* lazy){
+            if(lazy->val!=0) updateLazy(root, lazy);
+            
+            if(L>root->end || R < root->start) return 0;
+            if(L <= root->start && R >= root->end) return root->val;
+            
+            int mid = root->start + (root-> end - root->start)/2;
+            return max(queryutil(L, R, root->left, lazy->left), queryutil(L, R, root->right, lazy->right));
+        }
+        
+        void update(int L, int R, int h){
+            updateUtil(L, R, h, tree, lazytree);
+        }
+        
+        int updateUtil(int L, int R, int h, SegmentTreeNode* root, SegmentTreeNode* lazy){
+            if(lazy->val!=0) updateLazy(root, lazy);
+            
+            if(L>root->end || R < root->start) return root->val; //return 是val 不是0, 是0的话可能改变val 的值
+            if(L <= root->start && R >= root->end) {
+                root->val = max(root->val, h);
+                if(root->start != root->end){
+                    lazy->left->val = max(lazy->left->val, h);
+                    lazy->right->val = max(lazy->right->val, h);
+                }
+                return root->val;
+            }
+            root->val = max(updateUtil(L, R, h, root->right, lazy->right), updateUtil(L,R,h,root->left, lazy->left));
+            return root->val;
+        }
+        /*
+        int updateUtil(int L, int R, int h, SegmentTreeNode* root, SegmentTreeNode* lazy){
+            if(lazy->val!=0) updateLazy(root, lazy);
+            
+            if(L>root->end || R < root->start) return 0;
+            if(L <= root->start && R >= root->end) {
+                root->val = max(root->val, h);
+                if(root->start != root->end){
+                    lazy->left->val = max(lazy->left->val, h);
+                    lazy->right->val = max(lazy->right->val, h);
+                }
+                return root->val;
+            }
+            root->val = max(root->val, max(updateUtil(L, R, h, root->left, lazy->left), updateUtil(L,R,h,root->right, lazy->right)));
+            
+            //或者可以
+            //updateUtil(L, R, h, root->left, lazy->left);
+            //updateUtil(L, R, h, root->right, lazy->right);
+            //root->val = max(root->left->val, root->right->val);
+           // 不可以root->val = max( updateUtil(L, R, h, root->left, lazy->left), updateUtil(L,R,h,root->right, lazy->right) );
+           // 因为当 L>root->end || R < root->start 返回0， 是不行的
+            
+        
+            return root->val;
+        }
+        */
+        
+        
+        void updateLazy(SegmentTreeNode* root, SegmentTreeNode* lazy){
+            int update = lazy->val;
+            root->val = max(root->val, update);
+            if(root->start != root-> end){
+                lazy->left->val =max(lazy->left->val, update);
+                lazy->right->val = max(lazy->right->val, update);
+            }
+        }
+        
+    };
+};
