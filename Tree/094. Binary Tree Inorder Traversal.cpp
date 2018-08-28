@@ -59,7 +59,7 @@ public:
                     cur = cur->right;
                 }
                 else{
-                    pre->right = cur;
+                    pre->right = cur;//第一次pass的parent node 先不操作它
                     cur = cur->left;
                 }
             }
