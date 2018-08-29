@@ -4,6 +4,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [011. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | _O(n)_ | _O(1)_	| Medium | 🔍要按照高度来动左面和右面pointer, if height\[i]==h -> i++, if height\[j]==h -> j--, 不可以按照height前后大小if height\[i+1] >= height\[i], i++，这样会错失高度 |
+| [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | 🔍<ul><li>一点一点提高safe level, leftmost 代表左面最高值，rightmost表示右面最高值，谁小update 现在高度</li><li>Descending Stack: 当新高度小于现在stack的高度,update water, stack top代表底的高度, bar = stack.pop(); 否则push 现在的高度index,注意pop每次一个，否则有起伏高度不好算 </li></ul> |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
