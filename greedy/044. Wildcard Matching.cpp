@@ -33,6 +33,8 @@ else if(p[j] == '*')
     dp[i+1][j+1] = dp[i][j+1] *match 多个元素
     dp[i+1][j+1] =  dp[i+1][j]; *match 不匹配任何元素，s[0:i) 与 p[0:j-1) 匹配，given p[j] == '*';
 
+
+
 */
 class Solution {
 public:
@@ -66,34 +68,33 @@ public:
 /*
 Using Greedy Algorithm
 
-I agree with dtcxzch. The complexity of the algorithm is O(p*s), where p and s are the lengths of the pattern and input strings. An example of such a worst-case input is:
+I agree with dtcxzch. The complexity of the algorithm is O(p*s), 
+where p and s are the lengths of the pattern and input strings. An example of such a worst-case input is:
 
 input: bbbbbbbbbbbb
 pattern: *bbbb
+
+比如现在有两个*不用担心 上一个 *不能match的情况
+
 */
 class Solution {
 public:
     bool isMatch(string s, string p) {
-        int n = s.length(), m = p.length(), i = 0, j = 0, asterisk = -1, asteriskMatch = 0;
+        int n = s.size(), m = p.size(), i = 0, j = 0, stari = -1, starj = -1;
         while(i<n){
-            if(p[j] == '*'){
-                asterisk = j; 
-                j++;
-                asteriskMatch = i; // no forward position, 因为asterisk 可能为空
-            }else if(s[i] == p[j] || p[j] == '?'){
-                i++;
-                j++;
-            }else if(asterisk>=0){
-                i = asteriskMatch;
-                asteriskMatch++; //之前星号代表的，不match了,所以回到星号之前match的下一个
-                j = asterisk+1; // 不动星号的位置
+            if( j < m && p[j] == '*'){
+                stari = i;
+                starj = j++;
+            }else if(j < m && (s[i] == p[j] || p[j] == '?' )){
+                i++; j++;
+            }else if(stari >= 0){
+                i = stari; stari++; //移动到下一位，*match 增加一位, /之前星号代表的，不match了,所以回到星号之前match的下一个
+                j = starj + 1;
             }
             else return false;
         }
-        while(j<m && p[j] == '*') j++;
-        
-        return j==m;
-        
+         while(j<m && p[j] == '*') j++;
+        return j == m ;
     }
 };
 
