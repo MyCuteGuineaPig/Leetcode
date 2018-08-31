@@ -10,6 +10,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [055. Jump Game](https://leetcode.com/problems/jump-game/) | _O(n)_ | _O(1)_	| Hard | 🔍 只有当nums\[i] = 0时，才会有可能到不了终点，看nums\[i]=0之前的点能不能跨过0点 |
 | [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | _O(n)_ | _O(1)_	| Medium |  |
 | [134. Gas Station](https://leetcode.com/problems/gas-station/description/) | _O(n)_ | _O(1)_	| Hard | if sum(gas)>sum(cost)有解, 起点是最后一个累计sum为负后的点  |
+| [135. Candy](https://leetcode.com/problems/candy/) | _O(n)_ | _O(n)_	| Hard | 🔍 开始把每个人糖assign为1，从左面和右面各loop一回，如果比邻居rate大，比较现在糖数和邻居值+1，keep大的 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
