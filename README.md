@@ -1,5 +1,10 @@
 Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
 join 可以直接加generator, 比如 "".join(map(func, S))
+
+ 😍 好的面试题
+ 🔍 反复看的题
+ 💡 有点难度比较tricky
+
 ## Greedy
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -15,7 +20,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [321.	Create Maximum Number](https://leetcode.com/problems/create-maximum-number/) | _O((m+n)^3)_ | _O(k)_	| Hard | 🔍 tricky |
 | [330. Patching Array](https://leetcode.com/problems/patching-array/) | _O(s + logn)_ | _O(1)_	| Hard | 🔍 tricky, 当num <= miss 表示\[0,miss)已经满足, miss+=num; else, miss\*=2, patch++ |
 | [376.Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/) | _O(n)_ | _O(1)_	| Medium | 看有几个正负转化 |
-| [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/) | _O(n)_ | _O(1)_	| Medium | easy two pointer or C++ iterator; follow-up可以用binary search |
+| [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 easy two pointer or C++ iterator; follow-up可以用binary search |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
