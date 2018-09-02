@@ -24,6 +24,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [397. Integer Replacement](https://leetcode.com/problems/integer-replacement/description/) | _O(log(n))_ | _O(1)_	| Medium | 🔍 tricky,如果是奇数, 看第二个bit决定+1, -1 |
 | [402.	Remove K Digits](https://leetcode.com/problems/remove-k-digits/) | _O(n)_ | _O(n)_	| Medium | 😍 ascending stack |
 | [435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | _O(nlogn)_ | _O(1)_	| Medium | 💡 不要想最少删除几个，看最多可以有几个构成non-overlap的区间 |
+| [452. Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) | _O(nlogn)_ | _O(1)_	| Medium | 🔍  跟[435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/), [056. Merge Intervals](https://leetcode.com/problems/merge-intervals/), [057. Insert Interval](https://leetcode.com/problems/insert-interval/) 类似 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
