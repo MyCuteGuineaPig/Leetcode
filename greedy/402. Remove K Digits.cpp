@@ -17,6 +17,26 @@ how to remove 1 digit from the number so that the new number is the smallest pos
 
 */
 
+/*
+Solution 1: ascending stack, pop时候，如果有富余的值，就pop，没得有话，push——back
+*/
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        string out;
+        for(auto c: num){
+            while(k>0 && !out.empty() && out.back() > c){
+                out.pop_back();
+                k--;
+            }
+            if(out.empty() && c == '0') continue; //如果stack为空，不能往里面push 0
+            out.push_back(c);
+        }
+        while(k && !out.empty()) out.pop_back(), k--;
+        if(out.empty()) return "0";
+        return out;
+    }
+};
 
 
 class Solution {
