@@ -26,7 +26,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | _O(nlogn)_ | _O(1)_	| Medium | 💡 不要想最少删除几个，看最多可以有几个构成non-overlap的区间 |
 | [452. Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) | _O(nlogn)_ | _O(1)_	| Medium | 🔍  跟[435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/), [056. Merge Intervals](https://leetcode.com/problems/merge-intervals/), [057. Insert Interval](https://leetcode.com/problems/insert-interval/) 类似 可以sort start 也可以sort end |
 | [455. Assign Cookies](https://leetcode.com/problems/assign-cookies/) | _O(nlogn)_ | _O(1)_	| Easy |  |
-| [621. Task Scheduler](https://leetcode.com/problems/task-scheduler/) | _O(n)_ | _O(n)_	| Medium |🔍 用最多的字母和cooling interval构建框架  |
+| [621. Task Scheduler](https://leetcode.com/problems/task-scheduler/) | _O(n)_ | _O(1)_	| Medium |🔍 用最多的字母和cooling interval构建框架, or priority_queue 代表当前可以取的字母个数 + map用于缓存  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
