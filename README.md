@@ -29,6 +29,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [621. Task Scheduler](https://leetcode.com/problems/task-scheduler/) | _O(n)_ | _O(1)_	| Medium |🔍 用最多的字母和cooling interval构建框架, or priority_queue 代表当前可以取的字母个数 + map用于缓存  |
 | [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/) | _O(nlogn)_ | _O(k)_	| Hard |🔍 💡 移花接木  |
 | [646.	Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/) | _O(nlogn)_ | _O(1)_	| Medium |🔍 跟 [435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)思路一样|
+| [649.	Dota2 Senate](https://leetcode.com/problems/dota2-senate/) | _O(n)_ | _O(n)_	| Medium |🔍 tricky, 一个一个R和D比，index小的赢，直到一方全军覆没 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
