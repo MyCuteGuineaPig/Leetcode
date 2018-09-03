@@ -32,6 +32,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [649.	Dota2 Senate](https://leetcode.com/problems/dota2-senate/) | _O(n)_ | _O(n)_	| Medium |🔍 tricky, 一个一个R和D比，index小的赢，直到一方全军覆没 |
 | [659. Split Array into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/) | _O(n)_ | _O(n)_	| Medium |🔍tricky, 先看能不能以append i 到i-1的sequence,再看能不能建立新的起点 |
 | [738.	Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/) | _O(1)_ | _O(1)_	| Medium |🔍brainstorming |
+| [757. Set Intersection Size At Least Two](https://leetcode.com/problems/set-intersection-size-at-least-two/) | _O(nlogn)_ | _O(1)_	| Medium |🔍判断每个点是不是比largest 和second largest 大，如果只比largest, res+=1; 如果都不大，res+=2 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
