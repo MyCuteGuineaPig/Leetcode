@@ -4,8 +4,6 @@
 * [Tree](https://github.com/beckswu/Leetcode#tree) 
 * [Math](https://github.com/beckswu/Leetcode#math) 
 * [String](https://github.com/beckswu/Leetcode#string) 
-* [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
-* [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
 * [Hash Table](https://github.com/beckswu/Leetcode#hash-table) 
 * [Bit Manipulation](https://github.com/beckswu/Leetcode#bit-manipulation)
 * [Stack](https://github.com/beckswu/Leetcode#stack) 
@@ -20,6 +18,8 @@
 * [Depth First Search](https://github.com/beckswu/Leetcode#depth-first-search) 
 * [Backtracking](https://github.com/beckswu/Leetcode#backtracking) 
 * [Dynamic Programming](https://github.com/beckswu/Leetcode#dynamic-programming) 
+* [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
+* [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
 
 
 Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
