@@ -26,56 +26,22 @@ The integer n is in the range [0, 100].
 
 
 /*
-First consider the most frequent characters, we can determine their relative positions first and use them as a frame
-to insert the remaining less frequent characters. Here is a proof by construction:
+可以建一个框架，用最多的字母，和cooling interval, 比如最多字母是A, cooling interval n = 3
+A * * *  A * * * A * * * A, 每个A之间都隔了三个数，那么一个区间是 n + 1 (算上A)
+把剩下的字母填进空，
 
-Let F be the set of most frequent chars with frequency k.
-We can create k chunks, each chunk is identical and is a string consists of chars in F in a specific fixed order.
-Let the heads of these chunks to be H_i; then H_2 should be at least n chars away from H_1, and so on so forth;
-then we insert the less frequent chars into the gaps between these chunks sequentially one by one ordered by frequency 
-in a decreasing order and try to fill the k-1 gaps as full or evenly as possible each time you insert a character.
-In summary, append the less frequent characters to the end of each chunk of the first k-1 chunks sequentially and round and round, 
-then join the chunks and keep their heads' relative distance from each other to be at least n.
+比如AAABBCC， cooling interval n = 3, 因为A是最多的，既然A可以之间保证n个，其他的字母也可以保证也都隔了n个再重复
+A B C * A B C* A ， 
 
-Examples:
+(n + 1)*(max - 1);  n+1是每个区间长度， max - 1时除了最后一个外的，因为最后一个区间不用填满所有
+最后loop map如果map value == max, ans ++, 因为ans加的是最后结尾加的字母
+比如 AAABBBCC, A B C * A B C* A B， 结尾需要加两个： 1个A, 1个B 
 
-AAAABBBEEFFGG 3
-
-here X represents a space gap:
-
-Frame: "AXXXAXXXAXXXA"
-insert 'B': "ABXXABXXABXXA" <--- 'B' has higher frequency than the other characters, insert it first.
-insert 'E': "ABEXABEXABXXA"
-insert 'F': "ABEFABEXABFXA" <--- each time try to fill the k-1 gaps as full or evenly as possible.
-insert 'G': "ABEFABEGABFGA"
-AACCCBEEE 2
-
-3 identical chunks "CE", "CE CE CE" <-- this is a frame
-insert 'A' among the gaps of chunks since it has higher frequency than 'B' ---> "CEACEACE"
-insert 'B' ---> "CEABCEACE" <----- result is tasks.length;
-AACCCDDEEE 3
-
-3 identical chunks "CE", "CE CE CE" <--- this is a frame.
-Begin to insert 'A'->"CEA CEA CE"
-Begin to insert 'B'->"CEABCEABCE" <---- result is tasks.length;
-ACCCEEE 2
-
-3 identical chunks "CE", "CE CE CE" <-- this is a frame
-Begin to insert 'A' --> "CEACE CE" <-- result is (c[25] - 1) * (n + 1) + 25 -i = 2 * 3 + 2 = 8
-
-for the last line (c[25] - 1) * (n + 1) + 25 - i):
-
-c[25]-1: the most frequent letter happen time minus 1
-*(n+1): count for the loops for above
-+25-i: count for the less frequence letters.
-For example:
-tasks = ['A','A','A','B','B','B'], n = 2
-
-most frequent letter : A (happen 3 times, let it minus 1= 2)
-count loops: (n+1) =3
-plus the letters left: A,B.
-[A -> B -> idle]*loop1* -> [A -> B -> idle]*loop2* -> A -> B.
-
+最后需要跟task size比谁大, 这是因为可能既定的框架放不下, 给的cooling interval 小，字母足够大， 不需要idle补
+比如 AACCCBEE 2， 框架  C * * C * * C, 
+    先放A，= >  C A * C A * C
+    再放E = >  C A E C A E C,
+    B就没地方了，随便再一个interval即可 =》 C A E B C A E C
 
 */
 
@@ -90,7 +56,106 @@ public:
             maxN = max(maxN,m[i]);
         }
         int ans = (n+1)*(maxN-1);
-        for(auto itr: m) if(itr.second == maxN) ans++;
+        for(auto itr: m) if(itr.second == maxN) ans++;  //or use count_if
+        //size_t num_max = count_if(counts.begin(), counts.end(), [max_count](int i){return i == max_count;});
         return max(ans,(int)tasks.size());
     }
 };
+
+
+//one pass
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        int len = tasks.size();
+        vector<int>count(26,0);
+        int maxN = 0, maxNum = 0;
+        for (char c : tasks) {
+            count[c - 'A']++;
+            if (count[c - 'A'] > maxN) {
+                maxN = count[c - 'A'];
+                maxNum = 1;
+            } else if (count[c - 'A'] == maxN) {
+                maxNum++;
+            }
+        }
+        return max(len, (maxN - 1) * (n + 1) + maxNum);
+    }
+};
+
+/*
+Priority Queue的解： 
+把每个字母的frequency push 进pq
+
+需要一个map key是时间，value是下次开始时对应字母记得数
+map作用是作为缓存，假如time = 0, 现在字母是'A', 下次出现是time = 5,
+time 从2 到4， pq中不会在出现A，不能query A，避免不到n个间隔，做重复劳动，当time = 5时，发现map有记录，get cur = 4, push 进pq，就可以继续用A
+
+当还有还没用完的task taskremaining  > 0，但是可能因为没有结束cooling period, pq.size() == 0
+不减少taskremaining, 只增加一个time
+
+*/
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int>frequencies(26,0);
+        for (char c : tasks) frequencies[c - 'A']++;
+
+        priority_queue<int>pq;
+        for (int i : frequencies) if (i != 0) pq.push(i);
+        unordered_map<int,int>map;
+        int time = 0, tasksRemaining = tasks.size(), preCount = 0, cur = -1;
+        while (tasksRemaining > 0) {
+            if(map.count(time)) preCount=map[time]; //到下一个区间开始
+            else preCount = 0;
+            if (preCount != 0) pq.push(preCount); 
+            
+            if(!pq.empty()) {cur = pq.top(); pq.pop();} //现在pq 没有数，pop出来空的，在cooling period
+            else cur = -1;
+            if (cur != -1) tasksRemaining--;
+            if (cur != -1 && --cur > 0) map[time + n + 1] = cur; //比如现在是0，n+1 = 4, 到4的时候才把'A'的个数拿出来，放进pq
+            time++;
+        }
+        return time;
+
+    }
+};
+
+
+/**
+priority_queue<task, count>
+*/
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        unordered_map<char, int> counts;
+        for (char t : tasks) {
+            counts[t]++;
+        }
+        priority_queue<pair<int, char>> pq;
+        for (pair<char, int> count : counts) {
+            pq.push(make_pair(count.second, count.first)); //把次数最多的数先pop
+        }
+        int alltime = 0;
+        int cycle = n + 1;
+        while (!pq.empty()) {
+            int time = 0;
+            vector<pair<int, char>> tmp;
+            for (int i = 0; i < cycle; i++) {
+                if (!pq.empty()) {
+                    tmp.push_back(pq.top());
+                    pq.pop();
+                    time++;
+                }
+            }
+            for (auto t : tmp) {
+                if (--t.first) {
+                    pq.push(t);
+                }
+            }
+            alltime += !pq.empty() ? cycle : time;
+        }
+        return alltime;
+    }
+};
+

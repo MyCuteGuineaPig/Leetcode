@@ -38,12 +38,10 @@ And in the round 2, the third senator can just announce the victory since he is 
 
 /*
 
-This is obliviously a greedy algorithm problem. Each senate R must ban its next closest senate D who is from another party, or else D will ban its next senate from R's party.
+R 和 D一一对比，index小的赢，直到一方全军覆没，
+因为是循环的，所以赢得一方下次出现的index = i+n; 
 
-The idea is to use two queues to save the index of each senate from R's and D's parties, 
-respectively. During each round, we delete the banned senate's index; 
-and plus the remainning senate's index with n(the length of the input string senate), 
-then move it to the back of its respective queue.
+用queue的好处，因为push是按照index push 的，所以queue 是又小到大排序的，queue.front就是当前最靠前的元素
 
 */
 
@@ -60,5 +58,118 @@ public:
             r_index < d_index ? qR.push(r_index+n):qD.push(d_index+n);
         }
         return qR.size() ? "Radiant" : "Dire";
+    }
+};
+
+
+
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        string s = senate;
+        int cnt = 0, len = 0;
+        while (len != s.size()) {
+            string ns;
+            len = s.size();
+            for (auto c: s) {
+                if (c == 'D' && ++cnt > 0) {
+                    ns += c;
+                } else if (c == 'R' && --cnt < 0){
+                    ns += c;
+                }
+            }
+            s = ns;
+        }
+        return (s.front() == 'D')?"Dire":"Radiant";
+    }
+};
+
+
+/*
+people当前还有多少个战士各自，如果一方全军覆没，战斗结束
+ban 表示当前index，被禁的，比如ban[0]>0, 当后面出现index时候的，被杀掉，不用append
+
+*/
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        queue<int>q; vector<int>ban(2,0); 
+        vector<int>people(2,0);
+        for(auto s: senate){
+            int cur = s == 'R';
+            people[cur]++; q.push(cur);
+        }
+            
+        while(people[0] && people[1]){
+            int cur = q.front(); q.pop();
+            if(ban[cur]) {
+                ban[cur]--;
+                people[cur]--;
+            }
+            else{
+                ban[cur^1]++;
+                q.push(cur);
+            }
+        }
+        return people[0]>0 ? "Dire": "Radiant";
+    }
+};
+
+
+
+
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        int count = 0, len = 0;
+        // When the length of senate doesn't decrease, the game is over.
+        while (senate.size() != len) {
+            string s;
+            len = senate.size();
+            for (int i = 0; i < len; i++) {
+                if (senate[i] == 'R') {
+                    if (count++ >= 0) s += 'R';
+                }
+                else if (senate[i] == 'D') {
+                    if (count-- <= 0) s += 'D';
+                }
+            }  
+            swap(s, senate);
+        }
+        if (senate[0] == 'R') 
+            return "Radiant";
+        else 
+            return "Dire";
+    }
+};
+
+class Solution {
+public:
+
+    string predictPartyVictory(string senate) {
+        int r_count = 0, d_count = 0;
+		while(true) {
+			string s;
+			for (int i = 0; i < senate.size(); i++) {
+				if (senate[i] == 'R') {
+					if (d_count == 0) {
+						s += 'R';
+						r_count++;
+					} else {
+						d_count--;
+					}
+				} else {
+					if (r_count == 0) {
+						s += 'D';
+						d_count++;
+					} else {
+						r_count--;
+					}
+				}
+			}
+			if (s == senate) break;
+			senate = std::move(s);
+		}
+		return senate[0] == 'R' ? "Radiant" : "Dire";
     }
 };
