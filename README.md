@@ -3,7 +3,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 
  😍 好的面试题
  🔍 反复看的题
- 💡 有点难度比较tricky
+ 💡 比较tricky
 
 ## Greedy
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -23,6 +23,23 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 easy two pointer or C++ iterator; follow-up可以用binary search |
 | [397. Integer Replacement](https://leetcode.com/problems/integer-replacement/description/) | _O(log(n))_ | _O(1)_	| Medium | 🔍 tricky,如果是奇数, 看第二个bit决定+1, -1 |
 | [402.	Remove K Digits](https://leetcode.com/problems/remove-k-digits/) | _O(n)_ | _O(n)_	| Medium | 😍 ascending stack |
+| [435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | _O(nlogn)_ | _O(1)_	| Medium | 💡 不要想最少删除几个，看最多可以有几个构成non-overlap的区间 |
+| [452. Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) | _O(nlogn)_ | _O(1)_	| Medium | 🔍  跟[435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/), [056. Merge Intervals](https://leetcode.com/problems/merge-intervals/), [057. Insert Interval](https://leetcode.com/problems/insert-interval/) 类似 可以sort start 也可以sort end |
+| [455. Assign Cookies](https://leetcode.com/problems/assign-cookies/) | _O(nlogn)_ | _O(1)_	| Easy |  |
+| [621. Task Scheduler](https://leetcode.com/problems/task-scheduler/) | _O(n)_ | _O(1)_	| Medium |🔍 用最多的字母和cooling interval构建框架, or priority_queue 代表当前可以取的字母个数 + map用于缓存  |
+| [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/) | _O(nlogn)_ | _O(k)_	| Hard |🔍 💡 移花接木  |
+| [646.	Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/) | _O(nlogn)_ | _O(1)_	| Medium |🔍 跟 [435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)思路一样|
+| [649.	Dota2 Senate](https://leetcode.com/problems/dota2-senate/) | _O(n)_ | _O(n)_	| Medium |🔍 tricky, 一个一个R和D比，index小的赢，直到一方全军覆没 |
+| [659. Split Array into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/) | _O(n)_ | _O(n)_	| Medium |🔍tricky, 先看能不能以append i 到i-1的sequence,再看能不能建立新的起点 |
+| [738.	Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/) | _O(1)_ | _O(1)_	| Medium |🔍brainstorming |
+| [757. Set Intersection Size At Least Two](https://leetcode.com/problems/set-intersection-size-at-least-two/) | _O(nlogn)_ | _O(1)_	| Medium |🔍判断每个点是不是小于等于largest 和second largest ，如果只小于等于largest, res+=1; 如果都不小，res+=2 |
+| [763.	Partition Labels](https://leetcode.com/problems/partition-labels/) | _O(n)_ | _O(n)_	| Medium |🔍😍 <ul><li>用hashmap记录最后char的出现位置; loop S时候，取最大的最后位置，当最大最后位置与现在位置吻合，make cut </li><li>sliding window, 前进window当现在s不是最后出现 </li></ul> |
+| [767. Reorganize String](https://leetcode.com/problems/reorganize-string/) | _O(n)_ | _O(1)_	| Medium |🔍 💡😍priority_queue  |
+| [798. Smallest Rotation with Highest Score](https://leetcode.com/problems/smallest-rotation-with-highest-score/) | _O(n)_ | _O(1)_	| Hard |🔍 每次从0到A.length-1得一分，A\[i]从i到i-1减一分  |
+| [843. Guess the Word](https://leetcode.com/problems/guess-the-word/) | _O(n^2)_ | _O(n)_	| Hard |🔍 猜频率最大的词 或者 选取与其他词重合最多个数的中最小bar的 作为guess的单词(最多中最小的，代表分布平均, eliminate时候可以删更多)，然后根据return 值缩小范围 |
+| [861. Score After Flipping Matrix](https://leetcode.com/problems/guess-the-word/) | _O(m \* n)_ | _O(1)_	| Medium |🔍 先保证第一列全是1, 然后决定toggle每一列从再最大化每一列 |
+| [870. Advantage Shuffle](https://leetcode.com/problems/advantage-shuffle/) | _O(nlogn)_ | _O(n)_	| Medium |🔍😍 sort \ maxheap \ minheap |
+| [881. Boats to Save People](https://leetcode.com/problems/boats-to-save-people/) | _O(nlogn)_ | _O(n)_	| Medium | two pointer |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
