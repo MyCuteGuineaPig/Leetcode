@@ -1,10 +1,34 @@
+## catalogue
+* #### [Array](https://github.com/beckswu/Leetcode#array)
+* #### [Greedy](https://github.com/beckswu/Leetcode#greedy) 
+* #### [Tree](https://github.com/beckswu/Leetcode#Tree) 
+* #### [Math](https://github.com/beckswu/Leetcode#math) 
+* #### [String](https://github.com/beckswu/Leetcode#string) 
+* #### [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
+* #### [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
+* #### [Hash Table](https://github.com/beckswu/Leetcode#hash-table) 
+* #### [Bit Manipulation](https://github.com/beckswu/Leetcode#bit-manipulation)
+* #### [Stack](https://github.com/beckswu/Leetcode#stack) 
+* #### [Queue](https://github.com/beckswu/Leetcode#queue) 
+* #### [Heap](https://github.com/beckswu/Leetcode#heap) 
+* #### [Linked List](https://github.com/beckswu/Leetcode#linkedlist) 
+* #### [Two Pointer](https://github.com/beckswu/Leetcode#two-pointer) 
+* #### [Sort](https://github.com/beckswu/Leetcode#sort) 
+* #### [Recursion](https://github.com/beckswu/Leetcode#recursion) 
+* #### [Binary Search](https://github.com/beckswu/Leetcode#binary-search) 
+* #### [Binary Search Tree](https://github.com/beckswu/Leetcode#binary-search-tree) 
+* #### [Depth First Search](https://github.com/beckswu/Leetcode#depth-first-search) 
+* #### [Backtracking](https://github.com/beckswu/Leetcode#backtracking) 
+* #### [Dynamic Programming](https://github.com/beckswu/Leetcode#dynamic-programming) 
+
+
 Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
 join 可以直接加generator, 比如 "".join(map(func, S))
 
  😍 好的面试题
  🔍 反复看的题
  💡 比较tricky
-
+ 
 ## Greedy
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
