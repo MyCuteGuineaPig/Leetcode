@@ -1,7 +1,7 @@
 ## catalogue
 * [Array](https://github.com/beckswu/Leetcode#array)
 * [Greedy](https://github.com/beckswu/Leetcode#greedy) 
-* [Tree](https://github.com/beckswu/Leetcode#Tree) 
+* [Tree](https://github.com/beckswu/Leetcode#tree) 
 * [Math](https://github.com/beckswu/Leetcode#math) 
 * [String](https://github.com/beckswu/Leetcode#string) 
 * [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
@@ -11,7 +11,7 @@
 * [Stack](https://github.com/beckswu/Leetcode#stack) 
 * [Queue](https://github.com/beckswu/Leetcode#queue) 
 * [Heap](https://github.com/beckswu/Leetcode#heap) 
-* [Linked List](https://github.com/beckswu/Leetcode#linkedlist) 
+* [Linked List](https://github.com/beckswu/Leetcode#linked-list) 
 * [Two Pointer](https://github.com/beckswu/Leetcode#two-pointer) 
 * [Sort](https://github.com/beckswu/Leetcode#sort) 
 * [Recursion](https://github.com/beckswu/Leetcode#recursion) 
