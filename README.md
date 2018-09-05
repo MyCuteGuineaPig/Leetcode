@@ -38,6 +38,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [798. Smallest Rotation with Highest Score](https://leetcode.com/problems/smallest-rotation-with-highest-score/) | _O(n)_ | _O(1)_	| Hard |🔍 每次从0到A.length-1得一分，A\[i]从i到i-1减一分  |
 | [843. Guess the Word](https://leetcode.com/problems/guess-the-word/) | _O(n^2)_ | _O(n)_	| Hard |🔍 猜频率最大的词 或者 选取与其他词重合最多个数的中最小bar的 作为guess的单词(最多中最小的，代表分布平均, eliminate时候可以删更多)，然后根据return 值缩小范围 |
 | [861. Score After Flipping Matrix](https://leetcode.com/problems/guess-the-word/) | _O(m \* n)_ | _O(1)_	| Medium |🔍 先保证第一列全是1, 然后决定toggle每一列从再最大化每一列 |
+| [870. Advantage Shuffle](https://leetcode.com/problems/advantage-shuffle/) | _O(nlogn)_ | _O(n)_	| Medium |🔍😍 sort \ maxheap \ minheap |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
