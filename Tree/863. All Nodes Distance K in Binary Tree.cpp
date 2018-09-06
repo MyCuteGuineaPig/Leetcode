@@ -72,6 +72,24 @@ public:
     }
 };
 
+/*
+Solution DFS:
+不可以杂交
+比如:
+ l = dfs(l.left, K, dis == -1 ? -1: dis + 1, res)
+ r = dfs(r.right, K, dis == -1 ? -1: max(l, dis) + 1, res)
+ 
+这样可能有个后果，比如K=4, target = 1, 
+                1
+               /  \
+              2    4
+             /      \
+            3        5
+左面运行完 l = 2, 带进右侧tree, 到5的时候dis 就变成了4, 4的左侧右侧都没node, return dis = 4 到4， 再到1
+这样就把4, 1也算进了node, 实际上都不应该算
+ 
+*/
+
 
 class Solution {
     /**
