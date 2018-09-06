@@ -160,7 +160,7 @@ public:
 };
 
 
-//BFS 先找到最深的左侧和右侧的root, 然后再网上推parent
+//BFS 先找到最深的左侧和右侧的root, 然后再往上推parent
 class Solution {
 public:
     TreeNode* subtreeWithAllDeepest(TreeNode* root) {
