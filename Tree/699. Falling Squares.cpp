@@ -422,6 +422,7 @@ private:
         void updateLazy(SegmentTreeNode* root, SegmentTreeNode* lazy){
             int update = lazy->val;
             root->val = max(root->val, update);
+            lazy->val = 0;
             if(root->start != root-> end){
                 lazy->left->val =max(lazy->left->val, update);
                 lazy->right->val = max(lazy->right->val, update);
