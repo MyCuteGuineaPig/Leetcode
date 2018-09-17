@@ -139,7 +139,7 @@ http://www.allenlipeng47.com/blog/index.php/2016/07/21/candy/
 
 当现在数减小时候 countdown ++， 
 当现在数比前一个数大于等于，先把之前减小的部分算上，把连续countdown 的最后一个高度(连续最右侧的)假设为1，连续下降的起点也是最左侧高度为(countdown)
-那么这些countdown的高度是 (1+countdown)*countdown/w
+那么这些countdown的高度是 (1+countdown)*countdown/2
 
 如果下降最左侧 等于或者高于 上一个高度，需要增高上一个高度，增高到 countdown + 1, 因为之前算过了pre, 
 那么pre 到 countdown + 1增加的是 countdown - pre + 1
