@@ -106,6 +106,30 @@ public:
     }
 };
 
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        typedef pair<int, int> pin;
+        priority_queue<pin, vector<pin>, greater<pin>> pq; //由小到大一个一个pop,然后变邻居的糖
+        for(int i = 0; i < ratings.size(); i++)
+            pq.push({ratings[i], i});
+        vector<int> candies(ratings.size(), 1);
+        while(pq.size()){
+            pin next = pq.top();
+            pq.pop();
+            int val = next.first, idx = next.second;
+            if(idx - 1 >= 0 && ratings[idx-1] < ratings[idx] && candies[idx-1] >= candies[idx])
+                candies[idx] = candies[idx-1] + 1;
+            if(idx + 1 < ratings.size() && ratings[idx+1] < ratings[idx] && candies[idx+1] >= candies[idx])
+                candies[idx] = candies[idx+1] + 1;
+        }
+        int su = 0;
+        for(auto c:candies)
+            su += c;
+        return su;
+    }
+};
+
 /*
 
 Complexity O(n)
