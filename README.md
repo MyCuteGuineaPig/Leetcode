@@ -43,7 +43,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/) | _O(n)_ | _O(k)_	| Hard | 🔍 Ascending Stack, 可以用string 做stack, pop时候看cur char是不是在现在stack中(不重复)，还看后面有没有一样top(有一个再插入) |
 | [321.	Create Maximum Number](https://leetcode.com/problems/create-maximum-number/) | _O((m+n)^3)_ | _O(k)_	| Hard | 🔍 💡  tricky, 生成array时，除了考虑后面剩下的可不可以补充上drop，还可以考虑总共要去掉len - k个 |
 | [330. Patching Array](https://leetcode.com/problems/patching-array/) | _O(s + logn)_ | _O(1)_	| Hard | 🔍 tricky, 当num <= miss 表示\[0,miss)已经满足, miss+=num; else, miss\*=2, patch++ |
-| [376.Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/) | _O(n)_ | _O(1)_	| Medium | 看有几个正负转化💡 可以用dp |
+| [376.Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/) | _O(n)_ | _O(1)_	| Medium | 看有几个正负转化💡 可以用dp, python 可以用 |
 | [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 easy two pointer or C++ iterator; follow-up可以用binary search |
 | [397. Integer Replacement](https://leetcode.com/problems/integer-replacement/description/) | _O(log(n))_ | _O(1)_	| Medium | 🔍 tricky,如果是奇数, 看第二个bit决定+1, -1 |
 | [402.	Remove K Digits](https://leetcode.com/problems/remove-k-digits/) | _O(n)_ | _O(n)_	| Medium | 😍 ascending stack |
