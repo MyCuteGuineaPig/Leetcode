@@ -38,7 +38,7 @@ Explanation: You don't need to remove any of the intervals since they're already
 比如 [1,4],[2,4],[3,4] or[3,4], [1,4],[2,4] : end 都是4，起点都小于4，所以删除都会删除2个
 
 用end 来sort，因为：
-1. 小的start 可能end 很远，可能与很多interval 覆盖，比如[ [1,5], [2,3], [3,4], [4，5]] 需要一边走一边调整end
+1. 小的start 可能end 很远，可能与很多interval 覆盖，比如[ [1,5], [2,3], [3,4], [4, 5]] 需要一边走一边调整end
    而根据end 排序，遇到i.start >= end, 我们知道下一个最小的end 一定是i.start
 2. 不怕碰到跨度大的interval, 比如[1,2],[3,20], [4,21]，碰到[3,20]时候，即使它跨度大，
    20一定是最近上一个end的end点，如果有更接近的肯定会先出现, 比如[1,2],[3,10],[3,20]，
