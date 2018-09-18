@@ -61,6 +61,9 @@ However, N - 1 will remove only one '1'. 1011 - 1 = 1010 or 1111 - 1 = 1110. So 
 
 如果第二个bit是 '0', N+1 will remove zero '1'. 1001 + 1 = 1010. N -1 will remove one '1'. 1001 - 1 = 1000.
 
+而operation是当是奇数，只能加减一，不能消除位数，而是偶数时候，可以消除位数，比如1011只能变成1010 or 1100, 而1100 可以变成110, 
+所以目标是尽可能消除更多的1，让后面operation减小 从而更快减小位数
+
 */
 class Solution {
 public:
