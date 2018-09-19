@@ -62,7 +62,10 @@ public:
 };
 
 
+/*
+len = s 表示上一句的没有消灭，表示一方已经获胜
 
+*/
 class Solution {
 public:
     string predictPartyVictory(string senate) {
