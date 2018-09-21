@@ -78,7 +78,7 @@ public:
 Solution 2: 
 根据end 来sort： 如果end 一样根据start sort，
 
-当loop 时候因为是根据end sort，所以只需判断start <= largest ? second <= second? 
+当loop 时候因为是根据end sort，所以只需判断start <= largest ? end <= second? 
 如果都小于，继续
 如果只有second 不满足，+1 个点， second = largest, largest = p[1]
 如果两个点都不满足, + 2 个点, second = p[1]-1, largest = p[1]
