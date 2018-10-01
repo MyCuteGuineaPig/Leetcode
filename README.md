@@ -29,6 +29,53 @@ join 可以直接加generator, 比如 "".join(map(func, S))
  🔍 反复看的题
  💡 比较tricky
  
+ 
+ ## Array
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [015. 3 Sum](https://leetcode.com/problems/3sum/) | _O(n^2)_ | _O(1)_	| Medium | 🔍问题关键是sort + skip duplicate |
+| [016. 3 Sum Closest](https://leetcode.com/problems/3sum-closest/) | _O(n^2)_ | _O(1)_	| Medium | 🔍sort + two pointer，根据three sum 和sorted list移动两个pointers |
+| [018. 4 Sum](https://leetcode.com/problems/4sum/) | _O(n^3)_ | _O(1)_	| Medium | 🔍sort + two pointer，思路和[015. 3 Sum](https://leetcode.com/problems/3sum/) 一样 |
+| [026. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/) | _O(n)_ | _O(1)_	| Easy | Two pointer |
+| [027. Remove Element](https://leetcode.com/problems/remove-element/) | _O(n)_ | _O(1)_	| Easy | Two pointer |
+| [031. Next Permutation](https://leetcode.com/problems/next-permutation/) | _O(n)_ | _O(1)_	| Medium | 跟[556.	Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/) 思路类似, C++可以用is_sorted_until + upper_bound()  |
+| [041. First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | _O(n)_ | _O(1)_	| Hard | 🔍先置换, 把每个元素放在合适位置，再看A\[i] == i+1 ? 不等于 return i+1, 最后如果还没return, return size +1 |
+| [048. Rotate Image](https://leetcode.com/problems/rotate-image/) | _O(n^2)_ | _O(1)_	| Medium | 🔍<ul><li> 上下左右四个区域，每个区域相互置换 </li><li> 先以左下到右上对角线置换，然后上下换 </li></ul>|
+| [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) | _O(m\*n)_ | _O(1)_	| Medium | 🔍定义 up, down, left, right 四个边界，每次loop 在最外围的一圈 |
+| [059. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/) | _O(n^2)_ | _O(1)_	| Medium | 🔍思路跟[048. Rotate Image](https://leetcode.com/problems/rotate-image/)  和 [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) 类似 |
+| [066. Plus One](https://leetcode.com/problems/plus-one/) | _O(n)_ | _O(1)_	| Easy | |
+| [073. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/) | _O(m\*n)_ | _O(1)_	| Medium | 🔍two pass:1. 把如果matrix\[i]\[j] == 0, 把matrix\[i]\[0] 和matrix\[0]\[j] 设为0, 如果第一列设0之前，有数为0，设col0 = 0。 2.从下往上loop, 碰到matrix\[i]\[0]] or matrix\[0]\[j] 为0, matrix\[i]\[j] = 0, if col0 == 0, matrix\[i]\[0] = 0|
+| [080. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/) | _O(n)_ | _O(1)_	| Medium | |
+| [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/) | _O(n^2)_ | _O(1)_	| Easy | |
+| [119. Pascal's Triangle II	](https://leetcode.com/problems/pascals-triangle-ii/) | _O(n^2)_ | _O(1)_	| Easy | Easy DP |
+| [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | _O(n)_ | _O(1)_	| Easy |  |
+| [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | _O(n)_ | _O(n)_	| Hard | 🔍 <ul><li>先把所有数放进hash set 然后每次pop一个数n，设lower = n-1, upper = n+1, 持续pop lower--, upper++,直到lower,upper不在set里, 结果是max(res, upper-lower-1) </li><li>Onepass: 用hashmap记录以现在点作为边界点最大连续长，一边loop一边update不同左右边界值</li></ul>|
+| [169. Majority Element](https://leetcode.com/problems/majority-element/) | _O(n)_ | _O(1)_	| Easy | |
+| [189. Rotate Array](https://leetcode.com/problems/rotate-array/) | _O(n)_ | _O(1)_	| Easy | |
+| [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | 🔍 <ul><li>sliding window: 到sum >= s, 移动左面, 不断减小window且sum>=s, 寻找最小 r-l+1 </li><li>binary search: l = 1, r= size, while l<=r,检查mid作为窗口size是否满足>=s  </li><li>binary search: 建一个新的vector, newsum\[i] 表示nums\[0:i]的sum, 从新的newsum的每个点作为起点找最小满足s的窗口</li></ul> |
+| [215.	Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) | _O(n) ~ O(n^2)_ | _O(1)_	| Medium | 🔍 <ul><li> quick selection(nth_element) </li><li>heap: priority queue / multiset</li></ul> |
+| [228. Summary Ranges](https://leetcode.com/problems/summary-ranges/) | _O(n)_ | _O(1)_	| Medium |  |
+| [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/) | _O(n)_ | _O(1)_	| Medium | 🔍Boyer-Moore Majority Vote algorithm |
+| [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | _O(n)_ | _O(1)_	| Medium | 🔍res\[i]表示 nums\[0: i-1]的乘积，right 记录从结尾到nums\[i+1: end]的乘积. 最后res\[i] = res\[i] * right; 也可以用left, right One Pass |
+| [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) | _O(n+m)_ | _O(1)_	| Medium | 🔍sorted matrix题目的关键是从第一行最后一个开始，如果当前数比想要的大, --col, 如果当前数比想要的小，++row|
+| [289. Game of Life](https://leetcode.com/problems/game-of-life/) | _O(m \* n)_ | _O(1)_	| Medium | 🔍跟[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)有一点点类似，先变化matrix到想要的格式, 然后再做transform到结果: 把下一代活的| 2, 个位为1表示现在是活的，十位为1表示下代活的，res把每个cell>>=2 |
+| [334. Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍用两个数表示b, c, c表示当前最小, b表示当前第二小, 当i都大于这两个数，return true, 不用担心i只更新更新c, 因为答案必须要迈过b |
+| [384. Shuffle an Array	](https://leetcode.com/problems/shuffle-an-array/) | _O(n)_ | _O(n)_	| Medium | C++ srand(time(NULL)); rand(); uniform_int_distribution |
+| [396. Rotate Function](https://leetcode.com/problems/rotate-function/) | _O(n)_ | _O(1)_	| Medium | 🔍mathematical induction F(k) = F(k-1) + sum - nBk\[-k] |
+| [412. Fizz Buzz](https://leetcode.com/problems/fizz-buzz/) | _O(n)_ | _O(1)_	| Easy |  |
+| [414. Third Maximum Number](https://leetcode.com/problems/third-maximum-number/) | _O(n)_ | _O(1)_	| Easy |  |
+| [419. Battleships in a Board](https://leetcode.com/problems/battleships-in-a-board/) | _O(n\*m)_ | _O(1)_	| Medium | 🔍看源头，if \[i]\[j] = 'X' 且 \[i-1]\[j] 和 \[i]\[j-1] 如果都不是X，count += 1 |
+| [442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | _O(n)_ | _O(1)_	| Medium | <ul><li>把nums\[i]-1作为Index, 把nums\[index] 变成负数，如果即将变得已经是负数，代表重复</li><li>把nums\[i]-1作为Index,把nums\[i] 通过swap到nums\[index]上, 第二次pass, 如果nums\[i]!=i+1, 表示重复的</li></ul> |
+| [448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/) | _O(n)_ | _O(1)_	| Medium | 思路与[442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)一模一样，两种方法也一样  |
+| [565. Array Nesting](https://leetcode.com/problems/array-nesting/) | _O(n)_ | _O(1)_	| Medium | DFS, 把visit的点变为-1, nest array是循环，所以起点无论是哪个点进入都可以得到完整的循环, 比如 a->b->c->d->a 不会有 a->b->c->d->b |
+| [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/) | _O(m\*n)_ | _O(1)_	| Easy |  |
+| [581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/) | _O(n)_ | _O(1)_	| Easy | 🔍<ul><li>从左起, 最后一个小于左侧最大的数为 right,从右起，最后一个大于右侧最小的数为left, res = right - left + 1 </li><li> two pointer, 当有数小于current max, 往回开始找起点start, start只能减小, end只能增加,  res = end - start + 1</li></ul>  |
+| [605. Can Place Flowers](https://leetcode.com/problems/can-place-flowers/) | _O(n)_ | _O(1)_	| Easy |  |
+| [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
+| [661	Image Smoother](https://leetcode.com/problems/image-smoother/) | _O(n)_ | _O(1)_	| Easy | 跟[289. Game of Life](https://leetcode.com/problems/game-of-life/)思路一样， 一点不一样的是把下一代的数右移8个bit, 之后再第二次pass matrix, 每个点>>8 左移8个bits |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
+
+ 
 ## Greedy
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -104,52 +151,6 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [865. Smallest Subtree with all the Deepest Nodes](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/) | _O(n)_ | _O(h)_	| Medium | 🔍DFS, left level == right level 返回root, if left level > right level, 返回left dfs的node else返回right dfs的  |
 | [889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) | _O(n)_ | _O(h)_	| Medium | 🔍💡难点是找到 left 和right的边界 or 用stack: 当back val 与postorder一样是 pop, 当left 没有child,append left, 否则append到 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
-
-## Array
-|Title | Time  | Space | Difficulty |  Algorithm Note|
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| [015. 3 Sum](https://leetcode.com/problems/3sum/) | _O(n^2)_ | _O(1)_	| Medium | 🔍问题关键是sort + skip duplicate |
-| [016. 3 Sum Closest](https://leetcode.com/problems/3sum-closest/) | _O(n^2)_ | _O(1)_	| Medium | 🔍sort + two pointer，根据three sum 和sorted list移动两个pointers |
-| [018. 4 Sum](https://leetcode.com/problems/4sum/) | _O(n^3)_ | _O(1)_	| Medium | 🔍sort + two pointer，思路和[015. 3 Sum](https://leetcode.com/problems/3sum/) 一样 |
-| [026. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/) | _O(n)_ | _O(1)_	| Easy | Two pointer |
-| [027. Remove Element](https://leetcode.com/problems/remove-element/) | _O(n)_ | _O(1)_	| Easy | Two pointer |
-| [031. Next Permutation](https://leetcode.com/problems/next-permutation/) | _O(n)_ | _O(1)_	| Medium | 跟[556.	Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/) 思路类似, C++可以用is_sorted_until + upper_bound()  |
-| [041. First Missing Positive](https://leetcode.com/problems/first-missing-positive/) | _O(n)_ | _O(1)_	| Hard | 🔍先置换, 把每个元素放在合适位置，再看A\[i] == i+1 ? 不等于 return i+1, 最后如果还没return, return size +1 |
-| [048. Rotate Image](https://leetcode.com/problems/rotate-image/) | _O(n^2)_ | _O(1)_	| Medium | 🔍<ul><li> 上下左右四个区域，每个区域相互置换 </li><li> 先以左下到右上对角线置换，然后上下换 </li></ul>|
-| [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) | _O(m\*n)_ | _O(1)_	| Medium | 🔍定义 up, down, left, right 四个边界，每次loop 在最外围的一圈 |
-| [059. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/) | _O(n^2)_ | _O(1)_	| Medium | 🔍思路跟[048. Rotate Image](https://leetcode.com/problems/rotate-image/)  和 [054. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) 类似 |
-| [066. Plus One](https://leetcode.com/problems/plus-one/) | _O(n)_ | _O(1)_	| Easy | |
-| [073. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/) | _O(m\*n)_ | _O(1)_	| Medium | 🔍two pass:1. 把如果matrix\[i]\[j] == 0, 把matrix\[i]\[0] 和matrix\[0]\[j] 设为0, 如果第一列设0之前，有数为0，设col0 = 0。 2.从下往上loop, 碰到matrix\[i]\[0]] or matrix\[0]\[j] 为0, matrix\[i]\[j] = 0, if col0 == 0, matrix\[i]\[0] = 0|
-| [080. Remove Duplicates from Sorted Array II](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/) | _O(n)_ | _O(1)_	| Medium | |
-| [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/) | _O(n^2)_ | _O(1)_	| Easy | |
-| [119. Pascal's Triangle II	](https://leetcode.com/problems/pascals-triangle-ii/) | _O(n^2)_ | _O(1)_	| Easy | Easy DP |
-| [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | _O(n)_ | _O(1)_	| Easy |  |
-| [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/) | _O(n)_ | _O(n)_	| Hard | 🔍 <ul><li>先把所有数放进hash set 然后每次pop一个数n，设lower = n-1, upper = n+1, 持续pop lower--, upper++,直到lower,upper不在set里, 结果是max(res, upper-lower-1) </li><li>Onepass: 用hashmap记录以现在点作为边界点最大连续长，一边loop一边update不同左右边界值</li></ul>|
-| [169. Majority Element](https://leetcode.com/problems/majority-element/) | _O(n)_ | _O(1)_	| Easy | |
-| [189. Rotate Array](https://leetcode.com/problems/rotate-array/) | _O(n)_ | _O(1)_	| Easy | |
-| [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | 🔍 <ul><li>sliding window: 到sum >= s, 移动左面, 不断减小window且sum>=s, 寻找最小 r-l+1 </li><li>binary search: l = 1, r= size, while l<=r,检查mid作为窗口size是否满足>=s  </li><li>binary search: 建一个新的vector, newsum\[i] 表示nums\[0:i]的sum, 从新的newsum的每个点作为起点找最小满足s的窗口</li></ul> |
-| [215.	Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/) | _O(n) ~ O(n^2)_ | _O(1)_	| Medium | 🔍 <ul><li> quick selection(nth_element) </li><li>heap: priority queue / multiset</li></ul> |
-| [228. Summary Ranges](https://leetcode.com/problems/summary-ranges/) | _O(n)_ | _O(1)_	| Medium |  |
-| [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/) | _O(n)_ | _O(1)_	| Medium | 🔍Boyer-Moore Majority Vote algorithm |
-| [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) | _O(n)_ | _O(1)_	| Medium | 🔍res\[i]表示 nums\[0: i-1]的乘积，right 记录从结尾到nums\[i+1: end]的乘积. 最后res\[i] = res\[i] * right; 也可以用left, right One Pass |
-| [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) | _O(n+m)_ | _O(1)_	| Medium | 🔍sorted matrix题目的关键是从第一行最后一个开始，如果当前数比想要的大, --col, 如果当前数比想要的小，++row|
-| [289. Game of Life](https://leetcode.com/problems/game-of-life/) | _O(m \* n)_ | _O(1)_	| Medium | 🔍跟[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)有一点点类似，先变化matrix到想要的格式, 然后再做transform到结果: 把下一代活的| 2, 个位为1表示现在是活的，十位为1表示下代活的，res把每个cell>>=2 |
-| [334. Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍用两个数表示b, c, c表示当前最小, b表示当前第二小, 当i都大于这两个数，return true, 不用担心i只更新更新c, 因为答案必须要迈过b |
-| [384. Shuffle an Array	](https://leetcode.com/problems/shuffle-an-array/) | _O(n)_ | _O(n)_	| Medium | C++ srand(time(NULL)); rand(); uniform_int_distribution |
-| [396. Rotate Function](https://leetcode.com/problems/rotate-function/) | _O(n)_ | _O(1)_	| Medium | 🔍mathematical induction F(k) = F(k-1) + sum - nBk\[-k] |
-| [412. Fizz Buzz](https://leetcode.com/problems/fizz-buzz/) | _O(n)_ | _O(1)_	| Easy |  |
-| [414. Third Maximum Number](https://leetcode.com/problems/third-maximum-number/) | _O(n)_ | _O(1)_	| Easy |  |
-| [419. Battleships in a Board](https://leetcode.com/problems/battleships-in-a-board/) | _O(n\*m)_ | _O(1)_	| Medium | 🔍看源头，if \[i]\[j] = 'X' 且 \[i-1]\[j] 和 \[i]\[j-1] 如果都不是X，count += 1 |
-| [442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | _O(n)_ | _O(1)_	| Medium | <ul><li>把nums\[i]-1作为Index, 把nums\[index] 变成负数，如果即将变得已经是负数，代表重复</li><li>把nums\[i]-1作为Index,把nums\[i] 通过swap到nums\[index]上, 第二次pass, 如果nums\[i]!=i+1, 表示重复的</li></ul> |
-| [448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/) | _O(n)_ | _O(1)_	| Medium | 思路与[442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)一模一样，两种方法也一样  |
-| [565. Array Nesting](https://leetcode.com/problems/array-nesting/) | _O(n)_ | _O(1)_	| Medium | DFS, 把visit的点变为-1, nest array是循环，所以起点无论是哪个点进入都可以得到完整的循环, 比如 a->b->c->d->a 不会有 a->b->c->d->b |
-| [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/) | _O(m\*n)_ | _O(1)_	| Easy |  |
-| [581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/) | _O(n)_ | _O(1)_	| Easy | 🔍<ul><li>从左起, 最后一个小于左侧最大的数为 right,从右起，最后一个大于右侧最小的数为left, res = right - left + 1 </li><li> two pointer, 当有数小于current max, 往回开始找起点start, start只能减小, end只能增加,  res = end - start + 1</li></ul>  |
-| [605. Can Place Flowers](https://leetcode.com/problems/can-place-flowers/) | _O(n)_ | _O(1)_	| Easy |  |
-| [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
-| [661	Image Smoother](https://leetcode.com/problems/image-smoother/) | _O(n)_ | _O(1)_	| Easy | 跟[289. Game of Life](https://leetcode.com/problems/game-of-life/)思路一样， 一点不一样的是把下一代的数右移8个bit, 之后再第二次pass matrix, 每个点>>8 左移8个bits |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
-
 
 
 
