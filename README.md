@@ -75,6 +75,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [661. Image Smoother](https://leetcode.com/problems/image-smoother/) | _O(n)_ | _O(1)_	| Easy | 跟[289. Game of Life](https://leetcode.com/problems/game-of-life/)思路一样， 一点不一样的是把下一代的数右移8个bit, 之后再第二次pass matrix, 每个点>>8 左移8个bits |
 | [665. Non-decreasing Array](https://leetcode.com/problems/non-decreasing-array/) | _O(n)_ | _O(1)_	| Easy | 🔍两种operation: 1.nums\[i-1] = nums\[i] (降), nums\[i] = nums\[i-1] (升), 降优于升 |
 | [667. Beautiful Arrangement II](https://leetcode.com/problems/beautiful-arrangement-ii/) | _O(n)_ | _O(1)_	| Easy | 🔍brainstorm |
+| [670. Maximum Swap](https://leetcode.com/problems/maximum-swap/) | _O(n)_ | _O(1)_	| Medium | 🔍<ul><li>Two Pass: 第一个pass 记录每个digit最后出现位置, 第二个pass: 如果有大于当前digit出现, swap & return</li><li>One Pass: 从后往前, 记录最大数的index,如果当前数小于最大数,更新进行swap的两个index，最后</li></ul> |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
  
