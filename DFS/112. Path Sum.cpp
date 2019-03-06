@@ -46,3 +46,43 @@ public:
         
     }
 };
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        if(!root) return false;
+        stack<TreeNode *>stk;
+        int check = 0; 
+        TreeNode *pre = NULL, *cur = root;
+        while(cur || !stk.empty()){
+            while(cur){  //尽可能到最左面
+                check += cur->val;
+                stk.push(cur);  
+                cur = cur->left;
+            }
+            cur = stk.top();
+            if(!cur->left && !cur->right && check == sum){
+                return true;
+            }
+            if(cur->right && pre != cur->right){  //右侧有child, 到右侧
+                cur = cur->right;
+            }else{
+                pre = cur;
+                check -= cur->val;  //往上走
+                stk.pop();
+                cur = NULL;
+            }
+            
+        }
+        return false;
+    }
+};
