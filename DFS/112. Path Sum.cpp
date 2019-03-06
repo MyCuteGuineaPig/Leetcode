@@ -36,3 +36,13 @@ public:
         return !root->left && !root->right ? checksum+root->val == sum : (hasPathSum(root->left, sum, checksum+root->val) ||hasPathSum(root->right, sum, checksum+root->val));
     }
 };
+
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        if(!root) return false;
+        
+        return !root->left && !root->right ? sum == root->val : hasPathSum(root->left, sum - root->val) || hasPathSum(root->right, sum - root->val);
+        
+    }
+};
