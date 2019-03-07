@@ -125,3 +125,49 @@ public:
         DFS(grid, visited, x, y-1);
     }
 };
+
+
+//Union Find
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.empty() || grid[0].empty()) return 0;
+        int m = grid.size(), n = grid[0].size();
+        int count = 0;
+        vector<int>id(m*n, -1);
+        for(int i = 0; i<m; i++){
+            for(int j = 0; j<n; j++){
+                if(grid[i][j] == '1'){
+                    count ++;
+                    id[i*n+j] = i*n + j;
+                }
+            }
+        }
+        for(int i = 0; i<m; i++){
+            for(int j = 0; j<n; j++){
+                if(grid[i][j] == '1'){
+                    if(i>0 && grid[i-1][j] == '1' ) unionFind(i*n + j, (i-1)*n+j, id, count); //top 
+                    if(j>0 && grid[i][j-1] == '1' ) unionFind(i*n + j, i*n + j -1, id, count ); //left
+                }
+            }
+        }
+        
+        return count;
+    }
+
+    int find(int x, vector<int>& id){
+        if(id[x] == x) return x;
+        id[x] = find(id[x],id);
+        return id[x]; 
+    }
+    
+    void unionFind (int x, int y, vector<int>&id, int & count){
+        int px = find(x,id);
+        int py = find(y,id);
+        if(px!=py){
+            id[px] = id[py];
+            count--;
+        }
+    }
+    
+};
