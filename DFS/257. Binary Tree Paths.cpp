@@ -79,3 +79,44 @@ public:
         pt.pop_back();
     }
 };
+
+
+
+//iterative
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string>path;
+        if(!root) return path;
+        vector<int>pt; 
+        stack<TreeNode*>stk;
+        TreeNode* cur = root, *pre = NULL;
+        while(cur || !stk.empty()){
+            while(cur){
+                pt.push_back(cur->val);
+                stk.push(cur);
+                cur =  cur->left;
+            }
+            cur =  stk.top();
+            if(!cur->left && !cur->right){
+                string cur = "";
+                for(int i = 0; i<pt.size(); i++){
+                    cur += to_string(pt[i]);   
+                    if(i!=pt.size()-1)
+                        cur += "->";
+                }
+                path.push_back(cur);
+            }
+            if(cur->right && cur->right != pre){
+                cur = cur->right;
+            }else{
+                stk.pop();
+                pre = cur;
+                pt.pop_back();
+                cur = NULL;
+            } 
+        }
+        return path;
+    }
+};
+
