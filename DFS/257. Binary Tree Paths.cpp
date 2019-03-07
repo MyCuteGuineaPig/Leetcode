@@ -120,3 +120,63 @@ public:
     }
 };
 
+
+//DFS 
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string>path;
+        if(!root) return path;
+        stack<string>pt; 
+        stack<TreeNode*>stk;
+
+        stk.push(root);
+        pt.push("");
+        
+        while(!stk.empty()){
+            TreeNode *cur = stk.top(); stk.pop();
+            string temp = pt.top(); pt.pop();
+            if(!cur->left && !cur->right)
+                path.push_back(temp+to_string(cur->val));
+            if(cur->left){
+                stk.push(cur->left);
+                pt.push(temp+to_string(cur->val)+"->");
+            }
+            if(cur->right){
+                stk.push(cur->right);
+                pt.push(temp +to_string(cur->val)+"->");
+            }
+        }
+        return path;
+    }
+};
+
+
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        vector<string>path;
+        if(!root) return path;
+        queue<string>pt; 
+        queue<TreeNode*>stk;
+
+        stk.push(root);
+        pt.push("");
+        
+        while(!stk.empty()){
+            TreeNode *cur = stk.front(); stk.pop();
+            string temp = pt.front(); pt.pop();
+            if(!cur->left && !cur->right)
+                path.push_back(temp+to_string(cur->val));
+            if(cur->left){
+                stk.push(cur->left);
+                pt.push(temp+to_string(cur->val)+"->");
+            }
+            if(cur->right){
+                stk.push(cur->right);
+                pt.push(temp +to_string(cur->val)+"->");
+            }
+        }
+        return path;
+    }
+};
