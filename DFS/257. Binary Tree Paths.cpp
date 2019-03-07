@@ -151,7 +151,7 @@ public:
     }
 };
 
-
+//BFS
 class Solution {
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
