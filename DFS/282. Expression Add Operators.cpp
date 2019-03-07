@@ -59,3 +59,31 @@ public:
         }
     }
 };
+
+
+
+class Solution {
+public:
+    vector<string> addOperators(string num, int target) {
+        vector<string>res;
+        helper(res, num, "", 0, 0, 0, target);
+        return res;
+    }
+    void helper(vector<string>&res, string & num, string path, long prev_sum, long cum, long ind, long target){
+        if(ind == num.size() && cum == target) 
+            res.push_back(path);
+        long cur = 0;
+        for(int i = ind; i<num.size(); i++){
+            cur = cur*10 + num[i] - '0';
+            if(ind == 0)
+                helper(res, num, to_string(cur), cur, cur, i+1, target);
+            else{
+                helper(res, num, path + "+"+ to_string(cur), cur, cum + cur, i+1, target);
+                helper(res, num, path + "-"+ to_string(cur), -cur, cum - cur, i+1, target);
+                helper(res, num, path + "*"+ to_string(cur), prev_sum*cur, cum - prev_sum + prev_sum*cur, i+1, target);
+            }
+            if(num[ind] == '0') return;
+            
+        }
+    }
+};
