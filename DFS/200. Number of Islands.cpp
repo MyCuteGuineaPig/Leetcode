@@ -91,3 +91,37 @@ public:
 
     }
 };
+
+
+
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.empty() || grid[0].empty()) return 0;
+        vector<vector<int>> visited(grid.size(), vector<int>(grid[0].size(),0));
+        int count = 0;
+        helper(grid, visited, count, 0, 0);
+        return count;
+    }
+    
+    void helper(vector<vector<char>>& grid, vector<vector<int>> &visited, int & count, int x, int y){
+        if(x>=grid.size()) return;
+        
+        if(!visited[x][y] && grid[x][y] == '1'){
+            count += 1;
+            DFS(grid, visited, x, y);
+        }
+        if(y == grid[0].size() -1  ) helper(grid, visited, count, x+1, 0);
+        else helper(grid, visited, count, x, y+1);
+    }
+
+    void DFS(vector<vector<char>>& grid, vector<vector<int>> &visited, int x, int y){
+        if(x<0 || y<0 || x>=grid.size() || y >= grid[0].size() || visited[x][y]) {  return; }
+        visited[x][y] = 1;
+        if(grid[x][y]=='0') return;
+        DFS(grid, visited, x-1, y);
+        DFS(grid, visited, x+1, y);
+        DFS(grid, visited, x, y+1);
+        DFS(grid, visited, x, y-1);
+    }
+};
