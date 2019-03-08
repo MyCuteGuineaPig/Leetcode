@@ -210,7 +210,7 @@ class Solution {
                 }
             }
             string rs=s;
-            reverse(rs.begin(), rs.end());
+            reverse(rs.begin(), rs.end()); //做reverse string的，再reverse 就正了可,
             //cout<<"reversed "<<rs<<endl;
             if(p[rev]=='('){
                 //cout<<"go into another "<<endl;
