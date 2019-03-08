@@ -215,3 +215,25 @@ public:
         return water;
     }
 };
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        stack<int>level;
+        int water = 0;
+        for(int i = 0; i<height.size();i++){
+            while(level.size()>1 && height[i]>height[level.top()]){
+                int base = height[level.top()];
+                level.pop();
+              
+                int h = min(height[i], height[level.top()]) - base;
+                int length = i - level.top() - 1;
+                water += h*length;
+            }
+            if(!level.empty() && height[level.top()] <= height[i])
+                level.pop();
+            level.push(i);
+        }
+        return water;
+    }
+};
