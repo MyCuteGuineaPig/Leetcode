@@ -93,6 +93,31 @@ public:
     }
 };
 
+//iterative solution using stk
+class Solution {
+public:
+    vector<string> findItinerary(vector<pair<string, string>> tickets) { 
+        unordered_map<string, multiset<string>>m;
+        vector<string>route;
+        for(auto t: tickets){
+            m[t.first].insert(t.second);
+        }
+        stack<string>stk;
+        stk.push("JFK");
+        while(!stk.empty()){
+            string cur = stk.top(); 
+            while(!m[cur].empty()){
+                string next = *m[cur].begin();
+                stk.push(next);
+                m[cur].erase(m[cur].begin());
+                cur = next;
+            }
+            route.push_back(cur);
+            stk.pop();
+        }
+        return vector<string>(route.rbegin(), route.rend());
+    }
+};
 
 class Solution {
         unordered_map<string, priority_queue<string, vector<string>, greater<string>>> graph;
