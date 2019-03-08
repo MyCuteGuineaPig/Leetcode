@@ -226,7 +226,40 @@ class Solution {
             helper(s, 0, 0, 0);
             return res;
         }
-    };
+};
+
+class Solution {
+public:
+   vector<string> removeInvalidParentheses(string s) {
+        vector<string> output;
+        removeHelper(s, output, 0, 0, '(', ')');
+        return output;
+    }
+
+    void removeHelper(string s, vector<string>& output, int iStart, int jStart, char openParen, char closedParen) {
+        int numOpenParen = 0, numClosedParen = 0;
+        for (int i = iStart; i < s.size(); i++) {
+            if (s[i] == openParen) numOpenParen++;
+            if (s[i] == closedParen) numClosedParen++;
+            if (numClosedParen > numOpenParen) { // We have an extra closed paren we need to remove
+                for (int j = jStart; j <= i; j++) // Try removing one at each position, skipping duplicates
+                    if (s[j] == closedParen && (j == jStart || s[j - 1] != closedParen))
+                    // Recursion: iStart = i since we now have valid # closed parenthesis thru i. jStart = j prevents duplicates
+                        removeHelper(s.substr(0, j) + s.substr(j + 1, s.size()-j-1), output, i, j, openParen, closedParen);
+                return; // Stop here. The recursive calls handle the rest of the string.
+            }
+        }
+        // No invalid closed parenthesis detected. Now check opposite direction, or reverse back to original direction.
+        string reversed = s;
+        reverse(reversed.begin(), reversed.end());
+        if (openParen == '(')
+            removeHelper(reversed, output, 0, 0, ')','(');
+        else
+            output.push_back(reversed);
+    }
+};
+
+
 
 /*
 We can speed up and get rid of the hash table by generating unique strings only. 
@@ -265,3 +298,7 @@ We can just remove the 0th.
     
       return count == 0;
     }
+
+
+
+
