@@ -25,22 +25,31 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
  */
 
 
+
 class Solution {
 public:
     vector<string> findItinerary(vector<pair<string, string>> tickets) {
-        unordered_map<string, priority_queue<string>> m; 
+        unordered_map<string, map<string, int>> m; 
         vector<string>res={"JFK"};
         for(auto t: tickets){
-            m[t.first].push(t.second);
+            m[t.first][t.second]++;
         }
-        dfs("JFK", res, m);
+        dfs("JFK", res, tickets.size(), m);
         return res;
     }
 
-    void dfs( string cur,vector<string>& res, unordered_map<string,priority_queue<string>>&m){
-        string goplace = m[cur].top();
-        m[cur].pop();
-        res.push_back(goplace);
-        dfs(goplace,res, m);
+    bool dfs( string cur,vector<string>& res, int tickets, unordered_map<string, map<string, int>>&m){
+        if(tickets == 0)
+            return true;
+        for(auto &go: m[cur]){
+            if(go.second>0){
+                go.second--;
+                res.push_back(go.first);
+                if(dfs(go.first,res, tickets-1, m)) return true;
+                go.second++;
+                res.pop_back();
+            }
+        }
+        return false;
     }
 };
