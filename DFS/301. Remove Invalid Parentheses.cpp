@@ -243,7 +243,8 @@ public:
             if (s[i] == closedParen) numClosedParen++;
             if (numClosedParen > numOpenParen) { // We have an extra closed paren we need to remove
                 for (int j = jStart; j <= i; j++) // Try removing one at each position, skipping duplicates
-                    if (s[j] == closedParen && (j == jStart || s[j - 1] != closedParen))
+                    if (s[j] == closedParen && (j == jStart || s[j - 1] != closedParen)) 
+                        //jStart是上个刚删除的地方，所以S[j-1]!=closedParen 是为了避免重复，比如()()), 删除倒数第一个和倒数第二个）是一样的
                     // Recursion: iStart = i since we now have valid # closed parenthesis thru i. jStart = j prevents duplicates
                         removeHelper(s.substr(0, j) + s.substr(j + 1, s.size()-j-1), output, i, j, openParen, closedParen);
                 return; // Stop here. The recursive calls handle the rest of the string.
