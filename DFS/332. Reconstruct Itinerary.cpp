@@ -24,8 +24,23 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
  
  */
 
+/*
+First keep going forward until you get stuck. That's a good main path already. 
+Remaining tickets form cycles which are found on the way back and get merged into that main path.
+By writing down the path backwards when retreating from recursion, merging the cycles into the main path is easy - 
+the end part of the path has already been written, the start part of the path hasn't been written yet, 
+so just write down the cycle now and then keep backwards-writing the path.
 
+IMAGE:  https://leetcode.com/problems/reconstruct-itinerary/discuss/78768/Short-Ruby-Python-Java-C%2B%2B
 
+From JFK we first visit JFK -> A -> C -> D -> A. There we're stuck, so we write down A as the end of the route and retreat back to D. 
+There we see the unused ticket to B and follow it: D -> B -> C -> JFK -> D.
+Then we're stuck again, retreat and write down the airports while doing so: Write down D before the already written A, 
+then JFK before the D, etc. When we're back from our cycle at D, the written route is D -> B -> C -> JFK -> D -> A. 
+Then we retreat further along the original path, prepending C, A and finally JFK to the route, 
+ending up with the route JFK -> A -> C -> D -> B -> C -> JFK -> D -> A.
+
+*/
 class Solution {
 public:
     vector<string> findItinerary(vector<pair<string, string>> tickets) {
@@ -51,5 +66,29 @@ public:
             }
         }
         return false;
+    }
+};
+
+
+
+class Solution {
+public:
+    vector<string> findItinerary(vector<pair<string, string>> tickets) { 
+        unordered_map<string, multiset<string>>m;
+        vector<string>route;
+        for(auto t: tickets){
+            m[t.first].insert(t.second);
+        }
+        dfs("JFK", route, m);
+        return vector<string>(route.rbegin(), route.rend());
+    }
+
+    void dfs(string cur,vector<string>& route, unordered_map<string,multiset<string>>&m){
+        while(!m[cur].empty()){
+            string next = *m[cur].begin();
+            m[cur].erase(m[cur].begin());
+            dfs(next, route, m);
+        }
+        route.push_back(cur);
     }
 };
