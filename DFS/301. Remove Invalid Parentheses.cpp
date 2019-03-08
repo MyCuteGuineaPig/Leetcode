@@ -169,7 +169,7 @@ public:
         else if(s[index]==')'){
             if(right_removed>0)
                 dfs(s,res,cur,index+1,left_removed,right_removed-1, pair);
-            if(pair>0)
+            if(pair>0) //需要pair的原因：比如 ")(" 这样的话，在)的话，就会进行下个DFS
                 dfs(s,res,cur+s[index],index+1,left_removed,right_removed, pair-1);
         }
 
