@@ -227,3 +227,41 @@ class Solution {
             return res;
         }
     };
+
+/*
+We can speed up and get rid of the hash table by generating unique strings only. 
+There are two types of duplicates. First is due to removing the same set of characters in different order.
+For example, "(()(()", remove 0th then 3rd or remove 3rd then 0th both generates "()()". 
+So we can enforce an order by keeping the last removal index and remove after it only.
+The other is handling consecutive same chars, say, "(()". We get the same string by removing either the 0th or 1st '('. 
+We can just remove the 0th.
+*/
+
+
+    vector<string> removeInvalidParentheses(string s) {
+        queue<pair<string,int>> q;
+        q.push(make_pair(s,0));
+        vector<string> res;
+        while(!q.empty()) {
+            auto p=q.front();
+            q.pop();
+            string ss=p.first;
+            if(isValid(ss)) res.push_back(ss);
+            else if (res.empty()) 
+                for(int i=p.second;i<ss.size();i++) 
+                    if((ss[i]==')'|| ss[i]=='(') && (i==p.second || ss[i]!=ss[i-1])) 
+                        q.push(make_pair(ss.substr(0,i)+ss.substr(i+1),i));
+        }
+        return res;
+    }
+    
+    bool isValid(const string & s){
+      int count = 0;
+      for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (c == '(') count++;
+        if (c == ')' && count-- == 0) return false;
+      }
+    
+      return count == 0;
+    }
