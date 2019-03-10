@@ -114,6 +114,26 @@ public:
 };
 
 
+
+class Solution {
+public:
+    vector<string> findRepeatedDnaSequences(string s) {
+        unordered_map<long long, int>m;
+        unordered_set<string>res;
+        long long cur = 0;
+        unordered_map<char, int>id = {{'A',0}, {'C',1},{'G',2},{'T',3}};
+        for(int i = 0; i<s.size(); i++){
+            if(i>=10)
+                cur >>= 2;
+            cur |= id[s[i]]<<(i<10 ? i*2 : 18);
+            if(i>=10 && m[cur]>0)
+                res.insert(s.substr(i-9, 10));
+            m[cur]++;
+        }
+        return vector<string>(res.begin(), res.end());
+    }
+};
+
 /*
 
 bin(ord('A') & 7)  = 001 
