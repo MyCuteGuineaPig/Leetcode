@@ -130,3 +130,30 @@ public:
         return res;
     }
 };
+
+class Solution {
+public:
+    int sumNumbers(TreeNode* root) {
+        if(!root) return 0;
+        stack<TreeNode*> stk;
+        TreeNode* cur = root;
+        int sum = 0;
+        while(cur || !stk.empty()){
+            if(cur){
+                stk.push(cur);
+                if(cur->left) 
+                    cur->left->val = cur->val*10 + cur->left->val;
+                else if(!cur->right)
+                    sum += cur->val;
+                cur = cur->left;
+            }else{
+                cur = stk.top(); stk.pop();
+                if(cur->right)
+                    cur->right->val = cur->val*10 +cur->right->val;
+                cur = cur->right;
+            }
+        }
+        return sum;
+    }
+    
+};
