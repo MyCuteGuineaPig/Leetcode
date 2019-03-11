@@ -151,7 +151,7 @@ I push the clone version of the root, and I recover what I do to the old node im
                2                                          1 
                                                            \
                                                             2
-因为right tree不是nullptr, 所以要loop 之前的tree，loop right tree，每到一点就把之后的ree，作为这点的left-tree, 这的点值设为新的i
+因为right tree不是nullptr, 所以要loop 之前的tree，loop right tree，每到一点就把之后的tree，作为这点的left-tree, 这的点值设为新的i
 比如到达2了                   到达底部了
             1                   1
               \                   \
