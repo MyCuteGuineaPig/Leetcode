@@ -88,6 +88,44 @@ public:
 class MedianFinder {
 public:
     /** initialize your data structure here. */
+    MedianFinder() { 
+    }
+    priority_queue<int>maxheap;
+    priority_queue<int,vector<int>,greater<int>>minheap;
+    
+    void addNum(int num) {
+        if(maxheap.empty()) maxheap.push(num);
+        else{
+            if(maxheap.size() > minheap.size()){
+                if(maxheap.top() > num ){
+                    minheap.push(maxheap.top());
+                    maxheap.pop();
+                    maxheap.push(num);
+                }   
+                else minheap.push(num);
+            }else{
+                if(num>minheap.top()){
+                    maxheap.push(minheap.top());
+                    minheap.pop();
+                    minheap.push(num);
+                }
+                else maxheap.push(num);
+            }
+        }
+        
+    }
+    
+    double findMedian() {
+        if(maxheap.size()>minheap.size()) return maxheap.top();
+        else return static_cast<double>(maxheap.top() + minheap.top())/2;
+    }
+};
+
+
+
+class MedianFinder {
+public:
+    /** initialize your data structure here. */
     MedianFinder() {
         
     }
