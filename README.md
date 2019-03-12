@@ -483,7 +483,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [004. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) | _O(log(min(m, n)))_ |	_O(1)_	| Hard | 更新A的ilow 和ihigh, j = (m+n+1)/2-1,<ul><li>if i<m && B\[j-1]>A\[i]: ilow=i+1(A\[i]太小)</li><li> if i>0 && A\[i]>B\[j]：ihigh = i-1 (A\[i]太大)</li></ul> |
 | [033. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | _O(log(n))_ |	_O(1)_	| Medium | <ul><li>if t>A[mid] 想往左走，只能是A\[l]到A\[mid]有turn且A\[l]<=t</li><li>if t<A[mid] 想往右走，只能是A\[mid]到A\[r]有turn且A\[r]>=t</li></ul>  |
-| [034. Search for a Range](https://leetcode.com/problems/search-for-a-range/) | _O(log(n))_ |	_O(1)_	| Medium | lowerbound + upperbound |
+| [034. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/) | _O(log(n))_ |	_O(1)_	| Medium | lowerbound + upperbound |
 | [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/) | _O(log(n))_ |	_O(1)_	| Easy | lowerbound |
 | [069. Sqrt(x)](https://leetcode.com/problems/sqrtx/description/) | _O(log(n))_ |	_O(1)_	| Easy | Newton Method |
 | [074. search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/) | _O(logm + logn)_ |	_O(1)_	| Medium | <ul><li> 对row一次lowerbound， 对coloumn 一次lowerbound  </li><li> 把2D matrix不当成2D,当成一个大的sorted array</li></ul>|
