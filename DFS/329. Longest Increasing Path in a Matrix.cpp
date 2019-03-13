@@ -131,3 +131,75 @@ public:
         return visited[i][j] = max(up, max(left, max(down, right)));
     }
 };
+
+
+class Solution {
+public:
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        int rows = matrix.size();
+        if (!rows) return 0;
+        int cols = matrix[0].size();
+        
+        vector<vector<int>> dp(rows, vector<int>(cols, 0));
+        std::function<int(int, int)> dfs = [&] (int x, int y) {
+            if (dp[x][y]) return dp[x][y];
+            vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+            for (auto &dir : dirs) {
+                int xx = x + dir[0], yy = y + dir[1];
+                if (xx < 0 || xx >= rows || yy < 0 || yy >= cols) continue;
+                if (matrix[xx][yy] <= matrix[x][y]) continue;
+                dp[x][y] = std::max(dp[x][y], dfs(xx, yy));
+            }
+            return ++dp[x][y];
+        };
+        
+        int ret = 0;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                ret = std::max(ret, dfs(i, j));
+            }
+        }
+        
+        return ret;
+    }
+};
+
+
+ //BFS: 一个一个移掉peak的点(peak点是：四周有任何一点比现在这个点大)，一共移动几次，就有几个最大值
+class Solution {
+public:
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        if(matrix.empty() || matrix[0].empty()) return 0;
+        int longest = 0;
+        vector<pair<int,int>>dir = {{0,1},{1,0},{0,-1},{-1,0}};
+        int count = matrix.size() * matrix[0].size();
+        while(count > 0){
+            vector<pair<int,int>>remove;
+            for(int i = 0; i<matrix.size(); i++){
+                for(int j = 0; j<matrix[i].size(); j++){
+                    if(matrix[i][j] == numeric_limits<int>::min()) continue;
+                    bool isremove = true;
+                    for(auto p: dir){
+                        int x = i + p.first, y = j + p.second;
+                        if(x>=matrix.size() || x<0 || y>=matrix[0].size() || y<0) continue;
+                        if(matrix[x][y]>matrix[i][j]){
+                            isremove = false;
+                            break;
+                        }
+                    }
+                    if(isremove)
+                        remove.push_back({i,j});
+                }
+            }
+
+            for(auto p: remove){
+                matrix[p.first][p.second] = numeric_limits<int>::min();
+                count--;
+            }
+            longest++;
+        }
+        return longest;
+    }
+    
+};
+
