@@ -62,6 +62,44 @@ public:
 };
 
 
+
+
+
+//write by own
+class Solution {
+public:
+    vector<double> calcEquation(vector<pair<string, string>> equations, vector<double>& values, vector<pair<string, string>> queries) {
+        unordered_map<string, unordered_map<string, double>>mp;
+        for(int i = 0; i<equations.size(); i++){
+            string a = equations[i].first, b = equations[i].second;
+            double val = values[i];
+            mp[a][b] = val;
+            mp[b][a] = 1/val;
+        }
+        vector<double>res;
+        for(auto i: queries){
+            unordered_set<string>visited;
+            res.push_back(helper(mp,i.first, i.second, visited));
+        }
+        return res;
+    }
+    
+    double helper(unordered_map<string, unordered_map<string, double>>& mp, string in, string out, unordered_set<string>& visited){
+        if(mp.find(in) == mp.end()) return -1;
+        if( mp[in].find(out) != mp[in].end()) 
+            return mp[in][out];
+        for(auto i: mp[in]){
+            if(visited.find(i.first)!=visited.end()) continue;
+            visited.insert(i.first);
+            double res = helper(mp, i.first, out, visited);
+            if(res!=-1)
+                return i.second *res;
+        }
+        return -1;
+    }
+};
+
+
 class Solution {
 public:
     vector<double> calcEquation(vector<pair<string, string>> equations, 
