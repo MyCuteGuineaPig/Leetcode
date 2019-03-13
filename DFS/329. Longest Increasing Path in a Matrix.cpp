@@ -72,3 +72,34 @@ public:
         res.push_back(cur);
     }
 };
+
+
+//DFS with memoization
+class Solution {
+public:
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        if(matrix.empty() || matrix[0].empty()) return 0;
+        int longest = 0;
+        vector<vector<int>>visited(matrix.size(), vector<int>(matrix[0].size(), 0));
+        for(int i = 0; i<matrix.size(); i++)
+            for(int j = 0; j<matrix[i].size(); j++){
+                longest = max(longest, helper(matrix, visited, i, j));
+                //cout<<"i "<<i<<" j "<<j<<" res "<<longest<<endl;
+            }
+        return longest;
+    }
+
+    int helper(vector<vector<int>>& matrix, vector<vector<int>>&visited, int i, int j){
+        if(visited[i][j]) return visited[i][j];
+        int down = 1, right = 1, left= 1, up = 1;
+        if(i<matrix.size()-1 && matrix[i+1][j] > matrix[i][j] ) 
+            down = 1 + helper(matrix, visited, i+1, j);
+        if(j<matrix[0].size()-1 && matrix[i][j+1] > matrix[i][j])
+            right = 1 +  helper(matrix, visited, i, j+1);
+        if(i>0 && matrix[i-1][j] > matrix[i][j])
+            up = 1 +  helper(matrix, visited, i-1, j);
+        if(j>0 && matrix[i][j-1] > matrix[i][j])
+            left = 1 +  helper(matrix, visited, i, j-1);
+        return visited[i][j] = max(up, max(left, max(down, right)));
+    }
+};
