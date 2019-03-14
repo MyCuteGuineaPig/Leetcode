@@ -26,6 +26,7 @@ Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(
 join 可以直接加generator, 比如 "".join(map(func, S))
 
  😍 好的面试题
+ 😚 好的面试题 II (low priority)
  🔍 反复看的题
  💡 比较tricky
  🌒 不用太看的题目
