@@ -133,3 +133,51 @@ public:
         return res;
     }
 };
+
+
+
+//write by own second time
+class Solution {
+public:
+    vector<pair<int, int>> pacificAtlantic(vector<vector<int>>& matrix) {
+        if(matrix.empty() || matrix[0].empty()) return {};
+        vector<vector<int>>visited(matrix.size(), vector<int>(matrix[0].size(),0));
+        for(int i = 0; i< matrix.size(); i++) dfs_pacific(matrix, visited,i, 0);
+        for(int j = 0; j< matrix[0].size(); j++) dfs_pacific(matrix, visited,0, j);
+        
+
+        for(int i = 0; i< matrix.size(); i++) dfs_atlantic(matrix, visited,i, matrix[0].size()-1);
+        for(int j = 0; j< matrix[0].size(); j++) dfs_atlantic(matrix, visited, matrix.size()-1, j);
+        
+        vector<pair<int,int>>res;
+        for(int i = 0; i<matrix.size(); i++){
+            for(int j = 0; j<matrix[0].size(); j++){
+                if(visited[i][j] == 2) 
+                    res.push_back({i,j});
+            }
+        }
+        return res;
+    }
+    
+    vector<pair<int,int>>dir = {{0,1},{1,0},{0,-1},{-1,0}};
+    
+    void dfs_pacific(vector<vector<int>>& matrix, vector<vector<int>>&visited, int i, int j){
+        visited[i][j] = 1;
+        for(auto p: dir){
+            int x = i +p.first, y = j + p.second;
+            if(x>=matrix.size() || x<0 || y<0 || y>=matrix[0].size() || visited[x][y] || matrix[x][y]<matrix[i][j]) continue;
+            dfs_pacific(matrix, visited, x, y);
+        }
+    }
+
+    void dfs_atlantic(vector<vector<int>>& matrix, vector<vector<int>>&visited, int i, int j){
+        visited[i][j] = visited[i][j] == 1 || visited[i][j] == 2 ? 2: -1; 
+      //比如[[1]] 会进来两遍, 因为在atlantic满足i=matrix[0].size(), j = matrix[0].size()-1第一遍后已经visited[0][0] 已经是2
+      //第二遍进来还要给2,
+        for(auto p: dir){
+            int x = i +p.first, y = j + p.second;
+            if(x>=matrix.size() || x<0 || y<0 || y>=matrix[0].size() || visited[x][y] == 2 || visited[x][y] == -1 || matrix[x][y]<matrix[i][j]) continue;
+            dfs_atlantic(matrix, visited, x, y);
+        }
+    }
+};
