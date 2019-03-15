@@ -39,6 +39,35 @@ You are not allowed to buy more items than you want, even if that would lower th
 
 */
 
+
+class Solution {
+public:
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+        return helper(price, special, needs);
+    }
+    
+    int helper(vector<int>& price, vector<vector<int>>& special, vector<int>& needs){
+        int localmin = inner_product(price.begin(), price.end(), needs.begin(), 0);
+        for(int i = 0; i<special.size(); i++){
+            int j = 0;
+            for( ; j<price.size(); j++){
+                //cout<<" i "<<i<<" j "<<j<<endl;
+                if(needs[j] >= special[i][j]) needs[j]-=special[i][j];
+                else break;
+            }
+            if(j==price.size()){
+                localmin = min(localmin, special[i][price.size()] + helper(price, special, needs));
+            }
+            //cout<<" out i "<<i<<" j "<<j<<endl;
+            j--;
+            for(;j>=0; j--)
+                needs[j] += special[i][j];
+        }
+        return localmin;
+    }
+};
+
+
 class Solution {
 public:
     int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
