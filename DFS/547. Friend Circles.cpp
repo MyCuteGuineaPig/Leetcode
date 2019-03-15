@@ -33,6 +33,45 @@ If M[i][j] = 1, then M[j][i] = 1.
 
 */
 
+//Write by own, Union Find
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        if(M.empty() || M[0].empty()) return 0;
+        DisjointSet ds(M.size());
+        for(int i = 0; i<M.size()-1; i++){
+            for(int j = i+1; j<M.size(); j++){
+                if(M[i][j]==1)
+                    ds.join(i,j);
+            }
+        }
+        return ds.size; 
+    }
+
+    struct DisjointSet{
+        vector<int>parent;
+        int size;
+        DisjointSet(int size){
+            this->size = size;
+            parent.resize(size);
+            iota(parent.begin(), parent.end(),0);
+        }
+
+        int find(int x){
+            return parent[x] == x ? x : parent[x] = find(parent[x]);
+        }
+        
+        void join(int x, int y){
+            int px = find(x), py = find(y);
+            if(px != py){
+                parent[px] = py;
+                size--;
+            }
+        }
+    };
+};
+
+
 class Solution {
 public:
     vector<bool>visited;
