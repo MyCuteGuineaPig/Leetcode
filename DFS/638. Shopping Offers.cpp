@@ -39,7 +39,7 @@ You are not allowed to buy more items than you want, even if that would lower th
 
 */
 
-
+//write by own
 class Solution {
 public:
     int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
