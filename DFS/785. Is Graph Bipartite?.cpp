@@ -65,6 +65,25 @@ If it has been colored, check if the current color is the same as the color that
 /*
 DFS
 */
+//write by own
+class Solution {
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        vector<int>color(graph.size(), -1);
+        for(int i = 0; i<graph.size(); i++){
+            if(color[i] ==-1 && !helper(graph, 1, i, color)) return false;
+        }
+        return true;
+    }
+    
+    bool helper(vector<vector<int>>& graph, int c, int start, vector<int>& color){
+        color[start] = c;
+        for(auto p : graph[start]){
+            if(color[p]!=-1 && !(color[start] ^ color[p]) || color[p]==-1 && !helper(graph, 1-c, p, color)) return false;
+        }
+        return true;
+    }
+};
 
 class Solution {
 public:
