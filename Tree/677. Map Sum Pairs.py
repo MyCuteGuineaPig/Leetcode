@@ -127,3 +127,35 @@ class MapSum(object):
                 return 0
             curr = curr.children[char]
         return curr.count
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+class MapSum:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.obj = {}
+
+    def insert(self, key: str, val: int) -> None:
+        if key in self.obj.keys():
+            self.obj[key] = val
+        else:
+            self.obj[key] = val
+
+    def sum(self, prefix: str) -> int:
+        sums = 0
+        for key, values in self.obj.items():
+            if prefix in key[:(len(prefix))]:
+                sums += values
+            elif prefix == key:
+                sums += values
+        return sums    
