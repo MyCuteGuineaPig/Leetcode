@@ -37,6 +37,18 @@ graph[i] will not contain i or duplicate values.
 The graph is undirected: if any element j is in graph[i], then i will be in graph[j].
 """
 
+# write by own
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        color = collections.defaultdict(lambda: -1)
+        
+     def dfs(start, cur_color):
+            color[start] = cur_color
+            return all(dfs(i,  1-cur_color) if color[i] == -1 else color[i]^color[start] for i in graph[start] )
+        
+        return all(dfs(i, 0) for i, edges in enumerate(graph) if color[i] == -1)
+    
+
 
 class Solution:
     def isBipartite(self, graph):
