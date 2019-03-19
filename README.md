@@ -427,7 +427,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [056. Merge Intervals](https://leetcode.com/problems/merge-intervals/) | _O(nlogn)_ | _O(n)_	| Medium | 😍  |
 | [057. Insert Interval](https://leetcode.com/problems/insert-interval/) | _O(nlogn)_ | _O(n)_	| Hard | |
-| [075. Sort Colors](https://leetcode.com/problems/sort-colors/description/) | _O(n)_ | _O(1)_	| Medium | Tri Partition |
+| [075. Sort Colors](https://leetcode.com/problems/sort-colors/description/) | _O(n)_ | _O(1)_	| Medium | 🔍 Tri Partition |
 | [088. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/) | _O(n)_ | _O(1)_	| Easy | 从后往前摆，不用swap |
 | [147. Insertion Sort List](https://leetcode.com/problems/insertion-sort-list/) | _O(n^2)_ | _O(1)_	| Medium | |
 | [148. Sort List](https://leetcode.com/problems/sort-list/description/) | _O(nlogn)_ | _O(logn)_	| Medium | <ul><li>top-down,用两个pointer，一个慢，一个快，去split,然后merge, space: O(logn)</li><li> bottom-up, 第一次只把1和2顺序，3和4顺序，5和6顺序调整，第二次把1，2和3，4顺序调整，5,6和7，8顺序调整，以此类推, space: O(1) </li></ul>  |
