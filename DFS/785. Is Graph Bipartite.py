@@ -49,6 +49,28 @@ class Solution:
         return all(dfs(i, 0) for i, edges in enumerate(graph) if color[i] == -1)
     
 
+#BFS
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        n, color= len(graph), {}
+        for i in range(n):
+            if i not in color and graph[i]:
+                color[i] = 1;
+                c = 0
+                q = collections.deque([i])
+                while q: 
+                    size = len(q)
+                    for _ in range(size):
+                        cur = q.popleft()
+                        for nb in graph[cur]:
+                            if nb not in color: 
+                                color[nb] = c 
+                                q.append(nb)
+                            elif color[nb] != c:
+                                return False
+                    c = 1-c
+        return True    
+    
 
 class Solution:
     def isBipartite(self, graph):
