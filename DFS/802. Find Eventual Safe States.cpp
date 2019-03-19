@@ -22,6 +22,61 @@ Illustration of graph
 
 */
 
+//write by own
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<int>visited(graph.size(),0);
+        for(int i = 0; i < graph.size(); i++){
+            if(visited[i]==0){
+                helper(graph, visited, i);
+            }
+        }
+        
+        vector<int>res;
+        for(int i = 0; i<graph.size(); i++){
+            if(visited[i] == 2) res.push_back(i);
+        }
+        return res;
+    }
+    
+    bool helper(vector<vector<int>>& graph, vector<int>& visited, int start){
+        if(graph[start].empty()){
+            visited[start] = 2;
+            return true;
+        }
+        
+        visited[start] = 1;
+        bool terminate = false; 
+        /*
+        不能用visited[start] = 2 代替terminate
+              __ _ ___  __ __ 
+             |   __         |
+             |  /   |       |
+        比如  0      > 1      > 2     从 0 - > 1, visited[1] = 2, visited[0] = 2, 从0 到 2， 2 next point 是 0， 
+             ^                 |        看到 visited[0] = 2， visited[2] = 2, 这是错的，
+             | ________________|        如果用terminate， 从0 到 2 next point 是 0, visited[0] = 1, visited[2] = -1
+                
+        */
+        for(auto p: graph[start]){ 
+            if(visited[p] == 2 || visited[p] == 0 && helper(graph, visited, p) ){
+               terminate = true;
+            }
+           else{
+               terminate = false;
+               break;
+            }
+        }
+        if(terminate) visited[start] = 2;
+        else visited[start] = -1;
+        return visited[start] == 2;
+    }
+};
+
+
+
+
+
 class Solution {
 public: 
     
