@@ -53,8 +53,8 @@ public:
                 }
                 i++;
             }else{
-                int pop_h = pq.top().first, pop_r = pq.top().second; pq.pop();
-                while(!pq.empty() && pq.top().first<=pop_h && pq.top().second <= pop_r)
+                int  pop_r = pq.top().second; pq.pop();
+                while(!pq.empty() && pq.top().second <= pop_r) //不用比较高度，因为priority_queue 高度肯定比下个小
                     pq.pop(); //pop 出所有含在大block 里的小block 
                 res.push_back({pop_r, pq.empty()? 0: pq.top().first});
              
