@@ -60,7 +60,7 @@ For example [1,2,4,5] we have gap array [1,2,1], the average gap x = (1+2+1)/3.
 
 平均gap = (max-min)/(N-1), 平均gap表示有个gap 比它大，有的gap 比他小，因为我们要找最大gap，所以找bucket之间的，
 
-
+如果刚好gap 都一样，比如[1,4,7,10], average gap = 3,  正好分成了4个bucket, 每一个数在一个bucket 
 
 */
 
