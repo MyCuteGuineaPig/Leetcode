@@ -119,3 +119,29 @@ public:
         return res;
     }
 };
+
+
+
+class Solution {
+public:
+
+vector<int> topKFrequent(vector<int>& nums, int k) {
+	unordered_map<int, int>m;
+	vector<unordered_set<int>>count(nums.size() + 1);
+	for (auto i : nums)
+		m[i]++;
+	for (auto i : m)
+		count[i.second].insert(i.first);
+	vector<int>re;
+	for (int i = nums.size(); re.size()<k && i >= 0; i--) {
+		if (count[i].size()) {
+			for (unordered_set<int>::iterator it = count[i].begin(); (re.size() < k) && it != count[i].end(); it++) {
+				re.push_back(*it);
+			}
+		}
+	}
+	return re;
+}
+
+};
+
