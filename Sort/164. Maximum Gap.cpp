@@ -51,6 +51,17 @@ Since there are n-2 numbers that are not equal min or max and there are n-1 buck
 at least one of the buckets are empty. We only need to store the largest number and the smallest number in each bucket.
 
 After we put all the numbers into the buckets. We can scan the buckets sequentially and get the max gap.
+
+
+最大gap 在bucket 之间 不在bucket内的原因是：
+假如我们有N个数，average gap 是 x, 
+
+For example [1,2,4,5] we have gap array [1,2,1], the average gap x = (1+2+1)/3.
+
+平均gap = (max-min)/(N-1), 平均gap表示有个gap 比它大，有的gap 比他小，因为我们要找最大gap，所以找bucket之间的，
+
+
+
 */
 
 class Solution {
