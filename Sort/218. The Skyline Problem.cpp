@@ -55,8 +55,15 @@ public:
             }else{
                 int pop_h = pq.top().first, pop_r = pq.top().second; pq.pop();
                 while(!pq.empty() && pq.top().first<=pop_h && pq.top().second <= pop_r)
-                    pq.pop();
+                    pq.pop(); //pop 出所有含在大block 里的小block 
                 res.push_back({pop_r, pq.empty()? 0: pq.top().first});
+             
+             /*大block 里的小block 比如：
+                   _________        ______________
+              ____|______  |        |   ——————   |           
+             |           | |        |  |      |  |
+             |           | |        |  |      |  |
+             */ 
             }
         }
         return res;
