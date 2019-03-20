@@ -41,19 +41,16 @@ public:
         auto cmp = [](const pair<int,int>&a, const pair<int,int>&b){return a.first == b.first? a.second < b.second : a.first < b.first; };
         priority_queue<pair<int,int>, vector<pair<int,int>>, decltype(cmp)>pq(cmp);
 
-        sort(buildings.begin(), buildings.end(),[](const vector<int>&a, const vector<int> &b){
-            if(a[0] == b[0])
-                return a[2]>b[2];  //避免情况比如[[1,2,1],[1,2,2],[1,2,3]], 返回多个结果，结果只需要[[1,3],[3,0]]，而不是[[1,1],[1,2],[1,3],[3,0]]
-            else return a[0] < b[0];
-        });
-
         int i = 0;
         while(i<buildings.size() || !pq.empty()){
             if(i<buildings.size() && (pq.empty()|| pq.top().second>=buildings[i][0])){
                 int preh = pq.empty() ? numeric_limits<int>::min(): pq.top().first;
                 pq.push({buildings[i][2], buildings[i][1]});
-                if(pq.top().first > preh)
-                    res.push_back({buildings[i][0], buildings[i][2]});
+                if(pq.top().first > preh){
+                    if(!res.empty() && res.back().first == buildings[i][0]) 
+                        res.back() = {buildings[i][0], buildings[i][2]}; //避免情况比如[[1,2,1],[1,2,2],[1,2,3]], 返回多个结果，结果只需要[[1,3],[3,0]]，而不是[[1,1],[1,2],[1,3],[3,0]]
+                    else res.push_back({buildings[i][0], buildings[i][2]});
+                }
                 i++;
             }else{
                 int pop_h = pq.top().first, pop_r = pq.top().second; pq.pop();
@@ -65,6 +62,9 @@ public:
         return res;
     }
 };
+
+
+
 
 /*
 
