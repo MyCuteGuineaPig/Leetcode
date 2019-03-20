@@ -43,7 +43,7 @@ public:
 
         int i = 0;
         while(i<buildings.size() || !pq.empty()){
-            if(i<buildings.size() && (pq.empty()|| pq.top().second>=buildings[i][0])){
+            if(i<buildings.size() && (pq.empty()|| pq.top().second>=buildings[i][0])){ //现在building的左面大于前面building的右面
                 int preh = pq.empty() ? numeric_limits<int>::min(): pq.top().first;
                 pq.push({buildings[i][2], buildings[i][1]});
                 if(pq.top().first > preh){
