@@ -147,6 +147,9 @@ public:
         for(auto p:buildings){
             seq.emplace(make_pair(p[0],-p[2]));
             seq.emplace(make_pair(p[1],p[2]));
+          //不能让(p[0],p[2]), insert (p[1],-p[2]), 因为我们要保证在两个interval left 和right 同等的时候， 不能先让上一个interval结束的出现，
+         //应该先出现的是下一个 interval 的开始，比如[[0,2,3],[2,5,3]]， 在2的时候，seq 先出[2,5,3], 而不是[0,2,3],
+         // 这样就不会出现[[0,3],[2,0],[2,3],[5,0]]结果, 会generate 正确的结果 [[0,3],[5,0]]
         }
         multiset<int> height({0});
         for(auto p:seq){
