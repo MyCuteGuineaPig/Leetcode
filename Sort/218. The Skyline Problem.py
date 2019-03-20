@@ -1,6 +1,30 @@
 """
 218. The Skyline Problem
 """
+#write by own
+class Solution:
+    def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
+        i, n = 0, len(buildings)
+        pq = []
+        res = []
+        while i<n or pq: 
+            if i<n and (not pq or -pq[0][1] >= buildings[i][0] ):
+                h = float('-inf') if not pq else -pq[0][0]
+                heapq.heappush(pq, [-buildings[i][2],-buildings[i][1] ])
+                if -pq[0][0] > h: 
+                    if res and res[-1][0] == buildings[i][0]:
+                        res[-1][1] = buildings[i][2]
+                    else: res += [[buildings[i][0], buildings[i][2]]]
+                i += 1
+            else:
+                r = -pq[0][1]
+                heapq.heappop(pq)
+                while pq and -pq[0][1] <= r:
+                    heapq.heappop(pq)
+                h = 0 if not pq else -pq[0][0]
+                #print(r,h)
+                res += [[r, h]]
+        return res
 
 import heapq
 class Solution:
