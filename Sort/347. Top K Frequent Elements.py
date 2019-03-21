@@ -33,6 +33,24 @@ class Solution:
             if len(res)>=k:break
         return res
 
+   
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        c = collections.Counter(nums)
+        bucket = [[] for _ in range(len(nums)+1)]
+        for c, v in c.items(): 
+            bucket[v].append(c)
+        
+        res = []
+        for i in range(len(nums), -1, -1):
+            if bucket[i]:
+                res += bucket[i][:k]
+                k -= len(bucket[i])
+                if k<=0: 
+                    return res
+
+    
+    
 """
 Heap Sort
 """
