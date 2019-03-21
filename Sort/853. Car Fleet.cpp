@@ -39,6 +39,16 @@ All initial positions are different.
 
 */
 
+/*
+Input: target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]
+根据position 由大到小sort，然后到达终点时间 由大到小sort, 
+
+这么work的原因是：
+sort 结果是 [[10, 2],[8,2]] 如果后面的时间小于前面的时间，表示可以追上，
+不用担心如果数字小的本来在前面，sort之后被放到后面， 因为出发位置小的，在后面出发，而不是说0在5的前面位置出发
+
+
+*/
 class Solution {
 public:
     int carFleet(int target, vector<int>& position, vector<int>& speed) {
