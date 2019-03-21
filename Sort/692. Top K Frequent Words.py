@@ -60,7 +60,12 @@ class Solution(object):
         candidates = list(wordCounts.keys())
         candidates.sort(key = lambda word: (-wordCounts[word], word))
         return candidates[:k]
-
+    
+class Solution:
+    def topKFrequent(self, words, k):
+        c = collections.Counter(words)
+        return sorted(c.keys(), key = lambda x: (-c[x], x))[:k]    
+    
 class Solution:
     def topKFrequent(self, words, k):
         wDict=collections.Counter(words)
