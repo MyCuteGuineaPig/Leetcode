@@ -42,6 +42,30 @@ class Solution:
             return root
         return getTree(0,len(nums)-1)
 
+      
+      
+
+      
+      
+ #write by own     
+ class Solution:
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        def node(val, left, right):
+            node = TreeNode(val)
+            node.left = left
+            node.right = right
+            return node 
+        def generateTree(l,r):
+            mid = (l+r)>>1
+            return None if l > r else node(nums[mid], generateTree(l, mid-1), generateTree(mid + 1, r))
+        return generateTree(0, len(nums)-1)
+     
+      
+      
 class Solution:
     def sortedArrayToBST(self, nums):
         """
