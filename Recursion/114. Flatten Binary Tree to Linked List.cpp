@@ -143,3 +143,31 @@ public:
         root->left = NULL;
     }
 };
+
+//write by own
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(!root) return;
+        flatten(root->left);
+        flatten(root->right);
+        TreeNode* t = root->left;
+        while(t && t->right)
+            t = t->right;
+        if(t){ //
+            t->right = root->right;
+            root->right =root->left;
+            root->left = nullptr;
+            /*
+                5
+                  \ 
+                   6, 
+                如果5 没有left，就不用 root->right =root->left; 否则6就被抹了
+            
+            */
+        }
+        return;
+    }
+    
+    
+};
