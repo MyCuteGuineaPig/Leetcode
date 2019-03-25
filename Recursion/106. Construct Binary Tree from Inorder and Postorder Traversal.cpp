@@ -29,6 +29,25 @@ The the basic idea is to take the last element in postorder array as the root,
 
 */
 
+//write by own
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        unordered_map<int, int>in_map;
+        for(int i = 0; i<inorder.size(); i++)
+            in_map[inorder[i]] = i;   
+        return getTree(in_map, postorder, postorder.size()-1, 0, postorder.size()-1);
+    }
+
+    TreeNode* getTree(unordered_map<int, int>& in_map, vector<int>& postorder, int pos_r, int pos_l, int in_r){
+        if(pos_r < pos_l) return nullptr;
+        TreeNode* cur = new TreeNode(postorder[pos_r]);
+        cur->right = getTree(in_map, postorder, pos_r - 1, pos_r - (in_r - in_map[postorder[pos_r]]), in_r);
+        cur->left = getTree(in_map, postorder, pos_r - 1 - (in_r - in_map[postorder[pos_r]]), pos_l, in_map[postorder[pos_r]]-1);
+        return cur;
+    }
+};
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
