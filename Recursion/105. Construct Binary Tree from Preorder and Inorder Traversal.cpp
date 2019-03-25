@@ -20,6 +20,24 @@ Return the following binary tree:
 
 */
 
+//write by own
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int,int>inorder_;
+        for(int i = 0; i<inorder.size(); i++) inorder_[inorder[i]] = i;
+        return buildTree(preorder,inorder_, 0, preorder.size()-1, 0);
+    }
+
+    TreeNode* buildTree(vector<int>&preorder, unordered_map<int,int>&inorder_, int s, int e, int s_in){
+        if(s>e) return nullptr;
+        TreeNode* cur = new TreeNode(preorder[s]);
+        cur->left = buildTree(preorder, inorder_, s+1, s + inorder_[preorder[s]] - s_in, s_in);
+        cur->right = buildTree(preorder, inorder_, s+1+inorder_[preorder[s]] - s_in, e, s_in+1+inorder_[preorder[s]] - s_in);
+        return cur;
+    }
+};
+
 /*
 
 Solution:
