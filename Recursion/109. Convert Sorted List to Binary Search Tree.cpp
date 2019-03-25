@@ -59,6 +59,8 @@ public:
 };
 
 
+
+
 class Solution {
 public:
     TreeNode* sortedListToBST(ListNode* head) {
@@ -76,6 +78,27 @@ public:
         root->left = helper(head,slow);
         root->right = helper(slow->next, tail);
         return root;
+    }
+};
+
+class Solution {
+public:
+    TreeNode* sortedListToBST(ListNode* head) {
+        return helper(head, nullptr);
+    }
+    
+    TreeNode* helper(ListNode* head, ListNode* tail){
+        if(head == tail) return nullptr;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next != tail && fast->next->next!=tail){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        TreeNode* cur = new TreeNode(slow->val);
+        cur->left = helper(head,slow);
+        cur->right = helper(slow->next, tail);
+        return cur;
     }
 };
 
