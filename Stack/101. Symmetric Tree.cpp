@@ -77,3 +77,22 @@ public:
 
 
 
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(!root) return true;
+        queue<TreeNode*>stk;
+        stk.push(root->left);
+        stk.push(root->right);
+        while(!stk.empty()){
+            TreeNode* t1 = stk.front(); stk.pop();
+            TreeNode* t2 = stk.front(); stk.pop();
+            if(!t1 && t2 || t1 && !t2) return false;
+            if(t1 && t2 && t1->val != t2->val) return false;
+            if(!t1 && !t2) continue;
+            stk.push(t1->left); stk.push(t2->right);
+            stk.push(t1->right);stk.push(t2->left);
+        }
+        return true;
+    }
+};
