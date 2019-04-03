@@ -47,6 +47,51 @@ and is a valid formula as defined in the problem.
 */
 
 
+//write by own
+class Solution {
+public:
+    string countOfAtoms(string formula) {
+        map<string, int>mp;
+        stack<unordered_map<string,int>>stk;
+        stk.push(unordered_map<string,int>());
+        for(int i = 0; i<formula.size();){
+            if(formula[i] == '('){
+                stk.push(unordered_map<string,int>());
+                i++;
+            }
+            else if(formula[i] == ')'){
+                int start_c = ++i;
+                while(i<formula.size() && isdigit(formula[i])) i++;
+                int count = i==start_c ? 1 : stoi(formula.substr(start_c, i-start_c));
+                unordered_map<string,int>cur_mp = stk.top();
+                stk.pop();
+                for(auto p: cur_mp){
+                    stk.top()[p.first] += p.second*count;
+                }
+            }else{
+                int start = i;
+                while(i+1<formula.size() && islower(formula[i+1])) i++;
+                string cur = formula.substr(start,i+1-start);
+                int start_c = ++i;
+                while(i<formula.size() && isdigit(formula[i])) i++;
+                int count = i==start_c ? 1 : stoi(formula.substr(start_c, i-start_c+1));
+                stk.top()[cur] += count;
+            }
+        }
+        for(auto p: stk.top()){
+            mp[p.first] = p.second;
+        }
+        
+        
+        string res = "";
+        for(auto p: mp){
+            res += p.first + (p.second == 1 ? "": to_string(p.second));
+        }
+        
+        return res;
+    }
+};
+
 class Solution {
 public:
     string countOfAtoms(string formula) {
