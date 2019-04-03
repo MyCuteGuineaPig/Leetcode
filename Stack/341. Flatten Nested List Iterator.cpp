@@ -187,7 +187,7 @@ public:
                 return true;
             } else {
                 auto& nestedList = cur.first->getList();
-                ++cur.first;
+                ++cur.first; //push的时候++， 
                 depth_.emplace(nestedList.cbegin(), nestedList.cend());
             }
         }
@@ -197,3 +197,58 @@ public:
 private:
     stack<pair<IT, IT>> depth_;
 };
+
+
+/**
+ * // This is the interface that allows for creating nested lists.
+ * // You should not implement it, or speculate about its implementation
+ * class NestedInteger {
+ *   public:
+ *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
+ *     bool isInteger() const;
+ *
+ *     // Return the single integer that this NestedInteger holds, if it holds a single integer
+ *     // The result is undefined if this NestedInteger holds a nested list
+ *     int getInteger() const;
+ *
+ *     // Return the nested list that this NestedInteger holds, if it holds a nested list
+ *     // The result is undefined if this NestedInteger holds a single integer
+ *     const vector<NestedInteger> &getList() const;
+ * };
+ */
+class NestedIterator {
+public:
+    using IT = vector<NestedInteger>::const_iterator;
+    NestedIterator(vector<NestedInteger> &nestedList) {
+       stk.push({nestedList.cbegin(), nestedList.cend()});
+    }
+    
+
+    int next() {
+        return (stk.top().first++)->getInteger();;
+    }
+    
+
+    bool hasNext() {
+        while(!stk.empty()){
+            if(stk.top().first == stk.top().second){
+                stk.pop();
+                if(!stk.empty())
+                    stk.top().first++; //pop 时候
+            }else{
+                if(stk.top().first->isInteger())return true;
+                else{
+                    stk.push({stk.top().first->getList().cbegin(), stk.top().first->getList().cend()});
+                }
+            }
+        }
+        return false; 
+    }
+    stack<pair<IT,IT>>stk;
+};
+
+/**
+ * Your NestedIterator object will be instantiated and called as such:
+ * NestedIterator i(nestedList);
+ * while (i.hasNext()) cout << i.next();
+ */
