@@ -131,6 +131,43 @@ public:
 };
 
 
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        if(matrix.empty() || matrix[0].empty()) return 0;
+        int n = matrix.size(), m = matrix[0].size(); 
+        vector<int>heights(m);
+        vector<int>left(m);
+        vector<int>right(m, m-1);
+        int area = 0;
+        for(int i = 0; i<n; i++){
+            int cur_left  = 0, cur_right = m-1;
+            for(int j = 0, k = m-1; j<m; j++, k--){
+                if(matrix[i][k] == '1'){
+                    right[k] = min(cur_right, right[k]);
+                }else{
+                    right[k] = m-1;
+                    cur_right = k - 1;
+                }
+                
+                if(matrix[i][j] == '1'){
+                    left[j] = max(cur_left, left[j]);
+                    heights[j] += 1;
+                }else{
+                    left[j] = 0;
+                    heights[j] = 0;
+                    cur_left = j + 1;
+                }
+            }
+            
+            
+            for(int j = 0; j<m; j++){
+                area = max(area, heights[j]*(right[j] - left[j]+1));
+            }
+        }
+        return area;
+    }
+};
 
 
 class Solution {
