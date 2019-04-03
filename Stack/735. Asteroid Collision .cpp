@@ -41,6 +41,27 @@ Each asteroid will be a non-zero integer in the range [-1000, 1000]..
 
 */
 
+//write by own
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int>final;
+        for(auto i: asteroids){
+            if(final.empty() || final.back()<0 && i > 0 || final.back() * i > 0)
+                //only pass if i < 0 && stack.top() > 0 which collison happens
+                final.push_back(i);
+            else{
+                while(!final.empty() && final.back()>0 && i<0){
+                    i = final.back() == -i ? 0 : final.back() > -i ? final.back(): i;
+                    final.pop_back();
+                }
+                if(i)
+                    final.push_back(i);
+            }
+        }
+        return final;
+    }
+};
 
 
 class Solution {
