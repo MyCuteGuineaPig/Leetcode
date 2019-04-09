@@ -7,15 +7,12 @@ Given a digit string, return all possible letter combinations that the number co
 
 A mapping of digit to letters (just like on the telephone buttons) is given below.
 
-
-
 Input:Digit string "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want.
 
 """
-
 
 class Solution:
     def letterCombinations(self, digits):
@@ -36,3 +33,13 @@ class Solution:
             return
         for i in lookup[int(digits[index])]:
             self.backtracking(digits,lookup,result,cur+i, index+1)
+            
+import functools
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits: return []
+        kp = {'2':'abc', '3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
+        return functools.reduce(lambda acc, digit: [x+y for x in acc for y in kp[digit]],digits, [''])
+            
+            
+           
