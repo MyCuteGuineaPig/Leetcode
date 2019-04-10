@@ -16,6 +16,29 @@ For example,
 
 """
 
+#write by own
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def generate(n):
+            if not n:
+                return [[]]
+            return [[v] + p for i, v in enumerate(n) for p in generate(n[:i]+n[i+1:])]
+        return generate(nums)
+
+      
+#write by own
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def generate(cur, n):
+            if not n:
+                yield cur
+            for i, v in enumerate(n):
+                for p in generate(cur+[v], n[:i]+n[i+1:]):
+                    yield p
+        return [*generate([],nums)]      
+      
+      
+
 class Solution:
     def permute(self, nums):
         """
