@@ -20,7 +20,7 @@ Output:
 [[1,2,6], [1,3,5], [2,3,4]]
 """
 
-//write by own
+#write by own
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         def generate(cur, k, n, start):
@@ -32,7 +32,7 @@ class Solution:
         return [*generate([],k,n,1)]
 
     
-//write by own
+#write by own
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         def generate(k, n, start):
