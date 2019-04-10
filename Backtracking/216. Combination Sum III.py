@@ -20,6 +20,16 @@ Output:
 [[1,2,6], [1,3,5], [2,3,4]]
 """
 
+//write by own
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def generate(cur, k, n, start):
+            if n==0 and k == 0:
+                yield cur
+            for i in range(start,n+1):
+                for p in generate(cur+[i], k-1, n-i, i+1):
+                    yield p 
+        return [*generate([],k,n,1)]
 
 class Solution:
     def combinationSum3(self, k, n):
@@ -35,3 +45,5 @@ class Solution:
     def combinationSum3(self, k, n):
         import functools;
         return [ c for c in functools.reduce(lambda nexts, _ : [next_+[first] for next_ in nexts for first in range(next_[-1]+1 if next_ else 1, 10)], range(k), [[]]) if sum(c) == n]
+    
+    
