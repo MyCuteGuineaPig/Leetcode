@@ -26,11 +26,23 @@ class Solution:
         def generate(cur, k, n, start):
             if n==0 and k == 0:
                 yield cur
-            for i in range(start,n+1):
+            for i in range(start,min(n+1,10)):
                 for p in generate(cur+[i], k-1, n-i, i+1):
                     yield p 
         return [*generate([],k,n,1)]
 
+    
+//write by own
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def generate(k, n, start):
+            if n==0 and k == 0:
+                return [[]]
+            return [[x] + c for x in range(start, min(n+1, 10)) for c in generate(k-1, n-x, x+1)]
+            
+        return generate(k,n,1)
+    
+    
 class Solution:
     def combinationSum3(self, k, n):
         """
