@@ -9,6 +9,55 @@ You may assume that there will be only one unique solution.
 
 */
 
+//write by own
+class Solution {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        vector<int>mp(243,0);
+        for(int i = 0; i<board.size(); i++){
+            for(int j = 0; j<board[i].size(); j++){
+                if(board[i][j] == '.') continue;
+                int cur = board[i][j] - '0'-1;
+                mp[9*i+cur] = 1;
+                mp[9*9 + 9*j + cur] = 1;
+                mp[9*9*2 + (i/3*3+j/3)*9 + cur ] = 1;
+            }
+        }
+        solve(board, mp, 0, 0);
+           
+    }
+    
+    bool solve(vector<vector<char>>&board, vector<int>&mp, int i, int j){
+        if(j == 9){
+            i = i+ 1; 
+            j = 0;
+        }
+        if(i == 9){
+            return true;
+        }
+        
+        if(board[i][j]!='.') {
+            if(solve(board,mp, i, j+1)) return true;
+            else return false;
+        }
+        for(int x = 0; x<9; x++){
+            if(!mp[9*i + x] && !mp[9*9 + j*9 + x] && !mp[9*9*2 + (i/3*3+j/3)*9 + x ]){
+                mp[9*i+x] = 1;
+                mp[9*9 + 9*j + x] = 1;
+                mp[9*9*2 + (i/3*3+j/3)*9 + x ] = 1;
+                if(solve(board,mp, i, j+1)){
+                    board[i][j] = (x+1) + '0';
+                    return true;
+                }
+                mp[9*i+x] = 0;
+                mp[9*9 + 9*j + x] = 0;
+                mp[9*9*2 + (i/3*3+j/3)*9 + x ] = 0;
+            }
+        }
+        return false;
+    }
+};
+
 class Solution {
 public:
     void solveSudoku(vector<vector<char>>& board) {
