@@ -1,3 +1,17 @@
+#write by own
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def generate(cur, target, index):
+            if target == 0:
+                yield cur
+            if target > 0:
+                for i in range(index, len(candidates)):
+                     for p in generate(cur+[candidates[i]],target-candidates[i],i):
+                            yield p
+        return [*generate([],target,0)];
+
+
+
 class Solution(object):
     def combinationSum(self, candidates, target):
         """
