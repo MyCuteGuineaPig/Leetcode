@@ -87,6 +87,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [674. Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/) | _O(n)_ | _O(1)_	| Easy |  |
 | [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/) | _O(n)_ | _O(n)_	| Easy |  |
 | [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 Sliding Window  |
+| [845. Longest Mountain in Array](https://leetcode.com/problems/longest-mountain-in-array/) | _O(n)_ | _O(1)_	| Medium | 🐸 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
  
