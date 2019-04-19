@@ -58,3 +58,74 @@ public:
         return stk[0];
     }
 };
+
+
+
+class Solution {
+public:
+    TreeNode* recoverFromPreorder(string S) {
+        unordered_map<int, TreeNode*> tbl;
+        TreeNode* res = NULL;
+        
+        queue<pair<int, int>> q;
+        
+        for (int i = 0; i < S.size(); ) {
+            int c = 0;
+            int n = 0;
+            
+            while (i < S.size() && S[i] == '-') { c++; i++; }
+            
+            while (i < S.size() && S[i] != '-') { n *= 10; n += (S[i] - '0'); i++; }
+                        
+            q.push(make_pair(c, n));
+        }
+        
+        while (!q.empty()) {
+            auto i = q.front(); q.pop();
+            
+            TreeNode* cur = new TreeNode(i.second);
+            
+            tbl[i.first] = cur;
+            
+            if (!i.first) res = cur;
+            else {
+                auto x = tbl[i.first - 1];
+                
+                if (x->left == NULL)
+                    x->left = cur;
+                else x->right = cur;
+            }
+        }
+        
+        return res;
+    }
+};
+
+
+
+
+class Solution {
+public:
+    TreeNode* recoverFromPreorder(string S) {
+        int i = 0;
+        return dfs(S, i, 0);
+    }
+
+    TreeNode* dfs(const string& S, int& i, int depth) {
+        if (i == S.length()) return nullptr;
+        for (int j = 0; j < depth; j++) {
+            if (S[i + j] != '-') return nullptr;
+        }
+        i += depth;
+        int j = i;
+        while (j < S.length() && isdigit(S[j])) {
+            j++;
+        }
+        int val = stoi(S.substr(i, j - i));
+        i = j;
+        TreeNode* root = new TreeNode(val);
+        root->left = dfs(S, i, depth + 1);
+        root->right = dfs(S, i, depth + 1);
+        return root;
+    }
+};
