@@ -36,7 +36,6 @@ Can you solve it in O(1) space?
 class Solution {
 public:
     int longestMountain(vector<int>& A) {
-        stack<int>stk;
         int i = 1, res = 0;
         while(i < A.size()){
             int up = 0, down = 0;
