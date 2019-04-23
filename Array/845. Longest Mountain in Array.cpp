@@ -56,3 +56,26 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    int longestMountain(vector<int>& A) {
+        int i = 1, res = 0;
+        for(int i = 1; i<(int)A.size()-1; i++){ //(int)A.size()-1 需要(int) 否则是size_t 是unsign int, -1 overflow, 变成很大的int
+            cout<<i<<endl;
+            if (A[i-1] < A[i] && A[i+1] < A[i]) {
+                int l = i-1;
+                int r = i+1;
+                while(l > 0 && A[l-1] < A[l]) {
+                    l--;
+                }
+                while(r < A.size()-1 && A[r+1] < A[r]) {
+                    r++;
+                }
+                res = max(res, (r - l + 1));
+            }
+        }
+        return res;
+    }
+};
