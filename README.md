@@ -126,6 +126,7 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | [861. Score After Flipping Matrix](https://leetcode.com/problems/guess-the-word/) | _O(m \* n)_ | _O(1)_	| Medium |🔍 先保证第一列全是1, 然后决定toggle每一列从再最大化每一列 |
 | [870. Advantage Shuffle](https://leetcode.com/problems/advantage-shuffle/) | _O(nlogn)_ | _O(n)_	| Medium |🔍😍 sort \ maxheap \ minheap |
 | [881. Boats to Save People](https://leetcode.com/problems/boats-to-save-people/) | _O(nlogn)_ | _O(n)_	| Medium | two pointer |
+| [1249. Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/) | _O(n)_ | _O(1)_	| Medium | Stack |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
@@ -423,6 +424,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [828. Unique Letter String](https://leetcode.com/problems/unique-letter-string/) | _O(n)_ | _O(1)_	| Hard | <ul><li>与其算每个unique substring长度，不如算每一个char有多少种方法让它在substring种变成unique, 如果只有这个char是unique在substring中，其他的char不会再发现这个substring,所以结果只会加1</li><li>DP: 用contri记录此点贡献的值, last记录上次出现这个字母的位置，cur是到目前位置所有贡献值的和, 比如现在点为A,contri\[A]=现在点距离上次A出现的位置,contri保证了从上次A的后一位到现在A的位置，A只出现一次在每个substring中，贡献为i-last\[A]</li></ul> |
 | [844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | _O(m+n)_ | _O(1)_	| Easy | 两个pt，都从s,t的尾部开始起，从后往前，while一直到当前不能skip，然后对比两个点是否一样，一样继续往前，不一样return false |
 |LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
+| [1248	Count Number of Nice Subarrays]
 
 </br>
 
