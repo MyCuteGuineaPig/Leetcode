@@ -78,3 +78,32 @@ public:
         return s;
     }
 };
+
+//from https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/discuss/419445/C%2B%2B-stack-and-unordered_set
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int> mstack;
+        unordered_set<int> mset;
+        for (int i=0; i<s.size(); i++) {
+            if (s[i] == '(')
+                mstack.push(i);
+            else if (s[i] == ')') {
+                if (!mstack.empty())
+                    mstack.pop();
+                else
+                    mset.insert(i);
+            }
+        }
+        while (!mstack.empty()) {
+            mset.insert(mstack.top());
+            mstack.pop();
+        }
+        string ans;
+        for (int i=0; i<s.size(); i++) {
+            if (mset.find(i) == mset.end())
+                ans.push_back(s[i]);
+        }
+        return ans;
+    }
+};
