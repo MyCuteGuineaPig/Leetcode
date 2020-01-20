@@ -686,4 +686,5 @@ DFS 是看有没有path，DP是看有几个path
 
 ## Bash
 |Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | :-------------: | :-------------: | :-------------: | :------------- |
 | [195. Tenth Line](https://leetcode.com/problems/tenth-line/) | _O(n)_ | _O(1)_ | Easy | ```awk, sed``` |
