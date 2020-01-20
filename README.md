@@ -20,7 +20,7 @@
 * [Dynamic Programming](https://github.com/beckswu/Leetcode#dynamic-programming) 
 * [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
 * [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
-
+* [Bash](https://github.com/beckswu/Leetcode#Bash)
 
 Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
 join 可以直接加generator, 比如 "".join(map(func, S))
@@ -679,3 +679,11 @@ DFS 是看有没有path，DP是看有几个path
 | [813. Largest Sum of Averages](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(k\*n^2)_	|	_O(n)_|	Hard | dp\[k]\[i] 表示在A\[:i] 中最多分k次 所得的平均数最大和 dp\[k]\[i] = max(dp\[k]\[i], dp\[k-1]\[j] + (sum\[i]-sum\[j])/(i-j))  |
 | [818. Race Car](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(nlogn)_	|	_O(n)_|	Hard | <ul><li>if i=2^n-1, dp\[i]=n, </li><li>else dp\[i] = min(n + 1 + dp\[(1 << n)-1 - i], n-1+2+k+dp\[i-((1 << (n-1)) - (1 << k))] for j in \[0,n] ), </li><li>n + 1 + dp\[(1 << n)-1 - i]是先到2^n-1的用n步, +1是做reverse(停)</li><li> n-1+2+k+dp\[i-((1 << (n-1)) - (1 << k))] 是先到之前2^(n-1)-1的点, 接着+1做reverse(停),然后往回走(2^k-1)点，+1做reverse(停)，再从那个点到点i </ul></li>|
 | [823. Binary Trees With Factors](https://leetcode.com/problems/binary-trees-with-factors/)	|	_O(n^2)_	|	_O(n)_|	Medium | 找规律  |
+
+<br/>
+<br/>
+
+
+## Bash
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| [195. Tenth Line](https://leetcode.com/problems/tenth-line/) | _O(n)_ | _O(1)_ | Easy | ```awk, sed``` |
