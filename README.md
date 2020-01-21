@@ -687,6 +687,8 @@ DFS 是看有没有path，DP是看有几个path
 ## Bash
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | :-------------: | :-------------: | :-------------: | :------------- |
+| [192	Word Frequency](https://leetcode.com/problems/word-frequency/) | 	_O(n)_ |	_O(k)_ |	Medium | switch column ```awk```, remove whitespace ```sed``` |
 | [193. Valid Phone Numbers](https://leetcode.com/problems/valid-phone-numbers/submissions/) | _O(n)_ | _O(1)_ | Easy | ```grep``` |
+| [194	Transpose File	Shell](https://leetcode.com/problems/transpose-file/) | _O(n^2)_ | _O(n^2)_ |	Medium | ```paste``` & ```cut``` |	
 | [195. Tenth Line](https://leetcode.com/problems/tenth-line/) | _O(n)_ | _O(1)_ | Easy | ```awk, sed``` |
-
+| 
