@@ -85,3 +85,15 @@ for ((i=1;i<col;i++)) do
     done
     echo
 done
+
+
+
+
+###
+
+Solution 1: 
+grep -o '[[:alpha:]]\{1,\}' words.txt | sort | uniq -c | sed "s/^[[:space:]]*//" | sort -nr -k1 | awk '{t=$1; $1=$2;$2=t; print;}'
+# remove prefix white space sed "s/^[[:space:]]*//" 
+
+
+
