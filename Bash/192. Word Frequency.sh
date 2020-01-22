@@ -20,6 +20,13 @@ cat words.txt | xargs -n1 |sort|uniq -c| sort -nr|awk '{print $2 " " $1}'
 cat words.txt | tr -s ' ' '\n' | sort | uniq -c | sort -r | awk '{ print $2, $1 }'
 
 
+#Solution 4:  Sed
+cat words.txt | tr -s '[[:space:]]' '\n'| sort | uniq -c | sort -r | sed -r -e 's/[[:space:]]*([[:digit:]]+)[[:space:]]*([[:alpha:]]+)/\2 \1/g'
+
+#Solution 5: 
+cat words.txt | awk '{for(i=1;i<=NF;++i){count[$i]++}} END{for(i in count) {print i,count[i]}}' | sort -k2nr
+# NF column 个数
+
 
 #下面结果不是sort的
 #!/usr/bin/env bash
