@@ -16,3 +16,40 @@ grep -o "[a-z]\+" words.txt | sort | uniq -c | sort -nr| awk '{print $2, $1}'
 #Solution 2: xargs
 cat words.txt | xargs -n1 |sort|uniq -c| sort -nr|awk '{print $2 " " $1}'
 
+#Solution 3: tr 
+cat words.txt | tr -s ' ' '\n' | sort | uniq -c | sort -r | awk '{ print $2, $1 }'
+
+
+
+#下面结果不是sort的
+#!/usr/bin/env bash
+
+declare -A HashWord
+File="words.txt"
+
+function ReadTxtFile
+{
+    while read Line
+    do
+        Word=(${Line})
+        for Var in ${Word[@]}
+        do
+            HashWord+=( [${Var}]='1')
+            #Word[${Var}]=
+            #for i in ${Word[@]}
+           # do
+            #    if [[ ${Var} == ${i} ]];then
+           #         Value=${HashWord[${Var}]}
+          #      fi
+          #  done
+
+        done
+    done < ${File}
+
+
+    for Key in ${!HashWord[*]}
+    do
+        echo "${Key} ${#HashWord[${Key}]}"
+    done
+} 
+ReadTxtFile
