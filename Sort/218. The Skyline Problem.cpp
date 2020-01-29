@@ -70,6 +70,34 @@ public:
     }
 };
 
+//self
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        priority_queue<vector<int>>pq;
+        vector<vector<int>>res;
+        for(int i = 0; i<=buildings.size(); i++){
+            while(!pq.empty() && ( i==buildings.size() || pq.top()[1] < buildings[i][0] )){
+                int r =  pq.top()[1];
+                while(!pq.empty() && pq.top()[1] <= r)
+                    pq.pop();
+                res.push_back({r,pq.empty() ? 0: pq.top()[0]});
+            }
+            if(i!=buildings.size()){
+                int preh = pq.empty()?-1: pq.top()[0];
+                pq.push({buildings[i][2], buildings[i][1]});
+                if(pq.top()[0] > preh ){
+                    if(!res.empty() && res.back()[0] == buildings[i][0]) //表示起点一样，可能有更高的层
+                        res.back()[1] = max(res.back()[1], buildings[i][2]);
+                    else //起点不一样，楼层肯定不一样
+                        res.push_back({buildings[i][0],buildings[i][2]});
+                }
+            }
+        }
+        
+        return res;
+    }
+};
 
 
 
