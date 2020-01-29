@@ -88,7 +88,8 @@ public:
                 pq.push({buildings[i][2], buildings[i][1]});
                 if(pq.top()[0] > preh ){
                     if(!res.empty() && res.back()[0] == buildings[i][0]) //表示起点一样，可能有更高的层
-                        res.back()[1] = max(res.back()[1], buildings[i][2]);
+                        res.back()[1] = buildings[i][2]; 
+                     //res.back()[1] = max(res.back()[1], buildings[i][2]); 不用比最大，因为大于preh 所以肯定比之前高
                     else //起点不一样，楼层肯定不一样
                         res.push_back({buildings[i][0],buildings[i][2]});
                 }
