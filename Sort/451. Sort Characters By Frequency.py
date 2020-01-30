@@ -44,6 +44,19 @@ class Solution:
             for j in bucket[i]:
                 res+= j*i
         return res
+    
+  
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        count = collections.Counter(s)
+        n = len(s)
+        buckets = [[] for _ in range(n+1)] 
+        for k, v in count.items():
+            buckets[v].append(k)
+        res = ""
+        for c, b in enumerate(buckets):
+            res += "".join(i*c for i in b)
+        return res[::-1]
 
 """
 Heap Sort
