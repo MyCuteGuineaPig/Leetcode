@@ -89,7 +89,7 @@ class Solution:
             while j<=i and dic[v] < 0: 
                 dic[s[j]]+=1
                 j+=1
-            if dic[v] == 0 and i - j == lenn - 1:
+            if i - j == lenn - 1:
                 res.append(j)
         return res 
 
