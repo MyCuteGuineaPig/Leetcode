@@ -68,6 +68,20 @@ class Solution:
         while len(res)<k:
             res.append(heapq.heappop(heap)[1])
         return res
+    
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        mp = collections.Counter(nums)
+        n = len(nums)
+        pq = []
+        for key, v in mp.items():
+            heapq.heappush(pq,[v,key])
+            if len(pq) == k+1:
+                heapq.heappop(pq)
+        res = []
+        while pq:
+            res.append(heapq.heappop(pq)[1])
+        return res
 
 
 import collections 
