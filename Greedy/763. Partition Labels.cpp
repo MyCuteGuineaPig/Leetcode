@@ -118,3 +118,26 @@ public:
         return res;
     }
 };
+
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        unordered_map<char,int>mp;
+        for(auto i: S) mp[i]++;
+        unordered_set<char>appear;
+        vector<int>res;
+        for(int i = 0, l = 0; i<S.size(); ++i){
+            appear.insert(S[i]);
+            if(--mp[S[i]] == 0){
+                for(auto it = appear.begin(); it!=appear.end();)
+                    if(mp[*it] == 0) appear.erase(it++);
+                    else ++it;
+                if(appear.empty()){
+                    res.push_back(i-l+1);
+                    l = i+1;
+                }
+            }
+        }
+        return res;
+    }
+};
