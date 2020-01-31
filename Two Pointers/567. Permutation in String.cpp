@@ -119,7 +119,8 @@ public:
         for(int i = 0; i < s1.length(); i++) count[s1[i]]--;
         for(int l = 0, r = 0; r < s2.length(); r++) {
             if (++count[s2[r]] > 0)
-                while(--count[s2[l++]] != 0); 
+                while(--count[s2[l++]] != 0); //or while(--count[s2[l++]] < 0); , 把满足的都排除掉
+              //比如 s1 = 'abc' s2 = 'abdcba' 在d的位置把前面满足的(a,b)都排除掉
             else if ((r - l + 1) == s1.length()) return true;
         }
         return s1.length() == 0;
