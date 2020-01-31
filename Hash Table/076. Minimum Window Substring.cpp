@@ -16,6 +16,59 @@ If there is such window, you are guaranteed that there will always be only one u
 */
 
 
+//sliding windows
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char,int>m;
+        for(auto i: t) m[i]++;
+        
+        int  count = t.size(), curlen = s.size();
+        int head = -1;
+        
+        for(int i = 0, j = 0; i<s.size();i++){
+            if(m[s[i]]-->0) count--;
+            while(j<=i && count == 0){
+                if( i - j + 1 <= curlen){
+                    head = j; 
+                    curlen = i-j+1;
+                }
+                if(++m[s[j++]]>0) count++;
+            }
+        }
+        //cout<<"head "<<head<<"curlen "<<curlen<<endl;
+        return  head == -1 ? "" : s.substr(head, curlen);
+    }
+};
+
+lass Solution {
+public:
+    string minWindow(string s, string t) {
+        if(s.size() < t.size() || t.empty()) return "";
+        int start = -1, end = s.size()+1;
+        unordered_map<char,int>mp, lookup;
+        for(auto i: t) lookup[i]++;
+        for(int i = 0, l = 0, cnt = t.size(); i<s.size(); i++){
+            ++mp[s[i]];
+            if(lookup.count(s[i]) && mp[s[i]] <= lookup[s[i]])
+                cnt--;
+            if(cnt == 0){
+                if(i-l < end - start){
+                    end = i; 
+                    start = l;
+                }
+                cnt++;
+                --mp[s[l++]];
+            }
+            while(l<=i && (lookup.count(s[l]) == 0 || mp[s[l]] > lookup[s[l]])){
+                --mp[s[l++]];
+            }
+        }
+        return start == -1 ? "" : s.substr(start, end-start+1);
+    }
+};
+
+
 /*
 每次先减去当下的，然后看原来dictionary(T)里是否含有这个char，如果含有的话，dict[s[i]]会大于0，减去count
 然后如果count == 0，前进start到满足开始的起点(最小的起点)
