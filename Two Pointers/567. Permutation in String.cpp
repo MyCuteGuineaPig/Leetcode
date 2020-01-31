@@ -102,7 +102,11 @@ public:
                 ++cnt;
             }
             else {
-                while (s2[start++] != s2[i]) {
+                while (s2[start++] != s2[i]) { //两种情况是,
+                      /*
+                      case 1: s2[i] 之前没有出现过，且没有在s1中, 比如 s1='abc', s2 = 'abdcba', 碰见d, 前面没有d，
+                      case 2: s2[i] 减去过多的，s1中的元素, 比如 s1='abc', s2 = 'ababc', 碰见第二个a时候, 前面已经减去一个a了,所以要加回来
+                       */
                     ++arr[s2[start - 1] - 'a'];
                     --cnt;
                 }
