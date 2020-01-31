@@ -331,8 +331,91 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 </li></ul> </li>  </ul> |
 
 ```c++
+// 438. Find All Anagrams in a String
+
+//s2: "cbaebabacd"  s1: "abc"
+
+//Output: 0, 6]
+
 //固定windows长度
-int i = 0
+class Solution {
+public:
+    vector<int> findAnagrams(string s2, string s1) {
+        vector<int>map(26,0);
+        for(auto i: s1)
+            map[i-'a']++;
+        int len = s1.size(), count = s1.size();
+        vector<int>res;
+        for(int i = 0; i<s2.size();i++){
+            if(map[s2[i]-'a']-->0) count--;
+            if(count == 0) res.push_back(i-len+1);
+            if(i>=len-1){
+                if(++map[s2[i-len+1]-'a'] > 0) count++;
+            }
+        }
+        return res;
+    }
+};
+
+//不固定windows长度, 方法一:
+
+class Solution {
+public:
+    vector<int> findAnagrams(string s2, string s1) {
+        vector<int>map(26,0);
+        for(auto i: s1)
+            map[i-'a']++;
+        int len = s1.size(), left = 0;
+        vector<int>res;
+        for(int i = 0; i<s2.size();i++){
+            map[s2[i]-'a']--;
+            if(map[s2[i] - 'a'] <0)
+                while(left<= i && map[s2[i]-'a'] < 0) map[s2[left++]-'a']++;
+            if(i-left+1 == len){
+                res.push_back(left);
+            }
+        }
+        return res;
+    }
+};
+
+//不固定windows长度 方法二:
+
+class Solution {
+public:
+    vector<int> findAnagrams(string s2, string s1) {
+        vector<int>map(26,0);
+        for(auto i: s1)
+            map[i-'a']++;
+        int len = s1.size(), left = 0;
+        vector<int>res;
+        for(int i = 0; i<s2.size();i++){
+            map[s2[i]-'a']--;
+            if(map[s2[i] - 'a'] <0)
+                while(map[s2[left++]-'a']++ >= 0);
+            //cout<<i <<" left "<<left<<endl;
+            if(i-left+1 == len){
+                res.push_back(left);
+            }
+        }
+        return res;
+    }
+};
+/*
+"cbaebabacd"
+"abc"
+DEBUG stdout
+0 left 0
+1 left 0
+2 left 0
+3 left 4
+4 left 4
+5 left 4
+6 left 5
+7 left 6
+8 left 6
+9 left 10
+*/
 
 ```
 
