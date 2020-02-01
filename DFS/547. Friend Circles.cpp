@@ -72,6 +72,55 @@ public:
 };
 
 
+//With Rank Heuristic
+
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        DisjointSet st(M.size());
+        for(int i = 0; i<M.size(); ++i){
+            for(int j = i+1; j<M.size(); ++j){
+                if(M[i][j])
+                    st.join(i,j);
+            }
+        }
+        return st.size;
+    }
+private:
+    class DisjointSet{
+    public:
+        vector<int>parents;
+        vector<int>rank;
+        int size;
+        DisjointSet(int n): size(n){
+            parents.resize(n);
+            rank.resize(n);
+            iota(parents.begin(), parents.end(), 0);
+        }
+        
+        int find(int x){
+            return parents[x] == x ? x : parents[x] = find(parents[x]);
+        }
+        
+        void join(int x, int y){
+            int px = find(x), py = find(y);
+            if(px == py) return;
+            --size;
+            if(rank[px] > rank[py]) parents[py] = px;
+            else if (rank[px] < rank[py]) parents[px] = py;
+            else{
+                parents[py] = px;
+                ++rank[px];
+            }
+        }
+    };
+};
+
+
+
+
+//DFS
+
 class Solution {
 public:
     vector<bool>visited;
