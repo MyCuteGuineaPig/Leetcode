@@ -117,6 +117,69 @@ class Solution:
         return list(map(lambda v: [name[next(iter(v))]]+sorted(v), lookup.values()))
 
 
+#Rank hueristic
+
+class DisjointSet:
+    def __init__(self):
+        self.parents = collections.defaultdict(str)
+        self.ranks = collections.defaultdict()
+        
+    def __getitem__(self,x):
+        if x not in self.parents:
+            self.parents[x] = x
+            self.ranks[x] = 0
+        elif self.parents[x] != x:
+            self.parents[x] = self[self.parents[x]]
+        return self.parents[x]
+    
+    def union(self,x,y):
+        px, py = self[x], self[y]
+        if px == py:
+            return 
+        if self.ranks[px] > self.ranks[py]:
+            self.parents[py] = px
+        elif self.ranks[px] < self.ranks[py]:
+            self.parents[px] = py
+        else:
+            self.parents[py] = px
+            self.ranks[px] += 1
+    
+    def get(self):
+        res = collections.defaultdict(list)
+        for k, v in self.parents.items():
+            p = self[self.parents[v]]
+            res[p].append(k)
+        return res.values()
+        
+
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        email_name_dic = collections.defaultdict(str)
+        ds = DisjointSet()
+        for acct in accounts:
+            name =acct[0]
+            for email in acct[1:]:
+                ds.union(acct[1], email)
+                email_name_dic[email] = name
+        return [ [email_name_dic[e[0]]] + sorted(e) for e in ds.get()]
+            
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
