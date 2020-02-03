@@ -130,6 +130,63 @@ join 可以直接加generator, 比如 "".join(map(func, S))
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
+
+```c++
+//Inorder Traversal
+//stack
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>res;
+        stack<TreeNode*>stk;
+        while(root || !stk.empty()){
+            if(root){
+                stk.push(root);
+                root = root->left;
+            }else{
+                root = stk.top(); stk.pop();
+                res.push_back(root->val);
+                root = root->right;
+            }
+        }
+        return res;
+    }
+};
+
+//Morris
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>res;
+        TreeNode* cur = root;
+        while(cur){
+            if(!cur->left)
+            {
+                res.push_back(cur->val);
+                cur = cur->right;
+            }else{
+                TreeNode* pre = cur->left;
+                while(pre->right && pre->right!=cur)
+                    pre = pre->right;
+                if(pre->right){
+                    res.push_back(cur->val);
+                    pre->right = NULL;
+                    cur = cur->right;
+                }
+                else{
+                    pre->right = cur;
+                    cur = cur->left;
+                }
+            }
+        }
+        return res;
+    }
+};
+```
+
+
+
+
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [094. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) | _O(n)_ | _O(1)_	| Medium | 🔍Morris Traversal |
