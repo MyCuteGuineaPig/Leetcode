@@ -69,21 +69,6 @@ public:
 };
 
 /**
-Morris Traversal 不可以用下面判断的原因
-
-                pre = cur->left;
-                if(pre->right==cur){
-                     pre->right = NULL;
-                    res.push_back(cur->val);
-                    cur = cur->right;
-                }
-                else{
-                    while(pre->right)
-                        pre = pre->right;
-                    pre->right = cur;//第一次pass的parent node 先不操作它
-                    cur = cur->left;
-                }
-
 [] means has structure below, & 表示cur 
 比如       --->    at point 1:    -－》   at point 2    －－>      at point 4:   -->
        1             & 1                      [1]                   4 no left, cur = 4->right = 2   
@@ -116,20 +101,52 @@ Morris Traversal 不可以用下面判断的原因
             [2]  [1]
                
                
- --> at point 3:                       -->  at point 6:
-           1                                  1
-          / \                                /  \ 
-         [2] & 3                              [2]  3
-             /  \                               / \ 
-             6  7                               6  7
-             \                               
-              3
-             /  \
-           [6]   7
-            
-             
-             
-             
+ --> at point 3:                       -->  at point 6:  6 NO LEFT, cur = cur->right    -->   at point 3:        
+           1                                  1                                             pre = 3->left                    
+          / \                                /  \                                           pre -> right == 3, pre->right = null
+         [2] & 3                            [2]  3                                          cur = cur->right =7
+             /  \                               / \                                               1 
+             6  7                              & 6  7                                            / \ 
+             \                                   \                                             [2]  &3
+              3                                   3                                                 /  \
+             /  \                                /  \                                              6    7
+           [6]   7                              [6] [7]                                             x 
+                                                                                                     3
+                                                                                                    /  \ 
+                                                                                                   6   7
+ -->  at point 7,
+ no LEFT, cur = cur->right
+         1
+        / \ 
+      [2]   3
+            / \ 
+           6   & 7 
+           
+
+Morris Traversal 不可以用下面判断的原因
+
+                pre = cur->left;
+                if(pre->right==cur){
+                     pre->right = NULL;
+                    res.push_back(cur->val);
+                    cur = cur->right;
+                }
+                else{
+                    while(pre->right)
+                        pre = pre->right;
+                    pre->right = cur;//第一次pass的parent node 先不操作它
+                    cur = cur->left;
+                }
+    
+    注意上面例子第二次经过point 1 时候,  2->5->1, 不是 2->1 
+    
+    1
+   /
+   2
+    \
+     5
+      \ 
+       1
 */
 
 
