@@ -68,6 +68,70 @@ public:
     }
 };
 
+/**
+Morris Traversal 不可以用下面判断的原因
+
+                pre = cur->left;
+                if(pre->right==cur){
+                     pre->right = NULL;
+                    res.push_back(cur->val);
+                    cur = cur->right;
+                }
+                else{
+                    while(pre->right)
+                        pre = pre->right;
+                    pre->right = cur;//第一次pass的parent node 先不操作它
+                    cur = cur->left;
+                }
+
+[] means has structure below, & 表示cur 
+比如       --->    at point 1:    -－》   at point 2    －－>      at point 4:   -->
+       1             & 1                      [1]                   4 no left, cur = 4->right = 2   
+      /  \           /  \                    /  \                          [1]
+     2   3           2    3               $ 2                              /
+    / \ / \         /  \  /  \             / \                            2
+   4  5 6  7        4   5 6   7           4    5                        /  \
+                         \                  \   \                     & 4   5
+                           1                  2  [1]                      \  \
+                           / \              /  \                           2  [1]
+                         [2]   [3]        [4]   5                         / \
+                                                 \                       [4]  5
+                                                  [1]                           \
+                                                                                 [1]
+                                                                                 
+  -->  at point 2:,                       -->        at point 5:                  --->    at point  1
+  pre = 2->left = 4,                                 no left, cur = 5->right              pre = cur->left = 2
+  4->right == 2, pre->right = NULL                      [1]                               pre = pre -> right = 5; pre-> right == 1,  
+  cur = cur->right                                       /                                pre -> right = NULL, cur = cur->right
+            [1]                                         2                                        1
+           /                                           /  \                                     /  \ 
+          2                                           4   $ 5                                   2   [3]
+         /  \                                               \                                  /  \ 
+         4    5                                               1                               4    5
+          x     \                                            /  \                                   x
+          $ 2    [1]                                       [2]   [3]                                & 1
+           / \                                                                                       / \
+          4    5                                                                                   [2] [3]
+           x    \
+            [2]  [1]
+               
+               
+ --> at point 3:                       -->  at point 6:
+           1
+          / \ 
+         [2] 3
+             /  \
+             6  7
+             \
+              3
+             /  \
+           [6]   7
+            
+             
+             
+             
+*/
+
 
 
 //Stack
@@ -91,6 +155,10 @@ public:
         return res;
     }
 };
+
+
+
+
 
 class Solution {
 public:
