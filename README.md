@@ -141,11 +141,12 @@ public:
         stack<TreeNode*>stk;
         while(root || !stk.empty()){
             if(root){
+               // res.push_back(cur->val);  //Preorder
                 stk.push(root);
                 root = root->left;
             }else{
                 root = stk.top(); stk.pop();
-                res.push_back(root->val);
+               // res.push_back(root->val); //Inorder
                 root = root->right;
             }
         }
@@ -153,7 +154,30 @@ public:
     }
 };
 
-//Morris
+//Postorder
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*> stk;
+        vector<int>res;
+        TreeNode* cur = root;
+        while(cur ||!stk.empty()){
+            if(cur){
+                res.push_back(cur->val);
+                stk.push(cur);
+                cur = cur->right;
+            }else{
+                cur = stk.top(); stk.pop();
+                cur = cur->left;
+            }
+        }
+        
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};
+
+//Morris: 流程图见,  094. Binary Tree Inorder Traversal.cpp
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
@@ -162,18 +186,19 @@ public:
         while(cur){
             if(!cur->left)
             {
-                res.push_back(cur->val);
+                //res.push_back(cur->val); //Inorder, preorder
                 cur = cur->right;
             }else{
                 TreeNode* pre = cur->left;
                 while(pre->right && pre->right!=cur)
                     pre = pre->right;
                 if(pre->right){
-                    res.push_back(cur->val);
-                    pre->right = NULL;
+                    //res.push_back(cur->val); //Inorder
+                    pre->right = NULL; 
                     cur = cur->right;
                 }
                 else{
+                    //res.push_back(cur->val); //Pre-order
                     pre->right = cur;
                     cur = cur->left;
                 }
@@ -182,6 +207,37 @@ public:
         return res;
     }
 };
+
+
+//PostOrder
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int>res;
+        TreeNode* cur = root;
+        while(cur){
+            if(!cur->right){
+                res.push_back(cur->val);
+                cur = cur->left;
+            }else{
+                TreeNode* pre = cur->right;
+                while(pre->left && pre->left != cur)
+                    pre = pre->left;
+                if(pre->left){
+                    pre->left = NULL;
+                    cur = cur->left;
+                }else{
+                    res.push_back(cur->val);
+                    pre->left = cur;
+                    cur = cur->right;
+                }
+            }
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};
+
 ```
 
 
