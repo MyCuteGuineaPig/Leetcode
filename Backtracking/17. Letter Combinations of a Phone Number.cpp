@@ -36,7 +36,7 @@ public:
         return res;
     }
 
-    void backtracking(const string digits, const vector<vector<char>> & table,vector<string>& res, string &cur, int index){
+    void backtracking(const string& digits, const vector<vector<char>> & table,vector<string>& res, string &cur, int index){
         if(index == digits.size()){
             res.push_back(cur);
             return;
