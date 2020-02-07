@@ -215,3 +215,70 @@ public:
 private:
     SegmentTreeNode *root;
 };
+
+
+
+class NumArray {
+struct Tree{
+    Tree* left = nullptr;
+    Tree* right = nullptr;
+    int sum = 0;
+    int l, r; 
+    Tree(int lf, int rf, int sum): l(lf), r(rf), sum(sum){}
+}; 
+public:
+    Tree* t;
+    NumArray(vector<int>& nums) {
+        buildTree(&t, 0, nums.size()-1, nums);
+    }
+    
+    void update(int i, int val) {
+        modifyTree(t, i, val);
+    }
+    
+    int sumRange(int i, int j) {
+        return calculateSum(t, i, j);
+    }
+
+    int buildTree(Tree **tree, int l, int r, const vector<int>& nums){
+        if(l>r) 
+            return 0;
+        if(l == r){
+           *tree = new Tree(l,r, nums[l]);
+            return nums[l];
+        }
+        int mid = (l + r ) >> 1;
+        *tree = new Tree(l, r, 0);
+        int left = buildTree(&((*tree)->left), l, mid, nums);
+        int right = buildTree(&((*tree)->right), mid+1, r, nums);
+        (*tree)->sum += left + right;
+        return (*tree)->sum;
+    }
+
+    int modifyTree(Tree* tree, int index, int num){
+        if(tree->l == tree->r && tree->l == index){
+            int delta = num - tree->sum; 
+            tree->sum = num;
+            return delta;
+        }
+        int delta ;
+        int mid = (tree->l + tree->r)>>1;
+        if(mid >= index)
+            delta = modifyTree(tree->left, index, num);
+        else
+            delta = modifyTree(tree->right, index, num);
+        tree->sum += delta;
+        return delta;
+    }
+
+    int calculateSum(Tree* tree, const int& l, const int& r){
+        if(!tree) return 0;
+        if(tree->l > r || tree->r < l ) return 0;
+        if(tree->l >= l && tree->r <= r)
+            return tree->sum; 
+        int left = 0, right = 0;
+        if(tree->r >= l ) left = calculateSum(tree->left, l , r);
+        if(tree->l <= r) right = calculateSum(tree->right, l, r);
+        return left + right;
+    }
+};
