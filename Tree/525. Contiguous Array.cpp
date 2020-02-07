@@ -41,25 +41,19 @@ public:
     }
 };
 
-class Solution {
-public:
-    int findMaxLength(vector<int>& nums) {
-    const size_t len = nums.size();
-    if (len < 2) return 0;
-    if (len == 2 && nums[1] + nums[0] == 1) return 2;
 
-    int sum = len, ret = 0;
-    // -len -> 0; 0 -> len; len -> len * 2
-    vector<int> sumToIndexVec(2 * len + 1, -1);
-    // sumToIndexVec[len] = -1;
 
-    for (int i = 0; i < len; ++i) {
-        sum += nums[i] == 0 ? -1 : 1;
-        if (sum == len || sumToIndexVec[sum] != -1) 
-            ret = max(ret, i - sumToIndexVec[sum]);
-        else sumToIndexVec[sum] = i;
+//把所有的情况都列出来了, balance 初始化时size, 最大值是 2size, 最小值是 0,
+int findMaxLength(vector<int>& nums) {
+    int size = nums.size(), ballance = size, max_len = 0;
+    int ballances[size * 2 + 1] = {};
+    for (auto i = 0; i < size; ++i) {
+        ballance += nums[i] == 0 ? -1 : 1;
+        if (ballance == size) max_len = i + 1;
+        else {
+            if (ballances[ballance] != 0) max_len = max(max_len, i - ballances[ballance] + 1);
+            else ballances[ballance] = i + 1;
+        }
     }
-
-    return ret;
-    }
-};
+    return max_len;
+}
