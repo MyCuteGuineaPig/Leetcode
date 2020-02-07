@@ -25,13 +25,13 @@
 Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
 join 可以直接加generator, 比如 "".join(map(func, S))
 
- 😍 好的面试题
- 😚 好的面试题 II (low priority)
-:alien: 有陷阱
- 🔍 反复看的题，注意算法逻辑的
- 💡 比较tricky
- 🌒 不用太看的题目
- 🐸 brainstorming 
+ 😍 好的面试题<br/>
+ 😚 好的面试题 II (low priority)<br/>
+:alien: 有陷阱<br/>
+ 🔍 反复看的题，注意算法逻辑的<br/>
+ 💡 比较tricky<br/>
+ 🌒 不用太看的题目<br/>
+ 🐸 brainstorming <br/>
   ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -252,8 +252,8 @@ public:
 | [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | = 先right 再left 的 inorder traversal  🔍Morris Traversal |
 | [208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) | _O(n)_ | _O(1)_	| Medium | Trie |
 | [211. Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design/) | _O(min(n, h))_ | _O(min(n, h))_	| Medium | 🔍Trie + DFS |
-| [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | 🔍swap root left 和right |
-| [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | 🔍 preorder 或者BFS |
+| [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | :alien:  不可以 ```left = invert(right); right = invert(left);```, 因为left 在invert right时候改变  |
+| [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | 🔍```ostringstream``` & ```istringstream ``` 用法, BFS－> pointer of pointer 存pointer 地址  |
 | [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | 🔍 BIT & Segment Tree; BIT tree 需要arr作为参照物,每次根据val-arr\[i]的update, update过后arr\[i] = val |
 | [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 🔍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0  |
 | [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium | recursion, 遇到数字时，停止，遇到blank持续dfs |
