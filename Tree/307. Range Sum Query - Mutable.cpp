@@ -56,7 +56,7 @@ public:
     NumArray(vector<int> nums_) {
         nums = nums_;
         size = nums.size();
-        sums.resize(size+1,0);
+        sums.resize(size+1,0); //必须size +1, 否则 i =0, i+=lowerbot(0) = 0 无线循环
         for(int i = 0; i<nums.size();i++){
             updateTree(i,nums[i]);
         }
@@ -73,7 +73,7 @@ public:
 private:
     void updateTree(int i, int delta){
         i++;
-        while (i<=size){
+        while (i<=size){ //注意是 i <= size
             sums[i] += delta;
             i += lowerbit(i);
         }
@@ -83,7 +83,7 @@ private:
     int getSum(int i){
         int res = 0;
         i++;
-        while( i>0){
+        while( i>0){ //注意是i>0
             res += sums[i];
             i -= lowerbit(i);
         }
