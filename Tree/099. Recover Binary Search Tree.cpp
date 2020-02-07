@@ -115,7 +115,6 @@ public:
 };
 
 
-
 class Solution {
 public:
     void recoverTree(TreeNode* root) {
@@ -136,5 +135,49 @@ public:
         pre = cur;
         if(cur->right) traversal(cur->right, pre, first, second);
         
+    }
+};
+
+
+//write by self
+class Solution {
+public:
+    int helper(TreeNode*root, int min_val, TreeNode *&s1, TreeNode *&s2){
+        if(!root) return min_val;
+        int curmin = helper(root->left, min_val, s1, s2);
+        if(curmin != numeric_limits<int>::max() && curmin > root->val)
+            s2 = root;
+        if(!s2) s1 = root;
+        return helper(root->right, root->val, s1, s2);
+    }
+    
+    
+    void recoverTree(TreeNode* root) {
+        int min_val = numeric_limits<int>::max();
+        TreeNode*s1 = nullptr, *s2 = nullptr;
+        helper(root, min_val, s1, s2);
+        swap(s1->val, s2->val);
+    }
+};
+
+//write by self
+class Solution {
+public:
+    void helper(TreeNode*root, int& min_val, TreeNode *&s1, TreeNode *&s2){
+        if(!root) return;
+        helper(root->left, min_val, s1, s2);
+        if(min_val != numeric_limits<int>::max() && min_val > root->val)
+            s2 = root;
+        if(!s2) s1 = root;
+        min_val = root->val;
+        helper(root->right, min_val, s1, s2);
+    }
+    
+    
+    void recoverTree(TreeNode* root) {
+        int min_val = numeric_limits<int>::max();
+        TreeNode*s1 = nullptr, *s2 = nullptr;
+        helper(root, min_val, s1, s2);
+        swap(s1->val, s2->val);
     }
 };
