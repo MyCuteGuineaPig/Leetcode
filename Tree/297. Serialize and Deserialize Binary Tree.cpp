@@ -120,49 +120,45 @@ private:
 };
 
 
+
+//from StefanPochmann
 class Codec {
 public:
-    void se(TreeNode* node, stringstream &ss) {
-        if (node) {
-            ss << 'n';
-            ss << node->val;
-            se(node->left, ss);
-            se(node->right, ss);
-        } else {
-            ss << '@';
-        }
-    }
-    
-    void de(TreeNode* &node, stringstream &ss) {
-        char ch;
-        ss >> ch;
-        int num;
-        if (ch == 'n') {
-            ss >> num;
-            node = new TreeNode(num);
-            de(node->left, ss);
-            de(node->right, ss);
-        } else {
-            node = nullptr;
-        }
-    }
 
-    // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
-        stringstream ss;
-        se(root, ss);
-        return ss.str();
+        ostringstream out;
+        serialize(root, out);
+        return out.str();
     }
 
-    // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
-        stringstream ss(data);
-        TreeNode *root;
-        de(root, ss);
+        istringstream in(data);
+        return deserialize(in);
+    }
+
+private:
+
+    void serialize(TreeNode* root, ostringstream& out) {
+        if (root) {
+            out << root->val << ' ';
+            serialize(root->left, out);
+            serialize(root->right, out);
+        } else {
+            out << "# ";
+        }
+    }
+
+    TreeNode* deserialize(istringstream& in) {
+        string val;
+        in >> val;
+        if (val == "#")
+            return nullptr;
+        TreeNode* root = new TreeNode(stoi(val));
+        root->left = deserialize(in);
+        root->right = deserialize(in);
         return root;
     }
 };
-
 
 
 //BFS
