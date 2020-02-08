@@ -82,3 +82,80 @@ public:
         return root;
     }
 };
+
+
+
+
+
+//Solution 1: Pointer of Pointer 
+
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        TreeNode* pre = nullptr;
+        helper(&root, pre);
+        return root;
+    }
+    
+    void helper(TreeNode** root, TreeNode*& pre){
+        if(!*root) return;
+        helper(&((*root)->right), pre);
+        if(pre)
+            (*root)->val += pre->val;
+        pre = *root;
+        helper(&((*root)->left), pre);
+    }
+};
+
+//Solution 2: TreeNode 
+
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        TreeNode* pre = nullptr;
+        helper(root, pre);
+        return root;
+    }
+    
+    void helper(TreeNode* root, TreeNode*& pre){
+        if(!root) return ;
+        helper(root->right, pre);
+        if(pre)
+            root->val += pre->val;
+        pre = root;
+        helper(root->left, pre);
+        return;
+    }
+};
+
+
+//Solution 3  Morris 
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        TreeNode* cur = root;
+        TreeNode* prev = nullptr;
+        while(cur){
+            if(!cur->right){
+                if(prev) 
+                    cur->val += prev->val;
+                prev = cur;
+                cur = cur->left;
+            }else{
+                TreeNode* pre = cur->right;
+                while(pre->left && pre->left != cur)
+                    pre = pre->left;
+                if(pre->left){
+                    pre->left = NULL;
+                    cur->val += prev->val;
+                    prev = cur;
+                    cur = cur->left;
+                }else{
+                    pre->left = cur;
+                    cur = cur->right;
+                }
+            }
+        }
+        return root;
+    }
+};
