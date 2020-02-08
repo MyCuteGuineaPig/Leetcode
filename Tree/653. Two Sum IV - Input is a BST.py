@@ -71,7 +71,7 @@ class BSTIterator:
         self._val = None
         self.stack = []
         self.cur = root
-        self.__next__()
+        self.__next__() #or next(self)
     
     @property
     def val(self,):
