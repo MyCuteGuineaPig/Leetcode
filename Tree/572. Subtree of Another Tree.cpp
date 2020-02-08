@@ -90,4 +90,26 @@ public:
         
          return (s1.find(t1)!= std::string::npos);
     }
+     
+     
+     class Solution {
+public:
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+        if(!t ) return false;
+        ostringstream in1, in2;
+        seralization(in1, s);
+        seralization(in2, t);
+        return in2.str().find(in2.str()) != string::npos;
+    }
+
+    void seralization(ostringstream& in, TreeNode* root){
+        if(!root){
+            in << "# ";
+            return;
+        }
+        seralization(in, root->left);
+        in << root->val << ' ';
+        seralization(in, root->right);
+    }
+};
 };
