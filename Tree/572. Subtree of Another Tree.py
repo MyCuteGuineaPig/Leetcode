@@ -68,4 +68,20 @@ class Solution:
             else:
                 ans += ',#'
         return ans
+
+
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        def seralize(root):
+            code = ""
+            stk = [root]
+            while stk:
+                top = stk.pop()
+                if not top:
+                    code += "# "
+                else:
+                    code += "b"+str(top.val) + "e "
+                    stk.extend([top.left, top.right])
+            return code 
+        return seralize(t) in seralize(s)
         

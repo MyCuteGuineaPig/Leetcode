@@ -90,4 +90,48 @@ public:
         
          return (s1.find(t1)!= std::string::npos);
     }
+     
+ //preorder    
+class Solution {
+public:
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+        if(!t ) return false;
+        ostringstream in1, in2;
+        seralization(in1, s);
+        seralization(in2, t);
+        cout<<in2.str()<<endl;
+        cout<<in1.str()<<endl;
+        return in1.str().find(in2.str()) != string::npos;
+    }
+
+    void seralization(ostringstream& in, TreeNode* root){
+        if(!root){
+            in << "null ";
+            return;
+        }
+        in <<"b"<< root->val << "e "; //避免比如 [2], [12] 情况
+        seralization(in, root->left);
+        seralization(in, root->right);
+    }
 };
+     
+ /*
+ 不能用preorder 原因
+
+s:                       t
+          4                 4
+         /  \              / \
+        1    2            1   2
+       /
+      0
+
+Inorder
+S: "# b0e # b1e # b4e # b2e #]
+t:       "# b1e # b4e # b2e #]
+
+Preorder
+s:  "b4e b1e b0e # # # b2e # #"
+t:  "b4e b1e # # b2e # #"
+
+ 
+ */
