@@ -23,8 +23,10 @@
 * [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
 
-Python trick: \* 可以把generator 变成list, 比如\[\*zip(\*matrix)] = list(zip(\*matrix)) </br>
-join 可以直接加generator, 比如 "".join(map(func, S))
+Python trick: 
+1. ```\*``` 可以把generator 变成list, 比如```[*zip(*matrix)] = list(zip(*matrix))```
+2. ```join``` 可以直接加generator, 比如 ```"".join(map(func, S))```
+3. list 用于 inside function, 不能用 ```list += []```, 只能用```append```
 
  😍 好的面试题<br/>
  😚 好的面试题 II (low priority)<br/>
@@ -265,10 +267,10 @@ public:
 | [606. Construct String from Binary Tree](https://leetcode.com/problems/construct-string-from-binary-tree/) | _O(n)_ | _O(h)_	| Easy | ❌ |
 | [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | _O(n)_ | _O(h)_	| Easy | 😍 |
 | [623. Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/) | _O(n)_ | _O(h)_	| Medium | 😚 |
-| [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | |
-| [652. Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/) | _O(n)_ | _O(n\*h)_	| Medium |🔍 把tree hash 或者serialize, 然后对比hash值或者 serialize是否只出现一次,  |
-| [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy |🔍two pointer or BST Iterator; Python BSTIterator: property + setter |
-| [654. Maximum Binary Tree](https://leetcode.com/problems/maximum-binary-tree/) | _O(n)_ | _O(h)_	| Medium |🔍💡 descending stack: <ul><li> 如果现在数 num\[i] 小于stack top，stack.top->right = new TreeNode(nums\[i]) </li><li> 如果现在num\[i] 大于stack top，就不断pop stack 找最后一个小于nums\[i]的node，把最后的node 作为nums\[i]的left child </li></ul>  |
+| [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | ❌ |
+| [652. Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/) | _O(n)_ | _O(n)_	| Medium |😍🔍 Seralization(String的memory 是 O(n^2)) / Hash, C++ 有定义hash. 注: 无须seralize 完整后再寻找, [analysis](https://leetcode.com/problems/find-duplicate-subtrees/discuss/106016/O(n)-time-and-space-lots-of-analysis)   |
+| [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy |😍🔍可以考怎么写 BST Iterator |
+| [654. Maximum Binary Tree](https://leetcode.com/problems/maximum-binary-tree/) | _O(n)_ | _O(h)_	| Medium |😍🔍💡 descending stack: <ul><li> 如果现在数 num\[i] 小于stack top，stack.top->right = new TreeNode(nums\[i]) </li><li> 如果现在num\[i] 大于stack top，就不断pop stack 找最后一个小于nums\[i]的node，把最后的node 作为nums\[i]的left child </li></ul>  |
 | [655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
 | [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
 | [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | _O(n)_ | _O(t)_	| Medium | Trie 注意更新时候，要减去之前的val or map + lower_bound |
@@ -297,7 +299,11 @@ public:
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能Tree |
 | [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/) | _O(m \* n)_ | _O(h)_	| Easy | |
 | [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | _O(n)_ | _O(h)_	| Easy | |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
+| [623. Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/) | _O(n)_ | _O(h)_	| Medium | |
+| [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | |
+| [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
 ## Math
