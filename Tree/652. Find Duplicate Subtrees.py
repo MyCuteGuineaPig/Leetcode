@@ -20,6 +20,19 @@ and
     4
 
 """
+#Memory O(n), Speed O(n)
+class Solution:
+    def findDuplicateSubtrees(self, root: TreeNode) -> List[TreeNode]:
+        def getid(root):
+            if root:
+                id = treeid[root.val, getid(root.left), getid(root.right)] #如果没有返回值, 返回None
+                trees[id].append(root)
+                return id
+        trees = collections.defaultdict(list)
+        treeid = collections.defaultdict()
+        treeid.default_factory = treeid.__len__
+        getid(root)
+        return [root[0] for root in trees.values() if root[1:]]
 
 
 class Solution:
