@@ -76,6 +76,39 @@ output:
 */
 
 
+//最快解
+class Solution {
+public:
+    int helper(TreeNode* root, vector<vector<vector<int>>>&tmp, int left, int h){
+        if(!root) return h-1;
+        if(tmp.size() == h)
+            tmp.push_back({{root->val, left}});
+        else
+            tmp[h].push_back({root->val, left});
+        int l = helper(root->left, tmp, 2*(left+1)-2, h+1);
+        int r = helper(root->right, tmp, 2*(left+1)-1, h+1);
+        return max(l,r);
+    }
+    
+    vector<vector<string>> printTree(TreeNode* root) {
+        vector<vector<vector<int>>>tmp;
+        int h = helper(root, tmp, 0, 0);
+        int width = pow(2,h+1)-1;
+        vector<vector<string>>res(h+1, vector<string>(width));
+        for(int i = 0; i<tmp.size(); ++i){
+            for(auto v: tmp[i]){
+                int left = pow(2, h-i)-1;
+                int interval = pow(2, h+1-i);
+                int pos = v[1];
+                res[i][left + interval*pos] = to_string(v[0]);
+                
+            }
+        }
+        return res;
+    }
+};
+
+
 class Solution {
 public:
     vector<vector<string>> printTree(TreeNode* root) {
