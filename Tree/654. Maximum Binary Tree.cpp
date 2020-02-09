@@ -50,26 +50,18 @@ descending stack,
 class Solution {
 public:
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        vector<TreeNode* >stk;
-        for(int i = 0; i<nums.size(); i++){
-            TreeNode* cur = new TreeNode(nums[i]);
-            if(!stk.empty() && stk.back()->val < nums[i]){
-                TreeNode* pre;
-                while(!stk.empty() && stk.back()->val < nums[i])
-                {
-                    pre = stk.back();
-                    stk.pop_back();
-                }
-                cur->left = pre;
-            }
-            
-            if(!stk.empty()) stk.back()->right = cur;
+        vector<TreeNode*>stk;
+        for(auto v: nums){
+            TreeNode* cur = new TreeNode(v);
+            while(!stk.empty() && stk.back()->val < v)
+                cur->left = stk.back(), stk.pop_back();
+            if(!stk.empty())
+                stk.back()->right = cur;
             stk.push_back(cur);
         }
         return stk.front();
     }
 };
-
 
 
 class Solution {
