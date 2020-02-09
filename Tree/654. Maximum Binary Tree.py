@@ -17,22 +17,37 @@ Output: return the tree root node representing the following tree:
 
 
 class Solution:
-    def constructMaximumBinaryTree(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: TreeNode
-        """
-        stack = []
-        for i in nums:
-            cur = TreeNode(i)
-            if stack and i > stack[-1].val:
-                while stack and i > stack[-1].val:
-                    prev = stack.pop()
-                cur.left = prev
-            if stack: 
-                stack[-1].right = cur
-            stack.append(cur)
-        return stack[0]
+    def constructMaximumBinaryTree(self, nums: List[int]) -> TreeNode:
+        stk = []
+        for v in nums:
+            cur = TreeNode(v)
+            while stk and stk[-1].val < v:
+                    cur.left = stk.pop()
+            if stk and stk[-1].val > v: 
+                stk[-1].right = cur
+            stk.append(cur)
+        return stk[0]
+
+"""
+if stk and stk[-1].val > v: 
+    stk[-1].right = cur
+ 比如: 
+ #[48,259,222,129,17,245,174,68,8,261]
+ 
+ 在259的tree             在245 tree
+ 
+           259              245
+          /   \             /  \
+         48    222       222    174
+                 \        \       \ 
+                 129      129      68
+                   \       \        \
+                    17      17       8 
+                    
+ 如果没有 if 条件句 这句当, 259 右侧 连不上245 会变成dangling  
+                     
+
+"""
 
 class Solution:
     def constructMaximumBinaryTree(self, nums):
@@ -45,7 +60,8 @@ class Solution:
             cur = TreeNode(i)
             if stack and i > stack[-1].val:
                 while stack and i > stack[-1].val:
-                    cur.left = stack.pop()
+                    prev = stack.pop()
+                cur.left = prev
             if stack: 
                 stack[-1].right = cur
             stack.append(cur)
