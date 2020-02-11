@@ -48,6 +48,163 @@ Note:
 [[2,3],[5,1],[6,2],[4,2]]
 */
 
+
+/*
+
+Attempt: 
+
+  map<int, pair<int,int>>, key = start,  value.first = end, value.second = height 
+  
+  start = position[i][0], end = position[i][1]
+  it = mp.upper_bound(start);  base = (*it)->second.second //height 
+ 若 it = mp.upper_bound(end);   base = (*it)->second.second //height, 一样不行
+ 这中做法错误原因是无法根据x, 判断当前点后的高度 
+
+Failure: 比如 [5,6],[4,2],[3,5], 新的点是[6,2],  按上面的算法得到it 是 [5,[11,6]], base 为6, 而base 应为13
+
+                 ___
+                |   |
+ 13      _______|___|
+        |           |
+        |           |
+        |           |
+        |           |
+  8     |  _____    |
+           |    |
+  6        |  __|___________
+              |            |          
+              |            |
+              |            |
+              |            |
+              |            |
+        3 4   5  6   8    11
+
+Failure 极端情况: [2,2], [3,2], [4,2],[5,2],[6,2],
+                当有个点是[1,9], 无法知道现在base 为
+
+start = 1       
+it = mp.upper_bound(start); base = (*it)->second.second //height
+base = 2 //which is wrong 
+       _________________
+       |               |
+       |               |
+       |               |
+       |               |
+       |               |
+     10|           ___
+     8          _|__ |
+     6        _|_  |
+     4      _|_  |
+     2    _|_  |
+         |   |
+         2 3 4 5 6 7 8    
+*/
+
+
+
+
+
+
+
+/*
+
+Solution 1: 
+
+map->first 表示 x, map second 表示这点(x)后的height, 
+
+start = position[i][0], end = position[i][1]
+注： 更新 start 是从 start 到 end 之间 最大的高度, 
+    更新 end  是end 前最后一个高度,
+    从start 到end remove 之间所有点, 因为这些点被start -> end 这个square 覆盖
+
+case 1: [1,3],  map [1,3], [4,0]
+    ------
+   |     |
+   |     |
+   1     4
+
+
+case 2:  [1,2], [2,3], [4,1],   map [1,2], [2,5], [4,6], [5,0]
+
+
+ 6        _  
+ 5    ___|_|
+     |     |
+     |     |
+ 2  _|_    |
+   |   |
+   1 2 3    5   
+   
+   
+ while 删除map， 点为 [3,2],[6,3], [2,9]
+  
+11 —————————————————— 
+  |                 |
+  |                 |
+  |                 |         当在 [3,2], [6,3],  map 为[3,2],[5,0], [6,3], [9,0]
+  |                 |   
+  |                 |          当在 [2,9] 时候, map 会remove 2 到11所有的点， 最后map 为 [2,11], [11,0]
+  |                 |       
+  |                 |
+  |                 |
+3            ——————
+2     ————  |     |
+     |   |  |     |
+     |   |  |     |
+  2  3   5  6     9  11
+
+if(mp.find(end)==mp.end()) (尽管不在也可以pass 所有test case 但是需要有这个）
+目的:  让新增加的end 不remove 旧的start 
+
+比如 
+[[1, 3], [6, 9], [3,3], [4,3]] 如果不加这个if 会有error
+
+ 12         ———————                          [1, 3]   map:      [1,3], [3,0]
+           |      |                          [6, 9]   map:       [1,3], [6,9], [15,0]
+           |      |                          [3, 3]   有if map:  [1,3], [3,6], [6,9], [15,0]
+ 9         |    ————————————————————                  没有if map: [1,3], [3,6], [6,0], [15,0]
+               |                   |
+               |                   |         [4,3]    有if map:   [1,3], [3,6], [4,12], [7,9], [15,0]
+  6       ——---|                   |         [4,3]   没有if map:  [1,3], [3,6], [4,9],  [7,0],  [15,0]
+  5      |     |                   |
+         |     |                   |
+  3 _____|     |                   |
+   |     |     |                   |
+   |     |     |                   |
+   |     |     |                   |
+   1     3     6                   15
+
+*/
+
+
+
+class Solution {
+public:
+    vector<int> fallingSquares(vector<vector<int>>& positions) {
+        map<int,int>mp;
+        vector<int>res;
+        for(auto pos: positions){
+            int start = pos[0], h = pos[1], end = start + h;
+            auto it = mp.upper_bound(start);
+            int baseh = it == mp.begin() ? 0 : prev(it)->second;
+            int preh = baseh;
+            while(it!=mp.end() && it->first < end){
+                baseh = max(baseh, it->second);
+                preh = it->second;
+                it = mp.erase(it);
+            }
+            mp[start] = baseh + h;
+            if(mp.find(end)==mp.end())
+                mp[end] = preh;
+            res.push_back(res.empty() || baseh + h > res.back() ? baseh + h : res.back() );//因为back 存的永远是跟现在比最大的
+        }
+        return res;
+    }
+};
+
+
+
+
 /*
 Solution 1: 
 跟218. The Skyline Problem 解法类似， 画出square的轮廓
@@ -88,32 +245,6 @@ public:
     }
 };
 
-
-class Solution {
-public:
-    vector<int> fallingSquares(vector<pair<int, int>>& pos) {
-        map<int, int> h;
-        vector<int> ans;
-        for (auto& sqr : pos) {
-            int x = sqr.first, y = sqr.first+sqr.second, hnow = sqr.second;
-            auto it = h.upper_bound(x);
-            
-            int crnt = it==h.begin() ? 0 : prev(it)->second;
-            int maxh = crnt;
-            while (it!=h.end() && it->first<y) {
-                crnt = it->second;
-                maxh = max(maxh, crnt);
-                it = h.erase(it);
-            }
-            
-            h[x] = maxh + hnow;
-            h[y] = crnt;
-            
-            ans.push_back( ans.empty() || ans.back()<maxh+hnow ? maxh+hnow : ans.back());
-        }
-        return ans;
-    }
-};
 
 
 
