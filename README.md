@@ -30,9 +30,9 @@ Python trick:
 
  😍 好的面试题<br/>
  😚 好的面试题 II (low priority)<br/>
-:alien: 有陷阱<br/>
- 🔍 反复看的题，注意算法逻辑的<br/>
- 💡 比较tricky<br/>
+:alien:, 💡 比较tricky, 有陷阱<br/>
+ 🔍 偏算法逻辑<br/>
+ 🎅 偏思维逻辑 <br/>
  🌒, ❌ 不用太看的题目<br/>
  🐸 brainstorming <br/>
   ## Breadth-First Search
@@ -264,23 +264,23 @@ public:
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能dfs，再比较height 会更快 |
 | [563. Binary Tree Tilt](https://leetcode.com/problems/binary-tree-tilt/) | _O(n)_ | _O(n)_	| Easy | ❌思路跟[543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) 一样|
 | [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/) | _O(m \* n)_ | _O(h)_	| Easy | 😍 seralization  |
-| [606. Construct String from Binary Tree](https://leetcode.com/problems/construct-string-from-binary-tree/) | _O(n)_ | _O(h)_	| Easy | ❌ |
+| [606. Construct String from Binary Tree](https://leetcode.com/problems/construct-string-from-binary-tree/) | _O(n)_ | _O(h)_	| Easy | ❌ Easy Recursion |
 | [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | _O(n)_ | _O(h)_	| Easy | 😍 |
 | [623. Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/) | _O(n)_ | _O(h)_	| Medium | 😚 |
 | [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | ❌ |
 | [652. Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/) | _O(n)_ | _O(n)_	| Medium |😍🔍 Seralization(String的memory 是 O(n^2)) / Hash, C++ 有定义hash. 注: 无须seralize 完整后再寻找, [analysis](https://leetcode.com/problems/find-duplicate-subtrees/discuss/106016/O(n)-time-and-space-lots-of-analysis)   |
 | [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy |😍🔍可以考怎么写 BST Iterator |
 | [654. Maximum Binary Tree](https://leetcode.com/problems/maximum-binary-tree/) | _O(n)_ | _O(h)_	| Medium |😍🔍💡 descending stack: <ul><li> 如果现在数 num\[i] 小于stack top，stack.top->right = new TreeNode(nums\[i]) </li><li> 如果现在num\[i] 大于stack top，就不断pop stack 找最后一个小于nums\[i]的node，把最后的node 作为nums\[i]的left child </li></ul>  |
-| [655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
-| [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 找规律 |
-| [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | _O(n)_ | _O(t)_	| Medium | Trie 注意更新时候，要减去之前的val or map + lower_bound |
+| [655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree/) | _O(n)_ | _O(h)_	| Medium | Math找规律 |
+| [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/) | _O(n)_ | _O(h)_	| Medium | ❌ Math 找规律, 逻辑跟[655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree/)类似 |
+| [677. Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/) | _O(n)_ | _O(t)_	| Medium |  ❌Simple Trie |
 | [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/) | _O(n)_ | _O(n)_	| Medium | 🔍Union Find 如果两个node 连接之前发现parent 已经一样，表示之前两个nodes已经连接，如果再连接edge，会构成cycle |
-| [685. Redundant Connection II](https://leetcode.com/problems/redundant-connection-ii/) | _O(n)_ | _O(n)_	| Hard | 🔍Union Find 注意构成tree 的条件, 不能有一个child 连上两个parent, 然后去掉这个child一个链，保证都是一个child对应一个parent, 再看有没有cycle, 没有cycle表示去链去成功了, 有cycle 表示去链去错了 |
-| [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/) | _O(n)_ | _O(h)_	| Easy | 🔍DFS |
-| [699. Falling Squares](https://leetcode.com/problems/falling-squares/) | _O(nlogn)_ | _O(n)_	| Hard | 🔍💡<ul><li> solution 1: 解法与 [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/)相似, 画出轮廓, 并对比现在高度和最高点 </li><li> 用heights 表示到i点的高度, 再从i点往后，更新后面点的地基 </li><li> Segment Tree using lazy initialization: 需要注意update即使不在范围内，也要返回root.val, update还要更新root.val为max值 </li></ul> |
-| [814. Binary Tree Pruning](https://leetcode.com/problems/binary-tree-pruning/) | _O(n)_ | _O(h)_	| Medium | 🔍DFS |
+| [685. Redundant Connection II](https://leetcode.com/problems/redundant-connection-ii/) | _O(n)_ | _O(n)_	| Hard | Union Find 注意构成tree 的条件, 不能有一个child 连上两个parent, 然后去掉这个child一个链，保证都是一个child对应一个parent, 再看有没有cycle, 没有cycle表示去链去成功了, 有cycle 表示去链去错了 |
+| [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/) | _O(n)_ | _O(h)_	| Easy | 😍 Really good Recussive Question! |
+| [699. Falling Squares](https://leetcode.com/problems/falling-squares/) | _O(nlogn)_ | _O(n)_	| Hard | 😍Good Question! 若想找点属于 哪个范围之中 比如 3∈ (1,5) or (7,9) ?, <span style="background-color:#FFFF00">用map + binary search </span>  <ul><li> solution 1: 解法与 [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/)相似, 画轮廓 </li><li>Solution 2: Segment Tree using lazy initialization: 需要注意update即使不在范围内，也要返回root.val, update还要更新root.val为max值 </li></ul> |
+| [814. Binary Tree Pruning](https://leetcode.com/problems/binary-tree-pruning/) | _O(n)_ | _O(h)_	| Medium | 😍Really good question! |
 | [850. Rectangle Area II](https://leetcode.com/problems/rectangle-area-ii/description/) | _O(nlogn)_ | _O(h)_	| Hard | 🔍💡跟[699. Falling Squares](https://leetcode.com/problems/falling-squares/)思路有点像, 根据height一层一层的算当层长方体面积,算完面积后更新上一层的底curx |
-| [863. All Nodes Distance K in Binary Tree](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 🔍💡需要DFS + BFS, DFS 找到双向(parent->child, child->parent), BFS 比如距离k, 从target点为起点通过通道找距离k的所有点 |
+| [863. All Nodes Distance K in Binary Tree](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/) | _O(n)_ | _O(h)_	| Medium | 😍😍Really good question! 💡需要DFS + BFS, DFS 找到双向(parent->child, child->parent), BFS 比如距离k, 从target点为起点通过通道找距离k的所有点 |
 | [865. Smallest Subtree with all the Deepest Nodes](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/) | _O(n)_ | _O(h)_	| Medium | 🔍DFS, left level == right level 返回root, if left level > right level, 返回left dfs的node else返回right dfs的  |
 | [889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) | _O(n)_ | _O(h)_	| Medium | 🔍💡难点是找到 left 和right的边界 or 用stack: 当back val 与postorder一样是 pop, 当left 没有child,append left, 否则append到 |
 | [1028. Recover a Tree From Preorder Traversal](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Hard | 😍 stack or DFS |
@@ -296,12 +296,14 @@ public:
 | [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Tree |
 | [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | Tree |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | Tree |
-| [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能Tree |
+| [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | Tree |
 | [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/) | _O(m \* n)_ | _O(h)_	| Easy | |
 | [617. Merge Two Binary Trees](https://leetcode.com/problems/merge-two-binary-trees/) | _O(n)_ | _O(h)_	| Easy | |
 | [623. Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/) | _O(n)_ | _O(h)_	| Medium | |
 | [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | |
 | [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy | |
+| [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/) | _O(n)_ | _O(h)_	| Easy |  |
+ [814. Binary Tree Pruning](https://leetcode.com/problems/binary-tree-pruning/) | _O(n)_ | _O(h)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
 ;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
