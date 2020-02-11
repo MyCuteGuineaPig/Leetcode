@@ -116,36 +116,7 @@ public:
 };
 
 
-//看左右两侧的高度
-class Solution {
-    int helper(TreeNode* root,int level,TreeNode* &ret){
-        if(!root)return level;
-        level++;
-        TreeNode *lt=NULL,*rt=NULL;
-        int a=helper(root->left,level,lt);
-        int b=helper(root->right,level,rt);
-        if(a>b)
-        {
-            ret = lt;
-            return a;
-        }
-        else if(a<b)
-        {
-            ret = rt;
-        }
-        else
-        {
-            ret = root;
-        }
-        return b;
-    }
-public:
-    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-        TreeNode *ret=NULL;
-        helper(root,0,ret);
-        return ret;
-    }
-};
+
 
 class Solution {
 public:
