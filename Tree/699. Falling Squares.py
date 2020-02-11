@@ -38,6 +38,27 @@ Thus, we return an answer of [2, 5, 5].
 """
 
 
+class Solution:
+    def fallingSquares(self, positions: List[List[int]]) -> List[int]:
+        res = []
+        mp = []
+        for start, h in positions:
+            end = start + h 
+            j = it = bisect.bisect_right(mp, [start, float('inf')])
+            n = len(mp)
+            preh = baseh = 0 if it == 0 else mp[it-1][1]
+            while j < n and mp[j][0] < end:
+                preh = mp[j][1]
+                baseh = max(baseh, mp[j][1])
+                j+=1
+            mp.append([start, baseh + h])
+            if j < n and mp[j][0] != end or j == n:
+                mp.append([end, preh])
+            mp[it:j] = []
+            mp.sort(key = lambda x: x[0] )
+            res.append( max(res[-1], baseh+h) if res else baseh + h )
+        return res
+
 """
 Solution 1: 
 跟218. The Skyline Problem 解法类似， 画出square的轮廓
