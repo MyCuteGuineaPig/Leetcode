@@ -293,6 +293,7 @@ public:
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [094. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Tree |
 | [099	Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/) | _O(n)_ | _O(1)_	| Hard | Tree |
+| [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy |❌  注: iterative stack push 顺序 |
 | [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Tree |
 | [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | Tree |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | Tree |
@@ -563,7 +564,7 @@ DEBUG stdout
 | [071. Simplify Path](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Medium |  🔍getline可以当做stack, 遇到".." stack pop; vector可以用作stack   |
 | [084. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | _O(n)_ | _O(n)_	| Hard |😍  <ul><li>__stack__: ascending stack, 难点: 找到left start</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
 | [085. Maximal Rectangle	](https://leetcode.com/problems/maximal-rectangle/) | _O(n\*m)_ | _O(m)_	| Hard | 🔍<ul><li>__stack__:与[084.](https://leetcode.com/problems/simplify-path/) 类似, matrix有n行，问题可以转换成n个Histogram的问题 </li><li>😍😍__DP__ : height代表从上到下，有几个连续的1, left: 现在这个height，左侧边界位置, right:这个height,长方形的右侧边界（右侧边界不包括在长方形内，是长方形右外侧第一个点）  </li></ul>|
-| [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy |😚🔍  push时候先push 左面的，再push右面的, top先top 右面的，再top 左面的，注: left->right算右面，right->left算左面; 也可以用queue |
+| [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy |❌  注: iterative stack push 顺序 |
 | [150. Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/) | _O(n)_ | _O(n)_	| Medium | Recursive or Stack(先pop的放符号右边，后pop的放左边)|
 | [155. Min Stack](https://leetcode.com/problems/min-stack/) | _O(n)_ | _O(1)_	| Easy | 😚🔍Descending Stack: 两个stack,一个用来放正常的顺序，另一个作为min stack用来存最小值(stk中的数是从小到大排序的)，只有当新来的小于等于minstack.top()，再push，pop时候，如果普通stack.top() == minstack.top(),minstack也pop; 关键是想要详情两个stack的顺序 |
 | [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium | 先左后右，每次go left, push into stack, 每次go right 不用push into stack  |
