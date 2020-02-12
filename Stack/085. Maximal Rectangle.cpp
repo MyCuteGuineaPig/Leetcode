@@ -39,6 +39,33 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        if (matrix.empty() || matrix[0].empty()) 
+            return 0;
+        int n = matrix.size(), m = matrix[0].size();
+        vector<int>heights(m);
+        int maxarea = 0;
+        for(int i = 0; i<n; ++i){
+            stack<int>stk;
+            for(int j = 0; j<=m; ++j){
+                int curh = 0;
+                if(j<m)
+                    heights[j] = matrix[i][j]=='1' ?  heights[j] + 1 : 0 ;
+                while(!stk.empty() && (j == m || heights[j] <= heights[stk.top()] ) ){
+                    int h = heights[stk.top()];  stk.pop();
+                    int x = stk.empty() ? j : j-stk.top() - 1;
+                    maxarea = max(maxarea, h*x);
+                }
+                stk.push(j);
+            }
+        }
+        return maxarea;
+    }
+};
+
 /*
 dp的解：
 
