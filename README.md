@@ -32,6 +32,7 @@ Python trick:
  😚 好的面试题 II (low priority)<br/>
 :alien:, 💡 比较tricky, 有陷阱<br/>
  🔍 偏算法逻辑<br/>
+:pencil2: 聪明的code 写法 <br/>
  🎅 偏思维逻辑 <br/>
  🌒, ❌ 不用太看的题目<br/>
  🐸 brainstorming <br/>
@@ -565,7 +566,7 @@ DEBUG stdout
 | [084. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | _O(n)_ | _O(n)_	| Hard |😍  <ul><li>__stack__: ascending stack, 难点: 找到left start</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
 | [085. Maximal Rectangle	](https://leetcode.com/problems/maximal-rectangle/) | _O(n\*m)_ | _O(m)_	| Hard | 🔍<ul><li>__stack__:与[084.](https://leetcode.com/problems/simplify-path/) 类似, matrix有n行，问题可以转换成n个Histogram的问题 </li><li>😍😍__DP__ : height代表从上到下，有几个连续的1, left: 现在这个height，左侧边界位置, right:这个height,长方形的右侧边界（右侧边界不包括在长方形内，是长方形右外侧第一个点）  </li></ul>|
 | [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy |❌  注: iterative stack push 顺序 |
-| [150. Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/) | _O(n)_ | _O(n)_	| Medium | Recursive or Stack(先pop的放符号右边，后pop的放左边)|
+| [150. Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/) | _O(n)_ | _O(n)_	| Medium  | :pencil2: Python Lambda Function in dictionary  |
 | [155. Min Stack](https://leetcode.com/problems/min-stack/) | _O(n)_ | _O(1)_	| Easy | 😚🔍Descending Stack: 两个stack,一个用来放正常的顺序，另一个作为min stack用来存最小值(stk中的数是从小到大排序的)，只有当新来的小于等于minstack.top()，再push，pop时候，如果普通stack.top() == minstack.top(),minstack也pop; 关键是想要详情两个stack的顺序 |
 | [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium | 先左后右，每次go left, push into stack, 每次go right 不用push into stack  |
 | [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | _O(1), amortized_ | _O(n)_	| Easy | 😚🔍两个stack in & out, in用来push, top: 假如out为空，dump stack in into out(此时out top顺序应该与push时候顺序一样)|
