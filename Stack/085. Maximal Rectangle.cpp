@@ -121,6 +121,18 @@ result
 0 0 3 2 3 0 0
 0 5 6 3 6 5 0
 
+
+max(left,left[i]) 解释:
+case 1:
+
+0 0  1  1
+0 1  1  1 ->  curleft = 1, left[3] = 2, 所以这点left[3] = max(1,2) = 2 
+
+case 2: 
+
+0 1 1 1 
+0 0 0 1  -> curleft = 3, left[3] = 1, 所以这点left[3] = max(1,3) = 3
+
 */
 
 class Solution {
@@ -190,6 +202,11 @@ result
 0 0 0 1 0 0 0
 0 0 3 2 3 0 0
 0 5 6 3 6 5 0
+
+
+
+
+
 
 */
 
