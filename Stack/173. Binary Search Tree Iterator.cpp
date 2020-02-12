@@ -70,31 +70,35 @@ Stack
  */
 class BSTIterator {
 public:
-    stack<int>stk;
-    BSTIterator(TreeNode *root) {
-        helper(root);
+    TreeNode* cur;
+    stack<TreeNode*>stk;
+    BSTIterator(TreeNode* root) {
+        cur = root;
     }
-
-    void helper(TreeNode* root){
-        if(!root) return;    
-        helper(root->right);
-        stk.push(root->val);
-        helper(root->left);
+    
+    /** @return the next smallest number */
+    int next() {
+        int val;
+        while(cur || !stk.empty()){
+            if(cur){
+                stk.push(cur);
+                cur = cur->left;
+            }else{
+                cur = stk.top();
+                stk.pop();
+                val = cur->val;
+                cur = cur->right;
+                break;
+            }
+        }
+        return val;
     }
     
     /** @return whether we have a next smallest number */
     bool hasNext() {
-        return !stk.empty();
-    }
-
-    /** @return the next smallest number */
-    int next() {
-        int res = stk.top();
-        stk.pop();
-        return res;
+        return cur || !stk.empty();
     }
 };
-
 
 
 
