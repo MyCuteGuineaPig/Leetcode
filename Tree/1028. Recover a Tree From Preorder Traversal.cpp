@@ -129,3 +129,46 @@ public:
         return root;
     }
 };
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* buildTree(const vector<int>&levels,const vector<int>&nums, int l, int& i){
+        if(i >= nums.size()) return nullptr;
+        TreeNode* cur = new TreeNode(nums[i++]);
+        if(i == nums.size()) return cur;
+        if(levels[i-1] == l)
+            cur->left = buildTree(levels, nums, l+1, i);
+        if(i <= levels.size() && levels[i-1] == l)
+            cur->right = buildTree(levels, nums, l+1, i);
+        return cur;
+    }
+    
+    TreeNode* recoverFromPreorder(string S) {
+        if(S.size() == 0) return nullptr;
+        int index = S.find('-');
+        int num = stoi(S.substr(0, index));
+        vector<int> nums = {num};
+        vector<int>levels;
+        while(index < S.size()){
+            int j = index; 
+            while(S[j] == '-') ++j;
+            int level = j-index;  levels.push_back(level);
+            index = S.find('-',j);
+            
+            num = stoi(S.substr(j, index - j));
+            nums.push_back(num);
+        }
+        int i = 0;
+        return buildTree(levels, nums,1, i);
+    }
+};

@@ -72,6 +72,29 @@ public:
 };
 
 
+class Solution {
+public:
+    TreeNode* helper(vector<int>& pre, unordered_map<int,int>& post_mp, int& index, int start, int end){
+        if(start > end || index >= pre.size()) return nullptr;
+        auto node = new TreeNode(pre[index++]);
+        if(start == end) return node;
+        int new_end = index < pre.size() ? post_mp[pre[index]]: -1; 
+        node->left = helper(pre, post_mp, index, start, new_end);
+        //if(new_end < end-1){ //因为顺序是left, right, top, 所以如果new_end 是 left, end 是top 点中间有点，就是right
+            node->right = helper(pre, post_mp, index, new_end+1, end-1);
+        //}
+        return node;
+    }
+    
+    TreeNode* constructFromPrePost(vector<int>& pre, vector<int>& post) {
+        unordered_map<int,int>post_mp;
+        for(int i = 0; i<post.size(); ++i)
+            post_mp[post[i]] = i;
+        int index = 0;
+        return helper(pre, post_mp, index, 0, pre.size()- 1);
+    }
+};
+
 /*
 
 preorder 顺序是 root, (left), (right)
@@ -150,6 +173,38 @@ Output: [1,2,3,4,5,6,7]
 
 postorder 跟tree 生成路径一样，先左，然后右，再回到root
 当back->val == postorder 时候表示现在subtree 走完了，需要回去
+
+
+
+比如 
+[1,2,4,5,6,3,7]
+[4,6,5,2,7,3,1]
+
+       1                                node 2 back 1        
+      /  \                              node 4 back 2
+     2    3                             node 5 back 2
+    / \     \                           node 6 back 5
+   4  5      7                          node 3 back 1
+     /                                  node 7 back 3
+     6
+
+case1 : 如果只有left
+       preorder 顺序是 : top -> left -> next
+       postorder 顺序是 :  left -> top,   到next: left和top -> pop
+
+case2:  如果有left & right:
+       preorder 顺序是 : top -> left -> right  -> next 
+       postorder 顺序是 :  left ->right -> top,   到right: left->pop, 因top has left, right = top->right, 
+                                                 到next: right & top -> pop, 
+                                                 
+case 3:  如果 只有right, (right 被当做left)
+      preorder 顺序是 : top -> right  -> next 
+       postorder 顺序是 :  right -> top,       到right:  因top has no left, right = top -> left
+
+cast 4:  无left, 无 right:
+    preorder 顺序是 : top  -> next
+    postorder 顺序是 :  top                   到 next, top -> pop
+
 */
 class Solution {
 public:
@@ -158,7 +213,7 @@ public:
         s.emplace_back(new TreeNode(pre[0]));
         for (int i = 1, j = 0; i < pre.size(); ++i) {
             auto node = new TreeNode(pre[i]);
-            while (s.back()->val == post[j]) {
+            while (s.back()->val == post[j]) { //preval == post val, 已经到最左侧了
                 s.pop_back(), ++j;
             }
             if (s.back()->left == nullptr) {
