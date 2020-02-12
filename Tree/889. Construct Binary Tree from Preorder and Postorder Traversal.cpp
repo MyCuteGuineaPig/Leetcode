@@ -72,6 +72,29 @@ public:
 };
 
 
+class Solution {
+public:
+    TreeNode* helper(vector<int>& pre, unordered_map<int,int>& post_mp, int& index, int start, int end){
+        if(start > end || index >= pre.size()) return nullptr;
+        auto node = new TreeNode(pre[index++]);
+        if(start == end) return node;
+        int new_end = index < pre.size() ? post_mp[pre[index]]: -1; 
+        node->left = helper(pre, post_mp, index, start, new_end);
+        //if(new_end < end-1){ //因为顺序是left, right, top, 所以如果new_end 是 left, end 是top 点中间有点，就是right
+            node->right = helper(pre, post_mp, index, new_end+1, end-1);
+        //}
+        return node;
+    }
+    
+    TreeNode* constructFromPrePost(vector<int>& pre, vector<int>& post) {
+        unordered_map<int,int>post_mp;
+        for(int i = 0; i<post.size(); ++i)
+            post_mp[post[i]] = i;
+        int index = 0;
+        return helper(pre, post_mp, index, 0, pre.size()- 1);
+    }
+};
+
 /*
 
 preorder 顺序是 root, (left), (right)
