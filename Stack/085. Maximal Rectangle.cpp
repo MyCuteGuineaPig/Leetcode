@@ -66,6 +66,11 @@ public:
     }
 };
 
+
+
+
+
+
 /*
 dp的解：
 
@@ -158,6 +163,66 @@ public:
 };
 
 
+//self
+/*
+
+matrix
+0 0 0 1 0 0 0
+0 0 1 1 1 0 0
+0 1 1 1 1 1 0
+
+height
+0 0 0 1 0 0 0
+0 0 1 2 1 0 0
+0 1 2 3 2 1 0
+
+left
+-1 -1 -1 3 -1 -1 -1
+-1 -1  2 3 2  -1  -1
+-1  1  2 3 2  -1  -1
+
+right
+8 8 8 4 8 8 8
+8 8 5 4 5 8 8
+8 6 5 4 5 6 8
+
+result
+0 0 0 1 0 0 0
+0 0 3 2 3 0 0
+0 5 6 3 6 5 0
+
+*/
+
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        if (matrix.empty() || matrix[0].empty()) 
+            return 0;
+        int n = matrix.size(), m = matrix[0].size();
+        vector<int>heights(m);
+        vector<int>left(m,-1), right(m,m+1);
+        int maxarea = 0;
+        for(int i = 0; i<n; ++i){
+            int curleft= 0, curright = m;
+            for(int j = 0; j<m; ++j){
+                heights[j] = matrix[i][j] == '1' ? heights[j] + 1 : 0;
+                left[j] =   matrix[i][j] == '1' ? max(curleft, left[j]): -1;
+                curleft =  matrix[i][j] == '1' ? curleft: j+1;
+                
+                int r = m-j-1;
+                right[r] =  matrix[i][r] == '1' ? min(curright, right[r]): m+1;
+                curright =  matrix[i][r] == '1' ? curright: r;
+            }
+
+            for(int j = m -1; j>=0; --j)
+               maxarea = max(maxarea, heights[j]*(right[j] - left[j]));
+        }
+        return maxarea;
+    }
+};
+
+
+
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
@@ -197,33 +262,4 @@ public:
 };
 
 
-class Solution {
-public:
-    int maximalRectangle(vector<vector<char>>& matrix) {
-        if(matrix.empty() || matrix[0].empty()) return 0;
-        int n = matrix.size(), m = matrix[0].size();
-        vector<int>height(m,0);
-        vector<int>left(m, 0);
-        vector<int>right(m,m); 
-        int maxarea = 0;
-        for(int i = 0; i<n; i++){
-            int cur_left = 0, cur_right = m;
-            for(int j = 0; j<m; j++)
-                height[j] = matrix[i][j] == '1' ? height[j]+1 : 0;
 
-            for(int j = 0; j<m; j++)
-                if(matrix[i][j] == '1') left[j] = max(left[j], cur_left);
-                else{  cur_left = j+1; left[j] = 0; }
-
-            for(int j = m-1; j>=0; j--)
-                if(matrix[i][j] == '1') right[j] = min(right[j], cur_right);
-                else{ cur_right = j; right[j] = m; }
-                    
-            for(int j = 0; j<m; j++)
-                if((right[j] - left[j])*height[j] >maxarea)
-                    maxarea = (right[j] - left[j])*height[j];
-
-        }
-        return maxarea;
-    }
-};
