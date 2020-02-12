@@ -37,5 +37,24 @@ class Solution:
 
 
 
-            
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        if not matrix or not matrix[0]: 
+            return 0;
+        maxarea = 0
+        n, m = len(matrix), len(matrix[0])
+        heights, left, right = [0,]*m, [-1,]*m, [m+1,]*m
+        for i in range(n):
+            curleft = 0; curright = m
+            for j in range(m):
+                heights[j] = heights[j] + 1 if matrix[i][j] == '1' else 0
+                left[j] = max(curleft, left[j]) if matrix[i][j] == '1' else -1
+                curleft = curleft if matrix[i][j] == '1' else j + 1 
+
+                r = m-j-1
+                right[r] = min(curright, right[r]) if matrix[i][r] == '1' else m+1 
+                curright = curright if matrix[i][r] == '1' else r
+            print(heights,left,right)
+            maxarea = max(maxarea, max( (r-l)*h for h, l, r in zip(heights,left, right)))
+        return maxarea            
     
