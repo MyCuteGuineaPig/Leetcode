@@ -49,3 +49,22 @@ class Solution:
                 secLarge = stk.pop()
             stk.append(i)
         return False
+    
+ 
+#Descending Stack, minv 
+ class Solution:
+    def find132pattern(self, nums: List[int]) -> bool:
+        if not nums:
+            return False
+        minv = nums[0]
+        stk = []
+        for i in nums[1:]:
+            if i <= minv:
+                minv = i
+            else:
+                while stk and i > stk[-1][0]:
+                    if i < stk[-1][1]:
+                        return True
+                    else: stk.pop()
+                stk.append([minv, i])
+        return False   
