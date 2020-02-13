@@ -124,3 +124,20 @@ public:
         return degree == 0;
     }
 };
+
+
+class Solution {
+public:
+    bool isValidSerialization(string preorder) {
+        int degree = 0;
+        stringstream ss(preorder);
+        string cur;
+        while(getline(ss, cur, ',')){
+            if (degree >= 1) return false;
+            ++degree;
+            if(cur == "#") continue;
+            else degree-=2;
+        }
+        return degree==1; //表示出root点的 是1个degree
+    }
+};
