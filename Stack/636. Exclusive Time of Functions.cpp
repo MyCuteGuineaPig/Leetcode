@@ -65,8 +65,10 @@ public:
                 job.push(time);
             }else{
                 res[id] += time - job.top()+1; //因为一个job可能被执行很多次, +1, 结束是在那一时刻运行完，
+              //job.top() assume都是上次开始
                 job.pop();
-                if(!job.empty()) job.top() = time + 1 - job.top();//开始是在结束后的下一秒开始，
+                if(!job.empty()) job.top() = time + 1 - job.top();//开始是在结束后的下一秒开始， job.top() 是上次花费时间，
+             // time + 1 - job.top() 是把start 平行移动,
             }
         }
         return res;
