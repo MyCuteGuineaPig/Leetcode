@@ -45,6 +45,21 @@ Functions could be called recursively, and will always end.
 1
 ["0:start:0","0:start:2","0:end:5","0:start:6","0:end:6","0:end:7"]
 
+
+只能出现下面的
+
+        |_____|  |____|
+    |___________________|
+|__________________________|
+ 
+ 
+ 不
+       |___________________|
+ |____________________|
+ 
+
+ 
+
 */
 
 class Solution {
