@@ -253,6 +253,39 @@ public:
  * while (i.hasNext()) cout << i.next();
  */
 
+class NestedIterator {
+public:
+    NestedIterator(vector<NestedInteger> &nestedList) {
+        stk.push({nestedList.begin(), nestedList.end()});
+    }
+    
+    stack<pair<vector<NestedInteger>::iterator, vector<NestedInteger>::iterator >>stk;
+    int val;
+        
+    int next() {
+        return val;
+    }
+    
+    bool hasNext(){
+        while(!stk.empty()){
+            if(stk.top().first == stk.top().second){
+                stk.pop();
+                continue;
+            }
+            if(stk.top().first->isInteger()){
+                val = stk.top().first->getInteger();
+                ++stk.top().first;
+                return true;
+            }
+            vector<NestedInteger>& newlist = stk.top().first->getList();
+            //一定用vector<NestedInteger>&， 用auto, 或者 vector<NestedInteger> 会error
+            ++stk.top().first;
+            stk.push({newlist.begin(), newlist.end()});
+        }
+        return false;
+    }
+
+};
 
 
 class NestedIterator {
