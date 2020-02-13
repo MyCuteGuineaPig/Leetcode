@@ -92,6 +92,60 @@ public:
     }
 };
 
+
+
+class Solution {
+public:
+    string countOfAtoms(string formula) {
+        stack<unordered_map<string,int>>stk;
+        unordered_map<string,int>cur;
+        for(int i = 0; i<formula.size(); ){
+            //cout<<" i "<<formula[i]<<endl;
+            if(formula[i] == '('){
+                stk.push(cur);
+                cur.clear();
+                ++i;
+            }else if(formula[i] == ')'){
+                int count = 0;
+                ++i;//jump ')'
+                while(isdigit(formula[i])){
+                    count = count*10 + formula[i] - '0';
+                    ++i;
+                }
+                count = count > 0 ? count : 1;
+                for(auto& it: cur)
+                    it.second *= count;
+                auto top = stk.top(); stk.pop();
+                for(auto it: top){
+                    cur[it.first] += it.second;
+                }
+            }
+            else{
+                string str(1,formula[i++]);
+                while(islower(formula[i]))
+                    str += formula[i++];
+                int count = 0;
+                while(isdigit(formula[i])){
+                    count = count*10 + formula[i] - '0';
+                    ++i;
+                }
+                cur[str] +=  count > 0 ? count : 1;
+                
+            }    
+            
+        }
+
+
+        vector<pair<string,int>>tmp;
+        for(auto i: cur){
+            tmp.emplace_back(i.first, i.second);
+        }
+        sort(tmp.begin(),tmp.end(), [](const pair<string,int>&a, const pair<string,int>&b){return a.first < b.first;});
+        return accumulate(tmp.begin(), tmp.end(), string(""), [](string& s, pair<string,int>&a){return s + a.first+ (a.second > 1 ? to_string(a.second) : "") ;});
+    }
+};
+
+
 class Solution {
 public:
     string countOfAtoms(string formula) {
