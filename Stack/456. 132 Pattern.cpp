@@ -126,6 +126,9 @@ public:
 
 
 /*
+
+也是descending stack, 因为minv 逐渐缩小过程
+
 从左向右loop的，寻找当前nums[i],最大的window(最大值和最小值)
 stk pair first存当前最小值，second存的在当前最小的minimum s1时的s3的最大值
 
@@ -151,7 +154,7 @@ public:
         for(int i = 1; i<nums.size(); i++){
             if(nums[i] <= minv) minv = nums[i];
             else{
-                while(!stk.empty() && nums[i] > stk.top().first){
+                while(!stk.empty() && nums[i] > stk.top().first){ //如果 nums[i] < stk.top().first, stk 前面也是nums[i], 因为stk.top().first 逐渐变小 
                     if(nums[i] < stk.top().second) return true;
                     else stk.pop();
                 }
