@@ -46,7 +46,7 @@ public:
         stk.push(1);
         stringstream ss(preorder);
         while(getline(ss,cur,',')){
-            if(stk.empty()) return false;
+            if(stk.empty()) return false; //现在node 必须有挂的位置
             if(cur == "#"){
                 if(stk.top() == 2) stk.top()--;
                 else{
@@ -57,6 +57,28 @@ public:
             else{
                 stk.push(2);
             }
+        }
+        return stk.empty();
+    }
+};
+
+//or 
+class Solution {
+public:
+    bool isValidSerialization(string preorder) {
+        stack<int>stk;
+        stringstream ss(preorder);
+        string cur;
+        bool begin = true;
+        while(getline(ss, cur, ',')){
+            if(stk.empty()) {
+                if(begin) begin = false; //只有刚开始的点没有地方挂
+                else return false;
+            }
+            if(cur == "#"){
+                while(!stk.empty() && stk.top() == 1) stk.pop();
+                if(!stk.empty()) --stk.top();
+            }else stk.push(2);
         }
         return stk.empty();
     }
