@@ -60,7 +60,8 @@ public:
 };
 
 
-
+//Good Solution,
+//遇到']' assume always have something inside strs stack
 class Solution {
 public:
     string decodeString(string s) {
