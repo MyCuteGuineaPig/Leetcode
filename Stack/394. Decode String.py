@@ -51,3 +51,25 @@ class Solution:
             else:
                 cur = cur + v
         return cur
+    
+    class Solution:
+        def decodeString(self, s: str) -> str:
+            self.index = 0
+            def helper():
+                res = ""
+                num = 0
+                while self.index < len(s):
+                    if s[self.index].isdigit():
+                        num = num*10 + int(s[self.index])
+                    elif s[self.index].isalpha():
+                        res += s[self.index]
+                    elif s[self.index] == '[':
+                        self.index += 1
+                        pattern = helper()
+                        res += pattern*num
+                        num = 0
+                    else: #']'
+                        return res
+                    self.index += 1
+                return res
+            return helper()
