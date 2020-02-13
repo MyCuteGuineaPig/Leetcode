@@ -29,3 +29,25 @@ class Solution:
                 pattern[-1]+=s[i]
             i+=1
         return pattern[-1]
+    
+    
+    class Solution:
+    def decodeString(self, s: str) -> str:
+        stk = []
+        nums = []
+        cur = ""
+        n = 0
+        for v in s:
+            if v == '[':
+                stk.append(cur)
+                nums.append(n)
+                cur = ''
+                n = 0
+            elif v == ']':
+                cur = cur*nums.pop()
+                cur = stk.pop() + cur
+            elif v.isdigit():
+                n = n* 10 + int(v)
+            else:
+                cur = cur + v
+        return cur
