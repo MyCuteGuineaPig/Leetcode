@@ -146,3 +146,30 @@ public:
         return open == 0;
     }
 };
+
+
+
+//self
+
+class Solution {
+public:
+    bool isNStraightHand(vector<int>& hand, int W) {
+        int size = hand.size();
+        if(size % W != 0) return false;
+        int batch = size / W;
+        map<int,int>mp;
+        for(auto i: hand) ++mp[i];
+        for(int z = 0; z<batch; ++z){
+            int start = mp.begin()->first;
+            for(int y = 0; y<W; ++y)
+            {
+                //cout <<"start "<<start+y <<" i "<<z<<" y " <<y<<endl;
+                if(mp.find(start+y) == mp.end()) return false;
+                --mp[start + y];
+                if(mp[start+y] == 0)
+                    mp.erase(start+y);
+            }
+        }
+        return true;
+    }
+};
