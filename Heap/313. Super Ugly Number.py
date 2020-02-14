@@ -47,3 +47,18 @@ class Solution:
             for v in primes[:ind+1]:
                 heapq.heappush(heap,ugly*v)
         return ugly
+
+      
+class Solution:
+    def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
+        if n == 1 : return 1
+        q = [i for i in primes]
+        for _ in range(n-2):
+            top = heapq.heappop(q)
+            for i, v in enumerate(primes):
+                if top % v == 0:
+                    for p in primes[:i+1]:
+                        heapq.heappush(q, p*top)
+                    break
+
+        return q[0]
