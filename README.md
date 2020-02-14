@@ -581,7 +581,7 @@ DEBUG stdout
 | [682. Baseball Game](https://leetcode.com/problems/baseball-game/) | _O(n)_ | _O(n)_	| Easy |  ❌bad problem description |
 | [726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/) | _O(n^2)_ | _O(n)_	| Hard | 类似 [394. Decode String](https://leetcode.com/problems/decode-string/) |
 | [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium |  🎅 碰撞发生只能是新来的小于0，stack top > 0 |
-| [736. Parse Lisp Expression](https://leetcode.com/problems/parse-lisp-expression/) | _O(n)_ | _O(n)_	| Hard | stack需要两个，一个是存string dict(用来储存let的字典), 一个存string vector(用来储存上个string的split), 遇到'(', 如果之前是let, 先存map, 然后push进两个stack, string vector清空，字典不清空 。 遇到')', 算当前的, 把结果push到上个string(stkstring.top()) 的结尾, pop两个stack|
+| [736. Parse Lisp Expression](https://leetcode.com/problems/parse-lisp-expression/) | _O(n)_ | _O(n)_	| Hard | ❌stack需要两个，一个是存string dict(用来储存let的字典), 一个存string vector(用来储存上个string的split), 遇到'(', 如果之前是let, 先存map, 然后push进两个stack, string vector清空，字典不清空 。 遇到')', 算当前的, 把结果push到上个string(stkstring.top()) 的结尾, pop两个stack|
 | [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | _O(n)_ | _O(n)_	| Medium | 🔍 Ascending/Descending stack, 可以正向也可以反向 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | Ascending & Descending Stack 按照 container的顺序进行排序 |
 
@@ -614,7 +614,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 ## Queue
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | Monoqueue using Deque<ul><li>deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小</br> __push__: 跟back对比, 如果back小, count加上back.second, pop back, 直到比现在这个数大或deque为空, push({val, count}) </br> __pop__: 看top second如果大于0(比当前数小,在windows开始到top的数还存在),top.second-1, 如果是0, pop_front() </li><li>  __deque int__ : 只存单个index, deque中最大数的index存前面（deque是按大小排序的，并且按照出现的前后顺序排序)，且front的index比backindex小，所以pop时候对比front是不是当前windows的 </li></ul> |
+| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | 😍 Monoqueue using Deque<ul><li>  __deque int__ : 只存单个index, descending queue </li><li>deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
 
 
 ## Heap
