@@ -68,7 +68,7 @@ public:
 
     void addNum(int num) {
         small.push(num);
-        large.push(-small.top());
+        large.push(-small.top()); //这么做因为, 比如small [1,3], large 是[2],  3>2, 把small push到small上来
         small.pop();
         if (small.size() < large.size()) {
             small.push(-large.top());
@@ -76,6 +76,22 @@ public:
         }
     }
 
+ /*
+        small.push(num);
+        if (small.size() > large.size() + 1 || !large.empty() && -large.top() < small.top()) {
+            large.push(-small.top());
+            small.pop();
+        }
+        
+        可能出现small size > large,  比如add 1 , 2 ,3 
+        add 1,  small [1], large []
+        add 2, small[1], large [2]
+        add 3, small[1], large [2,3],  因为small[1,3], 3> 2, 3 被push
+ 
+ */
+ 
+ 
+ 
     double findMedian() {
         return small.size() > large.size()
                ? small.top()
