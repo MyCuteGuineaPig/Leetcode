@@ -56,4 +56,43 @@ class Solution:
                     heapq.heappush(q, [d1 + l2[j+1][0] , i, j+1])
                     visited |= {(i, j+1)}
         return res 
-        
+    
+    
+    
+ class Solution:        
+    def kSmallestPairs(self, nums1, nums2, k):
+        queue = []
+        def push(i, j):
+            if i < len(nums1) and j < len(nums2):
+                heapq.heappush(queue, [nums1[i] + nums2[j], i, j])
+        push(0, 0)
+        pairs = []
+        while queue and len(pairs) < k:
+            _, i, j = heapq.heappop(queue)
+            pairs.append([nums1[i], nums2[j]])
+            push(i, j + 1)
+            if j == 0:
+                push(i + 1, 0)
+        return pairs
+    
+    
+#Brute Force  O(k) extra memory and O(mn log k) time.
+class Solution: 
+    def kSmallestPairs(self, nums1, nums2, k):
+        return map(list, sorted(itertools.product(nums1, nums2), key=sum)[:k])
+
+ #Brute Force       
+ class Solution: 
+    def kSmallestPairs(self, nums1, nums2, k):
+        return map(list, heapq.nsmallest(k, itertools.product(nums1, nums2), key=sum))
+
+#or 
+class Solution: 
+    def kSmallestPairs(self, nums1, nums2, k):
+        return heapq.nsmallest(k, ([u, v] for u in nums1 for v in nums2), key=sum)
+    
+class Solution: 
+    def kSmallestPairs(self, nums1, nums2, k):
+        streams = map(lambda u: ([u+v, u, v] for v in nums2), nums1)
+        stream = heapq.merge(*streams)
+        return [suv[1:] for suv in itertools.islice(stream, k)]
