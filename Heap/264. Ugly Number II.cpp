@@ -165,6 +165,24 @@ public:
 };
 
 
+/*
+注：上面的解不可以写成
+
+
+           if(ungly_number %2 == 0 || ungly_number %3 == 0 || ungly_number %5 == 0){
+                pq.push(ungly_number*2);
+            }if(ungly_number %3 == 0 ||ungly_number %5 == 0){
+                pq.push(ungly_number*3);
+            } if(ungly_number %5 == 0){
+                pq.push(ungly_number*5);
+            }
+
+这样比如  18,  3*2*3 可以, 3*3*2 都等于 18, 会被push 
+
+*/
+
+
+
 class Solution { //这个解会慢很多，上面priority queue的解每次push进的数都是unqiue的，这个会push进很多一样数的
 public:
     int nthUglyNumber(int n) {
