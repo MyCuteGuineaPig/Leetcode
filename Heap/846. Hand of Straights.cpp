@@ -100,6 +100,10 @@ public:
 
 /*
 
+上面方法对有的例子比较慢: 
+
+比如 w=3  map为[2:2], [3:3], [4:4], [5:2],[6:1],  需要loop 三次, start 分别为2,3,4 但是下面方法不需要loop 三次
+
 Explanation:
 
 Count number of different cards to a map c
