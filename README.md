@@ -614,7 +614,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 ## Queue
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | 😍 Monoqueue using Deque<ul><li>  __deque int__ : 只存单个index, descending queue </li><li>deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
+| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | 😍 Monoqueue using Deque<ul><li>  Solution 1 __deque int__ : 只存单个index, descending queue </li><li>Solution 2 deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
 
 
 ## Heap
