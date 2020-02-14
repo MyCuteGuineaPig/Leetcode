@@ -64,6 +64,28 @@ public:
 };
 
 
+//self
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int>stk;
+        for(auto i: asteroids){
+            if(i<0){
+                while(!stk.empty() && stk.back() > 0 && stk.back() < -i){ //只有back >0, 且绝对值小于现在i, pop
+                    stk.pop_back();
+                }
+                if(stk.empty() || stk.back() < 0)  //
+                    stk.push_back(i);
+                else if(stk.back() == -i)
+                    stk.pop_back();
+            }
+            else stk.push_back(i);
+        }
+        return stk;
+    }
+};
+
+
 class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
