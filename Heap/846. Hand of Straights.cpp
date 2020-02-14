@@ -159,13 +159,13 @@ public:
         int batch = size / W;
         map<int,int>mp;
         for(auto i: hand) ++mp[i];
-        for(int z = 0; z<batch; ++z){
-            int start = mp.begin()->first;
+        while(!mp.empty()){
+            int start = mp.begin()->first, count = mp.begin()->second;
             for(int y = 0; y<W; ++y)
             {
-                //cout <<"start "<<start+y <<" i "<<z<<" y " <<y<<endl;
-                if(mp.find(start+y) == mp.end()) return false;
-                --mp[start + y];
+                mp[start + y] -= count;
+                if(mp[start+y]<0) 
+                    return false;
                 if(mp[start+y] == 0)
                     mp.erase(start+y);
             }
