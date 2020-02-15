@@ -21,12 +21,31 @@ Return 4.
 */
 
 /*
-把长方形四边所有的cell push进min heap, 
-然后pop 当前最小的height的cell,loop它的四边, 相当于从长方形从外向内走，先选取高最短的，然后看边上有没有比它矮的还没visit过边
-- 如果cell一个边的高小于cell高， res +=  cell.h- heightmap[x][y]，
+解题关键: 
 
-push进queue(push的height是当前height和cell的最大值, 不能是最小值, 
-因为cell.height的最小值，所以圈内height有这个值决定（木桶效益取决于最短的板）
+一个点的filled water 取决于周围 四个方向的最高高度  的最低高度 （而不是周围四个点的最低高度！！！）
+
+比如
+
+0 0 3 0 0
+0 0 2 0 0
+3 2 1 2 3
+0 0 2 0 0
+0 0 3 0 0
+
+2 被fill 后push 到heap 的高度为 max(heights[i][j], top.h) = max(2,3) = h,
+如果在 2 点 push 到heap 高度为1, 那么 1 点的高度 就是 2-1 而不是 3-1了
+
+
+把长方形四边所有的cell push进min heap, 
+然后pop 当前最小的height的cell,loop它的四边, 相当于从长方形从外向内走，先选取 height 最低的，然后看边上有没有比它矮的还没visit过边
+- 如果cell一个边的高小于cell高， res +=  cell.h- heightmap[x][y]，
+- push进queue(push的height是当前height和cell的最大值, 不能是最小值, 
+- 因为cell.height的最小值，所以圈内height有这个值决定（木桶效益取决于最短的板）
+
+priority_queue 高度是 递增的
+
+
 
 
 */
