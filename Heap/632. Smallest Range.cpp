@@ -81,6 +81,21 @@ public:
             curmax = max(curmax, *next(begin));
             pq.push({begin+1, end});
         }
+        /*
+        //while 也可以这么写
+        while(true){
+            IT begin, end; 
+            tie(begin,end) = pq.top(); pq.pop();
+            if(++begin == end)
+                break;
+            pq.push({begin, end});
+            curmax = max(curmax, *begin);
+            if(curmax - *(pq.top().first) < range)
+            {
+                range = curmax - *(pq.top().first);
+                res = {*(pq.top().first), curmax};
+            }
+        */
         return res;
     }
 };
