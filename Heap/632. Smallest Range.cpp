@@ -50,6 +50,42 @@ data structure: minHeap;
 */
 
 
+//Self
+class Solution {
+public:
+    vector<int> smallestRange(vector<vector<int>>& nums) {
+        if(nums.empty()) 
+            return {};
+        using IT = vector<int>::const_iterator;
+        auto cmp = [](const pair<IT,IT>&a, const pair<IT,IT>&b){return *(a.first)>*(b.first); };
+        priority_queue<pair<IT,IT>, vector<pair<IT,IT>>, decltype(cmp)>pq(cmp);
+        int curmax = 0;
+        for(auto& num: nums){//必须用reference, 否则报错,因为auto num是copy, 没有reference,
+            //在for loop 在这个for loop后destroy
+            curmax = max(curmax,num.front());
+            pq.push({num.begin(), num.end()});
+        }
+        int range = curmax - *(pq.top().first);
+        vector<int>res = {*(pq.top().first),curmax };
+        while(true){
+            IT begin, end; 
+            tie(begin,end) = pq.top(); pq.pop();
+            if(curmax - *begin < range)
+            {
+                range = curmax - *begin;
+                res = {*begin, curmax};
+            }
+            
+            if(begin+1 == end)
+                break;
+            curmax = max(curmax, *next(begin));
+            pq.push({begin+1, end});
+        }
+        return res;
+    }
+};
+
+
 
 class Solution {
 public:
