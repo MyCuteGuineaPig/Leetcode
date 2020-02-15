@@ -67,7 +67,8 @@ public:
                 int y = it.second + top.y;
                 if(x<0 || x>=n || y<0 || y>=m || visited[x][y])  continue;
                 if(heightMap[x][y] < top.h) res+= top.h - heightMap[x][y];
-                minheap.push(cell(x,y, max(top.h, heightMap[x][y])));
+                minheap.push(cell(x,y, max(top.h, heightMap[x][y]))); //因为top.h 是外面最低的,
+                //if heightMap[x[y] < top.h, 那么这个block 已经fill 了 top.h - heightMap[x][y])
                 visited[x][y] = 1;
             }
             
