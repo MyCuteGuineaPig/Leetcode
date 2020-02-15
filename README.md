@@ -618,6 +618,9 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 
 
 ## Heap
+
+<ul><li>C++ priority_queue default是max heap</li><li> Python的heapq default是min heap. </li><li> ```priority_queue<int, vector<int>, less<int>>``` 是max_heap, ```greater<int>是min_heap``` </li><li> ```multiset<int, greater<int>>``` 是max_heap  </li><li>  multiset和priority_queue用的default comparator相反</li></ul> 
+
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | 😍🎅🎅<ul><li>__dp__: loop n 而不是 loop 1 到 n-th ugly number</li><li> __heap__ 的解：:alien: 避免heap中出现重复数 </li></ul>|
@@ -628,7 +631,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [407. Trapping Rain Water II](https://leetcode.com/problems/trapping-rain-water-ii/) | _O(m \* n \* (logm + logn))_ | _O(m\*n)_	| Hard | 把长方形四边所有的cell push进min heap, 然后pop 当前最小的height的cell,loop它的四边,如果边高小于cell高，结果加上这个差，再push进queue(push的height是当前height和cell的最大值) [visualation](https://www.youtube.com/watch?time_continue=80&v=cJayBq38VYw) |
 | [632. Smallest Range](https://leetcode.com/problems/smallest-range/) | _O(nklogk)_ | _O(k)_	| Medium | 把所有vector\[i]\[0]的数push进minheap, 然后pop heap, 更新最大值和最小值,如果最大值-最小值<range, 更新range |
 | [846. Hand of Straights](https://leetcode.com/problems/hand-of-straights/) | _O(nlogn)_ | _O(n)_	| Medium | 🔍 <br/><ul><li>Solution 1: set, set.begin 为每个group 的起点</li><li>😍[Solution 2](https://github.com/beckswu/Leetcode/blob/master/Heap/846.%20Hand%20of%20Straights.cpp): set + queue, queue记录每个点的windows 每个点 新增加windows数</li></ul> |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | <ul><li>C++ priority_queue default是max heap</li><li> Python的heapq default是min heap. </li><li> ```priority_queue<int, vector<int>, less<int>>``` 是max_heap, ```greater<int>是min_heap``` </li><li> ```multiset<int, greater<int>>``` 是max_heap  </li><li>  multiset和priority_queue用的default comparator相反</li></ul>   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |   |
 
 
 
