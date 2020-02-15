@@ -639,7 +639,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 ## Two Pointer 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Easy | fast先前进n个，然后slow，fast同时前进，知道fast到null, list总长l, 需要remove的index是l-n, slow要前进到l-n-1, 所以先前进n个，再前进到尾部就是l-n-1 |
+| [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Medium | 🔍two pointer, list总长l, 需要remove的index是l-n, slow要前进到l-n-1, 所以先前进n个，再前进到尾部就是l-n-1 |
 | [086. Partition List](https://leetcode.com/problems/partition-list/) | _O(n)_ | _O(1)_	| Medium |  <ul><li>先把head所有小于x的pass掉,slow,head=first大于等于x的node, loop fast 当fast小于x,把这个放在slow上,slow前进一位</li><li> 建两个node，一个small,一个big,把所有小于的head放在small，其他的放在big，最后把所有big挂在small的后面 </li></ul> |
 | [141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) | _O(n)_ | _O(1)_	| Easy | |
 | [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | |
