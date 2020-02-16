@@ -71,6 +71,41 @@ private:
 };
 
 
+//self
+/*
+
+for 条件 是 i>=0 || j>=0;， 不能是 i>=0 && j>=0;
+ 否则比如
+
+"nzp#o#g"
+"b#nzp#o#g"
+
+return false;
+*/
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) {
+        int i = S.size()-1, j = T.size() -1 ;
+        for(; i>=0 || j>=0; --i, --j){
+            int count_i = 0, count_j= 0 ;
+            while(i>=0 && (S[i] == '#' || count_i> 0 )){
+                count_i += S[i] == '#' ? 1 : -1;
+                --i;
+            }
+            while(j>=0 && (T[j] == '#' || count_j> 0 )){
+               count_j += T[j] == '#' ? 1 : -1;
+               --j;
+            }
+            //cout<<i<<" j "<<j<<endl;
+            if( (i<0) != (j<0 )) 
+                return false;
+            if( i>= 0 && j>=0 && S[i] != T[j])
+                return false;
+        }   
+        
+        return i == j;
+    }
+};
 
 class Solution {
 public:
