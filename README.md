@@ -509,6 +509,13 @@ public:
             map[s2[i]-'a']--;
             if(map[s2[i] - 'a'] <0)
                 while(left<= i && map[s2[i]-'a'] < 0) map[s2[left++]-'a']++;
+                /* or
+
+                while( mp[s2[left]]++ >= 0 )
+                    ++left;
+                ++left;
+                */
+
             if(i-left+1 == len){
                 res.push_back(left);
             }
@@ -619,10 +626,12 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 
 ## Heap
 
-<ul><li>C++ priority_queue default是max heap</li><li> Python的heapq default是min heap. </li><li> ```priority_queue<int, vector<int>, less<int>>``` 是max_heap, ```greater<int>是min_heap``` </li><li> ```multiset<int, greater<int>>``` 是max_heap  </li><li>  multiset和priority_queue用的default comparator相反</li></ul> 
+
+
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
+| | | | | <ul><li>C++ priority_queue default是max heap</li><li> Python的heapq default是min heap. </li><li> ```priority_queue<int, vector<int>, less<int>>``` 是max_heap, ```greater<int`>```是min_heap </li><li> ```multiset<int, greater<int>>``` 是max_heap  </li><li>  multiset和priority_queue用的default comparator相反</li></ul>  |
 | [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | 😍🎅🎅<ul><li>__dp__: loop n 而不是 loop 1 到 n-th ugly number</li><li> __heap__ 的解：:alien: 避免heap中出现重复数 </li></ul>|
 | [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 虽是hard, 逻辑简单, 两个heap, minheap, maxheap, <br/> ✏️可以看看[**python heapq用法**](https://github.com/beckswu/Leetcode/blob/master/Heap/295.%20Find%20Median%20from%20Data%20Stream.py) ```heappushpop```  |
 | [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) |
@@ -648,10 +657,10 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) | _O(n)_ | _O(1)_	| Easy | ❌ 记录swap后第一个0位置 |
 | [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | _O(n)_ | _O(1)_	| Easy | 😍🎅 类似[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) ,有duplicate一定会有cycle, **难点: 找起点**<ul><li> 所有数都在\[0,n], ```nextIndex = num-1```,从n+1(index为n)开始，就不会上来进入循环 </li><li> 从0开始进入,```nextIndex = num```  </li><li>每个数数都在\[1,n],从0开始</li></ul> |
 | [344. Reverse String](https://leetcode.com/problems/reverse-string/) | _O(n)_ | _O(1)_	| Easy | 🔍[bit来进行swap](https://github.com/beckswu/Leetcode/blob/master/Two%20Pointers/344.%20Reverse%20String.cpp#L31) |
-| [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/) | _O(n+m)_ | _O(min(m, n))_	| Easy | ❌ <ul><li> 用hashmap, O(N) </li><li>binary search, 要sort两个vector,然后loop v1, 到v2中找有没有v1\[i]这个数</li><li>two pointer, sort两个vector,it1=v1.begin(), it2=v2.begin(),然后根据it1,it2大小,更新结果和自增it1和it2 </li></ul> |
+| [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/) | _O(n+m)_ | _O(min(m, n))_	| Easy | <ul><li> 用hashmap, O(N) </li><li>binary search, 要sort两个vector,然后loop v1, 到v2中找有没有v1\[i]这个数</li><li>two pointer, sort两个vector,it1=v1.begin(), it2=v2.begin(),然后根据it1,it2大小,更新结果和自增it1和it2 </li></ul> |
 | [350.Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/) | _O(n+m)_ | _O(1)_	| Easy | ❌<ul><li> 如果没有sort, space: ```O(1)``` complexity ```O(max(n,n)*log(max(m,n))``` 的解为binary search, two pointer  </li><li>如果有sort, space: O(1) complexity O(m+n)的解为two pointer </li><li> ✏️[C++ Set Intersection](https://github.com/beckswu/Leetcode/blob/master/Two%20Pointers/350.%20Intersection%20of%20Two%20Arrays%20II.cpp#L124) </li></ul>  |
 | [457. Circular Array Loop](https://leetcode.com/problems/circular-array-loop/) | _O(n)_ | _O(1)_	| Medium | ❌array loop必须是单向的, 比如1->2, 2->1 不算是loop，循环array每次两个pointer检查有没有loop,如果没有loop,把这次所有走过的点都标成0,下次不用再走了, 类似[141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) |
-| [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | sliding Window(长度为len(s1)), 每次移动框,vector减去新来的，加上刚刚pass的，直到l长度为0 |
+| [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | 😍sliding Window(长度为len(s1)), 每次移动框,vector减去新来的，加上刚刚pass的，直到l长度为0 |
 | [611. Valid Triangle Number](https://leetcode.com/problems/valid-triangle-number/) | _O(n^2)_ | _O(1)_	| Medium |先sort然后两个pointer,每一个都指向一个边 |
 | [777. Swap Adjacent in LR String](https://leetcode.com/problems/swap-adjacent-in-lr-string/) | _O(n)_ | _O(1)_	| Medium | R是向前走，L是向后走（swap R 和L都需要X）, 两个pointer，遇到X往前跳 |
 | [826. Most Profit Assigning Work](https://leetcode.com/problems/most-profit-assigning-work/) | _O(mlogm + nlogn)_ | _O(1)_	| Medium | <ul><li>sort jobs & work, 两个pt,一个指worker, 一个指jobs, profit记录到worker i之前最大的收益</li><li>用一个size=10001的vector, v\[i]表示第difficulty为i时，最大的profit </li></ul> |
