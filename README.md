@@ -28,8 +28,8 @@ Python trick:
 2. ```join``` 可以直接加generator, 比如 ```"".join(map(func, S))```
 3. list 用于 inside function, 不能用 ```list += []```, 只能用```append```
 
- 😍 好的面试题<br/>
- 😚 好的面试题 II (low priority)<br/>
+ 😍 反复看的题<br/>
+ 😚 反复看的题 II (low priority)<br/>
 :alien:, 💡 比较tricky, 有陷阱<br/>
  🔍 偏算法逻辑<br/>
 :pencil2: 聪明的code 写法 <br/>
@@ -640,10 +640,10 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Medium | 🔍two pointer, list总长l, 需要remove的index是l-n, slow要前进到l-n-1, 所以先前进n个，再前进到尾部就是l-n-1 |
-| [086. Partition List](https://leetcode.com/problems/partition-list/) | _O(n)_ | _O(1)_	| Medium |  <ul><li>先把head所有小于x的pass掉,slow,head=first大于等于x的node, loop fast 当fast小于x,把这个放在slow上,slow前进一位</li><li> 建两个node，一个small,一个big,把所有小于的head放在small，其他的放在big，最后把所有big挂在small的后面 </li></ul> |
-| [141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) | _O(n)_ | _O(1)_	| Easy | |
-| [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | |
-| [143. Reorder List](https://leetcode.com/problems/reorder-list/) | _O(n)_ | _O(1)_	| Medium | 用fast & slow先找到medium的点，slow到结尾所有的点reverse, 然后p1 = head, p2 = middle后一点，一个p1, 一个p2 插进pointer，就是结果 |
+| [086. Partition List](https://leetcode.com/problems/partition-list/) | _O(n)_ | _O(1)_	| Medium | 🔍 <ul><li>先把head所有小于x的pass掉,slow,head=first大于等于x的node, loop fast 当fast小于x,把这个放在slow上,slow前进一位</li><li> 建两个node，一个small,一个big,把所有小于的head放在small，其他的放在big，最后把所有big挂在small的后面 </li></ul> |
+| [141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) | _O(n)_ | _O(1)_	| Easy | ❌ |
+| [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | 🔍[具体数学解释](https://github.com/beckswu/Leetcode/blob/master/Two%20Pointers/142.%20Linked%20List%20Cycle%20II.cpp) |
+| [143. Reorder List](https://leetcode.com/problems/reorder-list/) | _O(n)_ | _O(1)_	| Medium | 😚🎅 用fast & slow先找到medium的点，slow到结尾所有的点reverse, 然后p1 = head, p2 = middle后一点，一个p1, 一个p2 插进pointer，就是结果 |
 | [167.Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | _O(n)_ | _O(1)_	| Easy | two pointer, 一个从开始位置，一个从末尾的位置 |
 | [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) | _O(n)_ | _O(1)_	| Easy | |
 | [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | _O(n)_ | _O(1)_	| Easy | 类似[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) ,有duplicate一定会有cycle<ul><li> 每个数减去1,所有数都在\[0,n-1],从n开始，因为从n开始不会自己循环 </li><li>每个数数都在\[1,n],从0开始</li></ul> |
