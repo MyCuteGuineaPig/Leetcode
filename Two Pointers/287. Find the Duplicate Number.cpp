@@ -81,21 +81,23 @@ public:
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        int n = nums.size()-1;
-        int slow = nums[n]-1;
-        int fast = nums[nums[n]-1]-1;
-        while(slow!=fast){
-            slow = nums[slow]-1;
-            fast = nums[nums[fast]-1]-1;
+        int n = nums.size(); //这的n实际上是n+1
+        int slow = 0;
+        int fast = 0;
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }while(slow != fast);
+        slow = 0;
+        while(slow != fast){
+            //cout<<" aaaslow "<<slow<<" fast "<<fast<<endl;
+            slow = nums[slow];
+            fast = nums[fast];
         }
-        slow = n;
-        while(slow!=fast){
-            slow = nums[slow]-1;
-            fast = nums[fast]-1;
-        }
-        return slow+1;
+        return slow;
     }
 };
+
 
 /*
 所有数不减去1,所有数都是在【1,n】 不减去1从i=0开始就不会回到0，
