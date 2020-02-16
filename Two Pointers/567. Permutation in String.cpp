@@ -54,6 +54,8 @@ loop s2,
                                  窗口在a到l之间，i=8的位置，i+1-s1.length() = 6
                                 
 */
+
+//fixed window size
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
@@ -73,6 +75,7 @@ public:
     }
 };
 
+//fixed window size
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
@@ -89,8 +92,29 @@ public:
     }
 };
 
+//moving window size 
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        if(s1.size() > s2.size()) return false;
+        unordered_map<char,int>mp;
+        for(auto s: s1) ++mp[s];
+        int left = 0, len = s1.size();
+        for(int i = 0; i<s2.size(); ++i){
+            //cout<<i<<" left "<<left<<endl;
+            if(--mp[s2[i]]<0){
+                while( mp[s2[left]]++ >= 0 )
+                    ++left;
+                ++left;
+            }
+            if(i - left + 1 == len) return true;
+        }
+        return false;
+    }
+};
 
-//3
+
+//3 
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
@@ -116,6 +140,7 @@ public:
     }
 };
 //4 方法3，4类似
+//不fix window size
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
