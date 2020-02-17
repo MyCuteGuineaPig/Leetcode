@@ -85,8 +85,8 @@ vector存上一个这个字母出现位置，和上上次这个字母出现位�
 s = "ABAB"
 i 0 index[c][1] -1 index[c][0] -1 res 0
 i 1 index[c][1] -1 index[c][0] -1 res 0
-i 2 index[c][1] 0 index[c][0] -1 res 2  "A"(i=0), "AB"(i=0,1) 贡献了两个substring
-i 3 index[c][1] 1 index[c][0] -1 res 6  "ABA"(i=[0,2]), "BA"(i=[1,2]), "AB"  (i=[0,1]), "B"(i=1) 贡献了四个substring
+i 2 index[c][1] 0 index[c][0] -1 res 2,  2种可能 让A(i=0) 在substring中是unique  "A"(i=0), "AB"(i=0,1) 贡献了两个substring
+i 3 index[c][1] 1 index[c][0] -1 res 6,  4种可能 让B(i=1) 在substring 中是unique  "ABA"(i=[0,2]), "BA"(i=[1,2]), "AB"  (i=[0,1]), "B"(i=1) 贡献了四个substring
 
 N
 c = A,  index[c][1] = 2 index[c][0] = 1,  "BAB" (i=[1,3]), "BA" (i=[1,2]), "AB" (i=[2,3]), "A" (i=2)贡献了四个substring
@@ -105,7 +105,7 @@ public:
         for (int i = 0; i < N; ++i) {
             int c = S[i] - 'A';
             cout<<"i "<<i<<" index[c][1] "<<index[c][1]<<" index[c][0] "<<index[c][0];
-            res = (res + (i - index[c][1]) * (index[c][1] - index[c][0]) % mod) % mod;
+            res = (res + (i - index[c][1]) * (index[c][1] - index[c][0]) % mod) % mod; //注意对res, 还要mod一下
             cout<<" res "<<res<<endl;
             index[c][0] = index[c][1];
             index[c][1] = i;
@@ -121,9 +121,13 @@ public:
 DP 解
 
 showLastPosition是存的上一个以这个字母结束的最后一位
-contribution[x] 以x结束的贡献的长度
+contribution[x] 以x结束, x为unique的新贡献的substring个数
+cur以x 为结尾的，每个substring中 unqiue的个数
+
 
 cur[i] = cur[i - 1] - contribution[S.charAt(i)] + (i - showLastPosition[S.charAt(i)])
+
+- contribution[S.charAt(i)]： 因为这个点和上个点char一样,  减去上个 S.charAt(i) 贡献为unqiue的substring 个数
 */
 class Solution {
 public:
@@ -142,8 +146,28 @@ public:
             cur += contribution[x]; 
             showLastPosition[x] = i ;
             res += cur;
+            //cout<<" cur "<<cur<<" i "<<i <<" S[i] "<<S[i]<<" contribution "<<contribution[x]<<endl;
         }   
         return res;
     }
 
 };
+
+
+/*
+E,g, ABAB 
+
+ cur 1 i 0 S[i] A contribution 1   new constribution A (i = 0)               cur A
+ cur 3 i 1 S[i] B contribution 2   new constribution AB(i=1,2)  B (i=1)      cur AB, B  3个unique
+ cur 4 i 2 S[i] A contribution 2   new constribution BA         A (i=2)      cur ABA, BA, A  4个unique 
+ cur 4 i 3 S[i] B contribution 2   new constribution BA         AB(i=3,4)    cur ABAB, BAB, AB, B, 4个unique 
+
+
+E,g, ABCB
+  
+ cur 1 i 0 S[i] A contribution 1    new constribution A (i = 0)               cur A
+ cur 3 i 1 S[i] B contribution 2    new constribution AB(i=1,2)  B (i=1)      cur AB, B  3个unique
+ cur 6 i 2 S[i] C contribution 3    new constribution ABC        BC,  C       cur C, AB, ABC,  6个unique 
+ cur 6 i 3 S[i] B contribution 2    new constribution  CB,      AB            cur ABCB, BCB, CB, B 6个unique 
+
+*/
