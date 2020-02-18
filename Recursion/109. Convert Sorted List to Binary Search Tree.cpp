@@ -146,6 +146,32 @@ public:
     }
 };
 
+//or 
+class Solution {
+public:
+    TreeNode* helper(ListNode*& head, int start,int end ){
+        if(start > end ) return nullptr;
+        int mid = (start + end )>>1;
+        TreeNode* left = helper(head, start, mid-1);
+        TreeNode* root = new TreeNode(head->val);
+        head = head->next;
+        root->left = left;
+        root->right = helper(head, mid+1, end);
+        return root;
+    }
+    
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        int n = 0; 
+        ListNode* cur = head;
+        while(cur){
+            ++n;
+            cur = cur->next;
+        }
+        return helper(head, 0, n-1);
+    }
+};
+
 /*
 Given the sorted linked list: [-10,-3,0,5,9],
 上面解会返回    
