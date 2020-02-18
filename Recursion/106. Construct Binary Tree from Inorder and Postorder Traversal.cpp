@@ -44,6 +44,31 @@ public:
 };
 
 
+//stack solution
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        if(postorder.empty()) return nullptr;
+        stack<TreeNode*>stk;
+        TreeNode* root = new TreeNode(postorder[postorder.size()-1]), * cur = root;
+        for(int p = postorder.size()-2, i = inorder.size()-1; p>=0; --p){
+           //cout<<p <<" i "<<i<<endl;
+            if(inorder[i] == cur->val){
+                --i;
+                while(!stk.empty() && stk.top()->val == inorder[i]){
+                    --i;
+                    cur = stk.top(); stk.pop();
+                }
+                cur = cur->left = new TreeNode(postorder[p]);
+            }else{
+                stk.push(cur);
+                cur = cur->right = new TreeNode(postorder[p]);
+            }
+        }
+        return root;
+    }
+};
+
 /*
 The the basic idea is to take the last element in postorder array as the root,
  find the position of the root in the inorder array; then locate the range for left sub-tree and 
