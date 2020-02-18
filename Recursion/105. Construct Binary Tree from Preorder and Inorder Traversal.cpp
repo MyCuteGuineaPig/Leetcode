@@ -38,6 +38,39 @@ public:
     }
 };
 
+
+//stack 解
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if(preorder.empty()) return {};
+        TreeNode* cur = new TreeNode(preorder[0]), *root = cur;
+        stack<TreeNode*>stk;//stk 用来preorder iterative traversal 
+        for(int i = 1, j = 0; i<preorder.size(); ++i){ //如果preorder 是 top->left, in order left->top,  不会经过if, 直接返回root
+            if(cur->val == inorder[j]){ 
+                /*
+                //preorder top->left->right, in order 是 left->top->right,
+                如果到right, stack 顺序是 left, top, 这样最好cur = top 
+               
+               //preorder top->right, in order 是 top->right, 
+               //到right, stack 是top, pop, cur  =top,  top->right = right
+                
+                */
+                ++j;
+                while(!stk.empty() && stk.top()->val == inorder[j]){
+                    ++j;
+                    cur = stk.top(); stk.pop();
+                }
+                cur = cur->right = new TreeNode(preorder[i]); 
+            }else{
+                stk.push(cur);//下面cur->left 会改边这个cur
+                cur = cur->left = new TreeNode(preorder[i]);
+            }
+        }
+        return root;
+    }
+};
+
 /*
 
 Solution:
