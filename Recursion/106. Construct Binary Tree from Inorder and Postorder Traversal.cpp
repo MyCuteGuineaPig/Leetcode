@@ -21,6 +21,29 @@ Return the following binary tree:
 */
 
 
+//O(1) extra space, 逻辑跟105. Construct Binary Tree from Preorder and Inorder Traversal 一样
+class Solution {
+public:
+
+    TreeNode* helper(const vector<int>& inorder,  const vector<int>& postorder,int& i, int& p, int stop){
+        if(p < 0) return nullptr;
+        if(inorder[i] == stop ){
+            --i;
+            return nullptr;
+        }
+        TreeNode* cur = new TreeNode(postorder[p--]);
+        cur->right =helper (inorder, postorder, i, p, cur->val);
+        cur->left =helper(inorder, postorder, i, p, stop);
+        return cur;
+    }
+
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+       int i = inorder.size()-1, p = postorder.size()-1;
+       return helper(inorder, postorder, i, p, numeric_limits<int>::max());
+    }
+};
+
+
 /*
 The the basic idea is to take the last element in postorder array as the root,
  find the position of the root in the inorder array; then locate the range for left sub-tree and 
@@ -48,15 +71,7 @@ public:
     }
 };
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+
 class Solution {
 public:
     unordered_map<int,int>inIndex;
