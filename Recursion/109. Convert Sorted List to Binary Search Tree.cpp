@@ -125,9 +125,50 @@ public:
         auto curr = new TreeNode((*head)->val);
 
         *head = (*head)->next;
+        /*
+        不可以写成 head = &((*head)->next); 这样只改变了当前head 的地址, 
+        
+        比如:  [-10,-3,0,5,9],
+            0
+           /  \
+         -10   5
+           \    \
+           -3    9
+         
+        在-10点， head = &((*head)->next)， head 变为3
+        curr->right = -3 
+        但是当return 当0点是, 0的地址并没有改变, 所以值还是-10 
+        
+        */
         curr->left = left;
         curr->right = BuildBSTFromSortedDoublyListHelper(head, m + 1, e);
         return curr;
+    }
+};
+
+//or 
+class Solution {
+public:
+    TreeNode* helper(ListNode*& head, int start,int end ){
+        if(start > end ) return nullptr;
+        int mid = (start + end )>>1;
+        TreeNode* left = helper(head, start, mid-1);
+        TreeNode* root = new TreeNode(head->val);
+        head = head->next;
+        root->left = left;
+        root->right = helper(head, mid+1, end);
+        return root;
+    }
+    
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        int n = 0; 
+        ListNode* cur = head;
+        while(cur){
+            ++n;
+            cur = cur->next;
+        }
+        return helper(head, 0, n-1);
     }
 };
 
