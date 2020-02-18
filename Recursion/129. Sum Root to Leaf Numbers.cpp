@@ -39,30 +39,18 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 */
 
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        vector<int>tree;
-        if (root)
-            helper(root, 0, tree);
-        return accumulate(tree.begin(),tree.end(),0);
+        return helper(root, 0);
     }
     
-    void helper(TreeNode *root, int prev, vector<int>&tree){
-        if(!root->left && !root->right) tree.push_back(prev*10+root->val);
-        if(root->left)
-            helper(root->left, prev*10+root->val, tree);
-        if(root->right)
-            helper(root->right, prev*10+root->val, tree);
+    int helper(TreeNode *root, int prev){
+        if(!root) return 0;
+        prev = prev*10+root->val;
+        if(!root->left && !root->right) return prev;
+        return helper(root->left, prev)+helper(root->right, prev);
     }
 };
 
@@ -91,16 +79,21 @@ public:
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        return helper(root, 0);
+        vector<int>tree;
+        if (root)
+            helper(root, 0, tree);
+        return accumulate(tree.begin(),tree.end(),0);
     }
     
-    int helper(TreeNode *root, int prev){
-        if(!root) return 0;
-        prev = prev*10+root->val;
-        if(!root->left && !root->right) return prev;
-        return helper(root->left, prev)+helper(root->right, prev);
+    void helper(TreeNode *root, int prev, vector<int>&tree){
+        if(!root->left && !root->right) tree.push_back(prev*10+root->val);
+        if(root->left)
+            helper(root->left, prev*10+root->val, tree);
+        if(root->right)
+            helper(root->right, prev*10+root->val, tree);
     }
 };
+
 
 
 /*
