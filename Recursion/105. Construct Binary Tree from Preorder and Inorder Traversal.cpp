@@ -216,7 +216,7 @@ public:
     */
     {
         //cout<<" pind "<<p<<" ind "<<i<<" end "<<end<<endl;
-        if(i < inorder.size() && inorder[i] != preorder[end])
+        if(i < inorder.size() && (end == inorder.size() || inorder[i] != preorder[end]))
         {
             //cout<<" in "<<" preorder "<<preorder[p]<<" inorder "<<inorder[i]<<endl;
             TreeNode* ret = new TreeNode(preorder[p++]);
@@ -230,25 +230,6 @@ public:
     }
 };
 
- 
-class Solution {
-public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        int prestart = 0, instart = 0;
-        return helper(preorder, inorder, prestart, instart, -1);
-    }
-    
-    TreeNode *helper(vector<int>& preorder, vector<int>& inorder, int &prestart, int&instart, int preprev){
-        if(prestart <preorder.size() && (preprev == -1 || inorder[instart]!=preorder[preprev])){
-            TreeNode *root = new TreeNode(preorder[prestart++]);
-            root->left = helper(preorder, inorder, prestart, instart, prestart-1);
-            instart++;
-            root->right = helper(preorder, inorder, prestart, instart, preprev);
-            return root;
-        }
-        return nullptr;
-    }
-};
 
 
 /*
