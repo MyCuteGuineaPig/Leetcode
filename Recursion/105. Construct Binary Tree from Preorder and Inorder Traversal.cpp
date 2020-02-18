@@ -20,23 +20,6 @@ Return the following binary tree:
 
 */
 
-//write by own
-class Solution {
-public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        unordered_map<int,int>inorder_;
-        for(int i = 0; i<inorder.size(); i++) inorder_[inorder[i]] = i;
-        return buildTree(preorder,inorder_, 0, preorder.size()-1, 0);
-    }
-
-    TreeNode* buildTree(vector<int>&preorder, unordered_map<int,int>&inorder_, int s, int e, int s_in){
-        if(s>e) return nullptr;
-        TreeNode* cur = new TreeNode(preorder[s]);
-        cur->left = buildTree(preorder, inorder_, s+1, s + inorder_[preorder[s]] - s_in, s_in);
-        cur->right = buildTree(preorder, inorder_, s+1+inorder_[preorder[s]] - s_in, e, s_in+1+inorder_[preorder[s]] - s_in);
-        return cur;
-    }
-};
 
 
 //stack 解
@@ -72,6 +55,53 @@ public:
         return root;
     }
 };
+
+
+//O(1) space 
+/*
+
+end 是对比left child 来说的返回点 比如,  ()在当前 function 中end值
+
+                                1   
+                    /                  \
+                   /                     \ 
+                 2 (1)                   9(Inf)
+               /      \                  /    \
+            /           \               #(9)   \
+          /                \                     \
+          3(2)              4(1)                  10 (Inf)
+      /       \            /  \                   /  \
+     5(3)     6(2)    7(4)    8 (1)             #(10) #(INF)
+    /  \      /  \     /    \     /  \ 
+   #(5) #(3) #(6) #(2) #(7)  #(4) #(8) #(1) 
+   
+preorder  1 2 3 5 6 4 7 8 9 10
+inorder   5 3 6 2 7 4 8 1 9 10 
+
+最底层stop 的顺序等于 inorder的顺序
+
+*/
+class Solution {
+public:
+    TreeNode* helper(const vector<int>& preorder, const vector<int>& inorder, int& p, int& i, int stop)    {
+        if(p >= preorder.size()) return nullptr;
+        if(inorder[i] == stop){
+            ++i;
+            return nullptr;
+        }
+        TreeNode* cur = new TreeNode(preorder[p++]);
+        cur->left = helper(preorder, inorder, p, i, cur->val);
+        cur->right = helper(preorder, inorder, p, i, stop);
+        return cur;
+        
+    }
+    
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int p=0, i = 0;
+        return helper(preorder, inorder, p,i, numeric_limits<int>::min());
+    }
+};
+
 
 /*
 
