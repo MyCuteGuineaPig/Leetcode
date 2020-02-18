@@ -48,6 +48,8 @@ public:
         stack<TreeNode*>stk;//stk 用来preorder iterative traversal 
         for(int i = 1, j = 0; i<preorder.size(); ++i){ //如果preorder 是 top->left, in order left->top,  不会经过if, 直接返回root
             if(cur->val == inorder[j]){ 
+                //不能是preorder[i] == inorder[j] 作为对比条件 因为 preorder top->left->right, inorder: left->right->top
+                //left 就不能append 到left
                 /*
                 //preorder top->left->right, in order 是 left->top->right,
                 如果到right, stack 顺序是 left, top, 这样最好cur = top 
