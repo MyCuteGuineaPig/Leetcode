@@ -42,6 +42,8 @@ public:
                 while(j<end && m[s[j]]<k) j++;
                 if(j == end) return helper(s,start, i, k);
                 return max(helper(s,start, i, k), helper(s,j,end, k));
+                //不能返回 max(i-start, helper(s,j,end,k) 原因是： 比如: ababacb k=3
+                // 到c m[s[i]] < 1, i-start = 5-0 = 5, 但是ababa 的a 个数并不满足大于3 
             }
         }   
         return end-start;
