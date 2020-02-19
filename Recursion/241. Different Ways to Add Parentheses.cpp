@@ -24,6 +24,64 @@ Explanation:
 
 
 */
+
+//self, beat 100% speed, 100% memory
+class Solution {
+public:
+    void helper(unordered_map<int,unordered_map<int, vector<int>>>&mp, const vector<int>&nums, const vector<char>& signs, int start, int end){
+        for(int i = start; i<end; ++i){
+            vector<int>left;
+            if(mp.find(start) == mp.end() || mp[start].find(i) == mp[start].end())
+                helper(mp, nums, signs,start, i);
+            left = mp[start][i]; 
+            vector<int>right;
+            if(mp.find(i+1) == mp.end() || mp[i+1].find(end) == mp[i+1].end())
+                helper(mp, nums, signs, i+1, end);
+            right = mp[i+1][end];   
+            //cout<<"start "<<start<<" end "<<end<<" i "<<i<<" left "<<left.size()<<" right "<<right.size() <<endl;
+            for(auto l: left)
+                for(auto r: right)
+                    mp[start][end].push_back(cal(l, r, signs[i]));
+        }
+    }
+    
+    void parse(const string& s, vector<int>&nums, vector<char>& signs, unordered_map<int,unordered_map<int, vector<int>>>&mp ){
+        int n = 0, cnt = 0;
+        for(auto i:  s){
+            if(isdigit(i)){
+                n = n*10 + i-'0';   
+            }
+            else {
+                nums.push_back(n);
+                mp[cnt][cnt++].push_back(n);
+                n = 0;
+                signs.push_back(i);
+            }
+        }
+        mp[cnt][cnt].push_back(n);
+        nums.push_back(n);
+    }
+    
+    int cal(int a, int b, char sign){
+        if(sign == '+') return a+b;
+        else if(sign == '-') return a-b;
+        return a*b;
+    }
+    
+    vector<int> diffWaysToCompute(string input) {
+        unordered_map<int,unordered_map<int, vector<int>>>mp; //key is start, end is second key
+        vector<int>nums;   vector<char>signs;
+        parse(input, nums, signs, mp);
+        helper(mp, nums, signs, 0, nums.size()-1);
+        return mp[0][nums.size()-1];
+    }
+};
+
+
+
+
+
+
 class Solution {
 public:
     unordered_map<int, unordered_map<int,vector<int>>>dp;
