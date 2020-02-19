@@ -52,7 +52,29 @@ public:
     }
 };
 
+/*
+ while (root && root->val>R) {  
+    root = root->left;
+    while (root && root->val<L) root = root->right;
+}
 
+而不是
+ while (root && root->val>R) {  
+    root = root->left;
+} 原因是可能螺旋式下降  比如
+
+ L = 30, R＝　35
+ 
+            50
+           /
+         20 
+           \
+           40
+          /
+         25
+          \ 
+           33 
+*/
 class Solution {
 public:
     TreeNode* trimBST(TreeNode* root, int L, int R) {
