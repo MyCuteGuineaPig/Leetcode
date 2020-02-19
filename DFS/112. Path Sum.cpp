@@ -47,6 +47,30 @@ public:
     }
 };
 
+//iterative
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        stack<TreeNode*>stk;
+        while(root || !stk.empty()){
+            if(root){
+                stk.push(root);
+                if(root->left)
+                    root->left->val += root->val;
+                else if(!root->right && root->val == sum)
+                    return true;
+                root = root->left;       
+            }else{
+                root = stk.top(); stk.pop();
+                if(root->right)
+                    root->right->val += root->val;
+                root = root->right;
+            }
+        }
+        return false;
+    }
+};
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
