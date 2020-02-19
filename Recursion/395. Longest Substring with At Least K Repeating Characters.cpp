@@ -51,6 +51,29 @@ public:
 };
 
 
+
+
+class Solution {
+public:
+    int longestSubstring(string s, int k) {
+        if(s.size() == 0 || k>s.size()) return 0;
+        if(k == 0) return s.size();
+        unordered_map<char, int>mp;
+        for(auto i: s)
+            ++mp[i];
+        int i = 0;
+        while(i < s.size() && mp[s[i]]>=k) ++i;
+        if(i == s.size()) return s.size();
+        //不加j，会tle
+        int j = i;
+        while(j < s.size() && mp[s[j]] < k) ++j;
+        return max(longestSubstring(s.substr(0,i),k), longestSubstring(s.substr(j),k));
+    }
+};
+
+
+
+
 /*
 Naive Solution
 Sol1: a simple improvement on the naive quaratic solution. The idea is that if a locally longest substr is found, 
