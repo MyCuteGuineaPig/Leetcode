@@ -250,6 +250,39 @@ public:
 };
 
 
+//如果有right child, 经过root 两次 
+//112. Path Sum  https://leetcode.com/problems/path-sum/
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        stack<TreeNode*>stk;
+        TreeNode* cur = root, *pre = nullptr;
+        while(cur || !stk.empty()){
+            if(cur){
+                stk.push(cur);
+                sum -= cur->val;
+                cur = cur->left;       
+            }else{
+                cur = stk.top();
+                if(!cur->right && !cur->left && sum == 0)
+                     return true;
+                
+                if(cur->right && cur->right != pre){
+                    cur = cur->right;
+                }
+                else{
+                    pre = cur;
+                    sum += cur->val;
+                    cur = nullptr;
+                    stk.pop();
+                }
+            }
+        }
+        return false;
+    }
+};
+
+
 TreeNode* helper(TreeNode** head ){
         int val = *head; //获取值, 比如值是5,
         TreeNode** cur = head; //
@@ -805,7 +838,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/) | _O(n)_ |	_O(logn)_	| Medium | 🔍[注意O(N)的解，不是two pointer的](https://github.com/beckswu/Leetcode/blob/master/Recursion/109.%20Convert%20Sorted%20List%20to%20Binary%20Search%20Tree.cpp#L106) |
 | [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/description/) | _O(n)_ |	_O(h)_	| Medium |😚 跟[095. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)类似 用bottom-up 比top-down 更efficient |
 | [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/) | _O(n)_ |	_O(h)_	| Medium | ❌```if not left: return h(r.right)+1; ```, ```if not right: return h(r.left)+1; ``` ```else: return min(h(r.right), h(r.left))+1; ``` |
-| [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | ❌ |
+| [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | 🔍(iterative Solution: 如果有right会经过root 两次)[https://github.com/beckswu/Leetcode/blob/master/DFS/112.%20Path%20Sum.cpp#L74]  |
 | [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/) | _O(n)_ |	_O(h)_	| Hard | 🔍not hard question |
 | [129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/) | _O(n)_ |	_O(h)_	| Medium | O(1) extra memory  |
 | [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Tree |
@@ -836,7 +869,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | ❌ |
+| [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | 🔍(iterative Solution: 如果有right会经过root 两次)[https://github.com/beckswu/Leetcode/blob/master/DFS/112.%20Path%20Sum.cpp#L74]  |
 | [113	Path Sum II](https://leetcode.com/problems/path-sum-ii/) |	_O(n)_	| _O(h)_ |	Medium |	🔍(iterative Solution: 如果有right会经过root 两次)[https://github.com/beckswu/Leetcode/blob/master/DFS/113.%20Path%20Sum%20II.cpp#L53] |
 | [199	Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)	| _O(n)_	| _O(h)_	| Medium		 |  用NULL 可以作为queue的层和层间隔  |
 | [200	Number of Islands](https://leetcode.com/problems/binary-tree-right-side-view/description/)	| _O(m \* n)_ |	_O(m \* n)_ |	Medium		|   |
