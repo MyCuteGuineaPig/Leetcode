@@ -720,6 +720,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Tree |
 | [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | Tree |
 | [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/) | _O(n)_ |	_O(h)_	| Easy | ❌  |
+| [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/) | _O(n)_ |	_O(h)_	| Easy | unorderedmap 存的在现在点之前的 <prefix sum, frequency> pairs. 从中间某点到现在sum = 从root到现在点sum - root到中间某点的sum |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | Tree |
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | Tree |
 | [572. Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/) | _O(m \* n)_ | _O(h)_	| Easy | |
@@ -727,6 +728,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [623. Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/) | _O(n)_ | _O(h)_	| Medium | |
 | [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/) | _O(n)_ | _O(h)_	| Easy | |
 | [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/) | _O(n)_ | _O(h)_	| Easy | |
+| [671. Second Minimum Node In a Binary Tree](https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/) | _O(n)_ |	_O(h)_	| Easy | ❌ |
 | [687. Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/) | _O(n)_ | _O(h)_	| Easy |  |
 | [669. Trim a Binary Search Tree](https://leetcode.com/problems/trim-a-binary-search-tree/description/) | _O(n)_ |	_O(h)_	| Easy |😚 |
  [814. Binary Tree Pruning](https://leetcode.com/problems/binary-tree-pruning/) | _O(n)_ | _O(h)_	| Medium | |
@@ -765,7 +767,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/) | _O(n)_ |	_O(h)_	| Easy | unorderedmap 存的在现在点之前的 <prefix sum, frequency> pairs. 从中间某点到现在sum = 从root到现在点sum - root到中间某点的sum |
 | [669. Trim a Binary Search Tree](https://leetcode.com/problems/trim-a-binary-search-tree/description/) | _O(n)_ |	_O(h)_	| Easy |😚 |
 | [671. Second Minimum Node In a Binary Tree](https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/) | _O(n)_ |	_O(h)_	| Easy | ❌ |
-| [761. Special Binary String](https://leetcode.com/problems/special-binary-string/description/) | _O(n^2)_ |	_O(n)_	| Hard | Divide-conquer, 把每个special string 再分成小的special string,然后sort |
+| [761. Special Binary String](https://leetcode.com/problems/special-binary-string/description/) | _O(n^2)_ |	_O(n)_	| Hard | ❌Bad problem description Divide-conquer, 把每个special string 再分成小的special string,然后sort |
 
 </br>
 </br>
