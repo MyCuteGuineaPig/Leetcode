@@ -47,6 +47,60 @@ public:
     }
 };
 
+//iterative
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        stack<TreeNode*>stk;
+        while(root || !stk.empty()){
+            if(root){
+                stk.push(root);
+                if(root->left)
+                    root->left->val += root->val;
+                else if(!root->right && root->val == sum)
+                    return true;
+                root = root->left;       
+            }else{
+                root = stk.top(); stk.pop();
+                if(root->right)
+                    root->right->val += root->val;
+                root = root->right;
+            }
+        }
+        return false;
+    }
+};
+
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        stack<TreeNode*>stk;
+        TreeNode* cur = root, *pre = nullptr;
+        while(cur || !stk.empty()){
+            if(cur){
+                stk.push(cur);
+                sum -= cur->val;
+                cur = cur->left;       
+            }else{
+                cur = stk.top();
+                if(!cur->right && !cur->left && sum == 0)
+                     return true;
+                
+                if(cur->right && cur->right != pre){
+                    cur = cur->right;
+                }
+                else{
+                    pre = cur;
+                    sum += cur->val;
+                    cur = nullptr;
+                    stk.pop();
+                }
+            }
+        }
+        return false;
+    }
+};
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {

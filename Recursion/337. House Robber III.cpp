@@ -26,6 +26,22 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
 */
 
 
+class Solution {
+public:
+    pair<int,int>helper(TreeNode* root){ //first last, second last two
+        if(!root) return {0,0};
+        pair<int,int>l = helper(root->left);
+        pair<int,int>r = helper(root->right);
+        return {max(l.second + r.second + root->val, l.first + r.first), l.first + r.first };
+        //first 用上root的最大值,
+        //second, 不用现在root的
+    }
+    
+    int rob(TreeNode* root) {
+        return helper(root).first;
+    }
+};
+
 /*
 返回一个vector, vector 第一个存的是用上一个最大的获取值，第二个存的是不用上一个 最大的获取值
 */

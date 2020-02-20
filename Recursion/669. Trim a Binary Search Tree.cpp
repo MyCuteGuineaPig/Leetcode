@@ -38,15 +38,43 @@ Output:
 
 */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+class Solution {
+public:
+    TreeNode* trimBST(TreeNode* root, int L, int R) {
+        if(!root) return root;
+        root -> left =  trimBST(root->left, L, R);
+        root -> right =trimBST(root->right, L, R);
+        if(root->val < L) return root->right;
+        if(root->val > R) return root->left;
+       
+        return root;
+
+    }
+};
+
+/*
+ while (root && root->val>R) {  
+    root = root->left;
+    while (root && root->val<L) root = root->right;
+}
+
+而不是
+ while (root && root->val>R) {  
+    root = root->left;
+} 原因是可能螺旋式下降  比如
+
+ L = 30, R＝　35
+ 
+            50
+           /
+         20 
+           \
+           40
+          /
+         25
+          \ 
+           33 
+*/
 class Solution {
 public:
     TreeNode* trimBST(TreeNode* root, int L, int R) {
