@@ -869,8 +869,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | 🔍(iterative Solution: 如果有right会经过root 两次)[https://github.com/beckswu/Leetcode/blob/master/DFS/112.%20Path%20Sum.cpp#L74]  |
-| [113	Path Sum II](https://leetcode.com/problems/path-sum-ii/) |	_O(n)_	| _O(h)_ |	Medium |	🔍(iterative Solution: 如果有right会经过root 两次)[https://github.com/beckswu/Leetcode/blob/master/DFS/113.%20Path%20Sum%20II.cpp#L53] |
+| [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | 🔍[iterative Solution: 如果有right会经过root 两次](https://github.com/beckswu/Leetcode/blob/master/DFS/112.%20Path%20Sum.cpp#L74)  |
+| [113	Path Sum II](https://leetcode.com/problems/path-sum-ii/) |	_O(n)_	| _O(h)_ |	Medium |	🔍[iterative Solution: 如果有right会经过root 两次](https://github.com/beckswu/Leetcode/blob/master/DFS/113.%20Path%20Sum%20II.cpp#L53) |
 | [199	Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)	| _O(n)_	| _O(h)_	| Medium		 |  用NULL 可以作为queue的层和层间隔  |
 | [200	Number of Islands](https://leetcode.com/problems/binary-tree-right-side-view/description/)	| _O(m \* n)_ |	_O(m \* n)_ |	Medium		|   |
 | [236	Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)	|	_O(n)_ |	_O(h)_ |	Medium	| 🔍 DFS left, right 如果left，right 各含有p,q</br> 返回current root， 否则返回left or right 同时含有p,q的那个;关键是: 不一定p,q都会经过，比如p是q的parent，到p直接返回，不会经过q |
