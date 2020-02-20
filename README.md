@@ -144,7 +144,7 @@ Python trick:
 
 ```c++
 //Inorder Traversal
-//stack
+//stack, 
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
@@ -279,6 +279,45 @@ public:
             }
         }
         return false;
+    }
+};
+
+
+//In order traversal, 不同于之前的iterative 解, 这是每个node 都先被push 进stack, 只有return back时候才pop
+/*
+详见  236. Lowest Common Ancestor of a Binary Tree
+https://github.com/beckswu/Leetcode/blob/master/DFS/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.cpp#L32，
+     1
+    /
+    2 
+     \
+      3  
+
+最上面的inorder 的 stack 到3时候是  [1，3 
+        下面解的stack 是 到3是   [1,2,3]
+
+*/
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        //iterative, path comparing
+        if(!root ) return root;
+        vector<TreeNode*> path;
+        if(root)
+            path.push_back(root); //temp是stack，元素是从root到现在node上的路径
+        TreeNode *prev = nullptr;
+        while(!path.empty()){
+            root=temp.back();
+            if(!root->left && !root->right || !root->right && prev==root->left || root->right && prev==root->right){
+                path.pop_back();
+                prev=root;
+            }
+            else{
+                if(!root->left || prev==root->left) path.push_back(root->right);
+                else path.push_back(root->left);
+            }
+        }
     }
 };
 
@@ -844,6 +883,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/) | _O(n)_ |	_O(h)_	| Medium | O(1) extra memory  |
 | [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Tree |
 | [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | Tree |
+| [199	Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)	| _O(n)_	| _O(h)_	| Medium		 |  ❌ Easy  |
 | [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/) | _O(n)_ |	_O(h)_	| Easy | ❌  |
 | [437. Path Sum III](https://leetcode.com/problems/path-sum-iii/description/) | _O(n)_ |	_O(h)_	| Easy | unorderedmap 存的在现在点之前的 <prefix sum, frequency> pairs. 从中间某点到现在sum = 从root到现在点sum - root到中间某点的sum |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | Tree |
@@ -871,9 +911,9 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | 🔍[iterative Solution: 如果有right会经过root 两次](https://github.com/beckswu/Leetcode/blob/master/DFS/112.%20Path%20Sum.cpp#L74)  |
 | [113	Path Sum II](https://leetcode.com/problems/path-sum-ii/) |	_O(n)_	| _O(h)_ |	Medium |	🔍[iterative Solution: 如果有right会经过root 两次](https://github.com/beckswu/Leetcode/blob/master/DFS/113.%20Path%20Sum%20II.cpp#L53) |
-| [199	Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)	| _O(n)_	| _O(h)_	| Medium		 |  用NULL 可以作为queue的层和层间隔  |
-| [200	Number of Islands](https://leetcode.com/problems/binary-tree-right-side-view/description/)	| _O(m \* n)_ |	_O(m \* n)_ |	Medium		|   |
-| [236	Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)	|	_O(n)_ |	_O(h)_ |	Medium	| 🔍 DFS left, right 如果left，right 各含有p,q</br> 返回current root， 否则返回left or right 同时含有p,q的那个;关键是: 不一定p,q都会经过，比如p是q的parent，到p直接返回，不会经过q |
+| [199	Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)	| _O(n)_	| _O(h)_	| Medium		 |  ❌ Easy  |
+| [200	Number of Islands](https://leetcode.com/problems/number-of-islands/)	| _O(m \* n)_ |	_O(m \* n)_ |	Medium		|   |
+| [236	Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)	|	_O(n)_ |	_O(h)_ |	Medium	| 🔍 [Iterative Solution](https://github.com/beckswu/Leetcode/blob/master/DFS/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.cpp#L32) |
 | [257	Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/description/) | 	_O(n \* h)_ | _O(h)_ | Easy 	| <ul><li>可以用queue，BFS 扫每个level，返回最右侧的 </li> <li>也可以用加上一个null pointer在 每个level</br>  queue 最后面，一旦返回null，知道这层扫完了，</br> append last number </li></ul>|
 | [282	Expression Add Operators](https://leetcode.com/problems/expression-add-operators/)	| _O(4^n)_ | _O(n)_ | Hard | DFS，需要cv (cumulative sum), pv(previous sum),</br>  pos 到现在process的index，注意: <ul><li>现在是'\*', cv = cv - pv + p\*n, pv = pv\*n </li> <li>现在是'-', cv = cv - pv + n, pv = -n </li></ul> 🌒|
 | [301. Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/description/)	| _O(C(n, c))_	| _O(c)_ | Hard | <ul><li> DFS: 开始DFS前记录left_removed，</br> right_removed, 这样可以保证删除的parenthese 最短，</br> 再记录pair，'(' 时候pair+1, ')'时候pair-1， pair最后等于0， 表示valid</li> <li>BFS: 用unordered_set 记录所有被visited的string，每次取一次char修改 push到queue</li></ul>|
