@@ -59,6 +59,23 @@ public:
 
 class Solution {
 public:
+    void helper(TreeNode* root, vector<int>&view, int h){
+        if(!root) return;
+        if(h == view.size()) view.push_back(root->val);
+        else view[h] = root->val;
+        helper(root->left, view, h+1);
+        helper(root->right, view, h+1);
+    }
+    
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>view;
+        helper(root, view, 0);
+        return view;
+    }
+};
+
+class Solution {
+public:
     vector<int> rightSideView(TreeNode* root) {
         vector<int>res;
         if(!root)
