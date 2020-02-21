@@ -33,45 +33,6 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
 
 */
 
-/**
- * 
- * some observations:
-https://leetcode.com/problems/reconstruct-itinerary/discuss/78768/Short-Ruby-Python-Java-C++
-The nodes which have odd degrees (int and out) are the entrance or exit. In your example it’s JFK and A.
-
-If there are no nodes have odd degrees, we could follow any path without stuck until hit the last exit node
-
-The reason we got stuck is because that we hit the exit
-
-In your given example, nodes A is the exit node, we hit it and it’s the exit. So we put it to the result as the last node.
-*/
-
-class Solution {
-public:
-    vector<string> findItinerary(vector<pair<string, string>> tickets) {
-        unordered_map<string, priority_queue<string, vector<string>, greater<string>>>m; 
-        vector<string>res;
-        for(auto t: tickets){
-            m[t.first].push(t.second);
-        }
-        dfs("JFK", res, m);
-        reverse(res.begin(),res.end());
-        return res;
-    }
-
-     void dfs(string cur, vector<string>& res, unordered_map<string, priority_queue<string, vector<string>, greater<string>>>& m)      {
-        //cout<<"cur " << cur <<endl;
-        while(!m[cur].empty()){
-            string s = m[cur].top();
-            m[cur].pop();
-            //cout<<"before dsf cur "<<cur<<" size "<<m[cur].size()<<endl;
-            dfs(s, res, m);
-            //cout<<"after dfs "<<cur<<" size "<<m[cur].size()<<endl;
-        }
-        //cout<<"push back "<<cur<<endl;
-        res.push_back(cur);
-    }
-};
 
 
 //DFS with memoization
