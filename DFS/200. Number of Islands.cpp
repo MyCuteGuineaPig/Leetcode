@@ -23,6 +23,7 @@ Answer: 3
 
 */
 
+//DFS
 class Solution {
 public:
     int n,m;
@@ -124,6 +125,101 @@ public:
         DFS(grid, visited, x, y+1);
         DFS(grid, visited, x, y-1);
     }
+};
+
+
+//BFS
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size(), n = m ? grid[0].size() : 0, islands = 0, offsets[] = {0, 1, 0, -1, 0};
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    islands++;
+                    grid[i][j] = '0';
+                    queue<pair<int, int>> todo;
+                    todo.push({i, j});
+                    while (!todo.empty()) {
+                        pair<int, int> p = todo.front();
+                        todo.pop();
+                        for (int k = 0; k < 4; k++) {
+                            int r = p.first + offsets[k], c = p.second + offsets[k + 1];
+                            if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] == '1') {
+                                grid[r][c] = '0';
+                                todo.push({r, c});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return islands;
+    }
+};
+
+//Union Find with Rank Heuristics
+
+class Solution {
+public:
+
+    class DisjointSet{
+        vector<int>parents;
+        int cnt = 0; 
+        vector<int>ranks;
+        private: 
+            int find(int a){
+                return parents[a] == a ? a : parents[a] = find(parents[a]);
+            }
+        
+        public:
+            int get_size() const {return cnt;}
+            DisjointSet(int size){
+                parents.resize(size);
+                ranks.resize(size);
+            }
+            void assign(int x){
+                parents[x] = x;
+                ++cnt;
+            }
+            void join(int a, int b){
+                int px = find(a), py = find(b);
+                if(px == py) 
+                    return;
+                --cnt;
+                if(ranks[px] > ranks[py]){
+                    parents[py] = px;
+                }else if(ranks[px] < ranks[py])
+                    parents[px] = py;
+                else{
+                    ++ranks[px];
+                    parents[py] = px;
+                }
+                
+            }
+    };
+
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.empty() || grid[0].empty())
+            return 0;
+        int n = grid.size(), m = grid[0].size();
+        DisjointSet uf(m*n);
+        for(int i =0; i<n; i++)
+            for(int j = 0; j<m; ++j)
+                if(grid[i][j] == '1')
+                    uf.assign(i*m + j);
+
+        for(int i = 0; i<n; i++)
+            for(int j = 0; j<m; ++j){
+                if(i> 0 && grid[i][j] == '1' && grid[i-1][j] == '1')
+                    uf.join(i*m + j, (i-1)*m + j);
+                if(j> 0 && grid[i][j] == '1' && grid[i][j-1] == '1')
+                    uf.join(i*m + j, i*m + j-1);
+            }
+        return uf.get_size();
+    }
+
+    
 };
 
 
