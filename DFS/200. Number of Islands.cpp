@@ -158,6 +158,71 @@ public:
     }
 };
 
+//Union Find with Rank Heuristics
+
+class Solution {
+public:
+
+    class DisjointSet{
+        vector<int>parents;
+        int cnt = 0; 
+        vector<int>ranks;
+        private: 
+            int find(int a){
+                return parents[a] == a ? a : parents[a] = find(parents[a]);
+            }
+        
+        public:
+            int get_size() const {return cnt;}
+            DisjointSet(int size){
+                parents.resize(size);
+                ranks.resize(size);
+            }
+            void assign(int x){
+                parents[x] = x;
+                ++cnt;
+            }
+            void join(int a, int b){
+                int px = find(a), py = find(b);
+                if(px == py) 
+                    return;
+                --cnt;
+                if(ranks[px] > ranks[py]){
+                    parents[py] = px;
+                }else if(ranks[px] < ranks[py])
+                    parents[px] = py;
+                else{
+                    ++ranks[px];
+                    parents[py] = px;
+                }
+                
+            }
+    };
+
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.empty() || grid[0].empty())
+            return 0;
+        int n = grid.size(), m = grid[0].size();
+        DisjointSet uf(m*n);
+        for(int i =0; i<n; i++)
+            for(int j = 0; j<m; ++j)
+                if(grid[i][j] == '1')
+                    uf.assign(i*m + j);
+
+        for(int i = 0; i<n; i++)
+            for(int j = 0; j<m; ++j){
+                if(i> 0 && grid[i][j] == '1' && grid[i-1][j] == '1')
+                    uf.join(i*m + j, (i-1)*m + j);
+                if(j> 0 && grid[i][j] == '1' && grid[i][j-1] == '1')
+                    uf.join(i*m + j, i*m + j-1);
+            }
+        return uf.get_size();
+    }
+
+    
+};
+
+
 //Union Find
 class Solution {
 public:
