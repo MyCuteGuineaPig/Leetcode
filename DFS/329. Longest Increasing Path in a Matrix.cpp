@@ -78,59 +78,30 @@ public:
 class Solution {
 public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
-        if(matrix.empty() || matrix[0].empty()) return 0;
-        int longest = 0;
-        vector<vector<int>>visited(matrix.size(), vector<int>(matrix[0].size(), 0));
-        for(int i = 0; i<matrix.size(); i++)
-            for(int j = 0; j<matrix[i].size(); j++)
-                longest = max(longest, helper(matrix, visited, i, j));
-
-        return longest;
+        if(matrix.empty() || matrix[0].empty()) 
+            return 0;
+        int res = 1;
+        vector<vector<int>>dp(matrix.size(),vector<int>(matrix[0].size()));
+        for(int i = 0; i<matrix.size(); ++i)
+            for(int j = 0; j<matrix[0].size(); ++j)
+                res = max(res, helper(dp, matrix, i, j));
+        return res;
     }
-    vector<pair<int,int>>dir = {{0,1},{1,0},{0,-1},{-1,0}};
-    
-    int helper(vector<vector<int>>& matrix, vector<vector<int>>&visited, int i, int j){
-        if(visited[i][j]) return visited[i][j];
-        int res  = 1;
-        for(auto p: dir){
-            int x = i + p.first, y = j + p.second;
-            //cout<<"i "<<i<<" j "<<j<<" x "<<x<<" y " << y <<endl;
-            if(x>=matrix.size() || x<0 || y>=matrix[0].size() || y<0 || matrix[x][y]<=matrix[i][j]) continue;
-            res = max(res, 1+helper(matrix, visited, x, y));
+
+    int helper(vector<vector<int>>& dp, const vector<vector<int>>& matrix, int i, int j){
+        if(dp[i][j] != 0)
+            return dp[i][j];
+        vector<int>dir = {-1,0,1,0};
+        dp[i][j] = 1;
+        for(int a = 0; a<4; ++a){
+            int x = i + dir[a], y = j + dir[(a+1)%4];
+            if(x >= 0 && y>=0 && x<matrix.size() && y < matrix[0].size() && matrix[x][y] > matrix[i][j])
+                dp[i][j] = max(dp[i][j], helper(dp, matrix, x, y)+ 1);
         }
-        return visited[i][j] = res;
+        return dp[i][j];
     }
 };
 
-
-class Solution {
-public:
-    int longestIncreasingPath(vector<vector<int>>& matrix) {
-        if(matrix.empty() || matrix[0].empty()) return 0;
-        int longest = 0;
-        vector<vector<int>>visited(matrix.size(), vector<int>(matrix[0].size(), 0));
-        for(int i = 0; i<matrix.size(); i++)
-            for(int j = 0; j<matrix[i].size(); j++){
-                longest = max(longest, helper(matrix, visited, i, j));
-                //cout<<"i "<<i<<" j "<<j<<" res "<<longest<<endl;
-            }
-        return longest;
-    }
-
-    int helper(vector<vector<int>>& matrix, vector<vector<int>>&visited, int i, int j){
-        if(visited[i][j]) return visited[i][j];
-        int down = 1, right = 1, left= 1, up = 1;
-        if(i<matrix.size()-1 && matrix[i+1][j] > matrix[i][j] ) 
-            down = 1 + helper(matrix, visited, i+1, j);
-        if(j<matrix[0].size()-1 && matrix[i][j+1] > matrix[i][j])
-            right = 1 +  helper(matrix, visited, i, j+1);
-        if(i>0 && matrix[i-1][j] > matrix[i][j])
-            up = 1 +  helper(matrix, visited, i-1, j);
-        if(j>0 && matrix[i][j-1] > matrix[i][j])
-            left = 1 +  helper(matrix, visited, i, j-1);
-        return visited[i][j] = max(up, max(left, max(down, right)));
-    }
-};
 
 
 class Solution {
