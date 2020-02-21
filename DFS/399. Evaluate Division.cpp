@@ -79,7 +79,7 @@ public:
         vector<double>res;
         for(auto i: queries){
             unordered_set<string>visited;
-            res.push_back(helper(mp,i.first, i.second, visited));
+            res.push_back(helper(mp,i.first, i.second, visited)); // a / a 是通过 a/b * b/a 算得
         }
         return res;
     }
@@ -184,6 +184,28 @@ public:
 
 
 //Union Find
+/*
+
+Union 就是给数赋值过程 
+
+Case 1: 两个都不在map 
+ a / b = 5 =>    a = 5, b = 1,    a parent ->  b
+ x / y = 8; =>   x = 8, y = 1,    x parent -> y
+Case 2: 第二个不在map 
+ a / c = 4 =>    a = 5, c = 1.25   c->parent -> a
+Case 3: 第一个不在map 
+ d / c = 10  =>   d = 12.5,  c = 1.25,  d->parent = c 
+Case 4: 两个都在 Union 
+    c / x = 10  
+    c parent = b,  x->parent  = y, ratio = x * 10 / c = 8 * 10 / 1.25 = 64 
+    如果 parent = b,  乘上这个ratio 
+           a = 5 * 64 = 320
+           b = 1 * 64 = 64
+           c = 1.25 * 64 = 80
+           d = 12.5 * 64 = 800
+
+
+*/
 class Solution {
 public:
     vector<double> calcEquation(vector<pair<string, string>> equations, vector<double>& values, vector<pair<string, string>> queries) {
