@@ -35,54 +35,6 @@ Finally we have this formula:
 
 T(n) = n x C(n, n) + (n-1) x C(n, n-1) + … + 1 x C(n, 1) = n x 2^(n-1).
 */
-class Solution {
-public:
-    vector<string> removeInvalidParentheses(string s) {
-        unordered_set<string>visited = {s};
-        vector<string>res;
-        queue<string>q;
-        int step = 0;
-        if(s.size()!=0 ){
-            if(isValid(s)) return {s};
-            else q.push(s);
-        }
-        while(q.size() && res.empty()){
-            int cursize = q.size();
-            for(int i = 0; i<cursize; i++){
-                string top = q.front();
-                q.pop();
-                for(int j = 0; j<top.size(); j++){
-                    if(top[j]!='(' && top[j]!=')') continue;
-                    string substr = top.substr(0,j)+top.substr(j+1,s.size()-j-1);
-                    if(visited.find(substr)!=visited.end()) continue;
-                    visited.insert(substr);
-                    //cout<<endl<<"substr "<<substr<<endl;
-                    if(isValid(substr)) res.push_back(substr);
-                    else q.push(substr);
-                }
-            }
-        }
-        if(res.size()==0) res.push_back("");
-        return res;
-    }
-    
-    bool isValid(const string & s){
-        stack<char>stk;
-        int count = 0;
-        for(int k = 0; k<s.size(); k++)
-            if(s[k]=='(' || s[k] == ')') stk.push(s[k]);
-        while(stk.size() && count >= 0){
-            if(stk.top() == ')') count++;
-            else if(count==0) count = -1;
-            else count--;
-            stk.pop();
-        }
-        if (count == 0) return true;
-        else return false;
-    }
-};
-
-
 
 
 //simplifed bfs
@@ -131,6 +83,53 @@ public:
 };
 
 
+
+//More Efficient BFS
+
+/*
+We can speed up and get rid of the hash table by generating unique strings only. 
+There are two types of duplicates. First is due to removing the same set of characters in different order.
+For example, "(()(()", remove 0th then 3rd or remove 3rd then 0th both generates "()()". 
+So we can enforce an order by keeping the last removal index and remove after it only.
+The other is handling consecutive same chars, say, "(()". We get the same string by removing either the 0th or 1st '('. 
+We can just remove the 0th.
+*/
+
+
+    vector<string> removeInvalidParentheses(string s) {
+        queue<pair<string,int>> q;
+        q.push(make_pair(s,0));
+        vector<string> res;
+        while(!q.empty()) {
+            auto p=q.front();
+            q.pop();
+            string ss=p.first;
+            if(isValid(ss)) res.push_back(ss);
+            else if (res.empty()) 
+                for(int i=p.second;i<ss.size();i++) 
+                    if((ss[i]==')'|| ss[i]=='(') && (i==p.second || ss[i]!=ss[i-1])) 
+                        q.push(make_pair(ss.substr(0,i)+ss.substr(i+1),i));
+        }
+        return res;
+    }
+    
+    bool isValid(const string & s){
+      int count = 0;
+      for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (c == '(') count++;
+        if (c == ')' && count-- == 0) return false;
+      }
+    
+      return count == 0;
+    }
+
+
+
+
+
+
+//DFS
 
 class Solution {
 public:
@@ -259,47 +258,3 @@ public:
             output.push_back(reversed);
     }
 };
-
-
-
-/*
-We can speed up and get rid of the hash table by generating unique strings only. 
-There are two types of duplicates. First is due to removing the same set of characters in different order.
-For example, "(()(()", remove 0th then 3rd or remove 3rd then 0th both generates "()()". 
-So we can enforce an order by keeping the last removal index and remove after it only.
-The other is handling consecutive same chars, say, "(()". We get the same string by removing either the 0th or 1st '('. 
-We can just remove the 0th.
-*/
-
-
-    vector<string> removeInvalidParentheses(string s) {
-        queue<pair<string,int>> q;
-        q.push(make_pair(s,0));
-        vector<string> res;
-        while(!q.empty()) {
-            auto p=q.front();
-            q.pop();
-            string ss=p.first;
-            if(isValid(ss)) res.push_back(ss);
-            else if (res.empty()) 
-                for(int i=p.second;i<ss.size();i++) 
-                    if((ss[i]==')'|| ss[i]=='(') && (i==p.second || ss[i]!=ss[i-1])) 
-                        q.push(make_pair(ss.substr(0,i)+ss.substr(i+1),i));
-        }
-        return res;
-    }
-    
-    bool isValid(const string & s){
-      int count = 0;
-      for (int i = 0; i < s.length(); i++) {
-        char c = s[i];
-        if (c == '(') count++;
-        if (c == ')' && count-- == 0) return false;
-      }
-    
-      return count == 0;
-    }
-
-
-
-
