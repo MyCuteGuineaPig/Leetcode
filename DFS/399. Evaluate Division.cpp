@@ -79,7 +79,7 @@ public:
         vector<double>res;
         for(auto i: queries){
             unordered_set<string>visited;
-            res.push_back(helper(mp,i.first, i.second, visited));
+            res.push_back(helper(mp,i.first, i.second, visited)); // a / a 是通过 a/b * b/a 算得
         }
         return res;
     }
