@@ -29,6 +29,97 @@ Return:
 
 */
 
+/*
+
+必须是从四周开始，而且必须从pacific 开始完成后, 再loop Altantic
+ 
+ if(dp[i][j] & val)  true表示这个点已经process 过, 
+
+*/
+
+class Solution {
+public:
+    bool flag = false;
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
+        if(matrix.empty() || matrix[0].empty())
+            return {};
+        int n = matrix.size(), m = matrix[0].size();
+       vector<vector<int>>dp(n, vector<int>(m,0));
+
+        vector<vector<int>>res;
+        for(int i = 0; i<n; ++i){
+           dfs(matrix, res, dp, i, 0, 1);
+          
+        for(int j = 0; j<m; ++j)
+            dfs(matrix, res, dp, 0,j, 1);
+        
+        for(int i = 0; i<n; ++i)
+            dfs(matrix, res, dp, i, m-1, 2);
+        
+        for(int j = 0; j<m; ++j)
+            dfs(matrix, res, dp, n-1, j, 2);
+        return res;
+    }
+    
+    void dfs(const vector<vector<int>>& matrix, vector<vector<int>>&res, vector<vector<int>>&dp, int i, int j, int val){
+        if(dp[i][j] & val)
+            return;
+        dp[i][j] |= val;
+        if(dp[i][j] == 3){
+            res.push_back({i,j});
+        }
+        vector<int>dir={-1,0,1,0};
+        for(int z = 0; z<4; ++z){
+            int x = i + dir[z], y = j + dir[(z+1)%4];
+            if(x >= 0 && y>=0 && x<matrix.size() && y < matrix[0].size() && matrix[x][y] >= matrix[i][j])
+            {
+                dfs(matrix, res, dp, x, y, val);
+            }
+        }
+    }
+};
+  
+  
+class Solution {
+public:
+    bool flag = false;
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
+        if(matrix.empty() || matrix[0].empty())
+            return {};
+        int n = matrix.size(), m = matrix[0].size();
+       vector<vector<int>>dp(n, vector<int>(m,0));
+
+        vector<vector<int>>res;
+        for(int i = 0; i<n; ++i){
+            dfs(matrix, res, dp, i, 0, 1);
+            dfs(matrix, res, dp, i, m-1, 2);
+        }
+        for(int j = 0; j<m; ++j){
+            dfs(matrix, res, dp, 0,j, 1);
+            dfs(matrix, res, dp, n-1, j, 2);
+        }
+
+        return res;
+    }
+    
+    void dfs(const vector<vector<int>>& matrix, vector<vector<int>>&res, vector<vector<int>>&dp, int i, int j, int val){
+        if(dp[i][j] == val || dp[i][j] == 3) //dp[i][j] means already did it before
+            return;
+        dp[i][j] |= val;
+        if(dp[i][j] == 3){
+            res.push_back({i,j});
+        }
+        vector<int>dir={-1,0,1,0};
+        for(int z = 0; z<4; ++z){
+            int x = i + dir[z], y = j + dir[(z+1)%4];
+            if(x >= 0 && y>=0 && x<matrix.size() && y < matrix[0].size() && matrix[x][y] >= matrix[i][j])
+            {
+                dfs(matrix, res, dp, x, y, dp[i][j]);// dp[i][j] 比如现在点是3, 比它高的或者等于的点也是3
+            }
+        }
+    }
+};
+
 //DFS
 
 
