@@ -36,6 +36,27 @@ The value of each color in image[i][j] and newColor will be an integer in [0, 65
 
 class Solution {
 public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor, int prev = numeric_limits<int>::min()) {
+        if(image.empty() || image[0].empty() || sr < 0 || sc < 0 
+           || sr >= image.size() || sc>=image[0].size()
+           || prev !=numeric_limits<int>::min() && image[sr][sc]!= prev || image[sr][sc] == newColor)
+            return image;
+        prev = image[sr][sc];
+        image[sr][sc] = newColor;
+        vector<int>dir = {-1,0,1,0};
+        for(int i = 0; i<4; i++){
+            int x = sr + dir[i];
+            int y = sc + dir[(i+1)%4];
+            floodFill(image, x, y, newColor, prev);
+        }
+        return image;
+    }
+};
+
+
+
+class Solution {
+public:
     int n, m;
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         n = image.size(); m = image[0].size();
