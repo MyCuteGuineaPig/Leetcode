@@ -51,3 +51,48 @@ private:
         return mp[cur] = false;
     }
 };
+
+//self
+class Solution {
+public:
+    unordered_map<int,bool>mpA;
+    unordered_map<int,bool>mpB;
+    bool canIWin(int maxChoosableInteger, int desiredTotal) {
+        if(desiredTotal <= 0) return true;
+        if((maxChoosableInteger + 1)*maxChoosableInteger/2 < desiredTotal)
+            return false;
+        long long number = pow(2, maxChoosableInteger)-1;
+        return helper(number, maxChoosableInteger,desiredTotal, 'A');
+    }
+    
+    bool helper(long long & number, int maxChoosableInteger, int desiredTotal, char cur){
+        if(cur == 'A' && mpA.find(number) != mpA.end())
+            return mpA[number];
+        if(cur == 'B' && mpB.find(number) != mpB.end())
+            return mpB[number];
+        if( desiredTotal <= maxChoosableInteger && (number >> (desiredTotal-1)) >= 1){//可以选的大于 desiredTotal,
+            assign(number, true, cur);
+            return true;
+        }
+        for(int i = 0; i<maxChoosableInteger; ++i){
+            if((number & (1<<i)) && i+1 < desiredTotal){
+                number = number ^ (1<<i);
+                if(!helper(number, maxChoosableInteger, desiredTotal - i-1, cur == 'A' ? 'B': 'A')){              
+                    number |= (1<<i); //一定把现在选择的放回去, 要不然影响前面的选择, 比如 A 选择了2 , 如果不reset bit, 前面 B 不能选择2了
+                    assign(number, true, cur);
+                    return true;
+                }
+                number |= (1<<i);
+            }
+        }
+       assign(number, false, cur);
+       return false;
+    }
+    
+    void assign(const long long & number, bool val, const char& cur){
+        if(cur == 'A')
+            mpA[number] = val;
+        else if(cur == 'B')
+            mpB[number] = val;        
+    }
+};
