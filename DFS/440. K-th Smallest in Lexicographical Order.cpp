@@ -84,3 +84,35 @@ public:
     return steps;
     }
 };
+
+
+//
+class Solution {
+public:
+    int findKthNumber(int n, int k) {
+        long res = 1; --k;
+        while(k>0){
+            long step = calstep(res*10, (res + 1)*10, n); //只寻找比如 1->2 中间有多少个数， e.g. n=13, k=2, 1->2 中间有 10, 11, 12, 13, 4个数
+            if(k > step){
+                //减去的step 是中间的数, 再减去1是下一个数, 比如1->2, 中间有 10, 11, 12, 13, step = 4, 再减去1表示到2 还离目标又几个
+                k = k - step - 1; 
+                res = res + 1;
+            }else{
+                res = res*10;
+                --k;
+            }
+        }
+        return res;
+    }
+    
+    
+    long calstep(long n1, long n2, long n){
+        long cnt = 0;
+        while(n1 <= n){
+            cnt += min(n2 , n+1) - n1 ;
+            n1 = n1 * 10;
+            n2 = n2 * 10;
+        }
+        return cnt;
+    }
+};
