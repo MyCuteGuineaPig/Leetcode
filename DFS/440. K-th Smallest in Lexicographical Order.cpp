@@ -62,7 +62,8 @@ public:
        int cur = 1;
        k = k-1;
        while(k>0){
-           int steps = calSteps(n, cur, cur+1);
+           int steps = calSteps(n, cur, cur+1);//这个step 包含了cur+1, 比如 
+           // n=13, k=2, 1->2 1,  10, 11, 12, 13, 2, steps = 5
             if(steps<=k){// it means cannot make this move, 这一步太大了
                 k = k - steps;
                 cur = cur+1; 
