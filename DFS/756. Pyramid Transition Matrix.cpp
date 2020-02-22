@@ -81,3 +81,29 @@ public:
         return false;
     }
 };
+
+
+//self
+class Solution {
+public:
+    bool pyramidTransition(string bottom, vector<string>& allowed) {
+        unordered_map<char, unordered_map<char, unordered_set<char>>>mp;
+        for(auto s: allowed){
+            mp[s[0]][s[1]].insert(s[2]);
+        }
+        return build(bottom, "", mp, 0);
+    }
+    
+    bool build(string s, string top, unordered_map<char, unordered_map<char, unordered_set<char>>>&mp, int index){
+        if(s.size() == 1)
+            return true;
+        if(index == s.size()-1)
+            return build(top, "", mp, 0); //这层走完走上一层
+        if(mp.find(s[index]) == mp.end() || mp[s[index]].find(s[index+1]) == mp[s[index]].end())
+            return false;
+        for(auto i: mp[s[index]][s[index+1]])
+            if(build(s, top + i, mp, index + 1))
+                return true;
+        return false;
+    }
+};
