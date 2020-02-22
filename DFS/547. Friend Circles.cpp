@@ -118,6 +118,42 @@ private:
 
 
 
+//Self
+//DFS
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        if(M.empty() || M[0].empty())
+            return 0;
+        int n = M.size(); 
+        int cnt = n;
+        vector<int>visited(n);
+        for(int i = 0; i<n; ++i)
+           cnt -= dfs(M, visited, i); //减去number of new friend from i
+        return cnt;
+    }
+    
+    int dfs(const vector<vector<int>>& M, vector<int>&visited, int i){
+        if(visited[i])
+            return 0;
+        int cnt = 0;
+        visited[i] = 1;
+        for(int j = 0; j<M.size(); ++j){ //需要从0 开始, 不能从i+1开始
+            /*
+            比如    1-> 4,  4->3 要不然3 没有算成功, 
+                1 0 0 1
+                0 1 0 0
+                0 0 0 1
+                0 0 1 1 
+            如果 i == j, 但是visited[i] 已经标记, !visied[j] 不会成立, 所以不会进入下个dfs
+            */
+            if(M[i][j] && !visited[j])
+                cnt += dfs(M, visited, j) + 1;
+        }
+        return cnt;
+    }
+    
+};
 
 //DFS
 

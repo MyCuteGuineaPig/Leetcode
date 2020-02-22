@@ -62,6 +62,27 @@ If it has been colored, check if the current color is the same as the color that
 */
 
 
+//DFS + Bit Mask
+class Solution {
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        vector<int>dp(graph.size());
+        for(int i = 0; i<graph.size(); ++i)
+            if(!dp[i] && !dfs(graph, dp, 1, i)) //!dp[i] has not visited before
+                return false;
+        return true;
+    }
+    //两种颜色, 1 和 2
+    bool dfs(const vector<vector<int>>& graph, vector<int>&dp, int color, int index){
+        if(dp[index])
+            return dp[index] & color;
+        dp[index] = color; 
+        for(auto next: graph[index])
+            if(!dfs(graph, dp, 3 ^ color, next))  //3 ^ color, 3 ^ 1 = 2, 3 ^ 2 = 1
+                return false;
+        return true;
+    }
+};
 /*
 DFS
 */
