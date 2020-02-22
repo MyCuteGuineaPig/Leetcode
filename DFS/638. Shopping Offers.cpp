@@ -46,6 +46,9 @@ public:
         return helper(price, special, needs);
     }
     
+    //下面的loop 是每次都会根据当前needs, 从第一个special开始 算最小值
+    // 比如用完第一个special, res = min(res, 第一个special price + 减去第一个special needs的最小值)
+    //  比如用完第二个special, res = min(res, 第二个special price + 减去第二个special needs的最小值)
     int helper(vector<int>& price, vector<vector<int>>& special, vector<int>& needs){
         int localmin = inner_product(price.begin(), price.end(), needs.begin(), 0);
         for(int i = 0; i<special.size(); i++){
@@ -66,6 +69,39 @@ public:
         return localmin;
     }
 };
+
+
+//DFS
+//跟上面解法区别是这个解, 会把当前special 可以用到最大的可能性
+// 比如用完第一个offer， 再尝试能不能再用第一个offer;  
+class Solution {
+public:
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+        return helper(price, special, needs, 0);;
+    }
+    
+    int helper(const vector<int>& price, const vector<vector<int>>& special, vector<int> needs, int start ){
+        if(start == special.size())
+            return inner_product(price.begin(), price.end(), needs.begin(), 0);
+        int res = helper(price, special, needs, start + 1);
+        int cur = 0;
+        bool small = false;
+        while(!small){
+            for(int i = 0; i<needs.size(); ++i){
+                if(needs[i] < special[start][i])
+                    small = true;
+                else 
+                    needs[i] -= special[start][i];
+            }
+            if(small)
+                break;
+            cur += special[start][needs.size()];
+            res = min(res, cur+ helper(price, special, needs, start+1));
+        }
+        return res;
+    }
+};
+
 
 
 class Solution {
