@@ -72,6 +72,51 @@ public:
     }
 };
 
+/*
+从结尾走到 起点,
+ 
+ 1 -> 2     如果从起点走会走两边 1->2->4->5->6, 1->3->4->5->6
+ |    |     如果从结尾走，就只走一遍  6->5->4
+ v    v
+ 3 -> 4
+      |
+      v
+      5
+      |
+      v
+      6
+*/
+class Solution {
+public:
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        if(graph.empty()) return {};
+        unordered_map<int, vector<int>>my_graph;
+        for(int i = 0; i<graph.size(); ++i){
+            for(auto j: graph[i])
+                my_graph[j].push_back(i);
+        }
+        vector<vector<int>> res;
+        for(int i = 0; i<graph.size(); ++i){
+            if(graph[i].empty()){
+                vector<int>cur;
+                dfs(my_graph, res, cur,i);
+            }
+        }
+        return res;
+    }
+    
+    void dfs(unordered_map<int, vector<int>>&my_graph, vector<vector<int>>& res, vector<int>&cur, int i){
+        cur.push_back(i);
+        if(my_graph.find(i) == my_graph.end())
+            res.push_back(vector<int>(cur.rbegin(), cur.rend()));  
+        else{
+            for(int j = 0; j<my_graph[i].size(); ++j)
+                dfs(my_graph, res, cur, my_graph[i][j]);   
+        }
+        cur.pop_back();
+    }
+};
+
 
 using namespace std;
 typedef long long ll;
