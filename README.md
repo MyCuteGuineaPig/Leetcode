@@ -21,6 +21,7 @@
 * [Dynamic Programming](https://github.com/beckswu/Leetcode#dynamic-programming) 
 * [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
 * [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
+* [Graph](https://github.com/beckswu/Leetcode#graph)
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
 
 Python trick: 
@@ -389,6 +390,9 @@ TreeNode* helper(TreeNode** head ){
 | [009. Palindrome Number](https://leetcode.com/problems/palindrome-number/) | _O(1)_ | _O(1)_	| Easy |  |
 | [012. Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | _O(n)_ | _O(1)_	| Medium |  |
 | [013. Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | _O(n)_ | _O(1)_	| Easy |  |
+| [1360. Number of Days Between Two Dates](https://leetcode.com/problems/number-of-days-between-two-dates/) | _O(1)_ | _O(1)_	| Easy |  |
+| [1362. Closest Divisors](https://leetcode.com/problems/closest-divisors/) | _O(sqrt(n))_ | _O(1)_	| Medium |  |
+| [1363. Largest Multiple of Three](https://leetcode.com/problems/largest-multiple-of-three/) | _O(n)_ | _O(1)_	| Hard |  |
 
 
 
@@ -936,7 +940,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [756. Pyramid Transition Matrix](https://leetcode.com/problems/pyramid-transition-matrix/description/)	|	_O(a^b)_	|	_O(a^b)_ |	Medium | bottom-up, bit mask |
 | [785. Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | DFS/BFS + Bit Mask, 用红蓝两色表vertex，如果相邻的node 一样颜色 return false |
 | [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/)	|	_O(p + r \* n)_	|	_O(n)_ |	Medium | ❌ |
-| [802. Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/description/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | 😍🔍 需要定义state 0：unvisited, 1 visited not safe, 2 visited safe， 注意不能用visited 的value 代替boolean 的value |
+| [802. Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/description/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | 😚 DFS + bit mask 需要定义state 0：unvisited, 1 visited not safe, 2 visited not safe, 3 visited and safe 注意不能用visited 的value 代替boolean 的value |
 
 </br>
 </br>
@@ -969,6 +973,12 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [698. Partition to K Equal Sum Subsets](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/)	|	_O(n\* 2^n)_	|	_O(2^n)_ |	Medium | 要有start index, 否则time out |  
 | [718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)	|	_O(m \* n)_	|	_O(min(m, n))_ |	Medium | DP  |
 | [784. Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/description/)	|	_O(n \* 2^n)	_	|	_O(1)_ |	Easy |  |
+
+## Graph
+
+ |Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [1361. Validate Binary Tree Nodes](https://leetcode.com/problems/validate-binary-tree-nodes/)	|	_O(n)_	|	_O(n)_ | Medium | DFS |
  
 </br>
 </br>
