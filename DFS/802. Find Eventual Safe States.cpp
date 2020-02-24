@@ -29,11 +29,9 @@ public:
         vector<int>visited(graph.size(),0);
         vector<int>res;
         for(int i = 0; i<graph.size(); ++i){
-            dfs(graph, visited, i);
-        }
-        for(int i = 0; i<visited.size(); ++i)
-            if(visited[i] == 3)
+            if(dfs(graph, visited, i) == 3)
                 res.push_back(i);
+        }
         return res;
     }
     
