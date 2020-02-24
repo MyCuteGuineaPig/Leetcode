@@ -22,7 +22,38 @@ Illustration of graph
 
 */
 
-//write by own
+//2020-02-23
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<int>visited(graph.size(),0);
+        vector<int>res;
+        for(int i = 0; i<graph.size(); ++i){
+            dfs(graph, visited, i);
+        }
+        for(int i = 0; i<visited.size(); ++i)
+            if(visited[i] == 3)
+                res.push_back(i);
+        return res;
+    }
+    
+    int dfs(vector<vector<int>>& graph, vector<int>&visited, int i){
+        if(visited[i] & 2) // visited[i] 2 or 3 
+            return visited[i];
+        if(visited[i]) //cycle 
+            return visited[i] = 2; //2 unsafe, 3 safe
+        visited[i] = 1; //give it visited, status unknown
+        for(int j = 0; j<graph[i].size(); ++j){
+            int next = dfs(graph, visited, graph[i][j]);
+            if((next & 3) == 2) //if return from  unsafe 
+                visited[i] = 2; //assign unsafe
+        }
+        return  visited[i] = (visited[i] & 2) == 2 ? 2 : 3; //if not unsafe, give it safe
+    }
+    
+};
+
+//18 Mar 2019
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
