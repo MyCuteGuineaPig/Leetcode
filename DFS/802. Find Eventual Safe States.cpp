@@ -22,7 +22,36 @@ Illustration of graph
 
 */
 
-//write by own
+//2020-02-23
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<int>visited(graph.size(),0);
+        vector<int>res;
+        for(int i = 0; i<graph.size(); ++i){
+            if(dfs(graph, visited, i) == 3)
+                res.push_back(i);
+        }
+        return res;
+    }
+    
+    int dfs(vector<vector<int>>& graph, vector<int>&visited, int i){
+        if(visited[i] & 2) // visited[i] 2 or 3 
+            return visited[i];
+        if(visited[i]) //cycle 
+            return visited[i] = 2; //2 unsafe, 3 safe
+        visited[i] = 1; //give it visited, status unknown
+        for(int j = 0; j<graph[i].size(); ++j){
+            int next = dfs(graph, visited, graph[i][j]);
+            if((next & 3) == 2) //if return from  unsafe 
+                visited[i] = 2; //assign unsafe
+        }
+        return  visited[i] = (visited[i] & 2) == 2 ? 2 : 3; //if not unsafe, give it safe
+    }
+    
+};
+
+//18 Mar 2019
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
@@ -74,48 +103,6 @@ public:
 };
 
 
-
-
-
-class Solution {
-public: 
-    
-    vector<int>visited;
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        visited.resize(graph.size(),-1); //-1 is unvisited, 0 visited (state undetermined), 1 cannot reach terminal 2 can reach terminal 
-        for(int i = 0; i<graph.size();i++){
-            if(visited[i] == -1){
-               dfs(graph, i);
-            }  
-        }
-        vector<int>res;
-        for(int i = 0; i<graph.size();i++)
-            if(visited[i] == 2)
-                res.push_back(i);
-        return res;
-    }
-
-
-    void dfs(vector<vector<int>>& graph, int cur){ //return true if reach terminal else false
-        if(graph[cur].size()==0){
-            visited[cur] = 2; 
-            return;
-        }
-        else visited[cur] = 0;
-        bool terminate = false;
-        for(auto i: graph[cur]){
-            if(visited[i] == -1)
-                dfs(graph, i);
-            if(visited[i] == 2)
-                terminate = true;
-            else if(visited[i] != 2){
-                visited[cur] = 1;
-                break;
-            }
-        }
-        if(visited[cur]!=1 && terminate) visited[cur] = 2;
-    }
-};
 
 
 class Solution {
