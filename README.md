@@ -948,10 +948,10 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 ## Backtracking
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [017. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)	|	_O(n \* 4^n)_	|	_O(n)_ |	Medium | Easy one |
-| [022. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)	|	_O(4^n \/ n^(3\/2))_	|	_O(n)_ |	Medium |  |
-| [037. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)	|	_O((9!)^9)_	|	_O(1)_ |	Hard |  recussion return 和 不return的区别， <ul><li>return 代表loop检查完毕,不进行下面的loop</li><li>不return 代表loop没有走全，需要继续</li></ul> |
-| [039. Combination Sum](https://leetcode.com/problems/combination-sum/)	|	_O(k \* n^k)_	|	_O(k)_ |	Medium | 需要sort, 每次backtrack 不增加index，因为数可以用两遍 |
+| [017. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)	|	_O(n \* 4^n)_	|	_O(n)_ |	Medium | ✏️[Python Lambda Function](https://github.com/beckswu/Leetcode/blob/master/Backtracking/17.%20Letter%20Combinations%20of%20a%20Phone%20Number.py#L37)  |
+| [022. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)	|	_O(4^n \/ n^(3\/2))_	|	_O(n)_ |	Medium | ✏️[Python Trick](https://github.com/beckswu/Leetcode/blob/master/Backtracking/022.%20Generate%20Parentheses.py)  |
+| [037. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)	|	_O((9!)^9)_	|	_O(1)_ |	Hard |  可以用bit mask |
+| [039. Combination Sum](https://leetcode.com/problems/combination-sum/)	|	_O(k \* n^k)_	|	_O(k)_ |	Medium | ✏️[Python Trick, Difference between yield and return](https://github.com/beckswu/Leetcode/blob/master/Backtracking/39.%20Combination%20Sum.py#L67) |
 | [040. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)	|	_O(n \* n!)_	|	_O(n)_ |	Medium | 😍🔍python generater, 注如果不yield, for i in generator(), generator 是个空list  |
 | [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/description/)	|	_O(k \* C(n, k))_	|	_O(k)_ |	Medium |  |
 | [046. Permutations](https://leetcode.com/problems/permutations/)	|	_O(\n * n!)_	|	_O(n)_ |	Medium | <ul><li>可以用next_permutation</li><li> 可以用backtracking + swap</li> <li> 可以用recursive insert value</li></ul> |
