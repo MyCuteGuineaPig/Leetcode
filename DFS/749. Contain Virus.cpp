@@ -49,3 +49,80 @@ Throughout the described process, there is always a contiguous viral region that
 
 
 */
+
+
+
+
+class Solution {
+public:
+    int containVirus(vector<vector<int>>& grid) {
+        if(grid.empty() || grid[0].empty())
+            return 0; 
+        int thisStepMaxWall = -1, res = 0;
+        while(thisStepMaxWall != 0){
+            thisStepMaxWall = buildWall(grid);
+            res += thisStepMaxWall;
+        }
+        return res;
+    }
+
+    int buildWall (vector<vector<int>>& grid){
+        vector<unordered_set<int>> new_infected;  //int:  x*m + y which is next step infected,
+        vector<unordered_set<int>> virus;  
+        // unordered_set<pair<int,int>> is group of next step new infection
+        vector<vector<int>>visited(grid.size(), vector<int>(grid[0].size()));
+        int wall = 0, maxinfectedArea = 0;
+        int maxIndex = -1;
+        for(int i = 0; i<grid.size(); ++i){
+            for(int j = 0; j<grid[0].size(); ++j){
+                if(!visited[i][j] && grid[i][j] == 1){
+                    new_infected.push_back({});
+                    virus.push_back({});
+                    int newwall = dfs(grid, new_infected.back(), virus.back(), visited, i, j);
+                    if(new_infected.back().size() > maxinfectedArea){
+                        wall = newwall;
+                        maxinfectedArea = new_infected.back().size();
+                        maxIndex = new_infected.size() -1 ;
+                    }
+            
+                }
+            }
+        }
+        
+        if (maxIndex >= 0){ //new_infected size == 1 last one 
+            const int m = grid[0].size();
+            for(int i = 0; i<new_infected.size(); ++i){
+                if (i == maxIndex){
+                    for(auto next: virus[i])
+                        grid[next/m][next%m] = -1; //equal -1 下一步就不会算 
+                }
+                else{
+                    for(auto next: new_infected[i])
+                        grid[next/m][next%m] = 1; //被感染的 
+                }
+            }
+        }
+        return wall;  
+    }
+
+    int dfs(const vector<vector<int>>& grid, unordered_set<int>& new_infected, unordered_set<int>& virus, vector<vector<int>>& visited, int x, int y){
+        vector<int>dir = {-1,0,1,0};
+        int res = 0; 
+        const int m = grid[0].size();
+        visited[x][y] = 1;
+        virus.insert(x*m + y);
+        for(int z = 0; z < 4; ++z){
+            int i = x + dir[z], j = y + dir[(z+1)%4];
+            if (i<0 || j < 0 || i >= grid.size() || j>=grid[0].size() || visited[i][j] || grid[i][j] == -1)
+                continue;
+            if(grid[i][j] == 1)
+                res += dfs(grid, new_infected, virus, visited, i, j);
+            else{ 
+                new_infected.insert(i*m + j);
+                res ++ ;
+            }
+        }
+        return res; 
+    }
+
+};
