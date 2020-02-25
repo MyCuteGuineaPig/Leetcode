@@ -16,7 +16,7 @@ For example,
 
 """
 
-#write by own
+#2019
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         def generate(n):
@@ -26,7 +26,7 @@ class Solution:
         return generate(nums)
 
       
-#write by own
+#2019
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         def generate(cur, n):
@@ -36,7 +36,42 @@ class Solution:
                 for p in generate(cur+[v], n[:i]+n[i+1:]):
                     yield p
         return [*generate([],nums)]      
+
+     
+#Recursive, take any number as first
+class Solution:
+    def permute(self, nums):
+        return [[n]+p for i,n in enumerate(nums) for p in self.permute(nums[:i]+nums[i+1:])] or [[]]
+        
+
       
+      
+ #2020
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        return [ x[:i] + [nums[0]] + x[i:] for x in self.permute(nums[1:]) for i in range(len(x)+1) ] if nums else [[]]
+
+#2020
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def generate(nums):
+            if not nums:
+                yield []
+            else:
+                for nxt in self.permute(nums[1:]):
+                    for i in range(len(nxt)+1):
+                        yield nxt[:i] + [nums[0]] + nxt[i:]
+        return [*generate(nums)] 
+      
+class Solution:
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        return (len(nums) and [p[:i] + [nums[0]] + p[i:]
+                     for p in self.permute(nums[1:])
+                     for i in range(len(nums))]) or [[]]      
       
 
 class Solution:
@@ -62,22 +97,7 @@ class Solution:
             perm = newone
         return perm
 
-     
-#Recursive, take any number as first
-class Solution:
-    def permute(self, nums):
-        return [[n]+p for i,n in enumerate(nums) for p in self.permute(nums[:i]+nums[i+1:])] or [[]]
-        
 
-class Solution:
-    def permute(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        return (len(nums) and [p[:i] + [nums[0]] + p[i:]
-                     for p in self.permute(nums[1:])
-                     for i in range(len(nums))]) or [[]]
 
 class Solution:
     def permute(self, nums):
