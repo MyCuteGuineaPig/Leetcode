@@ -15,6 +15,7 @@ For example,
 
 """
 
+#2019
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         def generate(cur, nums):
@@ -27,6 +28,19 @@ class Solution:
         nums.sort()
         return [*generate([],nums)]
 
+#2020
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def generate(nums):
+            if not nums:
+                yield []
+            for i, v in enumerate(nums):
+                if i == 0 or v != nums[i-1]:
+                  for p in generate(nums[:i]+nums[i+1:]):
+                    yield [v] + p
+        nums.sort()
+        return [*generate(nums)]      
+      
 class Solution:
     def permuteUnique(self, nums):
         ans = [[]]
