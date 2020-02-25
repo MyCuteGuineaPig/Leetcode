@@ -40,7 +40,17 @@ private:
         }
         
     }
+    /*
+    如果没有check middle的话, 比如 
+    [ 0 0 1 1 2 2]
+    现在index 0 和  index 5换 
+      -> 2 0 1 1 0 2    ->  0 1 1 0 变成不sort的了， 
+      
+       2 0 1 1 0 2   ->  再 index 1 和 index 2 换, 变成 2 1 0 1 0 2
+       
+       2 0 1 1 0 2   ->  index 0 和 index 3 换 -> 2 1 1 0 0 2 -> index 2 和 index 3 换 2 1 0 1 0 2 和上面重复了
     
+    */
     bool checkmiddle(vector<int>& nums, int i , int begin){
         for(int k = begin; k<i; k++)
             if(nums[i] == nums[k])
