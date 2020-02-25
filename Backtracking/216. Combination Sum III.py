@@ -20,7 +20,7 @@ Output:
 [[1,2,6], [1,3,5], [2,3,4]]
 """
 
-#write by own
+#2019
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         def generate(cur, k, n, start):
@@ -32,7 +32,7 @@ class Solution:
         return [*generate([],k,n,1)]
 
     
-#write by own
+#2019
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         def generate(k, n, start):
@@ -41,6 +41,18 @@ class Solution:
             return [[x] + c for x in range(start, min(n+1, 10)) for c in generate(k-1, n-x, x+1)]
             
         return generate(k,n,1)
+    
+#2020
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def generate(begin, k, n):
+            if k == 0 and n == 0: 
+                yield []
+            if begin <= 9 and k > 0 and n > 0:
+                for i in range(begin, min(10, n+1)):
+                    for nxt in generate(i+1, k-1, n-i):
+                        yield [i] + nxt 
+        return [*generate(1, k, n)] 
     
     
 class Solution:
