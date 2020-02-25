@@ -51,7 +51,7 @@ private:
 
 class Solution {
 public:
-    void recursion(vector<int> num, int i, int j, vector<vector<int> > &res) {
+    void recursion(vector<int> num, int i, int j, vector<vector<int> > &res) { //non reference num
         if (i == j-1) {
             res.push_back(num);
             return;
