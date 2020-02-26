@@ -41,6 +41,9 @@ class Solution:
         
     
 
+    
+    
+#2020
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         col = [0 for _ in range(n)]
