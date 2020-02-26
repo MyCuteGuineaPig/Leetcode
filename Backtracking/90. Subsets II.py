@@ -51,3 +51,21 @@ class Solution:
             for j in range(start,size):
                 res.append(res[j]+[nums[i]])
         return res
+    
+#2020 
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = [[]]
+        nums.sort()
+        prevStart = size = 0
+        for i, v in enumerate(nums):
+            size, prevStart =  len(res), size 
+            if i == 0 or v!= nums[i-1]:
+                start = 0 
+            else:
+                start = prevStart
+            
+            for j in range(start, size):
+                res.append([v for v in res[j]])
+                res[-1].append(v)  
+        return res
