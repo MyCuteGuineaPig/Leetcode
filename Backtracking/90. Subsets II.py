@@ -22,6 +22,25 @@ class Solution:
 
 
 
+#2020
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        cur = []
+        nums.sort()
+        def dfs(start):
+            if start <= len(nums):
+                print(start, cur)
+                res.append([i for i in cur])
+                for i, v in enumerate(nums[start:], start):
+                    cur.append(v)
+                    if i == start or nums[i-1] != nums[i]:
+                        dfs(i+1)
+                    cur.pop()
+            
+        dfs(0)
+        return res
+
 class Solution:
     def subsetsWithDup(self, nums):
         res = [[]]
