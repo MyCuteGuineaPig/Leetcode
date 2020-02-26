@@ -87,9 +87,13 @@ bitmask
 
 Bit Manipulation
 
-This is the most clever solution that I have seen. The idea is that to give all the possible subsets, we just need to exhaust all the possible combinations of the numbers. And each number has only two possibilities: either in or not in a subset. And this can be represented using a bit.
+This is the most clever solution that I have seen. The idea is that to give all the possible subsets, 
+we just need to exhaust all the possible combinations of the numbers. 
+And each number has only two possibilities: either in or not in a subset. And this can be represented using a bit.
 
-There is also another a way to visualize this idea. That is, if we use the above example, 1 appears once in every two consecutive subsets, 2 appears twice in every four consecutive subsets, and 3 appears four times in every eight subsets, shown in the following (initially the 8 subsets are all empty):
+There is also another a way to visualize this idea. That is, if we use the above example, 
+1 appears once in every two consecutive subsets, 2 appears twice in every four consecutive subsets, 
+and 3 appears four times in every eight subsets, shown in the following (initially the 8 subsets are all empty):
 
 [], [], [], [], [], [], [], []
 

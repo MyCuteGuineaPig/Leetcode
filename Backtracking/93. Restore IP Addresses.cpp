@@ -12,9 +12,32 @@ return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
 
 */
 
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        res = []
+        cur = []
+        def dfs(s):
+            if not s and len(cur) == 4:
+                res.append('.'.join(cur))
+                return 
+            if s and len(cur) < 4:
+                if s[0] == '0':
+                    cur.append('0')
+                    dfs(s[1:])
+                    cur.pop()
+                else:
+                    for i in range(1,1+min(3,len(s))):
+                        if int(s[:i]) <=255:
+                            cur.append(s[:i])
+                            dfs(s[i:])
+                            cur.pop() 
+        dfs(s)
+        return res
+
 /*
 backtracking
 */
+
 class Solution {
 public:
     vector<string> restoreIpAddresses(string s) {
