@@ -41,3 +41,28 @@ class Solution:
         
     
 
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        col = [0 for _ in range(n)]
+        dia1, dia2 = [0 for _ in range(2*n-1)], [0 for _ in range(2*n-1)]
+        res = []
+        def dfs(cur, i):
+            if i == n:
+                res.append(cur)
+                return 
+            if i < n:
+                for j in range (n):
+                    if isValid(i, j):
+                        assign(i,j,1)
+                        dfs(cur + ['.'*j + 'Q' + '.'*(n-j-1)], i+1)
+                        assign(i, j, 0)
+        
+        def isValid(i, j):
+            return not (col[j] or dia1[n-1+i-j] or dia2[i+j])
+        
+        def assign(i, j, val):
+            col[j] = val
+            dia1[n-1+i-j] = val 
+            dia2[i+j] = val
+        dfs([], 0)
+        return res
