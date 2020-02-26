@@ -51,3 +51,40 @@ import functools
 class Solution:
     def combine(self, n, k):
         return functools.reduce(lambda x, _: [c+[i] for c in x for i in range(c[-1]+1 if c else 1, n+1) ], range(k),[[]])
+    
+  
+
+#2020
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+        cur = []
+        def dfs(begin):
+            if len(cur) == k:
+                res.append([i for i in cur])
+            elif len(cur)<k:
+                for i in range(begin, n+1):
+                    cur.append(i)
+                    dfs(i+1)
+                    cur.pop()
+        dfs(1)
+        return res
+
+#2020
+class Solution:
+    def combine(self, n: int, k: int, start = 1) -> List[List[int]]:
+        return [[]] if k <= 0 else  \
+                    [ [i] + r  if len(r) < k else r  \
+                     for i in range(start, n+1) for r in self.combine(n, k-1, i+1)]
+
+#2020
+class Solution:
+    def combine(self, n: int, k: int, start = 1) -> List[List[int]]:
+        def dfs (k, start):
+            if k == 0:
+                yield []
+            elif k > 0:
+                for i in range(start, n+1):
+                    for p in dfs(k-1, i+1):
+                        yield [i] + p 
+        return [*dfs(k, 1)]
