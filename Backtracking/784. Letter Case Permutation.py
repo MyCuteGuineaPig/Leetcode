@@ -47,6 +47,18 @@ class Solution:
                 res = [i+ch for i in res]
         return res
 
+#2020    
+class Solution:
+    def letterCasePermutation(self, S: str) -> List[str]:
+        if not S:
+            return ['']
+        later = self.letterCasePermutation(S[1:])
+        if S[0].isdigit():
+            return [S[0] + l for l in later]
+        return [i +l 
+                    for i in (S[0].upper(), S[0].lower())  
+                    for l in later ]    
+  
 class Solution:
     def letterCasePermutation(self, S):
         """
