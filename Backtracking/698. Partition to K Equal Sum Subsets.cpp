@@ -155,6 +155,37 @@ public:
             }
         }
         
+       for(int i = 0; i < (1 << n); ++i){
+            cout<<i<<" dp "<<dp[i]<<" sum "<<sum[i]<<endl;
+        }
+     
         return dp[(1 << n) - 1];
     }
 };
+
+
+/*
+
+Example 
+
+[4,3,2,5]
+2
+
+0 dp 1 sum 0   
+1 dp 1 sum 4 
+2 dp 1 sum 3
+3 dp 1 sum 7
+4 dp 1 sum 2
+5 dp 1 sum 6  101
+6 dp 1 sum 5  110
+7 dp 1 sum 9  111  # (4 + 3) % 7 = 0, 2 + 7 = 9 < target 
+8 dp 1 sum 5
+9 dp 0 sum 0  1001  4 + 5 > target
+10 dp 0 sum 0 1010 3 + 5 > target
+11 dp 1 sum 12  1011  4+3 = 7,  7%7 + 5 < target
+12 dp 1 sum 7   1100 2 + 5 = 7
+13 dp 1 sum 11  1101 2+5 = 7,  7%7 + 4 < target
+14 dp 1 sum 10  1110 2+5 = 7， 7%7 + 2　< target
+15 dp 1 sum 14
+
+*/
