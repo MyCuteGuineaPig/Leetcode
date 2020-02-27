@@ -16,3 +16,21 @@ class Solution:
         return dfs(N,set(range(1,N+1)))
         
     
+    
+    #2020
+    class Solution:
+    def countArrangement(self, N: int) -> int:
+        if not N:
+            return 0 
+        mylist = [i for i in range(1, N+1)]
+        def backTrack(start):
+            if start == N:
+                return 1 
+            res = 0 
+            for i in range(start, N):
+                if mylist[i] % (start+1) == 0 or (start+1) % mylist[i] == 0:
+                    mylist[i],  mylist[start] = mylist[start], mylist[i] 
+                    res += backTrack(start+1)
+                    mylist[i],  mylist[start] = mylist[start], mylist[i] 
+            return res 
+        return backTrack(0)
