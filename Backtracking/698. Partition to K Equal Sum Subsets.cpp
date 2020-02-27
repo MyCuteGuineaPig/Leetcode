@@ -130,6 +130,16 @@ will tell whether the whole array can be partitioned into k subsets of equal sum
 
 total[i] stores the sum of subset with sum less than equal to target sum 
 (total sum/k why? because we need to split array into k subset).
+
+
+这么做肯定有解的原因,下面位置都用二进制表示
+
+比如 位置在 [1,3,4,5,6](二进制是 111101) 有解, dp[111101] = true, 最后index = 1(index = 10), nums[2] 
+如果 sums[111101] % target + nums[10] 只能==target, 否则 sum(list) 不能被 target 整除, 之前条件就早已经return False 
+
+如果 dp[011111], dp[101111], dp[110111], dp[111011], dp[111101], dp[111110] 都没有解， 都是false, 那么dp[111111]肯定也是false
+    
+
 */
 class Solution {
 public:
@@ -143,7 +153,7 @@ public:
         if(target % k) return false;
         target /= k;
         
-        for(int i = 0; i < (1 << n); ++i){
+        for(int i = 0; i < (1 << n) -1; ++i){ //不用到 1<<n -1, 因为1<<n -1, 在之前就已经set 
             if(dp[i] == false) continue;
             //int remainder = target - sum[i] % target;
             for(int j = 0; j < n; ++j){
@@ -187,5 +197,4 @@ Example
 13 dp 1 sum 11  1101 2+5 = 7,  7%7 + 4 < target
 14 dp 1 sum 10  1110 2+5 = 7， 7%7 + 2　< target
 15 dp 1 sum 14
-
 */
