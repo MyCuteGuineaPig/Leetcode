@@ -28,6 +28,8 @@ public:
             if(i > avg)
                 return false;
         sort(nums.begin(), nums.end(), greater<int>()); //需要sort 不sort 会TLE
+     //Always start from big numbers for this kind of question, just by doing it yourself for
+     //a few times you will find out that the big numbers are the easiest to place.
         vector<int>buckets(k, avg);
         return backTrack(nums, k, 0, buckets);
     }
