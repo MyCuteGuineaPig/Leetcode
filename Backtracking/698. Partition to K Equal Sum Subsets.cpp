@@ -16,6 +16,42 @@ Note:
 
 */
 
+//BackTrack with loop buckets
+class Solution {
+public:
+    bool canPartitionKSubsets(vector<int>& nums, int k) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if( sum % k != 0) 
+            return false;
+        int avg = sum / k;
+        for(auto i: nums) 
+            if(i > avg)
+                return false;
+        sort(nums.begin(), nums.end(), greater<int>()); //需要sort 不sort 会TLE
+        vector<int>buckets(k, avg);
+        return backTrack(nums, k, 0, buckets);
+    }
+
+    bool backTrack(vector<int>&nums, const int& k, int start, vector<int>&buckets){
+        if(start == nums.size()) 
+            return true;
+
+        for(int i = 0; i < k; ++i)
+        {
+            if(buckets[i] >= nums[start])
+            {
+                buckets[i] -= nums[start];
+                if (backTrack(nums, k, start +1, buckets))
+                    return true;
+                buckets[i] += nums[start];
+            }
+        }
+        return false;
+    }
+};
+
+
+//BackTrack with loop nums
 class Solution {
 public:
     bool canPartitionKSubsets(vector<int>& nums, int k) {
