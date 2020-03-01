@@ -771,6 +771,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) | _O(nlogk)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue  |
 | [853. Car Fleet](https://leetcode.com/problems/car-fleet/) | _O(nlogn)_ | _O(n)_	| Medium |  🐸sort postion又大到小，再sort从position\[i]到target的时间由小到大,一旦后面的时间比前面时间长，就不会catch前面的，再更新cur_time  |
 |C++priority_queue<pair<int,int>>pq 先对比first, top是first最大的，</br>constructor: greater\<int>是让top返回最小的数,大的数放后面 |  |	|  | python的heappop()先pop对比first,then second, top是first最小的  |
+| [1365	How Many Numbers Are Smaller Than the Current Number](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/) | _O(n+m)_ | _O(m)_	| Easy |  |
+| [1366. Rank Teams by Votes](https://leetcode.com/problems/rank-teams-by-votes/) | _O(n)_ | _O(1)_	| Medium |  |
 
 
 </br>
@@ -941,6 +943,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [785. Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | DFS/BFS + Bit Mask, 用红蓝两色表vertex，如果相邻的node 一样颜色 return false |
 | [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/)	|	_O(p + r \* n)_	|	_O(n)_ |	Medium | ❌ |
 | [802. Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/description/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | 😚 DFS + bit mask 需要定义state 0：unvisited, 1 visited not safe, 2 visited not safe, 3 visited and safe 注意不能用visited 的value 代替boolean 的value |
+| [1368	Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(m\*n|)_	|	_O(m\*n|)_ |	Medium | BFS + DFS |
 
 </br>
 </br>
