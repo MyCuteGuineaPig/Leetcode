@@ -909,6 +909,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [865. Smallest Subtree with all the Deepest Nodes](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/) | _O(n)_ | _O(h)_	| Medium | 🔍DFS, left level == right level 返回root, if left level > right level, 返回left dfs的node else返回right dfs的  |
 | [889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) | _O(n)_ | _O(h)_	| Medium | 😍😍 <ul><li>Solution 1: 难点是找到 left 和right的边界: 假定都把下一个assign 给left </li><li> 用stack </li></ul> |
 | [1028. Recover a Tree From Preorder Traversal](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Hard | 😚 stack / DFS, stack逻辑类似[889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) |
+| [1367	Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree/)	|	_O(n+l)_	|	_O(h+l)_ |	Medium |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -943,7 +944,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [785. Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | DFS/BFS + Bit Mask, 用红蓝两色表vertex，如果相邻的node 一样颜色 return false |
 | [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/)	|	_O(p + r \* n)_	|	_O(n)_ |	Medium | ❌ |
 | [802. Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/description/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | 😚 DFS + bit mask 需要定义state 0：unvisited, 1 visited not safe, 2 visited not safe, 3 visited and safe 注意不能用visited 的value 代替boolean 的value |
-| [1368	Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(m\*n|)_	|	_O(m\*n|)_ |	Medium | BFS + DFS |
+| [1367	Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree/)	|	_O(n+l)_	|	_O(h+l)_ |	Medium |  |
+| [1368	Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(m\*n|)_	|	_O(m\*n|)_ |	Hard | BFS + DFS |
 
 </br>
 </br>
