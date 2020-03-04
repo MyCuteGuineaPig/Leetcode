@@ -157,3 +157,86 @@ private:
 			}
 	}
 };
+
+
+
+
+
+//2020 
+class Solution {
+public:
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        if(find(wordList.begin(), wordList.end(), endWord) == wordList.end())
+            return {};
+	    
+        unordered_map<int, unordered_set<int>>mp;            
+        int endIndex = -1;  
+        
+        for(int  i = 0; i<wordList.size(); ++i){
+            if(isOneDiff(wordList[i], beginWord))
+                mp[wordList.size()].insert(i);
+		
+            for(int j = i+1; j<wordList.size(); ++j){
+                if(isOneDiff(wordList[i], wordList[j])){
+                    mp[i].insert(j);
+                    mp[j].insert(i);
+                }
+                if (endIndex== -1 && wordList[i] == endWord) endIndex = i; 
+                else if(endIndex== -1 && wordList[j] == endWord) endIndex = j;
+            }
+        }     
+        vector<int>visited(wordList.size()+1,0);
+        vector<vector<int>>res; 
+	    
+        queue<pair<int, vector<int>>>q; 
+        q.push({wordList.size(),{wordList.size()}});
+	    
+        while(res.empty() && !q.empty() && q.front().second.size() < wordList.size()){
+            int size = q.size();
+            unordered_set<int>curwords; //没有这个, 会TLE
+            for(int i = 0; i<size; ++i){
+                auto top = q.front();
+                curwords.insert(top.first);
+                q.pop();
+                for(auto i: mp[top.first]){
+                       top.second.push_back(i);
+                        if(i == endIndex)
+                            res.push_back(top.second);
+                        else
+			    q.push({i, top.second});
+                    top.second.pop_back();
+                }
+            }
+            for(auto i: curwords)//这一轮之后 不会再用到这些word, 用不到这些word了，如果再用, 需要round 也是更多
+                mp.erase(i);
+        }
+	    
+	    
+        return buildResult(res,wordList, beginWord);
+    }
+
+
+
+    vector<vector<string>> buildResult(const vector<vector<int>>&res, const vector<string>& wordList, const string& beginWord){
+        vector<vector<string>> resStr; 
+        for(int i = 0; i<res.size(); ++i){
+            resStr.push_back({beginWord});
+            
+            for(int j = 1 ; j <res[i].size(); ++j)
+                resStr.back().push_back(wordList[res[i][j]]);
+        }
+        return resStr;
+    }  
+
+
+    bool isOneDiff(const string& a, const string&b){
+        int diff = 0;
+        for(int i = 0; i<a.size(); ++i){
+            if (a[i] != b[i]){
+                if(diff) return false;
+                diff = 1;
+            }
+        }
+        return diff == 1; 
+    }
+};
