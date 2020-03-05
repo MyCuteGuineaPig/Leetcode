@@ -192,6 +192,7 @@ public:
         q.push({wordList.size(),{wordList.size()}});
 	    
         while(res.empty() && !q.empty() && q.front().second.size() < wordList.size()){
+		//q.front().second.size() < wordList.size(), 让queue 的size 小于dictionary size, 大于不可能有结果
             int size = q.size();
             unordered_set<int>curwords; //没有这个, 会TLE
             for(int i = 0; i<size; ++i){
@@ -209,7 +210,6 @@ public:
             }
             for(auto i: curwords)//这一轮之后 不会再用到这些word, 用不到这些word了，如果再用, 需要round 也是更多
                 mp.erase(i);
-        }
 	    
 	    
         return buildResult(res,wordList, beginWord);
@@ -239,4 +239,121 @@ public:
         }
         return diff == 1; 
     }
+};
+
+	
+	
+	
+	
+	
+	
+//Two-end BFS 
+//2020
+
+class Solution {
+public:
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        if(find(wordList.begin(), wordList.end(), endWord) == wordList.end()){
+            return {};
+        }
+
+        unordered_map<int, unordered_set<int>>mp;            
+        int endIndex = -1;  
+        
+        for(int  i = 0; i<wordList.size(); ++i){
+            if(isOneDiff(wordList[i], beginWord)){
+                mp[wordList.size()].insert(i);
+            }
+            for(int j = i+1; j<wordList.size(); ++j){
+                if(isOneDiff(wordList[i], wordList[j])){
+                    mp[i].insert(j);
+                    mp[j].insert(i);
+                }
+                if (endIndex== -1 && wordList[i] == endWord) endIndex = i; 
+                else if(endIndex== -1 && wordList[j] == endWord) endIndex = j;
+            }
+        }     
+        vector<vector<int>>res; 
+        unordered_multimap<int,vector<int>>begindict = {{wordList.size(), {wordList.size()}}};
+        unordered_multimap<int,vector<int>>enddict = {{endIndex, {endIndex}}};
+/*
+
+需要unordered_multimap，可能到这个word, 有多个路径
+比如 d : a-> b ->c -> d,  d: a->c->b->d 
+
+
+unordered_multimap: 记住不能用 []获取值，也不能用[] insert 值,
+获取值，需要用equal_range
+*/	    
+
+	    
+        if(twoEndedBFS(begindict, enddict, mp, res, true))
+            return buildResult(res,wordList, beginWord);
+        return {};
+    }
+
+
+    bool twoEndedBFS(unordered_multimap<int,vector<int>>&begindict, unordered_multimap<int,vector<int>>&enddict, 
+    unordered_map<int, unordered_set<int>>& mp, vector<vector<int>>&res, bool isBegin){
+        if(begindict.empty())
+            return false;
+        if(begindict.size() < enddict.size())
+            return twoEndedBFS(begindict, enddict, mp, res, !isBegin);
+
+        unordered_set<int>  this_round;//没有this_round, 删除路径, TLE
+        unordered_multimap<int, vector<int>>next;
+
+        for(auto itBegin : begindict){
+            this_round.insert(itBegin.first);
+
+            for(auto nxt: mp[itBegin.first]){
+                auto itendFind = enddict.equal_range(nxt);
+                for(auto itend = itendFind.first; itend != itendFind.second; ++itend){
+                    vector<int>& endPath = itend->second;
+                    auto beginPath = itBegin.second;
+                    
+                    reverse(endPath.begin(),endPath.end()); 
+                    copy(endPath.begin(), endPath.end(), back_inserter(beginPath));
+                    if(!isBegin)
+                        reverse(beginPath.begin(), beginPath.end());
+                    res.push_back(beginPath);
+                }
+                itBegin.second.push_back(nxt);
+                next.insert({nxt,  itBegin.second});
+                itBegin.second.pop_back();
+            }
+        }
+
+        for(auto cur: this_round)
+            mp.erase(cur);
+        return !res.empty() || twoEndedBFS(next, enddict, mp, res, isBegin);
+    }
+
+
+
+    vector<vector<string>> buildResult(const vector<vector<int>>&res, const vector<string>& wordList, const string& beginWord){
+        vector<vector<string>> resStr; 
+        for(int i = 0; i<res.size(); ++i){
+            resStr.push_back({beginWord});
+            
+            for(int j = 1 ; j <res[i].size(); ++j){
+                //cout<<" res[i][j] "<<res[i][j]<<endl;
+                resStr.back().push_back(wordList[res[i][j]]);
+            }
+        }
+        return resStr;
+    }  
+
+
+    bool isOneDiff(const string& a, const string&b){
+        int diff = 0;
+        for(int i = 0; i<a.size(); ++i){
+            if (a[i] != b[i]){
+                if(diff) return false;
+                diff = 1;
+            }
+        }
+        return diff == 1; 
+    }
+    
 };
