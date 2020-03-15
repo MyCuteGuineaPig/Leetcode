@@ -148,6 +148,12 @@ public:
 
             for(int i = n-1; i>=0; i--) //必须从后往前，因为之前的digit的是sort，大的digit在最后面，count是从这个位数的最后一个位置开始往前
                 aux[--count[(nums[i]/exp)%base]] = nums[i];
+          
+          /*
+          比如第一次sort完是  20, 10, 21, 11
+          第二次, sort 顺序是 10, 11, 20, 21  :  20 排21 前面, 因为根据上一位sort 结果, 1 > 0
+          */
+          
             exp *= base;
             nums = aux;
         }
