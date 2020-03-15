@@ -94,6 +94,41 @@ public:
 };
 
 
+//2020
+class Solution {
+public:
+    int maximumGap(vector<int>& nums) {
+        if(nums.size() <= 1) return 0;
+        int maxn = *max_element(nums.begin(), nums.end());
+        int minn = *min_element(nums.begin(), nums.end());
+        if( maxn == minn) 
+            return 0;
+        double gap = (double)(maxn - minn)/(double)nums.size();
+        vector<vector<int>> p((maxn - minn)/gap+1);
+        for(auto i: nums){
+            int bucket = (i -minn) / gap;
+            if (p[bucket].empty()){
+                p[bucket] = vector<int>(2,0);
+                p[bucket][0] = i;
+                p[bucket][1] = i;
+            }
+            else{
+                p[bucket][0] = min(p[bucket][0], i);
+                p[bucket][1] = max(p[bucket][1], i);
+            }
+        }
+        int res = 0, prev = maxn + 1;
+        for(int i = 0; i<p.size(); ++i){
+            if(!p[i].empty()){
+                if (prev != maxn+1) 
+                    res = max(res, p[i][0] - prev);
+                prev = p[i][1];
+            }
+        }
+        return res;
+    }
+};
+
 
 class Solution {
 public:
@@ -101,7 +136,7 @@ public:
         const int n = nums.size();
         if(n<=1) return 0;
         int maxn = *max_element(nums.begin(),nums.end());
-        long exp = 1, base = 16;
+        long exp = 1, base = 16; //注意用Long，否则 exp *= base; 可能overflow
         vector<int> aux(nums.size());
         while(maxn/exp>0){
             vector<int>count(base,0);
@@ -113,6 +148,12 @@ public:
 
             for(int i = n-1; i>=0; i--) //必须从后往前，因为之前的digit的是sort，大的digit在最后面，count是从这个位数的最后一个位置开始往前
                 aux[--count[(nums[i]/exp)%base]] = nums[i];
+          
+          /*
+          比如第一次sort完是  20, 10, 21, 11
+          第二次, sort 顺序是 10, 11, 20, 21  :  20 排21 前面, 因为根据上一位sort 结果, 1 > 0
+          */
+          
             exp *= base;
             nums = aux;
         }
