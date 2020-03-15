@@ -94,6 +94,41 @@ public:
 };
 
 
+//2020
+class Solution {
+public:
+    int maximumGap(vector<int>& nums) {
+        if(nums.size() <= 1) return 0;
+        int maxn = *max_element(nums.begin(), nums.end());
+        int minn = *min_element(nums.begin(), nums.end());
+        if( maxn == minn) 
+            return 0;
+        double gap = (double)(maxn - minn)/(double)nums.size();
+        vector<vector<int>> p((maxn - minn)/gap+1);
+        for(auto i: nums){
+            int bucket = (i -minn) / gap;
+            if (p[bucket].empty()){
+                p[bucket] = vector<int>(2,0);
+                p[bucket][0] = i;
+                p[bucket][1] = i;
+            }
+            else{
+                p[bucket][0] = min(p[bucket][0], i);
+                p[bucket][1] = max(p[bucket][1], i);
+            }
+        }
+        int res = 0, prev = maxn + 1;
+        for(int i = 0; i<p.size(); ++i){
+            if(!p[i].empty()){
+                if (prev != maxn+1) 
+                    res = max(res, p[i][0] - prev);
+                prev = p[i][1];
+            }
+        }
+        return res;
+    }
+};
+
 
 class Solution {
 public:
