@@ -96,7 +96,18 @@ class Solution:
             s.pop(p)#把第一个数n pop 掉，这样第二数后面比它小的，是所有数比他小的
         return c
 
-
+#2020 
+class Solution:
+def countSmaller(self, nums: List[int]) -> List[int]:
+    li = []
+    res = []
+    for i in nums[::-1]:
+        ind = bisect.bisect_left(li, i)
+        res += ind, 
+        li += i,
+        li.sort()
+    return reversed(res)
+    
 
 #BIT tree
 class Solution:
