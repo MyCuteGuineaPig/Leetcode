@@ -18,7 +18,7 @@ class Solution:
         h = []
         res = sSum = 0
         for e,s in sorted(zip(efficiency, speed), reverse=1):
-            bisect.insort(h, -s)
+            bisect.insort(h, -s) #assume h is sorted, can use binary search to find position to insert
             sSum += s
             if len(h) > k:
                 sSum += h.pop()
