@@ -47,6 +47,28 @@ public:
 };
 
 
+//2020
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int i1 = 0, i2 = 0;
+        for(int i = 0; i<nums.size(); ++i){
+            if (nums[i] == 0){
+                if(i1 == i2){
+                    swap(nums[i], nums[i2++]);
+                    i1++;
+                }
+                else{
+                    swap(nums[i], nums[i1++]);
+                    swap(nums[i], nums[i2++]);
+                }
+            }else if(nums[i] == 1){
+                swap(nums[i], nums[i2++]);
+            }
+        }
+    }
+};
+
 
 /*
 count 
