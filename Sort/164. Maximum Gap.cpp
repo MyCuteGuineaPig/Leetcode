@@ -136,7 +136,7 @@ public:
         const int n = nums.size();
         if(n<=1) return 0;
         int maxn = *max_element(nums.begin(),nums.end());
-        long exp = 1, base = 16;
+        long exp = 1, base = 16; //注意用Long，否则 exp *= base; 可能overflow
         vector<int> aux(nums.size());
         while(maxn/exp>0){
             vector<int>count(base,0);
