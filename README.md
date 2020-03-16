@@ -22,6 +22,7 @@
 * [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
 * [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
 * [Graph](https://github.com/beckswu/Leetcode#graph)
+* [Design](https://github.com/beckswu/Leetcode#design)
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
 
 Python trick: 
@@ -101,7 +102,7 @@ Python trick:
 | [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 Sliding Window  |
 | [845. Longest Mountain in Array](https://leetcode.com/problems/longest-mountain-in-array/) | _O(n)_ | _O(1)_	| Medium | 🐸 |
 | [1375. Bulb Switcher III](https://leetcode.com/problems/bulb-switcher-iii/) | _O(n)_ | _O(1)_	| Medium |  |
-| [1380. Lucky Numbers in a Matrix](https://leetcode.com/problems/lucky-numbers-in-a-matrix/) | _O(m\*n)_ | _O(m+n)_	| Easy | [```zip(*m)```获得column in list, set intersection]() |
+| [1380. Lucky Numbers in a Matrix](https://leetcode.com/problems/lucky-numbers-in-a-matrix/) | _O(m\*n)_ | _O(m+n)_	| Easy | [```zip(*m)```获得column in list, set intersection](https://github.com/beckswu/Leetcode/blob/master/Array/1380.%20Lucky%20Numbers%20in%20a%20Matrix.py#L35) |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
  
@@ -762,18 +763,19 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [147. Insertion Sort List](https://leetcode.com/problems/insertion-sort-list/) | _O(n^2)_ | _O(1)_	| Medium | 跟[148. Sort List](https://leetcode.com/problems/sort-list/description/) 一样 |
 | [148. Sort List](https://leetcode.com/problems/sort-list/description/) | _O(nlogn)_ | _O(logn)_	| Medium | <ul><li>top-down,用两个pointer，一个慢，一个快，去split,然后merge, space: O(logn)</li><li> bottom-up, 第一次只把1和2顺序，3和4顺序，5和6顺序调整，第二次把1，2和3，4顺序调整，5,6和7，8顺序调整，以此类推, space: O(1) </li></ul>  |
 | [164. Maximum Gap](https://leetcode.com/problems/maximum-gap/) | _O(n)_ | _O(n)_	| Hard | 😍🔍 <ul><li>Bucket Sort, **double** minstep = (max-min)/(n-1) = bucket_step, bucket (0,1) 0是bucket minvalue, 1 是max value, 结果max gap=相邻两个bucket的min\[i]-max\[i-1]  </li><li>🔍🔍radix sort, res = 最大两个相邻的点, radix sort排序是从后往前loop，因为之前的digit的是sort，大的digit在最后面，count\[i]是从ith-digit的最后一个位置</li></ul> |
-| [179. Largest Number](https://leetcode.com/problems/largest-number/) | _O(nlogn)_ | _O(n)_	| Medium | 变成string再sort,string sort会从string的第0位开始比,比如"9">"0", "9">"89", python解定义sort class，因为python中'30'>'3', 而我们希望'3'>'30' |
+| [164. Maximum Gap](https://leetcode.com/problems/maximum-gap/) | _O(n)_ | _O(n)_	| Hard | 😍🔍 <ul><li>Bucket Sort, **double** minstep = (max-min)/(n-1) = bucket_step, bucket (0,1) 0是bucket minvalue, 1 是max value, 结果max gap=相邻两个bucket的min\[i]-max\[i-1]  </li><li>🔍🔍radix sort, res = 最大两个相邻的点, radix sort排序是从后往前loop，因为之前的digit的是sort，大的digit在最后面，count\[i]是从ith-digit的最后一个位置</li></ul> |
+| [179. Largest Number](https://leetcode.com/problems/largest-number/) | _O(nlogn)_ | _O(n)_	| Medium |✏️✏️ [Python Lambda Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/179.%20Largest%20Number.py#L13) |
 | [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | _O(nlogn)_ | _O(logn)_	| Hard |😚🔍 priority_queue or multiset(看critical point) |
-| [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | 🌒counting Sort |
+| [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | ❌counting Sort |
 | [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BIT |
 | [324. Wiggle Sort II](https://leetcode.com/problems/wiggle-sort-ii/) | _O(n) average_ | _O(1)_	| Medium | 🌒(1 + 2\*index) \% (n \| 1)保证median左面数map奇数位，mediam右面的数map偶数位<ul><li>(1)elements smaller than the 'median' are put into the last even slots</li><li>(2) elements larger than the 'median' are put into the first odd slots</li><li>(3) the medians are put into the remaining slots.</li></ul> |
 | [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BIT |
-| [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | 😍🔍 Bucket Sort, Quick Select, <ul><li> C++: n-th elements,  priority_queue (maxheap: priority_queue, minheap: multiset), </li><li> python: collections.Count, heapq, most_common(k) </li></ul> |
+| [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | 😍 Bucket Sort, Quick Select, <ul><li> C++: n-th elements,  priority_queue (maxheap: priority_queue, minheap: multiset), </li><li> python: collections.Count, heapq, most_common(k) </li></ul> 与[451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) , [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) 类似 |
 | [406. Queue Reconstruction by Height](https://leetcode.com/problems/queue-reconstruction-by-height/) | _O(n \* sqrt(n))~O(n^2)_ | _O(n)_	| Medium | 😚🐸 关键是认清sort的顺序 先把height大的安排了，如果height一样再sort k有小到大。 sqrt(n)解是一样的sort，但是把sort之后的插入到不同的组中，每个组不超过sqrt(n)个元素 |
 | [462. Minimum Moves to Equal Array Elements II](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/) | _O(nlogn)_ | _O(n)_	| Medium | Medium是最小化Sum of Absolute Deviations; Quick Select: O(n) on average |
-| [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) | _O(n)_ | _O(n)_	| Medium |😍 Bucket Sort, Quick Select(n-th elements) O(nlogn), priority_queue O(nlogn)  |
+| [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements) O(nlogn), priority_queue O(nlogn)  |
 | [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) | _O(nlogk)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue  |
-| [853. Car Fleet](https://leetcode.com/problems/car-fleet/) | _O(nlogn)_ | _O(n)_	| Medium |  🐸sort postion又大到小，再sort从position\[i]到target的时间由小到大,一旦后面的时间比前面时间长，就不会catch前面的，再更新cur_time  |
+| [853. Car Fleet](https://leetcode.com/problems/car-fleet/) | _O(nlogn)_ | _O(n)_	| Medium |  Greedy: sort postion又大到小，再sort到target的时间由小到大  |
 |C++priority_queue<pair<int,int>>pq 先对比first, top是first最大的，</br>constructor: greater\<int>是让top返回最小的数,大的数放后面 |  |	|  | python的heappop()先pop对比first,then second, top是first最小的  |
 | [1365	How Many Numbers Are Smaller Than the Current Number](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/) | _O(n+m)_ | _O(m)_	| Easy |  🔍[_O(n+m)_ Solution Counting Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/1365.%20How%20Many%20Numbers%20Are%20Smaller%20Than%20the%20Current%20Number.cpp#L38) 🔍[Python Counting Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/1365.%20How%20Many%20Numbers%20Are%20Smaller%20Than%20the%20Current%20Number.py#L5) |
 | [1366. Rank Teams by Votes](https://leetcode.com/problems/rank-teams-by-votes/) | _O(n)_ | _O(1)_	| Medium | 🔍[Python Sort list based on Dictonary value](https://github.com/beckswu/Leetcode/blob/master/Sort/1366.%20Rank%20Teams%20by%20Votes.py#L31)  |
