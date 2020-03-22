@@ -142,6 +142,7 @@ Python trick:
 | [870. Advantage Shuffle](https://leetcode.com/problems/advantage-shuffle/) | _O(nlogn)_ | _O(n)_	| Medium |🔍😍 sort \ maxheap \ minheap |
 | [881. Boats to Save People](https://leetcode.com/problems/boats-to-save-people/) | _O(nlogn)_ | _O(n)_	| Medium | two pointer |
 | [1249. Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/) | _O(n)_ | _O(1)_	| Medium | Stack |
+| [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
@@ -849,7 +850,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [744. Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/) | _O(logn)_ |	_O(1)_	| Easy | 判断最后一个字母是不是大于target, 大于的话用upperbound，否则返回第一个char |
 | [786. K-th Smallest Prime Fraction](https://leetcode.com/problems/k-th-smallest-prime-fraction/) | _O(nlogr)_ |	_O(1)_	| Hard | <ul><li>用priority_queue, 先push进最小的，每次push前extract当前最小的, 保证push进去的比pop的大，最多max(n,k)次pop+push</li><li> binary search l=0, r=1, 看是不是有n个pair小于等于mid，i=0,增加j,减小A\[i]/\[j]的值，一旦A\[i]/\[j]小于等于mid，增加i,就是增加A\[i]/\[j], 再增加j, 如果count==k, 返回k中最大的那个pair</li><ul> |
 | [793.Preimage Size of Factorial Zeroes Function](https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/description/) | _O((logk)^2)_ |	_O(1)_	| Hard | l = 0, r=5\*k, binary search mid是否有k个零的0，有的话r=mid, 否则l = mid+1, 最后再判断l是否有k个0, 有的话返回5,没有的话返回0 |
-| [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅 |
+| [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅[Binary Search](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/1385.%20Find%20the%20Distance%20Value%20Between%20Two%20Arrays.cpp#L23), Two pointer |
 
 
 
