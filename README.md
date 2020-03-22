@@ -1071,6 +1071,7 @@ DFS 是看有没有path，DP是看有几个path
 | [813. Largest Sum of Averages](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(k\*n^2)_	|	_O(n)_|	Hard | dp\[k]\[i] 表示在A\[:i] 中最多分k次 所得的平均数最大和 dp\[k]\[i] = max(dp\[k]\[i], dp\[k-1]\[j] + (sum\[i]-sum\[j])/(i-j))  |
 | [818. Race Car](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(nlogn)_	|	_O(n)_|	Hard | <ul><li>if i=2^n-1, dp\[i]=n, </li><li>else dp\[i] = min(n + 1 + dp\[(1 << n)-1 - i], n-1+2+k+dp\[i-((1 << (n-1)) - (1 << k))] for j in \[0,n] ), </li><li>n + 1 + dp\[(1 << n)-1 - i]是先到2^n-1的用n步, +1是做reverse(停)</li><li> n-1+2+k+dp\[i-((1 << (n-1)) - (1 << k))] 是先到之前2^(n-1)-1的点, 接着+1做reverse(停),然后往回走(2^k-1)点，+1做reverse(停)，再从那个点到点i </ul></li>|
 | [823. Binary Trees With Factors](https://leetcode.com/problems/binary-trees-with-factors/)	|	_O(n^2)_	|	_O(n)_|	Medium | 找规律  |
+| [1387. Sort Integers by The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value/)	|	_O(n)_ average	|	_O(n)_|	Medium | nth_element, [static variable]()  |
 
 <br/>
 <br/>
