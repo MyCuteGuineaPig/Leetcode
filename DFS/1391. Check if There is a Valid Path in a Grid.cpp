@@ -61,3 +61,65 @@ public:
         return dfs(g, 1, 1);    
     }
 };
+
+
+class Solution {
+    // 0, 1, 2, 3 = l, r, u, d
+    constexpr static int fromTo[7][4] = {
+        {-1, -1, -1, -1},
+        {1, 0, -1, -1},
+        {-1, -1, 3, 2},
+        {3, -1, -1, 0},
+        {-1, 3, -1, 1},
+        {2, -1, 0, -1},
+        {-1, 2, 1, -1}
+    };
+    
+    constexpr static int delta[4][2] = {
+        {0, -1}, {0, 1}, {-1, 0}, {1, 0}
+    };
+public:
+    bool hasValidPath(vector<vector<int>>& grid) {
+        if(grid.empty()) return false;
+        if(grid.size() == 1 && grid[0].size() == 1) return true;
+        int i = 0;
+        int j = 0;
+        int fromDir = -1;
+        switch(grid[0][0]){
+            case 1:  case 4: case 6:
+                fromDir = 0;
+                j = 1;
+                break;
+            case 2: case 3:
+                fromDir = 2;
+                i = 1;
+                break;
+            case 5:
+                return false;
+        }
+        
+        if(explore(i, j, grid, fromDir)) return true;
+        
+        if(grid[0][0] != 4 || (i == 0 && j == 0)) return false;
+        
+        i = 1;
+        j = 0;
+        
+        return explore(i, j, grid, 2);
+    }
+    
+    bool explore(int& i, int& j, vector<vector<int>> grid, int fromDir){
+        while(i >= 0 && i < grid.size() && j >= 0 && j < grid[0].size()){
+            if(i == 0 && j == 0) return false;
+            int nextDir = fromTo[grid[i][j]][fromDir];
+            if(nextDir == -1) return false;
+            if(i == grid.size() - 1 && j == grid[0].size() - 1) return true;
+            
+            i += delta[nextDir][0];
+            j += delta[nextDir][1];
+            
+            fromDir = nextDir ^ 1;
+        }
+        return false;
+    }
+};
