@@ -964,6 +964,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1368	Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | BFS + DFS |
 | [1377. Frog Position After T Seconds](https://leetcode.com/problems/frog-position-after-t-seconds/) |	_O(n)_	|	_O(n)_ |	Hard | ✏️[Python Set](https://github.com/beckswu/Leetcode/blob/master/DFS/1377.%20Frog%20Position%20After%20T%20Seconds.py#L127) |
 | [1391. Check if There is a Valid Path in a Grid](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/) |	_O(m\*n)_	|	_O(1)_ |	Medium | |
+| [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP 🎅🎅  |
 
 
 </br>
