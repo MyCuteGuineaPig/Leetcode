@@ -82,3 +82,18 @@ public:
         return dp[m-1];
     }
 };
+
+//2020
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        if(grid.empty() || grid[0].empty())
+            return 0;
+        vector<int>dp(grid[0].size(), 0);
+        for(int i = 0; i<grid.size(); ++i){
+            for(int j = 0; j<grid[0].size(); ++j)
+                dp[j] = (i && j ? min(dp[j], dp[j-1]) : i ? dp[j] : j ? dp[j-1] : 0) + grid[i][j];       
+        }
+        return dp.back();
+    }
+};
