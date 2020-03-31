@@ -25,7 +25,26 @@ isMatch("aab", "c*a*b") → true
 
 */
 
-
+//2020
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        vector<vector<int>>dp(p.size()+1, vector<int>(s.size()+1,0));
+        int sz = s.size(), pz = p.size();
+        dp[0][0] = 1;
+        for(int i = 0; i<p.size(); ++i)
+            if(p[i] == '*' ) dp[i+1][0] = dp[i-1][0];
+        for(int i = 0; i<pz; ++i){
+            for(int j = 0; j<sz; ++j){
+                if (s[j] == p[i] || p[i] == '.' )
+                    dp[i+1][j+1] = dp[i][j];
+                else if(p[i] == '*') 
+                    dp[i+1][j+1] = dp[i-1][j+1] || (s[j] == p[i-1] || p[i-1] == '.') && dp[i+1][j];
+            }
+        }
+        return dp[pz][sz];
+    }
+};
 
 /*
 This Solution use 2D DP. beat 90% solutions, very simple.
@@ -128,21 +147,3 @@ public:
 };
 
 
-
-
-class Solution {
-public:
-    bool isMatch(string s, string p) {
-        vector<vector<int>>dp(p.size()+1, vector<int>(s.size()+1,0)); //dp[i+1][j+1] 代表s[i] p[j]位置情况
-        dp[0][0] = 1;
-        for(int i = 1; i<=p.size();i++)
-            for(int j = 0; j<=s.size(); j++) // 
-                    if(p[i-1]!='*') dp[i][j] =  p[i-1] == s[j-1] || p[i-1] == '.' ? dp[i-1][j-1] : 0;
-                    else dp[i][j] = dp[i-2][j] || (j>0 && (p[i-2] == s[j-1] || p[i-2] == '.')  && dp[i][j-1] ); 
-                        // dp[j] 
-                        //dp[i-2][j] is zero preceding
-                        //dp[i-1][j] is one preceding 
-                        //  (j>0 && (p[i-2] == s[j-1] || p[i-2] == '.')  && dp[i][j-1]  at least one time
-        return dp[p.size()][s.size()];
-    }
-};
