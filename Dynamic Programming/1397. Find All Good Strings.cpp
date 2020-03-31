@@ -79,21 +79,3 @@ public:
     }
 };
 
-
-class Solution {
-public:
-    int maxSizeSlices(vector<int>& slices) {
-        unordered_map<int, unordered_map<int, unordered_map<int, int>>>mp;
-        return dp(0,slices.size()-1, slices.size()/3, slices, mp, 1);
-    }
-    
-    int dp(int i , int j, int k, const vector<int>&slices, unordered_map<int, unordered_map<int, unordered_map<int, int>>>&mp, int lastOne = 0){
-        if(k == 1)
-            return *max_element(slices.begin()+i, slices.begin()+j+1);
-        if(j-i + 1 < 2*k - 1)
-            return numeric_limits<int>::min();
-        if(mp.count(i) && mp[i].count(j) && mp[i][j].count(k))
-            return mp[i][j][k];
-        return mp[i][j][k] = max(slices[j] + dp(i + lastOne, j-2, k-1, slices, mp), dp(i, j-1, k, slices,mp));;
-    }
-};
