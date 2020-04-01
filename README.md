@@ -1021,8 +1021,7 @@ DFS 是看有没有path，DP是看有几个path
 | [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)	|	_O(n)_	|	_O(1)_ |	Easy |  |
 | [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard |  |
 | [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | 🎅 Memoization |
-| [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 😍😍🎅 similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)
-[509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) |
+| [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 😍😍🎅 similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/) [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) |
 | [097. Interleaving String](https://leetcode.com/problems/interleaving-string/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | <ul><li>s1\[i-1] == s3\[i+j-1] 代表s3\[i+j-1] 来自S1 </li> <li>s2\[j-1] == s3\[i+j-1] 代表 s3\[i+j-1] 来自S2 </li></ul> |
 | [115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)	|	_O(n^2)_	|	_O(n)_ |	Hard | 弄清删除\[i-1\]\[j\] 还是用\[i-1\]\[j-1\] char关系 |
 | [120. Triangle](https://leetcode.com/problems/triangle/)	|	_O(m\*n)_	|	_O(n)_ |	Medium | Bottom-up DP  |
