@@ -1013,14 +1013,15 @@ DFS 是看有没有path，DP是看有几个path
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [010. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/description/)	|	_O(m\*n)_	|	_O(n)_ |	Hard | 🎅🎅 |
-| [053. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)	|	_O(n)_	|	_O(1)_ |	Easy |  |
+| [053. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)	|	_O(n)_	|	_O(1)_ |	Easy | 😍 更新res, minsum 的顺序 |
 | [062. Unique Paths](https://leetcode.com/problems/unique-paths/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [063. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [064. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium | |
 | [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)	|	_O(n)_	|	_O(1)_ |	Easy |  |
 | [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard |  |
-| [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | BackTrack with DP |
-| [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 📖 |
+| [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | 🎅 Memoization |
+| [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 😍😍🎅 similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)
+[509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) |
 | [096. Unique Binary Search Trees	](https://leetcode.com/problems/unique-binary-search-trees/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 📖 cartesian product</br> 作为root，sum(#left + #right) Catalan number |
 | [097. Interleaving String](https://leetcode.com/problems/interleaving-string/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | <ul><li>s1\[i-1] == s3\[i+j-1] 代表s3\[i+j-1] 来自S1 </li> <li>s2\[j-1] == s3\[i+j-1] 代表 s3\[i+j-1] 来自S2 </li></ul> |
 | [115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)	|	_O(n^2)_	|	_O(n)_ |	Hard | 弄清删除\[i-1\]\[j\] 还是用\[i-1\]\[j-1\] char关系 |
@@ -1083,6 +1084,7 @@ DFS 是看有没有path，DP是看有几个path
 | [1387. Sort Integers by The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value/)	|	_O(n)_ average	|	_O(n)_|	Medium | nth_element, ✏️✏️[C++ Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.cpp#L3) [Python Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.py#L20)  |
 | [1388. Pizza With 3n Slices](https://leetcode.com/problems/pizza-with-3n-slices/)	|	_O(n^2)_  |	_O(n)_|	Hard | 😍😍 类似[213. House Robber II](https://leetcode.com/problems/house-robber-ii/) 和 [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/) |
 | [1395. Count Number of Teams](https://leetcode.com/problems/count-number-of-teams/)	|	_O(n^2)_  |	_O(1)_|	Medium |   |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>
 <br/>
