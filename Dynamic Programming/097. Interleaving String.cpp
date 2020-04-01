@@ -79,14 +79,14 @@ public:
     bool dfs(const string&s1, const string&s2, const string&s3, int i, int j, unordered_set<int>&st){
         if(i+j == s3.size())
             return true;
-        if(st.count(i*2*s1.size() + j)){
+        if(st.count(i*s3.size() + j))
             return false;
-        }
+        
         if(i < s1.size() && s1[i] == s3[i+j] && dfs(s1,s2,s3,i+1, j, st))
             return true;
         if(j < s2.size() && s2[j] == s3[i+j] && dfs(s1,s2,s3, i, j+1, st))
             return true;
-        st.insert(i*s1.size()*2 + j);
+        st.insert(i*s3.size() + j);
         return false;
     }
 };
