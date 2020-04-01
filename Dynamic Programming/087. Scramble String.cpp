@@ -67,6 +67,38 @@ public:
 };
 
 
+//2020
+class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        unordered_map<int,unordered_map<int,int>>mp;
+       return helper(s1, s2, s1.size(), 0,  s1.size()-1, 0, s2.size()-1, mp);
+    }
+    
+    bool helper(const string s1, const string&s2, const int& n, int i1, int j1, int i2, int j2, unordered_map<int, unordered_map<int,int>>&mp){
+//s1[i1:j1+1], s2[i2:j2+1]        
+        if(i1 == j1)
+            return s1[i1] == s2[i2];
+        if(mp.count(i1*n + j1) && mp[i1*n + j1].count(i2*n + j2))
+            return mp[i1*n + j1][i2*n + j2];
+        unordered_map<char,int>lookup;
+        for(int i = 0; i<j1-i1+1; i++){
+            lookup[s1[i1 + i]] ++; 
+            lookup[s2[i2 + i]] --;
+        }
+        for(auto i: lookup)
+            if(i.second) return false;
+
+        for(int i = 0; i<j1- i1; ++i){
+            mp[i1*n + j1][i2*n + j2] = mp[i1*n + j1][i2*n + j2]  ||  helper(s1, s2, n, i1, i1+i, i2, i2+i, mp) && helper(s1, s2, n, i1+i+1, j1, i2+i+1, j2, mp);
+            mp[i1*n + j1][i2*n + j2] = mp[i1*n + j1][i2*n + j2]  ||  helper(s1, s2, n, i1, i1+i, j2-i, j2, mp) && helper(s1, s2, n, i1+i+1, j1, i2, j2-i-1, mp);    
+        }
+        
+        return mp[i1*n + j1][i2*n + j2];
+    }
+};
+
+
 /*
 The basic idea is to divide s1(s2) into two substrings with length k and len-k and check if the two substrings s1[0…k-1] and s1[k, len-1] 
 are the scrambles of s2[0…k-1] and s2[k,len-1] or s2[len-k, len-1] and s2[0…len-k-1] via recursion.
