@@ -16,6 +16,7 @@ class Solution:
                     t[i][j] = j>0 and (s[j-1] == p[i-1] or p[i-1] == '.') and t[i-1][j-1]
                 else: 
                     t[i][j] = t[i-2][j] or (j>0 and (s[j-1] == p[i-2] or p[i-2] == '.') and  t[i][j-1])
+                    #t[i][j] = t[i-2][j]  cover c * , t[2][0] = t[0][0] = 1
         return t[len(p)][len(s)]
 
 """

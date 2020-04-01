@@ -67,6 +67,38 @@ public:
 };
 
 
+//2020
+class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        unordered_map<int,unordered_map<int,int>>mp;
+       return helper(s1, s2, s1.size(), 0,  s1.size()-1, 0, s2.size()-1, mp);
+    }
+    
+    bool helper(const string s1, const string&s2, const int& n, int i1, int j1, int i2, int j2, unordered_map<int, unordered_map<int,int>>&mp){
+//s1[i1:j1+1], s2[i2:j2+1]        
+        if(i1 == j1)
+            return s1[i1] == s2[i2];
+        if(mp.count(i1*n + j1) && mp[i1*n + j1].count(i2*n + j2))
+            return mp[i1*n + j1][i2*n + j2];
+        unordered_map<char,int>lookup;
+        for(int i = 0; i<j1-i1+1; i++){
+            lookup[s1[i1 + i]] ++; 
+            lookup[s2[i2 + i]] --;
+        }
+        for(auto i: lookup)
+            if(i.second) return false;
+
+        for(int i = 0; i<j1- i1; ++i){
+            mp[i1*n + j1][i2*n + j2] = mp[i1*n + j1][i2*n + j2]  ||  helper(s1, s2, n, i1, i1+i, i2, i2+i, mp) && helper(s1, s2, n, i1+i+1, j1, i2+i+1, j2, mp);
+            mp[i1*n + j1][i2*n + j2] = mp[i1*n + j1][i2*n + j2]  ||  helper(s1, s2, n, i1, i1+i, j2-i, j2, mp) && helper(s1, s2, n, i1+i+1, j1, i2, j2-i-1, mp);    
+        }
+        
+        return mp[i1*n + j1][i2*n + j2];
+    }
+};
+
+
 /*
 The basic idea is to divide s1(s2) into two substrings with length k and len-k and check if the two substrings s1[0…k-1] and s1[k, len-1] 
 are the scrambles of s2[0…k-1] and s2[k,len-1] or s2[len-k, len-1] and s2[0…len-k-1] via recursion.
@@ -142,5 +174,54 @@ public:
         char isS[(sSize+1)*sSize*sSize];
         fill_n(isS, (sSize+1)*sSize*sSize, 0);
         return DP_helper(s1, s2, 0, 0, sSize, isS);
+    }
+};
+
+
+class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        		/**
+		 * Let F(i, j, k) = whether the substring S1[i..i + k - 1] is a scramble of S2[j..j + k - 1] or not
+		 * Since each of these substrings is a potential node in the tree, we need to check for all possible cuts.
+		 * Let q be the length of a cut (hence, q < k), then we are in the following situation:
+		 * 
+		 * S1 [   x1    |         x2         ]
+		 *    i         i + q                i + k - 1
+		 * 
+		 * here we have two possibilities:
+		 *      
+		 * S2 [   y1    |         y2         ]
+		 *    j         j + q                j + k - 1
+		 *    
+		 * or 
+		 * 
+		 * S2 [       y1        |     y2     ]
+		 *    j                 j + k - q    j + k - 1
+		 * 
+		 * which in terms of F means:
+		 * 
+		 * F(i, j, k) = for some 1 <= q < k we have:
+		 *  (F(i, j, q) AND F(i + q, j + q, k - q)) OR (F(i, j + k - q, q) AND F(i + q, j, k - q))
+		 *  
+		 * Base case is k = 1, where we simply need to check for S1[i] and S2[j] to be equal 
+		 * */
+        
+        if(s1.size() != s2.size())
+            return false;
+        int n = s1.size();
+        vector<vector<vector<int>>>F(n, vector<vector<int>>(n, vector<int>(n+1)));
+        for(int k = 1; k<=n; ++k)
+            for(int i = 0; i + k <= n; ++i)
+                for(int j = 0; j + k <= n; ++j){
+                    if(k == 1)
+                        F[i][j][k] = s1[i] == s2[j];
+                    else{
+                        for(int q = 1; q<k && !F[i][j][k]; ++q){
+                            F[i][j][k] = F[i][j][q] && F[i+q][j+q][k-q] || F[i][j+k-q][q] && F[i+q][j][k-q]; 
+                        }
+                    }
+                }
+        return F[0][0][n];
     }
 };
