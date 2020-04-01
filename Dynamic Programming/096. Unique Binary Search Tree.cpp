@@ -110,3 +110,25 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    int numTrees(int n) {
+        unordered_map<int,unordered_map<int,int>>mp;
+        return helper(1, n, mp);
+    }
+    
+    int helper(int l, int r, unordered_map<int,unordered_map<int,int>>&mp){
+        if(l >= r)
+            return 1;
+        if(mp.count(l) && mp[l].count(r))
+            return mp[l][r];
+        int res = 0;
+        for(int i = l; i<=r; ++i){
+            int left = helper(l, i-1, mp);
+            int right = helper(i+1, r, mp);
+            res += left * right;
+        }
+        return mp[l][r] = res;
+    }
+};
