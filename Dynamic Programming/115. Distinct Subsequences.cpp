@@ -35,7 +35,6 @@ If t[i - 1] == s[j - 1], the number of distinct subsequences include two parts:
 those with s[j - 1] and those without;
 An empty string will have exactly one subsequence in any string :-)
 Non-empty string will have no subsequences in an empty string.
-Putting these together, we will have the following simple codes (just like translation :-)):
 
 
 */
@@ -78,3 +77,17 @@ public:
         return dp[(t.length()-1)%2][s.length()-1];
     }
 };    
+
+//2020
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        vector<vector<long>>D(2, vector<long>(t.size()+1,0));
+        D[0][0] = 1; D[1][0] = 1;
+        for(int i = 0; i<s.size(); ++i)
+            for(int j = 0; j<t.size(); ++j)
+                D[(i+1)&1][j+1] =  D[i&1][j+1] + (s[i] == t[j] ? D[i&1][j] : 0);
+           
+        return D[s.size()&1].back();
+    }
+};
