@@ -63,3 +63,59 @@ public:
         return dp[s2.length()];
     }
 };
+
+
+
+//DFS with momization
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        if(s1.size() + s2.size() != s3.size())
+            return false;
+        unordered_set<int>st;
+        return dfs(s1,s2,s3,0,0,st);
+    }
+    
+    bool dfs(const string&s1, const string&s2, const string&s3, int i, int j, unordered_set<int>&st){
+        if(i+j == s3.size())
+            return true;
+        if(st.count(i*s3.size() + j))
+            return false;
+        
+        if(i < s1.size() && s1[i] == s3[i+j] && dfs(s1,s2,s3,i+1, j, st))
+            return true;
+        if(j < s2.size() && s2[j] == s3[i+j] && dfs(s1,s2,s3, i, j+1, st))
+            return true;
+        st.insert(i*s3.size() + j);
+        return false;
+    }
+};
+
+//BFS
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        if(s1.size() + s2.size() != s3.size())
+            return false;
+        queue<pair<int,int>>q;
+        unordered_set<int>visited;
+        q.push({0,0});
+        while(!q.empty())
+        {
+            auto [i, j] = q.front(); q.pop();
+            if(i + j == s3.size())
+                return true;
+            if(visited.count(i*s3.size() + j))
+                continue;
+            else{
+                visited.insert(i*s3.size()+j);
+                if(i < s1.size() && s1[i] == s3[i+j])
+                    q.push({i+1, j});
+                if(j < s2.size() && s2[j] == s3[i+j])
+                    q.push({i, j+1});
+                
+            }
+        }
+        return false;
+    }
+};
