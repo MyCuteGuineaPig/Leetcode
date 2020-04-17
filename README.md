@@ -361,7 +361,7 @@ TreeNode* helper(TreeNode** head ){
 | [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | :alien:  不可以 ```left = invert(right); right = invert(left);```, 因为left 在invert right时候改变  |
 | [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | :pencil2:```ostringstream``` & ```istringstream ``` 用法, BFS－> pointer of pointer 存pointer 地址  |
 | [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | :pencil2: BIT & Segment Tree; BIT tree 需要arr作为参照物,每次根据val-arr\[i]的update, update过后arr\[i] = val |
-| [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 😍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0， same as [325. Maximum Size Subarray Sum Equals k] (https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/)  |
+| [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 😍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0， same as [325. Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/)  |
 | [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium |❌ 简单DFS |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | 😍注意Python BFS  |
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能dfs，再比较height 会更快 |
@@ -387,6 +387,7 @@ TreeNode* helper(TreeNode** head ){
 | [865. Smallest Subtree with all the Deepest Nodes](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/) | _O(n)_ | _O(h)_	| Medium | 🔍 若left, right child 都是最深的, 则root为 最深的node |
 | [889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) | _O(n)_ | _O(h)_	| Medium | 😍😍 <ul><li>Solution 1: 难点是找到 left 和right的边界: 假定都把下一个assign 给left </li><li> 用stack </li></ul> |
 | [1028. Recover a Tree From Preorder Traversal](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Hard | 😚 stack / DFS, stack逻辑类似[889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) |
+| [1409. Queries on a Permutation With Key](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(nlogn)_ | _O(n)_	| Medium | BIT, Fenwick Tree |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -468,6 +469,7 @@ TreeNode* helper(TreeNode** head ){
 | [859. Buddy Strings](https://leetcode.com/problems/buddy-strings/) | _O(n)_ | _O(1)_	| Easy | 判断条件: 1.长度不一样，false，2. 如果a == b，有没有重复的字母，有的话true, 没有false, 3, 如果不一样的位置个数不等于2, 或者a\[diff\[0]]!=b\[diff\[1]] or a\[diff\[1]]!=a\[diff\[1]] 返回false, 否则是true  |
 | [1374	Generate a String With Characters That Have Odd Count](https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/) | _O(n)_ | _O(1)_	| Easy | ❌ |
 | [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | KMP, Rolling Hash |
+| [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -730,6 +732,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [632. Smallest Range Covering Elements from K Lists](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/) | _O(nklogk)_ | _O(k)_	| Hard | 😍🎅 <ul><li>**难点**: 缩小windows, windows需要包含每个list内一个数</li><li> 用heap, heap中包含每个list中当前最小数 </li><li> 不能用two pointer, two pointer: **每个list每个数** 包含在windwos内, 此题是 **每个list至少一个数** 含在windwos内 </li> <li> ```vector[i][0]```的数push进minheap, 一个int 记录最大值, heap top 当前最小值 </li></ul> |
 | [846. Hand of Straights](https://leetcode.com/problems/hand-of-straights/) | _O(nlogn)_ | _O(n)_	| Medium | 🔍 <br/><ul><li>Solution 1: set, set.begin 为每个group 的起点</li><li>😍[Solution 2](https://github.com/beckswu/Leetcode/blob/master/Heap/846.%20Hand%20of%20Straights.cpp): set + queue, queue记录每个点的windows 每个点 新增加windows数</li></ul> |
 | [846. Hand of Straights](https://leetcode.com/problems/maximum-performance-of-a-team/) | _O(nlogn)_ | _O(n)_	| Hard |  |
+| [1046. Last Stone Weight](https://leetcode.com/problems/last-stone-weight/) | _O(nlogn)_ | _O(n)_	| Easy |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |   |
 
 
@@ -938,7 +941,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [112. Path Sum](https://leetcode.com/problems/path-sum/description/) | _O(n)_ |	_O(h)_	| Easy | 🔍[iterative Solution: 如果有right会经过root 两次](https://github.com/beckswu/Leetcode/blob/master/DFS/112.%20Path%20Sum.cpp#L74)  |
 | [113	Path Sum II](https://leetcode.com/problems/path-sum-ii/) |	_O(n)_	| _O(h)_ |	Medium |	🔍[iterative Solution: 如果有right会经过root 两次](https://github.com/beckswu/Leetcode/blob/master/DFS/113.%20Path%20Sum%20II.cpp#L53) |
 | [199	Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)	| _O(n)_	| _O(h)_	| Medium		 |  ❌ Easy  |
-| [200	Number of Islands](https://leetcode.com/problems/number-of-islands/)	| _O(m \* n)_ |	_O(m \* n)_ |	Medium		|✏️ [Union Find with Rank Heuristics](https://github.com/beckswu/Leetcode/blob/master/DFS/200.%20Number%20of%20Islands.cpp#L161)  |
+| [200	Number of Islands](https://leetcode.com/problems/number-of-islands/)	| _O(m \* n)_ |	_O(m \* n)_ |	Medium		|✏️ [Union Find with Rank Heuristics](https://github.com/beckswu/Leetcode/blob/master/DFS/200.%20Number%20of%20Islands.cpp#L161), [✏️Python Complex number 表示四个DFS 方向](https://github.com/beckswu/Leetcode/blob/master/DFS/200.%20Number%20of%20Islands.py)  |
 | [236	Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)	|	_O(n)_ |	_O(h)_ |	Medium	| 🔍 [Iterative Solution](https://github.com/beckswu/Leetcode/blob/master/DFS/236.%20Lowest%20Common%20Ancestor%20of%20a%20Binary%20Tree.cpp#L32) |
 | [257	Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/description/) | 	_O(n \* h)_ | _O(h)_ | Easy 	| ❌ Easy |
 | [282	Expression Add Operators](https://leetcode.com/problems/expression-add-operators/)	| _O(4^n)_ | _O(n)_ | Hard | 🎅**难点: 弄清 cv (cumulative sum), pv(previous sum) 关系**,</br>  pos 到现在process的index，注意: <ul><li>现在是'\*', cv = cv - pv + p\*n, pv = pv\*n </li> <li>现在是'-', cv = cv - pv + n, pv = -n </li></ul> |
@@ -951,7 +954,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [464. Can I Win](https://leetcode.com/problems/can-i-win/description//)	|	_O(n!)_	|	_O(n)_ |	Medium | 😚DFS+Memoization **难点: Memoization记录的不能是还剩多少到target, 记录是现在可选择的set能不能赢** |
 | [515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description//)	|	_O(n)_	|	_O(h)_ |	Medium | ❌ DFS / BFS |
 | [547. Friend Circles](https://leetcode.com/problems/friend-circles/description/)	|	_O(n^2)_	|	_O(n)_ |	Medium | Union Find with Rank Heuristic / DFS |
-| [638. Shopping Offers](https://leetcode.com/problems/shopping-offers/description/)	|	_O(n \* 2^n)_	|	_O(n)_ |	Medium | 🎅✏️ [设计一个好的DFS structure)[https://github.com/beckswu/Leetcode/blob/master/DFS/638.%20Shopping%20Offers.cpp#L42]  |
+| [638. Shopping Offers](https://leetcode.com/problems/shopping-offers/description/)	|	_O(n \* 2^n)_	|	_O(n)_ |	Medium | 🎅✏️ [设计一个好的DFS structure](https://github.com/beckswu/Leetcode/blob/master/DFS/638.%20Shopping%20Offers.cpp#L42]  |
 | [690. Employee Importance](https://leetcode.com/problems/employee-importance/description/)	|	_O(n)_	|	_O(h)_ |	Easy | 需要用unordered_map, 因为vector index 不等同于 id |
 | [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | ✏️[Python Complex number 表示四个DFS 方向](https://github.com/beckswu/Leetcode/blob/master/DFS/695.%20Max%20Area%20of%20Island.py#L1) |
 | [733. Flood Fill](https://leetcode.com/problems/flood-fill/description/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Easy | ❌  |
