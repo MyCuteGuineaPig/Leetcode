@@ -13,3 +13,19 @@ class Solution:
                 dfs(i + 1j**k)
             return 1
         return sum(dfs(i+j*1j) for i in range(m) for j in range(n))
+
+    
+ """
+  grid.pop(z,0) 如果有z, pop dictionary value, 否则pop 0
+  
+  z + 1j**k for k in range(4): z的四个方向
+  
+  比如 z = 1+4j
+  
+  1+4j + 1j**0 = 2 + 4j
+  1+4j + 1j**1 = 1 + 5j
+  1+4j + 1j**2 = 0 + 4j
+  1+4j + 1j**3 = 1 + 3j
+  
+  
+ """
