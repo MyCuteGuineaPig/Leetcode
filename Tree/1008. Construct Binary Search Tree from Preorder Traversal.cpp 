@@ -1,0 +1,27 @@
+class Solution {
+public:
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        if(preorder.empty())
+            return nullptr;
+        vector<TreeNode*>stk;
+        TreeNode *res = new TreeNode(preorder[0]); 
+        stk.push_back(res);
+        for(int i = 1; i<preorder.size(); ++i){
+            if(preorder[i] > stk.back()->val){
+                TreeNode* cur;
+                while(stk.size() && preorder[i] > stk.back()->val){
+                    cur = stk.back();
+                    stk.pop_back();
+                }
+                cur->right = new TreeNode(preorder[i]);
+                stk.push_back(cur->right);
+            }
+            else{
+                TreeNode* cur = new TreeNode(preorder[i]);
+                stk.back()->left = cur;
+                stk.push_back(cur);
+            }
+        }
+        return res;
+    }
+};
