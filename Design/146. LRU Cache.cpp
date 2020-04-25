@@ -1,3 +1,80 @@
+//void splice (iterator position, list& x, iterator i);
+//Transfers elements from x into the container, inserting them at position.
+
+
+class LRUCache {
+    int capacity;
+    list<pair<int, int>> li;
+    unordered_map<int, list<pair<int, int>>::iterator> um; 
+
+public:
+    LRUCache(int capacity) : capacity{capacity} {}
+    
+    int get(int key) {
+        if (um.find(key) == um.end()) return -1;
+        li.splice(li.begin(), li, um[key]);
+        return um[key]->second;
+    }
+    
+    void put(int key, int value) {
+        if (get(key) != -1) {
+            um[key]->second = value;
+            return;
+        }
+        
+        if (um.size() == capacity) {
+            int delKey = li.back().first;
+            li.pop_back();
+            um.erase(delKey);
+        }
+        
+        li.emplace_front(key, value);
+        um[key] = li.begin();
+    }
+};
+
+
+class LRUCache {
+private:
+    // A list of (key, value) pairs
+    list<pair<int, int>> items;
+    // Map items to iterators (pointers) to list nodes
+    unordered_map<int, list<pair<int, int>>::iterator> cache;
+    // The capacity of the list
+    int capacity;
+
+public:
+    LRUCache(int capacity) : capacity(capacity) {}
+
+    int get(int key) {
+        // If key is not found in hash map, return -1
+        if (cache.find(key) == cache.end())
+            return -1;
+        // Move the (key, value) pair to the beginning of the list
+        items.splice(items.begin(), items, cache[key]);
+        return cache[key]->second;
+    }
+
+    void set(int key, int value) {
+        // The key is not in the hash table
+        if (cache.find(key) == cache.end()) {
+            // If the cache is full then delete the least recently
+            // used item, which is at the end of the list
+            if (items.size() == capacity) {
+                cache.erase(items.back().first);
+                items.pop_back();
+            }
+            items.push_front(make_pair(key, value));
+            cache[key] = items.begin();
+        } else {
+            // Update the value associated with the key
+            cache[key]->second = value;
+            // Move the (key, value) pair to the beginning of the list
+            items.splice(items.begin(), items, cache[key]);
+        }
+    }
+}
+
 class LRUCache {
 public:
     LRUCache(int capacity) {
@@ -34,4 +111,37 @@ public:
     unordered_map<int, list<pair<int,int>>::iterator>map_;
     list<pair<int,int>>list_; //key value, key is used for when delete value 
     
+};
+
+
+class LRUCache {
+public:
+    int size;
+    list<int> lru;                              // MRU ... LRU
+    unordered_map<int, list<int>::iterator> mp; // key -> iterator
+    unordered_map<int, int> kv;                 // key -> value
+
+    LRUCache(int capacity) : size(capacity) {}
+    int get(int key) {
+        if (kv.count(key) == 0) return -1;
+        updateLRU(key);
+        return kv[key];
+    }
+    void put(int key, int value) {
+        if (kv.size() == size && kv.count(key) == 0)
+            evict();
+        updateLRU(key);
+        kv[key] = value;
+    }
+    void updateLRU(int key) {
+        if (kv.count(key)) 
+            lru.erase(mp[key]);
+        lru.push_front(key);
+        mp[key] = lru.begin();
+    }
+    void evict() {
+        mp.erase(lru.back());
+        kv.erase(lru.back());
+        lru.pop_back();
+    }
 };
