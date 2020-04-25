@@ -75,7 +75,8 @@ class Solution:
             cur = TreeNode(v)
             if node.val > v:
                 cur.right = node
-                node.left = node = cur  #cannot write as node = node.left = cur
+                node.left = node = cur  #cannot write as node = node.left = cur,  left associative node = node.left then node.left =cur 
+                 # 这样node 先等于node.left了,  
             else:
                 while node.right and node.right.val < v:
                     node.right, node = None, node.right
