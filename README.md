@@ -1099,7 +1099,7 @@ DFS 是看有没有path，DP是看有几个path
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | :-------------: | :-------------: | :-------------: | :------------- |
-| [146. LRU Cache](https://leetcode.com/problems/lru-cache/) | _O(1)_ |	_O(k)_ |	Medium | <ul><li>✏️✏️[C++ List Splice]() </li><li>✏️✏️[Python OrderedDict]() </li></ul> |
+| [146. LRU Cache](https://leetcode.com/problems/lru-cache/) | _O(1)_ |	_O(k)_ |	Medium | <ul><li>✏️✏️[C++ List Splice](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.cpp#L1) </li><li>✏️✏️[Python OrderedDict](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.py) </li></ul> |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>
 push: _O(1)_ <br/>
 pop: _O(1)_ <br/>
