@@ -18,6 +18,38 @@ public:
     }
 };
 
+class Solution {
+public:
+    int minNumberOfFrogs(const string& s) {
+        int table[5]; // c: 0, r: 1, o: 2, a: 3, k: 4
+        memset(table, 0, sizeof(table));
+        int frog = 0, maxFrog = 0;
+
+        for(const char& c: s) {
+            int i;
+            switch (c) {
+                case 'c': i = 0; break;
+                case 'r': i = 1; break;
+                case 'o': i = 2; break;
+                case 'a': i = 3; break;
+                case 'k': i = 4;
+            }
+
+            ++table[i];
+            if (i == 0)
+                maxFrog = max(maxFrog, ++frog);
+            else if (--table[i - 1] < 0)
+                return -1;
+            else if (i == 4)
+                --frog;
+        }
+
+        return frog == 0 ? maxFrog : -1;
+    }
+    
+    
+};
+
 
 class Solution {
 public:

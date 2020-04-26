@@ -72,3 +72,19 @@ class Solution:
             return -1
 
         return ans
+
+class Solution:
+    def minNumberOfFrogs(self, croakOfFrogs: str) -> int:
+        d = {c : i for i, c in enumerate("croak")}
+        cnt = [0] * 5
+        for c in croakOfFrogs:
+            i = d[c]
+            j = (i - 1) % 5
+            cnt[i] += 1
+            if cnt[j] > 0:
+                cnt[j] -= 1
+            
+        if any([i != 0 for i in cnt[:4]]):
+            return -1
+        
+        return cnt[4]
