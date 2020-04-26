@@ -472,7 +472,7 @@ TreeNode* helper(TreeNode** head ){
 | [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | KMP, Rolling Hash |
 | [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
 | [1410. HTML Entity Parser](https://leetcode.com/problems/html-entity-parser/) | _O(n)_ | _O(t)_	| Medium | |
-| [1417. Reformat The String](https://leetcode.com/problems/reformat-the-string/) | _O(n)_ | _O(1)_	| Easy | |
+| [1417. Reformat The String](https://leetcode.com/problems/reformat-the-string/) | _O(n)_ | _O(1)_	| Easy | [🔍]() |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -550,6 +550,7 @@ TreeNode* helper(TreeNode** head ){
 | [811. Subdomain Visit Count](https://leetcode.com/problems/subdomain-visit-count/) | _O(n)_ | _O(n)_	| Easy |  |
 | [822. Card Flipping Game](https://leetcode.com/problems/card-flipping-game/) | _O(n)_ | _O(n)_	| Medium | 先把front\[i]和end\[i] 一样的插入到hash set, 再loop front & end, 选取不在hash set中最小的 |
 | [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/) | _O(n+k^2)_ | _O(k)_	| Medium | 用hash map存age和count, loop两层hashmap, 判断内层和外层key是否满足条件, 满足的话更新结果 |
+| [1418	Display Table of Food Orders in a Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/) | _O(n+k^2)_ | _O(k)_	| Medium | 用hash map存age和count, loop两层hashmap, 判断内层和外层key是否满足条件, 满足的话更新结果 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## sliding windows Summary

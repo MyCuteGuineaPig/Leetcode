@@ -51,36 +51,44 @@ public:
     }
 };
 
-
 class Solution {
 public:
     string reformat(string s) {
-        int lCount = 0, dCount = 0;
+        int strCount = 0, digitCount = 0;
         for (char i : s) {
             if ('a' <= i && i <= 'z')
-                lCount++;
+                strCount++;
             else
-                dCount++;
+                digitCount++;
         }
         
-        if (abs(lCount - dCount) > 1)
+        if (abs(strCount - digitCount) > 1)
             return "";
         
-        int lPos = 0, dPos = 1;
-        if (lCount < dCount) {
-            swap(lPos, dPos);
+        int strPos = 0, dPos = 1;
+        if (strCount < digitCount) {
+            swap(strPos, dPos);
         }
-        for (lPos; lPos < s.size(); lPos += 2) {
-            while (dPos + 1 < s.size() && !('a' <= s[dPos] && s[dPos] <= 'z')) {
+         //比如 Covid2019, 
+        // 第一个 0 换o 换后是 C0vid2o19
+        // 第二是 9 换i,  C0v9d201i
+
+        //比如a0b1c23,  strPos = 1, dPos = 0
+        // 第一个换是 0 和 a,   0ab1c23
+        // 第二个换是 1 和 b,   0a1bc23
+        // 第三个换是 c 和 2,   0a1b2c3
+        for (strPos; strPos < s.size(); strPos += 2) {
+            while (dPos + 1 < s.size() && isdigit(s[dPos])) { 
                 dPos += 2; //如果是数字就跳
             }
-            if (!('a' <= s[lPos] && s[lPos] <= 'z')) { //如果lPos 是数字，跟dPos 是字母的换
-                swap(s[lPos], s[dPos]);
+            if (isdigit(s[strPos])) { //如果strPosPos 是数字，跟dPos 是字母的换
+                swap(s[strPos], s[dPos]);
+                dPos += 2;
             }   
         }
         return s;
     }
-};
+};=
 
 
 class Solution {
