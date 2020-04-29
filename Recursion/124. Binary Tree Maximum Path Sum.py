@@ -46,3 +46,14 @@ class Solution(object):
             return max(max(left,right)+root.val,root.val)
         dfs(root)
         return val[0]  
+       
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        def maxsums(node):
+            if not node:
+                return [-2**31] * 2
+            left = maxsums(node.left)
+            right = maxsums(node.right)
+            return [node.val + max(left[0], right[0], 0),
+                    max(left + right + [node.val + left[0] + right[0]])]
+        return max(maxsums(root))
