@@ -233,13 +233,12 @@ public:
             buy1 = min(buy1, prices[i]);   //sell1, buy1 不会同时get update, 因为低点才能买，高点才能卖，不会同时低点高点
             sell1 = max(sell1, prices[i] - buy1);
             
-            buy2 = min(buy2, prices[i] - sell1); //buy2 和 sell1, doesn't matter
+            buy2 = min(buy2, prices[i] - sell1); //buy2 和 sell1 order, doesn't matter, 不会同时update
             /**
-             *  如果 prices[i] - buy1 > sell1, sell1 get updates, then buy2 won't get update 
              *  Assumption :  1. sell1 always positive, sell1 < prices[i], 
              *             2. buy1 = prices[i] - sell1 if sell1 get updated , 
              *             3. buy2 <= buy1,  初始值 buy2 = buy1, 但有了一些profit (sell1), 
-             *                               prices[i] - sell1 < prices[i] buy2 <= buy1 
+             *                               prices[i] - sell1 < prices[i]             =>  buy2 <= buy1 
              * 
              * When sell1 get update, buy1 = prices[i] - sell1:
              *         so  buy2 <= buy1 = prices[i] - sell1, buy2 won't get updated 
