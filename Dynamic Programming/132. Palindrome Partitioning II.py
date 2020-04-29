@@ -22,4 +22,48 @@ class Solution:
                 j+=1
         #print(dp)
         return dp[-1]
+
+
+class Solution:
+    def minCut(self, s: str) -> int:
+        F = collections.defaultdict(int)
+        ispal = collections.defaultdict(lambda: collections.defaultdict(int))
+        n = len(s)
+        for i in range(0, n+1):
+            F[i] = i-1
+            ispal[i][i] = 1
+            
+        for k in range(1,n):
+            for i in range(k+1): #比如更新 aab, b pal is 1
+                if s[k] == s[i] and ( k-i < 2 or ispal[i+1][k-1]):
+                    ispal[i][k] = 1
+                    F[k+1] = min(F[k+1], F[i]+1)
+        #print(F)
+        return F[n]
+
+"""
+Time Out 
+Complexity O(n^3)
+"""
+
+class Solution:
+    def minCut(self, s: str) -> int:
+        F = collections.defaultdict(lambda: collections.defaultdict(int))
+        n = len(s)
+        for i in range(n):
+            F[i][i] = 0
+            
+        for k in range(1,n):
+            for i in range(0, n-k):
+                if s[i] == s[i+k] and F[i+1][i+k-1] == 0:
+                    F[i][i+k] = 0
+                else:
+                    res = k+1
+                    for j in range(i, i+k):
+                        res = min(res, F[i][j] + F[j+1][i+k] + 1)
+                    F[i][i+k] = res
+                #print(i, i+k, F[i][i+k])
+        
+        
+        return F[0][n-1]
        

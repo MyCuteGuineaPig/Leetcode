@@ -94,9 +94,9 @@ class Solution {
 public:
     int minCut(string s) {
         int n = s.size();
-        vector<int>dp(n+1,0);
+        vector<int>dp(n+1,0); //dp[i] 表示 s[0:i-1] 组要几个cut 
         for(int i = 0; i<=n; i++)
-            dp[i] = i-1;
+            dp[i] = i-1;  //重点是 dp[0] = -1 所以遇到Palindrome, 来一刀就是0
         for(int i = 0; i<n; i++){
             for(int j = 0; i-j>=0 && i+j<n && s[i-j] == s[i+j];j++)
                 dp[i+j+1] = min(dp[i+j+1],dp[i-j]+1);
@@ -108,4 +108,44 @@ public:
         }
         return dp[n];
     }
+};
+
+
+
+
+#BFS, 从一个
+class Solution {
+public:
+	int minCut(string s) {
+		queue<int> node;
+		node.push(0);
+		int cuts = 0;
+		//bfs
+		vector<bool> visited(s.size(), false);
+		while (true){
+			queue<int> tmp;
+			while (!node.empty()){
+				int cur = node.front();
+				node.pop();
+				for (int i = s.size() - 1; i >= cur; i--){
+					if (visited[i]==false&&ispal(s, cur, i)){
+						if (i == s.size() - 1)
+							return cuts;
+						tmp.push(i+1); // cur:i form a Palindrome, so push i+1, 
+					}
+				}
+				visited[cur] = true;
+			}
+			cuts++;
+			node = tmp;
+		}
+	}
+
+	bool ispal(string& s, int pre, int post){
+		while (pre < post){
+			if (s[pre++] != s[post--])
+				return false;
+		}
+		return true;
+	}
 };
