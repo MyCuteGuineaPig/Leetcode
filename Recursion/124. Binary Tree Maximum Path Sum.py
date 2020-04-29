@@ -49,6 +49,17 @@ class Solution(object):
        
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
+        def helper(root):
+            if not root:
+                return 0, -float('inf')
+            left, ltot = helper(root.left)
+            right, rtot = helper(root.right)
+            nxt = max(left + root.val, right + root.val, root.val)
+            return nxt, max(ltot, rtot, nxt, left + right + root.val)
+        return max(helper(root))
+       
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
         def maxsums(node):
             if not node:
                 return [-2**31] * 2
