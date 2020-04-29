@@ -51,7 +51,7 @@ class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         def helper(root):
             if not root:
-                return 0, -float('inf')
+                return -float('inf'), -float('inf')
             left, ltot = helper(root.left)
             right, rtot = helper(root.right)
             nxt = max(left + root.val, right + root.val, root.val)
