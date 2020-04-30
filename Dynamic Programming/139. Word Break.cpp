@@ -86,3 +86,125 @@ public:
         return dp[s.size()-1];
     }
 };
+
+
+
+
+// Suffix Trie + DP
+struct Trie{
+    unordered_map<char, Trie*>mp;
+    bool isleaf = false;
+    
+    void insert(const string& word){
+        Trie* t =  this;
+        for(const auto& w: word)
+        {
+            if(t->mp.find(w) == t->mp.end())
+                t->mp[w] = new Trie();
+            t = t->mp[w];
+        }
+        t->isleaf = true;
+    }
+    
+    void search(const string& s, int index, vector<int>&dp){
+        Trie * t = this;
+        while(index < s.size()){
+            if(t->mp.find(s[index]) == t->mp.end())
+                break;
+            t = t->mp[s[index]];
+            if(t->isleaf)
+                dp[index+1] = true;
+            ++index;
+        }
+    }
+};
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        Trie t;
+        for(auto w: wordDict)
+            t.insert(w);
+        
+        int n = s.size();
+        vector<int>dp(n+1);
+        dp[0] = 1;
+        for(int i = 0; i<s.size() && !dp[n]; ++i){
+            if(dp[i] && t.mp.count(s[i]))
+                t.search(s, i, dp);
+        }
+        return dp[n];
+    }
+};
+
+
+
+/**
+ * BFS
+ */
+class Solution {
+public:
+    bool wordBreak(string s, unordered_set<string> &dict) {
+    // BFS
+        queue<int> BFS;
+        unordered_set<int> visited;
+
+        BFS.push(0);
+        while(BFS.size() > 0)
+        {
+            int start = BFS.front();
+            BFS.pop();
+            if(visited.find(start) == visited.end())
+            {
+                visited.insert(start);
+                for(int j=start; j<s.size(); j++)
+                {
+                    string word(s, start, j-start+1);
+                    if(dict.find(word) != dict.end())
+                    {
+                        BFS.push(j+1);
+                        if(j+1 == s.size())
+                            return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+};
+
+
+//DFS + memoization
+/**
+ * 
+
+如果没有Memoization 是 O(2^N)
+T(N) = T(N-1) + T(N-2) + ... + T(0)
+T(N-1) = T(N-2) + ... + T(0)
+T(N) - T(N-1) = T(N-1)
+T(N) = 2*T(N-1)
+O(2^N)
+
+https://leetcode.com/problems/word-break/discuss/169383/The-Time-Complexity-of-The-Brute-Force-Method-Should-Be-O(2n)-and-Prove-It-Below
+ * 
+ */
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<char> mem(s.size(),-1);
+        unordered_set<string>mp(wordDict.begin(), wordDict.end());
+        return canBrk(0,s,mp,mem); 
+    }
+    
+    bool canBrk(int start, string& s, unordered_set<string>& wordDict,vector<char>& mem) {
+        int n = s.size();
+        if(start == n) return 1;
+        if(mem[start]!= -1) return mem[start];
+        string sub;
+        for(int i = start; i<n; i++) 
+            if(wordDict.count(sub+=s[i]) && canBrk(i+1,s,wordDict,mem)) 
+                return mem[start] = 1; 
+        return mem[start] = 0;
+    }
+};

@@ -38,3 +38,41 @@ class Solution:
             return False
 
         return can_decode(0)
+
+
+
+
+class Solution:
+    def wordBreak(self, s, words):
+        ok = [True]
+        for i in range(1, len(s)+1):
+            ok += any(ok[j] and s[j:i] in words for j in range(i)),
+        return ok[-1]
+
+
+
+#Suffix Trie + DP
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        trie = {}
+        for word in wordDict:
+            t = trie 
+            for w in word:
+                t = t.setdefault(w,{})
+            t['#'] = '#' 
+
+        F = [1] + [0,]*len(s)
+        s = list(s)
+        for i, v in enumerate(s):
+            if F[i]:
+                t = trie
+                j = i
+                while j < len(s) and s[j] in t:
+                    t = t[s[j]]
+                    if '#' in t:
+                        F[j+1] = True 
+                        if j == len(s)-1:
+                            return True
+                    j += 1
+        return F[len(s)]
+
