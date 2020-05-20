@@ -101,6 +101,7 @@ Python trick:
 | [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/) | _O(n)_ | _O(n)_	| Easy |  |
 | [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 Sliding Window  |
 | [845. Longest Mountain in Array](https://leetcode.com/problems/longest-mountain-in-array/) | _O(n)_ | _O(1)_	| Medium | 🐸 |
+| [918. Maximum Sum Circular Subarray](https://leetcode.com/problems/maximum-sum-circular-subarray/) | _O(n)_ | _O(1)_	| Medium | 🎅🎅 Kadane's algorithm |
 | [1375. Bulb Switcher III](https://leetcode.com/problems/bulb-switcher-iii/) | _O(n)_ | _O(1)_	| Medium |  |
 | [1380. Lucky Numbers in a Matrix](https://leetcode.com/problems/lucky-numbers-in-a-matrix/) | _O(m\*n)_ | _O(m+n)_	| Easy | [```zip(*m)```获得column in list, set intersection](https://github.com/beckswu/Leetcode/blob/master/Array/1380.%20Lucky%20Numbers%20in%20a%20Matrix.py#L35) |
 | [1389. Create Target Array in the Given Order](https://leetcode.com/problems/create-target-array-in-the-given-order/)	|	_O(n^2)_  |	_O(1)_|	Easy |  ❌ |
@@ -602,9 +603,15 @@ public:
                 while(left<= i && map[s2[i]-'a'] < 0) map[s2[left++]-'a']++;
                 /* or
 
+                //correct
                 while( mp[s2[left]]++ >= 0 )
                     ++left;
                 ++left;
+
+                //wrong: 比如 ab: eabc,  left  会一直停在0(e)
+                while( mp[s2[left]] >= 0 )
+                    mp[s2[left++]]++
+
                 */
 
             if(i-left+1 == len){
@@ -687,6 +694,7 @@ DEBUG stdout
 | [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/) | _O(n)_ | _O(n)_	| Medium |  🎅 碰撞发生只能是新来的小于0，stack top > 0 |
 | [736. Parse Lisp Expression](https://leetcode.com/problems/parse-lisp-expression/) | _O(n)_ | _O(n)_	| Hard | ❌stack需要两个，一个是存string dict(用来储存let的字典), 一个存string vector(用来储存上个string的split), 遇到'(', 如果之前是let, 先存map, 然后push进两个stack, string vector清空，字典不清空 。 遇到')', 算当前的, 把结果push到上个string(stkstring.top()) 的结尾, pop两个stack|
 | [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) | _O(n)_ | _O(n)_	| Medium | 🔍 Ascending/Descending stack, 可以正向也可以反向 |
+| [0901. Online Stock Span](https://leetcode.com/problems/online-stock-span//) | _O(n)_ | _O(n)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | Ascending & Descending Stack 按照 container的顺序进行排序 |
 
 ## Linked List
