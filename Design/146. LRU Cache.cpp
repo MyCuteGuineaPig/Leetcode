@@ -1,5 +1,11 @@
+//void splice (iterator position, list& x);
 //void splice (iterator position, list& x, iterator i);
+//void splice (iterator position, list& x, iterator first, iterator last);
 //Transfers elements from x into the container, inserting them at position.
+//The first version (1) transfers all the elements of x into the container.
+//The second version (2) transfers only the element pointed by i from x into the container.
+//The third version (3) transfers the range [first,last) from x into the container.
+
 
 
 class LRUCache {
