@@ -108,10 +108,22 @@ public:
 
 /*
 
-把小的trade combine 成大的trade 比如: 
+Key point: 
+1. 把小的trade 看能不能combine 成大的trade, 列出所有trade的profit, 然后sort and calculate result 
+2. profit(v1, p2) + profit(v2, p1) = profit(v1, p1) + profit(v2, p2)： index : v1 < p1 < v2 < p2
+    k = 1, return profit (v1, p2)
+    k = 2, return profit (v1, p2) + profit (v2, p1)
 
-[6,10,7,11], profit = [3(10-7), 5(11-6)], 如果 k = 1,  result = 5,  如果 k = 2, result = 8
- 
+e.g. 1: 
+[6,10,7,11],
+两个trade pair [6,10],  [7,11] 因为 11 > 10, update profit = [3(10-7), 5(11-6)], 
+如果 k = 1,  result = 5,  如果 k = 2, result = 8
+
+e.g. 2:
+[6,8, 3,7],  pair: [6,8], [3,8]
+因为 3 < 6,   so profit = [2, 5]
+如果k = 1, result = 5, 如果k = 2, result = 7
+
 
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/discuss/54145/O(n)-time-8ms-Accepted-Solution-with-Detailed-Explanation-(C%2B%2B)
 
