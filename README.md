@@ -721,6 +721,7 @@ DEBUG stdout
 | [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/) | _O(n+m)_ | _O(m+n)_	| Medium | 用两个stack,把每个list值push 进stack，最后push进的先算 |
 | [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/) | _O(n)_ | _O(1)_	| Medium | 每次前进到此次push进vector的最后一位, 然后断链, 第i个vector长度为 n//k + (i< n%k) |
 | [817. Linked List Components](https://leetcode.com/problems/linked-list-components/) | _O(n+m)_ | _O(m)_	| Medium | 把vector转化成unordered_set, 然后判断每个val,是不是在unordered_set里面 |
+|LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
 
 
@@ -773,8 +774,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [826. Most Profit Assigning Work](https://leetcode.com/problems/most-profit-assigning-work/) | _O(mlogm + nlogn)_ | _O(1)_	| Medium | 😍🔍 <ul><li>sort jobs & work, 两个pt,一个指worker, 一个指jobs, profit记录到worker i之前最大的收益</li><li>用一个size=10001的vector, ```v[i]```表示第difficulty为i时，最大的profit </li></ul> |
 | [828. Unique Letter String](https://leetcode.com/problems/unique-letter-string/) | _O(n)_ | _O(1)_	| Hard | 😍🎅<ul><li> **难点:转换思路: 数每个substring 中unqiue 个数 = 每个位置的char在多少个substring中unique**</li><li>**Solution 1**: 需要char 上一次 和上上一次出现的位置, 比如```ABAB```, (i=3的```B``` 算的i=1 的B在几个substring中unique, 可以```(ABA)B```, ```A(BA)B```, ```(AB)AB```, ```A(B)AB```, ```()```表示substring </li><li>**Solution 2 DP**: <ul><li>```contribution[s[i]]``` 以```s[i]```结束, ```s[i]```为unique的substring个数 </li><li> ```cur```: 以```s[i]```为end, 每个substring中unique个数</li><li> ```lastPost[s[i]]```: 上次```s[i]```出现的位置 </li><li> **难点: 找到```contribution```和```cur```的关系**  </li></ul></li></ul> |
 | [844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | _O(m+n)_ | _O(1)_	| Easy | 两个pt，都从s,t 从后往前对比 |
-|LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
-| [1248	Count Number of Nice Subarrays]
+| [986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) | _O(m+n)_ | _O(1)_	| Medium |  |
 
 </br>
 
