@@ -1,19 +1,4 @@
-/*
-198. House Robber
-https://leetcode.com/problems/house-robber/description/
-
-
-You are a professional robber planning to rob houses along a street.
- Each house has a certain amount of money stashed, 
- the only constraint stopping you from robbing each of them is that 
- adjacent houses have security system connected and it will automatically 
- contact the police if two adjacent houses were broken into on the same night.
-
-Given a list of non-negative integers representing the amount of money of each house, 
-determine the maximum amount of money you can rob tonight without alerting the police.
-
-*/
-
+//top-down
 class Solution {
 public:
     int rob(vector<int>& nums) {
@@ -69,5 +54,28 @@ public:
             p1 = tot; 
         }
         return tot;
+    }
+};
+
+
+//top-down
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.empty())
+            return 0;
+        vector<int>dp(nums.size(),-1); //避免[0,0,0,0,0]
+        return helper(nums, dp, nums.size()-1);
+    }
+    
+    int helper(vector<int>&nums, vector<int>&dp, int i){
+        if(i == 0){
+            return dp[i] = nums[i];
+        }else if(i == 1){
+            return dp[i] = max(nums[0], nums[1]);
+        }
+        if(dp[i] >= 0)
+            return dp[i];
+        return dp[i] =  max(helper(nums, dp, i-1), helper(nums, dp, i-2)+nums[i]);
     }
 };

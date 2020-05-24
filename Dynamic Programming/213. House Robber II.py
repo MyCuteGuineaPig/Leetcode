@@ -15,3 +15,13 @@ class Solution:
             if i>0:
                 last1, now1 = now1, max(n+last1,now1)
         return max(now,now1)
+
+
+class Solution:
+    def rob(self, nums):
+        def rob(nums):
+            now = prev = 0
+            for n in nums:
+                now, prev = max(now, prev + n), now
+            return now
+        return max(rob(nums[len(nums) != 1:]), rob(nums[:-1]))
