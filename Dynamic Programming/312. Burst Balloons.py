@@ -2,6 +2,7 @@
 312. Burst Balloons
 """
 
+# bottom-up dp[i][j]: coins obtained from bursting all the balloons between index i and j (not including i or j)
 class Solution:
     def maxCoins(self, nums):
         dp = [[0 for _ in range(len(nums)+2)] for _ in range(len(nums)+2)]
@@ -14,6 +15,7 @@ class Solution:
                     dp[left][right] = max(dp[left][right], dp[left][i] + dp[i][right] + leftnum*rightnum*nums[i-1])
         return dp[0][-1]
 
+# bottom-up dp[i][j]: (not including i or j)
 class Solution:
     def maxCoins(self, nums):
         nums = [1] + nums +[1]
@@ -25,19 +27,7 @@ class Solution:
                     dp[left][right] = max(dp[left][right], dp[left][i] + dp[i][right] + nums[left]*nums[right]*nums[i])
         return dp[0][-1]
 
-
-class Solution:
-    def maxCoins(self, nums):
-        nums = [1] + nums +[1]
-        dp = [[0 for _ in range(len(nums))] for _ in range(len(nums))]
-        for k in range(2,len(nums)):
-            for left in range(0,len(nums)-k):
-                right = left + k
-                for i in range(left+1, right):
-                    dp[left][right] = max(dp[left][right], dp[left][i] + dp[i][right] + nums[left]*nums[right]*nums[i])
-        return dp[0][-1]
-
-
+# bottom-up dp[i][j]:  (not including i or j)
 class Solution:
     def maxCoins(self, nums):
         nums = [1] + nums +[1]
@@ -49,7 +39,7 @@ class Solution:
         return dp[0][-1]
 
 
-#2020
+# 2020 bottom-up dp[i][j]:  (including i or j)
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
         n = len(nums)
@@ -71,7 +61,7 @@ class Solution:
 
         return dp[0][n-1]
 
-# 2020 
+# 2020 bottom-up dp[i][j]: (including i or j)
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
         n = len(nums)
@@ -90,3 +80,25 @@ class Solution:
                     dp[left][right] = max(dp[left][right], leftnum*rightnum*nums[i] + (dp[left][i-1] if i - 1 >= left else 0) + (dp[i+1][right] if right >= i+1 else 0))
      
         return dp[0][n-1]
+
+
+#2020 Top-Down: dp[i][j]: (including i or j)
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        dp = collections.defaultdict(lambda: collections.defaultdict(int))
+        
+        def topDown(left, right):
+            if left > right:
+                return 0
+            
+            if left in dp and right in dp[left]:
+                return dp[left][right]
+            cur = 0
+            
+            for i in range(left, right+1):
+                leftnum = nums[left-1] if left > 0 else 1
+                rightnum = nums[right+1] if right < len(nums)-1 else 1
+                cur = max(cur, leftnum*nums[i]*rightnum + topDown(left, i-1)+topDown(i+1,right))
+            dp[left][right] = cur
+            return cur
+        return topDown(0, len(nums)-1)
