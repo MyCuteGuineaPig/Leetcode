@@ -50,28 +50,7 @@ class Solution:
 
 
 
-/**
-C++
-*/
 
-DP, the below code is self-explained. 
-```
-class Solution {
-public:
-    int coinChange(vector<int>& coins, int amount) {
-        sort(coins.begin(),coins.end());
-        vector<int>dp(amount+1,100000000);
-        dp[0] = 0;
-        for(auto one: coins){
-            if(one>amount) break;
-            dp[one] = 1;
-            for(int i = one+1; i<=amount; i++)
-                dp[i] = min(dp[i],dp[i-one]+1);
-        }
-        return dp[amount] == 100000000 ? -1 : dp[amount];
-    }
-};
-```
  
 DFS Solution. Sort coins at first. Then add constraint ```remaining >= coins[i] && remaining < (ans-count)*coins[i]``` to speed up. If remaining amount is less than minimum change* coins[i], no more need to do another DFS which just waste of time 
 ```
@@ -96,41 +75,3 @@ public:
     }
 };
 ````
-
-
-BFS: push current number in coins into a queue, then do another changes as well increase step by 1 and decide if the new number should be pushed into the queue. If we hit the amount, return the step. 
-```
-
-class Solution {
-public:
-    int coinChange(vector<int>& coins, int amount) {
-        vector<int>dp(amount+1,INT_MAX);
-        if(amount == 0) return 0;
-        queue<int>q;
-        for(auto i: coins){
-            if(i==amount) return 1;
-            if(i>amount) continue;
-            dp[i] = 1;
-            q.push(i);
-        }
-        int step = 1;
-        while(q.size()){
-            step++;
-            int size = q.size();
-            for(int i = 0; i<size; i++){
-                int top = q.front();
-                q.pop();
-                for(auto i: coins){
-                    if(i+top == amount)
-                        return step;
-                    if(i+top < amount && dp[i+top] == INT_MAX){
-                       dp[i+top] = step;
-                       q.push(i+top);
-                    }
-                }
-            }
-        }
-        return -1;
-    }
-};
-```

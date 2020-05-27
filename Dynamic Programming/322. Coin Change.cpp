@@ -1,29 +1,8 @@
 /*
-
-322. Coin Change
-
-You are given coins of different denominations and a total amount of money amount. 
-Write a function to compute the fewest number of coins that you need to make up that amount. 
-If that amount of money cannot be made up by any combination of the coins, return -1.
-
-Example 1:
-coins = [1, 2, 5], amount = 11
-return 3 (11 = 5 + 5 + 1)
-
-Example 2:
-coins = [2], amount = 3
-return -1.
-
-Note:
-You may assume that you have an infinite number of each kind of coin.
-
-
-*/
-
-/*
 dp
 */
 
+// Bottom-up
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
@@ -41,6 +20,7 @@ public:
 };
 
 
+// Bottom-up
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
@@ -56,6 +36,58 @@ public:
         return dp[amount] == 100000000 ? -1 : dp[amount];
     }
 };
+
+
+// Top-Down
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        vector<int>dp(amount+1,numeric_limits<int>::max());
+        return topDown(coins, dp, amount);
+    }
+    
+    int topDown(const vector<int>&coins,vector<int>&dp, int amount){
+        if(amount == 0)
+            return 0;
+        if(dp[amount]!= numeric_limits<int>::max())
+            return dp[amount];
+        int cur = numeric_limits<int>::max();
+        for(auto c: coins)
+            if(amount - c>=0){
+                int res = topDown(coins, dp, amount-c); 
+                if(res!=-1)
+                    cur = min(cur, 1+res);
+            }
+        return dp[amount] = (cur == numeric_limits<int>::max()?-1: cur);
+    }
+};
+
+
+
+/*
+DFS
+*/
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.rbegin(),coins.rend());
+        long long ans = INT_MAX;
+        dfs(coins, 0, amount, 0, ans);
+        return ans == INT_MAX ? -1: ans;
+    }
+
+    void dfs(vector<int>& coins, int beg, long long remaining, long long count, long long& ans){
+        if(remaining == 0){
+            ans = min(ans, count);
+            return;
+        }
+        for(int i = beg; i<coins.size(); i++)
+            if (remaining >= coins[i] && remaining < (ans-count)*coins[i])
+                dfs(coins, i, remaining -coins[i], count+1, ans);
+    }
+};
+
+
 
 /**BFS**/
 class Solution {
@@ -91,25 +123,3 @@ public:
     }
 };
 
-/*
-DFS
-*/
-class Solution {
-public:
-    int coinChange(vector<int>& coins, int amount) {
-        sort(coins.rbegin(),coins.rend());
-        long long ans = INT_MAX;
-        dfs(coins, 0, amount, 0, ans);
-        return ans == INT_MAX ? -1: ans;
-    }
-
-    void dfs(vector<int>& coins, int beg, long long remaining, long long count, long long& ans){
-        if(remaining == 0){
-            ans = min(ans, count);
-            return;
-        }
-        for(int i = beg; i<coins.size(); i++)
-            if (remaining >= coins[i] && remaining < (ans-count)*coins[i])
-                dfs(coins, i, remaining -coins[i], count+1, ans);
-    }
-};
