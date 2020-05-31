@@ -21,6 +21,7 @@ class Solution:
                     dp[i] += dp[i-n]
         return dp[target]
 
+#bottom-up
 class Solution:
     def combinationSum4(self, nums, target):
         """
@@ -38,11 +39,8 @@ class Solution:
                 dp[i]+=dp[i-num]
         return dp[target]
     
-"""
-bottom up 
 
-"""
-
+#bottom-up
 class Solution:
     def combinationSum4(self, nums, target):
         """
@@ -69,3 +67,18 @@ class Solution:
           return total
         
         return f(0)
+
+#2020 Top-Down
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        dp = [1] + [-1 for _ in range(target)]
+        def topDown(target):
+            if dp[target] >= 0:
+                return dp[target]
+            cur = 0
+            for i in nums:
+                if i <= target:
+                    cur += topDown(target-i)
+            dp[target] = cur
+            return dp[target]
+        return topDown(target)
