@@ -1063,11 +1063,11 @@ DFS 是看有没有path，DP是看有几个path
 | [338. Counting Bits](https://leetcode.com/problems/counting-bits/)	|	_O(n)_	|	_O(n)_ |	Medium | Math 找规律 |
 | [357. Count Numbers with Unique Digits](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 🎅DP, Static DP, backtracking |
 | [368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)	|	_O(n^2)_	|	_O(n)_ |	Medium | 🎅🎅Key: ```a < b < c, if c % b = 0 and b % a = 0 Then c % a == 0 ``` |
-| [375. Guess Number Higher or Lower II](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium | dp\[i]\[j]存的是n从1到j，最小的guarantee cost|
+| [375. Guess Number Higher or Lower II](https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium | [🎅](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/375.%20Guess%20Number%20Higher%20or%20Lower%20II.cpp#L6) |
 | [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/)	|	_O(nlogn + n \* t)_	|	_O(t)_ |	Medium | Similar Question <ul><li> [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/) </li><li>[322. Coin Change](https://leetcode.com/problems/coin-change/description/)</li></ul> |
-| [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/)	|	_O(n)_	|	_O(n)_ |	Hard | 需要dp，普通DFS， backtracking 会 timeout, python 把list变成set，much faster|
-| [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/description/)	|	_O(n\*s)_	|	_O(s)_ |	Medium | backtracking（更快） 或DP（要loop nums: loop target:1) |
-| [446. Arithmetic Slices II - Subsequence](https://leetcode.com/problems/arithmetic-slices-ii-subsequence/description/)	|	_O(n^2)_	|	_O(n\*d)_ |	Hard | 📖 每个位置在string都要建一个字典，key是i-j 的差, dict\[i]\[diff] += dict\[j]\[diff]  |
+| [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/)	|	_O(n^2)_	|	_O(n^2)_ |	Hard | 经典, TopDown, Bottom-up, BFS |
+| [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/description/)	|	_O(n\*s)_	|	_O(s)_ |	Medium | backtracking / DP |
+| [446. Arithmetic Slices II - Subsequence](https://leetcode.com/problems/arithmetic-slices-ii-subsequence/description/)	|	_O(n^2)_	|	_O(n\*d)_ |	Hard | 🎅  |
 | [466. Count The Repetitions](https://leetcode.com/problems/count-the-repetitions/description/)	|	_O(s1 \* min(s2, n1))_	|	_O(s2)_ |	Hard | 📖 找到pattern 然后跳过重复的部分 |
 | [467. Unique Substrings in Wraparound String](https://leetcode.com/problems/count-the-repetitions/description/)	|	_O(n)_	|	_O(1)_ |	Medium |  |
 | [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/)	|	_O(n \* l^2)_	|	_O(l)_ |	Medium |  |

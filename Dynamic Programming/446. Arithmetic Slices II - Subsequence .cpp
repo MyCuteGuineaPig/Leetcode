@@ -1,46 +1,3 @@
-/*
-446. Arithmetic Slices II - Subsequence
-A sequence of numbers is called arithmetic if it consists of at least three elements and
- if the difference between any two consecutive elements is the same.
-
-For example, these are arithmetic sequences:
-
-1, 3, 5, 7, 9
-7, 7, 7, 7
-3, -1, -5, -9
-The following sequence is not arithmetic.
-
-1, 1, 2, 5, 7
-
-A zero-indexed array A consisting of N numbers is given. A subsequence slice of that array is any sequence of integers (P0, P1, ..., Pk) 
-such that 0 ≤ P0 < P1 < ... < Pk < N.
-
-A subsequence slice (P0, P1, ..., Pk) of array A is called arithmetic if the sequence A[P0], A[P1], ..., A[Pk-1], A[Pk] is arithmetic.
- In particular, this means that k ≥ 2.
-
-The function should return the number of arithmetic subsequence slices in the array A.
-
-The input contains N integers. Every integer is in the range of -231 and 231-1 and 0 ≤ N ≤ 1000. The output is guaranteed to be less than 231-1.
-
-
-Example:
-
-Input: [2, 4, 6, 8, 10]
-
-Output: 7
-
-Explanation:
-All arithmetic subsequence slices are:
-[2,4,6]
-[4,6,8]
-[6,8,10]
-[2,4,6,8]
-[4,6,8,10]
-[2,4,6,8,10]
-[2,6,10]
-
-*/
-
 
 /*
 https://leetcode.com/problems/arithmetic-slices-ii-subsequence/discuss/92822/Detailed-explanation-for-Java-O(n2)-solution
@@ -63,6 +20,12 @@ https://leetcode.com/problems/arithmetic-slices-ii-subsequence/discuss/92822/Det
                       [2,4,6,8,10]  [4,6,8,10,12]
                                     [2,4,6,8,10,12]
 
+dp[i][diff] 表示到i为止，长度大于等于2个(注：不是3个) 差为diff 的 Arithmetic subsequence 数量, 
+    这样，下一个数可以直接append i的后面，组成新的Arithmetic subsequence , res += dp[i][diff]
+
+比如 [1,2,3,4],  
+    dp[2][1]( 3的位置) = 2 表示 (1,2,3), (2,3), 后面的4 直接接上这两个就可以组成新的Arithmetic subsequence, (1,2,3,4), (2,3,4)
+    dp[3][1] = 3 表示 (1,2,3,4), (2,3,4), (3,4)
 
 
 */
@@ -75,7 +38,7 @@ public:
         for (int i = 1; i < A.size(); ++i) {
             for (int j = 0; j < i; ++j) {
                 const auto diff = static_cast<long long>(A[i]) - A[j];
-                ++dp[i][diff];
+                ++dp[i][diff]; //important, [2,4,6,8], 比如 在6，[4,6]又可以作为起点
                 if (dp[j].count(diff)) {
                     dp[i][diff] += dp[j][diff];
                     result += dp[j][diff];
@@ -86,3 +49,21 @@ public:
     }
 };
 
+
+
+
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        vector<unordered_map<long long,int>>dp(A.size());
+        int res = 0;
+        for(int i = 0; i<A.size(); ++i){
+            for(int j = 0; j<i; ++j){
+                long long diff = static_cast<long long>(A[i]) - A[j];
+                res +=  dp[j][diff];
+                dp[i][diff] += dp[j][diff]+1;
+            }
+        }
+        return res;
+    }
+};

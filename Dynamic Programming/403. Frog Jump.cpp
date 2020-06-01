@@ -1,35 +1,4 @@
-/*
-403. Frog Jump
 
-A frog is crossing a river. The river is divided into x units and at each unit there may or may not exist a stone. 
-The frog can jump on a stone, but it must not jump into the water.
-
-Given a list of stones' positions (in units) in sorted ascending order, determine if the frog is able to cross the river by landing on the last stone. 
-Initially, the frog is on the first stone and assume the first jump must be 1 unit.
-
-If the frog's last jump was k units, then its next jump must be either k - 1, k, or k + 1 units.
- Note that the frog can only jump in the forward direction.
-
-Note:
-
-The number of stones is ≥ 2 and is < 1,100.
-Each stone's position will be a non-negative integer < 231.
-The first stone's position is always 0.
-Example 1:
-
-[0,1,3,5,6,8,12,17]
-
-There are a total of 8 stones.
-The first stone at the 0th unit, second stone at the 1st unit,
-third stone at the 3rd unit, and so on...
-The last stone at the 17th unit.
-
-Return true. The frog can jump to the last stone by jumping 
-1 unit to the 2nd stone, then 2 units to the 3rd stone, then 
-2 units to the 4th stone, then 3 units to the 6th stone, 
-4 units to the 7th stone, and 5 units to the 8th stone.
-
-*/
 
 /*
 backtrack 会timeout 因为这个会重复很多，比如现在move是10， next move 11，start 是100, 
@@ -68,17 +37,21 @@ public:
     bool canCross(vector<int>& stones, int pos = 0, int k = 0) {
         for (int i = pos + 1; i < stones.size(); i++) {
             int gap = stones[i] - stones[pos];
-            if (gap < k - 1) continue;
-            if (gap > k + 1) return false;
+            if (gap < k - 1) continue;  //小于当前的step, 继续
+            if (gap > k + 1) return false; //大于当前的step + 1, 不能继续
             if (canCross(stones, i, gap)) return true;
         }
         return pos == stones.size() - 1;
     }
 };
 
+
+
 /****************ACCEPT SOLUTION ***********************/
 
 /*
+Bit Solution: 
+
 把k和 pos combine起来，比如第8位置的k=2， 和第8位置k=3，key是不一样的
 
 */
@@ -130,5 +103,110 @@ public:
             }
         }
         return dp[stones.back()].size()!=0;
+    }
+};
+
+
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int N = stones.size();
+        vector<vector<int>>dp(N+1, vector<int>(N+1));
+        //dp[i][j] 表示可以从i出发前进j 步
+        dp[0][1] = true;
+        
+        for(int i = 1; i < N; ++i){
+            for(int j = 0; j < i; ++j){
+                int diff = stones[i] - stones[j];
+                if(diff < 0 || diff > N || !dp[j][diff]) continue;
+                dp[i][diff] = true;
+                if(diff - 1 >= 0) dp[i][diff - 1] = true;
+                if(diff + 1 <= N) dp[i][diff + 1] = true;
+                if(i == N - 1) return true;
+            }
+        }
+
+        return false;
+    }
+};
+
+
+//2020 Top-Down DFS
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        if(stones[1]!=1)
+            return false;
+        unordered_set<int>st(stones.begin(), stones.end());
+        unordered_map<int, unordered_set<int>>visited;
+        return dfs(st, visited, stones.back(), 1, 1);
+    }
+    
+    bool dfs(unordered_set<int>&stones, unordered_map<int, unordered_set<int>>&visited, int last, int cur, int step){
+        //cout<<cur<<" step "<<step<<endl;
+        if(visited.count(cur) && visited[cur].count(step))
+            return false;
+        if(cur == last)
+            return true;
+        for(int i = -1; i<=1; ++i){
+            if(step + i > 0 && stones.count(cur+step + i) && dfs(stones, visited, last, cur + step+i, step+i))
+                return true;
+        }
+        visited[cur].insert(step);
+        return false;
+    }
+};
+
+//2020 BFS
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        if(stones[1]!=1)
+            return false;
+        unordered_set<int>st(stones.begin(), stones.end());
+        unordered_map<int, unordered_set<int>>visited;
+        queue<pair<int,int>>q; q.push({1,1});
+        
+        int step = 1;
+        while(q.size()){
+            int size = q.size();
+            for(int z = 0; z<size; ++z){
+                int point, step;
+                tie(point, step) = q.front(); q.pop();
+                if(point == stones.back())
+                    return true;
+                for(int i = -1; i<=1; ++i){    
+                    if(step + i > 0 && st.count(point + step + i) && visited[point+step+i].count(step+i) == 0){
+                        visited[point+step+i].insert(step+i); 
+                        //注意： 不能把visited insert 放到for loop 外面, visited[point].insert(step), 这会重复算point
+                        //      因为加进queue了，还没有pop且没放进 visited, 可能有其他一样的point和step会visit
+                        q.push({point + step +i , step + i});
+                    }
+                    
+                }
+            }
+        }
+        
+        return false;
+    }
+};
+
+//2020 Bottom-up
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        if(stones[1]!=1)
+            return false;
+        unordered_map<int, unordered_set<int>>st;
+        st[1].insert(1);
+        for(int i = 1; i<stones.size()-1;++i){
+            for(auto nxt: st[stones[i]]){
+                for(int j = -1; j<=1; ++j){
+                    if(nxt + j > 0)
+                        st[stones[i]+nxt+j].insert(nxt + j);
+                }
+            }
+        }
+        return st[stones.back()].size();
     }
 };
