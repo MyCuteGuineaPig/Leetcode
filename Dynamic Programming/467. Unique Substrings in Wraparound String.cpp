@@ -1,32 +1,3 @@
-/*
-467. Unique Substrings in Wraparound String
-
-Consider the string s to be the infinite wraparound string of "abcdefghijklmnopqrstuvwxyz", 
-so s will look like this: "...zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd....".
-
-Now we have another string p. Your job is to find out how many unique non-empty substrings of p are present in s.
- In particular, your input is the string p and you need to output the number of different non-empty substrings of p in the string s.
-
-Note: p consists of only lowercase English letters and the size of p might be over 10000.
-
-Example 1:
-Input: "a"
-Output: 1
-
-Explanation: Only the substring "a" of string "a" is in the string s.
-Example 2:
-Input: "cac"
-Output: 2
-Explanation: There are two substrings "a", "c" of string "cac" in the string s.
-Example 3:
-Input: "zab"
-Output: 6
-Explanation: There are six substrings "z", "a", "b", "za", "ab", "zab" of string "zab" in the string s.
-
-
-
-*/
-
 
 /***错误解**/
 class Solution {
@@ -59,7 +30,19 @@ public:
     }
 };
 
+/**
+ 注意几种情况:
 
+ 1. bcabc = 6,  b, c, bc, a, ab, abc
+ 2. abaab = 3,  a, b, ab
+
+dp[i] 表示到字母i, 最长的距离，e.g. dp['d'] = 3 表示 bcd 都已经记录过了，
+                                 dp['a'] = 3 表示 yza 都已经记录过了
+
+  bcabc, 第一个b len = 1 记录 dp['b'] = 1, 
+         第二个b len = 2 ('ab') 记录 res += 2 -1,  dp['b'] = 2. 增加记录的'a'
+
+ */
 class Solution {
 public:
     int findSubstringInWraproundString(string p) {
@@ -76,5 +59,59 @@ public:
         }
         return res;
         
+    }
+};
+
+
+class Solution {
+public:
+    int findSubstringInWraproundString(string p) {
+        vector<int>dp(26,0);
+        int res = 0, len = 0;
+        for(int i = 0; i<p.size(); ++i){
+            int cur = p[i] - 'a';
+            if(i > 0 && (p[i-1] - 'a' + 1)%26 != cur)
+                len = 0;
+            if(++len > dp[cur])
+            {
+                dp[cur] = len; 
+            }
+        }
+        return accumulate(dp.begin(), dp.end(),0);
+    }
+};
+
+//Two pointer + dp
+class Solution {
+public:
+    int findSubstringInWraproundString(string p) {
+        vector<int> lens(26, 0);
+        int i = 0;
+        int j = 1;
+        while (j <= p.length()) {
+            while (j<p.length() && (p[j]=='a' && p[j-1]=='z' || p[j]==p[j-1]+1)) {
+                j++;
+            }
+            while (i < j) {
+                lens[p[i]-'a'] = max(lens[p[i]-'a'], j-i);
+                i++;
+            }
+            j++;
+        }
+        return accumulate(lens.begin(), lens.end(), 0);
+    }
+};
+
+class Solution {
+public:
+    int findSubstringInWraproundString(string p) {
+        int len[26]={0}, i = 0, n = p.size();
+        for(int j=0;j<n;j++)
+            if(j>i && p[j-1]+1!=p[j] && p[j-1]-p[j]!=25) {
+                for(int k=i;k<min(j,i+26);k++) len[p[k]-'a'] = max(len[p[k]-'a'],j-k);
+                i=j;
+            }
+        for(int k=i;k<min(n,i+26);k++) len[p[k]-'a'] = max(len[p[k]-'a'],n-k);
+        return accumulate(len,len+26,0);
     }
 };
