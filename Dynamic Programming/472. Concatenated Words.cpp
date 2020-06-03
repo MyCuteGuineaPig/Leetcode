@@ -1,29 +1,7 @@
 
-/*
-472. Concatenated Words
-
-Given a list of words (without duplicates), please write a program that returns all concatenated words in the given list of words.
-A concatenated word is defined as a string that is comprised entirely of at least two shorter words in the given array.
-
-Example:
-Input: ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
-
-Output: ["catsdogcats","dogcatsdog","ratcatdogcat"]
-
-Explanation: "catsdogcats" can be concatenated by "cats", "dog" and "cats"; 
- "dogcatsdog" can be concatenated by "dog", "cats" and "dog"; 
-"ratcatdogcat" can be concatenated by "rat", "cat", "dog" and "cat".
-Note:
-The number of elements of the given array will not exceed 10,000
-The length sum of elements in the given array will not exceed 600,000.
-All the input string will only include lower case letters.
-The returned elements order does not matter.
-*/
-
 
 class Solution {
 public:
-    unordered_set<string>conc;
     unordered_set<string>dict;
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         for(auto i: words)
@@ -77,7 +55,7 @@ public:
 
 /*
 DP solution much slower, 慢的原因是比如dogcatsdog，找到0，3 是dog了，而不是继续往下找别的
-而是继续（0,5), (0,6), (0,7)属不属于背别的，而不是从(3,5),(3,6),(3,7)
+而是继续（0,5), (0,6), (0,7)属不属于别的single word，而不是从(3,5),(3,6),(3,7)
 0后是（1，3），（1，4），（1，5） 有没有来自dictionary，很没有效率
 
 */
@@ -108,7 +86,6 @@ vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
 class Solution {
 public:
     unordered_set<string>memo;
-    unordered_set<string>conc;
     unordered_set<string>dict;
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         for(auto i: words)
@@ -129,11 +106,62 @@ public:
                 return true;
             
             if(dict.count(s.substr(beg,i-beg+1)) && check(s, i+1, count+1)){
-                if(i!=s.size()-1)
+                if(i!=s.size()-1) //这里不用检查count， s.substr(beg,i-beg+1)是一个词, s[i+1:] 之后是另一个词，count>1
                     memo.insert(s.substr(beg));
                 return true;
             }
         }
         return false;
+    }
+};
+
+
+
+
+//suffix Trie
+class Solution {
+public:
+    struct Trie{
+        unordered_map<char,Trie*>mp;
+        bool isleaf = false;
+    };
+    Trie *trie;
+    
+    void build(const string& word){
+        Trie* t = trie;
+        for(auto w: word){
+            if(t->mp.count(w) == 0)
+                t->mp[w] = new Trie();
+            t = t->mp[w];
+        }
+        t->isleaf = true;
+    }
+    
+    bool find(Trie* t, const string& word, int index, int count){
+        if(index == word.size())
+            return t->isleaf && count > 1;
+        if(t->mp.count(word[index]) == 0)
+            return false;
+        
+        t = t->mp[word[index]];
+        if(t->isleaf){
+            if(find(trie, word, index+1, count+1))
+                return true;
+                
+        }
+        return find(t, word, index+1, count);
+    }
+    
+    vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        trie =  new Trie();
+        for(auto w: words)
+            if(w.size()>=1) //比如 word ["cat", ""], "cat" 不算是解
+                build(w);
+        
+        vector<string>res;
+        for(auto w: words)
+            if(find(trie, w, 0, 1))
+                res.push_back(w);
+        return res;
     }
 };
