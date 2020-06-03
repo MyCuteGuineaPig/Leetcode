@@ -1,47 +1,9 @@
-/*
-466. Count The Repetitions
-
-Define S = [s,n] as the string S which consists of n connected strings s. For example, ["abc", 3] ="abcabcabc".
-
-On the other hand, we define that string s1 can be obtained from string s2 if we can remove some characters from s2 
-such that it becomes s1. For example, “abc” can be obtained from “abdbec” based on our definition, but it can not be obtained from “acbbe”.
-
-You are given two non-empty strings s1 and s2 (each at most 100 characters long) and two integers 0 ≤ n1 ≤ 106 and 1 ≤ n2 ≤ 106. 
-Now consider the strings S1 and S2, where S1=[s1,n1] and S2=[s2,n2]. Find the maximum integer M such that [S2,M] can be obtained from S1.
-
-Example:
-
-Input:
-s1="acb", n1=4
-s2="ab", n2=2
-
-Return:
-2
-
-
-*/
-
-
 
 /*
 
-It’s easy to come up with a brute force solution and to find that there will be a repetitive pattern when matching S2 through S1. 
-The only problem is how to use the repetitive pattern to save computation.
+Count[k]: 记录当k个s1结束后, 有几个s2可以form
+nextIndex[j] = k, 表示当k个s1 结束后，下一个s1开始要找相应的s2[j]
 
-Fact:
-If s2 repeats in S1 R times, then S2 must repeats in S1 R / n2 times.
-Conclusion:
-We can simply count the repetition of s2 and then divide the count by n2.
-
-How to denote repetition:
-We need to scan s1 n1 times. Denote each scanning of s1 as a s1 segment.
-After each scanning of i-th s1 segment, we will have
-
-The accumulative count of s2 repeated in this s1 segment.
-A nextIndex that s2[nextIndex] is the first letter you’ll be looking for in the next s1 segment.
-Suppose s1="abc", s2="bac", nextIndex will be 1; s1="abca", s2="bac", nextIndex will be 2
-
-It is the nextIndex that is the denotation of the repetitive pattern.
 
 Example:
 
@@ -51,85 +13,68 @@ s2="bcaa", n2=1
 
 Return:
 3
-                    0  1   2 3 0      1    2 3 0      1    2 3 0  
+                    
+                    0 1    2 3 0      1    2 3 0      1    2 3 0  
 S1 --------------> abacb | abacb | abacb | abacb | abacb | abacb 
-repeatCount ----->    0  |   1   |   1   |   2   |   2   |   3
-Increment of 
-repeatCount     ->    0  |   1   |   0   |   1   |   0   |   1
-nextIndex ------->    2  |   1   |   2   |   1   |   2   |   1
-The nextIndex has s2.size() possible values, ranging from 0 to s2.size() - 1. Due to PigeonHole principle, 
-you must find two same nextIndex after scanning s2.size() + 1 s1 segments.
-
-Once you meet a nextIndex you’ve met before, you’ll know that the following nextIndexs and increments of repeatCount will repeat a pattern.
-
-So let’s separate the s1 segments into 3 parts:
-
-the prefix part before repetitive pattern
-the repetitive part
-the suffix part after repetitive pattern (incomplete repetitive pattern remnant)
-All you have to do is add up the repeat counts of the 3 parts.
-
-*/
-
-
-/*
-
-"bacaba"
-3
-"abacab"
-1
-
-需要prefix的例子
-         b a c a b a  |  b a c a b a  |  b a c a b a  | 
-
-                a b a |      c a b a  |  b a c a b a |  
-cnt                 0 |            1  |            3 |
-nextindex           3 |            1  |            1 |
-
-需要suffix的例子
-          a  a  a |   a  a  a|  a  a  a |
-
-          a  a  a |   a  a  a|  a  a  a |
-cnt          1    |   2     3|     4    |
-nextindex       1 |         0|        1 |
+S2                  b c    a a b      c    a  ab      c    a a 0
+Cnt  ----->       |      |   1   |       |    2  |       |   3
+ 
+在s1结尾更新下面两个
+Count           ->     0 |      1|      1|      2|       2|      3
+nextIndex ------->     2 |      1|      2|      1|       2|      1
+                                        ^
+                                        |
+                                    find pattern:  2 1 
+ start = 0
+ prefix = Count[0] = 0
+ pattern = (n1 - start) / (k-start) *(cnt - prefix) // prefix 到 pattern 开始是 k - start
+         = (6 - 1) / (3 - 1) * (1 - 0)
+         = 2 
+suffix = count[start + (n1 - start) % (k - start) ]  // (n1 - start) % (k - start) < k-start
+       = count[ 0 + (6-1) % (3-1)]
+       = count[1]
+       = 1                        
 
 
 
 */
+
+
 class Solution {
 public:
     int getMaxRepetitions(string s1, int n1, string s2, int n2) {
-        vector<int>repeated(n1+1,0);
-        vector<int>nextIndex(n1+1,0);
-        int j = 0, cnt = 0;
-        for(int k = 1; k<=n1; k++){
-            for(int i = 0; i<s1.size(); i++){
-                if(s1[i] == s2[j])
-                    j++;
-                if(j==s2.length())
-                    cnt++, j = 0;  
-            }
-            repeated[k] = cnt;
-            nextIndex[k] = j;
-            for(int start = 0; start<k; start++){
-                if(nextIndex[start] == j){
-                    int prefix = repeated[start];
-                    int pattern = (repeated[k] - repeated[start])*((n1-start)/(k-start));
-                    int suffix = repeated[start+(n1-start)%(k-start)]-repeated[start];
-                    //cout<<prefix<<" pattern "<<pattern<<" suffix "<<suffix<<endl;
-                    return (prefix+pattern+suffix)/n2;
+        if(s1.size()*n1 < s2.size() * n2)
+            return 0;
+        unordered_map<int,int>count;
+        unordered_map<int,int>nextIndex; 
+        //key is index for s2 to begin search in s1, value is k (how many s1)
+        int cnt = 0, j = 0;
+        for(int k = 1; k<=n1; ++k){
+            for(int i = 0; i<s1.size(); ++i){
+                if(s1[i] == s2[j]){
+                    if(++j == s2.size()){
+                        cnt++;
+                        j = 0;
+                    }
                 }
             }
+            
+            if(nextIndex.count(j)){
+                int start = nextIndex[j];
+                int prefix = count[start];
+                int pattern = (n1 - start) / (k-start) *(cnt - prefix);
+                int suffix = count[start + (n1 - start) % (k-start)] - prefix;
+                return (prefix + pattern + suffix) / n2;
+            }
+            
+            count[k] = cnt;
+            nextIndex[j] = k;
         }
-        return cnt/n2;
+        return count[n1]/n2;
     }
 };
 
-/**
- * 
- * 最efficient的解
-*/
-以0 为底
+
 class Solution {
 public:
     int getMaxRepetitions(string s1, int n1, string s2, int n2) {
@@ -145,19 +90,23 @@ public:
                     }
                     else{
                         int l1 = index1-nextIndex[i].first, l2 = index2 - nextIndex[i].second;
-                        index2 += (n1*s1Len - index1)/l1*l2;
-                        index1 += (n1*s1Len - index1)/l1*l1;
+                        index2 += (n1*s1Len - index1)/l1*l2; //跳过match 的 pattern
+                        index1 += (n1*s1Len - index1)/l1*l1;//跳过match 的 pattern
                     }
                 }
-                if (index1++ < s1Len * n1) index2++;
-            }else index1++;
+                if (index1 < s1Len * n1) index2++; //不可以去掉 if (index1 < s1Len * n1)， 比如  "aa" 2 "a" 1, 去掉返回5, 正确是4
+                                                        //index2 = 1, index1 = 2, l1 = 2, l2 = 2 ,  (n1*s1Len - index1)/l1*l2 = (4-2)/2*2 = 2, 在index1 到 n1*s1Len, 可以跳两个位置 
+                                                        //因为跳过之后 index1 = s1Len*n1, ++index, 会多算实际的index2  
+            }
+            index1++;
         }
         return index2/n2/s2Len;
     }
 };
 
 
-以s2.length() 为底
+
+
 class Solution {
 public:
     int getMaxRepetitions(string s1, int n1, string s2, int n2) {
@@ -172,18 +121,36 @@ public:
                     }
                     else{
                         int l1 = index1-nextIndex[i].first, l2 = index2 - nextIndex[i].second;
-                        index2 += (n1*s1Len-1 - index1)/l1*l2;
-                        index1 += (n1*s1Len-1 - index1)/l1*l1;
+                        index2 += (n1*s1Len-1 - index1)/l1*l2;  //跳过match 的 pattern
+                        index1 += (n1*s1Len-1 - index1)/l1*l1;  //跳过match 的 pattern
                     }
                 }
-                index1++, index2++;
-            }else index1++;
+                index2++;
+            }
+            index1++;
         }
         return index2/n2/s2Len;
     }
 };
 
+
+//aslo work but slow, 找循环
 class Solution {
+public:
+    int getMaxRepetitions(string s1, int n1, string s2, int n2) {
+        int len=s2.size();
+        vector<int> dp(len);
+        for(int i=0;i<len;i++){
+            int start=i;
+            for(char ch : s1)if(ch==s2[start%len])start++;
+            if(start==i)return 0;
+            dp[i]=start-i;
+        }
+        int idx=0;
+        for(int i=0;i<n1;i++)idx+=dp[idx%len]; //找下一个点
+        return idx/len/n2;
+    }
+};
 
 
 /*
@@ -239,3 +206,4 @@ index2 += (n1*s1Len - index1)/l1*l2 = 2 + 6 = 8;
 return 8/2/2 = 2;
 
 */
+

@@ -30,6 +30,8 @@ class Solution:
             index1+=1
         return int(index2 / s2Len / n2)
 
+
+
 #以s2Len 为base
 class Solution:
     def getMaxRepetitions(self, s1, n1, s2, n2):
@@ -57,38 +59,3 @@ class Solution:
                     index2 += 1
             index1+=1
         return int(index2 / s2Len / n2)
-
-"""
-
-
-"acb"
-4
-"ab"
-2
-        a   c   b |  a   c   b |  a   c   b |  a   c   b |
-        a       b |  a       b |
-
-以s2 length 为base的
-map = { {2,{2,1}},  }}
-len1 = index1 - dp[i1].first  = 5 - 2 = 3 
-len2 = index2 - dp[i1].second = 3 - 1 = 2
-change2 = (n1*s1Len-1 - index1)/l1*l2 = (4* 3-1 - 5)/3*2 = 6/3*2 = 4;
-changed1 = (n1*s1Len-1 - index1)/l1*l1 = (4*3-1 - 5)/3*3 = 6;
-index1 += (n1*s1Len - index1)/l1*l1 = 5 + 6 = 11
-index2 += (n1*s1Len - index1)/l1*l2 = 3 + 4 = 7;
-index1++, index2++ 
-
-return 8/2/2 = 1;
-
-以s2 index 0 为base
-map = { {0,{0,0}},  }}
-len1 = index1 - dp[i1].first  = 3 - 0 = 3 
-len2 = index2 - dp[i1].second = 2 - 0 = 2
-change2 = (n1*s1Len - index1)/l1*l2 = (4*3 - 3)/3*2 = 6;
-changed1 = (n1*s1Len - index1)/l1*l1 = (4*3 - 3)/3*3 = 9;
-index1 += (n1*s1Len - index1)/l1*l1 = 3 + 9 = 12
-index2 += (n1*s1Len - index1)/l1*l2 = 2 + 6 = 8; 
-
-return 8/2/2 = 2;
-
-"""
