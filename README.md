@@ -1072,7 +1072,7 @@ DFS 是看有没有path，DP是看有几个path
 | [466. Count The Repetitions](https://leetcode.com/problems/count-the-repetitions/description/)	|	_O(s1 \* min(s2, n1))_	|	_O(s2)_ |	Hard | 🎅🎅 |
 | [467. Unique Substrings in Wraparound String](https://leetcode.com/problems/unique-substrings-in-wraparound-string/)	|	_O(n)_	|	_O(1)_ |	Medium | 经典🎅🎅 |
 | [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/)	|	_O(n \* l^2)_	|	_O(l)_ |	hard | suffix Trie  |
-| [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典knapsack |
+| [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典🎅, [Top-Down](), Bottom-up |
 | [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard |  <ul><li> dp\[i]\[k]代表当key\[i] = ring\[j],从j到k的需要步数(为下一步做准备). </li><li> dp\[k]代表在key\[i]是到达k最小的距离, 外loop是0: key-1, 中loop是 key\[i-1]在ring中出现的位置, 内loop是key\[i]在ring中出现的位置</li></ul> |
 | [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典dp |
 | [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 📖 dp\[i]\[j]\[k] 存的是从given k个与j一样的数在j后，从i,到j 最大得数 |

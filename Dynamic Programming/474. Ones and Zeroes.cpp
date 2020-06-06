@@ -1,33 +1,9 @@
 /*
-474. Ones and Zeroes
-
-In the computer world, use restricted resource you have to generate maximum benefit is what we always want to pursue.
-
-For now, suppose you are a dominator of m 0s and n 1s respectively. On the other hand, there is an array with strings consisting of only 0s and 1s.
-
-Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.
-
-Note:
-The given numbers of 0s and 1s will both not exceed 100
-The size of given string array won't exceed 600.
-Example 1:
-Input: Array = {"10", "0001", "111001", "1", "0"}, m = 5, n = 3
-Output: 4
-
-Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are “10,”0001”,”1”,”0”
-Example 2:
-Input: Array = {"10", "0", "1"}, m = 1, n = 1
-Output: 2
-
-Explanation: You could form "10", but then you'd have nothing left. Better form "0" and "1".
-
-*/
-
-/*
 经典knapsnap problem
 dp[i][j][k] means the maximum number of strings we can get from the first i argument strs using limited j number of '0’s and k number of '1’s.
 dp[i][j][k] 代表最大长度的string我们可以获得在第i个string，且0的最大个数为j, 且1的最大个数为K
 */
+//Bottom-Up
 class Solution {
 public:
     int findMaxForm(vector<string>& strs, int m, int n) {
@@ -53,7 +29,7 @@ public:
     }
 };
 
-
+//Bottom-Up
 class Solution {
 public:
     int findMaxForm(vector<string>& strs, int m, int n) {
@@ -71,58 +47,67 @@ public:
                 }
             }
         }
+        return dp[m][n]; // dp[m][n] 一定是解，dp[m][n] 不代表一定用m个0, n个1，而是最多用m个0, n个1
+    }
+};
+
+
+//Bottom-Up
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+
+        for (auto &s: strs) {
+            int ones = count(s.begin(), s.end(), '1');
+            int zeros= s.size()-ones;
+            for (int i=m; i>=zeros; i--) 
+                for (int j=n; j>=ones; j--)
+                    dp[i][j] = max(dp[i][j], dp[i-zeros][j-ones]+1);
+        }
         return dp[m][n];
     }
 };
 
-int findMaxForm(vector<string>& strs, int m, int n) {
-    vector<vector<int>> dp(m+1,vector<int>(n+1,0));
-    
-    for (auto &s: strs) {
-        int ones = count(s.begin(), s.end(), '1');
-        int zeros= s.size()-ones;
-        for (int i=m; i>=zeros; i--) 
-            for (int j=n; j>=ones; j--)
-                dp[i][j] = max(dp[i][j], dp[i-zeros][j-ones]+1);
+
+
+
+
+//Top-Down
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {        
+        int res = 0;
+        vector<vector<vector<int>>>dp(strs.size(), vector<vector<int>>(m+1, vector<int>(n+1,-1)));
+        //必须是三维的，因为用，也可以跳过strs[i]
+        return topDown(strs, dp, 0, m, n);
+        
     }
-    return dp[m][n];
-}
+    
+    int topDown(const vector<string>& strs, vector<vector<vector<int>>> &dp, int pos, int m, int n){
+        if(pos == strs.size() || m < 0 || n <0 || m == 0 && n == 0)
+            return 0;
+        
+        if(dp[pos][m][n] != -1)
+            return dp[pos][m][n];
+        
+        int i0 = 0, i1 = 0, cur = 0;
 
-/*
+        for(auto s: strs[pos]){
+            if(s == '0') i0 += 1;
+            else i1 += 1;
+        }
+        
+        
+                
+        if(i0 <= m && i1<=n)
+            cur = topDown(strs, dp, pos + 1, m - i0, n-i1)+1;
 
-对于
-["10","0001","111001","1","0"]  
-5
-3
- i 0               i 1
-0 0 0 0         0 0 0 0 
-0 0 0 0         0 1 1 1 
-0 0 0 0         0 1 1 1 
-0 0 0 0         0 1 1 1 
-0 0 0 0         0 1 1 1 
-0 0 0 0         0 1 1 1 
-
- i 2            i 3
-0 0 0 0         0 0 0 0 
-0 1 1 1         0 1 1 1 
-0 1 1 1         0 1 1 1 
-0 1 1 1         0 1 1 1 
-0 1 2 2         0 1 2 2 
-0 1 2 2         0 1 2 2 
- 
-
- i 4             i 5
-0 1 1 1         0 1 1 1 
-0 1 2 2         1 2 2 2 
-0 1 2 2         1 2 3 3 
-0 1 2 2         1 2 3 3 
-0 1 2 3         1 2 3 3
-0 1 2 3         1 2 3 4 
-
-
-*/
-
-
+        cur = max(cur, topDown(strs, dp, pos + 1, m, n));
+        return dp[pos][m][n] = cur;
+    }
+};
+//Top-Down
 class Solution {
 public:
     int findMaxForm(vector<string>& strs, int m, int n) 
@@ -150,11 +135,7 @@ public:
     }
     int getmax(vector<vector<int>> & visited,vector<pair<int,int>> &cache, int m , int n, int idx)
     {
-        if(m <= 0 && n <= 0)
-            return 0;
-        if(m < 0 || n < 0)
-            return 0;
-        if(idx >= cache.size())
+        if(m < 0 || n < 0 || m==0 && n==0 || idx >= cache.size() )
             return 0;
         if(visited[m][n] >= 0)
             return visited[m][n];
