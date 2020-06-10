@@ -1,36 +1,8 @@
 /*
-514. Freedom Trail
-
-In the video game Fallout 4, the quest "Road to Freedom" requires players to reach a metal dial called the "Freedom Trail Ring", 
-and use the dial to spell a specific keyword in order to open the door.
-
-Given a string ring, which represents the code engraved on the outer ring and another string key, which represents the keyword needs to be spelled.
- You need to find the minimum number of steps in order to spell all the characters in the keyword.
-
-Initially, the first character of the ring is aligned at 12:00 direction. You need to spell all the characters in the string key one by one
- by rotating the ring clockwise or anticlockwise to make each character of the string key aligned at 12:00 direction and then by pressing the center button. 
-At the stage of rotating the ring to spell the key character key[i]:
-You can rotate the ring clockwise or anticlockwise one place, which counts as 1 step. 
-The final purpose of the rotation is to align one of the string ring's characters at the 12:00 direction, 
-where this character must equal to the character key[i].
-If the character key[i] has been aligned at the 12:00 direction, you need to press the center button to spell, which also counts as 1 step.
- After the pressing, you could begin to spell the next character in the key (next stage), otherwise, you've finished all the spelling.
-Example:
-
-
-Input: ring = "godding", key = "gd"
-Output: 4
-Explanation:
- For the first key character 'g', since it is already in place, we just need 1 step to spell this character. 
- For the second key character 'd', we need to rotate the ring "godding" anticlockwise by two steps to make it become "ddinggo".
- Also, we need 1 more step for spelling.
- So the final output is 4.
-
-*/
-
-/*
 dp[i][j] 代表key中第i个char 是由ring中第j个过来的，上一个是j，到i需要的距离
 但是这个solution 比较慢
+
+dp[i][j]代表当key[i] = ring[k],从j到k的需要步数
 
 */
 
@@ -96,5 +68,70 @@ public:
             res = min(res, i);
         return res+key.size();
 
+    }
+};
+
+
+class Solution {
+public:
+    int findRotateSteps(string ring, string key) {
+        int k = key.size(), r = ring.size();
+        vector<vector<int>>dp(k, vector<int>(r,numeric_limits<int>::max()));
+        unordered_map<char, unordered_set<int>>index_mp;
+        
+        for(int i = 0; i<ring.size(); ++i){
+            index_mp[ring[i]].insert(i);
+        }
+        
+        unordered_set<int>startIndice = {0};
+        for(int i  = 0; i<k; ++i){
+            for(auto prev: startIndice){
+                for(auto cur: index_mp[key[i]]){
+                    int step = min(abs(cur-prev), r - abs(cur-prev)) + 1;
+                    if(i!=0)
+                        step += dp[i-1][prev];
+                    dp[i][cur] = min(dp[i][cur], step);
+                }
+            }
+            startIndice =  index_mp[key[i]];
+        }
+        
+        int res = r*k;
+        for(int j = 0; j<r; ++ j)
+            res = min(res, dp[k-1][j]);
+        return res;
+    }
+};
+
+
+/**
+ 2020 dp[i][j] 表示当 ring[i] == key [j] 所需要的步数
+ */
+class Solution {
+public:
+    int findRotateSteps(string ring, string key) {
+        int k = key.size(), r = ring.size();
+        vector<vector<int>>dp(k, vector<int>(r,numeric_limits<int>::max()));
+        for(int i  = 0; i<k; ++i){
+            for(int j = 0; j<r; ++j){
+                if(key[i] == ring[j]){
+                    if(i==0)
+                        dp[0][j] = min(j, r - j)+1;
+                    else{
+                        int step = numeric_limits<int>::max();
+                        for(int prev = 0; prev < r; ++prev){
+                            if(key[i-1] == ring[prev])
+                                step =min(step, min(abs(j-prev), r - abs(j-prev)) + dp[i-1][prev]);                         
+                        }
+                        dp[i][j] = step + 1;
+                    }
+                }
+            }
+        }
+        
+        int res = r*k;
+        for(int j = 0; j<r; ++ j)
+            res = min(res, dp[k-1][j]);
+        return res;
     }
 };

@@ -116,6 +116,8 @@ public:
 
         int n = nums.size(), sum = 0;
 	    if(n % 2 == 0) return true;
+        //If n is even, the first player can choose element from either all odd indices or even indices (easily proven by induction),
+        // so it's a simply comparison between sum of all odd and all even positions.
         vector<vector<int>>dp(n, vector<int>(n));
         
         for(int i=0; i < n; i++) {

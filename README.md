@@ -1074,7 +1074,7 @@ DFS 是看有没有path，DP是看有几个path
 | [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/)	|	_O(n \* l^2)_	|	_O(l)_ |	hard | suffix Trie  |
 | [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典🎅, [Top-Down](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/474.%20Ones%20and%20Zeroes.cpp#L77), Bottom-up |
 | [486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅🎅, [DP解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/486.%20Predict%20the%20Winner.cpp#L33), DFS |
-| [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard |  <ul><li> dp\[i]\[k]代表当key\[i] = ring\[j],从j到k的需要步数(为下一步做准备). </li><li> dp\[k]代表在key\[i]是到达k最小的距离, 外loop是0: key-1, 中loop是 key\[i-1]在ring中出现的位置, 内loop是key\[i]在ring中出现的位置</li></ul> |
+| [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard | 经典🎅🎅  |
 | [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典dp |
 | [518. Coin Change 2](https://leetcode.com/problems/coin-change-2/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅TopDown, Bottom-up |
 | [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 📖 dp\[i]\[j]\[k] 存的是从given k个与j一样的数在j后，从i,到j 最大得数 |
