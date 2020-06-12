@@ -135,3 +135,66 @@ public:
         return res;
     }
 };
+
+//Top-Down
+class Solution {
+public:
+       int findRotateSteps(string ring, string key) {
+        vector<int> pos[26];
+        int r = ring.size();
+        for(int i=0;i<r;i++) pos[ring[i]-'a'].push_back(i);
+        vector<vector<int>> mem(r,vector<int>(key.size()));
+        return findSteps(0, 0, ring, key, pos,mem);    
+    }
+    int findSteps(int p1, int p2, string &ring, string &key, vector<int> pos[26],vector<vector<int>>& mem) {
+        if(p2==key.size()) return 0;
+        if(mem[p1][p2]) return mem[p1][p2];
+        int r = ring.size(), ms=INT_MAX;
+        for(int nxt:pos[key[p2]-'a']) {
+            int dist = abs(p1-nxt);
+            ms = min(ms,min(dist, r-dist)+findSteps(nxt,p2+1,ring,key,pos,mem));    
+        }
+        return mem[p1][p2]=ms+1;
+    }
+};
+
+
+//Top-Down
+/*
+The state is represented by the 12:00 direction of index p and the current index of key to spell.
+Initially, p = 0. Rotate both direction to find the character to match the character in key to spell. 
+there are two cases:
+
+1. left rotation and right rotation end up with same index (i==j) then there is only one branch
+2. they end up with different index then there are two branch
+
+ */
+class Solution {
+public:
+       int findRotateSteps(string ring, string key) {
+       if(ring.size()==0 || key.size()==0) return 0;
+       unordered_map<int,unordered_map<int,int>>dp;
+       return findSteps(0, 0, ring, key, dp);    
+    }
+    int findSteps(int r, int k, string &ring, string &key, unordered_map<int,unordered_map<int,int>>&dp) {
+        if(k == key.size())
+            return 0;
+        if(dp.count(r) && dp[r].count(k))
+            return dp[r][k];
+        int step1 = 0, step2=0, i=r, j=r;
+        for(; ring[i]!=key[k]; step1++) {
+            i=(i+1)%ring.size();
+        }
+        for(; ring[j]!=key[k];step2++) {
+            j=(j-1+ring.size())%ring.size();
+        }
+        if(i==j) { //rotate to same location then use the less count one
+            dp[r][k]= min(step1,step2)+1 + findSteps(i, k+1, ring, key, dp);
+        } else {
+            int r1 = findSteps(i, k+1, ring, key, dp) + step1 + 1;
+            int r2 = findSteps(j, k+1, ring, key, dp) + step2 + 1;
+            dp[r][k] = min(r1,r2);
+        }
+        return dp[r][k];
+    }
+};
