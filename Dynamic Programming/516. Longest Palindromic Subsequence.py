@@ -1,24 +1,4 @@
-"""
-516. Longest Palindromic Subsequence
-
-Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
-
-Example 1:
-Input:
-
-"bbbab"
-Output:
-4
-One possible longest palindromic subsequence is "bbbb".
-Example 2:
-Input:
-
-"cbbd"
-Output:
-2
-
-
-"""
+# Bottom-up
 class Solution:
     def longestPalindromeSubseq(self, s):
         """
@@ -57,3 +37,39 @@ class Solution:
                 prev, dp[j] = dp[j], prev+2 if s[i] == s[j] else max(dp[j],dp[j-1])
         #print(dp)
         return dp[-1]
+
+#O(n) space
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n = len(s)
+        dp = [1] * n
+        for j in range(1, len(s)):
+            pre = dp[j]
+            for i in reversed(range(0, j)):
+                tmp = dp[i]
+                if s[i] == s[j]:
+                    dp[i] = 2 + pre if i + 1 <= j - 1 else 2
+                else:
+                    dp[i] = max(dp[i + 1], dp[i])
+                pre = tmp
+        return dp[0]
+
+#Top-Down
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        dp = collections.defaultdict(lambda: collections.defaultdict(int))
+        
+        def topDown(i, j):
+            if i > j:
+                return 0
+            if i == j:
+                return 1
+            if i in dp and j in dp[i]:
+                return dp[i][j]
+            
+            if s[i] == s[j]:
+                dp[i][j] = topDown(i+1, j-1) + 2
+            else:
+                dp[i][j] = max(topDown(i+1, j), topDown(i,j-1))
+            return dp[i][j]
+        return topDown(0, len(s)-1)

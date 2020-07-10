@@ -1,29 +1,4 @@
-
-
-/*
-516. Longest Palindromic Subsequence
-
-Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
-
-Example 1:
-Input:
-
-"bbbab"
-Output:
-4
-One possible longest palindromic subsequence is "bbbb".
-Example 2:
-Input:
-
-"cbbd"
-Output:
-2
-One possible longest palindromic subsequence is "bb".
-
-
-*/
-
-
+//Bottom-up
 class Solution {
 public:
     int longestPalindromeSubseq(string s) {
@@ -49,6 +24,33 @@ public:
         return dp[0][s.size()-1];
     }
 };
+
+
+
+//Top-Down
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n, vector<int>(n));
+        return topDown(dp, s, 0, s.size()-1);
+    }
+    
+    int topDown(vector<vector<int>>&dp, const string& s, int i , int j){
+        if(i>j)
+            return 0;
+        if(i == j)
+            return 1;
+        if(dp[i][j] > 0)
+            return dp[i][j];
+        if(s[i] == s[j])
+            return dp[i][j] = topDown(dp, s, i+1, j-1) + 2;
+        else 
+            return dp[i][j] = max(topDown(dp,s,i+1,j), topDown(dp,s, i, j-1));
+    }
+};
+
+
 
 
 class Solution {
@@ -122,5 +124,28 @@ public:
             }
         }
         return dp[s.size()-1];
+    }
+};
+
+
+//2020 
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.size();
+        vector<int>dp(n);
+        for(int j = 0; j<s.size(); ++j){
+            dp[j] = 1;
+            int prev = 0;
+            for(int i = j-1; i>=0; --i){
+                int temp = dp[i];
+                if(s[i] == s[j])
+                    dp[i] = prev + 2;
+                else
+                    dp[i] = max(dp[i], dp[i+1]);
+                prev = temp;
+            }
+        }
+        return dp[0];
     }
 };

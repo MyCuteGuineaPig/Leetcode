@@ -1059,7 +1059,7 @@ DFS 是看有没有path，DP是看有几个path
 | [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/)	|	_O(n \* sqrt(n)_	|	_O(n)_ |	Medium |Bottom-Up DP, Top-Down DP,BFS. Similar Question <ul><li> [322. Coin Change](https://leetcode.com/problems/coin-change/description/) </li><li>[377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/)	</li></ul> |
 | [304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)	|	_ctor: O(m * n), lookup: O(1)_	|	_O(m+n)_ |	Medium | 类似的题: <ul><li>[221. Maximal Square](https://leetcode.com/problems/maximal-square/)</li><li>[661 Image Smoother](https://leetcode.com/problems/image-smoother/)</li><li>[1277. Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones//)</li><li>[1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)</li></ul>  |
 | [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)	|	_O(n)_	|	_O(1)_ |	Medium | |
-| [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/)	|	_O(n^3)_	|	_O(n^2)_ |	Hard | Top-Down / Bottom-up |
+| [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/)	|	_O(n^3)_	|	_O(n^2)_ |	Hard | Top-Down / Bottom-up, Similar Question: [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/) |
 | [322. Coin Change](https://leetcode.com/problems/coin-change/description/)	|	_O(n\*k)_	|	_O(k)_ |	Medium | Bottom-up, Top-Down, BFS, Similar Question <ul><li> [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/) </li><li>[377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/) </li></ul> |
 | [338. Counting Bits](https://leetcode.com/problems/counting-bits/)	|	_O(n)_	|	_O(n)_ |	Medium | Math 找规律 |
 | [357. Count Numbers with Unique Digits](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 🎅DP, Static DP, backtracking |
@@ -1075,9 +1075,9 @@ DFS 是看有没有path，DP是看有几个path
 | [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典🎅, [Top-Down](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/474.%20Ones%20and%20Zeroes.cpp#L77), Bottom-up |
 | [486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅🎅, [DP解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/486.%20Predict%20the%20Winner.cpp#L33), DFS |
 | [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard | 经典🎅🎅, Top-Down, Bottom-up  |
-| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典dp |
+| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅, Bottom-up, Top-Down |
 | [518. Coin Change 2](https://leetcode.com/problems/coin-change-2/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅TopDown, Bottom-up |
-| [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 📖 dp\[i]\[j]\[k] 存的是从given k个与j一样的数在j后，从i,到j 最大得数 |
+| [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 🎅🎅🎅  Top-Down, Bottom-up, Similar Question: [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/) |
 | [552. Student Attendance Record II](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(n)_	|	_O(1)~O(n)_|	Hard | |
 | [576. Out of Boundary Paths](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(N \* m \* n)_	|	_O(m \* n)_|	Medium | dp or dfs with memoization or 每次进入只能从 (i+j)%2 = 1 进入(i+j)%2 = 0 或者 从 (i+j)%2 = 0 进入(i+j)%2 = 1 |
 | [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)	|	_O(m\*n)_	|	_O(n)_|	Medium | Edit Distance without replace |
@@ -1123,6 +1123,7 @@ DFS 是看有没有path，DP是看有几个path
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | :-------------: | :-------------: | :-------------: | :------------- |
 | [146. LRU Cache](https://leetcode.com/problems/lru-cache/) | _O(1)_ |	_O(k)_ |	Medium | <ul><li>✏️✏️[C++ List Splice](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.cpp#L1) </li><li>✏️✏️[Python OrderedDict](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.py) </li></ul> |
+| [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1) | _O(1)_ |	_O(1)_ |	Medium | 🎅🎅 |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>
 push: _O(1)_ <br/>
 pop: _O(1)_ <br/>

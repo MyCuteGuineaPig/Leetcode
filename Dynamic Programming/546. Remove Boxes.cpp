@@ -1,27 +1,4 @@
 /*
-546. Remove Boxes
-
-Given several boxes with different colors represented by different positive numbers. 
-You may experience several rounds to remove boxes until there is no box left. Each time you can choose some continuous boxes with the same color (composed of k boxes, k >= 1), remove them and get k*k points.
-Find the maximum points you can get.
-
-Example 1:
-Input:
-
-[1, 3, 2, 2, 2, 3, 4, 3, 1]
-Output:
-23
-Explanation:
-[1, 3, 2, 2, 2, 3, 4, 3, 1] 
-----> [1, 3, 3, 4, 3, 1] (3*3=9 points) 
-----> [1, 3, 3, 3, 1] (1*1=1 points) 
-----> [1, 1] (3*3=9 points) 
-----> [] (2*2=4 points)
-Note: The number of boxes n would not exceed 100.
-*/
-
-
-/*
 dp[i][j][k] 代表从boxes[i:j] 之后k个与boxes[j] 一样color ball，所得最大的count数
 
 
@@ -41,6 +18,8 @@ call dfs(i=0, j= 5, k = 1) 但是这里面还有recusion，因为j=5 和pos = 1 
 
 */
 
+
+// Top-Down
 int dp[102][102][102];
 class Solutiaon {
 public:
@@ -87,27 +66,18 @@ private:
 public:
     int dfs(int i, int j, int k) {
         if (d[i][j][k] != -1) {
-            cout<<"-1r "<<i<<" j "<<j<<" k "<<k<<" d "<<d[i][j][k]<<endl;
-        
             return d[i][j][k];
         }
         if (i > j) {
-            cout<<"i>j "<<i<<" j "<<j<<" k "<<k<<endl;
-        
             return 0;
         }
-        cout<<"in "<<i<<" j "<<j<<" k "<<k<<endl;
         
         d[i][j][k] = dfs(i, j - 1, 0) + (len[j] + k) * (len[j] + k);
-        cout<<" afdfs "<<"i  "<<i<<" j "<<j<<" k "<<k<<" lenj "<<len[j]<<" l+k "<<len[j] + k<<" dp "<<d[i][j][k] <<endl;
         for (int pos = i; pos < j; pos++) {
             if (c[pos] == c[j]) {
-                cout<<" equal "<<" i "<<i<<" j "<<j<<" k "<<k<<" pos "<<pos<<endl;
                 int before = dfs(i, pos, len[j] + k);
                 int after = dfs(pos + 1, j - 1, 0);
                 d[i][j][k] = max(d[i][j][k], before + after);
-                cout<<" before "<<before<<" aftter "<<after<<" i "<<" i "<<i<<" j "<<j<<" k "<<k<<" dp "<<d[i][j][k] <<endl;
-        
             }
         }
         return d[i][j][k];
@@ -122,20 +92,22 @@ public:
             if (i == 0 || boxes[i] != boxes[i - 1]) c[++n] = boxes[i], len[n] = 1;
             else len[n]++;
         }
-        for(int i =0 ;i<=n; i++){
-            cout<<c[i]<<"  ";
-        }
-        cout<<endl;
-        for(int i =0 ;i<=n; i++){
-            cout<<len[i]<<"  ";
-        }
-        cout<<endl;
         return dfs(1, n, 0);
     }
 };
 
 
+/*
+dp[i][j][k]: 表示 boxes[i,j] 可获得maximum point 通过remove 有 k个boxes 有一样的color 在boxes[i] 左侧
 
+Let dp(i, j, k) = the maximum value of removing boxes if we have k extra boxes of color A[i] to the left of boxes[i: j]. 
+
+1. dp[i][i-1][k] = 0, no boxes, so no point 
+2. dp[i][i][k] = (k+1)*(k+1):  only one box left in the subarray, 左侧有k个一样颜色的盒子, number是(k+1)*(k+1)
+3. dp[i][j][k] 如果 boxes[i] = boxes[m] (i < m < k): 
+              = max(dp[i][j][k], dp[i+1][m-1][0], dp[m][j][k+1])
+
+ */
 class Solution {
 public:
     int n;
@@ -160,4 +132,39 @@ public:
         return dp[i][j][k];
     }
     
+};
+
+//Bottom-up
+class Solution {
+public:
+    int removeBoxes(vector<int>& boxes) {
+    int n = boxes.size();
+    vector<vector<vector<int>>>dp(n, vector<vector<int>>(n, vector<int>(n)));
+    	
+    for (int j = 0; j < n; j++) {
+    	for (int k = 0; k <= j; k++) {
+    	    dp[j][j][k] = (k + 1) * (k + 1);
+    	}
+    }
+    	
+    for (int l = 1; l < n; l++) {
+    	for (int j = l; j < n; j++) {
+    	    int i = j - l;
+    	        
+    	    for (int k = 0; k <= i; k++) {
+    	        int res = (k + 1) * (k + 1) + dp[i + 1][j][0];
+    	            
+    	        for (int m = i + 1; m <= j; m++) {
+    	            if (boxes[m] == boxes[i]) {
+    	                res = max(res, dp[i + 1][m - 1][0] + dp[m][j][k + 1]);
+    	            }
+    	        }
+    	            
+    	        dp[i][j][k] = res;
+    	    }
+    	}
+    }
+    
+    return (n == 0 ? 0 : dp[0][n - 1][0]);
+    }
 };

@@ -105,3 +105,25 @@ public:
         return res;
     }
 };
+
+
+
+//2020 
+class Solution {
+public:
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        vector<int>res;
+        sort(nums.rbegin(), nums.rend());
+        vector<vector<int>>dp(nums.size());
+        for(int i = 0; i<nums.size(); ++i){
+            for(int j = 0; j<i; ++j){
+                if(nums[j] % nums[i] == 0 && dp[j].size() > dp[i].size())
+                    dp[i] = dp[j];
+            }
+            dp[i].push_back(nums[i]);
+            if(dp[i].size() > res.size())
+                res = dp[i];
+        }
+        return res;
+    }
+};
