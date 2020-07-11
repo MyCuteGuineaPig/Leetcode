@@ -41,3 +41,45 @@ class Solution:
         #print(dp)
         return dp[-1]
         
+# Bottom-up
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1), len(word2)
+        dp = [[0] * (n + 1) for i in range(m + 1)]
+        for i in range(m):
+            for j in range(n):
+                dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j], dp[i][j] + (word1[i] == word2[j]))
+        return m + n - 2 * dp[m][n]
+
+# Top-Down
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        memo = {}
+        def topDown(i, j):
+            if (i, j) not in memo:
+                if i == 0 or j == 0:
+                    ans = i if i else j 
+                elif word1[i-1] == word2[j-1]:
+                    ans = topDown(i-1, j-1)
+                else:
+                    ans = 1 + min(topDown(i-1, j), topDown(i, j-1))
+                memo[(i, j)] = ans
+            return memo[(i, j)]
+        return topDown(len(word1), len(word2))
+
+# Top-Down
+# i == len(A) or j == len(B), one of the strings is empty, so the answer is just the sum of the remaining lengths.
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        memo = {}
+        def topDown(i, j):
+            if (i, j) not in memo:
+                if i == len(word1) or j == len(word2):
+                    ans = len(word1) + len(word2) - i - j
+                elif word1[i] == word2[j]:
+                    ans = topDown(i+1, j+1)
+                else:
+                    ans = 1 + min(topDown(i+1, j), topDown(i, j+1))
+                memo[(i, j)] = ans
+            return memo[(i, j)]
+        return topDown(0, 0)

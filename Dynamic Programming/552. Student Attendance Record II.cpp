@@ -1,29 +1,8 @@
 /*
-552. Student Attendance Record II
 
-Given a positive integer n, return the number of all possible attendance records with length n, which will be regarded as rewardable. The answer may be very large, return it after mod 109 + 7.
-
-A student attendance record is a string that only contains the following three characters:
-
-'A' : Absent.
-'L' : Late.
-'P' : Present.
-A record is regarded as rewardable if it doesn't contain more than one 'A' (absent) or more than two continuous 'L' (late).
-
-Example 1:
-Input: n = 2
-Output: 8 
-Explanation:
-There are 8 records with length 2 will be regarded as rewardable:
-"PP" , "AP", "PA", "LP", "PL", "AL", "LA", "LL"
-Only "AA" won't be regarded as rewardable owing to more than one absent times. 
-Note: The value of n won't exceed 100,000.
-
-
-
-*/
-
-/*
+P(n), 在第n位是P的个数
+L(n), 在第n位是L的个数
+A(n), 在第n位是A的个数
 
 P(n) = A(n-1) + P(n-1) + L(n-1)
 L(n) = P(n-1) + P(n-2) + A(n-1) + A(n-2) （比如 PL, PLL, AL, ALL)
@@ -48,7 +27,8 @@ class Solution {
 public:
     int checkRecord(int n) {
         int m = 1000000007;
-        if(n==0) return 3;
+        if(n==1) return 3;
+        if(n==2) return 8;
         long long *P = new long long[n];
         long long *A = new long long[n];
         long long *L = new long long[n];
@@ -97,8 +77,35 @@ public:
             a1l2 = a1l1;
             a1l1 = a1l0;
             a1l0 = new_a1l0;
-            //cout<<i<<" a0l0 "<<a0l0<<" a0l1 "<<a0l1<<" a0l2 "<<a0l2<<" a1l0 "<<a1l0<<" a1l1 "<<a1l1<<" a1l2 "<<a1l2<<endl;
         }
         return static_cast<int>(a1l0);
+    }
+};
+
+//2020
+class Solution {
+public:
+    int checkRecord(int n) {
+        long long p = 1, a = 1, l = 1, ll = 0, al = 0, all = 0, ap = 0;
+        long long mod = pow(10,9)+7;
+        for(int i = 1; i<n; i++){
+            long long nxt_p = (p + l + ll) % mod; 
+            long long nxt_a = (p + l + ll)  % mod; 
+            long long nxt_l = p; 
+            long long nxt_ll = l;
+            
+            long long nxt_al = ( a + ap) % mod;
+            long long nxt_all = al;
+            long long nxt_ap =( a + al + all + ap ) % mod;
+            
+            p = nxt_p;
+            a = nxt_a;
+            l = nxt_l;
+            ll = nxt_ll;
+            al = nxt_al;
+            all = nxt_all;
+            ap = nxt_ap;
+        }
+        return (p+a+l+ll+al+all+ap)%mod;
     }
 };

@@ -1041,7 +1041,7 @@ DFS 是看有没有path，DP是看有几个path
 | [063. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [064. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium | |
 | [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)	|	_O(n)_	|	_O(1)_ |	Easy |  |
-| [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard |  |
+| [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | 类似的题: [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/) |
 | [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | 🎅 Memoization |
 | [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 😍😍🎅 similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/) [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) |
 | [097. Interleaving String](https://leetcode.com/problems/interleaving-string/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | 🎅 DP, DFS, BFS |
@@ -1078,9 +1078,9 @@ DFS 是看有没有path，DP是看有几个path
 | [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅, Bottom-up, Top-Down |
 | [518. Coin Change 2](https://leetcode.com/problems/coin-change-2/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅TopDown, Bottom-up |
 | [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 🎅🎅🎅  Top-Down, Bottom-up, Similar Question: [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/) |
-| [552. Student Attendance Record II](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(n)_	|	_O(1)~O(n)_|	Hard | |
-| [576. Out of Boundary Paths](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(N \* m \* n)_	|	_O(m \* n)_|	Medium | dp or dfs with memoization or 每次进入只能从 (i+j)%2 = 1 进入(i+j)%2 = 0 或者 从 (i+j)%2 = 0 进入(i+j)%2 = 1 |
-| [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)	|	_O(m\*n)_	|	_O(n)_|	Medium | Edit Distance without replace |
+| [552. Student Attendance Record II](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(n)_	|	_O(1)~O(n)_|	Hard | 🎅 [Derive Relation](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/552.%20Student%20Attendance%20Record%20II.cpp#L3) |
+| [576. Out of Boundary Paths](https://leetcode.com/problems/out-of-boundary-paths/)	|	_O(N \* m \* n)_	|	_O(m \* n)_|	Medium | DP, DFS, BFS |
+| [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)	|	_O(m\*n)_	|	_O(n)_|	Medium | Edit Distance without replace <br/> 类似题: [072. Edit Distance](https://leetcode.com/problems/edit-distance/) |
 | [600. Non-negative Integers without Consecutive Ones](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/description/)	|	_O(1)_	|	_O(1)_|	Hard | Fibonacci Sequence, 比如11000 返回fb\[5], 10101 返回 fb\[4]+ fb\[2]+fb\[0]+1 |
 | [629. K Inverse Pairs Array](https://leetcode.com/problems/k-inverse-pairs-array/)	|	_O(n\*k)_	|	_O(k)_|	Hard |  |
 | [639. Decode Ways II](https://leetcode.com/problems/decode-ways-ii/)	|	_O(n)_	|	_O(1)_|	Hard |  |

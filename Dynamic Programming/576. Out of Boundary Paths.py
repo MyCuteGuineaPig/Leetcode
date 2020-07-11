@@ -2,39 +2,62 @@
 576. Out of Boundary Paths
 """
 
-
-"""
-dp with memoization get time out (TLE)
-"""
-import collections
+# DP
 class Solution:
-    def findPaths(self, m, n, N, i, j):
-        """
-        :type m: int
-        :type n: int
-        :type N: int
-        :type i: int
-        :type j: int
-        :rtype: int
-        """
+    def findPaths(self, m: int, n: int, N: int, i: int, j: int) -> int:
         M = 10**9 + 7
-        dp = collections.defaultdict(int) #不能设置默认为0， 否则可能有0的情况无法返回
-        def dfs(i, j, k):
-            if k<0:
-                return 0
-            if i<0 or j<0 or i>=m or j>=n:
-                return 1
-            if dp[(i,j,k)]>0: 
-                return dp[(i,j,k)]
-            dp[(i,j,k)] = (dfs(i-1,j,k-1) + dfs(i,j-1,k-1) + dfs(i+1,j,k-1) +dfs(i,j+1,k-1))%M
-            return dp[(i,j,k)]
-        
-        return dfs(i,j,N)
+        dp = collections.defaultdict(int)
+        dp[(i,j)] = 1
+        res = 0;
+        dir_ = [[-1,0],[0,-1],[1,0],[0,1]]
+        for _ in range(0,N):
+            newdp = collections.defaultdict(int)
+            for i, v in dp.items():
+                for x_add, y_add in dir_:
+                    x = i[0] + x_add
+                    y = i[1] + y_add
+                    if x<0 or y<0 or x>=m or y>=n:
+                        res = (res + v) % M
+                    else:
+                        newdp[(x,y)] += dp[i]
+            dp = newdp
+        return res
 
-"""
-Accepted
-"""
+# DP
+class Solution:
+    def findPaths(self, R: int, C: int, N: int, sr: int, sc: int) -> int:
+        MOD = 10**9 + 7
+        nxt = [[0] * C for _ in range(R)]
+        nxt[sr][sc] = 1
 
+        ans = 0
+        for time in range(N):
+            cur = nxt
+            nxt = [[0] * C for _ in range(R)]
+            for r, row in enumerate(cur):
+                for c, val in enumerate(row):
+                    for nr, nc in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
+                        if 0 <= nr < R and 0 <= nc < C:
+                            nxt[nr][nc] += val
+                            nxt[nr][nc] %= MOD
+                        else:
+                            ans += val
+                            ans %= MOD
+        return ans
+
+
+
+# DP
+class Solution:
+    def findPaths(self, m: int, n: int, N: int, i: int, j: int) -> int:
+        M = [[0 for _ in range(n)] for _ in range(m)]
+        for _ in range(N):
+            M = [[(x == 0 or M[x - 1][y]) + (x + 1 == m or M[x + 1][y])
+                  + (y == 0 or M[x][y - 1]) + (y + 1 == n or M[x][y + 1])
+                  for y in range(n)] for x in range(m)]
+        return M[i][j] % (10 ** 9 + 7)
+
+# DFS
 import collections
 class Solution:
     def findPaths(self, m, n, N, i, j):
@@ -61,41 +84,9 @@ class Solution:
         return dfs(i,j,N)
 
 
-"""
-Accepted
-"""
 
-import collections
-class Solution:
-    def findPaths(self, m, n, N, i, j):
-        """
-        :type m: int
-        :type n: int
-        :type N: int
-        :type i: int
-        :type j: int
-        :rtype: int
-        """
-        M = 10**9 + 7
-        dp = collections.defaultdict(int)
-        dp[(i,j)] = 1
-        res = 0;
-        dir_ = [[-1,0],[0,-1],[1,0],[0,1]]
-        for _ in range(0,N):
-            newdp = collections.defaultdict(int)
-            for i, v in dp.items():
-                for x_add, y_add in dir_:
-                    x = i[0] + x_add
-                    y = i[1] + y_add
-                    if x<0 or y<0 or x>=m or y>=n:
-                        res = (res + v) % M
-                    else:
-                        newdp[(x,y)] += dp[i]
-            dp = newdp
-        return res
-                    
-                
         
+           
 import numpy as np
 
 class Solution(object):

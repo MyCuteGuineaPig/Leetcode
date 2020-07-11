@@ -1,26 +1,3 @@
-/*
-576. Out of Boundary Paths
-
-There is an m by n grid with a ball. Given the start coordinate (i,j) of the ball, you can move the ball to adjacent cell or cross the grid boundary in four directions (up, down, left, right). However, you can at most move N times. Find out the number of paths to move the ball out of grid boundary. The answer may be very large, return it after mod 109 + 7.
-
-Example 1:
-Input:m = 2, n = 2, N = 2, i = 0, j = 0
-Output: 6
-Explanation:
-
-Example 2:
-Input:m = 1, n = 3, N = 3, i = 0, j = 1
-Output: 12
-Explanation:
-
-Note:
-Once you move the ball out of boundary, you cannot move it back.
-The length and height of the grid is in range [1,50].
-N is in range [0,50].
-
-
-*/
-
 class Solution {
 public:
     int findPaths(int m, int n, int N, int i, int j) {
@@ -96,4 +73,132 @@ public:
         return dp[i][j][k];
     }
 
+};
+
+
+//Bottom-up DP
+class Solution {
+public:
+    int findPaths(int m, int n, int N, int i, int j) {
+        vector<vector<long long>>dp(m, vector<long long>(n));
+        dp[i][j] = 1;
+        int mod = pow(10,9)+7;
+        vector<vector<int>>move = {{-1,0},{0,-1}, {1,0}, {0,1}};
+        long long res = 0 ; 
+        for(int z = 0; z<N; ++z){
+            vector<vector<long long>>tmp(m, vector<long long>(n));
+            for(int ii = 0 ; ii<m; ++ii){
+                for(int jj = 0; jj<n; ++jj){
+                    if(dp[ii][jj]){
+                        for(auto nxt: move){
+                            int nxt_i = nxt[0] + ii; 
+                            int nxt_j = nxt[1] + jj;
+                            if(nxt_i <0 || nxt_j < 0 || nxt_i >= m || nxt_j >= n)
+                                res = (res + dp[ii][jj]) % mod;
+                            else
+                                tmp[nxt_i][nxt_j] = (tmp[nxt_i][nxt_j] + dp[ii][jj])%mod;
+                        }
+                    }
+                }
+            }
+            
+            dp = tmp;
+
+        }
+        return res;
+    }
+};
+
+
+
+
+//DP
+class Solution {
+public:
+    int findPaths(int m, int n, int N, int i, int j) {
+      uint dp[51][50][50] = {};
+      for (auto Ni = 1; Ni <= N; ++Ni)
+        for (auto mi = 0; mi < m; ++mi)
+          for (auto ni = 0; ni < n; ++ni)
+            dp[Ni][mi][ni] = ((mi == 0 ? 1 : dp[Ni - 1][mi - 1][ni]) + (mi == m - 1? 1 : dp[Ni - 1][mi + 1][ni])
+                + (ni == 0 ? 1 : dp[Ni - 1][mi][ni - 1]) + (ni == n - 1 ? 1 : dp[Ni - 1][mi][ni + 1])) % 1000000007;
+      return dp[N][i][j];
+    }
+};
+
+//reduce the memory usage by using two grids instead of N
+class Solution {
+public:
+    int findPaths(int m, int n, int N, int i, int j) {
+        unsigned int g[2][50][50] = {};
+        while (N-- > 0)
+            for (auto k = 0; k < m; ++k)
+                for (auto l = 0, nc = (N + 1) % 2, np = N % 2; l < n; ++l)
+                    g[nc][k][l] = ((k == 0 ? 1 : g[np][k - 1][l]) + (k == m - 1 ? 1 : g[np][k + 1][l])
+                        + (l == 0 ? 1 : g[np][k][l - 1]) + (l == n - 1 ? 1 : g[np][k][l + 1])) % 1000000007;
+        return g[1][i][j];
+    }
+};
+
+
+//DFS
+class Solution {
+public:
+    int findPaths(int m, int n, int N, int i, int j) {
+        vector<vector<vector<long>>>dp(m, vector<vector<long>>(n, vector<long>(N+1,-1)));
+        return dfs(dp, m, n, i, j, N);
+    }
+    
+    int dfs(vector<vector<vector<long>>>&dp, int m, int n, int i, int j, int N ){
+        if(N<0)
+            return 0;
+        if(i < 0 || j<0 || i>=m || j>=n)
+            return 1;
+        if(dp[i][j][N] >= 0)
+            return dp[i][j][N];
+        vector<vector<int>>move = {{-1,0},{0,-1}, {1,0}, {0,1}};
+        int mod = pow(10,9)+7;
+        long long res = 0;
+        for(auto nxt: move){
+            int nxt_i = nxt[0] + i; 
+            int nxt_j = nxt[1] + j;
+            res = (res + dfs(dp, m, n, nxt_i, nxt_j, N-1))%mod;
+        }        return dp[i][j][N] = res;
+    }
+};
+
+//BFS
+class Solution {
+public:
+    int findPaths(int m, int n, int N, int i, int j) {
+        vector<vector<int>>move = {{-1,0},{0,-1}, {1,0}, {0,1}};
+        int mod = pow(10,9)+7;
+        vector<vector<long>>dp(m, vector<long>(n));
+        
+        queue<vector<int>>q;
+        q.push({i,j});
+        long res = 0;
+        int size = 1;
+        dp[i][j] = 1;
+        while((size = q.size()) && N--){
+            vector<vector<long>>tmp(m, vector<long>(n));
+            for(int z = 0; z< size; ++z){
+                vector<int>cur = q.front(); q.pop();
+                int ii = cur[0], jj = cur[1];
+                for(auto nxt: move){
+                    int nxt_i = nxt[0] + ii; 
+                    int nxt_j = nxt[1] + jj;
+                    if(nxt_i <0 || nxt_j < 0 || nxt_i >= m || nxt_j >= n)
+                        res = (res + dp[ii][jj]) % mod;
+                    else{
+                        if(tmp[nxt_i][nxt_j]  == 0)
+                            q.push({nxt_i, nxt_j});
+                        tmp[nxt_i][nxt_j] = (tmp[nxt_i][nxt_j] + dp[ii][jj])%mod;
+                    }
+                }
+            }
+            dp = tmp;
+        }
+        return res;
+    }
 };
