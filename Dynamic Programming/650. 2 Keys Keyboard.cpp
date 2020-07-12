@@ -1,27 +1,4 @@
 /*
-650. 2 Keys Keyboard
-
-
-Initially on a notepad only one character 'A' is present. You can perform two operations on this notepad for each step:
-
-Copy All: You can copy all the characters present on the notepad (partial copy is not allowed).
-Paste: You can paste the characters which are copied last time.
-Given a number n. You have to get exactly n 'A' on the notepad by performing the minimum number of steps permitted.
- Output the minimum number of steps to get n 'A'.
-
-Example 1:
-Input: 3
-Output: 3
-Explanation:
-Intitally, we have one character 'A'.
-In step 1, we use Copy All operation.
-In step 2, we use Paste operation to get 'AA'.
-In step 3, we use Paste operation to get 'AAA'.
-Note:
-The n will be in the range [1, 1000].
-*/
-
-/*
 
   To get the DP solution, analyse the pattern first by generating first few solutions
 1: 0
@@ -87,13 +64,28 @@ public int minSteps(int n) {
     return dp[n];
 }
 
+//2020
+class Solution {
+public:
+    int minSteps(int n) {
+        vector<int>dp(n+1, n+1);
+        dp[1] = 0;
+        for(int i = 1; i<=n; ++i){
+            for(int j = i*2, time = dp[i]+2; j<=n; j=j+i, time++){ //dp[i]+2 加2 因为一次copy, 一次paste
+                dp[j] = min(dp[j], time);
+            }
+        }
+        return dp[n];
+    }
+};
+
 
 class Solution {
 public:
     int minSteps(int n) {
         int res = 0;
         for(int i = 2; i<=n; i++){
-            while(n%i == 0){
+            while(n%i == 0){  //比如 6 - > 18, copy 6, paste => 12, paste =》 18， 一次copy, 两次paste = 3
                 res += i;
                 n /= i;
             }
@@ -119,5 +111,54 @@ public:
         }
         if(n>1) return res+n;
         return res;
+    }
+};
+
+/*
+We want to find the greatest divisor for our number, 
+so we can minimize the number of steps by getting it 
+in a buffer and pasting multiple times. 
+The quickest way to find the greatest divisor is to start with the smallest prime and work our way up. 
+Note that we only need primes up to 31 as n is limited to 1,000 (32 * 32 > 1,000).
+
+
+
+ */
+class Solution {
+public:
+    int minSteps(int n) {
+       static const int primes[11] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
+        if (n <= 5) return n == 1 ? 0 : n;
+        for (auto i : primes)
+            if (n % i == 0) return i + minSteps(n / i);
+        return n; // prime number.
+    }
+};
+
+
+
+class Solution {
+public:
+    int minSteps(int n) {
+        if(n == 1) return 0;
+        int count = 0;
+        bool *isPrime = new bool[n + 1];
+        for(int i = 2; i < n + 1; i++) isPrime[i] = true;
+        for(int i = 2; i < n + 1; i++)
+        {
+            if(isPrime[i] == true)
+            {
+                while(n % i == 0)
+                {
+                    count += i;
+                    n /= i;
+                }
+                for(int j = i * i; j < n + 1; j += i) 
+                {
+                    if(isPrime[j]) isPrime[j] = false;
+                }
+            }
+        }
+        return count;
     }
 };

@@ -1082,9 +1082,9 @@ DFS 是看有没有path，DP是看有几个path
 | [576. Out of Boundary Paths](https://leetcode.com/problems/out-of-boundary-paths/)	|	_O(N \* m \* n)_	|	_O(m \* n)_|	Medium | DP, DFS, BFS |
 | [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)	|	_O(m\*n)_	|	_O(n)_|	Medium | Edit Distance without replace <br/> 类似题: [072. Edit Distance](https://leetcode.com/problems/edit-distance/) |
 | [600. Non-negative Integers without Consecutive Ones](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/description/)	|	_O(1)_	|	_O(1)_|	Hard | 🎅🎅  Math & Bit |
-| [629. K Inverse Pairs Array](https://leetcode.com/problems/k-inverse-pairs-array/)	|	_O(n\*k)_	|	_O(k)_|	Hard |  |
-| [639. Decode Ways II](https://leetcode.com/problems/decode-ways-ii/)	|	_O(n)_	|	_O(1)_|	Hard |  |
-| [650. 2 Keys Keyboard](https://leetcode.com/problems/2-keys-keyboard/)	|	_O(sqrt(n))_	|	_O(1)_|	Medium |  |
+| [629. K Inverse Pairs Array](https://leetcode.com/problems/k-inverse-pairs-array/)	|	_O(n\*k)_	|	_O(k)_|	Hard | 🎅找规律 |
+| [639. Decode Ways II](https://leetcode.com/problems/decode-ways-ii/)	|	_O(n)_	|	_O(1)_|	Hard | 🎅 [巧解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/639.%20Decode%20Ways%20II.cpp#L81) <br/> 类似的题: [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)  |
+| [650. 2 Keys Keyboard](https://leetcode.com/problems/2-keys-keyboard/)	|	_O(sqrt(n))_	|	_O(1)_|	Medium | 🎅 Greedy / DP [prime factoring ](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/650.%202%20Keys%20Keyboard.cpp#L118) |
 | [664. Strange Printer](https://leetcode.com/problems/strange-printer/)	|	_O(n^3)_	|	_O(n^2)_|	Hard | 📖dp\[i]\[j] 表示从i到j，最少print的次数 |
 | [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/)	|	_O(n^2)_	|	_O(n)_|	Medium |  |
 | [688. Knight Probability in Chessboard](https://leetcode.com/problems/knight-probability-in-chessboard/)	|	_O(k\*n^2)_	|	_O(k\*n^2)</br>~O(n^2)_|	Medium | DP or DFS + Memoization |

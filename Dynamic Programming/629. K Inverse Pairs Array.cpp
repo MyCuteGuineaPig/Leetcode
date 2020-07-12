@@ -1,33 +1,85 @@
+
 /*
-629. K Inverse Pairs Array
 
-Given two integers n and k, find how many different arrays consist of numbers from 1 to n such that there are exactly k inverse pairs.
+ k  0  1  2  3   4  5   6   7   8
+ n 
+ 1  1
+ 2  1  1
+ 3  1  2  2  1
+ 4  1  3  5  6   5   3   1
+ 5  1  4  9  15  20  22  20  15  9
+ 6  1  5  14 29  49  71  90  101 101
 
-We define an inverse pair as following: For ith and jth element in the array, if i < j and a[i] > a[j] 
-then it's an inverse pair; Otherwise, it's not.
+ dp[i][j] = dp[i-1][j](交换i 与前一个数的位置) + dp[i][j-1] (append i 到原有数组后)
+ if j >= i: 
+      dp[i][j] -= dp[i-1][j-i] (表示i已经到最左侧，无法交换)
+       dp[i-1][j-i]产生dp[i][j-i]时。 把i append 到最右侧，通过i-1个switch, i已经到最左侧
 
-Since the answer may be very large, the answer should be modulo 109 + 7.
 
-Example 1:
-Input: n = 3, k = 0
-Output: 1
-Explanation: 
-Only the array [1,2,3] which consists of numbers from 1 to 3 has exactly 0 inverse pair.
-Example 2:
-Input: n = 3, k = 1
-Output: 2
-Explanation: 
-The array [1,3,2] and [2,1,3] have exactly 1 inverse pair.
-Note:
-The integer n is in the range [1, 1000] and k is in the range [0, 1000].
 
+比如 n=3, k = 1:  (1,3,2),  (2,1,3)
+    n=3, k = 2:   (2,3,1), (3,1,2)
+    n=3, k = 3:   (3,2,1)
+
+那么, n = 4, k = 0:
+    对于n=3, k = 0, 把 4 append到数的后面, 且不破坏原数组顺序, (1,2,3) + 4
+
+那么, n = 4, k =1:
+    对于n=3, k = 1, 把 4 append到数的后面 则继续保持 inverse pair 为1且不破坏原数组顺序, (1,3,2) + 4, (2,1,3) + 4 
+    对于n=4, k = 0, 交换4和前一个数的位置, 产生一个新的pair,  (1,2,4,3)  =} 来自于 n = 3, k= 0
+
+那么 n = 4, k = 2
+     对于n=3, k = 2, 把 4 append到数的后面, (2,3,1)+4, (3,1,2) + 4
+     多于n=4, k = 1, 交换4 与前一个数的位置，产生一个新的pair, 
+         (1,3,2, 4) =》 (1,3,4,2),  (2,1,3,4) => （2,1,4,3),     =} 来自于 n = 3, k= 1
+         (1,2,4,3) => (1,4,2,3)                                 =} 来自于 n = 3, k= 0  
+
+ 那么 n = 4, k = 3
+     对于n=3, k = 3, 把 4 append到数的后面, (3,2,1) + 4 
+     对于  n=4, k = 2, 交换4 与前一个数的位置，产生一个新的pair, 
+        （2，3，1，4) => (2,3,4,1),  (3,1,2,4) = > (3,1,4,2)      =} 来自于 n = 3, k= 2
+         (1,3,4,2) => (1,4,3,2),  (2,1,4,3) => (2,4,1,3),        =} 来自于 n = 3, k= 1
+        (1,4,2,3) => (4,1,2,3)   =} 来自于 n = 3, k= 0
+
+ 那么 n = 4, k = 4
+     对于n=3, k = 4, 没有结果
+     对于 n=4, k = 3, 交换4 与前一个数的位置，产生一个新的pair, 
+     （3，2，1，4) =>  (3,2,4,1),                                 =} 来自于 n = 3, k= 3
+      (2,3,4,1) =>  (2,4,3,1), (3,1,4,2) = > (3,4,1,2)           =} 来自于 n = 3, k= 2
+      (1,4,3,2) =>  (4,1,3,2),  (2,4,1,3) =>  (4,2,1,3)          =} 来自于 n = 3, k= 1
+    *** 减去 dp[3][0]:  因为当 n =4, k =3 时， 来自于 n = 3, k = 0 的pair, 4 已经在最左侧( (4,1,2,3) )，不能移动
+
+那么 n=4, k = 5
+     对于 n = 4, k =4, 交换4 与前一个数的位置，产生一个新的pair, 
+       (3,2,4,1) =>  (3,4,2,1),                                 =} 来自于 n = 3, k= 3
+       (2,4,3,1) => (4,2,3,1), (3,4,1,2) => (4,3,1,2)           =} 来自于 n = 3, k= 2
+     *** 减去 dp[3][1]:  因为当 n =4, k =4 时， 来自于 n = 3, k = 1 的pair, 4 已经在最左侧( (4,1,3,2), (4,2,1,3) )，不能移动
+
+不会有重复：
+ 假设 n = i, k = i*(i-1)/2 时没有重复
+ 那么 当 n = i+ 1, 所有的数都是从 n = i 过来的，只不过是把i + 1 append 到n = i 右侧，然后不断左移动，所以不会有重复
 
 */
+class Solution {
+public:
+    int kInversePairs(int n, int k) {
+        if(n<=0 || k>n*(n-1)/2) return 0;
+        if(k == n*(n-1)/2 || k == 0) return 1;
+        static const long long m = 1000000007;
+        vector<vector<long long>>dp(2,vector<long long>(k+1));
+        for(int i = 2;i<=n; i++){
+            dp[i%2][0] = 1;
+            for(int j = 1, a = i%2; j<=min(k, i*(i-1)/2); j++){
+                dp[a][j] = (dp[a][j-1] + dp[a^1][j])%m;
+                if(j>=i)
+                    dp[a][j] = (dp[a][j]-dp[a^1][j-i]+m)%m;
+            }
+        }
+        return dp[n%2][k];
+    }
+};
 
-/*
-For a better understanding, I would use O(n * k ) space instead of O(k) space. It’s easy to write O(k) space version when you understand this DP process.
-As @awice said in his Post
-
+/* 
 For example, if we have some permutation of 1…4
 
 5 x x x x creates 4 new inverse pairs
@@ -56,26 +108,40 @@ so by deducting the first line from the second line, we have
 dp[n][k+1] = dp[n][k]+dp[n-1][k+1]-dp[n-1][k+1-n]
 
 
+This solution is too slow! 可以转化成方法一:
+Mathematical Proof:
+dp[i][j] = dp[i-1][j] + dp[i-1][j-1] + dp[i-1][j-2] + ......+dp[i-1][j-i+1] as per definition ---(1)
+                        /              /                     /
+But dp[i][j-1] = dp[i-1][j-1] + dp[i-1][j-2] + ....+ dp[i-1][j-i+1] + dp[i-1][j-i] as per definition ---(2)
+
+From (1) and (2)
+
+dp[i][j] = dp[i-1][j] + (dp[i-1][j-1] + ......+dp[i-1][j-i+1]) + dp[i-1][j-i] - dp[i-1][j-i]
+=>dp[i][j] = dp[i-1][j] + (dp[i-1][j-1] + ......+dp[i-1][j-i+1] + dp[i-1][j-i]) - dp[i-1][j-i]
+=>dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-i]
+
 
 */
-class Solution {
 public:
     int kInversePairs(int n, int k) {
-        if(n<=0 || k>n*(n-1)/2) return 0;
-        if(k == n*(n-1)/2 || k == 0) return 1;
-        static const long long m = 1000000007;
-        vector<vector<long long>>dp(2,vector<long long>(k+1));
-        for(int i = 2;i<=n; i++){
-            dp[i%2][0] = 1;
-            for(int j = 1, a = i%2; j<=min(k, i*(i-1)/2); j++){
-                dp[a][j] = (dp[a][j-1] + dp[a^1][j])%m;
-                if(j>=i)
-                    dp[a][j] = (dp[a][j]-dp[a^1][j-i]+m)%m;
+        vector<vector<int>> dp(n + 1, vector<int>(k+1, 0));
+        dp[0][0] = 1;
+        for(int i = 1; i <= n; ++i){
+            for(int j = 0; j < i; ++j){ // In number i, we can create 0 ~ i-1 inverse pairs 
+                for(int m = 0; m <= k; ++m){ //dp[i][m] +=  dp[i-1][m-j]
+                    if(m - j >= 0 && m - j <= k){
+                        dp[i][m] = (dp[i][m] + dp[i-1][m-j]) % mod; 
+                    }
+                }
             }
         }
-        return dp[n%2][k];
+        return dp[n][k];
     }
+private:
+    const int mod = pow(10, 9) + 7;
 };
+
+
 
 
 
@@ -91,7 +157,7 @@ public:
                 dp[i][j] = (dp[i][j-1] + dp[i-1][j]) % mod;
                 if(j - i >= 0){
                     dp[i][j] = (dp[i][j] - dp[i-1][j-i] + mod) % mod; 
-                    //It must + mod, If you don't know why, you can check the case 1000, 1000
+                    //It must + mod, If  don't know why, you can check the case 1000, 1000
                 }
             }
         }
