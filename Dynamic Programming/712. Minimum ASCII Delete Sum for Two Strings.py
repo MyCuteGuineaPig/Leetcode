@@ -38,4 +38,34 @@ class Solution:
                     dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
         result = sum(map(ord, s1 + s2)) - dp[l1][l2] * 2 #不一样减去一样的
         return result
-            
+
+
+
+
+#StefanPochmann: 
+class Solution:
+    def minimumDeleteSum(self, s1: str, s2: str) -> int:
+        a = [0] * (len(s2) + 1)
+        for c in s1:
+            a, b = [0], a
+            for d, x, y, z in zip(s2, b, b[1:], a):  #a会不断增加，然后z会变动
+                a += x + ord(c) if c == d else max(y, z),
+        return sum(map(ord, s1 + s2)) - 2 * a[-1]
+
+class Solution:
+    def minimumDeleteSum(self, s1: str, s2: str) -> int:
+        a = [0] * (len(s2) + 1)
+        for c in s1:
+            a, b = [0], a
+            for d, x, y in zip(s2, b, map(max, b[1:], a)):
+                a += x + ord(c) if c == d else y,
+        return sum(map(ord, s1 + s2)) - 2 * a[-1]
+
+#and a particularly lazy one:
+class Solution:
+    def minimumDeleteSum(self, s1: str, s2: str) -> int:
+        a = [0] * (len(s2) + 1)
+        for c in s1:
+            a, b = [0], a
+            a += (x + ord(c) if c == d else y for d, x, y in zip(s2, b, map(max, b[1:], a)))
+        return sum(map(ord, s1 + s2)) - 2 * a[-1]

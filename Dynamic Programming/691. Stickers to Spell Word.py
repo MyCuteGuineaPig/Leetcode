@@ -47,6 +47,36 @@ class Solution:
 
 
 class Solution:
+    def minStickers(self, stickers: List[str], target: str) -> int:
+        if set(target).difference(*stickers):
+            return -1
+        def ms(target, memo={(): 0}):
+            key = tuple(sorted(target.elements()))
+            if key not in memo:
+                memo[key] = 1 + min(ms(target - s) for s in stickers if min(target) in s)
+            return memo[key]
+        stickers = list(map(collections.Counter, stickers))
+        return ms(collections.Counter(target))
+
+
+# It's even faster to instead use the character that occurs in the fewest stickers. Gets accepted in about 650 ms:
+
+class Solution:
+    def minStickers(self, stickers: List[str], target: str) -> int:
+        if set(target).difference(*stickers):
+            return -1
+        def ms(target, memo={(): 0}):
+            key = tuple(sorted(target.elements()))
+            if key not in memo:
+                c = min(target, key=lambda c: sum(c in s for s in stickers))
+                memo[key] = 1 + min(ms(target - s) for s in stickers if c in s)
+            return memo[key]
+        stickers = list(map(collections.Counter, stickers))
+        return ms(collections.Counter(target))
+
+
+
+class Solution:
     def minStickers(self, stickers, target):
         """
         :type stickers: List[str]
@@ -84,32 +114,56 @@ class Solution:
         return match(dp, mp, target)
                 
 
+
+
+
+from collections import Counter
+from heapq import heappush, heappop
 class Solution(object):
     def minStickers(self, stickers, target):
-        t_count = collections.Counter(target)
-        A = [collections.Counter(sticker) & t_count
-             for sticker in stickers]
+        def get_key(cnt):
+            return "".join(sorted(list(cnt.elements())))
 
-        for i in range(len(A) - 1, -1, -1):
-            if any(A[i] == A[i] & A[j] for j in range(len(A)) if i != j):
-                A.pop(i)
-        dp = collections.defaultdict(lambda: 10**6)
-        dp[""] = 0
+        #The first section just make the available number of stickers smaller
+        #Some stickers will actually have the same results on making the target
+        #Example (1), if target = 'abc', two stickers 'aef' and 'agh' are actually the same thing 
+        #in terms of making the target, so we only need to reserve one sticker
+        #Example (2), if target = 'abc', two stickers 'abf' and 'agh'. We only need to reserve `abf`, 
+        #because whatever 'agh' can contribute, we can use 'abf' to achieve the same result,
+        #or a better one. 
+        target_cnt = Counter(target)
+        stks_cnt = [Counter(sticker) & target_cnt for sticker in stickers]
+        stks_key = [get_key(stk) for stk in stks_cnt]
+        stks_key = sorted(list(set(stks_key)), key = lambda x: -len(x))
+        stks_cnt = []
+        for stk_key in stks_key:
+            sub = False
+            for cnt in stks_cnt:
+                if len(Counter(stk_key) - cnt) == 0:
+                    sub = True
+            if not sub:
+                stks_cnt.append(Counter(stk_key))
+        #The result stks_cnt only contains useful stickers that never give the same results
+        #in the process of making the target. In some cases, only 14 / 50 stickers remained.
         
-        def dfs(t):
-            if t in dp:
-                return dp[t]
-            t_map = collections.Counter(t)
-            for sticker in A:
-                if sticker & t_map:
-                    newstring = ""
-                    for k,v in t_map.items():
-                        if k in sticker and v>sticker[k]:
-                            newstring += k*(v-sticker[k])
-                        elif k not in sticker:
-                            newstring += k*v
-                    dp[t] = min(dp[t], dfs(newstring))
-            dp[t] = dp[t] + (1 if dp[t]!=10**6 else 0)
-            return dp[t]
-        res = dfs(target) 
-        return res if res != 10**6 else -1
+        visited = set()
+        target_key = get_key(target_cnt)
+        
+        #now we have a BFS to search for the minimal number of stickers
+        queue = [(0, target_key)]
+        visited.add(target_key)
+
+        while queue:
+            #Here, I actuall maintain a priority queue in BFS
+            #I just want to get the results as early as possible, 
+            #so I prioritize a new state of shorter length 
+            length, cnt = heappop(queue) 
+            for stk in stks_cnt:
+                res = Counter(cnt) - stk
+                key = get_key(res)
+                if len(key) == 0:
+                    return length + 1
+                elif key not in visited:
+                    visited.add(key)
+                    heappush(queue, (length + 1, key))
+        return -1

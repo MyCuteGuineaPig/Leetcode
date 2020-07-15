@@ -1,54 +1,13 @@
 /*
-691. Stickers to Spell Word
 
-We are given N different types of stickers. Each sticker has a lowercase English word on it.
-
-You would like to spell out the given target string by cutting individual letters from your collection of stickers and rearranging them.
-
-You can use each sticker more than once if you want, and you have infinite quantities of each sticker.
-
-What is the minimum number of stickers that you need to spell out the target? If the task is impossible, return -1.
-
-Example 1:
-
-Input:
-
-["with", "example", "science"], "thehat"
-Output:
-
-3
-Explanation:
-
-We can use 2 "with" stickers, and 1 "example" sticker.
-After cutting and rearrange the letters of those stickers, we can form the target "thehat".
-Also, this is the minimum number of stickers necessary to form the target string.
-Example 2:
-
-Input:
-
-["notice", "possible"], "basicbasic"
-Output:
-
--1
-Explanation:
-
-We can't form the target "basicbasic" from cutting letters from the given stickers.
-Note:
-
-stickers has length in the range [1, 50].
-stickers consists of lowercase English words (without apostrophes).
-target has length in the range [1, 15], and consists of lowercase English letters.
-In all test cases, all words were chosen randomly from the 1000 most common US English words, and the target was chosen as a concatenation of two random words.
-The time limit may be more challenging than usual. It is expected that a 50 sticker test case can be solved within 35ms on average.
-
-
-*/
-
+一个长度为2^T array, array的j位记录此binary number的i位为1的,在target中被set 需要最小sticker数，
+比如target长度为4，array长度为16，j = 5(1001) dp\[5] 表示当第0位和第三位在target中被set 所需最小sticker数 
+ */
 class Solution {
 public:
     int minStickers(vector<string>& stickers, string target) {
         int n = target.size(), N = 1 << n;
-        vector<uint> dp(N, -1); dp[0] = 0;
+        vector<uint> dp(N, -1); dp[0] = 0; //用 vector<int>dp(N, N+1); TLE
         for(int i = 0; i<N; i++){
             if(dp[i]==-1) continue;
             for(auto sticker: stickers){
@@ -96,7 +55,7 @@ public:
                         break;
                     }
                 }
-                if(!has) clean_count.push_back(stickers_count[i]);
+                if(!has) clean_count.push_back(stickers_count[i]);//如果有一眼的unordered_map 就不要添加了
             }
         }
         
@@ -127,7 +86,7 @@ public:
 
 
 /*
-最快接
+最快解
 */
 
 class Solution {
@@ -152,7 +111,7 @@ private:
         }
         int num = 1e6;
         for (const auto& s : v) {
-            if (s.find(t[0]) != -1) {
+            if (s.find(t[0]) != -1) { //如果set_difference == t, 陷入无限循环
                 string n;
                 set_difference(t.begin(), t.end(), s.begin(), s.end(), back_inserter(n));
                 num = min(num, getNum(n, v, dp));
@@ -169,7 +128,7 @@ public:
         unordered_map<string,uint>dp; dp[""] = 0;
         sort(target.begin(),target.end());
         for(string & s: stickers)
-            sort(s.begin(),s.end());
+            sort(s.begin(),s.end()); //比如target 最小是a, 有的sticker 最小是b, 那么肯定需要其他的sticker 才可以组成target
         return helper(dp, stickers, target);
     }
     
@@ -190,41 +149,76 @@ public:
     }
 };
 
+
 class Solution {
 public:
     int minStickers(vector<string>& stickers, string target) {
-        unordered_map<string, int> dp;
-        vector<string> v = stickers;
-        sort(target.begin(), target.end());
-        for (auto& a : v) {
-            sort(a.begin(), a.end());
-        }
+        unordered_map<string, int>dp;
         dp[""] = 0;
-        getNum(target, v, dp);
-        cout<<" dp size "<<dp.size()<<endl;
-        return dp[target] >= 1e6 ? -1 : dp[target];
+        int res = helper(dp, stickers, target);
+        return res == 1000000 ? -1 : res;
     }
-
-private:
-    int getNum(const string& t, const vector<string>& v, unordered_map<string, int>& dp) {
-        cout<<" in target "<<t<<endl;
-        auto it = dp.find(t);
-        if (it != dp.end()) {
-            return it->second;
-        }
-        int num = 1e6;
-        for (const auto& s : v) {
-            if (s.find(t[0]) != -1) {
-                cout<<" find difference "<<s;
-                string n;
-                set_difference(t.begin(), t.end(), s.begin(), s.end(), back_inserter(n));
-                cout<<"  new t "<<n<<endl;
-                num = min(num, getNum(n, v, dp));
-                cout<<" t "<<t<<" after return "<<num<<endl;
+    
+    int helper(unordered_map<string, int>&dp, vector<string>& stickers, const string& cur){
+        if(dp.count(cur))
+            return dp[cur];
+        int res = 1000000;
+        for(auto sticker: stickers){
+            //相当于set difference
+            string nxt;
+            int now = 0;
+            for(int i = 0; i<cur.size(); ++i){
+                for(int j = 0; j< sticker.size(); ++j){
+                    if((now & 1<<j) == 0 && sticker[j] == cur[i]){
+                        now |= 1<<j;
+                        break;
+                    }
+                    else if(j == sticker.size()-1){
+                        nxt += cur[i];
+                    }
+                }
             }
+
+            if(now)
+                res = min(res, helper(dp, stickers, nxt)+1);
         }
-        cout<<" return num "<<num+1<<endl;
-        return dp[t] = ++num;
+        return dp[cur] = res;
     }
 };
 
+
+// Time:  O(T * S^T)
+// Space: O(T * S^T)
+class Solution {
+public:
+    int minStickers(vector<string>& stickers, string target) {
+        int m = stickers.size();
+        vector<vector<int>> mp(m, vector<int>(26, 0));
+        unordered_map<string, int> dp;
+        // count characters a-z for each sticker 
+        for (int i = 0; i < m; i++) 
+            for (char c:stickers[i]) mp[i][c-'a']++;
+        dp[""] = 0;
+        return helper(dp, mp, target);
+    }
+private:
+    int helper(unordered_map<string, int>& dp, vector<vector<int>>& mp, string target) {
+        if (dp.count(target)) return dp[target];
+        int ans = INT_MAX, n = mp.size();
+        vector<int> tar(26, 0);
+        for (char c:target) tar[c-'a']++;
+        // try every sticker
+        for (int i = 0; i < n; i++) {
+            // optimization
+            if (mp[i][target[0]-'a'] == 0) continue; 
+            string s;
+            // apply a sticker on every character a-z
+            for (int j = 0; j < 26; j++) 
+                if (tar[j]-mp[i][j] > 0) s += string(tar[j]-mp[i][j], 'a'+j);
+            int tmp = helper(dp, mp, s);
+            if (tmp!= -1) ans = min(ans, 1+tmp);
+        }
+        dp[target] = ans == INT_MAX? -1:ans;
+        return dp[target];
+    }
+};
