@@ -1,24 +1,10 @@
 /*
-689. Maximum Sum of 3 Non-Overlapping Subarrays
+ W记录每个点往后k个sum, left, right记录到j点左面和右面最大k个sum的index, 这样可以O(n) 完成
 
-In a given array nums of positive integers, find three non-overlapping subarrays with maximum sum.
 
-Each subarray will be of size k, and we want to maximize the sum of all 3*k entries.
+因为是3个non overlapping, 可以用这种sliding window的方法，如果是4个，就不行了
 
-Return the result as a list of indices representing the starting position of each interval (0-indexed). If there are multiple answers, return the lexicographically smallest one.
-
-Example:
-Input: [1,2,1,2,6,7,5,1], 2
-Output: [0, 3, 5]
-Explanation: Subarrays [1, 2], [2, 6], [7, 5] correspond to the starting indices [0, 3, 5].
-We could have also taken [2, 1], but an answer of [1, 3, 5] would be lexicographically larger.
-Note:
-nums.length will be between 1 and 20000.
-nums[i] will be between 1 and 65535.
-k will be between 1 and floor(nums.length / 3).
-
-*/
-
+ */
 
 
 class Solution {
@@ -57,9 +43,261 @@ public:
 
 /*
 
-            7   13   20   19   19   2   10   1   1   19
+            7   13   20   19   19   2   10   1   1   19   k = 3
     W       40  52   58   40   31   13  12   21 
     left    0   1    2    2    2    2   2    2 
     right   2   2    2    3    4    7   7    7 
 
 */
+
+
+
+//2020 
+class Solution {
+public:
+    vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<vector<int>>left(n,vector<int>(2,0)); //[i][0] 不算nums[i] 左侧最大sum 和起始index
+        vector<vector<int>>right(n,vector<int>(2,0)); //[i][0] 不算nums[i] 右侧最大sum 和起始index
+        for(int i = 0, cur = 0, leftmax = 0, index = 0; i<nums.size(); ++i){
+            if(i >= k){
+                if(cur > leftmax){
+                    leftmax = cur;
+                    index = i - k;
+                }
+                left[i] = {leftmax, index};
+                cur -= nums[i-k];
+            }
+            cur += nums[i];
+        }
+
+        for(int i = n-1, cur = 0, rightmax = 0, index = 0; i>=0; --i){
+            if(i < n - k){
+                if(cur >= rightmax){ //注意是大于等于
+                    rightmax = cur;
+                    index = i + 1;
+                }
+                right[i] = {rightmax, index};
+                cur -= nums[i+k];
+            }
+            cur += nums[i];
+        }
+        
+        vector<int>res;
+        for(int i = k, cur = 0, totmax = 0; i<nums.size()-k; ++i){
+            cur += nums[i];
+            if(i >= 2*k -1){
+                if(left[i-k+1][0] + right[i][0] + cur > totmax){     //  x  x x | 1 2 3 | x x  x 
+                    totmax = left[i-k+1][0] + right[i][0] + cur;    //          |     i |
+                    res = {left[i-k+1][1], i-k+1, right[i][1]};                 | i-k+1
+                }
+                cur-=nums[i-k+1];
+            }
+        }
+        return res;
+    }
+};
+
+
+
+/**
+  Idea is similar to stock purchasing
+    
+  maxSum[i][j]: 当有i个non-overlapping subarrays j 个数, 当前最大的sum
+  pos[i][j]:   当有i个non-overlapping subarrays j 个数, 当前最大的sum 第j个interval 的起始index
+  sum[j]:  nums[j-k: j-1] 的sum
+
+if maxSum[i-1][j-k] + sum[j] > tot: 前一个i-1 个nonoverlapping 的最大sum, 加上当前sum[j] 大于 tot;
+    更新tot 和 pos
+
+  e.g   [1,2,1,2,6,7,5,1], 2
+
+Index   0   1   2   3   4   5   6   7
+        1   2   1   2   6   7   5   1
+ sum        0   3   3   3   8  13  12 , 6       
+ i = 1
+ maxSum[1]  0   3   3   3   8  13  13  13 
+ pos[1]     0   0   0   0   3   4   4   4
+ i = 2, 
+ maxSum[2]              6, 11  16  20  20 
+ pos[2]              2  2   3   4   5   5
+ i = 3                      
+ maxSum[3]                      19  23  23
+ pos[2]                      4   4   5   5 
+
+
+ */
+class Solution {
+public:
+    vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        int m = 3;
+        
+        vector<vector<int>>maxSum(m+1, vector<int>(n+1,0));
+        vector<vector<int>>pos(m+1, vector<int>(n+1,0));
+        vector<int>sum(n+1, 0); 
+        
+        for(int i = 0, cur = 0; i<nums.size(); ++i){
+            cur += nums[i];
+            if(i >= k-1){
+                sum[i+1] = cur;
+                cur -= nums[i-k+1];
+            }
+        }
+        
+        for(int i = 1; i<=m; ++i){
+            int tot = sum[i*k] + maxSum[i-1][i*k-k];
+            pos[i][i*k-1] = i*k - k; //需要更新[i*k-1], 因为pos[i][j] = pos[i][j-1]; 
+            // 比如[1,2,1,2,1,2,1,2,1], 2,  tot 一直等于3, 不会更新tot, 和 pos[i][j] = j - k;, 
+            
+            for(int j = i*k; j<=n; ++j){
+                if(maxSum[i-1][j-k] + sum[j] > tot){
+                    tot = maxSum[i-1][j-k] + sum[j];
+                    maxSum[i][j] = tot;
+                    pos[i][j] = j - k;
+                }
+                else{
+                    maxSum[i][j] = tot;
+                    pos[i][j] = pos[i][j-1];
+                }
+            }
+        }
+
+        vector<int>res(m);
+        for(int i = m-1, cur = n; i>=0; --i){
+            res[i] = pos[i+1][cur]; // 从pos[m][n] 开始, 最后一个interval 起点是res[i]
+            cur = res[i];
+        }
+            
+        return res;
+    }
+};
+
+
+class Solution {
+public:
+    vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        int m = 3;
+        
+        vector<vector<int>>maxSum(m+1, vector<int>(n+1,0));
+        vector<vector<int>>pos(m+1, vector<int>(n+1,0));
+        vector<int>sum(n+1, 0); 
+        
+        for(int i = 0, cur = 0; i<nums.size(); ++i){
+            cur += nums[i];
+            if(i >= k-1){
+                sum[i+1] = cur;
+                cur -= nums[i-k+1];
+            }
+        }
+
+        for(int i = 1; i<=m; ++i){
+            for(int j = i*k; j<=n; ++j){
+                
+                if(maxSum[i-1][j-k] + sum[j] > maxSum[i][j-1]){
+                    maxSum[i][j] = maxSum[i-1][j-k] + sum[j];
+                    pos[i][j] = j - k;
+                }
+                else{
+                    maxSum[i][j] = maxSum[i][j-1];
+                    pos[i][j] = pos[i][j-1];
+                }
+            }
+        }
+        vector<int>res(m);
+        for(int i = m-1, cur = n; i>=0; --i){
+            res[i] = pos[i+1][cur];
+            cur = res[i];
+        }
+ 
+        return res;
+    }
+};
+
+
+//A greedy solution using three sliding windows where you keep track of the best indexes/sums as you go.
+//Many people solved this problem using DP. But just three pointer is enough. It is quite good and underrated solution :)
+
+/*
+
+sum[0], sum[1], sum[2] 不会overlap
+因为sum[0], sum[1], sum[2] 全是一起Move, 隔开的，即使全部更新，也不会有overlap
+    因为idx[0][0] >= idx[1][0], 可能更新max_sum0, 不更新max_sum1
+       idx [1][1] >= idx[2][1], idx[1][0] >= idx[2][0], 可能更新max_sum1, 不更新max_sum2
+
+         2 1 2 | 3 1 2 | 5 2 1 | 2 1 7   IDX  
+  sum[0]     5 |       |       |          0
+  sum[1]       |     6 |       |          0  3
+  sum[2]       |             8 |          0  3  6
+移动一位
+  sum[0]       | 6      |       |         1
+  sum[1]       |        | 8     |         1  4
+  sum[2]       |        |       |5        0  3  6
+移动一位
+  sum[0]       |    6   |       |         1
+  sum[1]       |        |   9   |         1  5
+  sum[2]       |        |       |   5     0  3  6
+移动一位
+  sum[0]       |       6|       |         1
+  sum[1]       |        |     8 |         1  5
+  sum[2]       |        |       |     10  1  5  9
+  
+
+ */
+class Solution {
+public:
+        vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        // sum[k]: records the current kth subarray sum
+        // max_sum[k]: records the max sum of 0th, ..., kth subarray sum 
+        vector<int> sum(3, 0), max_sum(3, 0);
+        vector<vector<int>> idx(3, vector<int>(3, 0));
+        
+        // records the index
+        idx[0] = vector<int>{0};
+        idx[1] = vector<int>{0, k};
+        idx[2] = vector<int>{0, k, 2*k};
+        
+        // init the sum
+        sum[0] = accumulate(nums.begin(), nums.begin() + k, 0);
+        sum[1] = accumulate(nums.begin() + k, nums.begin() + 2*k, 0);
+        sum[2] = accumulate(nums.begin() + 2*k, nums.begin() + 3*k, 0);
+        
+        // init the max_sum
+        max_sum[0] = sum[0];
+        max_sum[1] = sum[0] + sum[1];
+        max_sum[2] = sum[0] + sum[1] + sum[2];
+        
+        for (int i = 1; i <= n - 3*k; ++i) {
+            // update current sum
+            sum[0] += nums[i+k-1] - nums[i-1];
+            sum[1] += nums[i+2*k-1] - nums[i+k-1];
+            sum[2] += nums[i+3*k-1] - nums[i+2*k-1];
+            
+            // update max_sum[0] and idx[0] if possible
+            if (sum[0] > max_sum[0]) {
+                max_sum[0] = sum[0];
+                idx[0][0] = i;
+            }
+            
+            // update max_sum[1] and idx[1] if possible
+            if (sum[1] + max_sum[0] > max_sum[1]) {
+                max_sum[1] = sum[1] + max_sum[0];
+                idx[1][0] = idx[0][0];
+                idx[1][1] = i+k;
+            }
+            
+            // update max_sum[2] and idx[2] if possible
+            if (sum[2] + max_sum[1] > max_sum[2]) {
+                max_sum[2] = sum[2] + max_sum[1];
+                idx[2][0] = idx[1][0];
+                idx[2][1] = idx[1][1];
+                idx[2][2] = i + 2*k;
+            }
+        }
+        
+        return idx[2];
+    }
+
+};

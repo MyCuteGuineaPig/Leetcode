@@ -1,28 +1,4 @@
-/*
-688. Knight Probability in Chessboard
 
-On an NxN chessboard, a knight starts at the r-th row and c-th column and attempts to make exactly K moves. 
-The rows and columns are 0 indexed, so the top-left square is (0, 0), and the bottom-right square is (N-1, N-1).
-
-A chess knight has 8 possible moves it can make, as illustrated below. Each move is two squares in a cardinal direction, 
-then one square in an orthogonal direction.
-
-
-Each time the knight is to move, it chooses one of eight possible moves uniformly at random 
-(even if the piece would go off the chessboard) and moves there.
-
-The knight continues moving until it has made exactly K moves or has moved off the chessboard. 
-Return the probability that the knight remains on the board after it has stopped moving.
-
-Example:
-Input: 3, 2, 0, 0
-Output: 0.0625
-Explanation: There are two moves (to (1,2), (2,1)) that will keep the knight on the board.
-From each of those positions, there are also two moves that will keep the knight on the board.
-The total probability the knight stays on the board is 0.0625.
-
-
-*/
 class Solution {
 public:
     double knightProbability(int N, int K, int r, int c) {
@@ -78,3 +54,32 @@ public:
     }
     
 };
+
+
+
+class Solution {
+public:
+    vector<vector<int>>move = {{-2,-1}, {-2,1}, {-1,-2},{-1,2}, {1,-2},{1,2},{2,-1},{2,1}};
+    double knightProbability(int N, int K, int r, int c) {
+        vector<vector<vector<double>>>dp(K+1, vector<vector<double>>(N, vector<double>(N,-1)));
+        return topDown(dp, N, K, r,c);
+    }
+    
+    double topDown(vector<vector<vector<double>>>&dp, int N, int K, int i, int j){
+        if(i<0 || i>=N || j<0 || j>=N )
+            return 0;
+        if(K == 0)
+            return 1.0;
+        if(dp[K][i][j] >= 0)
+            return dp[K][i][j];
+        
+        double res = 0;
+        for(auto m: move){
+            int x = i + m[0];
+            int y = j + m[1];
+            res += topDown(dp,N, K-1, x, y) / 8;
+        }
+        return dp[K][i][j] = res;
+    }
+};
+
