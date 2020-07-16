@@ -68,6 +68,7 @@ class Solution:
                                
         return sum(dp[(n-1)%3][0])%M
 
+#Method 2
 class Solution:
     def countPalindromicSubsequences(self, S):
         """
@@ -102,3 +103,25 @@ class Solution:
                     dp[i][j] = dp[i+1][j] + dp[i][j-1] - dp[i+1][j-1]
                 dp[i][j] = dp[i][j]%M
         return dp[0][n-1]
+
+
+# Method 3
+class Solution(object):
+    def countPalindromicSubsequences(self, S):
+        M = 1000000007
+        def DFS(start, end, mem={}):
+            if (start, end) in mem: return mem[(start, end)]
+            
+            count = 0
+            s = S[start:end+1]
+            for x in 'abcd':
+                try:
+                    i = s.index(x) + start
+                    j = s.rindex(x) + start
+                except:
+                    continue
+                    
+                count += DFS(i+1, j-1, mem) + 2 if i!=j else 1
+            mem[(start, end)] = count % M
+            return mem[(start, end)]
+        return DFS(0, len(S)-1)
