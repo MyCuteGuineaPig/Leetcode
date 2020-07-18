@@ -1,71 +1,4 @@
 /*
-764. Largest Plus Sign
-
-In a 2D grid from (0, 0) to (N-1, N-1), every cell contains a 1, except those cells in the given list mines which are 0. 
-What is the largest axis-aligned plus sign of 1s contained in the grid? Return the order of the plus sign. If there is none, return 0.
-
-An "axis-aligned plus sign of 1s of order k" has some center grid[x][y] = 1 along with 4 arms of length k-1 going up, 
-down, left, and right, and made of 1s. 
-This is demonstrated in the diagrams below. Note that there could be 0s or 1s beyond the arms of the plus sign, 
-only the relevant area of the plus sign is checked for 1s.
-
-Examples of Axis-Aligned Plus Signs of Order k:
-
-Order 1:
-000
-010
-000
-
-Order 2:
-00000
-00100
-01110
-00100
-00000
-
-Order 3:
-0000000
-0001000
-0001000
-0111110
-0001000
-0001000
-0000000
-Example 1:
-
-Input: N = 5, mines = [[4, 2]]
-Output: 2
-Explanation:
-11111
-11111
-11111
-11111
-11011
-In the above grid, the largest plus sign can only be order 2.  One of them is marked in bold.
-Example 2:
-
-Input: N = 2, mines = []
-Output: 1
-Explanation:
-There is no plus sign of order 2, but there is of order 1.
-Example 3:
-
-Input: N = 1, mines = [[0, 0]]
-Output: 0
-Explanation:
-There is no plus sign, so return 0.
-Note:
-
-N will be an integer in the range [1, 500].
-mines will have length at most 5000.
-mines[i] will be length 2 and consist of integers in the range [0, N-1].
-(Additionally, programs submitted in C, C++, or C# will be judged with a slightly smaller time limit.)
-
-
-*/
-
-
-/*
 Table like this:  
 11111
 11111
@@ -95,17 +28,18 @@ public:
     int orderOfLargestPlusSign(int N, vector<vector<int>>& mines) {
         unordered_map<int,unordered_set<int>>Banned;
         for_each(mines.begin(),mines.end(),[&](auto mine){Banned[mine[0]].insert(mine[1]);});
+        
         vector<vector<int>>dp(N, vector<int>(N));
         for(int i = 0; i<N; i++){
             int count = 0;
-            for(int j = 0; j<N; j++){
-                if(Banned.count(i) == 0 || Banned[i].count(j) == 0)count++;
+            for(int j = 0; j<N; j++){//从左到右
+                if(Banned.count(i) == 0 || Banned[i].count(j) == 0)count++; 
                 else count = 0;
                 dp[i][j] = count;
             } 
             
             count = 0;
-            for(int j = N-1; j>=0; j--){
+            for(int j = N-1; j>=0; j--){ //从右到左
                 if(Banned.count(i) == 0 || Banned[i].count(j) == 0)count++;
                 else count = 0;
                 if (count<dp[i][j]) 
@@ -115,7 +49,7 @@ public:
         int res = 0;
         for(int j = 0; j<N; j++){
             int count = 0;
-            for(int i = 0; i<N; i++){
+            for(int i = 0; i<N; i++){ //从上到下
                 if(Banned.count(i) == 0 || Banned[i].count(j) == 0)count++;
                 else count = 0;
                 if (count<dp[i][j]) 
@@ -123,7 +57,7 @@ public:
             } 
             
             count = 0;
-            for(int i = N-1; i>=0; i--){
+            for(int i = N-1; i>=0; i--){ //从下到上
                 if(Banned.count(i) == 0 || Banned[i].count(j) == 0)count++;
                 else count = 0;
                 if (count<dp[i][j]) 
@@ -198,5 +132,66 @@ public:
         
         return res;
         
+    }
+};
+
+/*
+
+Method 2:
+
+- Iterate over mines of each row:  -1, N 也加进去
+- For each mines, 只考虑open spaces between mine and those that lead to a larger plus sign, 
+    比如已经有res =  2 and mine 在 positition 1 和 8， 只考虑position 4 和 5
+- for each position condersiding as a center, already know how far the plus sign can extend in that row, 
+   只要再找 how far it can extend in the column binary search the list of mines in that column
+    to find the closest one above and below.
+
+
+The fact that we only consider open positions that could lead to larger plus signs allows us to 
+    skip a large amount of computation in most practical cases.
+     
+The fact that the number of mines is very small compared to the grid size makes a solution 
+where we "iterate over mines" and "binary search over lists of mines" very efficient.
+
+
+
+ */
+
+class Solution {
+public:
+    int orderOfLargestPlusSign(int N, vector<vector<int>>& mines) {
+        vector<vector<int>>rows(N);
+        vector<vector<int>>cols(N);
+        for(int i = 0; i<N; ++i){
+            rows[i] = {-1,N};
+            cols[i] = {-1,N};
+        }
+        for(auto mine: mines){
+            rows[mine[0]].push_back(mine[1]);
+            cols[mine[1]].push_back(mine[0]);
+        }
+        for(int i = 0; i<N; ++i){
+            sort(rows[i].begin(), rows[i].end());
+            sort(cols[i].begin(), cols[i].end());
+        }
+        
+        int res = 0;
+        for(int i = 0; i<N; ++i){
+            for(int j = 0; j<rows[i].size()-1; ++j){
+                int left = rows[i][j];
+                int right = rows[i][j+1];
+                for(int k = left + res + 1; k<right-res; ++k){
+                    auto idx = upper_bound(cols[k].begin(), cols[k].end(), i);
+                    int bottom = *idx; //大于i行的
+                    int up = *(idx-1);
+                    res = max(res, min(min(min(k-left, right-k), bottom -i), i -up) );
+                }
+                
+            }
+            
+            
+        }
+        
+        return res;
     }
 };
