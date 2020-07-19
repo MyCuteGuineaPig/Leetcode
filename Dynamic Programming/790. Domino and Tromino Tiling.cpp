@@ -194,7 +194,7 @@ public:
         r.push_back({1, 0, 0});
         r.push_back({0, 1, 1});
         r = power(r, N - 2); //N 是从3开始
-        return (r[0][0] * 2 + r[0][1] + r[0][2]) % M;  //f(2) = 2, f(1) = 1, g(i) = 1
+        return (r[0][0] * 2 + r[0][1] + r[0][2]) % M;  //f(2) = 2, f(1) = 1, g(1) = 1
     }
     
     vector<vector<ll>> power(vector<vector<ll>>& x, int n) {
