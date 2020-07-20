@@ -1,30 +1,9 @@
 /*
-805. Split Array With Same Average
-In a given integer array A, we must move every element of A to either list B or list C. 
-(B and C initially start empty.)
-
-Return true if and only if after such a move, it is possible that the average value of B is equal to the average value of C, 
-and B and C are both non-empty.
-
-Example :
-Input: 
-[1,2,3,4,5,6,7,8]
-Output: true
-Explanation: We can split the array into [1,4,5,8] and [2,3,6,7], and both of them have the average of 4.5.
-Note:
-
-The length of A will be in the range [1, 30].
-A[i] will be in the range of [0, 10000].
-
-*/
-
-
-/*
   totalSum/n = Asum/k = Bsum/(n-k), where k = A.size() and 1 <= k <= n/2;
   Asum = totalSum*k/n, which is an integer. So we have totalSum*k%n == 0;
   不要求 Asum, 和 Bsum一样, 只要totalSum*k%n == 0  --》 totalSum*(n-k)%n == 0;
 
-If totalSumk%n == 0, totalSum(n-k)%n must == 0, because totalSumn%n == 0 and totalSumk + totalSum*(n-k) == totalSum*n
+If totalSum*k%n == 0, totalSum*(n-k)%n must == 0, because totalSumn%n == 0 and totalSum*k + totalSum*(n-k) == totalSum*n
 */
 
 class Solution {
