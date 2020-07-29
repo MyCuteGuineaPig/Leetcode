@@ -1,37 +1,27 @@
 /*
-818. Race Car
 
-Your car starts at position 0 and speed +1 on an infinite number line.  (Your car can go into negative positions.)
+if i=2^n-1, dp[i]=n, 
 
-Your car drives automatically according to a sequence of instructions A (accelerate) and R (reverse).
+else 2^(n-1)-1<i<2^n-1, 两种方法到达i,
+   - 先用n 步到 2^n-1 first, change direction + 1(R), total = n + 1 steps
+     剩下的步数等于 dp[2^n-1-i]
 
-When you get an instruction "A", your car does the following: position += speed, speed *= 2.
+   -  先用 n-1 A 到 2^(n-1)-1 first, then R to change the direction,
+      再用 m 个 A go backward (m 个A,走了2^(n-1)-1), 再用 R change direction again to move forward, 
+      by here there are n-1+2+m=n+m+1 operations (n-1 A, two R, m A) , 
+      current position is 2^(n-1)-1-(2^m-1)=2^(n-1)-2^m, 
+      剩下的步数等于 dp[i-(2^(n-1)-1)+(2^m-1)]=dp[i-2^(n-1)+2^m)].
 
-When you get an instruction "R", your car does the following: if your speed is positive then speed = -1 , otherwise speed = 1.  (Your position stays the same.)
 
-For example, after commands "AAR", your car goes to positions 0->1->3->3, and your speed goes to 1->2->4->-1.
 
-Now for some target position, say the length of the shortest sequence of instructions to get there.
+dp[i] = min(n + 1 + dp[(1 << n)-1 - i], n-1+2+k+dp[i-((1 << (n-1)) - (1 << k))] for j in [0,n] ), 
+   -  n + 1 + dp[(1 << n)-1 - i]是先到2^n-1的用n步, +1是做reverse(停)
+   -  n-1+2+k+dp\[i-((1 << (n-1)) - (1 << k))] 是先到之前2^(n-1)-1的点, 接着+1做reverse(停),然后往回走(2^k-1)点，+1做reverse(停)，再从那个点到点i
 
-Example 1:
-Input: 
-target = 3
-Output: 2
-Explanation: 
-The shortest instruction sequence is "AA".
-Your position goes from 0->1->3.
-
-Example 2:
-Input: 
-target = 6
-Output: 5
-Explanation: 
-The shortest instruction sequence is "AAARA".
-Your position goes from 0->1->3->7->7->6.
 
          0     1  2  3  4  5  6  7  8  9  10  11  12   13  14   15
          0     1  4 |2| 5  7  5 |3| 6  8                9   6  |4|
- speeed        2  1  4    -2 -1  6     
+speeed         2  1  4    -2 -1  6     
   
        0  1  3   3   3   4
 speed  1  2  4  -1   1   2
@@ -42,51 +32,35 @@ speed  1  2  4  -1   1   2
 */
 
 /*
-1 + 2 + 4 + ... + 2 ^ (n-1) = 2 ^ n - 1
-
-Consider two general cases for number i with bit_length n.
-
-1.  i==2^n-1, this case, n is the best way
-2. 2^(n-1)-1<i<2^n-1, there are two ways to arrive at i:
-   - Use n A to arrive at 2^n-1 first, then use R to change the direction, 
-     by here there are n+1 operations (n A and one R),
-      then the remaining is same as dp[2^n-1-i]
-   -  Use n-1 A to arrive at 2^(n-1)-1 first, then R to change the direction,
-      use m A to go backward, then use R to change the direction again to move forward, 
-      by here there are n-1+2+m=n+m+1 operations (n-1 A, two R, m A) , 
-      current position is 2^(n-1)-1-(2^m-1)=2^(n-1)-2^m, 
-      the remaining operations is same as dp[i-(2^(n-1)-1)+(2^m-1)]=dp[i-2^(n-1)+2^m)].
-
-
-Why dp in this way?
-
-I first think the dp way should be:
-
-dp[i] = min(n+1+dp[2**n-1-i], n-1+2+dp[i-2**(n-1)+1])
-But it's wrong, look at the (n-1) A case, we do A for (n-1) times, then do two R, then the situation is the same as dp[i-2**(n-1)+1].
- This can be larger than the actual min operations since, there may be redundant R operations, 
- we can combine RR operation with the remaining (2**(n-1)-1) to i path. 
- So we use m to go backward between the two R operations and count the remaining (2^(n-1)-2^m) to i path to include the combining situation.
-
-For example:
-
-target = 5
-
-The right answer should be AARARAA, positions: 0, 1, 3, 3, 2, 2, 3, 5
-But if we use the above formula, the answer is AA (0->3) RR (make speed at 1 again) AARA (3->5)
-
-We can move the last A to the middle of RR, so that we save an operation. That's where the combine can happen.
-So we do dp by adding m A between the RR and add the # operations for remaining distance.
-
-If you have better explanation, please let me know. Thanks.
-
-
-
-*/
-
-/*
 Bottom-up DP:
 */
+
+class Solution {
+public:
+    int racecar(int target) {
+    vector<int>dp(target + 1);
+    
+    for (int i = 1; i <= target; i++) {
+        dp[i] = numeric_limits<int>::max();
+        
+        int m = 1, j = 1;  //前进m个A 到 J, 再后退 q 个 A 到 p
+        
+        for (; j < i; j = (1 << ++m) - 1) {
+            for (int q = 0, p = 0; p < j; p = (1 << ++q) - 1) {
+                dp[i] = min(dp[i], m + 1 + q + 1 + dp[i - (j - p)]);
+            }
+        }
+        
+        dp[i] = min(dp[i], m + (i == j ? 0 : 1 + dp[j - i]));
+    }
+    
+    return dp[target];
+    }
+};
+
+
+
+
 class Solution {
 public:
     int racecar(int target) {
@@ -103,6 +77,56 @@ public:
                 dp[i] = min(dp[i], n-1+2+k+dp[i-((1<<(n-1)) - (1<<k))]);
         }
         return dp[target];
+    }
+};
+
+
+class Solution {
+public:
+    int racecar(int target) {
+        if(target == 1)
+            return 1;
+
+        vector<int>dp(target+1,target+1);
+        for(int i = 1, n = 1; i<=target;++i){
+            if( i == (1 << n) - 1){
+                dp[i] = n++;
+                
+            }
+            else{
+                dp[i] = n + 1 + dp[(1<<n)- 1 - i];
+                for(int j = 0; j <= n-1 ; ++j){
+                    dp[i] = min(dp[i], n-1  +  j + 2 + dp[ i-(1<<n-1)+ (1<<j) ]); //(1<<n-1) 先算 n-1 再算 << 
+                }
+            }
+        }
+        return dp[target];
+    }
+};
+
+
+//topDown
+class Solution {
+public:
+    int racecar(int target) {
+        vector<int>dp(target+1, 0);
+        return topDown(dp, target);
+    }
+    
+    int topDown(vector<int>&dp, int i){
+        if(i == 1)
+            return 1;
+        if(dp[i] > 0)
+            return dp[i];
+        
+        int N = log2(i) + 1;
+        if (i == (1 <<N) -1 )
+            return dp[i] = N;
+        
+        dp[i] = N+1 + topDown(dp, (1<<N)-1-i);
+        for(int j = 0; j<N; ++j)
+            dp[i] = min(dp[i], N-1 + j + 2 + topDown(dp, i - (1<<(N-1)) + (1 << j)));
+        return dp[i];
     }
 };
 
@@ -163,4 +187,49 @@ private:
         return left;
     }
 };
+
+
+
+
+
+class Solution {
+public:
+    int racecar(int target) {
+        if(target == 1)
+            return 1;
+        int step = 0;
+        queue<vector<int >>q; //0 is position, 1 is speed
+        q.push({0,1});
+        unordered_map<int,unordered_map<int,int>>visited;//0 is position, 1 is speed
+        
+        while(!q.empty())
+        {
+            ++step;
+            int size = q.size();
+            for(int z = 0; z<size; ++z){
+                vector<int >cur = q.front(); q.pop();
+                int point = cur[0], speed = cur[1];
+                
+                if(point + speed == target)
+                    return step;
+                
+                if(point + speed > 0 && point + speed < (target << 1) && visited[point+speed][speed*2] == 0){
+                    q.push({point+speed, speed*2});
+                    visited[point+speed][speed*2] = 1;
+                }
+                
+                if(speed > 0 && visited[point][-1] == 0){
+                    q.push({point, -1});
+                    visited[point][-1] = 1;
+                }
+                else if(speed < 0 && visited[point][1] == 0){
+                    q.push({point, 1});
+                    visited[point][1] = 1;
+                }
+            }
+        }
+        return -1;
+    }
+};
+
 

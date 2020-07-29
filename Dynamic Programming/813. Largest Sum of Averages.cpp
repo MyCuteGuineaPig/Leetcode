@@ -1,40 +1,21 @@
 /*
-813. Largest Sum of Averages
-
-
-What is the largest score we can achieve?
-
-Note that our partition must use every number in A, and that scores are not necessarily integers.
-
-Example:
-Input: 
-A = [9,1,2,3,9]
-K = 3
-Output: 20
-Explanation: 
-The best choice is to partition A into [9], [1, 2, 3], [9]. The answer is 9 + (1 + 2 + 3) / 3 + 9 = 20.
-We could have also partitioned A into [9, 1], [2], [3, 9], for example.
-That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
- 
-
-Note:
-
-1 <= A.length <= 100.
-1 <= A[i] <= 10000.
-1 <= K <= A.length.
-Answers within 10^-6 of the correct answer will be accepted as correct.
-
-
-*/
-
-
-/*
 dp[k][i] 表示在A[:i] 中最多分k次 所得的平均数最大和
 dp[k][i] = max(dp[k][i], dp[k-1][j] + (sum[i]-sum[j])/(i-j)) 
 
 (sum[i]-sum[j])/(i-j) 是从(j,i] 的平均数, 
 dp[k-1][j] k-1次partition A[0:j] 平均数最大和
 循环j比较sum of k-1 partition dp[k-1][j] and new added average 
+
+
+比如  [9, 1, 2, 9, 2,3, 4] 可以分成4 分
+
+k = 3 时
+      [9, 1, 2, 9, 2,3] 时候
+       (1) (2 ) (3    )
+
+k = 4 时:  dp = dp[k][3] + (sum(6) - sum(3))/3
+      [9, 1, 2, 9,  | 2 ,3， 4] 
+       (1) (2 ) (3)  （4    ）
 */
 
 
@@ -52,8 +33,8 @@ public:
         }
          
         for(int k = 1; k<K; k++){
-            for(int i = k; i<n; i++){
-                for(int j = k-1; j<i; j++){
+            for(int i = k; i<n; i++){  // 长度是 len = k + 1, 所以必须至少需要 k + 1 个数, 起点是 k
+                for(int j = k-1; j<i; j++){ // len = k + 1. sum[k-1] 表示 长度为前len -1 个数和,
                     dp[k][i] = max(dp[k][i], dp[k-1][j] + (sum[i]-sum[j])/(i-j));
                 }   
             }
@@ -68,24 +49,61 @@ public:
    
     double largestSumOfAverages(vector<int>& A, int K) {
         int n = A.size();
-        vector<vector<double>>dp(n,vector<double>(n,0.0));
+        vector<int>sum(n);
         
-        vector<double>sum(n); sum[0] =dp[0][0]  =  A[0];
-        for(int i = 1;i<n; i++){
-            sum[i] = sum[i-1] + A[i];
-            dp[0][i] = sum[i]/(i+1);
-        }
-         
-        for(int k = 1; k<K; k++){
-            for(int i = k,index = k%2; i<n; i++){
-                for(int j = k-1; j<i; j++){
-                    dp[index][i] = max(dp[index][i], dp[index^1][j] + (sum[i]-sum[j])/(i-j));
-                }   
+        for (int i = 0;i < n; i++) 
+            sum[i] = A[i] + (i > 0 ? sum[i-1] : 0); 
+        
+        vector<vector<double>>dp(K+1, vector<double>(n));
+
+        for (int groups = 1; groups <= K; groups++) {
+            for (int s = 0; s + groups <= n; s++) {
+                if (groups == 1) {
+                    dp[groups][s] = ((double)(sum[n-1] - sum[s] + A[s]) / (n-s));
+                    //sum[n-1] - sum[s] 没有算 A[s] 所以加上A[s]
+                    continue;
+                }
+                for (int e = s; e + groups <= n; e++) {
+                    dp[groups][s] = max(dp[groups][s], (dp[groups-1][e+1] + (double) (sum[e] - sum[s] + A[s]) / (e - s + 1)));
+                }
             }
         }
-        return dp[K%2^1][n-1];
+        return dp[K][0];
     }
+    
 };
+
+//O(n) space
+
+class Solution {
+public:
+   
+    double largestSumOfAverages(vector<int>& A, int K) {
+        int n = A.size();
+        vector<int>sum(n);
+        
+        for (int i = 0;i < n; i++) 
+            sum[i] = A[i] + (i > 0 ? sum[i-1] : 0); 
+        
+        vector<double>dp(n);
+
+        for (int groups = 1; groups <= K; groups++) {
+            for (int s = 0; s + groups <= n; s++) {
+                if (groups == 1) {
+                    dp[s] = ((double)(sum[n-1] - sum[s] + A[s]) / (n-s));
+                    //sum[n-1] - sum[s] 没有算 A[s] 所以加上A[s]
+                    continue;
+                }
+                for (int e = s; e + groups <= n; e++) {
+                    dp[s] = max(dp[s], (dp[e+1] + (double) (sum[e] - sum[s] + A[s]) / (e - s + 1)));
+                }
+            }
+        }
+        return dp[0];
+    }
+    
+};
+
 
 
 /*
@@ -117,4 +135,32 @@ public:
         }
         return dp[k][n-1];
     }
+};
+
+
+
+// 2020 Top-Down
+class Solution {
+public:
+   
+    double largestSumOfAverages(vector<int>& A, int K) {
+        int n = A.size();
+        vector<vector<double>>dp(n,vector<double>(n,-1));
+        
+        vector<double>sum(n); sum[0] =dp[0][0]  =  A[0];
+        for(int i = 1;i<n; i++){
+            sum[i] = sum[i-1] + A[i];
+            dp[0][i] = sum[i]/(i+1);
+        }
+        return topDown(A, dp, sum, K-1, A.size()-1);
+    }
+         
+        double topDown(vector<int>& A, vector<vector<double>>&dp,  vector<double>&sum, int k, int i){
+            if(dp[k][i]>=0)
+                return dp[k][i];
+            for(int l = k-1; l<=i; ++l)
+                dp[k][i] = max(dp[k][i], (sum[i]-sum[l])/(i-l) +topDown(A, dp, sum, k-1, l));
+            return dp[k][i];
+        }
+    
 };
