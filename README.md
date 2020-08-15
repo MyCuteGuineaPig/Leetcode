@@ -1115,7 +1115,14 @@ DFS 是看有没有path，DP是看有几个path
 | [877. Stone Game](https://leetcode.com/problems/stone-game/) | _O(n^2)_ |	_O(n)_	| Medium | Strategy |
 | [879. Profitable Schemes](https://leetcode.com/problems/profitable-schemes/) | _O(n\*g\*p)_ |	_O(g\*p)_	| Hard | 💜🎅 |
 | [903. Valid Permutations for DI Sequence](https://leetcode.com/problems/valid-permutations-for-di-sequence/) | _O(n^2)_ |	_O(n)_	| Hard | 💜🎅🎅 |
-| [1035. Uncrossed Lines](https://leetcode.com/problems/uncrossed-lines/)	|	_O(m\*n)_	|	_O(min(m,n))_|	Medium | Bottom-Up / Top-Down  |
+| [920. Number of Music Playlists](https://leetcode.com/problems/number-of-music-playlists/) | _O(n\*l)_ |	_O(n)_	| Hard | 🎅🎅🎅 |
+| [926. Flip String to Monotone Increasing](https://leetcode.com/problems/flip-string-to-monotone-increasing/) | _O(n)_ |	_O(n)_	| Medium | 💜🎅🎅 |
+| [931. Minimum Falling Path Sum](https://leetcode.com/problems/minimum-falling-path-sum/) | _O(n^2)_ |	_O(n)_	| Medium |  |
+| [926. Flip String to Monotone Increasing](https://leetcode.com/problems/knight-dialer/) | _O(n)_ |	_O(n)_	| Medium | 💜 |
+| [935. Knight Dialer](https://leetcode.com/problems/knight-dialer/)	|	_O(logn)_	|	_O(1)_|	Medium | 💜Citadel真题. Matrix Exponentiation  |
+| [940. Distinct Subsequences II](https://leetcode.com/problems/distinct-subsequences-ii/)	|	_O(n)_	|	_O(1)_|	Medium | 💜🎅  |
+| [943. Find the Shortest Superstring](https://leetcode.com/problems/find-the-shortest-superstring/)	|	_O(n^2 \* 2^n)_	|	_O(n^2)_|	Medium | 🎅🎅🎅 Travelling Salesman Problem  |
+| [956. Tallest Billboard](https://leetcode.com/problems/tallest-billboard/)	|	_O(n \* 3^(n/2))_	|	_O(3^(n/2))_|	Hard | 🎅🎅🎅 Knapsnack  |
 | [1277. Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones//)	|	_O(m\*n)_	|	_O(1)_|	Medium | 类似的题: <ul><li>[221. Maximal Square](https://leetcode.com/problems/maximal-square/)</li><li>[304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)</li><li>[661 Image Smoother](https://leetcode.com/problems/image-smoother/)</li><li>[764. Largest Plus Sign](https://leetcode.com/problems/largest-plus-sign/description/)</li><li>[1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)</li></ul> |
 | [1387. Sort Integers by The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value/)	|	_O(n)_ average	|	_O(n)_|	Medium | nth_element, ✏️✏️[C++ Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.cpp#L3) [Python Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.py#L20)  |
 | [1388. Pizza With 3n Slices](https://leetcode.com/problems/pizza-with-3n-slices/)	|	_O(n^2)_  |	_O(n)_|	Hard | 😍😍 类似[213. House Robber II](https://leetcode.com/problems/house-robber-ii/) 和 [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/) |
