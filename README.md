@@ -402,6 +402,7 @@ TreeNode* helper(TreeNode** head ){
 | [009. Palindrome Number](https://leetcode.com/problems/palindrome-number/) | _O(1)_ | _O(1)_	| Easy |  |
 | [012. Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | _O(n)_ | _O(1)_	| Medium |  |
 | [013. Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | _O(n)_ | _O(1)_	| Easy |  |
+| [964. Least Operators to Express Number](https://leetcode.com/problems/least-operators-to-express-number/) | _O(logn)_ | _O(logn)_	| Hard | 🎅🎅🎅  |
 | [1360. Number of Days Between Two Dates](https://leetcode.com/problems/number-of-days-between-two-dates/) | _O(1)_ | _O(1)_	| Easy |  |
 | [1362. Closest Divisors](https://leetcode.com/problems/closest-divisors/) | _O(sqrt(n))_ | _O(1)_	| Medium |  |
 | [1363. Largest Multiple of Three](https://leetcode.com/problems/largest-multiple-of-three/) | _O(n)_ | _O(1)_	| Hard |  |
@@ -984,6 +985,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/)	|	_O(p + r \* n)_	|	_O(n)_ |	Medium | ❌ |
 | [802. Find Eventual Safe States](https://leetcode.com/problems/find-eventual-safe-states/description/)	|	_O(\|V+E\|)_	|	_O(\|V\|)_ |	Medium | 😚 DFS + bit mask 需要定义state 0：unvisited, 1 visited not safe, 2 visited not safe, 3 visited and safe 注意不能用visited 的value 代替boolean 的value |
 | [886. Possible Bipartition](https://leetcode.com/problems/possible-bipartition/submissions/)	|	_O(\|V+E\|)_	|	_O(\|V+E\|)_ | Medium | DFS, BFS |
+| [980. Unique Paths III](https://leetcode.com/problems/unique-paths-iii/)	|	_O((m \* n) \* 2^(m \* n))_	|	_O((m \* n) \* 2^(m \* n))_ | Medium | DFS, BFS |
 | [1367	Linked List in Binary Tree](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(n+l)_	|	_O(h+l)_ |	Medium | KMP 🔍[C++ 用const auto ```[]``` get function return pair](https://github.com/beckswu/Leetcode/blob/master/DFS/1367.%20Linked%20List%20in%20Binary%20Tree.cpp#L9) |
 | [1368	Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | BFS + DFS |
 | [1377. Frog Position After T Seconds](https://leetcode.com/problems/frog-position-after-t-seconds/) |	_O(n)_	|	_O(n)_ |	Hard | ✏️[Python Set](https://github.com/beckswu/Leetcode/blob/master/DFS/1377.%20Frog%20Position%20After%20T%20Seconds.py#L127) |
@@ -1123,6 +1125,8 @@ DFS 是看有没有path，DP是看有几个path
 | [940. Distinct Subsequences II](https://leetcode.com/problems/distinct-subsequences-ii/)	|	_O(n)_	|	_O(1)_|	Medium | 💜🎅  |
 | [943. Find the Shortest Superstring](https://leetcode.com/problems/find-the-shortest-superstring/)	|	_O(n^2 \* 2^n)_	|	_O(n^2)_|	Medium | 🎅🎅🎅 Travelling Salesman Problem  |
 | [956. Tallest Billboard](https://leetcode.com/problems/tallest-billboard/)	|	_O(n \* 3^(n/2))_	|	_O(3^(n/2))_|	Hard | 🎅🎅🎅 Knapsnack  |
+| [960. Delete Columns to Make Sorted III](https://leetcode.com/problems/delete-columns-to-make-sorted-iii/)	|	_O(n \* l^2)_	|	_O(l)_|	Hard | 🎅类似的题: <ul><li>https://leetcode.com/problems/longest-increasing-subsequence/description/</li></ul>  |
+| [975. Odd Even Jump](https://leetcode.com/problems/odd-even-jump/) | _O(nlogn)_ |	_O(n)_	| Hard | 💜🎅🎅🎅, Mono Stack/BST |
 | [1277. Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones//)	|	_O(m\*n)_	|	_O(1)_|	Medium | 类似的题: <ul><li>[221. Maximal Square](https://leetcode.com/problems/maximal-square/)</li><li>[304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)</li><li>[661 Image Smoother](https://leetcode.com/problems/image-smoother/)</li><li>[764. Largest Plus Sign](https://leetcode.com/problems/largest-plus-sign/description/)</li><li>[1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)</li></ul> |
 | [1387. Sort Integers by The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value/)	|	_O(n)_ average	|	_O(n)_|	Medium | nth_element, ✏️✏️[C++ Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.cpp#L3) [Python Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.py#L20)  |
 | [1388. Pizza With 3n Slices](https://leetcode.com/problems/pizza-with-3n-slices/)	|	_O(n^2)_  |	_O(n)_|	Hard | 😍😍 类似[213. House Robber II](https://leetcode.com/problems/house-robber-ii/) 和 [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/) |
