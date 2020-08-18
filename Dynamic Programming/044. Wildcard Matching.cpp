@@ -1,31 +1,4 @@
 /*
-44. Wildcard Matching
-
-https://leetcode.com/problems/wildcard-matching/description/
-
-Implement wildcard pattern matching with support for '?' and '*'.
-
-'?' Matches any single character.
-'*' Matches any sequence of characters (including the empty sequence).
-
-The matching should cover the entire input string (not partial).
-
-The function prototype should be:
-bool isMatch(const char *s, const char *p)
-
-Some examples:
-isMatch("aa","a") → false
-isMatch("aa","aa") → true
-isMatch("aaa","aa") → false
-isMatch("aa", "*") → true
-isMatch("aa", "a*") → true
-isMatch("ab", "?*") → true
-isMatch("aab", "c*a*b") → false
-
-*/
-
-
-/*
 dp[i][j] 保存的是 s[0:i) 与 p[0:j) match 不match得结果
 
 else if(p[j] == '*')
@@ -67,6 +40,44 @@ public:
         }
         return dp[n][m];
         
+    }
+};
+
+
+
+
+
+//2020
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int n1 = s.size(), n2 = p.size();
+        vector<vector<int>>dp(n1+1, vector<int>(n2+1,-1));
+        return topDown(dp, s,p,0,0);
+    }
+    
+    int topDown(vector<vector<int>>&dp, const string&s, const string&p, int i, int j){
+        if(i == s.size() || j==p.size()){
+            while(j<p.size() && p[j] == '*')
+                    ++j;
+            while(i<s.size() && s[i] == '*')
+                    ++i;
+            return i == s.size() && j==p.size() ? 1 : 0;
+        }
+        if(dp[i][j] == 0)
+            return 0;
+        if(s[i] == p[j] || p[j] == '?' || p[j] == '*')
+             if(topDown(dp,s, p, i+1, j+1))
+                return true;
+        
+        if(p[j] == '*'){
+            dp[i][j] = topDown(dp,s,p, i+1, j) ||  topDown(dp,s,p, i, j+1);
+        }
+        
+        if(dp[i][j] != 1) 
+            dp[i][j] = 0;
+        
+        return dp[i][j] ;
     }
 };
 
