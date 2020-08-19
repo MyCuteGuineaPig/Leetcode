@@ -116,7 +116,7 @@ Python trick:
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [011. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | _O(n)_ | _O(1)_	| Medium | |
 | [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | Greedy/Descending Stack |
-| [045. Jump Game II](https://leetcode.com/problems/jump-game-ii/) | _O(n)_ | _O(1)_	| Hard | 🔍 <ul><li>在现有可以jump 的区域里，找这一步加上下一步可以跳的最远的, 下一次index到这个最远的index </li><li>找目前可以跳的范围内(这一跳加上下一跳)最远的点为curfastest, 当到curend时，更新curend最远点为curfast </li></ul> |
+| [045. Jump Game II](https://leetcode.com/problems/jump-game-ii/) | _O(n)_ | _O(1)_	| Hard | 🎅  |
 | [055. Jump Game](https://leetcode.com/problems/jump-game/) | _O(n)_ | _O(1)_	| Medium | 🔍 只有当nums\[i] = 0时，才会有可能到不了终点，看nums\[i]=0之前的点能不能跨过0点 |
 | [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | _O(n)_ | _O(1)_	| Medium |  |
 | [134. Gas Station](https://leetcode.com/problems/gas-station/description/) | _O(n)_ | _O(1)_	| Medium | if sum(gas)>sum(cost)有解, 起点是最后一个累计sum为负后的点  |

@@ -1,25 +1,7 @@
-/*
-45. Jump Game II
-
-Given an array of non-negative integers, you are initially positioned at the first index of the array.
-
-Each element in the array represents your maximum jump length at that position.
-
-Your goal is to reach the last index in the minimum number of jumps.
-
-For example:
-Given array A = [2,3,1,1,4]
-
-The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
-
-
-*/
-
-
 
 /*
 
-在现有可以jump 的区域里，找这一步加上下一步可以跳的最远的
+在现有可以jump 的区域里，找这一步 + 下一步可以跳的最远的
 这一步到 reach，下一步到next = reach + nums[reach]， ind表示可以跳的最远的index
 
 
@@ -51,7 +33,24 @@ public:
     }
 };
 
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        if(n<2)return 0;
+	    int level=0,currentMax=0,i=0,nextMax=0;
 
+         while(i <= currentMax){		//nodes count of current level>0
+             level++;
+             for(;i<=currentMax;i++){	//traverse current level , and update the max reach of next level
+                nextMax=max(nextMax,nums[i]+i);
+                if(nextMax>=n-1)return level;   // if last element is in level+1,  then the min jump=level 
+             }
+             currentMax=nextMax;
+         }
+         return 0;
+        }
+};
 /*
 
 与上面解一样的道理，找目前可以跳的范围内(这一跳加上下一跳)最远的点,curfastest, 
@@ -77,6 +76,7 @@ public:
         return jump;
     }
 };
+
 /*
                2      3     1     1  4
     farthest  2       4     4     
@@ -84,3 +84,35 @@ public:
 
 
 */
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int jump = 0, curfarthest = 0, curend = 0;
+        for(int i = 0; i<nums.size() && curend<nums.size()-1;i++){ //需要的是curend < nums.size()-1
+            if(i > curend){
+                jump++;
+                curend = curfarthest;
+            }
+            curfarthest = max(curfarthest,i+nums[i]);
+        }
+        return jump;
+    }
+};
+
+
+//2020
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        if(nums.size()==1) return 0;
+        int far = 0, steps = 0, prev = 0;
+        for(int i = 0; i < nums.size()-1; ++i){
+            if(i >= prev){
+                prev = max(far,i+nums[i]);
+                ++steps;
+            }
+            far = max(far, i+nums[i]);
+        }
+        return steps;
+    }
+};
