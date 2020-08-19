@@ -60,26 +60,21 @@ public:
         if(i == s.size() || j==p.size()){
             while(j<p.size() && p[j] == '*')
                     ++j;
-            while(i<s.size() && s[i] == '*')
-                    ++i;
             return i == s.size() && j==p.size() ? 1 : 0;
         }
         if(dp[i][j] == 0)
             return 0;
         if(s[i] == p[j] || p[j] == '?' || p[j] == '*')
              if(topDown(dp,s, p, i+1, j+1))
-                return true;
+                return 1;
         
-        if(p[j] == '*'){
-            dp[i][j] = topDown(dp,s,p, i+1, j) ||  topDown(dp,s,p, i, j+1);
-        }
+        if(p[j] == '*')
+            return dp[i][j] = topDown(dp,s,p, i+1, j) ||  topDown(dp,s,p, i, j+1);
         
-        if(dp[i][j] != 1) 
-            dp[i][j] = 0;
-        
-        return dp[i][j] ;
+        return dp[i][j] = 0 ;
     }
 };
+
 
 
 class Solution {
@@ -119,6 +114,13 @@ pattern: *bbbb
 
      s = "adcefeafafeab"
     p =  "*a*b",  return true
+
+
+比如   s =  "adbcdbce"
+      p =  "*ad*bce"
+   
+   当p的bce 不match bcd时，i跳到 3('c'), j跳回4('*')
+    
 */
 class Solution {
 public:

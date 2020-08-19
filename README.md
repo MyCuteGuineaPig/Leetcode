@@ -1041,7 +1041,7 @@ DFS 是看有没有path，DP是看有几个path
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [010. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/description/)	|	_O(m\*n)_	|	_O(n)_ |	Hard | 🎅🎅 |
-| [044. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/) | _O(n\*m)_ | _O(1)_	| Hard | dp or 🎅[greedy]() |
+| [044. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/) | _O(n\*m)_ | _O(1)_	| Hard | dp or greedy (Greedy也是 _O(n\*m)_ ) |
 | [053. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)	|	_O(n)_	|	_O(1)_ |	Easy | 😍 更新res, minsum 的顺序 |
 | [062. Unique Paths](https://leetcode.com/problems/unique-paths/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [063. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
