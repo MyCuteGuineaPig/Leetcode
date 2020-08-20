@@ -1,19 +1,4 @@
-/*
-55 Jump Game
-https://leetcode.com/problems/jump-game/description/
-Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
-Each element in the array represents your maximum jump length at that position.
-
-Determine if you are able to reach the last index.
-
-For example:
-A = [2,3,1,1,4], return true.
-
-A = [3,2,1,0,4], return false.
-
-
-*/
 
 /*
 跟045	Jump Game II 相像，找目前可以跳的范围内(这一跳加上下一跳)最远的点,curfastest, 
@@ -52,7 +37,7 @@ public:
         if(nums.size()<2) return true;
         int zero = 0, n = nums.size();
         bool res = true;
-        for(; zero<n-1; zero++){
+        for(; zero<n-1 && res; zero++){
             if(nums[zero]==0){
                 bool temp = false;
                 for(int i=0; i<zero; i++){
@@ -101,17 +86,7 @@ public:
     }
 };
 
-class Solution {
-public:
-    bool canJump(vector<int>& nums) {
-        int height = 0;
-        for (int i=nums.size()-2; i>=0; i--) {
-            if (height >= nums[i]) height++;
-            else height = 0;
-        }
-        return height == 0;
-    }
-};
+
 
 //width 只有当 nums[i] 等于0时，才会从0 变成1;，因为是从后向前的顺序，只要nums[i] 能跨过这个width时，width又变成0
 //比如 [3,3,1,0], 当i = 1,时， width = 2, 但是nums[i] > width, 跨过到达0之前，
@@ -127,3 +102,21 @@ public:
     }
 };
 
+
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int size=nums.size();
+        int step=nums[0];
+        for(int i=1;i<size;++i){
+            step--;
+            if(step<0)
+               return false;
+            if(nums[i]>step)
+               step=nums[i];
+        }
+        return true;
+    }
+
+};

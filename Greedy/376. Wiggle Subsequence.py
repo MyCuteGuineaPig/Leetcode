@@ -64,12 +64,27 @@ class Solution:
         nan = float('nan')
         diffs = [a-b for a, b in zip([nan] + nums, nums + [nan]) if a-b]
         return sum(not d*e >= 0 for d, e in zip(diffs, diffs[1:]))
+        """
+        [1,7,4,9,2,5]
+        diffs = [nan, -6, 3, -5, 7, -3, nan]
+        nan * 1 >= 0 false, nan*1 <= 0 也是false
+        zip(diffs, diffs[1:]):  [(nan, -6), (-6, 3), (3, -5), (-5, 7), (7, -3), (-3, nan)]
+
+        比如: [1,1,1,1,1,1]
+        diffs = [nan, nan]
+        """
+        
 
  class Solution:   
     def wiggleMaxLength(self, nums):
         norep = [num for num, _ in itertools.groupby(nums)]
         triples = zip(norep, norep[1:], norep[2:])
         return sum((b>a) == (b>c) for a, b, c in triples) + len(norep[:2])
+        """
+        [1,7,7,4,7,9,2,5]: 
+        norep = [1, 7, 4, 7, 9, 2, 5]
+        triples = [(1, 7, 4), (7, 4, 7), (4, 7, 9), (7, 9, 2), (9, 2, 5)]
+        """
 
 class Solution:
     def wiggleMaxLength(self, nums):

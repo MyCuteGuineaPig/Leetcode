@@ -117,14 +117,14 @@ Python trick:
 | [011. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | _O(n)_ | _O(1)_	| Medium | |
 | [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | Greedy/Descending Stack |
 | [045. Jump Game II](https://leetcode.com/problems/jump-game-ii/) | _O(n)_ | _O(1)_	| Hard | 🎅  |
-| [055. Jump Game](https://leetcode.com/problems/jump-game/) | _O(n)_ | _O(1)_	| Medium | 🔍 只有当nums\[i] = 0时，才会有可能到不了终点，看nums\[i]=0之前的点能不能跨过0点 |
+| [055. Jump Game](https://leetcode.com/problems/jump-game/) | _O(n)_ | _O(1)_	| Medium |  |
 | [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | _O(n)_ | _O(1)_	| Medium |  |
-| [134. Gas Station](https://leetcode.com/problems/gas-station/description/) | _O(n)_ | _O(1)_	| Medium | if sum(gas)>sum(cost)有解, 起点是最后一个累计sum为负后的点  |
-| [135. Candy](https://leetcode.com/problems/candy/) | _O(n)_ | _O(n) O(1)_	| Hard | 🔍 开始把每个人糖assign为1，从左面和右面各loop一回，如果比邻居rate大，比较现在糖数和邻居值+1，keep大的 |
-| [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/) | _O(n)_ | _O(k)_	| Hard | 🔍 Ascending Stack, 可以用string 做stack, pop时候看cur char是不是在现在stack中(不重复)，还看后面有没有一样top(有一个再插入) |
+| [134. Gas Station](https://leetcode.com/problems/gas-station/description/) | _O(n)_ | _O(1)_	| Medium | 🎅  |
+| [135. Candy](https://leetcode.com/problems/candy/) | _O(n)_ | _O(n) O(1)_	| Hard | 🎅 |
+| [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/) | _O(n)_ | _O(k)_	| Hard | 🎅🎅🎅 Ascending Stack, 可以用string 做stack, pop时候看cur char是不是在现在stack中(不重复)，还看后面有没有一样top(有一个再插入) |
 | [321.	Create Maximum Number](https://leetcode.com/problems/create-maximum-number/) | _O((m+n)^3)_ | _O(k)_	| Hard | 🔍 💡  tricky, 生成array时，除了考虑后面剩下的可不可以补充上drop，还可以考虑总共要去掉len - k个 |
 | [330. Patching Array](https://leetcode.com/problems/patching-array/) | _O(s + logn)_ | _O(1)_	| Hard | 🔍 tricky, 当num <= miss 表示\[0,miss)已经满足, miss+=num; else, miss\*=2, patch++ |
-| [376.Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/) | _O(n)_ | _O(1)_	| Medium | 看有几个正负转化💡 可以用dp, python 可以用 |
+| [376.Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🎅 |
 | [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 easy two pointer or C++ iterator; follow-up可以用binary search; Python in iter()  |
 | [397. Integer Replacement](https://leetcode.com/problems/integer-replacement/description/) | _O(log(n))_ | _O(1)_	| Medium | 🔍 tricky,如果是奇数, 看第二个bit决定+1, -1 |
 | [402.	Remove K Digits](https://leetcode.com/problems/remove-k-digits/) | _O(n)_ | _O(n)_	| Medium | 😍 ascending stack |
