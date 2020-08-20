@@ -31,6 +31,16 @@ class Solution:
             remaining[i] -=1 
         return "".join(stack)
 
+
+class Solution:
+    def removeDuplicateLetters(self, s: str) -> str:
+        for c in sorted(set(s)):  #比如 "abacb", a index = 0, 后面set 包括了 b,c, a是起点
+                                  #比如 "dabacb" a index = 1, 但a 后面没有d, a不能是起点
+            suffix = s[s.index(c):]  
+            if set(suffix) == set(s):
+                return c + self.removeDuplicateLetters(suffix.replace(c, ''))
+        return ''
+
 """
 找最右侧的index，如果当前index 小于最右侧的index，表示后面还有可以删除
 """
@@ -44,6 +54,16 @@ class Solution:
                     result.pop()
                 result += [c]
         return ''.join(result)
+
+class Solution:
+    def removeDuplicateLetters(self, s: str) -> str:
+        result = ''
+        while s:
+            i = min(map(s.rindex, set(s)))
+            c = min(s[:i+1])
+            result += c
+            s = s[s.index(c):].replace(c, '')
+        return result
 
 """
 找最小的最右侧的index，如果当前index 小于最右侧的index，

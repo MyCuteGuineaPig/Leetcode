@@ -25,7 +25,14 @@ in step 3, the beginning index of the search range should be the index of previo
 */
 
 
+/**
+ 两个Tricky 的例子: 
 
+"abacb"  -> "abc"
+
+"bddbccd" -> "bcd"
+
+ */ 
 
 class Solution {
 public:
@@ -46,7 +53,11 @@ public:
             for(int i = start; i<= end; i++){
                 if(lastappear.count(s[i])>0 && s[i]<minChar){
                     minChar = s[i];
-                    start = i+1;
+                    start = i+1;// "bddbccd"， 第一个end = 3(b), s[0] < minChar, start = 1, 而不是start = 3+1 = 4
+                                // 同时下面remove了b, 第二个end = 5('c'),  在[1,5] 之间找最小的
+
+                                //"abacb"  第一个end = 2(a), s[0] < minChar, start = 1, 也不是end后
+                                // 下面remove 了 a, 第二个end = 3, 在[1,3]找最小的
                 }
             }
             result+=minChar;
@@ -99,6 +110,8 @@ public:
         unordered_set<char>set;
         for(auto i: s){
             while(!stk.empty() && set.count(i) == 0 && map[stk.top()] >1 && stk.top() >= i){
+                //Key: set.count(i) == 0, 比如"abacb", 第二个a, stk是ab, stack中已经有a, 
+                // 如果pop,会破坏原有的排序
                 map[stk.top()]--;
                 set.erase(stk.top());
                 stk.pop();
@@ -142,5 +155,61 @@ public:
             --remaining[c];
         }
         return stk; 
+    }
+};
+
+
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        vector<int> cand(256, 0);
+        vector<bool> visited(256, false);
+        for (char c : s)
+            cand[c]++;
+        string result = "0";
+        for (char c : s) {
+            cand[c]--;
+            if (visited[c]) continue;
+            while (c < result.back() && cand[result.back()]) {
+                visited[result.back()] = false;
+                result.pop_back();
+            }
+            result += c;
+            visited[c] = true;
+        }
+        return result.substr(1);
+    }
+};
+
+/*
+The runtime is O(26 * n) = O(n).
+
+the greedy choice (i.e., the leftmost letter in the answer) is the smallest s[i], s.t.
+
+After determining the greedy choice s[i], we get a new string s' from s by
+
+1. removing all letters to the left of s[i],
+2. removing all s[i]'s from s.
+
+ */
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        if(s.empty())
+            return "";
+        unordered_map<char,int>cnt;
+        for(auto i: s) cnt[i]++;
+        
+        int pos = 0;
+        for(int i = 0; i<s.size(); ++i){
+            if(s[i] < s[pos]) pos = i;  /
+            if(--cnt[s[i]] == 0) break;
+        }
+        
+        string nxt;
+        for(int i = pos+1; i<s.size();++i)
+            if(s[i]!=s[pos])  //remove all the same as s[pos]
+                nxt += s[i];
+        return s[pos] + removeDuplicateLetters(nxt);
     }
 };
