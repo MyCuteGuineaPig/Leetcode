@@ -1,13 +1,4 @@
 /*
-402. Remove K Digits
-https://leetcode.com/problems/remove-k-digits/description/
-
-
-
-*/
-
-
-/*
 The first algorithm is straight-forward. Let's think about the simplest case: 
 how to remove 1 digit from the number so that the new number is the smallest possible？
  Well, one can simply scan from left to right, and remove the first "peak" digit; 

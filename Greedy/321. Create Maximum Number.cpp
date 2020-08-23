@@ -1,39 +1,3 @@
-/*
-321. Create Maximum Number
-
-
-Given two arrays of length m and n with digits 0-9 representing two numbers. 
-Create the maximum number of length k <= m + n from digits of the two. 
-The relative order of the digits from the same array must be preserved. Return an array of the k digits.
-
-Note: You should try to optimize your time and space complexity.
-
-Example 1:
-
-Input:
-nums1 = [3, 4, 6, 5]
-nums2 = [9, 1, 2, 5, 8, 3]
-k = 5
-Output:
-[9, 8, 6, 5, 3]
-Example 2:
-
-Input:
-nums1 = [6, 7]
-nums2 = [6, 0, 4]
-k = 5
-Output:
-[6, 7, 6, 0, 4]
-Example 3:
-
-Input:
-nums1 = [3, 9]
-nums2 = [8, 9]
-k = 3
-Output:
-[9, 8, 9]
-
-*/
 
 /*
 试各种可能性，大的一个是answer
@@ -64,8 +28,8 @@ public:
     
     void merge(vector<int>&a, vector<int>&b, vector<int>&cand){
         for(int i = 0, j = 0; i<a.size() || j<b.size(); ){
-            if(isGreater(a, i, b, j)) cand[i+j] = a[i++];
-            else  cand[i+j] = b[j++];
+            if(isGreater(a, i, b, j)) { cand[i+j] = a[i]; ++i;}
+            else  { cand[i+j] = b[j]; ++j;}
         }
     }
     
@@ -79,7 +43,7 @@ public:
         while(i<cand.size() && j < ans.size() && cand[i] == ans[j]){
             i++; j++;
         }
-        return j==ans.size() && i<cand.size() || (i<cand.size() && cand[i] > ans[j]);
+        return j == ans.size() || i < cand.size() && j < ans.size() && cand[i] > ans[j];
     }
     
     /*
@@ -96,7 +60,7 @@ public:
     void maxArray(vector<int>&nums, vector<int>& res, int k){
         res.resize(k,0);
         for(int i = 0, j = 0; i<nums.size(); i++){//j 控制res的
-            while(j > 0 && j<=k && k - j < nums.size()-i && res[j-1] < nums[i]) j--;
+            while(j > 0 && k - j+1 <= nums.size()-i && res[j-1] < nums[i]) j--;
             if(j<k) res[j++] = nums[i];
         }
     }
@@ -162,7 +126,7 @@ private:
             if(nums.size() <= k)
                 max_num[nums.size()] = nums;
             for(i = start; i + 1 < nums.size() && nums[i] >= nums[i + 1]; i++);
-            nums.erase(nums.begin() + i);
+            nums.erase(nums.begin() + i);  //比如 9, 8, 7, 6, 8 到6发现 6 <8, nums.erase(8)
         }
     }
     
@@ -191,6 +155,7 @@ private:
         return false;
     }
 };
+
 
 
 class Solution {
@@ -223,7 +188,7 @@ public:
         while (nums1.size() + nums2.size()) {
             vector<int>& now = nums1 > nums2 ? nums1 : nums2;
             out.push_back(now[0]);
-            now.erase(now.begin());
+            now.erase(now.begin()); //now 是reference 直接erase nums1 or nums2
         }
         return out;
     }

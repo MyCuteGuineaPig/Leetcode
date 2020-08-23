@@ -1,45 +1,19 @@
+/*
+Hint: 
+ tricky,如果是奇数, 看第二个bit决定+1, -1
+ */
 
 /*
-397. Integer Replacement
-https://leetcode.com/problems/integer-replacement/description/
 
-Given a positive integer n and you can do operations as follow:
-
-If n is even, replace n with n/2.
-If n is odd, you can replace n with either n + 1 or n - 1.
-What is the minimum number of replacements needed for n to become 1?
-
-Example 1:
-
-Input:
-8
-
-Output:
-3
-
-Explanation:
-8 -> 4 -> 2 -> 1
-Example 2:
-
-Input:
-7
-
-Output:
-4
-
-Explanation:
-7 -> 8 -> 4 -> 2 -> 1
-or
-7 -> 6 -> 3 -> 2 -> 1
-
-*/
-
-
-/*
 
 in binary form 我们需要remove 尽可能多的1， 
 
+111011 -> 111010 -> 11101 -> 11100 -> 1110 -> 111 -> 1000 -> 100 -> 10 -> 1
+And yet, this is not the best way because
+
 111011 -> 111100 -> 11110 -> 1111 -> 10000 -> 1000 -> 100 -> 10 -> 1
+
+
 See? Both 111011 -> 111010 and 111011 -> 111100 remove the same number of 1's, but the second way is better.
 
 尽可能的把1 往左侧堆积，比如111100， 除以4后，+1，可以消除很多1
@@ -134,5 +108,23 @@ public:
     int integerReplacement(int n) {
         //cout << INT_MAX + 1 << endl;
         return check(n);
+    }
+};
+
+
+//2020 
+class Solution {
+public:
+    int integerReplacement(int n) {
+        unordered_map<long,int>dp;
+        return topDown(n, dp);
+    }
+    
+    int topDown(long n, unordered_map<long,int>&dp){
+        if(n == 1) return 0;
+        if(dp.count(n)) return dp[n];
+        if (n % 2 == 0)
+            return dp[n] = topDown(n/2, dp) + 1;
+        return dp[n] = min(topDown(n+1,dp), topDown(n-1, dp))+1;
     }
 };

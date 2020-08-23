@@ -1,28 +1,6 @@
 /*
-330. Patching Array
-
-Given a sorted positive integer array nums and an integer n, 
-add/patch elements to the array such that any number in range [1, n] inclusive can be formed by the sum of some elements in the array. 
-Return the minimum number of patches required.
-
-Example 1:
-
-Input: nums = [1,3], n = 6
-Output: 1 
-Explanation:
-Combinations of nums are [1], [3], [1,3], which form possible sums of: 1, 3, 4.
-Now if we add/patch 2 to nums, the combinations are: [1], [2], [3], [1,3], [2,3], [1,2,3].
-Possible sums are 1, 2, 3, 4, 5, 6, which now covers the range [1, 6].
-So we only need 1 patch.
-Example 2:
-
-Input: nums = [1,5,10], n = 20
-Output: 2
-Explanation: The two patches can be [2, 4].
-Example 3:
-
-Input: nums = [1,2,2], n = 5
-Output: 0
+Hint:
+当num <= miss 表示\[0,miss)已经满足, miss+=num; else, miss*=2, patch++ 
 
 
 */
@@ -60,6 +38,16 @@ public:
     }
 };
 
+class Solution {
+public:
+    int minPatches(vector<int>& nums, int n) {
+        int count = 0, i = 0;
+        for (long miss=1; miss <= n; count++)
+            miss += (i < nums.size() && nums[i] <= miss) ? nums[i++] : miss;
+        return count - i;
+    }
+};
+
 /*
 比如现在是[1,2,3,9], 
 1,2,3 是可以实现的，可以到6，7是第一个到不了的，所以我们加上7, 6 + 7 = 13, 【1，13】都可以的
@@ -68,7 +56,6 @@ public:
 class Solution {
 public:
     int minPatches(vector<int>& nums, int n) {
-        sort(nums.begin(), nums.end());
         
         long long sum = 0; 
         //和上面解法区别是上面sum 起始是1，所以miss *= 2, 这起始0，sum是第一个到不了的点需要 sum += sum + 1
@@ -78,7 +65,7 @@ public:
         while(sum < n) {
             if(i>=(int)nums.size() || sum+1 < nums[i]) {
                 patch += 1;
-                sum = sum + (sum+1);
+                sum = sum + (sum+1); //sum 是 2^n - 1, 1,3,7,15
             }
             else {
                 sum = sum + nums[i];
@@ -89,6 +76,7 @@ public:
         return patch;
     }
 };
+
 
 
 

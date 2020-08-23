@@ -1,31 +1,6 @@
-/*
-621. Task Scheduler
-https://leetcode.com/problems/task-scheduler/description/
-
-Given a char array representing tasks CPU need to do. 
-It contains capital letters A to Z where different letters represent different tasks.
-Tasks could be done without original order. 
-Each task could be done in one interval. 
-For each interval, CPU could finish one task or just be idle.
-
-However, there is a non-negative cooling interval n that means between two same tasks, 
-there must be at least n intervals that CPU are doing different tasks or just be idle.
-
-You need to return the least number of intervals the CPU will take to finish all the given tasks.
-
-Example 1: 
-Input: tasks = ["A","A","A","B","B","B"], n = 2
-Output: 8
-Explanation: A -> B -> idle -> A -> B -> idle -> A -> B.
-Note:
-The number of tasks is in the range [1, 10000].
-The integer n is in the range [0, 100].
-
-
-*/
-
 
 /*
+Math: 
 可以建一个框架，用最多的字母，和cooling interval, 比如最多字母是A, cooling interval n = 3
 A * * *  A * * * A * * * A, 每个A之间都隔了三个数，那么一个区间是 n + 1 (算上A)
 把剩下的字母填进空，
@@ -83,6 +58,8 @@ public:
     }
 };
 
+
+//🔍 用最多的字母和cooling interval构建框架, or priority_queue 代表当前可以取的字母个数 + map用于缓存  
 /*
 Priority Queue的解： 
 把每个字母的frequency push 进pq
@@ -118,6 +95,37 @@ public:
         }
         return time;
 
+    }
+};
+
+
+class Solution {
+public:
+     int leastInterval(vector<char>& tasks, int n) {
+         unordered_map<char,int>mp;
+         for(auto i: tasks) ++mp[i];
+         
+         priority_queue<int>pq; 
+         unordered_map<int,int>coolDown; 
+         int time = 0, left = 0;
+         for(auto i: mp)
+             pq.push(i.second);
+         
+         while(pq.size() || coolDown.size()){
+             if(coolDown.count(time - n - 1)){
+                 int cur = coolDown[time-n-1];
+                 coolDown.erase(time-n-1);
+                 pq.push(cur);
+             }
+             if(pq.size()){
+                 left = pq.top()-1;
+                 pq.pop();
+                 if(left)
+                     coolDown[time] = left;
+             }
+             ++time;
+         }
+         return time;
     }
 };
 
@@ -159,3 +167,68 @@ public:
     }
 };
 
+
+
+//2020
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int>cnt(26);
+        for(auto i: tasks) cnt[i-'A']++;
+        int res = 0; 
+        vector<int>lastPos(26,-101);
+        for(; true; ++res){
+            int maxAppear = 0; 
+            int ind = -1;
+            int tot = 0;
+            for(int i = 0; i<26; ++i){
+                if(lastPos[i] < res - n && cnt[i] > 0)
+                {
+                    if(cnt[i] > maxAppear){
+                        maxAppear = cnt[i];
+                        ind = i;
+                    }
+                }
+                tot += cnt[i];
+            }
+            if(tot == 0)
+                break;
+            if(ind != -1){
+                lastPos[ind] = res;
+                --cnt[ind];
+            }
+        }
+        return res;
+    }
+};
+
+
+/*
+
+ 比如 A A A B B B C C D D n = 2
+
+ 可以把A,B 绑定一起为 X
+   X C D X C D X
+ */
+class Solution {
+public:
+     int leastInterval(vector<char>& tasks, int n) {
+        int m[128] = {0};
+        for (char c : tasks)  m[c]++;  
+        sort(m, m + 128, [](int a, int b){ return a > b; });
+        int gap = n * (m[0] - 1), total = m[0] + gap; //gap 除了出现最多element外 aviable slots;
+        for (int i=1; i<128 && m[i] != 0; i++) {
+            if (gap >= m[i]) {
+                if (m[i] == m[0]) {
+                    gap -= (m[0] - 1);     // 填充中间的empty slot, 
+                    total++; // 相等于 X 原本有 A, 现在加上B
+                } else {
+                    gap -= m[i];
+                }
+            } else {
+                return tasks.size();
+            }
+        } 
+        return total;
+    }
+};

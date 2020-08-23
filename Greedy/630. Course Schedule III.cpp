@@ -1,37 +1,4 @@
 /*
-630. Course Schedule III
-https://leetcode.com/problems/course-schedule-iii/description/
-
-There are n different online courses numbered from 1 to n. 
-Each course has some duration(course length) t and closed on dth day. A course should be taken continuously for t days 
-and must be finished before or on the dth day. You will start at the 1st day.
-
-Given n online courses represented by pairs (t,d), 
-your task is to find the maximal number of courses that can be taken.
-
-Example:
-Input: [[100, 200], [200, 1300], [1000, 1250], [2000, 3200]]
-Output: 3
-Explanation: 
-There're totally 4 courses, but you can take 3 courses at most:
-First, take the 1st course, it costs 100 days so you will finish it on the 100th day, 
-and ready to take the next course on the 101st day.
-
-Second, take the 3rd course, it costs 1000 days so you will finish it on the 1100th day, 
-and ready to take the next course on the 1101st day. 
-
-Third, take the 2nd course, it costs 200 days so you will finish it on the 1300th day. 
-The 4th course cannot be taken now, since you will finish it on the 3300th day, which exceeds the closed date.
-Note:
-The integer 1 <= d, t, n <= 10,000.
-You can't take two courses simultaneously.
-
-
-
-*/
-
-
-/*
 Solution 1: 移花接木
 
 需要先sort，按照结课的时间排序; 
@@ -146,8 +113,8 @@ public:
             }
             /*
              比如上一个满足，这个不满足，可能是因为这次加个很大的，或者是之前加个很大的, 不管顺序是这次是大，还是之前是大，就pop掉大的
-             比如 cur = 20, top = 4, 这次[9,25], pop掉9 , cur 还是20
-             比如 cur = 20, top = 9, 这次是[4,25], pop掉9， cur = 20 - 9 + 4 = 16, 
+             比如 now = 20, top = 4, 这次[9,25], pop掉9 , now 还是20
+             比如 now = 20, top = 9, 这次是[4,25], pop掉9， now = 20 - 9 + 4 = 16, 
              pop掉肯定满足，因为上一个满足，所以end >= 20, 而这次pop之后，变成16 比20更小了，肯定满足
 
              */
