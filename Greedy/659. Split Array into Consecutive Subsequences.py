@@ -1,31 +1,4 @@
-"""
-659. Split Array into Consecutive Subsequences
 
-You are given an integer array sorted in ascending order (may contain duplicates), you need to split them into several subsequences, 
-where each subsequences consist of at least 3 consecutive integers. Return whether you can make such a split.
-
-Example 1:
-Input: [1,2,3,3,4,5]
-Output: True
-Explanation:
-You can split them into two consecutive subsequences : 
-
-1, 2, 3
-3, 4, 5
-
-Example 2:
-Input: [1,2,3,3,4,4,5,5]
-Output: True
-Explanation:
-You can split them into two consecutive subsequences : 
-1, 2, 3, 4, 5
-3, 4, 5
-
-Example 3:
-Input: [1,2,3,4,4,5]
-Output: False
-
-"""
 class Solution:
     def isPossible(self, nums):
         """
@@ -132,3 +105,44 @@ class Solution:
             else:
                 last[num - 1] -= 1
         return not heap
+
+
+"""
+比如： [1,2,3,3,3,4,4,5,5]
+counts = [(1, 1), (2, 1), (3, 3), (4, 2), (5, 2)]
+
+start = [0,2,2]
+end = [2,4,4]
+
+"""
+
+class Solution:
+    def isPossible(self, nums: List[int]) -> bool:
+        counts = [(x, len(list(group)))
+          for x, group in itertools.groupby(nums)]
+
+        def possible(chunk):
+            starts, ends = [], []
+            prev_count = 0
+            for time, count in enumerate(chunk):
+                if count > prev_count:
+                    starts.extend([time] * (count - prev_count))
+                elif count < prev_count:
+                    ends.extend([time-1] * (prev_count - count))
+                prev_count = count
+            
+            ends.extend([time] * count)
+            return all(e >= s+2 for s, e in zip(starts, ends))
+
+        chunk = []
+        prev = None
+        for x, count in counts:
+            if prev is None or x - prev == 1:
+                chunk.append(count)
+            else:
+                if not possible(chunk):
+                    return False
+                chunk = []
+            prev = x
+
+        return possible(chunk)

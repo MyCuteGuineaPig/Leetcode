@@ -1,31 +1,6 @@
 /*
 
 659. Split Array into Consecutive Subsequences
-https://leetcode.com/problems/split-array-into-consecutive-subsequences/description/
-
-You are given an integer array sorted in ascending order (may contain duplicates), you need to split them into several subsequences, where each subsequences consist of at least 3 consecutive integers. Return whether you can make such a split.
-
-Example 1:
-Input: [1,2,3,3,4,5]
-Output: True
-Explanation:
-You can split them into two consecutive subsequences : 
-1, 2, 3
-3, 4, 5
-Example 2:
-Input: [1,2,3,3,4,4,5,5]
-Output: True
-Explanation:
-You can split them into two consecutive subsequences : 
-1, 2, 3, 4, 5
-3, 4, 5
-Example 3:
-Input: [1,2,3,4,4,5]
-Output: False
-Note:
-The length of the input is in range of [1, 10000]
-
-*/
 
 
 /*
@@ -63,7 +38,6 @@ public:
         for(int i = 0; i<nums.size(); p1=c1, p2=c2, p3=c3,pre=cur){
             for(cur = nums[i], cnt = 0; i<nums.size() && cur == nums[i]; i++, cnt++);
             
-            //cout<<p1<<"  "<<p2<<"  "<<p3<<" cnt "<<cnt<<" cur "<<cur<<" pre "<<pre <<" i "<<i <<endl;
             if(cur!=pre+1){
                 if(p1!=0 || p2!=0 ) return false; // 比如pre = 3 , cur =5, 之前到3为止，长度为1，长度为2的array必须是0
                 c1 = cnt; c2 = 0; c3 = 0;
@@ -147,6 +121,63 @@ public:
             if(cur < one + two || cnt[i- 1] < two) return false; 
             // cnt < p1 + p2 (cur<one+two) 
             //cnt[i- 1] < two 原理上也可以用 cur < one 代替，但是我们从 i = 2开始的，如果用cur < one 代替，比如[0, 2,3,4]的0就查不出了
+        }
+        return true;
+    }
+};
+
+/*
+priority_queue
+
+Case 1 : num == pq.peek().end, we offer a new interval (num, num) to pq => #1
+Case 2 : num == pq.peek().end+ 1, we poll a interval prev, offer a new interval (prev.start, num) => #2
+Case 3 : num > p1.peek().end + 1,
+we keep abandoning intervals (if the length of the interval to abandon is smaller than 3, return false) until we could reduce to case 1 or case 2 => #3
+
+The order of 3 cases above matters. For easier implementation, Case 3 should be checked first.
+
+In the priority queue, all intervals are sorted by end increasingly, if there is a tie, we sort them by size increasingly.
+
+
+
+priority_queue:
+1. 如果end 一样，返回长度短的
+2. 如果end 不一样，返回end 小的
+
+[1,2,3,3,4,4,5,5], 
+ 
+ 到第一个4的时候, pq 有 [1,3], [3,3], 先用[3,3]
+到第二个4的时候, pq 有[1,3], [3,4],  先用[1,3]
+ */
+
+class Solution {
+public:
+    bool isPossible(vector<int>& nums) {
+        auto cmp = [](vector<int>&a, vector<int>&b){
+          if(a[1] == b[1] )
+              return (a[1] - a[0]) > (b[1] - b[0]);  //如果end 一样，先return 长度短的
+          return a[1] > b[1];
+        };
+        priority_queue<vector<int>, vector<vector<int>>, decltype(cmp)>pq(cmp);
+        for(auto num: nums){
+            while(pq.size() && pq.top()[1] + 1 < num){
+                if(pq.top()[1] - pq.top()[0] < 2)
+                    return false;
+                pq.pop();
+            }
+            if(pq.empty() || pq.top()[1] == num)
+                pq.push({num, num});
+            else{ // pq.top()[1] + 1 =  num
+                vector<int> top = pq.top(); 
+                pq.pop();
+                top[1] = num;
+                pq.push(top);
+            }
+        }
+        while(pq.size()){
+            if(pq.top()[1] - pq.top()[0] < 2)
+                return false;
+            pq.pop();
         }
         return true;
     }
