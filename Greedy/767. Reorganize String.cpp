@@ -1,25 +1,4 @@
-/*
-767. Reorganize String
 
-Given a string S, check if the letters can be rearranged 
-so that two characters that are adjacent to each other are not the same.
-
-If possible, output any possible result.  If not possible, return the empty string.
-
-Example 1:
-
-Input: S = "aab"
-Output: "aba"
-Example 2:
-
-Input: S = "aaab"
-Output: ""
-Note:
-
-S will consist of lowercase letters and have length in range [1, 500].
-
-
-*/
 
 /*
 priority queue; 
@@ -75,7 +54,7 @@ public:
         for(auto it : cnts)
             pq.push(make_pair(it.second, it.first));
         string res;
-        while(pq.size()>1){
+        while(pq.size()>1){ //size > 1 避免是 'aaaa' 情况，sec = pq.top() 报错
             auto cur = pq.top(); pq.pop();
             if(res.empty() || cur.second != res.back()){
                 res+=cur.second;
@@ -211,4 +190,42 @@ public:
 
 	return S;
 	}
+};
+
+
+
+class Solution {
+public:
+    string reorganizeString(string str) {
+        
+        int strSize = str.size();
+        if(strSize < 2)
+            return str;
+        
+        vector<int> freq(26, 0);
+        int freqChar = -1, freqCharCount = -1;
+        
+        for(int i = 0; i < strSize; i++) {
+            freq[str[i]-'a']++;
+            if(freq[str[i]-'a'] > freqCharCount) {
+                freqCharCount = freq[str[i]-'a'];
+                freqChar = str[i]-'a';
+            }
+        }
+        
+        if(freqCharCount > (strSize+1)/2)
+            return "";
+        
+        
+        int position = 0;
+        
+        for(int i = -1; i < 26; i++) {
+            int current = (i == -1) ? freqChar : i;
+            while(freq[current]-- > 0) {
+                str[position] = 'a' + current;
+                position = (position+2 >= strSize) ? 1 : position+2;
+            }
+        }
+        return str;
+    }
 };

@@ -54,6 +54,30 @@ class Solution(object):
         return cnt
 
 
+
+class Solution:
+    def intersectionSizeTwo(self, intervals: List[List[int]]) -> int:
+        picks = []
+        # Sort intervals by ending points
+        # Greedily select two largest numbers in interval as needed
+        # KEY: We only need to look at the two largest numbers added thus far (last added) to our picks list.
+        intervals = sorted(intervals, key=lambda x: x[1])
+
+        for start, end in intervals:
+            if len(picks) == 0 or picks[-1] < start: # No numbers already selected
+                picks.append(end-1)
+                picks.append(end)
+            elif picks[-2] < start:     # One number already selected
+                if picks[-1] == end:
+                    picks.append(end-1)
+                else:
+                    picks.append(end)
+            else:                       # picks[-2] and picks[-1] already in picks
+                continue    
+
+        return len(picks)
+
+
 class Solution(object):
     def intersectionSizeTwo(self, intervals):
         max2 = [float('-inf')] * 2

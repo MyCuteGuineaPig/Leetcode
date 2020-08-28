@@ -1,18 +1,3 @@
-"""
-738. Monotone Increasing Digits
-
-Example 1:
-Input: N = 10
-Output: 9
-Example 2:
-Input: N = 1234
-Output: 1234
-Example 3:
-Input: N = 332
-Output: 299
-
-"""
-
 class Solution:
     def monotoneIncreasingDigits(self, N):
         """

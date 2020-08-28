@@ -1,36 +1,12 @@
 /*
-757. Set Intersection Size At Least Two
-
-An integer interval [a, b] (for integers a < b) is a set of all consecutive integers from a to b, including a and b.
-
-Find the minimum size of a set S such that for every integer interval A in intervals, 
-the intersection of S with A has size at least 2.
-
-Example 1:
-Input: intervals = [[1, 3], [1, 4], [2, 5], [3, 5]]
-Output: 3
-Explanation:
-Consider the set S = {2, 3, 4}.  For each interval, there are at least 2 elements from S in the interval.
-Also, there isn't a smaller size set that fulfills the above condition.
-Thus, we output the size of this set, which is 3.
-Example 2:
-Input: intervals = [[1, 2], [2, 3], [2, 4], [4, 5]]
-Output: 5
-Explanation:
-An example of a minimum sized set is {1, 2, 3, 4, 5}.
-Note:
-
-intervals will have length in range [1, 3000].
-intervals[i] will have length 2, representing some integer interval.
-intervals[i][j] will be an integer in [0, 10^8].
+Hint: 判断每个点是不是小于等于largest 和second largest ，如果只小于等于largest, res+=1; 如果都不小，res+=2
 
 
-*/
-
+ */
 
 /*
 Solution 1: 先按照start 点由小到大sort，再按照end 由大到小sort， 
-让end 有大到小sort， 是start 一样的点 而是end大的，提前充满，避免到它点，往S push之前使用过的点
+让end 由大到小sort， 是start 一样的点 而是end大的，提前充满，避免到它点，往S push之前使用过的点
 
 建一个vector cnt 初始值为2，表示点i还需要几个点让它还剩几个点就覆盖，
 

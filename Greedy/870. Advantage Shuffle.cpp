@@ -1,31 +1,4 @@
-/*
-870. Advantage Shuffle
 
-
-Given two arrays A and B of equal size, the advantage of A with respect to B is the number of indices i for which A[i] > B[i].
-
-Return any permutation of A that maximizes its advantage with respect to B.
-
- 
-
-Example 1:
-
-Input: A = [2,7,11,15], B = [1,10,4,11]
-Output: [2,11,7,15]
-Example 2:
-
-Input: A = [12,24,8,32], B = [13,25,32,11]
-Output: [24,32,8,12]
- 
-
-Note:
-
-1 <= A.length = B.length <= 10000
-0 <= A[i] <= 10^9
-0 <= B[i] <= 10^9
-
-
-*/
 
 /*
 sort A, B 
@@ -41,7 +14,7 @@ public:
         vector<int>res(B.size());
         for(int i = 0, jstart = 0, jend = A.size()-1; i<A.size(); i++){
             if(A[i]>Bs[jstart].first) res[Bs[jstart++].second] = A[i];
-            else res[Bs[jend--].second] = A[i];
+            else res[Bs[jend--].second] = A[i];  //最小的A 给当前最大的 B
         }
         return res;
     }
@@ -64,12 +37,12 @@ public:
         for(int i = 0; i<B.size(); i++) pq.push({B[i], i});
         sort(A.begin(), A.end());
         vector<int>res(B.size());
-        int lo = 0, hi = A.size();
+        int lo = 0, hi = A.size()-1;
         
         while(!pq.empty()){
             auto b = pq.top(); pq.pop();
             if(A[hi]>b.first) res[b.second] = A[hi--];
-            else res[b.second] = A[lo++];
+            else res[b.second] = A[lo++]; //最小的A 给当前最大的 B
         }
         
         return res;

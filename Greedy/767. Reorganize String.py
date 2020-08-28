@@ -98,7 +98,7 @@ class Solution:
             idx = 0
             for key, value in sorted(table.items(), key=lambda x: x[1], reverse=True):
                 for i in range(value):
-                    res[idx] += key
+                    res[idx] += key #['',''] -> ['a','a'] -> ['ab','a']
                     idx += 1
                     idx %= max_freq
         return ''.join(res)
