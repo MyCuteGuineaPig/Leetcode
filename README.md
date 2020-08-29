@@ -142,9 +142,10 @@ Python trick:
 | [767. Reorganize String](https://leetcode.com/problems/reorganize-string/) | _O(n)_ | _O(1)_	| Medium | priority_queue  |
 | [798. Smallest Rotation with Highest Score](https://leetcode.com/problems/smallest-rotation-with-highest-score/) | _O(n)_ | _O(1)_	| Hard | 🎅🎅🎅 |
 | [843. Guess the Word](https://leetcode.com/problems/guess-the-word/) | _O(n^2)_ | _O(n)_	| Hard | |
-| [861. Score After Flipping Matrix](https://leetcode.com/problems/guess-the-word/) | _O(m \* n)_ | _O(1)_	| Medium | |
+| [861. Score After Flipping Matrix](https://leetcode.com/problems/score-after-flipping-matrix/) | _O(m \* n)_ | _O(1)_	| Medium | |
 | [870. Advantage Shuffle](https://leetcode.com/problems/advantage-shuffle/) | _O(nlogn)_ | _O(n)_	| Medium | 💜🎅 sort \ maxheap \ [minheap](https://github.com/beckswu/Leetcode/blob/master/Greedy/870.%20Advantage%20Shuffle.cpp#L60) |
 | [881. Boats to Save People](https://leetcode.com/problems/boats-to-save-people/) | _O(nlogn)_ | _O(n)_	| Medium | two pointer |
+| [948. Bag of Tokens](https://leetcode.com/problems/bag-of-tokens/) | _O(nlogn)_ | _O(1)_	| Medium | Bad Problem Description. [Rewrite Version]() |
 | [1249. Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/) | _O(n)_ | _O(1)_	| Medium | Stack |
 | [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | [1419	Minimum Number of Frogs Croaking](https://leetcode.com/problems/minimum-number-of-frogs-croaking/) | _O(n)_ |	_O(1)_	| Medium | 需保证 counter 递增 ```c>r>o>a>k```  |
