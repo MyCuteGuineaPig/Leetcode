@@ -107,8 +107,8 @@ class Solution:
                         if cand:
                             memo[s, t] = cand
                             break
-                    else: 
-                        memo[s, t] = []
+                        else: 
+                            memo[s, t] = []
                 elif target[t] == stamp[s]:
                     cand = dfs(s+1, t+1, seqs)
                     memo[s, t] = cand if cand else dfs(0, t+1, seqs+[t+1])
