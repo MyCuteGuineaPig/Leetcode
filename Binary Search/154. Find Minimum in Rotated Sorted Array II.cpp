@@ -1,28 +1,3 @@
-/*
-154. Find Minimum in Rotated Sorted Array II
-Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
-
-(i.e.,  [0,1,2,4,5,6,7] might become  [4,5,6,7,0,1,2]).
-
-Find the minimum element.
-
-The array may contain duplicates.
-
-Example 1:
-
-Input: [1,3,5]
-Output: 1
-Example 2:
-
-Input: [2,2,2,0,1]
-Output: 0
-Note:
-
-This is a follow up for "Find Minimum in Rotated Sorted Array".
-Would allow duplicates affect the run-time complexity? How and why?
-
-*/
-
 class Solution {
 public:
     int findMin(vector<int>& nums) {
@@ -98,25 +73,18 @@ private:
 };
 
 
+//Recursive
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int l = 0, r = nums.size() - 1;
-        while (nums[l] >= nums[r]) {
-            int mid = (l & r) + ((l ^ r) >> 1);
-            //cout<<" left "<<l<<" mid "<<mid<<" right "<<r<<endl;
-            if (nums[l] == nums[r] && nums[mid] == nums[l])
-                return findMinLinear(nums, l, r);
-            if (nums[mid] > nums[r])  l = mid + 1;  //turn is on right
-            else r = mid;
-        }
-        return nums[l];
-    } 
-private:
-    int findMinLinear(vector<int>& nums, int l, int r) {
-        int minnum = nums[l];
-        for (int p = l + 1; p <= r; p++)
-            minnum = min(minnum, nums[p]);
-        return minnum;
+       return findMin(nums, 0, nums.size() - 1);
+    }
+    
+    int findMin(vector<int>& nums, int l, int r) {
+        if(l > r) return nums[l];
+        int mid = l + (r - l) / 2;
+        if(nums[mid] > nums[r]) return findMin(nums, mid + 1, r);
+        else if(nums[mid] < nums[r]) return findMin(nums, l, mid);
+        else return findMin(nums, l, r - 1);
     }
 };

@@ -1,27 +1,3 @@
-/*
-222. Count Complete Tree Nodes
-
-Given a complete binary tree, count the number of nodes.
-
-Note:
-
-Definition of a complete binary tree from Wikipedia:
-In a complete binary tree every level, except possibly the last, is completely filled, 
-and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
-
-Example:
-
-Input: 
-    1
-   / \
-  2   3
- / \  /
-4  5 6
-
-Output: 6
-
-
-*/
 
 
 /*
@@ -104,7 +80,8 @@ class Solution {
 public:
     int countNodes(TreeNode* root) {
         int h = height(root);
-        return h < 0 ? 0 : height(root->right) == h-1 ?  (1<<h) + countNodes(root->right) : (1<<h-1) + countNodes(root->left);
+        return h < 0 ? 0 : height(root->right) == h-1 ?  (1<<h) + countNodes(root->right) 
+                                                        : (1<<h-1) + countNodes(root->left);
     }
     
     int height(TreeNode* root ){
@@ -147,42 +124,6 @@ public:
 };
 
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:    
-    int height(TreeNode* root) {
-        return !root ? -1 : 1 + height(root->left);
-    }
-    int countNodes(TreeNode* root) {
-        int h = height(root);
-        int res = 0;
-        if (root)
-            cout<<" h "<<h<<" root "<<root->val<<endl;
-        if (h<0)
-            return 0;
-        if ( height(root->right) == h-1){
-            cout<<" root "<<root->val<<" + (1 << h) "<<(1 << h)<<endl;
-            res = (1 << h) + countNodes(root->right);
-            cout<<" after h-1 "<<" root "<<root->val<<" res "<<res<<endl;
-        }
-        else{
-            cout<<" root "<<root->val<<" + (1 << h-1) "<<(1 << h-1)<<endl;
-            res = (1 << h-1) + countNodes(root->left);
-            cout<<" after else "<<" root "<<root->val<<" res "<<res<<endl;
-        }
-        
-        return res;
-    }
-};
-
 
 
 class Solution {
@@ -207,4 +148,48 @@ public:
 
     }
 
+};
+
+
+
+/*
+O(logN * logN)
+
+If midNode is null, then it means we should count the nodes on the last level in the left subtree.
+If midNode is not null, then we add half of the last level nodes to our result and then count the nodes on the last level in the right subtree.
+
+
+*/
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+    	if (!root) return 0;
+        if (!root->left) return 1;
+        int height = 0;
+        int nodesSum = 0;
+        TreeNode* curr = root;
+        while(curr->left) {
+            nodesSum += (1<<height);
+            height++;
+            curr = curr->left;
+        }
+        return nodesSum + countLastLevel(root, height);  
+    }
+    
+
+  int countLastLevel(TreeNode* root, int height) {
+        if(height==1){
+            if (root->right) return 2;
+            else if (root->left) return 1;
+            else return 0;
+        }
+        TreeNode* midNode = root->left; //左侧最右侧的child
+        int currHeight = 1;
+        while(currHeight<height) {
+            currHeight++;
+            midNode = midNode->right;
+        }
+        if (!midNode) return countLastLevel(root->left, height-1);//if right tree is null
+        else return (1<<(height-1)) + countLastLevel(root->right, height-1);
+    }
 };

@@ -1,27 +1,3 @@
-/*
-33. Search in Rotated Sorted Array
-
-Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
-
-(i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
-
-You are given a target value to search. If found in the array return its index, otherwise return -1.
-
-You may assume no duplicate exists in the array.
-
-Your algorithm's runtime complexity must be in the order of O(log n).
-
-Example 1:
-
-Input: nums = [4,5,6,7,0,1,2], target = 0
-Output: 4
-Example 2:
-
-Input: nums = [4,5,6,7,0,1,2], target = 3
-Output: -1
-
-*/
-
 
 
 class Solution {
@@ -114,5 +90,131 @@ public:
         auto it = lower_bound( nums.begin(), nums.end(), target, [&] (int x, int y) { return adjust(x) < adjust(y); } );
             
         return it != nums.end() && *it == target ? it-nums.begin() : -1;
+    }
+};
+
+
+
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int lo=0,hi=n-1;
+        // find the index of the smallest value using binary search.
+        // Loop will terminate since mid < hi, and lo or hi will shrink by at least 1.
+        // Proof by contradiction that mid < hi: if mid==hi, then lo==hi and loop would have been terminated.
+        while(lo<hi){
+            int mid=(lo+hi)/2;
+            if(nums[mid]>nums[hi]) lo=mid+1;
+            else hi=mid;
+        }
+        // lo==hi is the index of the smallest value and also the number of places rotated.
+        int rot=lo;
+        lo=0;hi=n-1;
+        // The usual binary search and accounting for rotation.
+        while(lo<=hi){
+            int mid=(lo+hi)/2;
+            int realmid=(mid+rot)%n;
+            if(nums[realmid]==target)return realmid;
+            if(nums[realmid]<target)lo=mid+1;
+            else hi=mid-1;
+        }
+        return -1;
+    }
+};
+
+
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int start = 0;
+        int end = nums.size() - 1;
+        while (start <= end){
+            int mid = (start + end) / 2;
+            if (nums[mid] == target)
+                return mid;
+        
+            if (nums[start] <= nums[mid]){
+                 if (target < nums[mid] && target >= nums[start]) 
+                    end = mid - 1;
+                 else
+                    start = mid + 1;
+            } 
+        
+            if (nums[mid] <= nums[end]){
+                if (target > nums[mid] && target <= nums[end])
+                    start = mid + 1;
+                 else
+                    end = mid - 1;
+            }
+        }
+        return -1;
+    }
+};
+
+
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0, r = nums.size()-1;
+        while (l <= r) {
+            int mid = (l+r) / 2;
+            if (target == nums[mid])
+                return mid;
+            // there exists rotation; the middle element is in the left part of the array
+            if (nums[mid] > nums[r]) {
+                if (target < nums[mid] && target >= nums[l])
+                    r = mid - 1;
+                else
+                    l = mid + 1;
+            }
+            // there exists rotation; the middle element is in the right part of the array
+            else if (nums[mid] < nums[l]) {
+                if (target > nums[mid] && target <= nums[r])
+                    l = mid + 1;
+                else
+                    r = mid - 1;
+            }
+            // there is no rotation; just like normal binary search
+            else {
+                if (target < nums[mid])
+                    r = mid - 1;
+                else
+                    l = mid + 1;
+            }
+        }
+        return -1;
+    }
+};
+
+
+
+/*
+
+Those three cases look cyclic when should move to left
+
+    nums[0] <= target <= nums[i]
+               target <= nums[i] < nums[0]
+                         nums[i] < nums[0] <= target
+
+    checks (nums[0] <= target), (target <= nums[i]) and (nums[i] < nums[0]), and I want to know 
+    whether exactly two of them are true. They can't all be true or all be false (check it)
+
+ */
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int lo = 0, hi = int(nums.size()) - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if ((nums[0] > target) ^ (nums[0] > nums[mid]) ^ (target > nums[mid]))
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        return lo == hi && nums[lo] == target ? lo : -1;
     }
 };

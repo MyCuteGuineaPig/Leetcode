@@ -20,5 +20,5 @@ class Solution:
 
 class Solution:
     def findMin(self, nums):
-        self.__getitem__ = lambda i: nums[i] <= nums[-1]
+        self.__getitem__ = lambda i: nums[i] <= nums[-1] #大于最后一个数，往左； 小于最后一个往右
         return nums[bisect.bisect(self, False, 0, len(nums))]
