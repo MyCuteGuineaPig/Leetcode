@@ -52,7 +52,6 @@ public:
             //               ^ ^
             // Next:     1 1 3 3|5 6 6|
             else l = mid+2;
-            //cout<<" aftermid "<<mid<<" l "<<l<<" r "<<r<<endl;
         }
         return nums[l];
     }
@@ -66,13 +65,77 @@ public:
         int l = 0, r = nums.size()-1;
         while(l<r){
             int mid = (l + r) >> 1;
-            cout<<" mid "<<mid<<" l "<<l<<" r "<<r<<endl;
-            if (nums[mid] == nums[mid ^ 1])
+            if (nums[mid] == nums[mid ^ 1]) //mid 是奇数, mid ^ 1 = mid - 1
+                                            //mid 是偶数, mid ^ 1 = mid + 1
                 l = mid + 1;
             else
                 r = mid;
-            cout<<" aftermid "<<mid<<" l "<<l<<" r "<<r<<endl;
         }
         return nums[l];
+    }
+};
+
+
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size(), lo=0, hi=n/2;
+        while (lo < hi) {
+            int m = (lo + hi) / 2;
+            if (nums[2*m]!=nums[2*m+1]) hi = m;
+            else lo = m+1;
+        }
+        return nums[2*lo];
+    }
+};
+
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int N = nums.size();
+        if(N == 1)
+            return nums[0];
+        
+        int left = 0;
+        int right = N - 1;
+        int mid;
+        
+        while(left < right){
+            mid = left + ((right  - left) >> 1);
+            if(nums[mid] == nums[mid + 1]){
+                // from index mid to (N - 1) - if even then check left interval
+                if(mid % 2 == 0)
+                  left = mid + 2;
+                else
+                   right = mid - 1;
+            }else if(nums[mid] == nums[mid - 1]){
+                // from index (mid - 1) to (N - 1) - if even then check left interval
+                if(mid % 2 == 0)
+                    right = mid - 2;
+                else
+                    left = mid + 1;
+            }else
+                return nums[mid];
+        }
+        
+        return nums[left];
+    }
+};
+
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int lo = 0, hi = nums.size() - 1;
+        while (lo < hi){
+            int mid = 2 * ((lo + hi) / 4);
+            if(nums[mid] == nums[mid+1])
+                lo = mid+2;
+            else
+                hi = mid;
+        }
+	    return nums[lo];
     }
 };

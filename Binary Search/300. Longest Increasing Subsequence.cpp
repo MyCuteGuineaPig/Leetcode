@@ -1,3 +1,10 @@
+/*
+Binary Search Hint:
+tail[i] 存的是递增subarray长度为i+1，组成该长度最小的尾部数字, 
+    比如tail = [2,5] 代表当increasing subarray长度为2是，组成递增subarray 末尾最后一位数最小是5 
+
+ */
+
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {

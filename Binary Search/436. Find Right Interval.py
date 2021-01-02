@@ -1,29 +1,4 @@
 """
-436. Find Right Interval
-"""
-Example 1:
-Input: [ [1,2] ]
-
-Output: [-1]
-
-Explanation: There is only one interval in the collection, so it outputs -1.
-Example 2:
-Input: [ [3,4], [2,3], [1,2] ]
-
-Output: [-1, 0, 1]
-
-Explanation: There is no satisfied "right" interval for [3,4].
-For [2,3], the interval [3,4] has minimum-"right" start point;
-For [1,2], the interval [2,3] has minimum-"right" start point.
-Example 3:
-Input: [ [1,4], [2,3], [3,4] ]
-
-Output: [-1, 2, -1]
-
-Explanation: There is no satisfied "right" interval for [1,4] and [3,4].
-For [2,3], the interval [3,4] has minimum-"right" start point.
-
-"""
 # Definition for an interval.
 # class Interval(object):
 #     def __init__(self, s=0, e=0):
@@ -54,14 +29,18 @@ class Solution(object):
 
 class Solution(object):
     def findRightInterval(self, intervals):
-        """
-        :type intervals: List[Interval]
-        :rtype: List[int]
-        """
         start = sorted([ints.start, i] for i, ints in enumerate(intervals)) + [[float('inf'),-1]]
         return [start[bisect.bisect_left(start,[ints.end])][1] for ints in intervals ]
-        
 
+
+
+
+
+class Solution:
     def findRightInterval(self, intervals):
-    starts = sorted([I.start, i] for i, I in enumerate(intervals)) + [[float('inf'), -1]]
-    return [starts[bisect.bisect(starts, [I.end])][1] for I in intervals]
+        l = sorted((e.start, i) for i, e in enumerate(intervals))
+        res = []
+        for e in intervals:
+            r = bisect.bisect_left(l, (e.end,))
+            res.append(l[r][1] if r < len(l) else -1)
+        return res

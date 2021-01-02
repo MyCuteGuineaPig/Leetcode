@@ -1,15 +1,3 @@
-/*
-354. Russian Doll Envelopes
-You have a number of envelopes with widths and heights given as a pair of integers (w, h). 
-One envelope can fit into another if and only if both the width and height of one envelope is greater than the width and height of the other envelope.
-
-What is the maximum number of envelopes can you Russian doll? (put one inside other)
-
-Example:
-Given envelopes = [[5,4],[6,4],[6,7],[2,3]], the maximum number of envelopes you can Russian doll is 3 ([2,3] => [5,4] => [6,7]).
-
-*/
-
 class Solution {
 public:
     int maxEnvelopes(vector<pair<int, int>>& envelopes) {
@@ -62,33 +50,34 @@ public:
 
 
 
+
+
+
+bool cmp (pair<int, int> i, pair<int, int> j) {
+    if (i.first == j.first)
+        return i.second > j.second;
+    return i.first < j.first;
+}
 class Solution {
 public:
     int maxEnvelopes(vector<pair<int, int>>& envelopes) {
-        if(envelopes.empty()) return 0;
-        vector<int>dp;
-        sort(envelopes.begin(),envelopes.end(),[](const pair<int,int>a, const pair<int,int>b){
-            if(a.first == b.first) return a.second > b.second; else return a.first < b.first;
-        }); /*按照width由小到达排序，按照height又大到小排序， 同样width，把height由大到小排序，可以避免同样width，不一样height，不可以组
-         的element放前main, 比如[[2,3],[3,1],[3,5]] sort时候要把[3,5] 放在[3,1]前面，因为这样才能保证[2,3]，[3,5] 可以组，
-        比如[[2,3],[3,1],[3,3]] 要是把[3,1] 放在[3,3] 前面，按照height [3，1],[3,3] 就可以组了
-
-        dp\[i] 存组成递增subarray长度为i+1时，末尾最小数
-        */
-        
-        //for(auto i: envelopes)
-        //    cout<<i.first<<" "<<i.second<<endl;
-        for(auto e: envelopes){
-            int i = 0, j = dp.size();
-            while(i<j){
-                int mid = i + (j-i)/2;
-                if(dp[mid]<e.second)
-                    i = mid+1;
-                else j = mid;
+        int N = envelopes.size();
+        vector<int> candidates;
+        sort(envelopes.begin(), envelopes.end(), cmp);
+        for (int i = 0; i < N; i++) {
+            int lo = 0, hi = candidates.size() - 1;
+            while (lo <= hi) {
+                int mid = lo + (hi - lo)/2;
+                if (envelopes[i].second > envelopes[candidates[mid]].second)
+                    lo = mid + 1;
+                else
+                    hi = mid - 1;
             }
-            if(i==dp.size()) dp.push_back(e.second);
-            else dp[i] = e.second;
+            if (lo == candidates.size())
+                candidates.push_back(i);
+            else
+                candidates[lo] = i;
         }
-        return dp.size();
+        return candidates.size();
     }
 };

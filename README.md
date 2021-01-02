@@ -25,19 +25,12 @@
 * [Design](https://github.com/beckswu/Leetcode#design)
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
 
-Python trick: 
-1. ```\*``` 可以把generator 变成list, 比如```[*zip(*matrix)] = list(zip(*matrix))```
-2. ```join``` 可以直接加generator, 比如 ```"".join(map(func, S))```
-3. list 用于 inside function, 不能用 ```list += []```, 只能用```append```
 
- 😍 反复看的题<br/>
- 😚 反复看的题 II (low priority)<br/>
-:alien:, 💡 比较tricky, 有陷阱<br/>
- 🔍 偏算法逻辑<br/>
-:pencil2: 聪明的code 写法 <br/>
- 🎅 偏思维逻辑 <br/>
- 🌒, ❌ 不用太看的题目<br/>
- 🐸 brainstorming <br/>
+
+🔍 good algorithm<br/>
+:pencil2: smart code design <br/>
+🎅: good question <br/>
+❌: not good designed question<br/>
 
 几个单独算法:
 1. Trie
@@ -859,7 +852,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [033. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | _O(log(n))_ |	_O(1)_	| Medium | 💜🎅Similar Question: <ul><li>[081. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/)</li><li>[153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)</li><li>[154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/)</li></ul>  |
 | [034. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/) | _O(log(n))_ |	_O(1)_	| Medium | lowerbound/upperbound/EqualRange, [lowerbound 可以convert to int](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/034.%20Search%20for%20a%20Range.cpp#L110) |
 | [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/) | _O(log(n))_ |	_O(1)_	| Easy |  |
-| [069. Sqrt(x)](https://leetcode.com/problems/sqrtx/description/) | _O(log(n))_ |	_O(1)_	| Easy |  |
+| [069. Sqrt(x)](https://leetcode.com/problems/sqrtx/description/) | _O(log(n))_ |	_O(1)_	| Easy |🎅 [Bit Solution](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/069.%20Sqrt(x).cpp#L140) similar Question <ul><li>[367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/)</li></ul>  |
 | [074. search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/) | _O(logm + logn)_ |	_O(1)_	| Medium | [lower_bound, upper_bound lambda](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/074.%20Search%20a%202D%20Matrix.cpp#L6)|
 | [081. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/) | _O(logn)_ |	_O(1)_	| Medium | 💜🎅 Similar Question: <ul><li>[033. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)</li><li>[153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)</li><li>[154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/)</li></ul> |
 | [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/) | _O(logn)_ |	_O(1)_	| Medium | Similar Question: <ul><li>[033. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)</li><li>[081. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/)</li><li>[154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/)</li></ul>  |
@@ -868,14 +861,14 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/description/) | _O((logn)^2)_ |	_O(1)_	| Medium | 注意审题 complete tree |
 | [275. H-Index II](https://leetcode.com/problems/h-index-ii/description/) | _O(logn)_ |	_O(1)_	| Medium | |
 | [278. First Bad Version](https://leetcode.com/problems/first-bad-version/) | _O(logn)_ |	_O(1)_	| Easy | |
-| [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | _O(nlogn)_ |	_O(n)_	| Medium | 💜🎅🎅🎅tail\[i] 存的是递增subarray长度为i+1，组成该长度最小的尾部数字, 比如tail = \[2,5] 代表当increasing subarray长度为2是，组成递增subarray 末尾最后一位数最小是5   |
-| [354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) | _O(nlogn)_ |	_O(n)_	| Hard | 按照width由小到达排序，再把同样width，把height由大到小排序，dp\[i] 存组成递增subarray长度为i+1时，末尾最小数(也就是最小height) |
-| [363. Max Sum of Rectangle No Larger Than K](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/description/) | _O(min(m, n)^2 * max(m, n) * logn(max(m, n)))_ |	_O(max(m, n))_	| Hard | 如果row多，外面两个outer loop是col(vice versa), 利用binary search(set) |
-| [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | _O(logn)_ |	_O(1)_	| Easy | Newton Method |
+| [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | _O(nlogn)_ |	_O(n)_	| Medium | 💜🎅🎅🎅 similar question <ul><li>[354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) </li></ul>  |
+| [354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) | _O(nlogn)_ |	_O(n)_	| Hard | 💜🎅similar question <ul><li>[300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)</li></ul> |
+| [363. Max Sum of Rectangle No Larger Than K](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/description/) | _O(min(m, n)^2 * max(m, n) * logn(max(m, n)))_ |	_O(max(m, n))_	| Hard | 💜🎅🎅, 利用Set |
+| [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | _O(logn)_ |	_O(1)_	| Easy | Similar Question <ul><li>[069. Sqrt(x)](https://leetcode.com/problems/sqrtx/description/)</li></ul>  |
 | [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/) | _O(logn)_ |	_O(1)_	| Easy | |
 | [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) | _O(n * log(MAX - MIN)_ |	_O(1)_	| Medium | l=m\[0]\[0], r=m\[-1]\[-1], binary search 是否至少有k个数小于等于mid |
-| [410. Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/description/) | _O(nlogn)_ |	_O(1)_	| Hard | 答案在\[maxnum, totsum]之间，binary search这个interval |
-| [436. Find Right Interval](https://leetcode.com/problems/find-right-interval/) | _O(nlogn)_ |	_O(n)_	| Medium | 把每个interval start put in set, 然后interval找end的lower bound |
+| [410. Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/description/) | _O(nlogn)_ |	_O(1)_	| Hard | 💜 |
+| [436. Find Right Interval](https://leetcode.com/problems/find-right-interval/) | _O(nlogn)_ |	_O(n)_	| Medium | [map lower bound](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/436.%20Find%20Right%20Interval.cpp#L47) |
 | [475. Heaters](https://leetcode.com/problems/find-right-interval/) | _O((m + n) * logn)_ |	_O(1)_	| Easy | <ul><li>sort heater + lower_bound</li><li> sort house sort heaters,逐渐递增index</li></ul> |
 | [540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/description/) | _O(logn)_ |	_O(1)_	| Medium | |
 | [658. Find K Closest Elements](https://leetcode.com/problems/find-k-closest-elements/description/) | _O(logn+k)_ |	_O(1)_	| Medium | x-arr\[left-1]<=arr\[right]-x 保证left一定是起点，right是最后数后面一位 |

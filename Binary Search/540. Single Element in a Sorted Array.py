@@ -26,3 +26,30 @@ class Solution(object):
             else:
                 l = mid+2
         return nums[l]
+
+
+
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        lo, hi = 0, len(nums) - 1
+        while lo < hi:
+            mid = 2 * ((lo + hi) // 4)
+            if nums[mid] == nums[mid+1]:
+                lo = mid+2
+            else:
+                hi = mid
+        return nums[lo]
+
+
+
+
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        lo, hi = 0, len(nums) - 1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if nums[mid] == nums[mid ^ 1]:
+                lo = mid + 1
+            else:
+                hi = mid
+        return nums[lo]
