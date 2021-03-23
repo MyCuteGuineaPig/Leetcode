@@ -155,3 +155,51 @@ public:
         return longestRun;
     }
 };
+
+//Disjoint Set
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        Disjointset dj; 
+        for(auto i: nums)
+            dj.insert(i);
+        return dj.getMaxChild();
+    }
+    
+    class Disjointset{
+        unordered_map<int,int>parents; 
+        unordered_map<int, int>child;
+        
+        int find(int x){
+            return parents[x] == x? x: parents[x] = find(parents[x]);
+        }
+        
+    public:
+        void insert(int x){
+            if(parents.count(x) == 0){
+                parents[x] = x;
+                child[x] = 1;
+            }
+            else 
+                return;
+            if(parents.count(x+1)){
+                int p1 = find(x+1);
+                parents[x] = p1;
+                child[p1] += child[x];
+            }
+            if(parents.count(x-1)){
+                int p2 = find(x-1);
+                int px = find(x);
+                parents[p2] = px;
+                child[px] += child[p2];
+            }
+        }
+        
+        int getMaxChild(){
+            int res = 0;
+            for(auto i: child)
+                res = max(res, i.second);
+            return res;
+        }
+    };
+};
