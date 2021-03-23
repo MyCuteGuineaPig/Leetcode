@@ -273,6 +273,14 @@ public:
                         //jStart是上个刚删除的地方，所以S[j-1]!=closedParen 是为了避免重复，比如()()), 删除倒数第一个和倒数第二个）是一样的
                     // Recursion: iStart = i since we now have valid # closed parenthesis thru i. jStart = j prevents duplicates
                         removeHelper(s.substr(0, j) + s.substr(j + 1, s.size()-j-1), output, i, j, openParen, closedParen);
+                /*
+                从jStart 而不是iStart 开始删除是, 
+                    当numClosedParen > numOpenParen - 1时，就会call removeHelper; 所以进入function时, s的iStart 左面的括号都是balanced的, 
+                    而若此时 numClosedParen 又大于 numOpenParen,  
+                            已知上个call ()) a ()) -> () a ()),  a左侧的是上个balanced的结果, iStart = 2, jStart = 1
+                            而此时，删除index = 1 , 可以让iStart右侧的重新balanced numClosedParen = numOpenParen , () a ()) ->  ( a ( ) )
+                
+                */
                 return; // Stop here. The recursive calls handle the rest of the string.
             }
         }
