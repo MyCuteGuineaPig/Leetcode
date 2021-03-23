@@ -151,6 +151,43 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+       if(!root) return {};
+        stack<pair<TreeNode*,int>> stk;
+        TreeNode* cur = root;
+        vector<int>path;
+        vector<string>res;
+        int l = 0;
+        while(cur || !stk.empty()){
+            if(cur){
+                path.push_back(cur->val);
+                stk.push({cur,++l});
+                if(!cur->left && !cur->right)
+                    res.push_back(construct(path));
+                cur = cur->left;
+            }else{
+                auto top = stk.top(); stk.pop();
+                cur = top.first; l = top.second;
+                while (path.size()>l)
+                    path.pop_back();
+                cur = cur->right;
+            }   
+        }
+        return res;
+    }
+    
+    string construct(const vector<int>&path){
+        string res;
+        for(auto i: path){
+            if(res.empty()) res = to_string(i);
+            else res += "->"+to_string(i);
+        }
+        return res;
+    }
+};
+
 //BFS
 class Solution {
 public:
