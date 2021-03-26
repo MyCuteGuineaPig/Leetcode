@@ -56,4 +56,9 @@ class Solution:
                 if 1 << i & j:
                    res[j].append(v) 
         return res
+    
+#2021
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        return functools.reduce(lambda x, y: x + [l + [y] for l in x], nums, [[]])
             

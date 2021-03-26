@@ -99,6 +99,20 @@ Everything inside the for loop is O(1) so the total time is O(n).
 
 */
 
+
+/*
+需要update hash的原因，
+    比如 i = 6, hash = 4 5  7   bound = 2(hash[5]) + 1 + 1(hash[7]) =4      =>   hash = 4 5 6 7 
+                count 2 2  1                                                    count= 4 2 1 4
+                
+     如果不update i, 
+        hash = 4 5  7   bound = 2(hash[5]) + 1 + 1(hash[7]) =4      =>   hash = 4 5 6 7 
+                count 2 2  1                                             count= 4 2 0 4
+                
+         接下来还有6的话,   bound = 2(hash[5]) + 1 + 4(hash[7]) = 7 which is wrong  
+        
+*/ 
+
 class Solution {
 public:
     int longestConsecutive(vector<int> &nums) {

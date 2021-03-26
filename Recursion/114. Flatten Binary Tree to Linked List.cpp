@@ -72,6 +72,19 @@ public:
 
 */
 
+/*
+Time is O(n), here's why:
+
+Moving root over all nodes and for each one potentially dive down deep into its left subtree, 
+so one might think it's more than O(n) time. But... a long path down the left subtree immediately pays off,
+as you then insert that entire path into the "right border" of the whole tree, 
+where now will walk over it once more but t will never have to walk over it again.
+
+To put it differently: Every node is visited by Root exactly once and by t at most once, (root 和 t都最多经过每个点1次)
+and the runtime is proportional to the number of steps taken by root and t, so O(n) overall.
+
+*/
+
 class Solution {
 public:
     void flatten(TreeNode* root) {
