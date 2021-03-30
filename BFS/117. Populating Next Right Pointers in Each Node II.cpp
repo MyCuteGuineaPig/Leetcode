@@ -1,35 +1,61 @@
-/*
-117. Populating Next Right Pointers in Each Node II.cpp
-Time	Space	Difficulty
-O(n)	O(1)	Hard
-
-Follow up for problem "Populating Next Right Pointers in Each Node".
-
-What if the given tree could be any binary tree? Would your previous solution still work?
-
-Note:
-
-You may only use constant extra space.
-For example,
-Given the following binary tree,
-         1
-       /  \
-      2    3
-     / \    \
-    4   5    7
-After calling your function, the tree should look like:
-         1 -> NULL
-       /  \
-      2 -> 3 -> NULL
-     / \    \
-    4-> 5 -> 7 -> NULL
-
-
-*/
 
 class Solution {
 public:
-    void connect(TreeLinkNode *root) {
-        
+    Node* connect(Node* root) {
+        helper(root);
+        return root;
+    }
+    
+    void helper(Node* root){
+        if(!root)
+            return;
+        Node* cur = root, *prev = nullptr;
+        Node* nextLeftMostChild = nullptr;
+        while(cur){
+            if(cur->left){
+                if(!nextLeftMostChild)// !nextLeftMostChild 也是 !prev,  
+                    nextLeftMostChild = cur->left;
+                else prev->next =cur->left;
+                prev = cur->left;
+            }
+            if(cur->right){
+                if(!nextLeftMostChild) 
+                     nextLeftMostChild = cur->right;
+                else prev->next =cur->right;
+                prev = cur->right;
+            }
+            cur = cur->next;
+        }
+        helper(nextLeftMostChild);
+        return;
+    }
+};
+
+
+class Solution {
+public:
+    Node* connect(Node* root) {
+        Node* cur = root;
+        while(cur){
+            Node   *prev = nullptr;
+            Node* nextLeftMostChild = nullptr;
+            while(cur){
+                if(cur->left){
+                    if(!nextLeftMostChild)
+                        nextLeftMostChild = cur->left;
+                    else prev->next =cur->left;
+                    prev = cur->left;
+                }
+                if(cur->right){
+                    if(!nextLeftMostChild) //
+                         nextLeftMostChild = cur->right;
+                    else prev->next =cur->right;
+                    prev = cur->right;
+                }
+                cur = cur->next;
+            }
+            cur = nextLeftMostChild;
+        }
+        return root;
     }
 };

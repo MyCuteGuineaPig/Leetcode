@@ -42,7 +42,9 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | _O(n)_ | _O(n)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
- 
+ | [117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/) |	_O(n)_	| _O(1)_ |	Medium | Traverse through next instead of Traverse from top to down |
+  | [269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) |	_O(n)_	| _O(1)_ |	Medium | Topological sort |
+
  
  ## Array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -400,6 +402,7 @@ TreeNode* helper(TreeNode** head ){
 | [009. Palindrome Number](https://leetcode.com/problems/palindrome-number/) | _O(1)_ | _O(1)_	| Easy |  |
 | [012. Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | _O(n)_ | _O(1)_	| Medium |  |
 | [013. Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | _O(n)_ | _O(1)_	| Easy |  |
+| [390. Elimination Game](https://leetcode.com/problems/elimination-game/) | _O(logn)_ | _O(1)_	| Meidum |  |
 | [964. Least Operators to Express Number](https://leetcode.com/problems/least-operators-to-express-number/) | _O(logn)_ | _O(logn)_	| Hard | 🎅🎅🎅  |
 | [1360. Number of Days Between Two Dates](https://leetcode.com/problems/number-of-days-between-two-dates/) | _O(1)_ | _O(1)_	| Easy |  |
 | [1362. Closest Divisors](https://leetcode.com/problems/closest-divisors/) | _O(sqrt(n))_ | _O(1)_	| Medium |  |
@@ -425,7 +428,7 @@ TreeNode* helper(TreeNode** head ){
 | [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | _O(n)_ | _O(1)_	| Easy | C++ 跳过非isalnum的 |
 | [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/) | _O(n)_ | _O(1)_	| Medium | 先reverse所有的, 再reverse单个每个词, 记录总共len,最后用来截取, C++ find_first_not_of + find_first_of |
 | [165. Compare Version Numbers](https://leetcode.com/problems/compare-version-numbers/) | _O(n)_ | _O(1)_	| Medium | c++ 算当前version1,2的substr的数，如果其中一个碰到结尾，设当前数位0。 c, 可以用c_str() + strtol; python3 zip(\*itertools.zip_longest(\*splits, fillvalue=0)) |
-| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |🔍可以把此题换一种问法: 以index0开始最长的部分palindrome 的长度, 部分最长的pal后面的掉个+s = 答案  <ul><li>KMP: s+"#"+reverse(s), prefix array最后一位是部分最长的pal的长度, kmp prefix 即是suffix，pal是掉个也相等, 所以最后一位是部分最长  </li><li>马拉车(manacher): 不断找最大的回文长，但一边更新右边界时, 只更新mxlen 当p\[i]==i的时候, 最长回文从0开始</li></ul>  |
+| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |🔍可以把此题换一种问法: 以index0 开始最长的部分palindrome 的长度, 部分最长的pal后面的reverse +s = 答案  <ul><li>KMP: s+"#"+reverse(s), prefix array最后一位是部分最长的pal的长度, kmp prefix 即是suffix，pal是掉个也相等, 所以最后一位是部分最长  </li><li>马拉车(manacher): 不断找最大的回文长，但一边更新右边界时, 只更新mxlen 当p\[i]==i的时候, 最长回文从0开始</li></ul>  |
 | [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/) | _O(n)_ | _O(1)_	| Easy | 经典面试题 |
 | [273. Integer to English Words](https://leetcode.com/problems/integer-to-english-words/) | _O(1)_ | _O(1)_	| Hard | 无聊的recursion |
 | [306. Addictive Number](https://leetcode.com/problems/additive-number/) | _O(n^3)_ | _O(n)_	| Medium | recursion 从index0开始试所有的digit可能性直到成功, 比如开始是一位+两位, 还是三位+两位 , 需要一个string add的help function; python 可以用itertools.combination + startswith, 跟[067. Add Binary	](https://leetcode.com/problems/add-binary/) 和[415. Add Strings](https://leetcode.com/problems/add-strings/) 类似, 只不过多个recursion  |
@@ -878,6 +881,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [744. Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/) | _O(logn)_ |	_O(1)_	| Easy | 判断最后一个字母是不是大于target, 大于的话用upperbound，否则返回第一个char |
 | [786. K-th Smallest Prime Fraction](https://leetcode.com/problems/k-th-smallest-prime-fraction/) | _O(nlogr)_ |	_O(1)_	| Hard | <ul><li>用priority_queue, 先push进最小的，每次push前extract当前最小的, 保证push进去的比pop的大，最多max(n,k)次pop+push</li><li> binary search l=0, r=1, 看是不是有n个pair小于等于mid，i=0,增加j,减小A\[i]/\[j]的值，一旦A\[i]/\[j]小于等于mid，增加i,就是增加A\[i]/\[j], 再增加j, 如果count==k, 返回k中最大的那个pair</li><ul> |
 | [793.Preimage Size of Factorial Zeroes Function](https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/description/) | _O((logk)^2)_ |	_O(1)_	| Hard | l = 0, r=5\*k, binary search mid是否有k个零的0，有的话r=mid, 否则l = mid+1, 最后再判断l是否有k个0, 有的话返回5,没有的话返回0 |
+| [1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/) | _O((logN)_ |	_O(1)_	| Medium| 🎅 |
 | [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅[Binary Search](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/1385.%20Find%20the%20Distance%20Value%20Between%20Two%20Arrays.cpp#L23), Two pointer |
 
 
