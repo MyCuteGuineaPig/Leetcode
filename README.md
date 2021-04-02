@@ -43,8 +43,10 @@
 | [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | _O(n)_ | _O(n)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
  | [117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/) |	_O(n)_	| _O(1)_ |	Medium | Traverse through next instead of Traverse from top to down |
-  | [269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) |	_O(n)_	| _O(1)_ |	Medium | Topological sort |
-
+| [269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) |	_O(n)_	| _O(1)_ |	Medium | Topological sort |
+| [743. Network Delay Time](https://leetcode.com/problems/network-delay-time/) |	_O(E \*logV)_	| _O(E + V)_ |	Medium | Dijkstra's Algorithm |
+| [787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) |	_O(E \* logV)_	| _O(E + V)_ |	Medium | Dijkstra's Algorithm |
+| [1197. Minimum Knight Moves](https://leetcode.com/problems/minimum-knight-moves/) |	_O(n\*m)_	| _O(n\*m)_ |	Hard |   |
  
  ## Array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -400,6 +402,7 @@ TreeNode* helper(TreeNode** head ){
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [007. Reverse Integer](https://leetcode.com/problems/reverse-integer/) | _O(1)_ | _O(1)_	| Easy |  |
 | [009. Palindrome Number](https://leetcode.com/problems/palindrome-number/) | _O(1)_ | _O(1)_	| Easy |  |
+| [50. Pow(x, n)](https://leetcode.com/problems/powx-n/) | _O(logN)_ | _O(1)_	| Medium | Divide Conquer |
 | [012. Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | _O(n)_ | _O(1)_	| Medium |  |
 | [013. Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | _O(n)_ | _O(1)_	| Easy |  |
 | [390. Elimination Game](https://leetcode.com/problems/elimination-game/) | _O(logn)_ | _O(1)_	| Meidum |  |
@@ -748,10 +751,12 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | Binary Search, Heap, ZigZag Search |
 | [407. Trapping Rain Water II](https://leetcode.com/problems/trapping-rain-water-ii/) | _O(m \* n \* (logm + logn))_ | _O(m\*n)_	| Hard | 😍🎅 <ul><li>**难点**: 点hold水的高度 取决于 min(周围四个方向上最大高度), 而不是min(四个邻居的高度), 再push进queue(push的height是当前height和cell的最大值) </li><li> 先把长方形四条边 push进min heap; 要**heap top高度是递增的**！**途径**: BFS push 时候push max(heap top 高度, heights\[i]\[j]) </li> <li> [visualization](https://www.youtube.com/watch?time_continue=80&v=cJayBq38VYw) </li></ul> |
 | [632. Smallest Range Covering Elements from K Lists](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/) | _O(nklogk)_ | _O(k)_	| Hard | 😍🎅 <ul><li>**难点**: 缩小windows, windows需要包含每个list内一个数</li><li> 用heap, heap中包含每个list中当前最小数 </li><li> 不能用two pointer, two pointer: **每个list每个数** 包含在windwos内, 此题是 **每个list至少一个数** 含在windwos内 </li> <li> ```vector[i][0]```的数push进minheap, 一个int 记录最大值, heap top 当前最小值 </li></ul> |
+| [759. Employee Free Time](https://leetcode.com/problems/employee-free-time/) | _O(klogk)_ | _O(k)_	| Hard | Heap _O(Nlogk)_ or SweepLine _O(klogk)_   |
 | [846. Hand of Straights](https://leetcode.com/problems/hand-of-straights/) | _O(nlogn)_ | _O(n)_	| Medium | 🔍 <br/><ul><li>Solution 1: set, set.begin 为每个group 的起点</li><li>😍[Solution 2](https://github.com/beckswu/Leetcode/blob/master/Heap/846.%20Hand%20of%20Straights.cpp): set + queue, queue记录每个点的windows 每个点 新增加windows数</li></ul> |
 | [846. Hand of Straights](https://leetcode.com/problems/maximum-performance-of-a-team/) | _O(nlogn)_ | _O(n)_	| Hard |  |
 | [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)	|	_O(n) average_	|	_O(1)_ |	Easy |  ✏️[Quick-Select](https://github.com/beckswu/Leetcode/blob/master/Heap/973.%20K%20Closest%20Points%20to%20Origin.cpp)|
 | [1046. Last Stone Weight](https://leetcode.com/problems/last-stone-weight/) | _O(nlogn)_ | _O(n)_	| Easy |  |
+
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |   |
 
 
