@@ -78,19 +78,14 @@ public:
     
     /** @return the next smallest number */
     int next() {
-        int val;
-        while(cur || !stk.empty()){
-            if(cur){
-                stk.push(cur);
-                cur = cur->left;
-            }else{
-                cur = stk.top();
-                stk.pop();
-                val = cur->val;
-                cur = cur->right;
-                break;
-            }
+        while(cur){
+            stk.push(cur);
+            cur = cur->left; 
         }
+        cur = stk.top();
+        stk.pop();
+        int val = cur->val;
+        cur = cur->right;
         return val;
     }
     
@@ -99,7 +94,6 @@ public:
         return cur || !stk.empty();
     }
 };
-
 
 
 class BSTIterator {

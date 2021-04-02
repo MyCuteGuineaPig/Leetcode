@@ -24,6 +24,35 @@ public:
 };
 
 
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int lo = 0, hi = int(nums.size()) - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if(target > nums[mid]){ 
+                if(target <= nums.back() || nums[0] <= nums[mid] ) 
+/*
+     l <= mid < t    nums[0] <= nums[mid]   -> 不可以改为  nums[0] <= t, 比如  4 5 6 0 1 2, mid= 3(0), t = 6, 也满足,  0 < 6 且 0 < 3
+     mid < t <= r    target <= nums.back()  -> 不可以改为 nums[mid] < r: 比如 4 5 6 0 1 2, mid = 3(0), t = 6, r = 5 (2),  mid(0) < t (6) 且 nums[mid] (0) < r (2) 
+
+*/
+                    lo = mid + 1;
+                else
+                    hi = mid;
+            }
+            else{
+                if(target < nums[mid] && target<=nums.back() && nums[mid] > nums.back())
+                    lo = mid + 1;
+                else
+                    hi = mid;
+            }
+        }
+        return nums[lo] == target ? lo : -1;
+    }
+};
+
 /*
 Explanation
 
