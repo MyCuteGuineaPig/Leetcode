@@ -23,6 +23,8 @@ cat words.txt | tr -s ' ' '\n' | sort | uniq -c | sort -r | awk '{ print $2, $1 
 #Solution 4:  Sed
 cat words.txt | tr -s '[[:space:]]' '\n'| sort | uniq -c | sort -r | sed -r -e 's/[[:space:]]*([[:digit:]]+)[[:space:]]*([[:alpha:]]+)/\2 \1/g'
 
+grep -o -E  '[[:alpha:]]{1,}' words.txt | sort | uniq -c | sort -nr -k1 | sed 's/[ ]*\([0-9]*\) \([a-z]*\)/\2 \1/g' 
+
 #Solution 5: 
 cat words.txt | awk '{for(i=1;i<=NF;++i){count[$i]++}} END{for(i in count) {print i,count[i]}}' | sort -k2nr
 # NF column 个数
