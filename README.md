@@ -1181,3 +1181,11 @@ getaverage: _O(1)_ |	_O(n)_ |	Medium |  |
 | [193. Valid Phone Numbers](https://leetcode.com/problems/valid-phone-numbers/submissions/) | _O(n)_ | _O(1)_ | Easy | ```grep``` |
 | [194	Transpose File	Shell](https://leetcode.com/problems/transpose-file/) | _O(n^2)_ | _O(n^2)_ |	Medium | ```paste``` & ```cut``` |	
 | [195. Tenth Line](https://leetcode.com/problems/tenth-line/) | _O(n)_ | _O(1)_ | Easy | ```awk, sed``` |
+
+
+
+  ## Concurrency
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`]() |
+| [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | `unique_lock` & `condition_variable` |
