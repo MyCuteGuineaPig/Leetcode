@@ -25,7 +25,7 @@ The following sequence may occur:
 
 P                         LC                       HC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              execute(item)（not wait            (in wait())
+              execute(item)（not wait)            (in wait())
 lock()                                  
 wq.push(item)
 release()

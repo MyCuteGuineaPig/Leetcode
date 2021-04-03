@@ -1187,5 +1187,8 @@ getaverage: _O(1)_ |	_O(n)_ |	Medium |  |
   ## Concurrency
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`]() |
+| [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法]() |
+| [1116. Print Zero Even Odd](https://leetcode.com/problems/print-zero-even-odd/) | _O(n)_ | _O(1)_	| Medium | |
+| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L16) |
+| [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Medium | [只能用`notify_all()` 不能用 `notify_one()`]() |
 | [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | `unique_lock` & `condition_variable` |
