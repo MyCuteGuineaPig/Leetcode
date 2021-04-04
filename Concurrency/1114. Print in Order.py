@@ -71,7 +71,14 @@ class Foo:
         with self.locks[1]:
             printThird()
 
+"""
 
+ An event manages a flag that can be set to true with the set() method and
+  reset to false with the clear() method. 
+  The wait() method blocks until the flag is true. The flag is initially false.
+
+
+"""
 
 from threading import Event
 

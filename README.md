@@ -1,5 +1,6 @@
 ## Catalogue
 * [Array](https://github.com/beckswu/Leetcode#array)
+* [Concurrency](https://github.com/beckswu/Leetcode#Concurrency)
 * [Greedy](https://github.com/beckswu/Leetcode#greedy) 
 * [Tree](https://github.com/beckswu/Leetcode#tree) 
 * [Tree Relevant](https://github.com/beckswu/Leetcode#tree-relevant) 
@@ -888,6 +889,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [793.Preimage Size of Factorial Zeroes Function](https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/description/) | _O((logk)^2)_ |	_O(1)_	| Hard | l = 0, r=5\*k, binary search mid是否有k个零的0，有的话r=mid, 否则l = mid+1, 最后再判断l是否有k个0, 有的话返回5,没有的话返回0 |
 | [1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/) | _O((logN)_ |	_O(1)_	| Medium| 🎅 |
 | [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅[Binary Search](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/1385.%20Find%20the%20Distance%20Value%20Between%20Two%20Arrays.cpp#L23), Two pointer |
+| [1818. Minimum Absolute Sum Difference](https://leetcode.com/problems/minimum-absolute-sum-difference/) | _O((n \* logn)_ |	_O(n)_	| Medium | |
+
 
 
 
@@ -1187,8 +1190,193 @@ getaverage: _O(1)_ |	_O(n)_ |	Medium |  |
   ## Concurrency
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法]() |
+| [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |
+| [1115. Print FooBar Alternately](https://leetcode.com/problems/print-foobar-alternately/) | _O(n)_ | _O(1)_	| Medium | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |
 | [1116. Print Zero Even Odd](https://leetcode.com/problems/print-zero-even-odd/) | _O(n)_ | _O(1)_	| Medium | |
-| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L16) |
-| [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Medium | [只能用`notify_all()` 不能用 `notify_one()`]() |
+| [1117. Building H2O](https://leetcode.com/problems/building-h2o/) | _O(n)_ | _O(1)_	| Medium | [只能用`notify_all()` 不能用 `notify_one()`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1117.%20Building%20H2O.cpp#L36) |
+| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L2) |
+| [1195. Fizz Buzz Multithreaded](https://leetcode.com/problems/fizz-buzz-multithreaded/) | _O(n)_ | _O(1)_	| Medium |  |
 | [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | `unique_lock` & `condition_variable` |
+
+```python
+#下面code thread 1 先run, thread 2后run
+
+# Condition, 必须 notifyAll() under with self.cv:
+cv = threading.Condition()
+isFoo = True
+
+def thread1():
+    with cv:
+        cv.wait_for(lambda: isFoo) #when isFoo = True, acquire lock and continue work 
+        """
+        do some thing
+        """ 
+        print("先print")
+        global isFoo
+        isFoo = not isFoo
+        cv.notify()
+
+def thread2():
+    with cv:
+        cv.wait_for(lambda: not isFoo)  #when isFoo = False, acquire lock and continue work 
+        """
+         do some thing
+         """     
+        print("后print")
+        global isFoo
+        isFoo = not isFoo
+        cv.notify()
+
+t = threading.Thread(target = thread1).start()
+t2 = threading.Thread(target = thread2).start()
+
+
+
+# Event
+
+# Event.set()
+# Event.clear()
+ 
+# An event manages a flag that can be set to true with the set() method and
+# reset to false with the clear() method. 
+# The wait() method blocks until the flag is true. The flag is initially false.
+
+e = (threading.Event(), threading.Event())
+e[0].set()
+
+def thread1():
+    e[0].wait() # wait until e[0] flag is true by set, pass because e[0] has been set
+    """
+    do some thing
+    """ 
+    print("先print")
+    e[1].set() 
+    e[0].clear() #set e[0] flag false
+
+def thread2():
+    e[1].wait() # wait until e[1] flag is true by set
+    """
+    do some thing
+    """
+    print("后print")
+    e[0].set() 
+    e[1].clear() #set e[1] flag false
+
+t = threading.Thread(target = thread1).start()
+t2 = threading.Thread(target = thread2).start()
+
+"""
+Barrier: 
+
+used as to wait for a fixed number of thread before any particular thread can proceed
+
+keep track of wait() call. If wait () call大于 number of thread initialized.
+
+wait(): Wait until notified or a timeout occurs. 当代n 个 thread 到wait 后一起释放 工作， simultaneously released.
+        比如 n = 5, 现在有3个到了wait， 等待另外两个到wait 才工作
+
+"""
+
+
+barrier = threading.Barrier(2)
+
+i = 0
+
+def run(id):
+    print("enter ",id)
+    barrier.wait()
+    print("process  ",id)
+		
+thread1 = threading.Thread(target=run, args=(1,)).start()
+
+time.sleep(5)
+thread2 = threading.Thread(target=run, args=(2,)).start()
+
+"""
+先打印 enter id = 1, 然后wait
+5 秒后，
+打印 enter id = 2, release all simultaneously
+print :  process 2
+         process 1
+
+"""
+
+
+
+
+"""
+Lock, default is release 
+
+lock.acquire()
+lock.release()
+"""
+
+e =  (threading.Lock(), threading.Lock())
+e[1].acquire()
+
+def thread1():
+    e[0].acquire()
+    """
+    do some thing
+    """ 
+    print("先print")
+    e[1].release()
+
+def thread2():
+    e[1].acquire() 
+    """
+    do some thing
+    """
+    print("后print")
+    e[0].release
+
+t = threading.Thread(target = thread1).start()
+t2 = threading.Thread(target = thread2).start()
+
+# Semaphore 
+"""
+Semaphore(value=1)
+
+acquire()
+release(n=1)
+
+A semaphore manages an internal counter which is decremented by each acquire() call and incremented by each release() call. The counter can never go below zero; when acquire() finds that it is zero, it blocks, waiting until some task calls release().
+
+"""
+
+e =  (threading.Semaphore(1), threading.Semaphore(1))
+e[1].acquire()
+
+def thread1():
+    e[0].acquire()
+    """
+    do some thing
+    """ 
+    print("先print")
+    e[1].release()
+
+def thread2():
+    e[1].acquire() 
+    """
+    do some thing
+    """
+    print("后print")
+    e[0].release
+
+t = threading.Thread(target = thread1).start()
+t2 = threading.Thread(target = thread2).start()
+
+"""
+Lock vs Semaphore
+1. Locks cannot be shared between more than one thread processes but semaphores can have multiple processes of the same thread.
+2. Only one thread works with the entire buffer at a given instance of time but semaphores can work on different buffers at a given time.
+3. Lock takes care of the locking system however semaphore takes care of the signal system.
+4. we consider lock as an object whereas we consider semaphore as an integer with values.
+5, The lock has 2 principles that are acquire and release however semaphore has two principles which are wait() and signal().
+6. The lock does not have any subtypes of its own however semaphore has 2 subtypes. They are binary semaphores and counting semaphores.
+7. Locks can have multiple programs at a time but it cannot perform them all at the same time. Whereas semaphores can have multiple programs and can perform them all at the same time. 
+
+"""
+
+
+```
