@@ -1191,7 +1191,7 @@ getaverage: _O(1)_ |	_O(n)_ |	Medium |  |
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |
-| [1115. Print FooBar Alternately](https://leetcode.com/problems/print-foobar-alternately/) | _O(n)_ | _O(1)_	| Medium | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |
+| [1115. Print FooBar Alternately](https://leetcode.com/problems/print-foobar-alternately/) | _O(n)_ | _O(1)_	| Medium | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1115.%20Print%20FooBar%20Alternately.py) |
 | [1116. Print Zero Even Odd](https://leetcode.com/problems/print-zero-even-odd/) | _O(n)_ | _O(1)_	| Medium | |
 | [1117. Building H2O](https://leetcode.com/problems/building-h2o/) | _O(n)_ | _O(1)_	| Medium | [只能用`notify_all()` 不能用 `notify_one()`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1117.%20Building%20H2O.cpp#L36) |
 | [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L2) |
