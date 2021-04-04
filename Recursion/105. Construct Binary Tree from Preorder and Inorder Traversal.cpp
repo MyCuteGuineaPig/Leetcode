@@ -59,6 +59,8 @@ public:
 
 //O(1) space 
 /*
+思路关键是 比如到preorder 到5, in order 也是 5，不返回，而是到5的left, 发现 stop  == inorder[0] 返回,
+                                                      到5的right，发现 stop(5的parent val)  == inorder[1] 返回,
 
 end 是对比left child 来说的返回点 比如,  ()在当前 function 中end值
 
