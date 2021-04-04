@@ -91,7 +91,7 @@ public:
         }
         TreeNode* cur = new TreeNode(preorder[p++]);
         cur->left = helper(preorder, inorder, p, i, cur->val);
-        cur->right = helper(preorder, inorder, p, i, stop);
+        cur->right = helper(preorder, inorder, p, i, stop); //如果 stop  == inorder[i] 表示 parent val == in order[i] 表示没有kid了
         return cur;
         
     }
