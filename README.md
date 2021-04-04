@@ -1368,13 +1368,18 @@ t2 = threading.Thread(target = thread2).start()
 
 """
 Lock vs Semaphore
-1. Locks cannot be shared between more than one thread processes but semaphores can have multiple processes of the same thread.
-2. Only one thread works with the entire buffer at a given instance of time but semaphores can work on different buffers at a given time.
+1. Locks cannot be shared between more than one thread processes but semaphores 
+    can have multiple processes of the same thread.
+2. Only one thread works with the entire buffer at a given instance of time 
+    but semaphores can work on different buffers at a given time.
 3. Lock takes care of the locking system however semaphore takes care of the signal system.
 4. we consider lock as an object whereas we consider semaphore as an integer with values.
-5, The lock has 2 principles that are acquire and release however semaphore has two principles which are wait() and signal().
-6. The lock does not have any subtypes of its own however semaphore has 2 subtypes. They are binary semaphores and counting semaphores.
-7. Locks can have multiple programs at a time but it cannot perform them all at the same time. Whereas semaphores can have multiple programs and can perform them all at the same time. 
+5, The lock has 2 principles that are acquire and release however semaphore has two principles
+     which are wait() and signal().
+6. The lock does not have any subtypes of its own however semaphore has 2 subtypes.
+     They are binary semaphores and counting semaphores.
+7. Locks can have multiple programs at a time but it cannot perform them all at the same time.
+     Whereas semaphores can have multiple programs and can perform them all at the same time. 
 
 """
 
