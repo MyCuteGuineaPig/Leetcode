@@ -87,9 +87,29 @@ mx是在当前回文右侧外的第一个点 mx点不包括在当前回文内
 if (i < mx)  
     p[i] = min(p[2 * id - i], mx - i);
 
-2 * id - i为 i 关于 id 的对称点，而p[j]表示以 j 为中心的最长回文半径，
+2 * id - i为 i 关于 id 的对称点 ( id - (id-i))，而p[j]表示以 j 为中心的最长回文半径，
 因此我们可以利用p[j]来加快查找。
 
+e.g1 . min(p[2 * id - i], mx - i);
+比如  c b c d c b z
+           -   - | mx 
+          id     
+       p[第一个b] = 3
+第二个b的
+    p[2 * id - i] =  p [第一个b] = 3， 现在以b 作为中心，右侧没有c，所以 不能等于 3
+    mx - i = 1   ✅
+
+e.g2. min(p[2 * id - i], mx - i);
+比如  a b c d c b a d
+           -   _   | mx 
+          id     
+还是在 第二个b 点    
+p[2 * id - i] =  p [第一个b] = 1，✅
+mx - i =  2 
+
+
+              
+     
 因为i小于mx, given (id - p[id], id + p[id])每个点都是对称的,不包括两端的点
 做min的原因是 因为 i关于id的对称点是 id - (i-id) = 2*id - i = j, 我们要比较是p[j] 大还是 mx - i 
 so  [i, mx) 也是对称(id - p[id], 2*id-i]的

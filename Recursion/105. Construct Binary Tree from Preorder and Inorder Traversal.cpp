@@ -1,26 +1,3 @@
-/*
-105. Construct Binary Tree from Preorder and Inorder Traversal
-
-Given preorder and inorder traversal of a tree, construct the binary tree.
-
-Note:
-You may assume that duplicates do not exist in the tree.
-
-For example, given
-
-preorder = [3,9,20,15,7]
-inorder = [9,3,15,20,7]
-Return the following binary tree:
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-
-*/
-
-
 
 //stack 解
 class Solution {
@@ -30,23 +7,41 @@ public:
         TreeNode* cur = new TreeNode(preorder[0]), *root = cur;
         stack<TreeNode*>stk;//stk 用来preorder iterative traversal 
         for(int i = 1, j = 0; i<preorder.size(); ++i){ //如果preorder 是 top->left, in order left->top,  不会经过if, 直接返回root
-            if(cur->val == inorder[j]){ 
-                //不能是preorder[i] == inorder[j] 作为对比条件 因为 preorder top->left->right, inorder: left->right->top
-                //left 就不能append 到left
-                /*
-                //preorder top->left->right, in order 是 left->top->right,
-                如果到right, stack 顺序是 left, top, 这样最好cur = top 
+            if(cur->val == inorder[j]){  
+                 /*
+                 cur 实际上是上一个被process的点,
+
+                //不能是preorder[i] == inorder[j] 作为对比条件 因为 preorder top->left->right, inorder: left->top->right
+                  因为不知道下个点在 preorder[i] 的right tree 还是preorder[i]->parent 的right tree
+                  比如 preorder 3-9-2-4   in order 2-9-4-3
+
+                        3    preorder 3-9-4-2                   3       preorder 3-9-4-2      
+                       / \   in order 9-4-3-2                  /  \     in order 9-3-2-4     
+                      9   2                                   9    4      
+                       \                                          /
+                       4                                         2 
+                比如两个tree 都是碰到 9, preorder[1] == inorder[0], 不知道下个数应该挂在9的right tree 还是3的right tree
+                        ***碰到9 只知道，9的left tree 走完了
+
+                如果用cur->val (上个process) == inorder[j], 如果stk top != inorder[j] 表示当前cur还有right tree, stk不能pop
+                    比如上面左侧的, 跳过第一个meet 的点(++j), stk.top (3) != inorder[1], 表示 当前cur (9) 还有right tree没处理
+
+
+                preorder top->left->right, in order 是 left->top->right,
+                如果到right, cur -> left, stack 顺序是 top, 这样最好cur = top 
                
-               //preorder top->right, in order 是 top->right, 
-               //到right, stack 是top, pop, cur  =top,  top->right = right
+               preorder top->right, in order 是 top->right, 
+                到right, stack 是为空,  cur  =top,  top->right = right
                 
+                所以while loop 是找到合适的top, 把现在preorder 挂到右侧数上
                 */
                 ++j;
-                while(!stk.empty() && stk.top()->val == inorder[j]){
+                while(!stk.empty() && stk.top()->val == inorder[j]){// stk.top()->val != inorder[j] 表示stk.top()右侧还没有走
                     ++j;
                     cur = stk.top(); stk.pop();
                 }
                 cur = cur->right = new TreeNode(preorder[i]); 
+
             }else{
                 stk.push(cur);//下面cur->left 会改边这个cur
                 cur = cur->left = new TreeNode(preorder[i]);
@@ -86,6 +81,7 @@ inorder   5 3 6 2 7 4 8 1 9 10
 class Solution {
 public:
     TreeNode* helper(const vector<int>& preorder, const vector<int>& inorder, int& p, int& i, int stop)    {
+        //stop 就是solution 1 的stack top的值
         if(p >= preorder.size()) return nullptr;
         if(inorder[i] == stop){
             ++i;
