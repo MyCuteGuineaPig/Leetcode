@@ -18,6 +18,7 @@ You may assume the number of calls to update and sumRange function is distribute
 
 /*
 
+
 BIT TREE: 
   
   1
@@ -31,7 +32,19 @@ BIT TREE:
   v  / 
   8  <- 7
 
+ Each node of the Binary Indexed Tree stores the sum of some elements of the input array. 
+ 
+ 
+ 
 
+ To generalize this every index i in the BIT[] array stores the cumulative sum from the index i to i - (1<<r) + 1 (both inclusive), 
+ where r represents the last set bit in the index i;  Note index i is starting from 1
+ 
+          {  num [x],                   if x is odd
+BIT[x] =     num[1] + ... + num[x],     if x is power of 2
+          }
+ 
+ 
 比如一个tree 有8个节点，更新时候
 更新1 ->2 ->4 ->8
 更新2 ->4 -> 8
