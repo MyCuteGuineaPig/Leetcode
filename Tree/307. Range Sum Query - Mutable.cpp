@@ -18,6 +18,7 @@ You may assume the number of calls to update and sumRange function is distribute
 
 /*
 
+
 BIT TREE: 
   
   1
@@ -31,7 +32,19 @@ BIT TREE:
   v  / 
   8  <- 7
 
+ Each node of the Binary Indexed Tree stores the sum of some elements of the input array. 
+ 
+ 
+ 
 
+ To generalize this every index i in the BIT[] array stores the cumulative sum from the index i to i - (1<<r) + 1 (both inclusive), 
+ where r represents the last set bit in the index i;  Note index i is starting from 1
+ 
+          {  num [x],                   if x is odd
+BIT[x] =     num[1] + ... + num[x],     if x is power of 2
+          }
+ 
+ 
 比如一个tree 有8个节点，更新时候
 更新1 ->2 ->4 ->8
 更新2 ->4 -> 8
@@ -60,6 +73,21 @@ BIT index n只存最小bit下面的和
 比如1100， 有和的是1001 + 1010 + 1011 + 1100
 比如100 有的和是1， 10, 100,
 
+
+negative number binary representation, 
+
+最左边是signed bit, positive number, signed bit 是 0, negative number, signed bit 是1
+
+6:  0 | 0 0 1 1 0  (第一位位是signed bit)
+-6: 1 | 1 1 0 1 0  是 6(110) 的 negate operation + 1  (001 => 010)
+
+对于 0: 保证 0 和 -0 是一样的binary number
+
+0:  0 | 0 0 0 0 0  (第一位位是signed bit) 
+-0: 0 | 0 0 0 0 0 : 0 的negate 1 1 1 1 1 1 + 1 还是 0 0 0 0 0 0 
+
+range: (2^n - 1) for positive number
+        2^n      for negative number
 */
 class NumArray {
 public:
