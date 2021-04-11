@@ -396,6 +396,8 @@ TreeNode* helper(TreeNode** head ){
 | [1008. Construct Binary Search Tree from Preorder Traversal](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Medium | 🎅[Stack, Recursion, Morris Traversal](https://github.com/beckswu/Leetcode/blob/master/Tree/1008.%20Construct%20Binary%20Search%20Tree%20from%20Preorder%20Traversal.cpp#L1) |
 | [1028. Recover a Tree From Preorder Traversal](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Hard | 😚 stack / DFS, stack逻辑类似[889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) |
 | [1409. Queries on a Permutation With Key](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(nlogn)_ | _O(n)_	| Medium | BIT, Fenwick Tree, [🎅 How to Build FenwickTree](https://github.com/beckswu/Leetcode/blob/master/Tree/1409.%20Queries%20on%20a%20Permutation%20With%20Key.py#L18)  |
+| [1825. Finding MK Average
+](https://leetcode.com/problems/finding-mk-average/) | _O(nlogn)_ | _O(n)_	| Hard | BIT, Fenwick Tree |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -415,7 +417,7 @@ TreeNode* helper(TreeNode** head ){
 | [1363. Largest Multiple of Three](https://leetcode.com/problems/largest-multiple-of-three/) | _O(n)_ | _O(1)_	| Hard |  |
 | [1390. Four Divisors](https://leetcode.com/problems/four-divisors/) | _O(n \* sqrt(n))	_ | _O(1)_	| Medium |  ❌ |
 | [1808. Maximize Number of Nice Divisors](https://leetcode.com/problems/four-divisors/) | _O(log(n))_ | _O(1)_	| Hard |   |
-| [1823. Find the Winner of the Circular Game](https://leetcode.com/problems/find-the-winner-of-the-circular-game/) | _O(n)_ | _O(1)_	| Medium | [Thinking Process]()  |
+| [1823. Find the Winner of the Circular Game](https://leetcode.com/problems/find-the-winner-of-the-circular-game/) | _O(n)_ | _O(1)_	| Medium | [Thinking Process](https://github.com/beckswu/Leetcode/blob/master/Math/1823.%20Find%20the%20Winner%20of%20the%20Circular%20Game.cpp)  |
 
 
 ## String
