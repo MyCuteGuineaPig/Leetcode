@@ -56,3 +56,27 @@ public:
         return res;
     }
 };
+
+
+
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>>res;
+        build(res, 0, root);
+        for(int i = 0; i<res.size(); ++i)
+            if(i & 1)
+                reverse(res[i].begin(), res[i].end());
+        return res;
+    }
+    
+    void build(vector<vector<int>>&res, int l, TreeNode* cur){
+        if(!cur)
+            return;
+        if(res.size() <= l)
+            res.push_back({});
+        res[l].push_back(cur->val);
+        build(res, l+1, cur->left);
+        build(res, l+1, cur->right);
+    }
+};
