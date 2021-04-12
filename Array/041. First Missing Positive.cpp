@@ -39,6 +39,7 @@ Your algorithm should run in O(n) time and uses constant extra space.
 
 */
 
+// 换完后, nums[i] 可能为负数，或者大于 size, 要不然num[i] == i+1
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
@@ -54,6 +55,7 @@ public:
 };
 
 
+//和上个解的区别是: 必须满足 nums[start] == start + 1 才++start, 要不然一直不update start, 
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
