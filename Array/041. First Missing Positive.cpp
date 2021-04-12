@@ -57,6 +57,22 @@ public:
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
+        int start = 0, end = nums.size() - 1;
+        while(start <= end){
+            int index = nums[start] <= 0 ? -1 : nums[start]-1; // nums[start]可能是  -2147483648， -2147483648 - 1 integer overflow 
+            if(index == start) ++start;
+            else if(index > start && index <= end && nums[start] != nums[index]) //比如[2,2], 没有 nums[start] != nums[index] 会loop forever
+                swap(nums[start], nums[index]);
+            else
+                swap(nums[start], nums[end--]);
+        }
+        return start+1;
+    }
+};
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
         int start = 0, end = nums.size()-1;
         while(start <= end){
             int index = nums[start] - 1;
