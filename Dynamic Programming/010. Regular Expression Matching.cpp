@@ -51,7 +51,7 @@ s=  1   0  0  0  0
  a  0   1  0  1  0 
  b  0   0  1  1 ===== > dp[i+1][j]: 表示 * 重复了0遍或者多变
  b  0   0  0 _1_ =====>  i = 2, j = 2   dp[i+1][j+1] <= take dp[i][j+1], 
- c  0   0  0  0  1        take  dp[i][j+1] 原因是, dp[i][j+1] = dp[2][3] 只考虑了 s[i-1] ('ab') 和 p[j-2] ('ab')  match 不 match, 
+ c  0   0  0  0  1        take  dp[i][j+1] 原因是, dp[i][j+1] = dp[2][3] 只考虑了 s[i-1] ('ab') 和 p[j-1] ('ab')  match 不 match, 
                          如果 s再多考虑一位, 因为是*, t是跟之前一样的pattern,  if s[i]  == p[j-1]  s= 'abb', t='ab'  dp[i+1][j+1] = dp[i][j+1] = true;
 */
 
