@@ -39,6 +39,7 @@ Your algorithm should run in O(n) time and uses constant extra space.
 
 */
 
+// 换完后, nums[i] 可能为负数，或者大于 size, 要不然num[i] == i+1
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
@@ -53,6 +54,23 @@ public:
     }
 };
 
+
+//和上个解的区别是: 必须满足 nums[start] == start + 1 才++start, 要不然一直不update start, 
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int start = 0, end = nums.size() - 1;
+        while(start <= end){
+            int index = nums[start] <= 0 ? -1 : nums[start]-1; // nums[start]可能是  -2147483648， -2147483648 - 1 integer overflow 
+            if(index == start) ++start;
+            else if(index > start && index <= end && nums[start] != nums[index]) //比如[2,2], 没有 nums[start] != nums[index] 会loop forever
+                swap(nums[start], nums[index]);
+            else
+                swap(nums[start], nums[end--]);
+        }
+        return start+1;
+    }
+};
 
 class Solution {
 public:
