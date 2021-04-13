@@ -701,6 +701,7 @@ DEBUG stdout
 | [385. Mini Parser](https://leetcode.com/problems/mini-parser/) | _O(n)_ | _O(h)_	| Medium | 遇到',' ']' 把之前的integer add，  比如\[-1],  \[123,456], 遇到']',把现在这个nested list加入上个nested list |
 | [394. Decode String](https://leetcode.com/problems/decode-string/) | _O(n)_ | _O(h)_	| Medium | 🔍可以看看recursive 的解, **程序设计**: 怎么设计一个好的stack, 类似[726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/)  <ul><li>遇到num, push num 进num stack </li><li>遇到'\[',push “”进pat stack</li></ul> |
 | [456. 132 Pattern](https://leetcode.com/problems/132-pattern/) | _O(n)_ | _O(h)_	| Medium |  🎅🎅 寻找 s1 < s3 < s2，从后向前，Descending stack, 难点: 理解stack让s2 逐渐变大, 但s3可增也可减, 因为s2减小前就return true了 |
+| [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/) | _O(n)_ | _O(n)_	| Medium |  |
 | [636. Exclusive Time of Functions](https://leetcode.com/problems/exclusive-time-of-functions/) | _O(n)_ | _O(n)_	| Medium | 🔍stack 存的是上个job的id |
 | [682. Baseball Game](https://leetcode.com/problems/baseball-game/) | _O(n)_ | _O(n)_	| Easy |  ❌bad problem description |
 | [726. Number of Atoms](https://leetcode.com/problems/number-of-atoms/) | _O(n^2)_ | _O(n)_	| Hard | 类似 [394. Decode String](https://leetcode.com/problems/decode-string/) |
@@ -741,6 +742,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | 😍 Monoqueue using Deque<ul><li>  Solution 1 __deque int__ : 只存单个index, descending queue </li><li>Solution 2 deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
+| [362. Design Hit Counter](https://leetcode.com/problems/design-hit-counter/) | _O(1)_ | _O(1)_	| Medium | Should consider remove performance  |
 
 
 ## Heap
@@ -995,6 +997,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [547. Friend Circles](https://leetcode.com/problems/friend-circles/description/)	|	_O(n^2)_	|	_O(n)_ |	Medium | Union Find with Rank Heuristic / DFS |
 | [638. Shopping Offers](https://leetcode.com/problems/shopping-offers/description/)	|	_O(n \* 2^n)_	|	_O(n)_ |	Medium | 🎅✏️ [设计一个好的DFS structure](https://github.com/beckswu/Leetcode/blob/master/DFS/638.%20Shopping%20Offers.cpp#L42]  |
 | [690. Employee Importance](https://leetcode.com/problems/employee-importance/description/)	|	_O(n)_	|	_O(h)_ |	Easy | 需要用unordered_map, 因为vector index 不等同于 id |
+| [694. Number of Distinct Islands](https://leetcode.com/problems/number-of-distinct-islands/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | |
 | [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | ✏️[Python Complex number 表示四个DFS 方向](https://github.com/beckswu/Leetcode/blob/master/DFS/695.%20Max%20Area%20of%20Island.py#L1) |
 | [733. Flood Fill](https://leetcode.com/problems/flood-fill/description/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Easy | ❌  |
 | [749. Contain Virus](https://leetcode.com/problems/contain-virus/)	|	_O((m \* n)^(4/3))_		|	_O(m \* n)_ |	Hard | 😚 DFS/BFS, every step try each possibility see where is max **new Infection area**, then build wall and update grid  |
