@@ -482,6 +482,7 @@ TreeNode* helper(TreeNode** head ){
 | [839. Similar String Groups](https://leetcode.com/problems/similar-string-groups/) | _O(n^2 \* l)_ | _O(n)_	| Easy | 🔍 Union Find Disjoint Set with Rank Heuristic, string 所在位置为index |
 | [848. Shifting Letters](https://leetcode.com/problems/shifting-letters/) | _O(n)_ | _O(1)_	| Medium | 加的时候及时%26, 小心overflow  |
 | [859. Buddy Strings](https://leetcode.com/problems/buddy-strings/) | _O(n)_ | _O(1)_	| Easy | 判断条件: 1.长度不一样，false，2. 如果a == b，有没有重复的字母，有的话true, 没有false, 3, 如果不一样的位置个数不等于2, 或者a\[diff\[0]]!=b\[diff\[1]] or a\[diff\[1]]!=a\[diff\[1]] 返回false, 否则是true  |
+| [953. Verifying an Alien Dictionary](https://leetcode.com/problems/verifying-an-alien-dictionary/) | _O(n\*l)_ | _O(1)_	| Easy |  |
 | [1374	Generate a String With Characters That Have Odd Count](https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/) | _O(n)_ | _O(1)_	| Easy | ❌ |
 | [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | KMP, Rolling Hash |
 | [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
