@@ -562,7 +562,7 @@ TreeNode* helper(TreeNode** head ){
 | [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/) | _O(n)_ | _O(n)_	| Easy |  |
 | [599. Minimum Index Sum of Two Lists](https://leetcode.com/problems/minimum-index-sum-of-two-lists/) | _O((m + n) \* l)_ | _O(m \* l)_	| Easy |  |
 | [609. Find Duplicate File in System](https://leetcode.com/problems/find-duplicate-file-in-system/) | _O(n \* k)_ | _O(n \* k)_	| Medium |  |
-| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy |  |
+| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy | 🔍[list `find_if`, `remove_if`]()  |
 | [721. Accounts Merge](https://leetcode.com/problems/accounts-merge/description/) | _O(nlogn)_ | _O(n)_	| Medium | 🔍 Union Find, 不能用简单的hash table 找parent, 比如 (1@com, 2@com), (3@com, 4@com), (4@com, 2@com), 不用Union find分成两组 | 
 | [748. Shortest Completing Word](https://leetcode.com/problems/shortest-completing-word/) | _O(n)_ | _O(1)_	| Medium |  |
 | [771. Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/) | _O(n+m)_ | _O(n)_	| Easy |  |
