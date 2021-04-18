@@ -154,6 +154,7 @@
 | [1249. Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/) | _O(n)_ | _O(1)_	| Medium | Stack |
 | [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | [1419	Minimum Number of Frogs Croaking](https://leetcode.com/problems/minimum-number-of-frogs-croaking/) | _O(n)_ |	_O(1)_	| Medium | 需保证 counter 递增 ```c>r>o>a>k```  |
+| [1833. Maximum Ice Cream Bars](https://leetcode.com/problems/maximum-ice-cream-bars/) | _O(nlogn)_ |	_O(1)_	| Medium |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
@@ -520,6 +521,7 @@ TreeNode* helper(TreeNode** head ){
 | [645. Set Mismatch](https://leetcode.com/problems/set-mismatch/) | _O(n)_ | _O(1)_	| Easy | <ul><li>bit Xor:与[260. Single Number III](https://leetcode.com/problems/single-number-iii/) 解法一样, 第一次pass,找到两个数的xor = c, c & (-c)是unique的digit, 第二次pass分别找到这两个数，第三次pass调整两个数return的顺序 </li><li>改变nums\[abs(nums\[i])-1] 为负数, 如果发现新找到的已经为负数, 证明是重复的，第二次pass, 如果发现某位为正数, 代表是missing的 </li></ul> |
 | [693. Binary Number with Alternating Bits](https://leetcode.com/problems/binary-number-with-alternating-bits/) | _O(1)_ | _O(1)_	| Easy | 🔍 |
 | [762. Prime Number of Set Bits in Binary Representation](https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/) | _O(R-L)_ | _O(1)_	| Easy | loop\[L,R],数每个数多少个bit，因为log2(10^6) < 16, 事先把所有的prime存到hash set里面, 看现在bit数是不是质数，if so res++, 还可以用 \__builtin_popcountl(n); bitset<32>(n).count() |
+| [1835. Find XOR Sum of All Pairs Bitwise AND](https://leetcode.com/problems/find-xor-sum-of-all-pairs-bitwise-and/) | _O(n)_ | _O(1)_	| Hard |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | C++ 0b表示binary number，比如0b10 = 2, 0b111 = 7</br> python 0b表示binary number，比如0b10 = 2, 0b111 = 7 <ul><li>注意运算顺序</li><li> +, - 先于 &, \|, <<, >>; 所以不用括号 n&n-1 </li><li> << >> == 是优于&,\| ; 判断&, 需要加括号,比如(n& n-1) == 0; </li><li> &,\|优于 && \|\| ; (1&2 && 2) = 0 && 2 = false; </li></ul> bit数1的个数，可以用 n&(n-1); \__builtin_popcountl(n); bitset<32>(n).count() |
 
 
@@ -560,6 +562,7 @@ TreeNode* helper(TreeNode** head ){
 | [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/) | _O(n)_ | _O(n)_	| Easy |  |
 | [599. Minimum Index Sum of Two Lists](https://leetcode.com/problems/minimum-index-sum-of-two-lists/) | _O((m + n) \* l)_ | _O(m \* l)_	| Easy |  |
 | [609. Find Duplicate File in System](https://leetcode.com/problems/find-duplicate-file-in-system/) | _O(n \* k)_ | _O(n \* k)_	| Medium |  |
+| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy |  |
 | [721. Accounts Merge](https://leetcode.com/problems/accounts-merge/description/) | _O(nlogn)_ | _O(n)_	| Medium | 🔍 Union Find, 不能用简单的hash table 找parent, 比如 (1@com, 2@com), (3@com, 4@com), (4@com, 2@com), 不用Union find分成两组 | 
 | [748. Shortest Completing Word](https://leetcode.com/problems/shortest-completing-word/) | _O(n)_ | _O(1)_	| Medium |  |
 | [771. Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/) | _O(n+m)_ | _O(n)_	| Easy |  |
@@ -766,7 +769,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [846. Hand of Straights](https://leetcode.com/problems/maximum-performance-of-a-team/) | _O(nlogn)_ | _O(n)_	| Hard |  |
 | [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)	|	_O(n) average_	|	_O(1)_ |	Easy |  ✏️[Quick-Select](https://github.com/beckswu/Leetcode/blob/master/Heap/973.%20K%20Closest%20Points%20to%20Origin.cpp)|
 | [1046. Last Stone Weight](https://leetcode.com/problems/last-stone-weight/) | _O(nlogn)_ | _O(n)_	| Easy |  |
-
+| [1834. Single-Threaded CPU](https://leetcode.com/problems/single-threaded-cpu/) | _O(nlogn)_ | _O(n)_	| Medium |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |   |
 
 
