@@ -222,6 +222,24 @@ private:
         return r;
     }
     
+    也可以换顺序
+    int partition(vector<vector<int>>& points, int left, int right) {
+        int pivot = left, l = left + 1, r = right;
+        while (l <= r) { 
+            if (!farther(points[l], points[pivot])) {
+                l++;
+            }
+            if (!closer(points[r], points[pivot])) {
+                r--;
+            }
+            if (farther(points[l], points[pivot]) && closer(points[r], points[pivot])) {
+                swap(points[l++], points[r--]);
+            }
+            
+        }
+        swap(points[pivot], points[r]); 
+        return r;
+    }
     
      */
 };
