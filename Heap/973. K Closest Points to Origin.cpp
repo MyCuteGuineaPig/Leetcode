@@ -89,11 +89,14 @@ Theoretically, the average time complexity is O(N) , but just like quick sort,
 in the worst case, this solution would be degenerated to O(N^2), and pratically, the real time it takes on leetcode is 15ms.
 
  */
+
+
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
         int l = 0, r = points.size()-1;
         while(l<=r){
+            //cout<<"l "<<l<<" r "<<r<<endl;
             int mid = quickselect(points, l, r);
             if(mid  == K)
                 break;
@@ -160,13 +163,32 @@ l 3 r 3
 2, 2, 3, 4, 7, 5, 10, 13, 6,  
  */
 
+/*
+O(N^2) 的例子
 
+[[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9]] 每次run partition都是只run r--
+8
+
+l 0 r 7
+l 1 r 7
+l 2 r 7
+l 3 r 7
+l 4 r 7
+l 5 r 7
+l 6 r 7
+l 7 r 7
+
+
+
+*/
+            
 
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
         int l = 0, r = points.size() - 1;
         while (true) {
+            //cout<<"l "<<l<<" r "<<r<<endl;
             int p = partition(points, l, r);
             if (p == K - 1) {
                 break;
