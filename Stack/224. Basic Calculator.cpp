@@ -1,18 +1,110 @@
-/*
-224. Basic Calculator
-Example 1:
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int>numstk;
+        stack<int>signstk;
+        int res = 0;
+        int sign = 1; 
+        int operand = 0;
+        for(int i = 0; i<s.size(); ++i){
+            if(s[i] == ' ')
+                continue;
+            else if(isdigit(s[i])){
+                operand = operand* 10;
+                operand += s[i] - '0';
+                
+            }
+            else if(s[i] == '+' ||s[i] == '-' ){
+                res += sign*operand;
+                
+                sign = s[i] == '+' ? 1 : -1;
+                operand = 0;
+            }
+            else if(s[i] == '('){
+                res += sign * operand;
+                numstk.push(res);
+                signstk.push(sign);
+                
+                res = 0;
+                operand = 0;
+                sign = 1;
+            }
+            else{
+                res += sign * operand;
+                int prevSign = signstk.top(); signstk.pop();
+                
+                res *= prevSign;
+                res += numstk.top(); numstk.pop();
+                
+                sign = 1;
+                operand = 0;
+            }
+        }
+        return res + sign*operand;
+    }
+};
 
-Input: "1 + 1"
-Output: 2
-Example 2:
 
-Input: " 2-1 + 2 "
-Output: 3
-Example 3:
 
-Input: "(1+(4+5+2)-3)+(6+8)"
-Output: 23
-*/
+
+class Solution {
+public:
+    int calculate(string s) {
+        stack<int> stk;
+        int res=0;
+        int sign=1;
+        int n=s.size();
+        for(int i=0;i<n;i++){
+            char c=s[i];
+            if(c>='0'&&c<='9'){
+                int num=0;
+                while(i<n&&s[i]>='0'){
+                    num=num*10+s[i++]-'0';
+                }
+                res+=sign*num;
+                i--;
+            }else if(c=='+'){
+                sign=1;
+            }else if(c=='-'){
+                sign=-1;
+            }else if(c=='('){
+                stk.push(res);
+                stk.push(sign);
+                res=0;
+                sign=1;   
+            }else if(c==')'){
+                res*=stk.top();stk.pop();
+                res+=stk.top();stk.pop();
+            }
+        }
+        return res;
+    }
+};
+
+
+
+
+int calculate(string s) {
+    int total = 0;
+    vector<int> signs(2, 1); //需要push进两个， 比如(1+2), 遇到） 如果push一个，）pop之后stack为空，下一个sign找sign top 会报错了
+    for (int i=0; i<s.size(); i++) {
+        char c = s[i];
+        if (c >= '0') {
+            int number = 0;
+            while (i < s.size()  &&  s[i] >= '0')
+                number = 10 * number + s[i++] - '0';
+            total += signs.back() * number;
+            signs.pop_back(); 
+            i--;
+        }
+        else if (c == ')')
+            signs.pop_back();//因为遇到这个，前面sign是'(' 所以要pop back
+        else if (c != ' ') 
+            signs.push_back(signs.back() * (c == '-' ? -1 : 1)); //这样子比如 -(1+2+3), 前面是-，那么1*（-1） 加变减, 相当于把括号打开了
+    }
+    return total;
+}
+
 
 class Solution {
 public:
@@ -111,64 +203,6 @@ public:
         }
     } 
 };
-
-class Solution {
-public:
-    int calculate(string s) {
-        stack<int> stk;
-        int res=0;
-        int sign=1;
-        int n=s.size();
-        for(int i=0;i<n;i++){
-            char c=s[i];
-            if(c>='0'&&c<='9'){
-                int num=0;
-                while(i<n&&s[i]>='0'){
-                    num=num*10+s[i++]-'0';
-                }
-                res+=sign*num;
-                i--;
-            }else if(c=='+'){
-                sign=1;
-            }else if(c=='-'){
-                sign=-1;
-            }else if(c=='('){
-                stk.push(res);
-                stk.push(sign);
-                res=0;
-                sign=1;   
-            }else if(c==')'){
-                res*=stk.top();stk.pop();
-                res+=stk.top();stk.pop();
-            }
-        }
-        return res;
-    }
-};
-
-
-
-
-int calculate(string s) {
-    int total = 0;
-    vector<int> signs(2, 1); //需要push进两个， 比如(1+2), 遇到） 如果push一个，）pop之后stack为空，下一个sign找sign top 会报错了
-    for (int i=0; i<s.size(); i++) {
-        char c = s[i];
-        if (c >= '0') {
-            int number = 0;
-            while (i < s.size()  &&  s[i] >= '0')
-                number = 10 * number + s[i++] - '0';
-            total += signs.back() * number;
-            signs.pop_back(); 
-            i--;
-        }
-        else if (c == ')')
-            signs.pop_back();//因为遇到这个，前面sign是'(' 所以要pop back
-        else if (c != ' ') 
-            signs.push_back(signs.back() * (c == '-' ? -1 : 1)); //这样子比如 -(1+2+3), 前面是-，那么1*（-1） 加变减, 相当于把括号打开了
-    }
-    return total;
-}
 
 
 

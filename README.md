@@ -6,6 +6,7 @@
 * [Tree Relevant](https://github.com/beckswu/Leetcode#tree-relevant) 
 * [Math](https://github.com/beckswu/Leetcode#math) 
 * [String](https://github.com/beckswu/Leetcode#string) 
+* * [Hash Table](https://github.com/beckswu/Leetcode#trie) 
 * [Hash Table](https://github.com/beckswu/Leetcode#hash-table) 
 * [Bit Manipulation](https://github.com/beckswu/Leetcode#bit-manipulation)
 * [Stack](https://github.com/beckswu/Leetcode#stack) 
@@ -423,6 +424,14 @@ TreeNode* helper(TreeNode** head ){
 | [1823. Find the Winner of the Circular Game](https://leetcode.com/problems/find-the-winner-of-the-circular-game/) | _O(n)_ | _O(1)_	| Medium | [Thinking Process](https://github.com/beckswu/Leetcode/blob/master/Math/1823.%20Find%20the%20Winner%20of%20the%20Circular%20Game.cpp)  |
 
 
+
+## Trie
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [588. Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | <ul><li>`ls` : _O(n)_ </li> <li>`mkdir` : _O(n + klogk)_ </li> <li>`addContentToFile` : _O(n)_ </li> <li>`readContentFromFile` : _O(n)_ </li> | _O(n)_	| Hard |   |
+
+
+
 ## String
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -699,7 +708,7 @@ DEBUG stdout
 | [155. Min Stack](https://leetcode.com/problems/min-stack/) | _O(n)_ | _O(1)_	| Easy | 😚 Descending Stack: 两个stack,一个用来放正常的顺序，另一个作为min |
 | [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium |  [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) 逻辑类似, 不要先全部走完  |
 | [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | _O(1), amortized_ | _O(n)_	| Easy | 🔍两个stack in & out, in用来push, top: 假如out为空，dump in to out |
-| [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/) | _O(n)_ | _O(n)_	| Hard |  ❌用sign=1记录+, -1记录减, 碰到num乘以res,'('res,sign push进stack, ')'先乘以stack的top(是sign),再加上stack的top(sign之前的res)  |
+| [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/) | _O(n)_ | _O(n)_	| Hard |  |
 | [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | _O(n)_ | _O(n)_	| Medium | ❌ 用sign=1记录+, -1记录减, sign = 2 记录\*， 3记录除, 上一个sign是乘或除，先进行operation|
 | [331. Verify Preorder Serialization of a Binary Tree](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/) | _O(n)_ | _O(n)_	| Medium | 😍😍✏️stringstream + getline <ul><li>__Stack__: 每个node outdegree = 2，in-degree = 1 </li><li>indegree(到parent的) = outdegree（到child的） not NULL node has outdegree</li></ul>  |
 | [341. Flatten Nested List Iterator](https://leetcode.com/problems/flatten-nested-list-iterator/) | _O(n)_ | _O(h)_	| Medium | 😍😍stack + recursion从最后往前loop, queue从前往后loop, ✏️✏️**C++/Python Iterator**, 要存iterator, 不能存vector, 因为存vector memory会很大  |
@@ -829,6 +838,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 |C++priority_queue<pair<int,int>>pq 先对比first, top是first最大的，</br>constructor: greater\<int>是让top返回最小的数,大的数放后面 |  |	|  | python的heappop()先pop对比first,then second, top是first最小的  |
 | [1365	How Many Numbers Are Smaller Than the Current Number](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/) | _O(n+m)_ | _O(m)_	| Easy |  🔍[_O(n+m)_ Solution Counting Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/1365.%20How%20Many%20Numbers%20Are%20Smaller%20Than%20the%20Current%20Number.cpp#L38) 🔍[Python Counting Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/1365.%20How%20Many%20Numbers%20Are%20Smaller%20Than%20the%20Current%20Number.py#L5) |
 | [1366. Rank Teams by Votes](https://leetcode.com/problems/rank-teams-by-votes/) | _O(n)_ | _O(1)_	| Medium | 🔍[Python Sort list based on Dictonary value](https://github.com/beckswu/Leetcode/blob/master/Sort/1366.%20Rank%20Teams%20by%20Votes.py#L31)  |
+| [1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/) | _O(hlogh + vlogv)_ | _O(1)_	| Medium |  |
 
 
 </br>
