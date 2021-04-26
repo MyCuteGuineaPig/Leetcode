@@ -22,7 +22,7 @@
 * [Backtracking](https://github.com/beckswu/Leetcode#backtracking) 
 * [Dynamic Programming](https://github.com/beckswu/Leetcode#dynamic-programming) 
 * [Regular Expression Summary](https://github.com/beckswu/Leetcode#regular-expression-summary)
-* [Sliding Window Summary](https://github.com/beckswu/Leetcode#sliding-windows-summary)
+* [Sliding Window](https://github.com/beckswu/Leetcode#sliding-windows)
 * [Graph](https://github.com/beckswu/Leetcode#graph)
 * [Design](https://github.com/beckswu/Leetcode#design)
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
@@ -422,6 +422,7 @@ TreeNode* helper(TreeNode** head ){
 | [1390. Four Divisors](https://leetcode.com/problems/four-divisors/) | _O(n \* sqrt(n))	_ | _O(1)_	| Medium |  ❌ |
 | [1808. Maximize Number of Nice Divisors](https://leetcode.com/problems/four-divisors/) | _O(log(n))_ | _O(1)_	| Hard |   |
 | [1823. Find the Winner of the Circular Game](https://leetcode.com/problems/find-the-winner-of-the-circular-game/) | _O(n)_ | _O(1)_	| Medium | [Thinking Process](https://github.com/beckswu/Leetcode/blob/master/Math/1823.%20Find%20the%20Winner%20of%20the%20Circular%20Game.cpp)  |
+| [1837. Sum of Digits in Base K](https://leetcode.com/problems/sum-of-digits-in-base-k/) | _O(logk)_ | _O(1)_	| Easy |  |
 
 
 
@@ -583,10 +584,26 @@ TreeNode* helper(TreeNode** head ){
 | [1418	Display Table of Food Orders in a Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/) | _O(n + tlogt + flogf)_ | _O(n)_	| Medium | ✏️[C++ transform]() |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
-## sliding windows Summary
+## sliding windows 
 |summary |
 | ------------- |
 | sliding windows: windows都是看以当前字母结尾的window. 比较对象```s1```, 被比较对象```s2```<ul><li>可以记录当前substring的开始位置，</li><li>用数字记录substring的长度 </li><li>用hashset和两个pointer记录当前windows的长度 </li><li> map+pointer 1 map + 2 pointers: map先记录比较对象 ```map[s1[i]]++```, 再对被比较对象 __所有字母__ / __key出现__  , ```map[s2[i]]--```<ul> <li> **固定windows 长度**<ul>  <li> 一个pointer ```count```(初始值为 ```count=len```), 它的值会变动, 表示固定windows 内多少个满足条件 </li> <li> 一个pointer ```len```(不变化)表示```s1```长度,用来移动窗口, </li><li>比较条件:  ```if --map[s2[i]] >= 0 ```, ```--count```, 当```count == 0```  ```i-len + 1``` 是windows起点 </li><li>移动窗口条件：```if i>=len-1```, ```map[s2[i-len+1]]++```   </li>  </ul></li> <li> **不固定长度**.<ul>   <li> 一个pointer```left```(变化) , 记录左侧windows 起始点</li><li> 一个pointer ```len``` 记录```s1```长度(不变化) </li> <li>比较条件: ```if i - left == len - 1``` , left表示windows 起点 </li> <li> 移动窗口条件: ```if(map[s2[i]])<0 ``` 表示现windows中 ```s2[i]``` 个数 大于 ```s1```中个数, or ```s1```中没有 ```s2[i]```, 下面两种移动方式都可以   <ul> <li> 方式一: ```while(left <= i && map[s2[i]]< 0) map[s2[left++]]++```。e.g.1 ```s1=abc```, ```s2=ababc```, 在index=2, 第二个a, 有两个a 多于s1中个数, e.g. 2 ```s1=abc```, ```s2=abdabc```, 在index=2, d在s1中没有出现 ) </li> <li>方式二: ```while(map[s2[start++]-'a']++ >= 0);``` 把之前所有满足的都移走, </li></ul>  </li> </ul> </li><li>  可以用两个map,一个map记录比较对象(T)，一个记录被比较对象(S), 还需要一个count记录S中T出现的个数, start记录windows起始点, 初始化count = len(T); </br>只有当sdict\[s\[i]] < tdict\[s\[i]], count--; 当count == 0, 满足情况,append to res; </br>移动窗口过程中,dict\[s\[start]]--, start++,只有当sdict\[s\[start]] < tdict\[s\[start]]时 ++count, </br>比如[30题 Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/), [76题 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)</br>两个题区别是30不能包括多余的string (不可以sdict\[s\[start]] > tdict\[s\[start]]), 76是允许的 </li></ul> </li>  </ul> |
+
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | |
+| [862. Shortest Subarray with Sum at Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/) | _O(n)_ | _O(k)_	| Hard | |
+| [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | _O(n)_ | _O(1)_	| Medium | |
+| [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) | _O(n)_ | _O(1)_	| Medium | |
+| [992. Subarrays with K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/) | _O(n)_ | _O(1)_	| Medium | |
+| [1004. Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | _O(n)_ | _O(1)_	| Medium | |
+| [1234. Replace the Substring for Balanced String](https://leetcode.com/problems/replace-the-substring-for-balanced-string/) | _O(n)_ | _O(t)_	| Medium | |
+| [1248. Count Number of Nice Subarrays](https://leetcode.com/problems/count-number-of-nice-subarrays/) | _O(n)_ | _O(k)_	| Medium | |
+| [1358. Number of Substrings Containing All Three Characters](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/) | _O(n)_ | _O(1)_	| Medium | |
+| [1425. Constrained Subsequence Sum](https://leetcode.com/problems/constrained-subsequence-sum/) | _O(n)_ | _O(1)_	| Medium | |
+| [1493. Longest Subarray of 1's After Deleting One Element](https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/) | _O(n)_ | _O(1)_	| Medium | |
+| [1838. Frequency of the Most Frequent Element](https://leetcode.com/problems/frequency-of-the-most-frequent-element/) | _O(logn)_ | _O(1)_	| Medium | |
+| [1839. Longest Substring Of All Vowels in Order](https://leetcode.com/problems/longest-substring-of-all-vowels-in-order) | _O(n)_ | _O(1)_	| Medium | |
 
 
 ```c++
@@ -748,6 +765,7 @@ DEBUG stdout
 | [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/) | _O(n+m)_ | _O(m+n)_	| Medium | 用两个stack,把每个list值push 进stack，最后push进的先算 |
 | [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/) | _O(n)_ | _O(1)_	| Medium | 每次前进到此次push进vector的最后一位, 然后断链, 第i个vector长度为 n//k + (i< n%k) |
 | [817. Linked List Components](https://leetcode.com/problems/linked-list-components/) | _O(n+m)_ | _O(m)_	| Medium | 把vector转化成unordered_set, 然后判断每个val,是不是在unordered_set里面 |
+| [1836. Remove Duplicates From an Unsorted Linked List](https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/) | _O(n)_ | _O(n)_	| Medium |  |
 |LinkedList 当head, cur 指向同一点, cur = cur->next; ||||head 不会改变, 但是当cur在head之后，head包含cur, cur = cur->next, head会跳过cur这点|
 two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
 
@@ -839,6 +857,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1365	How Many Numbers Are Smaller Than the Current Number](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/) | _O(n+m)_ | _O(m)_	| Easy |  🔍[_O(n+m)_ Solution Counting Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/1365.%20How%20Many%20Numbers%20Are%20Smaller%20Than%20the%20Current%20Number.cpp#L38) 🔍[Python Counting Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/1365.%20How%20Many%20Numbers%20Are%20Smaller%20Than%20the%20Current%20Number.py#L5) |
 | [1366. Rank Teams by Votes](https://leetcode.com/problems/rank-teams-by-votes/) | _O(n)_ | _O(1)_	| Medium | 🔍[Python Sort list based on Dictonary value](https://github.com/beckswu/Leetcode/blob/master/Sort/1366.%20Rank%20Teams%20by%20Votes.py#L31)  |
 | [1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/) | _O(hlogh + vlogv)_ | _O(1)_	| Medium |  |
+| [1840. Maximum Building Height](https://leetcode.com/problems/maximum-building-height/) | _O(nlogn)_ | _O(1)_	| Hard |  |
 
 
 </br>
