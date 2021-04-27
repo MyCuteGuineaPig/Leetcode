@@ -476,6 +476,7 @@ TreeNode* helper(TreeNode** head ){
 | [657. Judge Route Circle](https://leetcode.com/problems/judge-route-circle/) | _O(n)_ | _O(1)_	| Easy |  |
 | [678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/) | _O(n)_ | _O(1)_	| Medium | 🔍Three Solutions<ul><li>用low 和high: low 表示把 '\*' 当成 ')', high: 表示把 '\*' 当成'(', 如果high小于0，表示有太多的')' '(' + '\*' = high < ')' </li><li>用两个stack 分别记录 '(' 和 '\*'的位置, 如果当前是')', 先pop '(' 再pop '\*'; 最后看'(' 有没有对应index往后的的 '\*'可以pop掉, </li><li> Two pass solution 从左向右看是不是所有的')' 都有对应的 '(' 和 '\*', 再从右向左看是不是所有的 '(', 都有对应的 ')' 和' \*' </li></ul> |
 | [680. Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) | _O(n)_ | _O(1)_	| Easy | 🔍两个pointer,  检查s\[i] == s\[j]?, 遇到不等时，再看s\[i+1, j], or s\[i, j-1]是不是pal |
+| [681. Next Closest Time](https://leetcode.com/problems/next-closest-time/) | _O(1)_ | _O(1)_	| Medium |  |
 | [686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/) | _O(n+m)_ | _O(n)_	| Easy | 🔍<ul><li>Kmp: 然后两个pointer, 一个pointer i 记录A的位置，一个pointer j记录B的位置，每次对比 A\[(i + j)%A.size()] 是否等于B\[j] 等于就++j., 直到 j =  b.size() return ceil((i+j)/a.size()) </li><li> rabin-karp algorithm, 寻找最短的长度一直到最大长度的hash </li></ul> |
 | [696.	Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/) | _O(n)_ | _O(1)_	| Easy | manacher(马拉车)算法的变形 |
 | [720. Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | _O(n)_ | _O(t)_	| Easy | Trie or 先按长度sort, 长度越短, 排前面, loop word, loop s\[i]\[0,len), 看是不是每个substr都在，都在话insert to hashset & update result |
@@ -557,7 +558,7 @@ TreeNode* helper(TreeNode** head ){
 | [299. Bulls and Cows](https://leetcode.com/problems/bulls-and-cows/) | _O(n)_ | _O(1)_	| Easy | One pass: 如果guess\[i] 和 secret\[i]一样, bull++, 不一样，++m\[sec\[i]], --m\[guess\[i]] python 可以用两个collectons.Counter相减, 得到重合的set|
 | [336. Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/) | _O(n \* k^2)_ | _O(n\*k)_	| Hard |🔍trie  |
 | [387. First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/) | _O(n)_ | _O(n)_	| Easy | 需要 two pass |
-| [388. Longest Absolute File Path](https://leetcode.com/problems/longest-absolute-file-path/) | _O(n)_ | _O(d)_	| Medium | map记录每一层现有的长度,到新的或者原来一层，更新map, res是max(map中含有“.”的一层), 用到string::find, string::find_first_not_of, std::find  |
+| [388. Longest Absolute File Path](https://leetcode.com/problems/longest-absolute-file-path/) | _O(n)_ | _O(d)_	| Medium |  |
 | [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/) | _O(n)_ | _O(1)_	| Easy | 可以用std::count, 或者可以来回flip map, 当map位true +2 |
 | [424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | _O(n)_ | _O(1)_	| Medium | 🔍sliding window: 记录window的初始点, 如果当前长度 - 最大count > k, ++start(保持windows的最大长度), 如果满足，start不变，结果是s.size()-start |
 | [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/) | _O(n)_ | _O(1)_	| Easy | sliding window: 跟[567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)思路一样 <ul><li>保持window的长度不变, 用l算p中还剩几个点没有被数过 </li><li>用right和left, 当right和left之间长度 == p的长度,append to result</li><li>用两个map 分别记录s 和p，如果s==p,append to result </li></ul> |
@@ -593,7 +594,7 @@ TreeNode* helper(TreeNode** head ){
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | |
 | [862. Shortest Subarray with Sum at Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/) | _O(n)_ | _O(k)_	| Hard | |
-| [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | _O(n)_ | _O(1)_	| Medium | |
+| [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | _O(n)_ | _O(1)_	| Medium | Rephrase Question: return the longest subarray's length which only contains 2 different elements |
 | [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) | _O(n)_ | _O(1)_	| Medium | |
 | [992. Subarrays with K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/) | _O(n)_ | _O(1)_	| Medium | |
 | [1004. Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/) | _O(n)_ | _O(1)_	| Medium | |
