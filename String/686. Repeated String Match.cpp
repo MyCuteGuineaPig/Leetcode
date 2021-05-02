@@ -24,7 +24,7 @@ KMP 算法：利用kmp 先得b的prefix的table
 这样好处是假如到A[i+j]!=B[j]不match, a不用回到这次开始前的下一点(i+1)继续开始，可以直接到 i += j - prefix[j-1]的点
 
 
-i跳到 i' =  j - prefix[j-1]的原因是： 分两种情况
+i跳到 i +=  j - prefix[j-1]的原因是： 分两种情况
     -  prefix[j - 1] > 0: 有suffix 也是prefix的情况，这样不动A点, 动B点到上一个prefix的后一点, 继续进行比较，同时调整相对应B的A的起点位置i，
        根据kmp的性质，这样做可以省去重复比较时间
         因为这部分既可以当suffix 也可以当prefix，当suffix（也已经测过A = B） = prefix 的满足起点(B)的需求
@@ -50,21 +50,21 @@ i跳到 i' =  j - prefix[j-1]的原因是： 分两种情况
         A: a b a b a b c  (return 2)
                    _
         B: a b a b c a b a b
-               a b a b c a b a b
+            B: a b a b c a b a b
 
         当j = 5 不match 的时候, p[j = 4] = 2 > 0 (ab) 即是prefix 又是suffix，此时不动A(i+j保持不动)，动B到上一个prefix的后一位 j = 2, 
             i前进到3(A的B相对应的起点)
             A: a a b a a c  (return 2)
                          -
             B: a a b a a b a a c
-                     a a b a a b a a c
+                  B: a a b a a b a a c
 
             
         因为比较是A[i + j ] 和 B【j] 要保持 i + j 不变，我们已经知道j要回到 j' = prefix [ j- 1], 所以 i + j = i' + j ' = i' + prefix[j-1]
         i' = i + j - prefix[j - 1]
         i' 是下一个B（还是这个prefix的） 起点位置， 
 
-    -  prefix[j - i] = 0, 现在suffix 不能构成prefix，跳过match的部分，因为match的话一定是从j = 0 开始逐一match, 这样没有suffix 不做prefix的，
+    -  prefix[j - 1] = 0, 现在suffix 不能构成prefix，跳过match的部分，因为match的话一定是从j = 0 开始逐一match, 这样没有suffix 不做prefix的，
         我们知道j下个位置会回到0，i就可以到 i + j 的位置继续loop, 
         比如
         A: a b c d f  (return -1)
@@ -90,7 +90,7 @@ public:
             if(B[i] == B[j]) ++j;
             prefix[i] = j;
         }
-        
+        // i += j - prefix[j-1] is the key
         for(int i = 0, j = 0; i<A.size(); i += j - prefix[j-1], j = prefix[j-1]){
             while(j<B.size() && A[(i+j) % A.size()] == B[j]) j ++;
             if(j == B.size()) return (i+j)/(A.size()) + ((i+j) % A.size() ? 1 : 0);

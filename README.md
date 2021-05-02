@@ -6,7 +6,7 @@
 * [Tree Relevant](https://github.com/beckswu/Leetcode#tree-relevant) 
 * [Math](https://github.com/beckswu/Leetcode#math) 
 * [String](https://github.com/beckswu/Leetcode#string) 
-* * [Hash Table](https://github.com/beckswu/Leetcode#trie) 
+* [Hash Table](https://github.com/beckswu/Leetcode#trie) 
 * [Hash Table](https://github.com/beckswu/Leetcode#hash-table) 
 * [Bit Manipulation](https://github.com/beckswu/Leetcode#bit-manipulation)
 * [Stack](https://github.com/beckswu/Leetcode#stack) 
@@ -152,6 +152,7 @@
 | [968. Binary Tree Cameras](https://leetcode.com/problems/binary-tree-cameras/) | _O(n)_ | _O(h)_	| Hard | 🎅 |
 | [984. String Without AAA or BBB](https://leetcode.com/problems/string-without-aaa-or-bbb/) | _O(a+b)_ | _O(1)_	| Medium |  |
 | [995. Minimum Number of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/) | _O(n)_ | _O(1)_	| Hard | 💜🎅 |
+| [1007. Minimum Domino Rotations For Equal Row](https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/) | _O(n)_ | _O(1)_	| Medium |  |
 | [1249. Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/) | _O(n)_ | _O(1)_	| Medium | Stack |
 | [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | [1419	Minimum Number of Frogs Croaking](https://leetcode.com/problems/minimum-number-of-frogs-croaking/) | _O(n)_ |	_O(1)_	| Medium | 需保证 counter 递增 ```c>r>o>a>k```  |
@@ -593,7 +594,7 @@ TreeNode* helper(TreeNode** head ){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | |
-| [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | 只能固定长度 |
+| [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT </li></ul>|
 | [862. Shortest Subarray with Sum at Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/) | _O(n)_ | _O(k)_	| Hard | |
 | [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | _O(n)_ | _O(1)_	| Medium | Rephrase Question: return the longest subarray's length which only contains 2 different elements |
 | [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) | _O(n)_ | _O(1)_	| Medium | |

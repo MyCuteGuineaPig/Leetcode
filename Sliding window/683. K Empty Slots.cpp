@@ -107,3 +107,49 @@ public:
         return -1;
     }
 };
+
+/*
+BIT Tree,
+
+search if the point i - (k + 1) or i + (k+1) is the next closet point 
+
+Need visited. Since when update tree, it will update the point which maybe unvisited 
+
+e.g. update 5, then update 5 -> 6 -> 8 . if k = 2, and 8 is not unvisited, may get wrong answer
+
+*/
+
+class Solution {
+public:
+    int kEmptySlots(vector<int>& bulbs, int k) {
+        int n = bulbs.size();
+        vector<int>bits(n+1);
+        vector<int>visited(n+1);
+        for(int i =0 ; i<bulbs.size(); ++i){
+            int pos = bulbs[i], l = pos - (k + 1), r = pos + ( k + 1);
+            
+            update(bits, pos);
+            visited[pos] = 1;
+          
+            int count = getSum(bits, pos);
+            
+            if(l >0 && visited[l] && getSum(bits, l) == count - 1)
+                return i + 1;
+            if (r<=n && visited[r] && getSum(bits, r) == count + 1)
+                return i + 1;
+        }
+        return -1;
+    }
+    
+    void update(vector<int>&bits, int i){
+        for(; i<bits.size(); i += i & -i)
+            bits[i]++;
+    }
+    
+    int getSum(vector<int>&bits, int i){
+        int cur = 0;
+        for(; i; i -= i & -i)
+            cur += bits[i];
+        return cur;
+    }
+};
