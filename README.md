@@ -157,6 +157,7 @@
 | [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | [1419	Minimum Number of Frogs Croaking](https://leetcode.com/problems/minimum-number-of-frogs-croaking/) | _O(n)_ |	_O(1)_	| Medium | 需保证 counter 递增 ```c>r>o>a>k```  |
 | [1833. Maximum Ice Cream Bars](https://leetcode.com/problems/maximum-ice-cream-bars/) | _O(nlogn)_ |	_O(1)_	| Medium |  |
+| [1850. Minimum Adjacent Swaps to Reach the Kth Smallest Number](https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/) | _O(n^2)_ |	_O(n)_	| Medium |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
@@ -861,6 +862,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1366. Rank Teams by Votes](https://leetcode.com/problems/rank-teams-by-votes/) | _O(n)_ | _O(1)_	| Medium | 🔍[Python Sort list based on Dictonary value](https://github.com/beckswu/Leetcode/blob/master/Sort/1366.%20Rank%20Teams%20by%20Votes.py#L31)  |
 | [1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/) | _O(hlogh + vlogv)_ | _O(1)_	| Medium |  |
 | [1840. Maximum Building Height](https://leetcode.com/problems/maximum-building-height/) | _O(nlogn)_ | _O(1)_	| Hard |  |
+| [1851. Minimum Interval to Include Each Query](https://leetcode.com/problems/minimum-interval-to-include-each-query/) | _O(nlogn + qlogq)_ | _O(n)_	| Hard |  |
 
 
 </br>
@@ -1189,7 +1191,8 @@ DFS 是看有没有path，DP是看有几个path
 | [960. Delete Columns to Make Sorted III](https://leetcode.com/problems/delete-columns-to-make-sorted-iii/)	|	_O(n \* l^2)_	|	_O(l)_|	Hard | 🎅类似的题: <ul><li>https://leetcode.com/problems/longest-increasing-subsequence/description/</li></ul>  |
 | [975. Odd Even Jump](https://leetcode.com/problems/odd-even-jump/) | _O(nlogn)_ |	_O(n)_	| Hard | 💜🎅🎅🎅, Mono Stack/BST |
 | [983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/) | _O(n)_ |	_O(1)_	| Medium | 💜🎅🎅 Similar Question <ul><li> [279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/) </li><li>[322. Coin Change](https://leetcode.com/problems/coin-change/description/)</li><li> [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/)</li></ul> |
-| [1277. Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones//)	|	_O(m\*n)_	|	_O(1)_|	Medium | 类似的题: <ul><li>[221. Maximal Square](https://leetcode.com/problems/maximal-square/)</li><li>[304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)</li><li>[661 Image Smoother](https://leetcode.com/problems/image-smoother/)</li><li>[764. Largest Plus Sign](https://leetcode.com/problems/largest-plus-sign/description/)</li><li>[1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)</li></ul> |
+| [1235. Maximum Profit in Job Scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/)	|	_O(nlogn)_	|	_O(n)_|	Hard |  |
+| [1277. Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones/)	|	_O(m\*n)_	|	_O(1)_|	Medium | 类似的题: <ul><li>[221. Maximal Square](https://leetcode.com/problems/maximal-square/)</li><li>[304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)</li><li>[661 Image Smoother](https://leetcode.com/problems/image-smoother/)</li><li>[764. Largest Plus Sign](https://leetcode.com/problems/largest-plus-sign/description/)</li><li>[1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)</li></ul> |
 | [1335. Minimum Difficulty of a Job Schedule](https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule)	|	_O(dn)_ 	|	_O(n)_|	Hard |  |
 | [1387. Sort Integers by The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value/)	|	_O(n)_ average	|	_O(n)_|	Medium | nth_element, ✏️✏️[C++ Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.cpp#L3) [Python Static Variable](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/1387.%20Sort%20Integers%20by%20The%20Power%20Value.py#L20)  |
 | [1388. Pizza With 3n Slices](https://leetcode.com/problems/pizza-with-3n-slices/)	|	_O(n^2)_  |	_O(n)_|	Hard | 😍😍 类似[213. House Robber II](https://leetcode.com/problems/house-robber-ii/) 和 [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/) |
