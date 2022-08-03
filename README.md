@@ -38,6 +38,8 @@
 1. Trie
 2. Union Find 
 
+c++ vector 可以作为map的key，但不能作为unordered_map的Key
+
 
   ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -585,6 +587,7 @@ TreeNode* helper(TreeNode** head ){
 | [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/) | _O(n+k^2)_ | _O(k)_	| Medium | 用hash map存age和count, loop两层hashmap, 判断内层和外层key是否满足条件, 满足的话更新结果 |
 | [1347. Minimum Number of Steps to Make Two Strings Anagram](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/) | _O(n)_ | _O(n)_	| Medium |  |
 | [1418	Display Table of Food Orders in a Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/) | _O(n + tlogt + flogf)_ | _O(n)_	| Medium | ✏️[C++ transform]() |
+| [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/) | _O(n)_ | _O(n)_	| Easy |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## sliding windows 
@@ -938,6 +941,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/) | _O((logN)_ |	_O(1)_	| Medium| 🎅 |
 | [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅[Binary Search](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/1385.%20Find%20the%20Distance%20Value%20Between%20Two%20Arrays.cpp#L23), Two pointer |
 | [1818. Minimum Absolute Sum Difference](https://leetcode.com/problems/minimum-absolute-sum-difference/) | _O((n \* logn)_ |	_O(n)_	| Medium | |
+| [2358. Maximum Number of Groups Entering a Competition](https://leetcode.com/problems/maximum-number-of-groups-entering-a-competition/) | _O(logN)_ |	_O(1)_	| Medium | Math / Brain Teaser |
 
 
 
@@ -1053,6 +1057,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1391. Check if There is a Valid Path in a Grid](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/) |	_O(m\*n)_	|	_O(1)_ |	Medium | |
 | [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP 🎅🎅  |
 | [1806. Minimum Number of Operations to Reinitialize a Permutation](https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/)	|	_O(n)_  |	_O(1)_|	Medium | Reverse |
+| [2359. Find Closest Node to Given Two Nodes](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/)	|	_O(n)_  |	_O(n)_|	Medium |  |
 
 </br>
 </br>
@@ -1089,6 +1094,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)	|	_O(m \* n)_	|	_O(min(m, n))_ |	Medium | 🔍 [DP](https://github.com/beckswu/Leetcode/blob/master/Backtracking/718.%20Maximum%20Length%20of%20Repeated%20Subarray.cpp#L69)  |
 | [784. Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/description/)	|	_O(n \* 2^n)	_	|	_O(1)_ |	Easy |  ✏️[Python itertools.product](https://github.com/beckswu/Leetcode/blob/master/Backtracking/784.%20Letter%20Case%20Permutation.py#L68)|
 | [1087. Brace Expansion](https://leetcode.com/problems/brace-expansion/)	|	_O(n \* l \*log(n \*l))_	|	_O(n \* l)_ |	Medium |  |
+| [2352. Equal Row and Column Pairs](https://leetcode.com/problems/equal-row-and-column-pairs/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium |  suffix Trie |
 
 ## Graph
 
@@ -1221,6 +1227,9 @@ increment: _O(1)_ |	_O(n)_ |	Medium | Lazy increment |
 checkin: _O(1)_ <br/>
 checkout: _O(1)_ <br/>
 getaverage: _O(1)_ |	_O(n)_ |	Medium |  |
+| [2353. Design a Food Rating System](https://leetcode.com/problems/design-a-food-rating-system/) | ctor: _O(nlogn)_ <br/>
+changeRating: _O(logn)_ <br/>
+highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 
 
 
