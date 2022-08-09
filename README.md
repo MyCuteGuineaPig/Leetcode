@@ -587,7 +587,9 @@ TreeNode* helper(TreeNode** head ){
 | [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/) | _O(n+k^2)_ | _O(k)_	| Medium | 用hash map存age和count, loop两层hashmap, 判断内层和外层key是否满足条件, 满足的话更新结果 |
 | [1347. Minimum Number of Steps to Make Two Strings Anagram](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/) | _O(n)_ | _O(n)_	| Medium |  |
 | [1418	Display Table of Food Orders in a Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/) | _O(n + tlogt + flogf)_ | _O(n)_	| Medium | ✏️[C++ transform]() |
+| [2347. Best Poker Hand](https://leetcode.com/problems/best-poker-hand/) | _O(1)_ | _O(1)_	| Easy | ❌ |
 | [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/) | _O(n)_ | _O(n)_	| Easy |  |
+| [2367. Number of Arithmetic Triplets](https://leetcode.com/problems/number-of-arithmetic-triplets/) | _O(n)_ | _O(n)_	| Easy |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## sliding windows 
@@ -832,6 +834,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [838. Push Dominoes](https://leetcode.com/problems/push-dominoes/) | _O(n)_ | _O(n)_	| Medium | 🎅🎅🎅 |
 | [844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | _O(m+n)_ | _O(1)_	| Easy | 两个pt，都从s,t 从后往前对比 |
 | [986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) | _O(m+n)_ | _O(1)_	| Medium |  |
+| [2337. Move Pieces to Obtain a String](https://leetcode.com/problems/move-pieces-to-obtain-a-string/) | _O(n)_ | _O(1)_	| Medium |  |
+| [2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/) | _O(n)_ | _O(1)_	| Medium |  |
 
 </br>
 
@@ -1058,6 +1062,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP 🎅🎅  |
 | [1806. Minimum Number of Operations to Reinitialize a Permutation](https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/)	|	_O(n)_  |	_O(1)_|	Medium | Reverse |
 | [2359. Find Closest Node to Given Two Nodes](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/)	|	_O(n)_  |	_O(n)_|	Medium |  |
+| [2360. Longest Cycle in a Graph](https://leetcode.com/problems/longest-cycle-in-a-graph/)	|	_O(n)_  |	_O(n)_|	Hard | ⭐ |
+| [2368. Reachable Nodes With Restrictions](https://leetcode.com/problems/reachable-nodes-with-restrictions/)	|	_O(V+E)_  |	_O(V+E)_|	Medium | BFS / DFS |
 
 </br>
 </br>
@@ -1094,7 +1100,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)	|	_O(m \* n)_	|	_O(min(m, n))_ |	Medium | 🔍 [DP](https://github.com/beckswu/Leetcode/blob/master/Backtracking/718.%20Maximum%20Length%20of%20Repeated%20Subarray.cpp#L69)  |
 | [784. Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/description/)	|	_O(n \* 2^n)	_	|	_O(1)_ |	Easy |  ✏️[Python itertools.product](https://github.com/beckswu/Leetcode/blob/master/Backtracking/784.%20Letter%20Case%20Permutation.py#L68)|
 | [1087. Brace Expansion](https://leetcode.com/problems/brace-expansion/)	|	_O(n \* l \*log(n \*l))_	|	_O(n \* l)_ |	Medium |  |
-| [2352. Equal Row and Column Pairs](https://leetcode.com/problems/equal-row-and-column-pairs/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium |  suffix Trie |
+| [2352. Equal Row and Column Pairs](https://leetcode.com/problems/equal-row-and-column-pairs/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium |  suffix Trie / Python Zip |
 
 ## Graph
 
@@ -1207,6 +1213,8 @@ DFS 是看有没有path，DP是看有几个path
 | [1420. Build Array Where You Can Find The Maximum Exactly K Comparisons](https://leetcode.com/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/)	|	_O(n\*m\*k)_  |	_O(m\*k)_|	Hard | 🎅  |
 | [1531. String Compression II](https://leetcode.com/problems/string-compression-ii/)	|	_O(n\^2\*k)_  |	_O(n\*k)_|	Hard | 🎅🎅  |
 | [1824. Minimum Sideway Jumps](https://leetcode.com/problems/minimum-sideway-jumps/)	|	_O(n)_  |	_O(1)_|	Medium |  |
+| [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/)	|	_O(n)_  |	_O(1)_|	Medium |  |
+| [2370. Longest Ideal Subsequence](https://leetcode.com/problems/longest-ideal-subsequence/)	|	_O(kn)_  |	_O(1)_|	Medium | ⭐ TopDown |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>
@@ -1227,6 +1235,9 @@ increment: _O(1)_ |	_O(n)_ |	Medium | Lazy increment |
 checkin: _O(1)_ <br/>
 checkout: _O(1)_ <br/>
 getaverage: _O(1)_ |	_O(n)_ |	Medium |  |
+| [2349. Design a Number Container System](https://leetcode.com/problems/design-a-number-container-system/) | ctor: _O(1)_  <br/>
+change: _O(logn)_  <br/>
+find: _O(1)_  <br/>|	_O(n)_ |	Medium |  Python SortedList |
 | [2353. Design a Food Rating System](https://leetcode.com/problems/design-a-food-rating-system/) | ctor: _O(nlogn)_ <br/>
 changeRating: _O(logn)_ <br/>
 highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
