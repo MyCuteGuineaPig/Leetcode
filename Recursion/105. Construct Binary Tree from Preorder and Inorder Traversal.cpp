@@ -11,6 +11,8 @@ public:
                  /*
                  cur 实际上是上一个被process的点,
 
+                 此解只push 有left 的tree，right tree process 完，不会push 进stack, 而是直接assign cur
+
                 //不能是preorder[i] == inorder[j] 作为对比条件 因为 preorder top->left->right, inorder: left->top->right
                   因为不知道下个点在 preorder[i] 的right tree 还是preorder[i]->parent 的right tree
                   比如 preorder 3-9-2-4   in order 2-9-4-3
@@ -22,6 +24,9 @@ public:
                        4                                         2 
                 比如两个tree 都是碰到 9, preorder[1] == inorder[0], 不知道下个数应该挂在9的right tree 还是3的right tree
                         ***碰到9 只知道，9的left tree 走完了
+
+                只有3 被push 到stack里
+
 
                 如果用cur->val (上个process) == inorder[j], 如果stk top != inorder[j] 表示当前cur还有right tree, stk不能pop
                     比如上面左侧的, 跳过第一个meet 的点(++j), stk.top (3) != inorder[1], 表示 当前cur (9) 还有right tree没处理
