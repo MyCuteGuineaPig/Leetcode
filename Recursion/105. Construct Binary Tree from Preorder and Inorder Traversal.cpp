@@ -91,6 +91,8 @@ end 是对比left child 来说的返回点 比如,  ()在当前 function 中end�
 preorder  1 2 3 5 6 4 7 8 9 10
 inorder   5 3 6 2 7 4 8 1 9 10 
 
+min 的值会在left tree 的righmost 的点出现
+
 最底层stop 的顺序等于 inorder的顺序
 
 */
