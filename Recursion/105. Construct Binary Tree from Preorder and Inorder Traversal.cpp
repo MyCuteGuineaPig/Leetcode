@@ -39,6 +39,17 @@ public:
                 到right, stack 是为空,  cur  =top,  top->right = right
                 
                 所以while loop 是找到合适的top, 把现在preorder 挂到右侧数上
+
+
+                        3    preorder 3-9-4-5-2                   
+                       / \   in order 9-5-4-3-2                      
+                      9   2                                   
+                       \                                       
+                       4    
+                       /
+                      5                                 
+
+                      9只经过一次, 当5回到3的时候，经过4, 不经过9    
                 */
                 ++j;
                 while(!stk.empty() && stk.top()->val == inorder[j]){// stk.top()->val != inorder[j] 表示stk.top()右侧还没有走
