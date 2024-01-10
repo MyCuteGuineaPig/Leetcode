@@ -1228,6 +1228,7 @@ DFS 是看有没有path，DP是看有几个path
 | [1824. Minimum Sideway Jumps](https://leetcode.com/problems/minimum-sideway-jumps/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2370. Longest Ideal Subsequence](https://leetcode.com/problems/longest-ideal-subsequence/)	|	_O(kn)_  |	_O(1)_|	Medium | ⭐ TopDown |
+| [3003. Maximize the Number of Partitions After Operations](https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/description/)	|	_O(2^26n)_  |	_O(2^26n)_|	Hard | TopDown, Bottomup |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>
