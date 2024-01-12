@@ -195,6 +195,7 @@ public:
 };
 
 //Postorder: 先right 再left 最后reverse
+//postorder 是把tree mirror后的pre order
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
