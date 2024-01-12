@@ -170,6 +170,19 @@ c++ vector 可以作为map的key，但不能作为unordered_map的Key
 ## Tree
 
 ```c++
+
+//
+void helper(TreeNode* root, vector<int>&res){
+    if(!root) {return;}
+    //res.push_back(root->val); pre order
+    helper(root->left, res);
+    //res.push_back(root->val); in order
+    helper(root->right, res);
+    //res.push_back(root->val); post order
+    return;
+}
+
+
 //Inorder Traversal
 //stack, 
 class Solution {
