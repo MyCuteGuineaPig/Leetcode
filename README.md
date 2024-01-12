@@ -241,14 +241,14 @@ public:
             if(!cur->left)
             {
                 //res.push_back(cur->val); //Inorder, preorder
-                cur = cur->right;
+                cur = cur->right; //cover所有没有left tree的点
             }else{
                 TreeNode* pre = cur->left;
                 while(pre->right && pre->right!=cur)
                     pre = pre->right;
-                if(pre->right){
+                if(pre->right){ //表示cur的left 已经全部visit完成，又回到cur了
                     //res.push_back(cur->val); //Inorder
-                    pre->right = NULL; 
+                    pre->right = NULL;  //cover剩下其他的点
                     cur = cur->right;
                 }
                 else{
