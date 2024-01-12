@@ -175,24 +175,26 @@ c++ vector 可以作为map的key，但不能作为unordered_map的Key
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
+        TreeNode *cur = root;
+        if(!root) return {};
         vector<int>res;
-        stack<TreeNode*>stk;
-        while(root || !stk.empty()){
-            if(root){
-               // res.push_back(cur->val);  //Preorder
-                stk.push(root);
-                root = root->left;
-            }else{
-                root = stk.top(); stk.pop();
-               // res.push_back(root->val); //Inorder
-                root = root->right;
+        stack<TreeNode *>stk;
+        while(cur || !stk.empty()){ //cur 比如只有右面的，stack只存之后需要返回的 ； !stk.empty() 是看是不是有接下来返回的node，比如到最左侧node 需要返回
+            if(cur){
+                //res.push_back(cur->val); pre order
+                stk.push(cur);
+                cur = cur->left;
+            }else{//切换到之前的top
+                cur = stk.top(); stk.pop();
+                res.push_back(cur->val);
+                cur = cur->right;
             }
         }
         return res;
     }
 };
 
-//Postorder
+//Postorder: 先right 再left 最后reverse
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
