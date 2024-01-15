@@ -56,7 +56,7 @@ no reason to compare abc again move pattern like this
 pattern:                       a b c d a b c y 
 
 
-STEP 1: calculate pattern's longgest prefix which is a suffix. lps[i]表示在index i结束 prefix也是suffix最大长度
+calculate pattern's longgest prefix which is a suffix. lps[i]表示在index i结束 prefix也是suffix最大长度
 
 For the pattern “AAAA”, lps[] is [0, 1, 2, 3]
 For the pattern “AABAACAABAA”, lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
