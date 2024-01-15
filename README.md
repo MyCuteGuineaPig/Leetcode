@@ -1,4 +1,5 @@
 <!-- vscode-markdown-toc -->
+* 1. [Catalogue](#Catalogue)
 * 2. [KMP](#KMP)
 * 3. [Breadth-First Search](#Breadth-FirstSearch)
 * 4. [Array](#Array)
@@ -33,7 +34,10 @@
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->##  1. <a name='Catalogue'></a>Catalogue
+<!-- /vscode-markdown-toc -->
+
+
+##  1. <a name='Catalogue'></a>Catalogue
 * [Array](https://github.com/beckswu/Leetcode#array)
 * [Concurrency](https://github.com/beckswu/Leetcode#Concurrency)
 * [Greedy](https://github.com/beckswu/Leetcode#greedy) 
