@@ -1,4 +1,3 @@
-<!-- vscode-markdown-toc -->
 * 1. [Catalogue](#Catalogue)
 * 2. [KMP](#KMP)
 * 3. [Breadth-First Search](#Breadth-FirstSearch)
@@ -30,11 +29,6 @@
 * 29. [Bash](#Bash)
 * 30. [Concurrency](#Concurrency)
 
-<!-- vscode-markdown-toc-config
-	numbering=true
-	autoSave=true
-	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->
 
 
 ##  1. <a name='Catalogue'></a>Catalogue
