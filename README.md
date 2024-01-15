@@ -1,37 +1,6 @@
-* 1. [Catalogue](#Catalogue)
-* 2. [KMP](#KMP)
-* 3. [Breadth-First Search](#Breadth-FirstSearch)
-* 4. [Array](#Array)
-* 5. [Greedy](#Greedy)
-* 6. [Tree](#Tree)
-* 7. [Math](#Math)
-* 8. [Trie](#Trie)
-* 9. [String](#String)
-* 10. [Regular Expression Summary](#RegularExpressionSummary)
-* 11. [Bit Manipulation](#BitManipulation)
-* 12. [Hash Table](#HashTable)
-* 13. [sliding windows](#slidingwindows)
-* 14. [Stack](#Stack)
-* 15. [Linked List](#LinkedList)
-* 16. [Queue](#Queue)
-* 17. [Heap](#Heap)
-* 18. [Two Pointer](#TwoPointer)
-* 19. [Sort](#Sort)
-* 20. [Recursion](#Recursion)
-* 21. [Binary Search](#BinarySearch)
-* 22. [Binary Search Tree](#BinarySearchTree)
-* 23. [Tree Relevant](#TreeRelevant)
-* 24. [Depth-First Search](#Depth-FirstSearch)
-* 25. [Backtracking](#Backtracking)
-* 26. [Graph](#Graph)
-* 27. [Dynamic Programming](#DynamicProgramming)
-* 28. [Design](#Design)
-* 29. [Bash](#Bash)
-* 30. [Concurrency](#Concurrency)
 
-
-
-##  1. <a name='Catalogue'></a>Catalogue
+## Catalogue
+* [KMP](https://github.com/beckswu/Leetcode#KMP)
 * [Array](https://github.com/beckswu/Leetcode#array)
 * [Concurrency](https://github.com/beckswu/Leetcode#Concurrency)
 * [Greedy](https://github.com/beckswu/Leetcode#greedy) 
@@ -73,7 +42,7 @@
 c++ vector 可以作为map的key，但不能作为unordered_map的Key
 
 
-##  2. <a name='KMP'></a>KMP
+## KMP
 
 complexity O(m+n), 不是kmp pattern search是O(mn)
 
@@ -180,7 +149,7 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 
 
 
-##  3. <a name='Breadth-FirstSearch'></a>Breadth-First Searchch
+  ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/) | _O(n)_ | _O(n)_	| Medium | |
@@ -192,7 +161,7 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 | [1197. Minimum Knight Moves](https://leetcode.com/problems/minimum-knight-moves/) |	_O(n\*m)_	| _O(n\*m)_ |	Hard |   |
 
 
-##  4. <a name='Array'></a>Arrayy
+ ## Array
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [015. 3 Sum](https://leetcode.com/problems/3sum/) | _O(n^2)_ | _O(1)_	| Medium | 🔍问题关键是sort + skip duplicate |
@@ -254,7 +223,7 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 
 
  
-##  5. <a name='Greedy'></a>Greedy
+## Greedy
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [011. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | _O(n)_ | _O(1)_	| Medium | |
@@ -306,7 +275,7 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 | [3002. Maximum Size of a Set After Removals](https://leetcode.com/problems/maximum-size-of-a-set-after-removals/) | _O(n)_ |	_O(n)_	| Medium | ⭐set difference  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
-##  6. <a name='Tree'></a>Tree
+## Tree
 
 ```c++
 
@@ -568,7 +537,7 @@ TreeNode* helper(TreeNode** head ){
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
-##  7. <a name='Math'></a>Math
+## Math
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [007. Reverse Integer](https://leetcode.com/problems/reverse-integer/) | _O(1)_ | _O(1)_	| Easy |  |
@@ -592,14 +561,14 @@ TreeNode* helper(TreeNode** head ){
 
 
 
-##  8. <a name='Trie'></a>Trie
+## Trie
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [588. Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | <ul><li>`ls` : _O(n)_ </li> <li>`mkdir` : _O(n + klogk)_ </li> <li>`addContentToFile` : _O(n)_ </li> <li>`readContentFromFile` : _O(n)_ </li> | _O(n)_	| Hard |   |
 
 
 
-##  9. <a name='String'></a>String
+## String
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [🔍 manacher(马拉车算法)](https://github.com/beckswu/Leetcode/blob/master/String/005.%20Longest%20Palindromic%20Substring.cpp#L72), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, `if i<mx, p[i] = min(p[2id-i], p[i])` `2id-i` 表示i与中心位对称点的 `id - (i - id)`, `p[2id-i]`表示对称点的最长回文  |
@@ -669,12 +638,12 @@ TreeNode* helper(TreeNode** head ){
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
-##  10. <a name='RegularExpressionSummary'></a>Regular Expression Summary
+## Regular Expression Summary
 |summary |
 | ------------- |
 |  <ul><li>regex_match 是从头开始到结尾结束都要match的, 可以用string + regex, regex_match(string, regex()); or Iterator + regex: regex_match ( s.begin(), s.end(), regex()), 返回值match是不是成功 </li><li>regex_search 是寻找entire string, 有没有substring满足regex的, 可以用string + regex, regex_search(string, regex()) or Iterator + regex: regex_search ( s.begin(), s.end(), regex())</li><li> regex_replace 是寻找entire string match pattern的部分,用其他的string代替它, 返回值新生成的string, replace 不会修改原来string s。 regex_replace(s, regex(), "geek"); 或者把替代的生成到另一个新的string: string result; regex_replace(back_inserter(result), s.begin(), s.end(), regex(),  "geek");</li><ul></br> [reference](http://www.runoob.com/regexp/regexp-syntax.html) [reference2](https://www.regular-expressions.info/shorthand.html) <li>+: 前面的子表达式出现一次或多次 ro+b，可以匹配 roob、rob、rooob </li>                                                             <li>\*: 前面的子表达式出现0次、或1次、或多次ro+b，可以匹配 rb、rob、rooob</li>                                                               <li>\?: 前面的子表达式出现0次、或1次 colou?r，可以匹配 color、colour</li>                                                                   <li>{n}	n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。</li>                     <li> {n,}	n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。 </li> <li> {n,m}	m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。</li>  <li>\|	指明两项之间的一个选择。比如 "A.\|B" 匹配 CAA 也匹配 CB</li>    <li>.	匹配除换行符 \n 之外的任何单字符。 比如A. 匹配AD</li>                                                        <li>^	匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合。比如^A, 表示字符以A开始, 比如\^[0-9] 表示不含有数字</li>                                                    <li>$	匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 '\n' 或 '\r'。比如C$ 字符串以C结尾</li> <li>\w	匹配任何word character short version for \[A-Za-z0-9_], \W is short for \[^\w]。</li> <li> \s stands for "whitespace character"  \S is the equivalent of \[^\s]</li> <li>  \d is short for \[0-9],\[0-9] is not always equivalent to \d. In python3, \[0-9] matches only 0123456789 characters, while \d matches [0-9] and other digit characters, for example Eastern Arabic numerals ٠١٢٣٤٥٦٧٨٩  \D is the same as \[^\d]</li>  </li></ul></ul> difference between () \[], <ul><li>\[] denotes a character class. () denotes a capturing group.</li> <li>\[a-z0-9] -- One character that is in the range of a-z OR 0-9, (a-z0-9) -- Explicit capture of a-z0-9. No ranges. </li> <li>a -- Can be captured by \[a-z0-9]., a-z0-9 -- Can be captured by (a-z0-9) and then can be referenced in a replacement and/or later in the expression</li> <ul>.|
 
-##  11. <a name='BitManipulation'></a>Bit Manipulation
+## Bit Manipulation
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [136. Single Number](https://leetcode.com/problems/single-number/) | _O(n)_ | _O(1)_	| Easy | 用xor ^, Python Reduce one line |
@@ -704,7 +673,7 @@ TreeNode* helper(TreeNode** head ){
 
 
 
-##  12. <a name='HashTable'></a>Hash Table
+## Hash Table
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [001	Two Sum](https://leetcode.com/problems/two-sum/) | _O(n)_ | _O(n)_	| Easy | |
@@ -759,7 +728,7 @@ TreeNode* helper(TreeNode** head ){
 ](https://leetcode.com/problems/node-with-highest-edge-score/) | _O(n)_ | _O(n)_	| Medium |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
-##  13. <a name='slidingwindows'></a>sliding windows 
+## sliding windows 
 |summary |
 | ------------- |
 | sliding windows: windows都是看以当前字母结尾的window. 比较对象```s1```, 被比较对象```s2```<ul><li>可以记录当前substring的开始位置，</li><li>用数字记录substring的长度 </li><li>用hashset和两个pointer记录当前windows的长度 </li><li> map+pointer 1 map + 2 pointers: map先记录比较对象 ```map[s1[i]]++```, 再对被比较对象 __所有字母__ / __key出现__  , ```map[s2[i]]--```<ul> <li> **固定windows 长度**<ul>  <li> 一个pointer ```count```(初始值为 ```count=len```), 它的值会变动, 表示固定windows 内多少个满足条件 </li> <li> 一个pointer ```len```(不变化)表示```s1```长度,用来移动窗口, </li><li>比较条件:  ```if --map[s2[i]] >= 0 ```, ```--count```, 当```count == 0```  ```i-len + 1``` 是windows起点 </li><li>移动窗口条件：```if i>=len-1```, ```map[s2[i-len+1]]++```   </li>  </ul></li> <li> **不固定长度**.<ul>   <li> 一个pointer```left```(变化) , 记录左侧windows 起始点</li><li> 一个pointer ```len``` 记录```s1```长度(不变化) </li> <li>比较条件: ```if i - left == len - 1``` , left表示windows 起点 </li> <li> 移动窗口条件: ```if(map[s2[i]])<0 ``` 表示现windows中 ```s2[i]``` 个数 大于 ```s1```中个数, or ```s1```中没有 ```s2[i]```, 下面两种移动方式都可以   <ul> <li> 方式一: ```while(left <= i && map[s2[i]]< 0) map[s2[left++]]++```。e.g.1 ```s1=abc```, ```s2=ababc```, 在index=2, 第二个a, 有两个a 多于s1中个数, e.g. 2 ```s1=abc```, ```s2=abdabc```, 在index=2, d在s1中没有出现 ) </li> <li>方式二: ```while(map[s2[start++]-'a']++ >= 0);``` 把之前所有满足的都移走, </li></ul>  </li> </ul> </li><li>  可以用两个map,一个map记录比较对象(T)，一个记录被比较对象(S), 还需要一个count记录S中T出现的个数, start记录windows起始点, 初始化count = len(T); </br>只有当sdict\[s\[i]] < tdict\[s\[i]], count--; 当count == 0, 满足情况,append to res; </br>移动窗口过程中,dict\[s\[start]]--, start++,只有当sdict\[s\[start]] < tdict\[s\[start]]时 ++count, </br>比如[30题 Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/), [76题 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)</br>两个题区别是30不能包括多余的string (不可以sdict\[s\[start]] > tdict\[s\[start]]), 76是允许的 </li></ul> </li>  </ul> |
@@ -888,7 +857,7 @@ DEBUG stdout
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |  |
 
 
-##  14. <a name='Stack'></a>Stack
+## Stack
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [020. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | _O(n)_ | _O(n)_	| Easy | ❌注意return true if stack is empty |
@@ -918,7 +887,7 @@ DEBUG stdout
 | [0901. Online Stock Span](https://leetcode.com/problems/online-stock-span//) | _O(n)_ | _O(n)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | Ascending & Descending Stack 按照 container的顺序进行排序 |
 
-##  15. <a name='LinkedList'></a>Linked List
+## Linked List
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [002. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | _O(n)_ | _O(1)_	| Medium | |
@@ -946,14 +915,14 @@ DEBUG stdout
 two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-5-6，slow最后等于3 </br> 2.whiLe(fast && fast->Next) 是找中后一点,比如1-2-3-4-5-6，slow最后等于4, 1-2-3-4-5 最后是3
 
 
-##  16. <a name='Queue'></a>Queue
+## Queue
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | 😍 Monoqueue using Deque<ul><li>  Solution 1 __deque int__ : 只存单个index, descending queue </li><li>Solution 2 deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
 | [362. Design Hit Counter](https://leetcode.com/problems/design-hit-counter/) | _O(1)_ | _O(1)_	| Medium | Should consider remove performance  |
 
 
-##  17. <a name='Heap'></a>Heap
+## Heap
 
 
 
@@ -979,7 +948,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
-##  18. <a name='TwoPointer'></a>Two Pointer 
+## Two Pointer 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Medium | 🔍two pointer, list总长l, 需要remove的index是l-n, slow要前进到l-n-1, 所以先前进n个，再前进到尾部就是l-n-1 |
@@ -1006,7 +975,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
 </br>
 
-##  19. <a name='Sort'></a>Sort
+## Sort
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [056. Merge Intervals](https://leetcode.com/problems/merge-intervals/) | _O(nlogn)_ | _O(n)_	| Medium |  类似的题 <ul><li> [057. Insert Interval](https://leetcode.com/problems/insert-interval/) </li><li>[435.	Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) </li><li>[452. Minimum Number of Arrows to Burst Balloons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/)</li><li>[630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/) </li><li>[646.	Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)</li><li>[757. Set Intersection Size At Least Two](https://leetcode.com/problems/set-intersection-size-at-least-two/)</li></ul> |
@@ -1045,7 +1014,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 
 
-##  20. <a name='Recursion'></a>Recursion
+## Recursion
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -1076,7 +1045,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 </br>
 </br>
 
-##  21. <a name='BinarySearch'></a>Binary Search
+## Binary Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [004. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) | _O(log(min(m, n)))_ |	_O(1)_	| Hard | 💜🎅🎅 |
@@ -1123,7 +1092,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 
 
-##  22. <a name='BinarySearchTree'></a>Binary Search Tree
+## Binary Search Tree
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -1141,7 +1110,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 </br>
 
 
-##  23. <a name='TreeRelevant'></a>Tree Relevant
+## Tree Relevant
 
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -1189,7 +1158,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 
 
-##  24. <a name='Depth-FirstSearch'></a>Depth-First Search
+## Depth-First Search
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -1238,7 +1207,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 
 
-##  25. <a name='Backtracking'></a>Backtracking
+## Backtracking
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [017. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)	|	_O(n \* 4^n)_	|	_O(n)_ |	Medium | ✏️[Python Lambda Function](https://github.com/beckswu/Leetcode/blob/master/Backtracking/17.%20Letter%20Combinations%20of%20a%20Phone%20Number.py#L37)  |
@@ -1269,7 +1238,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1087. Brace Expansion](https://leetcode.com/problems/brace-expansion/)	|	_O(n \* l \*log(n \*l))_	|	_O(n \* l)_ |	Medium |  |
 | [2352. Equal Row and Column Pairs](https://leetcode.com/problems/equal-row-and-column-pairs/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium |  suffix Trie / Python Zip |
 
-##  26. <a name='Graph'></a>Graph
+## Graph
 
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -1279,7 +1248,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 </br>
 
 DFS 是看有没有path，DP是看有几个path
-##  27. <a name='DynamicProgramming'></a>Dynamic Programmingg 
+ ## Dynamic Programming 
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [010. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/description/)	|	_O(m\*n)_	|	_O(n)_ |	Hard | 🎅🎅 |
@@ -1389,7 +1358,7 @@ DFS 是看有没有path，DP是看有几个path
 <br/>
 
 
-##  28. <a name='Design'></a>Design 
+## Design 
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | :-------------: | :-------------: | :-------------: | :------------- |
@@ -1417,7 +1386,7 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 <br/>
 
 
-##  29. <a name='Bash'></a>Bash
+## Bash
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | :-------------: | :-------------: | :-------------: | :------------- |
 | [192	Word Frequency](https://leetcode.com/problems/word-frequency/) | 	_O(n)_ |	_O(k)_ |	Medium | switch column ```awk```, remove whitespace ```sed``` |
@@ -1427,7 +1396,7 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 
 
 
-##  30. <a name='Concurrency'></a>Concurrencycy
+  ## Concurrency
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |
