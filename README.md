@@ -28,6 +28,104 @@
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
 
 
+kmp, complexity O(m+n), 不是kmp pattern search是O(mn)
+
+
+```c++
+
+/*
+kmp的逻辑比如 
+   text: a b c d a b x a b c d a b c d a b c y
+pattern: a b c d a b c y
+                     ^
+                     |
+                  not match 
+check if any suffix is also preffix, 发现 abcdab 中 ab 即是prefix 也是suffix 
+就可以不用从头搜寻从 a b 开始, move pattern like this
+   text: a b c d a b x a b c d a b c d a b c y
+pattern:         a b c d a b c y  then check if x and a are the same
+
+   text: a b c d a b x a b c d a b c d a b c y
+pattern:               a b c d a b c y
+                                     ^
+                                     |
+                                not match 
+check if any suffix is also preffix, 发现 abc即是prefix 也是suffix , 
+no reason to compare abc again move pattern like this
+   text: a b c d a b x a b c d a b c d a b c y
+pattern:                       a b c d a b c y 
+
+
+STEP 1: calculate pattern's longgest prefix which is a suffix. lps[i]表示在index i结束 prefix也是suffix最大长度
+
+For the pattern “AAAA”, lps[] is [0, 1, 2, 3]
+For the pattern “AABAACAABAA”, lps[] is [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
+For the pattern “AAACAAAAAC”, lps[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4] 
+For the pattern “AAABAAA”, lps[] is [0, 1, 2, 0, 1, 2, 3]
+For the pattern "aacaabdaacaac: lps is [0, 1, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, 3]
+
+a a c a a b d a a c a a c -> 到 c, j = 5, 不match, pattern[j]!=pattern[i] => j = prefix[j-1] = prefix[4] = 2 => ve pattern[2] == pattern[i] 
+0 1 0 1 2 0 0 1 2 3 4 5  
+
+
+*/
+
+int kmp(const string &text, const string & pattern){
+    vector<int>prefix = computeLps(pattern);
+    int j = 0; 
+    for(int i = 0; i<text.size(); i++){  //i start from 0
+        while(j>0 && pattern[j]!=text[i])
+            j = prefix[j-1];
+        if(pattern[j] == text[i])
+            j++;
+        //else j = 0; //可以不用else
+        if(j == pattern.size()){
+            cout<<" pattern match at index="<<i - j + 1<<endl;
+            j = lps[j-1];
+        }
+    }
+}
+
+vector<int>computeLps(const string& pattern){
+    vector<int>lps(pattern.size()); //p 记录 longest proper prefix which is also a suffix. 
+    //A proper prefix is a prefix with a whole string not allowed. 
+    // For example, prefixes of “ABC” are “”, “A”, “AB” and “ABC”. Proper prefixes are “”, “A” and “AB”. Suffixes of the string are “”, “C”, “BC”, and “ABC”.
+    int j = 0; //表示最长prefix 也是suffix的index
+    for(int i = 1; i<pattern.size(); i++){ // i start from 1
+        while(j>0 && pattern[j]!= pattern[i]){
+            j = lps[j-1];
+        }
+        if(pattern[j] ==pattern[i])
+            j++;
+        //else j = 0;
+        lps[i] = j;
+    }
+    return lps;
+}
+
+
+void kmp(const string& pattern, const string& text, vector<int>&res){
+    string combine = pattern + "@" + text;
+    int pattern_size = pattern.size();
+    vector<int>lps(combine.size(), 0);
+    
+    int j = 0; 
+    for(int i = 1; i < combine.size(); ++i){
+        while(j > 0 && combine[i]!=combine[j])
+            j = lps[j-1];
+        if (combine[i] == combine[j])
+            ++j;
+        lps[i] = j;
+    }
+    for(int i = 0; i<combine.size(); ++i){
+        if(lps[i] == pattern.size()){
+            cout<<"find match at text index "<< i - 2*pattern_size<<endl;
+            res.push_back(i-2*pattern_size);
+        }
+    }
+    return;
+}
+```
 
 🔍 good algorithm<br/>
 :pencil2: smart code design <br/>
@@ -509,7 +607,7 @@ TreeNode* helper(TreeNode** head ){
 | [720. Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | _O(n)_ | _O(t)_	| Easy | Trie or 先按长度sort, 长度越短, 排前面, loop word, loop s\[i]\[0,len), 看是不是每个substr都在，都在话insert to hashset & update result |
 | [722. Remove Comments](https://leetcode.com/problems/remove-comments/) | _O(n)_ | _O(k)_	| Medium | |
 | [791. Custom Sort String](https://leetcode.com/problems/custom-sort-string/) | _O(n)_ | _O(k)_	| Medium | 可以当经典面试题, 三种解法: <ol><li>Custom Sort (or STL inserter + make_pair)</li><li>Bucket Sort</li><li>Priority Queue</li></ol>|
-| [796. Rotate String](https://leetcode.com/problems/rotate-string/) | _O(n)_ | _O(1)_	| Easy | 🔍两种kmp的解, <ul><li>跟[686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/)一样, 详见686的C++ code 解释 </li><li>pattern = B, text = A + A, 看text中有没有pattern </li></ul> |
+| [796. Rotate String](https://leetcode.com/problems/rotate-string/) | _O(n)_ | _O(1)_	| Easy | ⭐ 两种kmp的解, <ul><li>跟[686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/)一样, 详见686的C++ code 解释 </li><li>pattern = B, text = A + A, 看text中有没有pattern </li></ul> |
 | [804. Unique Morse Code Words](https://leetcode.com/problems/unique-morse-code-words/) | _O(n)_ | _O(n)_	| Easy | Easy one unordered_set  |
 | [806.Number of Lines To Write String](https://leetcode.com/problems/number-of-lines-to-write-string/) | _O(n)_ | _O(1)_	| Easy | Easy one but stupid question description  |
 | [809. Expressive Words](https://leetcode.com/problems/expressive-words/) | _O(n+s)_ | _O(1)_	| Medium | Two pointer: 如果word\[i]!=S\[j] 的时候， 看S的j-1, j, j+1是不是连续是三个，若不是，再看过去是不是连续三个，若不是，break |
@@ -865,7 +963,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) | _O(m+n)_ | _O(1)_	| Medium |  |
 | [2337. Move Pieces to Obtain a String](https://leetcode.com/problems/move-pieces-to-obtain-a-string/) | _O(n)_ | _O(1)_	| Medium |  |
 | [2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/) | _O(n)_ | _O(1)_	| Medium |  |
-
+| [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
 </br>
 
 ## Sort

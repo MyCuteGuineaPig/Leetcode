@@ -33,7 +33,7 @@ public:
         pair<int,int>l = helper(root->left);
         pair<int,int>r = helper(root->right);
         return {max(l.second + r.second + root->val, l.first + r.first), l.first + r.first };
-        //first 用上root的最大值,
+        //first 用上或者不用root的最大值,
         //second, 不用现在root的
     }
     
