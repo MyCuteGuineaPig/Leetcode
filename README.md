@@ -129,7 +129,7 @@ vector<int>computeLps(const string& pattern){
 }
 
 
-void kmp(const string& pattern, const string& text, vector<int>&res){
+void kmp2(const string& pattern, const string& text, vector<int>&res){
     string combine = pattern + "@" + text;
     int pattern_size = pattern.size();
     vector<int>lps(combine.size(), 0);
