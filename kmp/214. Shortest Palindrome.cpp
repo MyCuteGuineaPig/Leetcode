@@ -72,6 +72,31 @@ public:
     }
 };
 
+class Solution {
+public:
+    string shortestPalindrome(string s) {
+        int longest_pal_from_begin = kmp(s);
+        string non_pal = s.substr(longest_pal_from_begin);
+        reverse(non_pal.begin(), non_pal.end());
+        return non_pal + s;
+    }
+
+    int kmp(const string& s){
+        string rev = string(s.rbegin(), s.rend());
+        string text = s + "@" + rev;
+        vector<int>lps(text.size());
+        int j = 0;
+        for(int i = 1; i<text.size(); ++i){
+            while(j > 0 && text[i]!=text[j])
+                j = lps[j-1];
+            if (text[i] == text[j])
+                ++j;
+            lps[i] = j;
+        }
+        return lps.back();
+    }
+};
+
 
 /*
 不用#
@@ -111,7 +136,7 @@ public:
 
     int getmaxPalindrome(const vector<int>&prefix, const string &s){
         int match = 0;
-        for(int i = s.size()-1; i>=0; i--){
+        for(int i = s.size()-1; i>=0; i--){//从后往前
             while(match > 0 && s[match]!= s[i]) match = prefix[match-1];
             if(s[match] == s[i]) match++;
         }

@@ -18,25 +18,39 @@ Note:
 A and B will have length at most 100.
 
 */
-
 class Solution {
 public:
-    bool rotateString(string A, string B) {
-        if(A.size()!=B.size()) return false;
-        if(A == B) return true;
-        vector<int>prefix(B.size());
-        for(int i = 1, j = 0; i<B.size(); i++){
-            while(j>0 && B[i] != B[i]) j = prefix[j-1];
-            if( B[i] == B[j]) ++j;
-            prefix[i] = j; 
-        }
-
-        for(int i = 0, j = 0; i<A.size(); i+= j - prefix[j-1], j = prefix[j-1]){
-            while(j<B.size() && A[(i+j)%A.size()] == B[j]) j++;
-            if(j == B.size()) return true;
-            if(j == 0) j = 1;
+    bool rotateString(string s, string goal) {
+        if (s.size() != goal.size())
+            return false;
+        string text = s  + s;
+        vector<int>lps = computeLps(goal);
+        int j = 0;
+        for(int i = 0; i<text.size(); ++i){
+            while(j > 0 && text[i]!=goal[j]){
+                j = lps[j-1];
+            }
+            if (text[i] == goal[j]){
+                ++j;
+            }
+            if(j == goal.size()){
+                return true;
+            }
         }
         return false;
+    }
+
+    vector<int> computeLps(const string& text){
+        vector<int>lps(text.size());
+        int j = 0;
+        for(int i = 1; i<text.size(); ++i){
+            while(j > 0 && text[i]!=text[j])
+                j = lps[j-1];
+            if (text[i] == text[j])
+                ++j;
+            lps[i] = j;
+        }
+        return lps;
     }
 };
 
@@ -61,6 +75,29 @@ public:
         return false;
     }
 };
+
+
+class Solution {
+public:
+    bool rotateString(string A, string B) {
+        if(A.size()!=B.size()) return false;
+        if(A == B) return true;
+        vector<int>prefix(B.size());
+        for(int i = 1, j = 0; i<B.size(); i++){
+            while(j>0 && B[i] != B[i]) j = prefix[j-1];
+            if( B[i] == B[j]) ++j;
+            prefix[i] = j; 
+        }
+
+        for(int i = 0, j = 0; i<A.size(); i+= j - prefix[j-1], j = prefix[j-1]){
+            while(j<B.size() && A[(i+j)%A.size()] == B[j]) j++;
+            if(j == B.size()) return true;
+            if(j == 0) j = 1;
+        }
+        return false;
+    }
+};
+
 
 
 //complexity O(n^2)

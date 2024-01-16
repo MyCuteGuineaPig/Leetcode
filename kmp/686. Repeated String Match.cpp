@@ -15,6 +15,48 @@ The length of A and B will be between 1 and 10000.
 */
 
 
+class Solution {
+public:
+    int repeatedStringMatch(string a, string b) {
+        string new_a;
+        while(new_a.length() < b.length()){
+            new_a.append(a);
+        }
+        int res = kmp_a_contain_b(new_a, b);
+        if (res > 0 ) return new_a.length() / a.length();
+        new_a.append(a); 
+        /*
+        再append 一次的原因比如 
+        a =    "abcd"
+        b =    "cdabcdab"   
+        new_a append a 两次 
+        new_a = "abcdabcd"
+        还需要再一次, b 才在a中出现
+        */
+        return kmp_a_contain_b(new_a, b) ? new_a.length() / a.length(): -1;
+    }
+
+    bool kmp_a_contain_b(const string& a, const string& b){
+        string text = b + "#" + a;
+        vector<int>lps(text.size());
+        int j = 0;
+        for(int i = 1; i<text.size(); ++i){
+            while(j > 0 && text[i]!=text[j])
+                j = lps[j-1];
+            if(text[i] == text[j])
+                ++j;
+            lps[i] = j;
+        }
+        int cnt = 0, n_b = b.size();
+        for(int i = n_b + 1 ; i <text.size(); ++i){
+            if (lps[i] == n_b){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
 /*
 KMP 算法：利用kmp 先得b的prefix的table
 
@@ -93,7 +135,8 @@ public:
         // i += j - prefix[j-1] is the key
         for(int i = 0, j = 0; i<A.size(); i += j - prefix[j-1], j = prefix[j-1]){
             while(j<B.size() && A[(i+j) % A.size()] == B[j]) j ++;
-            if(j == B.size()) return (i+j)/(A.size()) + ((i+j) % A.size() ? 1 : 0);
+            if(j == B.size()) return (i+j)/(A.size()) + ((i+j) % A.size() ? 1 : 0); 
+            // i 是A的起始位置, (i+j) 完成B rotate A 的结束位置,
             if(j == 0) j = 1; // avoid overflow like prefix [ 0 - 1]
         }
         return -1;

@@ -30,7 +30,8 @@
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
 
 
-🔍 good algorithm<br/>
+🔍 ⭐  good algorithm<br/>
+💥 : hard problem <br/>
 :pencil2: smart code design <br/>
 🎅: good question <br/>
 ❌: not good designed question<br/>
@@ -94,10 +95,17 @@ int kmp(const string &text, const string & pattern){
             j = prefix[j-1];
         if(pattern[j] == text[i])
             j++;
-        //else j = 0; //可以不用else
         if(j == pattern.size()){
             cout<<" pattern match at index="<<i - j + 1<<endl;
-            j = lps[j-1];
+            j = lps[j-1]; //注意j 跳到上lps[j-1]
+            /*
+            比如  text = a b a b a b a b
+             pattern  = a b a b 
+                              |  => move j to 2 
+                              v
+                   pattern  a b a b 
+            
+            */
         }
     }
 }
@@ -133,7 +141,7 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
             ++j;
         lps[i] = j;
     }
-    for(int i = 0; i<combine.size(); ++i){
+    for(int i = pattern.size()+1; i<combine.size(); ++i){
         if(lps[i] == pattern.size()){
             cout<<"find match at text index "<< i - 2*pattern_size<<endl;
             res.push_back(i-2*pattern_size);
@@ -146,8 +154,14 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [028. Implement strStr()](https://leetcode.com/problems/implement-strstr/) | _O(n+k)_ | _O(k)_	| Easy | kmp algorithm: prefix array\[i]表示i点的最长的prefix 也是suffix长度 比如"ABA", 第三个a的最长的prefix 也是suffix 的长度是1 A 而prefix array\[i], 作为index, 是当前最长prefix 也是suffix 的下一位|
-
-
+| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>马拉车(manacher): 不断找最大的回文长，但一边更新右边界时, 只更新mxlen 当p\[i]==i的时候, 最长回文从0开始</li></ul>  |
+| [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/) | _O(n)_ | _O(n)_	| Easy | KMP |
+| [686. Repeated String Match](https://leetcode.com/problems/repeated-string-match/description/) | _O(n+m)_ | _O(n)_	| Medium | ⭐ <ul><li>Kmp</li><li> rabin-karp algorithm, rolling hash </li></ul> |
+| [796. Rotate String](https://leetcode.com/problems/rotate-string/) | _O(n)_ | _O(1)_	| Easy | ⭐ 两种kmp的解, <ul><li>跟[686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/)一样, 详见686的C++ code 解释 </li><li>pattern = B, text = A + A, 看text中有没有pattern </li><li>Rabin-Karp Algorithm (rolling hash)</li></ul> |
+| [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | Easy KMP, Rabin-Karp Algorithm (rolling hash) |
+| [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP Hard problem💥   |
+| [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
+| [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
 
   ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -583,7 +597,6 @@ TreeNode* helper(TreeNode** head ){
 | [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | _O(n)_ | _O(1)_	| Easy | C++ 跳过非isalnum的 |
 | [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/) | _O(n)_ | _O(1)_	| Medium | 先reverse所有的, 再reverse单个每个词, 记录总共len,最后用来截取, C++ find_first_not_of + find_first_of |
 | [165. Compare Version Numbers](https://leetcode.com/problems/compare-version-numbers/) | _O(n)_ | _O(1)_	| Medium | c++ 算当前version1,2的substr的数，如果其中一个碰到结尾，设当前数位0。 c, 可以用c_str() + strtol; python3 zip(\*itertools.zip_longest(\*splits, fillvalue=0)) |
-| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |🔍可以把此题换一种问法: 以index0 开始最长的部分palindrome 的长度, 部分最长的pal后面的reverse +s = 答案  <ul><li>KMP: s+"#"+reverse(s), prefix array最后一位是部分最长的pal的长度, kmp prefix 即是suffix，pal是掉个也相等, 所以最后一位是部分最长  </li><li>马拉车(manacher): 不断找最大的回文长，但一边更新右边界时, 只更新mxlen 当p\[i]==i的时候, 最长回文从0开始</li></ul>  |
 | [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/) | _O(n)_ | _O(1)_	| Easy | 经典面试题 |
 | [273. Integer to English Words](https://leetcode.com/problems/integer-to-english-words/) | _O(1)_ | _O(1)_	| Hard | 无聊的recursion |
 | [306. Addictive Number](https://leetcode.com/problems/additive-number/) | _O(n^3)_ | _O(n)_	| Medium | recursion 从index0开始试所有的digit可能性直到成功, 比如开始是一位+两位, 还是三位+两位 , 需要一个string add的help function; python 可以用itertools.combination + startswith, 跟[067. Add Binary	](https://leetcode.com/problems/add-binary/) 和[415. Add Strings](https://leetcode.com/problems/add-strings/) 类似, 只不过多个recursion  |
@@ -593,7 +606,6 @@ TreeNode* helper(TreeNode** head ){
 | [420. Strong Password Checker](https://leetcode.com/problems/strong-password-checker/) | _O(n)_ | _O(1)_	| Hard | Brain Storm 详见C++ code 解释|
 | [434. Number of Segments in a String](https://leetcode.com/problems/number-of-segments-in-a-string/) | _O(n)_ | _O(1)_	| Easy | 🔍, 根据s\[i] 和 s\[i-1]判断, or s\[i] 和 s\[i+1]判断 |
 | [443. String Compression](https://leetcode.com/problems/string-compression/) | _O(n)_ | _O(1)_	| Easy | two pointer + num reverse |
-| [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/) | _O(n)_ | _O(n)_	| Easy | KMP |
 | [468. Validate IP Address](https://leetcode.com/problems/validate-ip-address/) | _O(1)_ | _O(1)_	| Medium | 注意IPv4 和IPv6的定义(c++ code里), 判断一个char是不是符合十六进制用isxdigit(c) |
 | [520. Detect Capital](https://leetcode.com/problems/detect-capital/) | _O(1)_ | _O(1)_	| Easy | C++ count_if; Python istitle()看是不是只有首字母大写 |
 | [521. Longest Uncommon Subsequence I](https://leetcode.com/problems/longest-uncommon-subsequence-i/) | _O(min(a, b))_ | _O(1)_	| Easy | 题出的神经病，逗你玩儿 |
@@ -611,12 +623,10 @@ TreeNode* helper(TreeNode** head ){
 | [678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/) | _O(n)_ | _O(1)_	| Medium | 🔍Three Solutions<ul><li>用low 和high: low 表示把 '\*' 当成 ')', high: 表示把 '\*' 当成'(', 如果high小于0，表示有太多的')' '(' + '\*' = high < ')' </li><li>用两个stack 分别记录 '(' 和 '\*'的位置, 如果当前是')', 先pop '(' 再pop '\*'; 最后看'(' 有没有对应index往后的的 '\*'可以pop掉, </li><li> Two pass solution 从左向右看是不是所有的')' 都有对应的 '(' 和 '\*', 再从右向左看是不是所有的 '(', 都有对应的 ')' 和' \*' </li></ul> |
 | [680. Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/) | _O(n)_ | _O(1)_	| Easy | 🔍两个pointer,  检查s\[i] == s\[j]?, 遇到不等时，再看s\[i+1, j], or s\[i, j-1]是不是pal |
 | [681. Next Closest Time](https://leetcode.com/problems/next-closest-time/) | _O(1)_ | _O(1)_	| Medium |  |
-| [686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/) | _O(n+m)_ | _O(n)_	| Easy | 🔍<ul><li>Kmp: 然后两个pointer, 一个pointer i 记录A的位置，一个pointer j记录B的位置，每次对比 A\[(i + j)%A.size()] 是否等于B\[j] 等于就++j., 直到 j =  b.size() return ceil((i+j)/a.size()) </li><li> rabin-karp algorithm, 寻找最短的长度一直到最大长度的hash </li></ul> |
 | [696.	Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/) | _O(n)_ | _O(1)_	| Easy | manacher(马拉车)算法的变形 |
 | [720. Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/) | _O(n)_ | _O(t)_	| Easy | Trie or 先按长度sort, 长度越短, 排前面, loop word, loop s\[i]\[0,len), 看是不是每个substr都在，都在话insert to hashset & update result |
 | [722. Remove Comments](https://leetcode.com/problems/remove-comments/) | _O(n)_ | _O(k)_	| Medium | |
 | [791. Custom Sort String](https://leetcode.com/problems/custom-sort-string/) | _O(n)_ | _O(k)_	| Medium | 可以当经典面试题, 三种解法: <ol><li>Custom Sort (or STL inserter + make_pair)</li><li>Bucket Sort</li><li>Priority Queue</li></ol>|
-| [796. Rotate String](https://leetcode.com/problems/rotate-string/) | _O(n)_ | _O(1)_	| Easy | ⭐ 两种kmp的解, <ul><li>跟[686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/)一样, 详见686的C++ code 解释 </li><li>pattern = B, text = A + A, 看text中有没有pattern </li></ul> |
 | [804. Unique Morse Code Words](https://leetcode.com/problems/unique-morse-code-words/) | _O(n)_ | _O(n)_	| Easy | Easy one unordered_set  |
 | [806.Number of Lines To Write String](https://leetcode.com/problems/number-of-lines-to-write-string/) | _O(n)_ | _O(1)_	| Easy | Easy one but stupid question description  |
 | [809. Expressive Words](https://leetcode.com/problems/expressive-words/) | _O(n+s)_ | _O(1)_	| Medium | Two pointer: 如果word\[i]!=S\[j] 的时候， 看S的j-1, j, j+1是不是连续是三个，若不是，再看过去是不是连续三个，若不是，break |
@@ -631,8 +641,6 @@ TreeNode* helper(TreeNode** head ){
 | [859. Buddy Strings](https://leetcode.com/problems/buddy-strings/) | _O(n)_ | _O(1)_	| Easy | 判断条件: 1.长度不一样，false，2. 如果a == b，有没有重复的字母，有的话true, 没有false, 3, 如果不一样的位置个数不等于2, 或者a\[diff\[0]]!=b\[diff\[1]] or a\[diff\[1]]!=a\[diff\[1]] 返回false, 否则是true  |
 | [953. Verifying an Alien Dictionary](https://leetcode.com/problems/verifying-an-alien-dictionary/) | _O(n\*l)_ | _O(1)_	| Easy |  |
 | [1374	Generate a String With Characters That Have Odd Count](https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/) | _O(n)_ | _O(1)_	| Easy | ❌ |
-| [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | KMP, Rolling Hash |
-| [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
 | [1410. HTML Entity Parser](https://leetcode.com/problems/html-entity-parser/) | _O(n)_ | _O(t)_	| Medium | |
 | [1417. Reformat The String](https://leetcode.com/problems/reformat-the-string/) | _O(n)_ | _O(1)_	| Easy | <ul><li>[🔍](https://github.com/beckswu/Leetcode/blob/master/String/1417.%20Reformat%20The%20String.cpp#L80)</li><li> [🔍](https://github.com/beckswu/Leetcode/blob/master/String/1417.%20Reformat%20The%20String.cpp#L111)</li></ul>  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
@@ -972,7 +980,6 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) | _O(m+n)_ | _O(1)_	| Medium |  |
 | [2337. Move Pieces to Obtain a String](https://leetcode.com/problems/move-pieces-to-obtain-a-string/) | _O(n)_ | _O(1)_	| Medium |  |
 | [2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/) | _O(n)_ | _O(1)_	| Medium |  |
-| [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
 </br>
 
 ## Sort
@@ -1195,7 +1202,6 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1368	Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | BFS + DFS |
 | [1377. Frog Position After T Seconds](https://leetcode.com/problems/frog-position-after-t-seconds/) |	_O(n)_	|	_O(n)_ |	Hard | ✏️[Python Set](https://github.com/beckswu/Leetcode/blob/master/DFS/1377.%20Frog%20Position%20After%20T%20Seconds.py#L127) |
 | [1391. Check if There is a Valid Path in a Grid](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/) |	_O(m\*n)_	|	_O(1)_ |	Medium | |
-| [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP 🎅🎅  |
 | [1806. Minimum Number of Operations to Reinitialize a Permutation](https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/)	|	_O(n)_  |	_O(1)_|	Medium | Reverse |
 | [2359. Find Closest Node to Given Two Nodes](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/)	|	_O(n)_  |	_O(n)_|	Medium |  |
 | [2360. Longest Cycle in a Graph](https://leetcode.com/problems/longest-cycle-in-a-graph/)	|	_O(n)_  |	_O(n)_|	Hard | ⭐ |
