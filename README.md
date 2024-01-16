@@ -161,6 +161,7 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 | [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | Easy KMP, Rabin-Karp Algorithm (rolling hash) |
 | [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP Hard problem💥   |
 | [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
+| [2800. Shortest String That Contains Three Strings](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/) | _O(a+b+c)_ | _O(a+b+c)_	| Medium | |
 | [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
 
   ## Breadth-First Search
