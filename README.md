@@ -1,6 +1,7 @@
 
 ## Catalogue
 * [KMP](https://github.com/beckswu/Leetcode#KMP)
+* [Manacher](https://github.com/beckswu/Leetcode#Manacher)
 * [Array](https://github.com/beckswu/Leetcode#array)
 * [Concurrency](https://github.com/beckswu/Leetcode#Concurrency)
 * [Greedy](https://github.com/beckswu/Leetcode#greedy) 
@@ -163,6 +164,95 @@ void kmp(const string& pattern, const string& text, vector<int>&res){
 | [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
 | [2800. Shortest String That Contains Three Strings](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/) | _O(a+b+c)_ | _O(a+b+c)_	| Medium | |
 | [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
+
+## Manacher
+
+complexity O(n), 
+
+```c++
+/*
+https://segmentfault.com/a/1190000008484167
+
+manacher 算法：
+建一个新的string 开头用$, 结尾用^(为了防止越界), 中间用#
+这样可以把偶回文 和 奇回文 都转化成奇数，比如
+如此，s 里起初有一个偶回文abba和一个奇回文opxpo，被转换为#a#b#b#a#和#o#p#x#p#o#，长度都转换成了奇数。
+
+p[i] 表示以i为中小心的最长回文半径
+
+i	        0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19  20 
+s_new[i]	$	#	a	#	b	#	b	#	a	#	h	#	o	#	p	#	x	#	p	#   ^
+p[i]		1	1   2	1	2	5	2	1	2	1	2	1	2	1	2	1	4	1	2	1   
+两个int mx，和id, right 代表以 center 为中心的最长回文的右边界，也就是mx = center + p[center]。
+mx是在当前回文右侧外的第一个点 mx点不包括在当前回文内
+
+
+假设我们现在求p[i]，也就是以 i 为中心的最长回文半径，如果i < mx：
+if (i < right)  
+    p[i] = min(p[2 * center - i], right - i);
+
+2 * center - i为 i 关于 center 的对称点 ( j+i = 2*center)，而p[j]表示以 j 为中心的最长回文半径，
+因此我们可以利用p[j]来加快查找。
+
+e.g1 . min(p[2 * center - i], right - i);
+比如  c b c d c b z
+           -   - | right 
+          center     
+       p[第一个b] = 3
+第二个b的
+    p[2 * center - i] =  p [第一个b] = 3， 现在以b 作为中心，右侧没有c，所以 不能等于 3
+    right - i = 1   ✅
+
+e.g2. min(p[2 * center - i], right - i);
+比如  a b c d c b a d
+           -   _   | right 
+          center     
+还是在 第二个b 点    
+p[2 * center - i] =  p [第一个b] = 1，✅
+right - i =  2 
+*/ 
+
+string manacher(const string& s){
+    string s_new;
+    init(s, s_new);
+    vector<int>p(s_new.size());
+    int right = -1, center = -1; 
+    int max_len = -1, max_center = -1;
+    for(int i = 1; i<s_new.size()-1; ++i){
+        if(i < right){
+            p[i] = min(p[2*center - i], right - i);
+        } else{
+            p[i] = 1;
+        }
+        while(s_new[i + p[i]] == s_new[i-p[i]] )
+            ++p[i];
+        if (p[i] > right){
+            right = p[i];
+            center = i;
+        }
+        if (p[i] > max_len){
+            max_len = p[i];
+            max_center = i;
+        }
+    }
+    return s.substr((max_center - max_len)/2, max_len - 1);
+}
+
+void init(const string& s, string& res){
+    res = "$#";
+    for(auto c: s){
+        res  +=  c;
+        res += '#';
+    }
+    res += "^";
+}
+```
+
+|Title | Time  | Space | Difficulty |  Algorithm Note|
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/beckswu/Leetcode/blob/master/String/005.%20Longest%20Palindromic%20Substring.cpp#L72) |
+
+
 
   ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -586,7 +676,6 @@ TreeNode* helper(TreeNode** head ){
 ## String
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [🔍 manacher(马拉车算法)](https://github.com/beckswu/Leetcode/blob/master/String/005.%20Longest%20Palindromic%20Substring.cpp#L72), mx表示当前最长回文外右侧第一点, id是当前回文中心, p\[i]表示当前最长回文, `if i<mx, p[i] = min(p[2id-i], p[i])` `2id-i` 表示i与中心位对称点的 `id - (i - id)`, `p[2id-i]`表示对称点的最长回文  |
 | [006. ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion/) | _O(n)_ | _O(n)_	| Medium | <ul><li>把string 循环push到一个长度为nrow的vector当中</li><li>用step = 2*nrows - 2 控制每次jump step, 到中间行看是否jump step之间有夹的元素</li></ul>|
 | [008. String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) | _O(n)_ | _O(1)_	| Easy | C++可以用find_first_not_of |
 | [014. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) | _O(n)_ | _O(1)_	| Easy | loop所有数第0位到第i位，直到不相同,返回str\[0].substr(0,i) |
