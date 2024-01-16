@@ -250,7 +250,7 @@ void init(const string& s, string& res){
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/beckswu/Leetcode/blob/master/String/005.%20Longest%20Palindromic%20Substring.cpp#L72) |
+| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/Manacher/005.%20Longest%20Palindromic%20Substring.cpp#L70) |
 
 
 
