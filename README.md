@@ -116,7 +116,7 @@ vector<int>computeLps(const string& pattern){
     //A proper prefix is a prefix with a whole string not allowed. 
     // For example, prefixes of “ABC” are “”, “A”, “AB” and “ABC”. Proper prefixes are “”, “A” and “AB”. Suffixes of the string are “”, “C”, “BC”, and “ABC”.
     int j = 0; //表示最长prefix 也是suffix的index
-    for(int i = 1; i<pattern.size(); i++){ // i start from 1
+    for(int i = 1; i<pattern.size(); i++){ // ** i start from 1
         while(j>0 && pattern[j]!= pattern[i]){
             j = lps[j-1];
         }
@@ -155,7 +155,7 @@ void kmp2(const string& pattern, const string& text, vector<int>&res){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [028. Implement strStr()](https://leetcode.com/problems/implement-strstr/) | _O(n+k)_ | _O(k)_	| Easy | kmp algorithm: prefix array\[i]表示i点的最长的prefix 也是suffix长度 比如"ABA", 第三个a的最长的prefix 也是suffix 的长度是1 A 而prefix array\[i], 作为index, 是当前最长prefix 也是suffix 的下一位|
-| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>马拉车(manacher): 不断找最大的回文长，但一边更新右边界时, 只更新mxlen 当p\[i]==i的时候, 最长回文从0开始</li></ul>  |
+| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>马拉车(manacher)</li></ul>  |
 | [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/) | _O(n)_ | _O(n)_	| Easy | KMP |
 | [686. Repeated String Match](https://leetcode.com/problems/repeated-string-match/description/) | _O(n+m)_ | _O(n)_	| Medium | ⭐ <ul><li>Kmp</li><li> rabin-karp algorithm, rolling hash </li></ul> |
 | [796. Rotate String](https://leetcode.com/problems/rotate-string/) | _O(n)_ | _O(1)_	| Easy | ⭐ 两种kmp的解, <ul><li>跟[686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/)一样, 详见686的C++ code 解释 </li><li>pattern = B, text = A + A, 看text中有没有pattern </li><li>Rabin-Karp Algorithm (rolling hash)</li></ul> |
@@ -251,8 +251,8 @@ void init(const string& s, string& res){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/Manacher/005.%20Longest%20Palindromic%20Substring.cpp#L70) |
-
-
+| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>[马拉车(manacher)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/kmp/214.%20Shortest%20Palindrome.cpp#L151)</li></ul>  |
+| [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | ⭐ `sum(sum(dp, []))` sum 2d array <ul><li>manacher(马拉车算法) </li><li>DP</li></ul> |
 
   ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -707,7 +707,6 @@ TreeNode* helper(TreeNode** head ){
 | [556.	Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/) | _O(1)_ | _O(1)_	| Medium |  可以用ascending stack or 两个for loop, 寻找i点往后最后一个比i点大的数(也是比i大,最接近i的数)(index j), swap(s\[i], s\[j]), 这样s\[i]后面的数又大到小排序的, 把i往后的数到end全部reverse后变成Int, 就是答案, 跟[031. Next Permutation](https://leetcode.com/problems/next-permutation/)思路类似 |
 | [564. Find the Closest Palindrome](https://leetcode.com/problems/find-the-closest-palindrome/) | _O(l)_ | _O(l)_	| Hard | Brain Storm: 最接近的pal只可能5中选一, 100..001(l.size()+1), 99..99(l.size()-1), or string的前半部分 +1, +0, -1 加上前半部分的reverse(如果起始长度是奇数，reverse不包括前半部分最后一个，如果长度是偶数，都包括在内) |
 | [591. Tag Validator](https://leetcode.com/problems/tag-validator/) | _O(n)_ | _O(n)_	| Hard | cdata 必须以 已 ]]>结束, recursion 找是不是valid tag, valid cdata, valid tagname  |
-| [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | 🔍 manacher(马拉车算法), 在snew中 p\[i]表示以id为中心最长回文，到i点，res += p\[i] /2  |
 | [648. Replace Words](https://leetcode.com/problems/replace-words/) | _O(n)_ | _O(t)_	| Medium | 🔍 Trie; python 可以用reduce + dict.\_\_getitem__ |
 | [657. Judge Route Circle](https://leetcode.com/problems/judge-route-circle/) | _O(n)_ | _O(1)_	| Easy |  |
 | [678. Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/) | _O(n)_ | _O(1)_	| Medium | 🔍Three Solutions<ul><li>用low 和high: low 表示把 '\*' 当成 ')', high: 表示把 '\*' 当成'(', 如果high小于0，表示有太多的')' '(' + '\*' = high < ')' </li><li>用两个stack 分别记录 '(' 和 '\*'的位置, 如果当前是')', 先pop '(' 再pop '\*'; 最后看'(' 有没有对应index往后的的 '\*'可以pop掉, </li><li> Two pass solution 从左向右看是不是所有的')' 都有对应的 '(' 和 '\*', 再从右向左看是不是所有的 '(', 都有对应的 ')' 和' \*' </li></ul> |

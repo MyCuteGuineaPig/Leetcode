@@ -75,6 +75,28 @@ public:
 };
 
 
+/*
+. There are 2N-1 possible centers for the palindrome: we could have a center at S[0], between S[0] and S[1], 
+at S[1], between S[1] and S[2], 
+at S[2], between S[2] and S[3]etc.
+*/
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        int res = 0;
+        for(int i = 0; i < 2*n-1; ++i){
+            int left = i / 2;
+            int right = left + i % 2;
+            while (left >= 0 && right < n && s[left] == s[right]){
+                --left; 
+                ++right;
+                ++res;
+            }
+        }
+        return res;
+    }
+};
 
 
 //brute force
@@ -112,6 +134,10 @@ dp[i][j] 记录i，j点是不是substring，
     - 如果s[i] == s[j], 如果 j - i < 3 比如 a, aa, aba,  
     - 或者 dp[i+1][j-1] == true，比如 a[...true....]a，
     则dp[i][j] 为true
+
+    // 3. tabulation
+    // time: O(n ^ 2)
+    // space: O(n ^ 2)
 */
 
 class Solution {
@@ -129,4 +155,56 @@ public:
         }
         return res;
     }
+};
+
+//bottom up
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n, vector<int>(n));
+        int res = 0;
+        for(int i = 0; i<n; ++i){
+            for(int j = 0; j<=i; ++j){
+                if (i == j){
+                    dp[j][i] = 1;
+                } else if (i == j + 1){
+                    dp[j][i] =  s[i] == s[j];
+                } else{
+                    dp[j][i] =  s[i] == s[j] && dp[j+1][i-1];
+                }
+                res += dp[j][i];
+            } 
+        }
+        return res;
+    }
+};
+
+//
+class Solution {
+public:
+    int countSubstrings(string& s) {
+       return memoization(s);
+    }
+    
+    // 2. memoization
+    // Time: O(n ^ 2)
+    // space: O(n ^ 2)
+    int memoization(string& s) {
+        vector<vector<int>> mem(s.size(), vector<int>(s.size(), -1));
+        int count = 0;
+        for(int i = 0; i < s.size(); ++i) {
+            for(int j = i; j < s.size(); ++j) {
+                count += solve(mem, s, i, j);
+            }
+        }
+        return count;
+    }
+    
+    int solve(vector<vector<int>>& mem, string& s, int i, int j) {
+        if (i >= j) return 1;
+        if (mem[i][j] >= 0) return mem[i][j];
+        return mem[i][j] = s[i] == s[j] ? solve(mem, s, i+1, j-1) : 0;
+    }
+    
 };
