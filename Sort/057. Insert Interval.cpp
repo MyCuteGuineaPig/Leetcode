@@ -30,7 +30,7 @@ class Solution {
 public:
     vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
         auto it = lower_bound(intervals.begin(),intervals.end(), newInterval,[](const Interval& a, const Interval& t){
-            return a.start<t.start;
+            return a.start<t.start;//返回的是第一个不满足条件的位置
         });
         vector<Interval>res;
         if(it!=intervals.begin()){
@@ -46,6 +46,30 @@ public:
         res.push_back(newInterval);
         if(it!=intervals.end())
             copy(it, intervals.end(),back_inserter(res));
+        return res;
+    }
+};
+
+
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        auto it = lower_bound(intervals.begin(), intervals.end(), newInterval, [](const vector<int>& a, const vector<int>&b){
+            return a[1] < b[0]; 
+        });
+        vector<vector<int>>res;
+        if (it != intervals.begin()){
+            copy(intervals.begin(), it, back_inserter(res));
+        }
+        while (it != intervals.end() && (*it)[0] <= newInterval[1]){
+            newInterval[0] = min(newInterval[0], (*it)[0]);
+            newInterval[1] = max(newInterval[1], (*it)[1]);
+            ++it;
+        }
+        res.push_back(newInterval);
+        if (it!=intervals.end()){
+            copy(it, intervals.end(), back_inserter(res));
+        }
         return res;
     }
 };
