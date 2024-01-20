@@ -48,7 +48,8 @@ c++ vector 可以作为map的key，但不能作为unordered_map的Key
 
 complexity O(m+n), 不是kmp pattern search是O(mn)
 
-
+作为suffix 放后面, 作为prefix 放前面，比如 a ("abc") + b("bcd") = 最小包含两个是的 = "abcd" , 用kmp时候, b (prefix) + "# + a (suffix)
+ 
 ```c++
 
 /*
@@ -155,9 +156,9 @@ void kmp2(const string& pattern, const string& text, vector<int>&res){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [028. Implement strStr()](https://leetcode.com/problems/implement-strstr/) | _O(n+k)_ | _O(k)_	| Easy | kmp algorithm: prefix array\[i]表示i点的最长的prefix 也是suffix长度 比如"ABA", 第三个a的最长的prefix 也是suffix 的长度是1 A 而prefix array\[i], 作为index, 是当前最长prefix 也是suffix 的下一位|
-| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>马拉车(manacher)</li></ul>  |
-| [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/) | _O(n)_ | _O(n)_	| Easy | KMP |
-| [686. Repeated String Match](https://leetcode.com/problems/repeated-string-match/description/) | _O(n+m)_ | _O(n)_	| Medium | ⭐ <ul><li>Kmp</li><li> rabin-karp algorithm, rolling hash </li></ul> |
+| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>马拉车(manacher)</li></ul>  |
+| [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/) | _O(n)_ | _O(n)_	| Easy | ⭐KMP return 条件 |
+| [686. Repeated String Match](https://leetcode.com/problems/repeated-string-match/description/) | _O(n+m)_ | _O(n)_	| Medium | ⭐⭐ <ul><li>Kmp</li><li> rabin-karp algorithm, rolling hash </li></ul> |
 | [796. Rotate String](https://leetcode.com/problems/rotate-string/) | _O(n)_ | _O(1)_	| Easy | ⭐ 两种kmp的解, <ul><li>跟[686. Repeated String Match](https://leetcode.com/problems/valid-palindrome-ii/)一样, 详见686的C++ code 解释 </li><li>pattern = B, text = A + A, 看text中有没有pattern </li><li>Rabin-Karp Algorithm (rolling hash)</li></ul> |
 | [1392. Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/) | _O(n)_ | _O(n)_	| Hard | Easy KMP, Rabin-Karp Algorithm (rolling hash) |
 | [1397. Count Number of Teams](https://leetcode.com/problems/find-all-good-strings/)	|	_O(m\*n)_  |	_O(m)_|	Hard | DFS /DP + KMP Hard problem💥   |
