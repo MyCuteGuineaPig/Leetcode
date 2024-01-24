@@ -408,12 +408,12 @@ public:
         stack<TreeNode *>stk;
         while(cur || !stk.empty()){ //cur 比如只有右面的，stack只存之后需要返回的 ； !stk.empty() 是看是不是有接下来返回的node，比如到最左侧node 需要返回
             if(cur){
-                //res.push_back(cur->val); pre order
+                //res.push_back(cur->val); pre order, post order
                 stk.push(cur);
                 cur = cur->left;
             }else{//切换到之前的top
                 cur = stk.top(); stk.pop();
-                res.push_back(cur->val);
+                res.push_back(cur->val); // in order;
                 cur = cur->right;
             }
         }
@@ -962,12 +962,12 @@ DEBUG stdout
 | [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard |  <ul><li> ⭐__DP__: dp\[i] 代表以current index结束的最大valid substring的长, 非经典dp </li><li>__Stack__</li></ul>  |
 | [071. Simplify Path](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Medium |  ✏️ **Split** `stringstream` + `getline` 可以处理连续的delimiter 比如delimiter是`/`, 可以parse`//c/d//` 为`c` 和`d`, `vectro<string>`的 **join** |
 | [084. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | _O(n)_ | _O(n)_	| Hard |  <ul><li>⭐__stack__: ascending stack</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
-| [085. Maximal Rectangle	](https://leetcode.com/problems/maximal-rectangle/) | _O(n\*m)_ | _O(m)_	| Hard | 🔍<ul><li>__stack__:与[084.](https://leetcode.com/problems/simplify-path/) 类似, matrix有n行，问题可以转换成n个Histogram的问题 </li><li>😍😍__DP__ : height代表从上到下，有几个连续的1, left: 现在这个height，左侧边界位置, right:这个height,长方形的右侧边界（右侧边界不包括在长方形内，是长方形右外侧第一个点）  </li></ul>|
-| [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy |❌  注: iterative stack push 顺序 |
+| [085. Maximal Rectangle	](https://leetcode.com/problems/maximal-rectangle/) | _O(n\*m)_ | _O(m)_	| Hard |  ⭐  <ul><li>__stack__:与[084.](https://leetcode.com/problems/simplify-path/) 类似</li><li> __DP__ : height代表从上到下，有几个连续的1, left: 现在这个height，左侧边界位置, right:这个height,长方形的右侧边界（右侧边界不包括在长方形内，是长方形右外侧第一个点）  </li></ul>|
+| [101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/) | _O(n)_ | _O(h)_	| Easy |❌ ⭐ 注: iterative stack push 顺序 |
 | [150. Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/) | _O(n)_ | _O(n)_	| Medium  | :pencil2: **Python Lambda Function in dictionary**   🔍 C++ recursive solution |
-| [155. Min Stack](https://leetcode.com/problems/min-stack/) | _O(n)_ | _O(1)_	| Easy | 😚 Descending Stack: 两个stack,一个用来放正常的顺序，另一个作为min |
-| [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium |  [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) 逻辑类似, 不要先全部走完  |
-| [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | _O(1), amortized_ | _O(n)_	| Easy | 🔍两个stack in & out, in用来push, top: 假如out为空，dump in to out |
+| [155. Min Stack](https://leetcode.com/problems/min-stack/) | _O(n)_ | _O(1)_	| Easy/Medium | ⭐ Descending Stack: 两个stack,一个用来放正常的顺序，另一个作为min |
+| [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/) | _O(1)_ | _O(h)_	| Medium | ⭐⭐[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) 逻辑类似, 不要先全部走完  |
+| [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) | _O(1), amortized_ | _O(n)_	| Easy | ⭐ 两个stack in & out, in用来push, top: 假如out为空，dump in to out |
 | [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/) | _O(n)_ | _O(n)_	| Hard |  |
 | [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/) | _O(n)_ | _O(n)_	| Medium | ❌ 用sign=1记录+, -1记录减, sign = 2 记录\*， 3记录除, 上一个sign是乘或除，先进行operation|
 | [331. Verify Preorder Serialization of a Binary Tree](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/) | _O(n)_ | _O(n)_	| Medium | 😍😍✏️stringstream + getline <ul><li>__Stack__: 每个node outdegree = 2，in-degree = 1 </li><li>indegree(到parent的) = outdegree（到child的） not NULL node has outdegree</li></ul>  |
@@ -1028,6 +1028,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | | | | | <ul><li>C++ priority_queue default是max heap</li><li> Python的heapq default是min heap. </li><li> ```priority_queue<int, vector<int>, less<int>>``` 是max_heap, ```greater<int`>```是min_heap </li><li> ```multiset<int, greater<int>>``` 是max_heap  </li><li>  multiset和priority_queue用的default comparator相反</li></ul>  |
+| [253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/description/) | _O(nlogn)_ | _O(n)_	| Medium | ⭐⭐ |
 | [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | 😍🎅🎅<ul><li>__dp__: loop n 而不是 loop 1 到 n-th ugly number</li><li> __heap__ 的解：:alien: 避免heap中出现重复数 </li></ul>|
 | [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 虽是hard, 逻辑简单, 两个heap, minheap, maxheap, <br/> ✏️可以看看[**python heapq用法**](https://github.com/beckswu/Leetcode/blob/master/Heap/295.%20Find%20Median%20from%20Data%20Stream.py) ```heappushpop```  |
 | [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) |
@@ -1041,6 +1042,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)	|	_O(n) average_	|	_O(1)_ |	Easy |  ✏️[Quick-Select](https://github.com/beckswu/Leetcode/blob/master/Heap/973.%20K%20Closest%20Points%20to%20Origin.cpp), [Multiset Comparator](https://github.com/beckswu/Leetcode/blob/master/Heap/973.%20K%20Closest%20Points%20to%20Origin.cpp#L296)|
 | [1046. Last Stone Weight](https://leetcode.com/problems/last-stone-weight/) | _O(nlogn)_ | _O(n)_	| Easy |  |
 | [1834. Single-Threaded CPU](https://leetcode.com/problems/single-threaded-cpu/) | _O(nlogn)_ | _O(n)_	| Medium |  |
+| [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/) | _O(mlogm + n + mlogn)_ | _O(n)_	| Hard |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |   |
 
 
@@ -1085,6 +1087,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [164. Maximum Gap](https://leetcode.com/problems/maximum-gap/) | _O(n)_ | _O(n)_	| Hard | 😍🔍 <ul><li>Bucket Sort, **double** minstep = (max-min)/(n-1) = bucket_step, bucket (0,1) 0是bucket minvalue, 1 是max value, 结果max gap=相邻两个bucket的min\[i]-max\[i-1]  </li><li>🔍🔍radix sort, res = 最大两个相邻的点, radix sort排序是从后往前loop，因为之前的digit的是sort，大的digit在最后面，count\[i]是从ith-digit的最后一个位置</li></ul> |
 | [179. Largest Number](https://leetcode.com/problems/largest-number/) | _O(nlogn)_ | _O(n)_	| Medium |✏️✏️ [Python Lambda Sort](https://github.com/beckswu/Leetcode/blob/master/Sort/179.%20Largest%20Number.py#L13) |
 | [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | _O(nlogn)_ | _O(logn)_	| Hard |😍😍 priority_queue or multiset(看critical point) |
+| [252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/description/) | _O(nlogn)_ | _O(1)_	| Easy |❌ |
 | [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | ❌counting Sort |
 | [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BIT |
 | [324. Wiggle Sort II](https://leetcode.com/problems/wiggle-sort-ii/) | _O(n) average_ | _O(1)_	| Medium | ❌(1 + 2\*index) \% (n \| 1)保证median左面数map奇数位，mediam右面的数map偶数位<ul><li>(1)elements smaller than the 'median' are put into the last even slots</li><li>(2) elements larger than the 'median' are put into the first odd slots</li><li>(3) the medians are put into the remaining slots.</li></ul> |
@@ -1459,6 +1462,7 @@ DFS 是看有没有path，DP是看有几个path
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | :-------------: | :-------------: | :-------------: | :------------- |
 | [146. LRU Cache](https://leetcode.com/problems/lru-cache/) | _O(1)_ |	_O(k)_ |	Medium | <ul><li>✏️✏️[C++ List Splice](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.cpp#L1) </li><li>✏️✏️[Python OrderedDict](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.py) </li></ul> |
+| [359. Logger Rate Limiter](https://leetcode.com/problems/logger-rate-limiter/description/) | _O(1)_ |	_O(n)_ |	Easy | |
 | [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1) | _O(1)_ |	_O(1)_ |	Medium | 🎅🎅 |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>
 push: _O(1)_ <br/>

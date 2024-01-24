@@ -96,6 +96,34 @@ public:
 };
 
 
+//2024-1-24
+class BSTIterator {
+public:
+    stack<TreeNode*> stk;
+    TreeNode* cur;
+    BSTIterator(TreeNode* root) {
+        if(!root) return;
+        cur = root;
+    }
+    
+    int next() {
+        hasNext();
+        cur = stk.top(); stk.pop();
+        int val = cur->val;
+        cur = cur->right;
+        return val;
+    }
+    
+    bool hasNext() {
+        while(cur){
+            stk.push(cur);
+            cur = cur->left;
+        } 
+        return stk.size();
+    }
+};
+
+
 class BSTIterator {
 public:
     BSTIterator(TreeNode *root) : cur_(root) {

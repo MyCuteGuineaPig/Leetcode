@@ -150,7 +150,7 @@ public:
                 if(matrix[i][k] == '1')
                     right[k] = min(right[k], cur_right);
                 else{
-                    cur_right = k;
+                    cur_right = k; //注意是k
                     right[k] = m;
                 }
                     
@@ -161,7 +161,7 @@ public:
                 }   
                 else{
                     height[j] = 0;
-                    cur_left = j+1;
+                    cur_left = j+1; //注意是j+1
                     left[j] = 0;
                 }
             }
