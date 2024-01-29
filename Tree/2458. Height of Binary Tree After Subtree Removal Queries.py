@@ -29,6 +29,7 @@ class Solution:
         return [result[q] for q in queries]
 
 
+# swap and run dfs twice
 class Solution:
     def treeQueries(self, root: Optional[TreeNode], queries: List[int]) -> List[int]:
         res = defaultdict(int)
@@ -42,3 +43,26 @@ class Solution:
         dfs(root, 0, 0)
         dfs(root, 0, 0)
         return [res[q] for q in queries]
+
+# depth - 1 + height (from the same level)
+class Solution:
+    def treeQueries(self, root: Optional[TreeNode], queries: List[int]) -> List[int]:
+    
+        height, depths, levels = {}, {}, defaultdict(list)
+        
+        def dfs(n, d):
+            if not n: return 0
+            h = 1 + max(dfs(n.left, d+1), dfs(n.right, d+1))
+            levels[d].append(n.val)
+            height[n.val] = h
+            depths[n.val] = d
+            return h
+        
+        @functools.cache
+        def query(q):
+            max_height = max([height[v] for v in levels[depths[q]] if v != q] or [0])
+            return depths[q] - 1 + max_height
+        
+        dfs(root, 0)     
+        
+        return [query(q) for q in queries]
