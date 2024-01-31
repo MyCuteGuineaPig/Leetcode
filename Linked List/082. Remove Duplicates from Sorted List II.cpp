@@ -67,3 +67,28 @@ public:
         return dummy.next;
     }
 };
+
+
+//recursion
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(!head || !head->next){
+            return head;
+        }
+        bool repeat = false;
+        while(head->next && head->val == head->next->val){
+            head = head->next;
+            repeat = true;
+        }
+        if(repeat){
+            if(head){
+                return deleteDuplicates(head->next);
+            }
+            return nullptr;
+        } else{
+            head->next = deleteDuplicates(head->next);
+            return head;
+        }
+    }
+};

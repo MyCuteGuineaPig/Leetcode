@@ -57,6 +57,29 @@ public:
 };
 
 
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(k == 0 || !head || !head->next){
+            return head;
+        }
+        int len = 1;
+        ListNode* tail = head;
+        while(tail->next){
+            tail = tail->next;
+            ++len;
+        }
+        if (k % len == 0) return head;
+        tail->next = head;
+        ListNode* cur = head;
+        for(int i = 0; i<len - k % len - 1; ++i){
+            cur = cur->next;
+        }
+        ListNode* res = cur->next;
+        cur->next = nullptr;
+        return res;
+    }
+};
 
 
 class Solution {
