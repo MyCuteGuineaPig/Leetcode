@@ -88,22 +88,35 @@ step 4:
     }
 };
 
-
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode dummy(0);
+        ListNode* res = &dummy;
+        while(head){ //process head
+            ListNode* next = head->next;
+            head->next = res->next;
+            res->next = head;
+            head = next;
+        }
+        return dummy.next;
+    }
+};
 
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* new_head = new ListNode(0);
-        new_head -> next = head;
-        ListNode* pre = new_head;
-        ListNode* cur = head; 
-        while (cur && cur -> next) {
-            ListNode* temp = cur -> next;
-            cur -> next = cur -> next -> next;  
-            temp->next = pre->next;
-            pre -> next = temp;
+        ListNode dummy(0);
+        ListNode* res = &dummy;
+        res->next = head;
+        while(head && head->next){ //process head->next
+            ListNode* tmp = head->next;
+            head->next = head->next->next; 
+            tmp->next = res->next;
+            res->next = tmp;
         }
-        return new_head -> next;
+        
+        return dummy.next;
     }
 };
 
@@ -140,14 +153,14 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode *copy = NULL;
+        ListNode *res = NULL;
         while (head != NULL) {
             ListNode *temp = head;
             head = head->next;
-            temp->next = copy;
-            copy = temp;
+            temp->next = res;
+            res = temp;
         }
-        return copy;
+        return res;
     }
 };
 /*

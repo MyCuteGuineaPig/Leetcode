@@ -35,7 +35,7 @@ Output: -1->0->3->4->5
  */
 
 
-
+//head 和 head->next比
 class Solution {
 public:
     ListNode* insertionSortList(ListNode* head) {
@@ -84,6 +84,50 @@ public:
 };
 
 
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode dummy(0);
+        ListNode* res = &dummy;
+        res->next = head;
+        ListNode* pre = res;
+        while(head){
+            if (head->next && head->next->val < head->val){
+                while(pre->next->val < head->next->val){
+                    pre = pre->next;
+                }
+                ListNode* tmp = head->next->next;
+                head->next->next = pre->next;
+                pre->next = head->next;
+                head->next = tmp;
+                pre = res;
+            } else {
+                head = head->next;
+            }
+        }
+        return dummy.next;
+    }
+};
+
+
+//head 和 prevv->next比
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode res(0);
+        while(head){
+            ListNode* prev = &res;
+            while(prev->next && prev->next->val < head->val){
+                prev = prev->next;
+            }
+            ListNode* next = head->next;
+            head->next = prev->next;
+            prev->next = head;
+            head = next;
+        }
+        return res.next;
+    }
+};
 
 class Solution {
     public:
@@ -111,27 +155,6 @@ class Solution {
         return prev;
     }
 };
-
-
-class Solution {
-    public:
-        ListNode *insertionSortList(ListNode *head) {
-            ListNode *dummy = new ListNode(numeric_limits<int>::min());
-            ListNode *pos;
-            while(head){
-                pos = dummy;
-                while(pos->next && pos->next->val<head->val){
-                    pos = pos->next;
-                }
-                ListNode *next = head->next;
-                head->next = pos->next;
-                pos->next = head;
-                head = next;
-            }
-            return dummy->next;
-        }
-};
-
 
 class Solution {
 public:

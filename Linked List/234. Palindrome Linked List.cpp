@@ -37,27 +37,29 @@ Could you do it in O(n) time and O(1) space?
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(!head || !head->next) return true;
-        ListNode* slow = NULL, *fast = head;
-        while(fast && fast->next){
-            fast = fast->next->next;
-            auto next = head->next;
+        if (!head || !head->next){
+            return true;
+        }
+        ListNode* slow = nullptr;
+        ListNode* fast = head;
+        while(fast && fast->next ){
+            fast = fast->next->next; //一定在前面要不然head->next 破坏fast->next
+            ListNode* tmp = head->next;
             head->next = slow;
             slow = head;
-            head = next;
+            head = tmp;
         }
-        ListNode *temp = slow;
-        ListNode *head2 = fast? head->next : head;
-        while(slow){
-            if(slow->val!=head2->val) return false;
-            head2 = head2->next;
+        head = fast? head->next: head; //奇数长度，前进少一位
+        while(head){
+            if(head->val != slow->val){
+                return false;
+            }
+            head = head->next;
             slow = slow->next;
         }
         return true;
     }
 };
-
-
 
 
 

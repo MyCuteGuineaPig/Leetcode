@@ -104,16 +104,19 @@ public:
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        if(!head || !head->next) return head;
-        ListNode *odd = head, *cur = head->next;
-        while(cur && cur->next){
-            auto evenhead = odd->next;
-            odd->next = cur->next;
-            cur->next = cur->next->next; //断奇数链
-            odd->next->next = evenhead;
-            
-            cur = cur->next;//cur 前进
-            odd = odd->next; //old 尾部前进
+        if(!head || !head->next) {
+            return head;
+        }
+        ListNode dummy(0);
+        auto odd = head, even = head->next;
+        while(even && even->next) {
+            auto even_head = odd->next;
+            odd->next = even->next; 
+            even->next = even->next->next; //断奇数链
+            odd->next->next = even_head;
+
+            odd = odd->next;
+            even = even->next;
         }
         return head;
     }

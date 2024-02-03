@@ -47,10 +47,9 @@ public:
             slow = slow->next;
             fast = fast->next->next;
         }
-        fast = slow;
-        slow = slow->next;
-        fast->next = nullptr;
-        return mergeList(sortList(head),sortList(slow));
+        ListNode* mid = slow->next;
+        slow->next = nullptr; //必须要nullptr, 要不然前半段不会挺，比如[5,6,1,2], cut 一半，[5,6] 但6后面还有1，会持续recursion
+        return mergeList(sortList(head), sortList(mid));
     }
     
     ListNode*mergeList(ListNode* l1, ListNode* l2){
@@ -73,6 +72,54 @@ public:
 
 
 // complexity O(nlogn), space O(n)
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        auto cmp = [](const ListNode* r1, const ListNode* r2){
+            return r1->val > r2->val;
+        };
+        priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)>pq(cmp);
+        ListNode* cur = head;
+        while(cur){
+            pq.push(cur);
+            cur = cur->next;
+        }
+        ListNode dummy(0);
+        cur = &dummy;
+        while(pq.size()){
+            ListNode* top = pq.top(); pq.pop();
+            cur->next = top;
+            cur = top;
+        }
+        cur->next = nullptr;
+        return dummy.next;
+    }
+};
+
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        auto cmp = [](const ListNode* r1, const ListNode* r2){
+            return r1->val < r2->val;
+        };
+        multiset<ListNode*, decltype(cmp)>pq(cmp);
+        ListNode* cur = head;
+        while(cur){
+            pq.insert(cur);
+            cur = cur->next;
+        }
+        ListNode dummy(0);
+        cur = &dummy;
+        while(pq.size()){
+            ListNode* top = *pq.begin(); pq.erase(pq.begin());
+            cur->next = top;
+            cur = top;
+        }
+        cur->next = nullptr;
+        return dummy.next;
+    }
+};
+
 
 class Solution {
 public:

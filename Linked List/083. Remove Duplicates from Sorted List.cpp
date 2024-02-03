@@ -57,3 +57,17 @@ We use it for tree because its stack space is O(logn), where n is the number of 
 But it's O(n) space required for linked list, which is very likely to be stack overflow. 
 
 */
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(!head || !head->next){
+            return head;
+        }
+        if (head->next->val == head->val){
+            return deleteDuplicates(head->next);
+        }
+        head->next = deleteDuplicates(head->next);
+        return head;
+    }
+};

@@ -108,6 +108,42 @@ public:
 };
 
 
+class Solution {
+public:
+    ListNode* reverse(ListNode* l){
+        ListNode* res = nullptr;
+        while(l){
+            ListNode* next = l->next;
+            l->next = res;
+            res = l;
+            l = next;
+        }
+        return res;
+    }
+
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* r1 = reverse(l1);
+        ListNode* r2 = reverse(l2);
+
+        ListNode* res = nullptr;
+        int cnt = 0;
+        while (r1 || r2 || cnt ){
+            cnt += r1? r1->val: 0;
+            cnt += r2? r2 ->val:0;
+            ListNode* new_head = new ListNode(cnt % 10);
+            new_head->next = res;
+            res = new_head; 
+
+            cnt = cnt / 10;
+            r1 = r1 ?  r1->next: nullptr;
+            r2 = r2 ? r2->next: nullptr;
+        }
+
+        return res;
+    }
+};
+
 
 class Solution {
 public:
