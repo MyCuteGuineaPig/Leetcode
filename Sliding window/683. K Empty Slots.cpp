@@ -23,7 +23,32 @@ public:
 };
 
 
-
+class Solution {
+public:
+    int kEmptySlots(vector<int>& bulbs, int k) {
+        int n = bulbs.size();
+        if (k>= n -1 ){
+            return -1;
+        }
+        vector<int>vec(n);
+        for(int i = 0; i<n; ++i){
+            vec[bulbs[i]-1] = i+1;
+        }
+        int res = n + 1; 
+        int l = 0, r = k+1;
+        for(int i = 1; i<n && r < n; ++i){
+            if( i > l && i < r && (vec[i] < vec[l] || vec[i] < vec[r])){ // i>l && i<r 是为了避免 k = 0的情况
+                l = i; 
+                r = i + k + 1;
+            } else if(i == r) {
+                res = min(res, max(vec[l], vec[r]));
+                l = r;
+                r = l + k + 1;
+            }
+        }
+        return res == n+1 ? -1: res;
+    }
+};
 /*
 MinQueue: 
 

@@ -129,6 +129,17 @@ vector<int>computeLps(const string& pattern){
     return lps;
 }
 
+vector<int>computeLps(const string& pattern){
+    vector<int>lps(pattern.size()); //p 记录 longest proper prefix which is also a suffix. 
+    for(int i = 1; i<pattern.size(); i++){ // ** i start from 1
+        while(j>0 && pattern[j]!= pattern[i]){
+            j = lps[j-1];
+        }
+        j = lps[i] = j+ (pattern[j] ==pattern[i]);
+    }
+    return lps;
+}
+
 
 void kmp2(const string& pattern, const string& text, vector<int>&res){
     string combine = pattern + "@" + text;
@@ -165,6 +176,7 @@ void kmp2(const string& pattern, const string& text, vector<int>&res){
 | [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array/) | _O(n)_ | _O(n)_	| Easy | KMP, Rolling Hash |
 | [2800. Shortest String That Contains Three Strings](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/) | _O(a+b+c)_ | _O(a+b+c)_	| Medium | |
 | [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
+| [3031. Minimum Time to Revert Word to Initial State II](https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-ii/description/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐ kmp, [z function](https://oi-wiki.org/string/z-func/)|
 
 ## Manacher
 
@@ -308,14 +320,12 @@ void init(const string& s, string& res){
 | [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/) | _O(m\*n)_ | _O(1)_	| Easy |  |
 | [581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/) | _O(n)_ | _O(1)_	| Easy | 🔍<ul><li>从左起, 最后一个小于左侧最大的数为 right,从右起，最后一个大于右侧最小的数为left, res = right - left + 1 </li><li> two pointer, 当有数小于current max, 往回开始找起点start, start只能减小, end只能增加,  res = end - start + 1</li></ul>  |
 | [605. Can Place Flowers](https://leetcode.com/problems/can-place-flowers/) | _O(n)_ | _O(1)_	| Easy |  |
-| [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
 | [661. Image Smoother](https://leetcode.com/problems/image-smoother/) | _O(n)_ | _O(1)_	| Easy | 跟[289. Game of Life](https://leetcode.com/problems/game-of-life/)思路一样， 一点不一样的是把下一代的数右移8个bit, 之后再第二次pass matrix, 每个点>>8 左移8个bits |
 | [665. Non-decreasing Array](https://leetcode.com/problems/non-decreasing-array/) | _O(n)_ | _O(1)_	| Easy | 🔍两种operation: 1.nums\[i-1] = nums\[i] (降), nums\[i] = nums\[i-1] (升), 降优于升 |
 | [667. Beautiful Arrangement II](https://leetcode.com/problems/beautiful-arrangement-ii/) | _O(n)_ | _O(1)_	| Meidum | 🔍brainstorm |
 | [670. Maximum Swap](https://leetcode.com/problems/maximum-swap/) | _O(n)_ | _O(1)_	| Medium | 🔍<ul><li>Two Pass: 第一个pass 记录每个digit最后出现位置, 第二个pass: 如果有大于当前digit出现, swap & return</li><li>One Pass: 从后往前, 记录最大数的index,如果当前数小于最大数,更新进行swap的两个index，最后</li></ul> |
 | [674. Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/) | _O(n)_ | _O(1)_	| Easy |  |
 | [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/) | _O(n)_ | _O(n)_	| Easy |  |
-| [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍😍 Sliding Window  |
 | [845. Longest Mountain in Array](https://leetcode.com/problems/longest-mountain-in-array/) | _O(n)_ | _O(1)_	| Medium | 🐸 |
 | [918. Maximum Sum Circular Subarray](https://leetcode.com/problems/maximum-sum-circular-subarray/) | _O(n)_ | _O(1)_	| Medium | 🎅🎅 [Kadane's algorithm](https://github.com/beckswu/Leetcode/blob/master/Array/918.%20Maximum%20Sum%20Circular%20Subarray.cpp#L37) |
 | [997. Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/) | _O(n+t)_ | _O(n)_	| Easy | 🎅 [In-degree, out-degree](https://github.com/beckswu/Leetcode/blob/master/Array/997.%20Find%20the%20Town%20Judge.cpp#L28)  |
@@ -325,6 +335,7 @@ void init(const string& s, string& res){
 | [1394. Find Lucky Integer in an Array	](https://leetcode.com/problems/find-lucky-integer-in-an-array/)	|	_O(n)_  |	_O(n)_|	Easy |  :pencil2: [Loop C++ Map Key Value](https://github.com/beckswu/Leetcode/blob/master/Array/1394.%20Find%20Lucky%20Integer%20in%20an%20Array.cpp#L6) |
 | [1583. Count Unhappy Friends	](https://leetcode.com/problems/count-unhappy-friends/)	|	_O(n^2)_  |	_O(n)_|	Medium | [bad description, better description](https://leetcode.com/problems/count-unhappy-friends/discuss/844089/C%2B%2B-Easy-explanation-%3A)-for-a-bad-framed-question-%3A() |
 | [2373. Largest Local Values in a Matrix](https://leetcode.com/problems/largest-local-values-in-a-matrix/)	|	_O(n)_  |	_O(1)_|	Easy | |
+| [3030. Find the Grid of Region Average](https://leetcode.com/problems/find-the-grid-of-region-average/description/)	|	_O(9\*n\*m)_  |	_O(n\*m)_|	Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -838,7 +849,9 @@ TreeNode* helper(TreeNode** head ){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | |
+| [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
 | [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT </li></ul>|
+| [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍 Sliding Window  |
 | [862. Shortest Subarray with Sum at Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/) | _O(n)_ | _O(k)_	| Hard | |
 | [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | _O(n)_ | _O(1)_	| Medium | Rephrase Question: return the longest subarray's length which only contains 2 different elements |
 | [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) | _O(n)_ | _O(1)_	| Medium | |
