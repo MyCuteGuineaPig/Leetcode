@@ -61,6 +61,22 @@ public:
 };
 
 
+class Solution {
+public:
+    int numComponents(ListNode* head, vector<int>& nums) {
+        unordered_set<int>st(nums.begin(), nums.end());
+        int cnt = 0;
+        ListNode* prev = nullptr;
+        while(head){
+            if(st.count(head->val) && (prev == nullptr || st.count(prev->val) == 0))
+                ++cnt;
+            prev = head;
+            head = head->next;
+        }
+        return cnt;
+    }
+};
+
 
 class Solution {
 public:
