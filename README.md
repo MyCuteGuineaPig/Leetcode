@@ -367,7 +367,6 @@ void init(const string& s, string& res){
 | [659. Split Array into Consecutive Subsequences](https://leetcode.com/problems/split-array-into-consecutive-subsequences/) | _O(n)_ | _O(n)_	| Medium |🎅 |
 | [738.	Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/) | _O(1)_ | _O(1)_	| Medium | |
 | [757. Set Intersection Size At Least Two](https://leetcode.com/problems/set-intersection-size-at-least-two/) | _O(nlogn)_ | _O(1)_	| Hard |🎅🎅 边界选最大的两个，而不是一大一小  |
-| [763.	Partition Labels](https://leetcode.com/problems/partition-labels/) | _O(n)_ | _O(n)_	| Medium | hashmap/sliding windows |
 | [767. Reorganize String](https://leetcode.com/problems/reorganize-string/) | _O(n)_ | _O(1)_	| Medium | priority_queue  |
 | [798. Smallest Rotation with Highest Score](https://leetcode.com/problems/smallest-rotation-with-highest-score/) | _O(n)_ | _O(1)_	| Hard | 🎅🎅🎅 |
 | [843. Guess the Word](https://leetcode.com/problems/guess-the-word/) | _O(n^2)_ | _O(n)_	| Hard | |
@@ -853,6 +852,7 @@ TreeNode* helper(TreeNode** head ){
 | [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT </li></ul>|
 | [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍 Sliding Window  |
 | [862. Shortest Subarray with Sum at Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/) | _O(n)_ | _O(k)_	| Hard | |
+| [763.	Partition Labels](https://leetcode.com/problems/partition-labels/) | _O(n)_ | _O(n)_	| Medium | hashmap/sliding windows |
 | [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/) | _O(n)_ | _O(1)_	| Medium | Rephrase Question: return the longest subarray's length which only contains 2 different elements |
 | [930. Binary Subarrays With Sum](https://leetcode.com/problems/binary-subarrays-with-sum/) | _O(n)_ | _O(1)_	| Medium | |
 | [992. Subarrays with K Different Integers](https://leetcode.com/problems/subarrays-with-k-different-integers/) | _O(n)_ | _O(1)_	| Medium | |
