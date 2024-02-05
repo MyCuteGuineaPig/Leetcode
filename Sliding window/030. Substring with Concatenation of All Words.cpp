@@ -104,10 +104,134 @@ public:
     }
 };
 
+//不固定window size, 用cnt来比较 words.size()
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        unordered_map<string, int>wordss;
+        for(auto& w: words) wordss[w]++;
+        vector<int> res;
+        int k = words[0].size();
+        for(int start = 0; start<k; ++start){
+            int cnt = 0;
+            unordered_map<string, int>mp;
+            for(int i = start; i<s.size(); i+=k){
+                string ss = s.substr(i, k);
+                if(wordss.count(ss) == 0){
+                    mp.clear();
+                    cnt = 0;
+                    continue;
+                }
+                while(mp[ss] == wordss[ss]){
+                    int l = i - cnt * k;
+                    mp[s.substr(l, k)]--;
+                    --cnt;
+                }
+                mp[ss]++;
+                ++cnt;
+                if(cnt  == words.size())
+                    res.push_back(i-(words.size()-1)*k);
+            }
+        }
+        return res;
+    }
+};
+
+//不固定window size, 用l 
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        unordered_map<string, int>wordss;
+        for(auto& w: words) wordss[w]++;
+        vector<int> res;
+        int k = words[0].size();
+        for(int start = 0; start<k; ++start){
+            unordered_map<string, int>mp;
+            int l = start;
+            for(int i = start; i<s.size(); i+=k){
+                string ss = s.substr(i, k);
+                if(wordss.count(ss) == 0){
+                    mp.clear();
+                    l = i+k;
+                    continue;
+                }
+                while(mp[ss] == wordss[ss]){
+                    mp[s.substr(l, k)]--;
+                    l += k;
+                }
+                mp[ss]++;
+                if(i - l  == (words.size()-1)*k)
+                    res.push_back(i-(words.size()-1)*k);
+            }
+        }
+        return res;
+    }
+};
+
+
+//Sliding wndows: 固定windows size
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        if(words.size()==0 || s.empty()) return {};
+        unordered_map<string,int>lookup;
+        for(auto word: words)
+            lookup[word]++;
+        int size = s.size(), word_len = words[0].size(), len = words.size();
+        vector<int>res;
+        for(int j = 0; j<word_len; j++){
+            unordered_map<string, int>mp;
+            for(int i = j, cnt = words.size(); i<=size - word_len; i+= word_len){
+                string cur = s.substr(i,word_len);
+                if(lookup.count(cur) && ++mp[cur] <= lookup[cur]) 
+                    --cnt;
+                if(cnt==0) res.push_back(i-word_len*(len-1));
+                if(i-j >= word_len*(len-1) ){
+                    string before = s.substr(i-word_len*(len-1), word_len);
+                    if(lookup.count(before) && --mp[before] < lookup[before] )
+                        ++cnt;
+                }
+            }
+        }
+        return res;
+    }
+};
+
+
+//Sliding windows 不固定windows size 
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        if(s.empty() || words.empty()) return {};
+        int size = s.size(), wlen = words[0].size(), len = words.size();
+        unordered_map<string, int>lookup;
+        for(auto word: words) lookup[word]++;
+        vector<int>res;
+        for(int j = 0; j<wlen; j++){
+            unordered_map<string, int>mp;
+            for(int i = j, left = j; i<= size - wlen; i+=wlen){
+                string cur = s.substr(i, wlen);
+                mp[cur]++;
+                if(lookup.count(cur) == 0 || mp[cur] > lookup[cur])
+                {
+                    while(left <= i && (lookup.count(cur) == 0 || mp[cur] > lookup[cur]))
+                    {
+                        string before = s.substr(left, wlen);
+                        mp[before]--;
+                        left += wlen;
+                    }
+                }
+                if(i-left == wlen*(len-1)) res.push_back(left);   
+            }
+        }
+        return res;
+    }
+};
 
 
 
 
+//不太优化的解
 class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {

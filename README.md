@@ -789,8 +789,6 @@ TreeNode* helper(TreeNode** head ){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [001	Two Sum](https://leetcode.com/problems/two-sum/) | _O(n)_ | _O(n)_	| Easy | |
-| [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | Sliding Windows |
-| [030. Substring with Concatenation of All Words	](https://leetcode.com/problems/substring-with-concatenation-of-all-words/) | _O((m+n)\*k)_ | _O(n\*k)_	| Hard | 🔍k = word\[0]长度, n = 整个words长度, m = S的长度。最快的解是两个map, map1记录words的每个string, | map2记录S的substr，substr每次移动k个, 直到当前window长度 == n\*k, res append(start) |
 | [036. Valid Sudoku](https://leetcode.com/problems/valid-sudoku/) | _O(9\*9)_ | _O(9)_	| Medium |🔍 用bit比较快，比如i在横着第2行出现, row\[2] |= 1<<i; 如果row\[i] & id == 1: return false |
 | [049. Group Anagrams](https://leetcode.com/problems/group-anagrams/) | _O(n * glogg)_ | _O(n)_	| Medium | 经典 面试题, python list不能作为字典的key,但是tuple可以 |
 | [076. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | _O(n)_ | _O(k)_	| Hard | 🔍sliding windows, 此题没有窗口的size，要去找最小的size，关键是如何确定window valid，记录每次滑到cur char也在T中出现的个数，当个数满足T.size(),证明window valid，然后逐步缩小start与i的距离，找最小点 |
@@ -847,6 +845,8 @@ TreeNode* helper(TreeNode** head ){
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
+| [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | Sliding Windows |
+| [030. Substring with Concatenation of All Words	](https://leetcode.com/problems/substring-with-concatenation-of-all-words/) | _O((m+n)\*k)_ | _O(n\*k)_	| Hard | 🔍k = word\[0]长度, n = 整个words长度, m = S的长度。最快的解是两个map, map1记录words的每个string, | map2记录S的substr，substr每次移动k个, 直到当前window长度 == n\*k, res append(start) |
 | [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | |
 | [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
 | [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT </li></ul>|

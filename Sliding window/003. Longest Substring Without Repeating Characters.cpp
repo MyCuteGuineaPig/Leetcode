@@ -53,20 +53,38 @@ sliding window,
 */
 
 
-class Solution { //记录当前substring的开始位置
+class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char,int>m;
-        int start = -1, res = 0;
-        for(int i = 0; i<s.size();i++){
-            if(m.count(s[i]) && m[s[i]] >start) start = m[s[i]];
-            m[s[i]] = i;
-            res = max(i-start, res);
+        unordered_map<int, int>mp;
+        int res = 0, l = -1;
+        for(int i = 0; i<s.size(); ++i){
+            if(mp.count(s[i])) {
+                l = max(l, mp[s[i]]);
+            } 
+            mp[s[i]] = i;
+            res = max(res, i - l);
         }
         return res;
     }
 };
 
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<int>st;
+        int res = 0, l = 0;
+        for(int i = 0; i<s.size(); ++i){
+            while(st.count(s[i])){
+                st.erase(s[l++]);
+            }
+            st.insert(s[i]);
+            res = max(res, i - l + 1);
+        }
+        return res;
+    }
+};
 /*
 用hash set记录当前string，
 
