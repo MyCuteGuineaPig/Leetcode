@@ -846,7 +846,7 @@ TreeNode* helper(TreeNode** head ){
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | Sliding Windows |
 ⭐⭐  |
-| [030. Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/) | _O((m+n)\*k)	_ | _O(n\*k)_	| Hard | Sliding Windows |
+| [030. Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/) | _O((m+n)\*k)_ | _O(n\*k)_	| Hard | Sliding Windows |
 ⭐⭐ |
 | [076. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | _O(n)_ | _O(k)_	| Hard | 🔍sliding windows, 此题没有窗口的size，要去找最小的size，关键是如何确定window valid，记录每次滑到cur char也在T中出现的个数，当个数满足T.size(),证明window valid，然后逐步缩小start与i的距离，找最小点 |
 | [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | |
