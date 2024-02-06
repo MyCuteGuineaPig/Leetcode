@@ -63,6 +63,26 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        unordered_map<char,int>dict;
+        for(auto& c: p)
+            dict[c]++;
+        int cnt = 0;
+        vector<int>res;
+        for(int i = 0; i<s.size(); ++i){
+            if (--dict[s[i]]>=0) ++cnt;
+            if (cnt == p.size()) 
+                res.push_back(i-p.size()+1);
+            if (i >= p.size()-1 && ++dict[s[i-p.size()+1]]>0)
+                    --cnt;
+        
+        }
+        return res;
+    }
+};
+
 
 
 /*

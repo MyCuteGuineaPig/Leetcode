@@ -104,6 +104,40 @@ public:
     }
 };
 
+//固定window size 
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        unordered_map<string, int>dict;
+        for(auto& w: words) dict[w]++;
+        vector<int> res;
+        int k = words[0].size();
+        int m = words.size();
+        for(int start = 0; start<k; ++start){
+            int cnt = 0; int i = start;
+            for( ;i<s.size(); i+=k){
+                string ss = s.substr(i, k);
+                if(dict.count(ss)){
+                    if(--dict[ss]>=0)
+                        ++cnt;
+                    if(cnt == m)
+                        res.push_back(i - (m-1)*k);
+                }
+                if(i >=(m-1)*k){
+                    string ss2 = s.substr(i - (m-1)*k, k);
+                    if(dict.count(ss2) && ++dict[ss2] > 0)
+                        --cnt;
+                }
+            }
+            for(int j = i - (m-1)*k; j < s.size(); j+=k){
+                string ss2 = s.substr(j, k);
+                if(dict.count(ss2) && ++dict[ss2] > 0);
+            }
+        }
+        return res;
+    }
+};
+
 //不固定window size, 用cnt来比较 words.size()
 class Solution {
 public:
@@ -169,6 +203,50 @@ public:
 };
 
 
+
+
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        unordered_map<string, int>dict;
+        for(auto& w: words) dict[w]++;
+        vector<int> res;
+        int k = words[0].size();
+        int m = words.size();
+        for(int start = 0; start<k; ++start){
+            int l = start;
+            for( int i = start;i<s.size(); i+=k){
+                string ss = s.substr(i, k);
+                if(dict.count(ss)){
+                    --dict[ss];
+                    while(dict[ss] < 0){
+                        string ss2 = s.substr(l, k);
+                        ++dict[ss2];
+                        l+=k;
+                    }
+                    if(i-l == (m-1)*k)
+                        res.push_back(l);
+                } else{
+                    while(l<=i){ //把l 移动到i
+                        string ss2 = s.substr(l, k);
+                        if(dict.count(ss2)){
+                            ++dict[ss2];
+                        }
+                        l+=k;
+                    }
+                }
+            }
+            while(l<s.size()){ //restore map
+                string ss2 = s.substr(l, k);
+                if(dict.count(ss2)){
+                    ++dict[ss2];
+                }
+                l+=k;
+            }
+        }
+        return res;
+    }
+};
 //Sliding wndows: 固定windows size
 class Solution {
 public:
