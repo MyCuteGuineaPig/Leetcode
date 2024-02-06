@@ -82,7 +82,7 @@ public:
         vector<int>res;
         for(int i = 0; i<s.size();i++){
             map[s[i]-'a']--;
-            while(start<= i && map[s[i]-'a'] < 0) map[s[start++]-'a']++; 
+            while(map[s[i]-'a'] < 0) map[s[start++]-'a']++; 
             //start <= i, 比如“abceabc", p = "abc", 当i=e, 要把start前进到a（e的后一位）
             if(i-start+1 == m){
                 res.push_back(start);
