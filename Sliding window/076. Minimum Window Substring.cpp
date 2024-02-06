@@ -30,7 +30,7 @@ class Solution {
 public:
     string minWindow(string s, string t) {
         if(s.size()<1 || t.size()<1 || t.size()>s.size()) return "";
-        vector<char,int>dict;
+        unordered_map<char,int>dict;
         for(auto i: t) dict[i]++;
         int minlen = numeric_limits<int>::max(), minstart = 0, count = t.size();
         for(int i = 0, start = 0; i<s.size();i++){
@@ -54,6 +54,29 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if(s.size()<1 || t.size()<1 || t.size()>s.size()) return "";
+        unordered_map<char,int>dict;
+        for(auto i: t) dict[i]++;
+        int minlen = numeric_limits<int>::max(), minstart = 0, count = 0;
+        for(int i = 0, start = 0; i<s.size();i++){
+            dict[s[i]]--;
+            if(dict[s[i]]>=0) count++;
+            while(dict[s[start]]<0) { 
+                dict[s[start]]++;
+                start++;
+            }
+            if(count == t.size() && i-start+1<minlen) {
+                minlen = i-start+1;
+                minstart = start;
+            }
+        }
+        return minlen == numeric_limits<int>::max() ? "" : s.substr(minstart,minlen);
+    }
+};
 
 class Solution {
 public:

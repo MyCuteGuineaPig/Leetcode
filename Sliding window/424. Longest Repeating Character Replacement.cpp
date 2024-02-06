@@ -134,7 +134,7 @@ public:
         {
             maxCount = max(maxCount, ++m[s[end++] - 'A']);
             
-            while (end - start - maxCount > k)
+            while (end - start - maxCount > k) //while 可以改成if
             {
               --m[s[start++] - 'A'];
             }
