@@ -847,6 +847,7 @@ TreeNode* helper(TreeNode** head ){
 | [076. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | _O(n)_ | _O(k)_	| Hard | ⭐⭐⭐ |
 | [424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐🔍sliding window: 记录window的初始点, 如果当前长度 - 最大count > k, ++start(保持windows的最大长度), 如果满足，start不变，结果是s.size()-start |
 | [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/) | _O(n)_ | _O(1)_	|  Medium | ⭐⭐⭐sliding window: 跟[567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)思路一样 <ul><li>保持window的长度不变, 用l算p中还剩几个点没有被数过 </li><li>用right和left, 当right和left之间长度 == p的长度,append to result</li><li>用两个map 分别记录s 和p，如果s==p,append to result </li></ul> |
+| [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐sliding Window|
 | [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
 | [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT </li></ul>|
 | [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍 Sliding Window  |
@@ -903,17 +904,17 @@ public:
         for(int i = 0; i<s2.size();i++){
             map[s2[i]-'a']--;
             if(map[s2[i] - 'a'] <0)
-                while(left<= i && map[s2[i]-'a'] < 0) map[s2[left++]-'a']++;
+                while( map[s2[i]-'a'] < 0) map[s2[left++]-'a']++;
                 /* or
 
                 //correct
-                while( mp[s2[left]]++ >= 0 )
+                while( map[s2[left] - 'a']++ >= 0 )
                     ++left;
                 ++left;
 
                 //wrong: 比如 ab: eabc,  left  会一直停在0(e)
-                while( mp[s2[left]] >= 0 )
-                    mp[s2[left++]]++
+                while( map[s2[left] - 'a'] >= 0 )
+                    map[s2[left++]- 'a']++
 
                 */
 
@@ -964,11 +965,6 @@ DEBUG stdout
 */
 
 ```
-
-|Title | Time  | Space | Difficulty |  Algorithm Note|
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | 😍sliding Window(长度为len(s1)), 每次移动框,vector减去新来的，加上刚刚pass的，直到l长度为0 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |  |
 
 
 ## Stack
@@ -1032,7 +1028,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 ## Queue
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard | 😍 Monoqueue using Deque<ul><li>  Solution 1 __deque int__ : 只存单个index, descending queue </li><li>Solution 2 deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
+| [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) | _O(n)_ | _O(k)_	| Hard |  ⭐⭐⭐ Monoqueue using Deque<ul><li>  Solution 1 __deque int__ : 只存单个index, descending queue </li><li>Solution 2 deque pair, first是存当前的数, second表示window开始位置到这个数之前，多少个比现在这个数小 </br> __pop__: 看```top second-- = 0```, pop_front() </li></ul> |
 | [362. Design Hit Counter](https://leetcode.com/problems/design-hit-counter/) | _O(1)_ | _O(1)_	| Medium | Should consider remove performance  |
 
 
@@ -1422,7 +1418,7 @@ DFS 是看有没有path，DP是看有几个path
 | [664. Strange Printer](https://leetcode.com/problems/strange-printer/)	|	_O(n^3)_	|	_O(n^2)_|	Hard | 🎅🎅<br/> 类似的题: <ul>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)<li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li></ul>  |
 | [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/)	|	_O(n^2)_	|	_O(n)_|	Medium | 💜🎅🎅 |
 | [688. Knight Probability in Chessboard](https://leetcode.com/problems/knight-probability-in-chessboard/)	|	_O(k\*n^2)_	|	_O(k\*n^2)</br>~O(n^2)_|	Medium | 💜 Bottom-up, Top-Down |
-| [689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)	|	_O(n)_	|	_O(n)_|	Hard | 🎅🎅🎅 sliding windows/ DP similar to Stock Purchasing <br/> 类似的题 <ul><li> [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)</li><li>[188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)	</li><li>[714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)</li></ul>  |
+| [689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)	|	_O(n)_	|	_O(n)_|	Hard | ⭐⭐⭐  sliding windows/ DP similar to Stock Purchasing <br/> 类似的题 <ul><li> [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)</li><li>[188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)	</li><li>[714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)</li></ul>  |
 | [691. Stickers to Spell Word](https://leetcode.com/problems/stickers-to-spell-word/description/)	|	_O(2^T\*S\*T)_	|	_O(2^T)_|	Hard | 🎅🎅🎅 |
 | [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/)	|	_O(m*n)_	|	_O(m\*n)</br>~O(n)_|	Medium | Edit Distance <br/>类似的题: <ul><li>[072. Edit Distance](https://leetcode.com/problems/edit-distance/)</li><li>[583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)</li></ul>  |
 | [714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)	|	_O(n)_	|	_O(n)_|	Medium | <ul><li> [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)</li><li>[188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)	</li><li>[689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)</li></ul>   |

@@ -127,48 +127,42 @@ Index   0   1   2   3   4   5   6   7
 
 
  */
+
 class Solution {
 public:
     vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
         int n = nums.size();
-        int m = 3;
-        
-        vector<vector<int>>maxSum(m+1, vector<int>(n+1,0));
-        vector<vector<int>>pos(m+1, vector<int>(n+1,0));
-        vector<int>sum(n+1, 0); 
-        
-        for(int i = 0, cur = 0; i<nums.size(); ++i){
+        if (n < 3*k) return {};
+        vector<int>sum(n);
+        vector<vector<vector<int>>> cnt(3, vector<vector<int>>(n, vector<int>(2)));
+        int best_index = 0, cur = 0, best = 0;
+        for(int i = 0; i<n; ++i){
             cur += nums[i];
-            if(i >= k-1){
-                sum[i+1] = cur;
+            if (i >= k- 1){
+                sum[i-k+1] = cur;
                 cur -= nums[i-k+1];
             }
         }
-        
-        for(int i = 1; i<=m; ++i){
-            int tot = sum[i*k] + maxSum[i-1][i*k-k];
-            pos[i][i*k-1] = i*k - k; //需要更新[i*k-1], 因为pos[i][j] = pos[i][j-1]; 
-            // 比如[1,2,1,2,1,2,1,2,1], 2,  tot 一直等于3, 不会更新tot, 和 pos[i][j] = j - k;, 
-            
-            for(int j = i*k; j<=n; ++j){
-                if(maxSum[i-1][j-k] + sum[j] > tot){
-                    tot = maxSum[i-1][j-k] + sum[j];
-                    maxSum[i][j] = tot;
-                    pos[i][j] = j - k;
+        for(int j = 0; j <=2; ++j){
+            best = (j == 0 ? 0 : cnt[j][j*k-k][0]) + sum[j*k];
+            best_index  = j*k;
+            for(int i = j*k; i<=n-k; ++i){
+                int tmp = (j == 0 ? 0 : cnt[j-1][i-k][0]) + sum[i];
+                if(tmp > best){
+                    best = tmp;
+                    best_index = i;
                 }
-                else{
-                    maxSum[i][j] = tot;
-                    pos[i][j] = pos[i][j-1];
-                }
+                cnt[j][i] = {best, best_index};
             }
         }
 
-        vector<int>res(m);
-        for(int i = m-1, cur = n; i>=0; --i){
-            res[i] = pos[i+1][cur]; // 从pos[m][n] 开始, 最后一个interval 起点是res[i]
-            cur = res[i];
+        vector<int>res(3);
+        best_index = n-k;
+        for(int j = 2; j>=0; --j){
+            best_index = cnt[j][best_index][1];
+            res[j] = best_index;
+            best_index -= k; //跳过k个，因为不能重复
         }
-            
         return res;
     }
 };
