@@ -177,6 +177,7 @@ void kmp2(const string& pattern, const string& text, vector<int>&res){
 | [2800. Shortest String That Contains Three Strings](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/) | _O(a+b+c)_ | _O(a+b+c)_	| Medium | |
 | [3008. Find Beautiful Indices in the Given Array II](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/description/) | _O(n+ max(na, nb))_ | _O(na+nb)_	| Hard | ⭐ KMP + Two pointers |
 | [3031. Minimum Time to Revert Word to Initial State II](https://leetcode.com/problems/minimum-time-to-revert-word-to-initial-state-ii/description/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐ kmp, [z function](https://oi-wiki.org/string/z-func/)|
+| [3036. Number of Subarrays That Match a Pattern II](hhttps://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/description/) | _O(mn)_ |	_O(n)_	| Hard |  |
 
 ## Manacher
 
@@ -389,7 +390,7 @@ void init(const string& s, string& res){
 | [2350. Shortest Impossible Sequence of Rolls](https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/) | _O(n)_ |	_O(K)_	| Hard |  ⭐ |
 | [2375. Construct Smallest Number From DI String](https://leetcode.com/problems/construct-smallest-number-from-di-string/) | _O(1)_ |	_O(1)_	| Medium |  |
 | [3002. Maximum Size of a Set After Removals](https://leetcode.com/problems/maximum-size-of-a-set-after-removals/) | _O(n)_ |	_O(n)_	| Medium | ⭐set difference  |
-| [035. Maximum Palindromes After Operations](https://leetcode.com/problems/maximum-palindromes-after-operations/description/) | _O(nlogn)_ |	_O(n)_	| Medium | ⭐Count Pair  |
+| [3035. Maximum Palindromes After Operations](https://leetcode.com/problems/maximum-palindromes-after-operations/description/) | _O(nlogn)_ |	_O(n)_	| Medium | ⭐Count Pair  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 ## Tree
