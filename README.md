@@ -684,7 +684,8 @@ TreeNode* helper(TreeNode** head ){
 ## Trie
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [588. Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | <ul><li>`ls` : _O(n)_ </li> <li>`mkdir` : _O(n + klogk)_ </li> <li>`addContentToFile` : _O(n)_ </li> <li>`readContentFromFile` : _O(n)_ </li> | _O(n)_	| Hard |   |
+| [588. Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/) | <ul><li>`ls` : _O(n)_ </li> <li>`mkdir` : _O(n + klogk)_ </li> <li>`addContentToFile` : _O(n)_ </li> <li>`readContentFromFile` : _O(n)_ </li> </ul>| _O(n)_	| Hard |   |
+| [3045. Count Prefix and Suffix Pairs II](https://leetcode.com/problems/count-prefix-and-suffix-pairs-ii/description/) | _O(n\*max(l))_| _O(n\*max(l))_	| Hard | ⭐⭐⭐⭐ <ul><li>Trie  c++ `unordered_map` `insert` 如果key 存在不会改变现有的key,value pair, python Trie and `:=` walrus operator, </li> <li> rolling hash </li> <li> z-function </li></ul>  |
 
 
 
@@ -1163,7 +1164,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 ## Binary Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [004. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) | _O(log(min(m, n)))_ |	_O(1)_	| Hard | 💜🎅🎅 |
+| [004. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) | _O(log(min(m, n)))_ |	_O(1)_	| Hard | ⭐⭐⭐ |
 | [033. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/) | _O(log(n))_ |	_O(1)_	| Medium | 💜🎅Similar Question: <ul><li>[081. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/)</li><li>[153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)</li><li>[154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/)</li></ul>  |
 | [034. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/) | _O(log(n))_ |	_O(1)_	| Medium | lowerbound/upperbound/EqualRange, [lowerbound 可以convert to int](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/034.%20Search%20for%20a%20Range.cpp#L110) |
 | [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/) | _O(log(n))_ |	_O(1)_	| Easy |  |
