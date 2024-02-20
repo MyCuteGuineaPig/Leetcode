@@ -29,46 +29,46 @@ if i>0 && A[i]>B[j]：ihigh = i-1 (A[i]太大)
 
 如果 n+m 为奇数，规定这个数在左面
 i 代表 中位数以左nums1 抽取的个数
-j 代表 中位数以左nums1 抽取的个数
+j 代表 中位数以左nums2 抽取的个数
 
 */
 
+/*
+i, j 是mid interval 右侧的点, 因为array 是index 0 为base的
+
+      left_part          |        right_part
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+
+m + n + 1 保证i, j 当m+n 为奇数时， i,j 一定为interval 右侧的点 
+
+*/
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        if(nums1.size()>nums2.size()) return findMedianSortedArrays(nums2,nums1);
-        int m = nums1.size(), n = nums2.size();
-        int k = (m+n+1)/2,  ilow = 0, ihigh = m; //k代表中位数从nums1, nums2中挑的数
-        while(ilow<=ihigh){
-        /*
-         //要有等于的情况比如
-        [2]
-        [1,3]
-        第一次 i=0, j = 2, ilow = 0, ihigh = 1
-        第二次 i=1, j = 2, ilow = 1, ihigh = 1
-
-        */
-
-            int i = ilow + (ihigh-ilow)/2;
-            int j = k-i;
-            if(i<m && nums2[j-1]>nums1[i])
-                ilow = i+1;
-            else if(i>0 && nums1[i-1]>nums2[j])
-                ihigh = i-1;
-            else{
-                int maxleft = numeric_limits<int>::min(), minright=numeric_limits<int>::max();
-                if(i>0) maxleft = nums1[i-1];
-                if(j>0) maxleft = nums2[j-1];
-                if(i>0 && j>0) maxleft = max(nums2[j-1], nums1[i-1]);
-                if((m+n)&1) return maxleft;
-                
-                if(i<m) minright = nums1[i];
-                if(j<n) minright = nums2[j];
-                if(i<m && j<n) minright = min(nums1[i], nums2[j]);
-                return static_cast<double>(maxleft + minright)/2;
-            }
+        int n1 = nums1.size(), n2 = nums2.size();
+        if(n1 > n2) return findMedianSortedArrays(nums2, nums1);
+        int low = 0, high = n1;
+        int half = (n1 + n2 + 1) / 2;
+        while(low < high){
+            int i = low + (high - low) / 2;
+            int j = half - i;
+            if(nums2[j-1] > nums1[i]) //i一定小于n1, j 一定大于0， 因为 half >= high
+                low = i + 1;
+            else 
+                high = i;
         }
-        return -1;
+        int i = low + (high - low) / 2;
+        int j = half - i;
+
+        int maxleft = numeric_limits<int>::min(), minright = numeric_limits<int>::max();
+        if(i > 0 ) maxleft = nums1[i-1];
+        if (j > 0 ) maxleft = max(maxleft, nums2[j-1]);
+        if ((n1 + n2) & 1) return maxleft;  
+
+        if (i  < n1) minright = nums1[i]; 
+        if (j < n2 ) minright = min(minright, nums2[j]);
+        return static_cast<double>(maxleft + minright) / 2;
     }
 };
 
@@ -77,35 +77,30 @@ class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int n1 = nums1.size(), n2 = nums2.size();
-        if(n1 > n2) 
-            return findMedianSortedArrays(nums2, nums1);
-        int l = 0, r = n1;
-        while(l<r){
-            int m1 = (l+r)/2;
-            int m2 = (n1 + n2 + 1)/2 - m1;
-            if(m1 < n1 && m2 > 0 && nums1[m1] < nums2[m2-1])
-                l = m1 + 1;
-            else
-                r = m1;
+        if(n1 > n2) return findMedianSortedArrays(nums2, nums1);
+        int low = 0, high = n1;
+        int half = (n1 + n2) / 2; // n1 + n2 而不是 n1 + n2 + 1, mid 落在右侧
+        while(low < high){
+            int i = low + (high - low) / 2;
+            int j = half - i;
+            if(nums2[j-1] > nums1[i]) //i一定小于n1, j 一定大于0， 因为 half >= high
+                low = i + 1;
+            else 
+                high = i;
         }
-        
-        int m1 = l, m2 = (n1 + n2 + 1)/2 - m1;
-        int lv = numeric_limits<int>::min();
-        if(m1 > 0 && m1 <= n1 )
-            lv = max(lv, nums1[m1-1]);
-        if(m2 > 0 && m2 <= n2 )
-            lv = max(lv, nums2[m2 -1]);
-        if((n1 + n2)&1)
-            return lv;
-        int rv = numeric_limits<int>::max();
-        if(m1 < n1)
-            rv = min(rv, nums1[m1]);
-        if(m2 < n2)
-            rv = min(rv, nums2[m2]);
-        return static_cast<double>(lv+rv)/2;
+        int i = low + (high - low) / 2;
+        int j = half - i;
+
+        int maxleft = numeric_limits<int>::min(), minright = numeric_limits<int>::max();
+        if (i  < n1) minright = nums1[i]; 
+        if (j < n2 ) minright = min(minright, nums2[j]);
+        if ((n1 + n2) & 1) return minright;  
+
+        if(i > 0 ) maxleft = nums1[i-1];
+        if (j > 0 ) maxleft = max(maxleft, nums2[j-1]);
+        return static_cast<double>(maxleft + minright) / 2;
     }
 };
-
 
 //2020 
 /*
