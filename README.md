@@ -346,7 +346,7 @@ void init(const string& s, string& res){
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [011. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | _O(n)_ | _O(1)_	| Medium | |
 | [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | Greedy/Descending Stack |
-| [045. Jump Game II](https://leetcode.com/problems/jump-game-ii/) | _O(n)_ | _O(1)_	| Hard | ⭐⭐⭐ Similar Question: <ul><li>[1024. Video Stitching](https://leetcode.com/problems/video-stitching/description/)</li><li>[1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/)</li></ul>   |
+| [045. Jump Game II](https://leetcode.com/problems/jump-game-ii/) | _O(n)_ | _O(1)_	| Hard | ⭐⭐⭐ <ul><li>greedy</li><li>DP</li></ul> **Similar Question**: <ul><li>[1024. Video Stitching](https://leetcode.com/problems/video-stitching/description/)</li><li>[1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/)</li></ul>   |
 | [055. Jump Game](https://leetcode.com/problems/jump-game/) | _O(n)_ | _O(1)_	| Medium |  |
 | [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | _O(n)_ | _O(1)_	| Medium |  |
 | [134. Gas Station](https://leetcode.com/problems/gas-station/description/) | _O(n)_ | _O(1)_	| Medium | 🎅  |
@@ -381,8 +381,9 @@ void init(const string& s, string& res){
 | [984. String Without AAA or BBB](https://leetcode.com/problems/string-without-aaa-or-bbb/) | _O(a+b)_ | _O(1)_	| Medium |  |
 | [995. Minimum Number of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/) | _O(n)_ | _O(1)_	| Hard | 💜🎅 |
 | [1007. Minimum Domino Rotations For Equal Row](https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/) | _O(n)_ | _O(1)_	| Medium |  |
+| [1024. Video Stitching](https://leetcode.com/problems/video-stitching/description/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐ <ul><li>greedy</li><li>DP</li></ul> **Similar Question**: <ul><li>[045. Jump Game II](https://leetcode.com/problems/jump-game-ii/)</li><li>[1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/)</li></ul>   |
 | [1249. Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/) | _O(n)_ | _O(1)_	| Medium | Stack |
-| [1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/) | _O(n)_ | _O(1)_	| Hard | ⭐⭐⭐  <ul><li>sort</li><li>greedy</li></ul> **Similar Question**: <ul><li>[045. Jump Game II](https://leetcode.com/problems/jump-game-ii/)</li><li>[1024. Video Stitching](https://leetcode.com/problems/video-stitching/description/)</li></ul>   |
+| [1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐  <ul><li>sort</li><li>greedy</li><li>DP</li></ul> **Similar Question**: <ul><li>[045. Jump Game II](https://leetcode.com/problems/jump-game-ii/)</li><li>[1024. Video Stitching](https://leetcode.com/problems/video-stitching/description/)</li></ul>   |
 | [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | [1419	Minimum Number of Frogs Croaking](https://leetcode.com/problems/minimum-number-of-frogs-croaking/) | _O(n)_ |	_O(1)_	| Medium | 需保证 counter 递增 ```c>r>o>a>k```  |
 | [1833. Maximum Ice Cream Bars](https://leetcode.com/problems/maximum-ice-cream-bars/) | _O(nlogn)_ |	_O(1)_	| Medium |  |
@@ -1515,7 +1516,12 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 
 
 
-  ## Concurrency
+  ## Concurrency 
+
+**c++ parameter to thread always pass by value. need `std::ref(x)` to pass by reference. Thread cannot be copied cannot only be moved**
+
+**Future .get() 只能被call 一次，call多次会crash**
+
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |

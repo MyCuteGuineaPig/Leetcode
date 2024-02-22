@@ -13,25 +13,18 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        if(nums.size() <= 1) return 0;
-        int count = 0, i = 0;
-        while(i < nums.size()-1){
-            count++;
-            if(i + nums[i] >= nums.size() - 1) break;
-            
-            int reach = i+nums[i], next = reach + nums[reach], ind = i+ nums[i];
-            for(int j = i; j<reach; j++){
-                if(j+nums[j] > next){
-                    next = j + nums[j];
-                    ind = j;
-                }
+        int n =  nums.size();
+        int count = 0, end = 0, next = 0;
+        for(int i = 0; i<nums.size()-1 && end < n-1; end = next){
+            ++count;
+            while(i <= end){
+                next = max(next, i+nums[i++]);
             }
-            
-            i = ind;
         }
         return count;
     }
 };
+
 
 class Solution {
 public:
@@ -61,7 +54,7 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         int jump = 0, curfarthest = 0, curend = 0;
-        for(int i = 0; i<nums.size() && curend<nums.size()-1;i++){ //需要的是curend < nums.size()-1
+        for(int i = 0; i<nums.size()-1 && curend<nums.size()-1;i++){ //需要的是curend < nums.size()-1
         /*
             不能是curfast < nums.size()-1，可能出现还没update, 就结束了
             比如[2,3,1,1,4], 在一点，curfast = 1 + 3 = 4, 下一次loop 停止在最后一点
@@ -88,7 +81,7 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         int jump = 0, curfarthest = 0, curend = 0;
-        for(int i = 0; i<nums.size() && curend<nums.size()-1;i++){ //需要的是curend < nums.size()-1
+        for(int i = 0; i<nums.size()-1 && curend<nums.size()-1;i++){ //需要的是curend < nums.size()-1
             if(i > curend){
                 jump++;
                 curend = curfarthest;
@@ -114,5 +107,47 @@ public:
             far = max(far, i+nums[i]);
         }
         return steps;
+    }
+};
+
+
+//DP
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size(); 
+        vector<int>dp(n, n+1);
+        dp[0] = 0;
+        for(int i = 0; i < n; ++i){
+            for(int j = i+1; j<=min(i+nums[i], n-1); ++j){
+                dp[j] = min(dp[j], dp[i]+1);
+            }
+        }
+        return dp.back();
+    }
+};
+
+class Solution {
+public:
+    int topdown(vector<int>&nums, int index, vector<int>&dp){
+        if(index == 0) {
+            return 0;
+        } 
+        int n = nums.size();
+        if (index < 0) return n +1;
+        if (dp[index] <= n) return dp[index];
+        int res = n + 1;
+        for(int i = 0; i<index; ++i){
+            if(nums[i] + i >= index){
+                res = min(res, 1 + topdown(nums, i, dp));
+            }
+        }
+        return dp[index] = res;
+    }
+
+    int jump(vector<int>& nums) {
+        int n = nums.size(); 
+        vector<int>dp(n, n+1);
+        return topdown(nums, n-1, dp);
     }
 };

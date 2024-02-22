@@ -23,6 +23,81 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    int minTaps(int n, vector<int>& ranges) {
+        vector<int>dist(n+1);
+        for(int i = 0; i<ranges.size(); ++i){
+            int left = max(0, i - ranges[i]);
+            dist[left] = max(dist[left], i + ranges[i]);
+        }
+        int end = 0, count = 0, next = 0;
+        for(int i = 0; i<=n && end < n; i++){
+            if ( i > end){
+                if ( i > next) return -1; 
+                //or if (end == next) return -1;
+                ++count;
+                end = next;
+            }
+            next = max(next, dist[i]);
+        }
+        return end >=n ? count: -1;
+    }
+};
+
+
+
+class Solution {
+public:
+    int minTaps(int n, vector<int>& ranges) {
+        vector<int>dist(n+1);
+        for(int i = 0; i<ranges.size(); ++i){
+            int left = max(0, i - ranges[i]);
+            dist[left] = max(dist[left], i + ranges[i]);
+        }
+        int end = 0, count = 0, next = 0;
+        for(int i = 0; i<=n && end < n; i++){
+            next = max(next, dist[i]); //如果用 i == end 必须把next = max(next, dist[i]) 放前面
+            /*
+            否则 
+            比如 n = 5, [3,4,1,1,0,0]
+                 i = 0, end = 0, 进来, update end = next = 0; 在if statement 外面, assign next = 5;
+            then i = 1, end = 0, 进不来了, 因为 end 还等于0
+            
+            */
+            if ( i == end){
+                cout<<i<<" end "<<end<<endl;
+                //or if (end == next) return -1;
+                ++count;
+                end = next;
+            }
+        }
+        return end >=n ? count: -1;
+    }
+};
+
+
+class Solution {
+public:
+    int minTaps(int n, vector<int>& ranges) {
+        vector<int>dp(n+1, n+2);
+        dp[0] = 0;
+        for(int i = 0; i<=n; ++i){
+            for(int j = max(0, i-ranges[i] + 1); j<=min(n, i+ranges[i]); ++j){
+                /*
+                也可以是
+                 max(0, i-ranges[i]）
+                如果 j = max(0, i-ranges[i]), the first iteration will be 
+                    dp[j] = min(dp[j], dp[j] + 1);, which is redundant.
+                */
+                dp[j] = min(dp[j], dp[max(0, i-ranges[i])]+1);
+            }
+        }
+        return dp.back() < n+2 ? dp.back(): -1;
+    }
+};
+
 class Solution {
 public:
     int minTaps(int n, vector<int>& ranges) {

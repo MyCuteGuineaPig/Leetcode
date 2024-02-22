@@ -1,5 +1,41 @@
 class Foo {
 public:
+    Foo() {}
+    int n = 0;
+    condition_variable cv;
+    mutex mu;
+
+    void first(function<void()> printFirst) {        
+        {
+            unique_lock<mutex>lock(mu);
+            ++n;
+            printFirst();
+            cv.notify_all();
+        }
+    }
+
+    void second(function<void()> printSecond) {
+        {
+            unique_lock<mutex>lock(mu);
+            cv.wait(lock, [&](){ return n == 1; });
+            printSecond();
+            ++n;
+            cv.notify_all();
+        }
+    }
+
+    void third(function<void()> printThird) {
+        {
+            unique_lock<mutex>lock(mu);
+            cv.wait(lock, [&](){ return n == 2; });
+            printThird();
+            ++n;
+        }
+    }
+};
+
+class Foo {
+public:
     Foo() {
         
     }
