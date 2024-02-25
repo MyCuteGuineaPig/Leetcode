@@ -28,6 +28,12 @@ class Foo:
             # printThird() outputs "third". Do not change or remove this line.
             printThird()
         
+""" 
+first_barrier = Barrier(2) 2表示number of thread support
+当第一个thread first_barrier.wait(), barrier internal count -= 1
+知道所有的thread .wait barrier. Barrier 才会放行  => Barrier count reset 为初始值 (2)
+
+"""
 
 from threading import Barrier
 
@@ -49,6 +55,13 @@ class Foo:
         self.second_barrier.wait()
         printThird()
 
+
+"""
+如果状态是unlocked， 可以调用 acquire() 将状态改为locked
+如果状态是locked， acquire() 会被block直到另一线程调用 release() 释放锁
+如果状态是unlocked， 调用 release() 将导致 RuntimError 异常
+如果状态是locked， 可以调用 release() 将状态改为unlocked
+"""
 
 
 class Foo:

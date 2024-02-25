@@ -73,7 +73,7 @@ public:
 
     // printNumber(x) outputs "x", where x is an integer.
     void zero(function<void(int)> printNumber) {
-        for (int i = 0; i < n_; ++i) {
+        for (int i = 0; i < n_; ++i) { //注意是 < n 
             {
                 unique_lock<mutex> l(m_);
                 wait_.wait(l, [this]() { return curr_ % 2 == 0; });
@@ -85,7 +85,7 @@ public:
     }
 
     void even(function<void(int)> printNumber) {
-        for (int i = 2; i <= n_; i += 2) {
+        for (int i = 2; i <= n_; i += 2) { //是 <= n
             {
                 unique_lock<mutex> l(m_);
                 wait_.wait(l, [this]() { return curr_ % 4 == 3; });

@@ -1518,9 +1518,11 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 
   ## Concurrency 
 
-**c++ parameter to thread always pass by value. need `std::ref(x)` to pass by reference. Thread cannot be copied cannot only be moved**
-
-**Future .get() 只能被call 一次，call多次会crash**
+- **c++ parameter to thread always pass by value. need `std::ref(x)` to pass by reference. Thread cannot be copied cannot only be moved**
+- **Future .get() 只能被call 一次，call多次会crash**、
+- **c++ wait lambda是release的条件，python 的wait_for也是release的条件**
+- **Python Barrier release 当初始的counter == barrier.wait()的call时候**
+- **Python Semaphore block 当counter == 0, acquire 是 --counter, release是 ++counter**
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -1531,6 +1533,15 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 | [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L2) |
 | [1195. Fizz Buzz Multithreaded](https://leetcode.com/problems/fizz-buzz-multithreaded/) | _O(n)_ | _O(1)_	| Medium |  |
 | [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | `unique_lock` & `condition_variable` |
+
+**Python**
+
+- 第一个`Lock.acquire()` 不会block thread, 第二个`Lock.acquire()` 会block
+- 第一个`Event.wait()` 会block thread, thread process 当 `Event.set()`, 用完一次后需要 `Event.clear()`
+- `Semphore` 初始值默认1, `Semphore.acquire()` decrement value, thread block 当 value == 0, `Semphore.release()` increent value
+
+
+## release increment value  
 
 ```python
 #下面code thread 1 先run, thread 2后run
@@ -1674,7 +1685,10 @@ Semaphore(value=1)
 acquire()
 release(n=1)
 
-A semaphore manages an internal counter which is decremented by each acquire() call and incremented by each release() call. The counter can never go below zero; when acquire() finds that it is zero, it blocks, waiting until some task calls release().
+A semaphore manages an internal counter which is decremented by each acquire() call 
+and incremented by each release() call. 
+The counter can never go below zero; 
+when acquire() finds that it is zero, it blocks, waiting until some task calls release().
 
 """
 
