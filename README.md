@@ -1201,8 +1201,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅[Binary Search](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/1385.%20Find%20the%20Distance%20Value%20Between%20Two%20Arrays.cpp#L23), Two pointer |
 | [1818. Minimum Absolute Sum Difference](https://leetcode.com/problems/minimum-absolute-sum-difference/) | _O((n \* logn)_ |	_O(n)_	| Medium | |
 | [2358. Maximum Number of Groups Entering a Competition](https://leetcode.com/problems/maximum-number-of-groups-entering-a-competition/) | _O(logN)_ |	_O(1)_	| Medium | Math / Brain Teaser |
-
-
+| [3048. Earliest Second to Mark Indices I](https://leetcode.com/problems/earliest-second-to-mark-indices-i) | _O(mlogm)_ |	_O(m)_	| Medium | ⭐⭐⭐ key: 根据bound，每次last_index 是需要更新的  |
+| [3049. Earliest Second to Mark Indices II](https://leetcode.com/problems/earliest-second-to-mark-indices-ii/description/) | _O(mlogm)_ |	_O(m)_	| Hard | ⭐⭐⭐  <ul><li>key: 需要看first_index, 尽早set to 0. 循环需要从后往前。 </li><li> :pencil2: c++ vector heap, 是max_heap, `std::pop_heap` 不会从vector中pop element, 需要再call `pop_back`</li></ul> |
 
 
 
