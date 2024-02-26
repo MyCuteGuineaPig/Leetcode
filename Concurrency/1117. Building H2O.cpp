@@ -32,6 +32,37 @@ public:
     }
 };
 
+class H2O {
+public:
+    mutex mu;
+    condition_variable cond;
+    int cnt = 0;
+    H2O() {
+        
+    }
+
+    void hydrogen(function<void()> releaseHydrogen) {
+        unique_lock<mutex>lock(mu);
+        cond.wait(lock, [&](){
+            return cnt != 2;
+        });
+        // releaseHydrogen() outputs "H". Do not change or remove this line.
+        releaseHydrogen();
+        ++cnt;
+        cond.notify_all();
+    }
+
+    void oxygen(function<void()> releaseOxygen) {
+        unique_lock<mutex>lock(mu);
+        cond.wait(lock, [&](){
+            return cnt % 3 == 2;
+        });
+        // releaseOxygen() outputs "O". Do not change or remove this line.
+        releaseOxygen();
+        cnt -= 2;
+        cond.notify_all();
+    }
+};
 /*
 不可以是notify_one 
 比如 H H H H H  O O  O
