@@ -51,39 +51,54 @@ and wanted to establish that as a `Condition` at the expense of the other (proba
 
 
 import threading
+class BoundedBlockingQueue(object):
+    def __init__(self, capacity: int):
+        self.__size = capacity
+        self.__q = Deque()
+        self.cond = threading.Condition()
 
+    def enqueue(self, element: int) -> None:
+        with self.cond:
+            self.cond.wait_for(lambda: len(self.__q) < self.__size)
+            self.__q.appendleft(element)
+            self.cond.notifyAll()
+
+    def dequeue(self) -> int:
+        with self.cond:
+            self.cond.wait_for(lambda: len(self.__q) != 0)
+            ret = self.__q.pop()
+            self.cond.notifyAll()
+            return ret
+
+    def size(self) -> int:
+        with self.cond:
+            return len(self.__q)
+        
+## Semaphore
+import threading
 class BoundedBlockingQueue(object):
 
     def __init__(self, capacity: int):
-        self.cv = threading.Condition()
-        self.q = collections.deque()
-        self.capa = capacity
-        self.count = 0
+        self.__q = Deque()
+        self.pushing = threading.Semaphore(capacity)
+        # self.lock = threading.Lock()  
+        # deques are threadsafe, no need lock
+        self.pulling = threading.Semaphore(0)
 
     def enqueue(self, element: int) -> None:
-        with self.cv:
-            while self.count == self.capa:
-                self.cv.wait()
-            self.q.append(element)
-            self.count += 1
-            self.cv.notify()
+        self.pushing.acquire()
+        self.__q.appendleft(element)
+        self.pulling.release()
 
     def dequeue(self) -> int:
-        val = 0
-        with self.cv:
-            while self.count == 0:
-                self.cv.wait()
-            val = self.q.popleft()
-            self.count -= 1
-            self.cv.notify()
+        self.pulling.acquire()
+        val = self.__q.pop()
+        self.pushing.release()
         return val
-            
+
     def size(self) -> int:
-        with self.cv:
-            return len(self.q)
-
-
-
+        return len(self.__q)
+        
 
 import threading
 
@@ -121,4 +136,31 @@ class BoundedBlockingQueue(object):
 
 
 
+##3 Lock
+class BoundedBlockingQueue(object):
 
+    def __init__(self, capacity: int):
+        self.en, self.de = Lock(), Lock()
+        self.q = deque()
+        self.capacity = capacity
+        self.de.acquire()
+
+    def enqueue(self, element: int) -> None:
+        self.en.acquire()
+        self.q.append(element)
+        if len(self.q) < self.capacity:
+            self.en.release()
+        if self.de.locked():
+            self.de.release()
+
+    def dequeue(self) -> int:
+        self.de.acquire()
+        val = self.q.popleft()
+        if len(self.q):
+            self.de.release()
+        if val and self.en.locked():
+            self.en.release()
+        return val
+        
+    def size(self) -> int:
+        return len(self.q)

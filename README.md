@@ -1521,25 +1521,26 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 - **c++ parameter to thread always pass by value. need `std::ref(x)` to pass by reference. Thread cannot be copied cannot only be moved**
 - **Future .get() 只能被call 一次，call多次会crash**、
 - **c++ wait lambda是release的条件，python 的wait_for也是release的条件**
+
+**Python**
+
+- 第一个`Lock.acquire()` 不会block thread, 第二个`Lock.acquire()` 会block
+- 第一个`Event.wait()` 会block thread, thread process 当 `Event.set()`(**Set the internal flag to true**), 用完一次后需要 `Event.clear()`(**Reset the internal flag to false**).  **需要先clear 才能再次set**
+- **`Semphore` 初始值默认1, `Semphore.acquire()` decrement value, thread block 当 value == 0, `Semphore.release()` increent value**
 - **Python Barrier release 当初始的counter == barrier.wait()的call时候**
-- **Python Semaphore block 当counter == 0, acquire 是 --counter, release是 ++counter**
+
+
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [1114. Print in Order](https://leetcode.com/problems/print-in-order/) | _O(1)_ | _O(1)_	| Easy | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1114.%20Print%20in%20Order.py#L1) |
 | [1115. Print FooBar Alternately](https://leetcode.com/problems/print-foobar-alternately/) | _O(n)_ | _O(1)_	| Medium | [Python的多种写法](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1115.%20Print%20FooBar%20Alternately.py) |
 | [1116. Print Zero Even Odd](https://leetcode.com/problems/print-zero-even-odd/) | _O(n)_ | _O(1)_	| Medium | |
-| [1117. Building H2O](https://leetcode.com/problems/building-h2o/) | _O(n)_ | _O(1)_	| Medium | [只能用`notify_all()` 不能用 `notify_one()`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1117.%20Building%20H2O.cpp#L36) |
-| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium | [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L2) |
-| [1195. Fizz Buzz Multithreaded](https://leetcode.com/problems/fizz-buzz-multithreaded/) | _O(n)_ | _O(1)_	| Medium |  |
+| [1117. Building H2O](https://leetcode.com/problems/building-h2o/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐ <ul><li>[只能用`notify_all()` 不能用 `notify_one()`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1117.%20Building%20H2O.cpp#L36)</li><li>:pencil2: python semaphore 解 </li></ul> |
+| [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium |⭐⭐⭐ [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L2) |
+| [1195. Fizz Buzz Multithreaded](https://leetcode.com/problems/fizz-buzz-multithreaded/) | _O(n)_ | _O(1)_	| Medium |  ⭐ :pencil2: c++ python thread lambda function |
 | [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | `unique_lock` & `condition_variable` |
-
-**Python**
-
-- 第一个`Lock.acquire()` 不会block thread, 第二个`Lock.acquire()` 会block
-- 第一个`Event.wait()` 会block thread, thread process 当 `Event.set()`, 用完一次后需要 `Event.clear()`
-- `Semphore` 初始值默认1, `Semphore.acquire()` decrement value, thread block 当 value == 0, `Semphore.release()` increent value
-
+| [1279. Traffic Light Controlled Intersection](https://leetcode.com/problems/traffic-light-controlled-intersection/description/) | _O(n)_ | _O(n)_	| Easy | ❌ bad question description |
 
 ## release increment value  
 

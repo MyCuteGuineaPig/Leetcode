@@ -39,45 +39,14 @@ thread 2: 被step 5的 thread 3 wake up -> pop 2
 
 */
 
+/*
+不能用 notify_one 可能有问题
+当 同时enqueue 和 dequeue 被block, 0 < count < capcacity, 先enqueue 或者先dequeu 都可以
 
-class BoundedBlockingQueue {
-public:
-    BoundedBlockingQueue(int capacity) {
-        this->capacity = capacity;
-    }
-    
-    mutex m;
-    condition_variable cv;
-    queue<int>q;
-    int capacity;
-    int count = 0;
-    
-    void enqueue(int element) {
-        unique_lock<mutex>lock(m);
-        cv.wait(lock, [&](){
-            return count < capacity;
-        });
-        q.push(element);
-        count++;
-        cv.notify_one();
-    }
-    
-    int dequeue() {
-        unique_lock<mutex>lock(m);
-        cv.wait(lock, [&](){
-            return count > 0;
-        });
-        int top = q.front(); q.pop();
-        count--;
-        cv.notify_one();
-        return top;
-    }
-    
-    int size() {
-        unique_lock<mutex>lock(m);
-        return count;
-    }
-};
+当 size == capacity, cv.wait 叫起来了下一个enqueue request, 又被block住，而没有叫起来dequeue
+
+*/
+
 
 /*
 Notifying waiters while holding the lock would cause waiters to wake-up and immediately block again.
@@ -125,4 +94,42 @@ private:
     condition_variable cv_;
     queue<int> q_;
     int cap_;
+};
+
+class BoundedBlockingQueue {
+public:
+    BoundedBlockingQueue(int capacity) {
+        q_size = capacity;
+    }
+    
+    void enqueue(int element) {
+        unique_lock<mutex>lock(mu);
+        cond_enqueue.wait(lock, [&]{return q.size() < q_size ;});
+        q.push(element);
+        cond_deque.notify_all();
+    }
+    
+    int dequeue() {
+        unique_lock<mutex>lock(mu);
+        cond_deque.wait(lock, [&]{return q.size();});
+        int top = q.front();
+        q.pop();
+        cond_enqueue.notify_all();
+        return top;
+    }
+    
+    int size() {
+        int cur_size;
+        {
+            lock_guard<mutex>lock(mu);
+            cur_size = q.size();
+        }
+        return cur_size;
+    }
+private: 
+    mutex mu;
+    int q_size;
+    queue<int>q;
+    condition_variable cond_deque, cond_enqueue;
+
 };
