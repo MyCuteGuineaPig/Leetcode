@@ -42,8 +42,35 @@ class Solution:
         return list(seen)
 
 
+https://leetcode.com/problems/web-crawler-multithreaded/solutions/929995/python3-using-concurrent-futures-threadpoolexecutor-with-error-handling/
 
+from concurrent.futures import ThreadPoolExecutor, as_completed
+class Solution:
+    def process_url(self, url):
+        urls = set(u for u in self.htmlParser.getUrls(url) if u.startswith(self.hostname))
+        not_visited = urls - self.seen
+        for u in not_visited:
+            self.submit_to_executor(u)
 
+    def submit_to_executor(self, url):
+        self.seen.add(url)
+        self.pending.append(self.executor.submit(self.process_url, url))
+
+    def crawl(self, startUrl, htmlParser):
+        self.seen = set()
+        self.hostname = '/'.join(startUrl.split('/', 3)[:3])
+        self.htmlParser = htmlParser
+        self.pending = []
+
+        with ThreadPoolExecutor(max_workers=64) as self.executor:
+            self.submit_to_executor(startUrl)
+            while self.pending:
+                pending_so_far, self.pending = self.pending, []
+                for fut in as_completed(pending_so_far):
+                    if e := fut.exception():
+                        raise RuntimeError("Future failed with an exception") from e
+
+        return self.seen
 
 
 

@@ -1539,7 +1539,8 @@ highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
 | [1117. Building H2O](https://leetcode.com/problems/building-h2o/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐ <ul><li>[只能用`notify_all()` 不能用 `notify_one()`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1117.%20Building%20H2O.cpp#L36)</li><li>:pencil2: python semaphore 解 </li></ul> |
 | [1188. Design Bounded Blocking Queue](https://leetcode.com/problems/design-bounded-blocking-queue/) | _O(n)_ | _O(n)_	| Medium |⭐⭐⭐ [解释python 为什么`notify` 需要before `lock.release`](https://github.com/beckswu/Leetcode/blob/master/Concurrency/1188.%20Design%20Bounded%20Blocking%20Queue.py#L2) |
 | [1195. Fizz Buzz Multithreaded](https://leetcode.com/problems/fizz-buzz-multithreaded/) | _O(n)_ | _O(1)_	| Medium |  ⭐ :pencil2: c++ python thread lambda function |
-| [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | `unique_lock` & `condition_variable` |
+| [1226. The Dining Philosophers](https://leetcode.com/problems/the-dining-philosophers/description/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐ :pencil2: C++  `semaphore` 写法 |
+| [1242. Web Crawler Multithreaded](https://leetcode.com/problems/web-crawler-multithreaded/) | _O(V+E)_ | _O(V)_	| Medium | ⭐⭐⭐ `vector<thread>` 在`emplace_back` 后就开始工作了 |
 | [1279. Traffic Light Controlled Intersection](https://leetcode.com/problems/traffic-light-controlled-intersection/description/) | _O(n)_ | _O(n)_	| Easy | ❌ bad question description |
 
 ## release increment value  
