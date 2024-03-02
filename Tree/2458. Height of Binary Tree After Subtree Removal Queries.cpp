@@ -91,9 +91,10 @@ public:
 
     void pre(TreeNode* root, int h) {
         if (!root) return;
-        preh[root->val] = maxh;
+        preh[root->val] = maxh; //先update node 避免left tree更新maxh, 把child tree的height update 到node
+        //maxh update 比h 晚一步，保证root->left, root->right 的 preh是0
         maxh = max(maxh, h);
-        pre(root->left, h + 1);
+        pre(root->left, h + 1); //先run left, left的height 就会到right
         pre(root->right, h + 1);
     }
 

@@ -41,7 +41,13 @@
 1. Trie
 2. Union Find 
 
-c++ vector 可以作为map的key，但不能作为unordered_map的Key
+
+C++
+
+- c++ vector 可以作为map的key，但不能作为unordered_map的Key
+- C++ `unordered_set` 的insert 的return 的pair.second 可以告诉有没有insert 成功，如果原来就有，`return false`, 如果unordered_set 之前没有, `return true`  比如 [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)
+
+
 
 
 ## KMP
@@ -1362,6 +1368,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [1361. Validate Binary Tree Nodes](https://leetcode.com/problems/validate-binary-tree-nodes/)	|	_O(n)_	|	_O(n)_ | Medium | DFS |
+| [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ directed graph, count the max number of child from a node |
  
 </br>
 </br>
