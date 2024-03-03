@@ -32,3 +32,12 @@ class Solution:
                     ds.union(i,j)
         
         return ds.size
+
+
+
+import numpy as np
+
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        return len(set(map(tuple, (np.matrix(M, dtype='bool')**len(M)).A)))
+        #.A 表示 matrix to tuple https://numpy.org/doc/stable/reference/generated/numpy.matrix.A.html

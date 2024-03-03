@@ -129,7 +129,8 @@ public:
         int cnt = n;
         vector<int>visited(n);
         for(int i = 0; i<n; ++i)
-           cnt -= dfs(M, visited, i); //减去number of new friend from i
+           cnt -= dfs(M, visited, i); //减去number of new friend from i， 
+           //终点不会算进去 所以 是 new friend - 1
         return cnt;
     }
     
@@ -148,7 +149,7 @@ public:
             如果 i == j, 但是visited[i] 已经标记, !visied[j] 不会成立, 所以不会进入下个dfs
             */
             if(M[i][j] && !visited[j])
-                cnt += dfs(M, visited, j) + 1;
+                cnt += dfs(M, visited, j) + 1; //注意这是 + 1， 加的是现有i的点,
         }
         return cnt;
     }

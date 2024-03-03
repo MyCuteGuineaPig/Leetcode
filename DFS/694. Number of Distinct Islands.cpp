@@ -24,7 +24,7 @@ public:
         helper(grid, i, j-1, cur,'D');
         helper(grid, i+1, j, cur,'R');
         helper(grid, i, j+1, cur, 'U');
-        cur.push_back('0');
+        cur.push_back('0');//这个很关键
     }
 };
 

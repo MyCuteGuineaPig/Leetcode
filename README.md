@@ -631,7 +631,6 @@ TreeNode* helper(TreeNode** head ){
 | [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | :pencil2:```ostringstream``` & ```istringstream ``` 用法, BFS－> pointer of pointer 存pointer 地址  |
 | [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | :pencil2: BIT & Segment Tree; BIT tree 需要arr作为参照物,每次根据val-arr\[i]的update, update过后arr\[i] = val |
 | [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 😍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0， same as [325. Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/)  |
-| [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium |❌ 简单DFS |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | 😍注意Python BFS  |
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能dfs，再比较height 会更快 |
 | [563. Binary Tree Tilt](https://leetcode.com/problems/binary-tree-tilt/) | _O(n)_ | _O(n)_	| Easy | ❌思路跟[543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) 一样|
@@ -1302,11 +1301,9 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [440. K-th Smallest in Lexicographical Order](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/description/)	|	_O(logn)_	|	_O(logn)_ |	Hard | 找规律, 不能一个一个算, 要跳缩减区间 |
 | [464. Can I Win](https://leetcode.com/problems/can-i-win/description//)	|	_O(n!)_	|	_O(n)_ |	Medium | 😚DFS+Memoization **难点: Memoization记录的不能是还剩多少到target, 记录是现在可选择的set能不能赢** |
 | [515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description//)	|	_O(n)_	|	_O(h)_ |	Medium | ❌ DFS / BFS |
-| [547. Friend Circles](https://leetcode.com/problems/friend-circles/description/)	|	_O(n^2)_	|	_O(n)_ |	Medium | Union Find with Rank Heuristic / DFS |
 | [638. Shopping Offers](https://leetcode.com/problems/shopping-offers/description/)	|	_O(n \* 2^n)_	|	_O(n)_ |	Medium | 🎅✏️ [设计一个好的DFS structure](https://github.com/beckswu/Leetcode/blob/master/DFS/638.%20Shopping%20Offers.cpp#L42]  |
 | [690. Employee Importance](https://leetcode.com/problems/employee-importance/description/)	|	_O(n)_	|	_O(h)_ |	Easy | 需要用unordered_map, 因为vector index 不等同于 id |
 | [694. Number of Distinct Islands](https://leetcode.com/problems/number-of-distinct-islands/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | |
-| [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | ✏️[Python Complex number 表示四个DFS 方向](https://github.com/beckswu/Leetcode/blob/master/DFS/695.%20Max%20Area%20of%20Island.py#L1) |
 | [733. Flood Fill](https://leetcode.com/problems/flood-fill/description/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Easy | ❌  |
 | [749. Contain Virus](https://leetcode.com/problems/contain-virus/)	|	_O((m \* n)^(4/3))_		|	_O(m \* n)_ |	Hard | 😚 DFS/BFS, every step try each possibility see where is max **new Infection area**, then build wall and update grid  |
 | [753. Cracking the Safe](https://leetcode.com/problems/cracking-the-safe/description/)	|	_O(k^n)_	|	_O(k^n)_ |	Hard | 🎅 Greedy + BrainStorming, **难点:如果设置起始数字，如何Loop 不会有deadlock** |
@@ -1363,12 +1360,16 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1087. Brace Expansion](https://leetcode.com/problems/brace-expansion/)	|	_O(n \* l \*log(n \*l))_	|	_O(n \* l)_ |	Medium |  |
 | [2352. Equal Row and Column Pairs](https://leetcode.com/problems/equal-row-and-column-pairs/)	|	_O(n^2)_	|	_O(n^2)_ |	Medium |  suffix Trie / Python Zip |
 
-## Graph
+## Graph (注directed vs undirected 区别)
 
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [1361. Validate Binary Tree Nodes](https://leetcode.com/problems/validate-binary-tree-nodes/)	|	_O(n)_	|	_O(n)_ | Medium | DFS |
-| [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ directed graph, count the max number of child from a node |
+| [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium | ⭐⭐简单DFS, Similar Question <ul><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li><li>  [529. Minesweeper](https://leetcode.com/problems/minesweeper/) </li><li>[2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	</li></ul> |
+| [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)	|	_O(n^2)_	|	_O(n)_ |	Medium | ⭐⭐⭐ Union Find with Rank Heuristic / DFS, **undirected graph** 设置global `visited`, b/c A不能到B 不代表 B 不能到A |
+| [695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium | ✏️[Python Complex number 表示四个DFS 方向](https://github.com/beckswu/Leetcode/blob/master/DFS/695.%20Max%20Area%20of%20Island.py#L1) |
+| [994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)	|	_O(m\*n)_	|	_O(m\*n)_ |	Medium |  |
+| [1361. Validate Binary Tree Nodes](https://leetcode.com/problems/validate-binary-tree-nodes/)	|	_O(n)_	|	_O(n)_ | Medium | i |
+| [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ **directed graph**, 每个dfs 前设置`visited`, b/c A不能到B 不代表 B 不能到A , count the max number of child from a node  Similar Question <ul><li>  [529. Minesweeper](https://leetcode.com/problems/minesweeper/) </li><li>[547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)	</li><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li></ul>  |
  
 </br>
 </br>
