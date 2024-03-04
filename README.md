@@ -658,7 +658,7 @@ TreeNode* helper(TreeNode** head ){
 | [1110. Delete Nodes And Return Forest](https://leetcode.com/problems/delete-nodes-and-return-forest/description/) | _O(n)_ | _O(n)_	| Medium |  |
 | [1028. Recover a Tree From Preorder Traversal](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Hard | 😚 stack / DFS, stack逻辑类似[889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) |
 | [1409. Queries on a Permutation With Key](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(nlogn)_ | _O(n)_	| Medium | BIT, Fenwick Tree, [🎅 How to Build FenwickTree](https://github.com/beckswu/Leetcode/blob/master/Tree/1409.%20Queries%20on%20a%20Permutation%20With%20Key.py#L18)  |
-| [2458. Height of Binary Tree After Subtree Removal Queries](https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries/) | _O(n)_ | _O(n)_	| Hard | ⭐ ⭐ ⭐  把左边高度带到右边，把右边高度带到左边, `lru_cache`, `@functools.cache`|
+| [2458. Height of Binary Tree After Subtree Removal Queries](https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐  把左边高度带到右边，把右边高度带到左边, `lru_cache`, `@functools.cache`|
 | [1825. Finding MK Average
 ](https://leetcode.com/problems/finding-mk-average/) | _O(nlogn)_ | _O(n)_	| Hard | BIT, Fenwick Tree |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
@@ -827,7 +827,8 @@ TreeNode* helper(TreeNode** head ){
 | [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/) | _O(n)_ | _O(n)_	| Easy |  |
 | [599. Minimum Index Sum of Two Lists](https://leetcode.com/problems/minimum-index-sum-of-two-lists/) | _O((m + n) \* l)_ | _O(m \* l)_	| Easy |  |
 | [609. Find Duplicate File in System](https://leetcode.com/problems/find-duplicate-file-in-system/) | _O(n \* k)_ | _O(n \* k)_	| Medium |  |
-| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy | 🔍[list `find_if`, `remove_if`](https://github.com/beckswu/Leetcode/blob/master/Hash%20Table/706.%20Design%20HashMap.cpp#L118)  |
+| [705. Design HashSet](https://leetcode.com/problems/design-hashset/description/) | _O(1)_ | _O(n)_	| Easy | ⭐⭐|
+| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy | ⭐⭐⭐ [list `find_if`, `remove_if`](https://github.com/beckswu/Leetcode/blob/master/Hash%20Table/706.%20Design%20HashMap.cpp#L118)  |
 | [721. Accounts Merge](https://leetcode.com/problems/accounts-merge/description/) | _O(nlogn)_ | _O(n)_	| Medium | 🔍 Union Find, 不能用简单的hash table 找parent, 比如 (1@com, 2@com), (3@com, 4@com), (4@com, 2@com), 不用Union find分成两组 | 
 | [748. Shortest Completing Word](https://leetcode.com/problems/shortest-completing-word/) | _O(n)_ | _O(1)_	| Medium |  |
 | [771. Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/) | _O(n+m)_ | _O(n)_	| Easy |  |

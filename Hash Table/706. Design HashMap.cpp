@@ -87,6 +87,70 @@ public:
 
 class MyHashMap {
 public:
+    vector<list<pair<int,int>>>hashMap;
+    int num_element = 0;
+    MyHashMap() {
+        hashMap.resize(16);
+    }
+    
+    void put(int key, int value) {
+        if((double) num_element/hashMap.size() > 0.5) grow();
+        auto &list = hashMap[key % hashMap.size()];
+        ++num_element;
+        for(auto &it: list){
+            if(it.first == key){
+                it.second = value;
+                return;
+            }
+        }
+        list.emplace_back(key, value);
+    }
+    
+    int get(int key) {
+        auto& list = hashMap[key % hashMap.size()];
+        for(auto& it: list){
+            if(it.first == key){
+                return it.second;
+            }
+        }
+        return -1;
+    }
+    
+    void remove(int key) {
+        auto& list = hashMap[key % hashMap.size()];
+        list.remove_if([&](const pair<int,int>& p){
+            if(p.first == key){
+                --num_element;
+                return true;
+            }
+            return false;
+        });
+    }
+
+    void grow(){
+        num_element = 0;
+        vector<list<pair<int,int>>> vec2(hashMap.size());
+        vec2.swap(hashMap);
+        hashMap.resize(hashMap.size() * 2);
+        for(auto& list: vec2){
+            for(auto & it: list){
+                put(it.first, it.second);
+            }
+        }
+
+    }
+};
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap* obj = new MyHashMap();
+ * obj->put(key,value);
+ * int param_2 = obj->get(key);
+ * obj->remove(key);
+ */
+
+class MyHashMap {
+public:
     vector<list<pair<int, int>>> v;
     int numElements;
     /** Initialize your data structure here. */
