@@ -8,17 +8,41 @@ public:
 
         int res = arr.size()+2;
         int start = 0, right = k + 1;
-        for(int i = 1; right < arr.size(); ++i){
+        for(int i = 1; right < arr.size(); ++i){ //i从1开始
             if(arr[i] > arr[start] && arr[i] > arr[right]){
                 continue;
             }
             if(i == right){
                 res = min(res, max(arr[start], arr[right]));
             }
-            start = i;
+            start = i; //start 必须是i ， 不能是i + 1 因为 k 可能等于 0, i+1 会错过点 比如[4,3,1,5,2], 会错过3的起始点
             right = start + k + 1;
         }
         return res > arr.size() ? -1: res;
+    }
+};
+
+class Solution {
+public:
+    int kEmptySlots(vector<int>& bulbs, int k) {
+        vector<int>arr(bulbs.size());
+        for(int i = 0; i<bulbs.size(); ++i){
+            arr[bulbs[i]-1] = i+1;
+        }
+        for(auto i: arr){
+            cout<<i<<" , ";
+        }
+        cout<<endl;
+        int res = arr.size() + 2;
+        for(int i = 1, start = 0; start + k + 1<arr.size() ; ++i){
+            if(k!=0 && (arr[i] < arr[start] || arr[i] < arr[start + k + 1])){
+                start = i; //如果k==0, 会一直更新i
+            } else if (i == start+k || k == 0) {
+                res = min(res, max(arr[start], arr[start+k+1]));
+                start = i;
+            }
+        }
+        return res == arr.size() + 2 ? -1: res;
     }
 };
 
@@ -154,7 +178,7 @@ public:
             int pos = bulbs[i], l = pos - (k + 1), r = pos + ( k + 1);
             
             update(bits, pos);
-            visited[pos] = 1;
+            visited[pos] = 1; //需要visited，比如[6，5], k = 2,  当pos = 5, r = 8, getSum(8) = 1 (因为6的时候update了)
           
             int count = getSum(bits, pos);
             

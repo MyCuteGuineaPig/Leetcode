@@ -616,7 +616,57 @@ TreeNode* helper(TreeNode** head ){
 
 ```
 
+**BIT tree (Binary Index Tree)**
 
+```c++
+
+/*
+
+array 3 2 -1 6 5 4 -3 3 7 2 3
+index 0 1  2 3 4 5  6 7 8 9 10
+
+BIT Tree Visulation (tree 的index = array index + 1)
+
+                0 (0)
+        /      |        |      \
+    /       /         \         \           
+3 (0,0)  5 (0,1)    10 (0,3)         19 (0,7)     -> 存的是它左侧所有属于同一个parent的leaf 和 
+    1         2         4                 8            比如 tree index = 6 存的是 array (4,5) 的点
+            |        |     \          |     \
+        -1 (2,2)  5(4,4)   9 (4, 5) 7 (8,8)  9 (8, 9)
+            3        5       6      9          10        
+                                |                 | 
+                            -3 (6,6)         3 (10,10)
+                                7               11
+            
+
+Get Parent (把最右侧的bit remove掉，比如 1010 -> 1000, 111->110)
+1) 2's complement (= negate 所有bit + 1)
+2) AND it with original number 
+3) subtract from original number
+
+Parent(7) 
+1) 7 (111) complement + 1 = 000 + 1 = 001 
+2) 111 & 001 = 001 
+3) 111 - 001 = 110 (6) 
+
+Get Next: 
+1) 2's complement  (= negate 所有bit + 1)
+2) AND it with original number 
+3) Add from original number
+
+Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 -> 0100, 0101 -> 0110, 0110 -> 1000
+1) 的 2's complement 0011 的negate 是1100  + 1 = 1101
+2) 1100 & 0011 = 1
+3） 0011 + 1 = 0100
+
+
+*/
+
+
+
+
+```
 
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -629,7 +679,7 @@ TreeNode* helper(TreeNode** head ){
 | [211. Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design/) | _O(min(n, h))_ | _O(min(n, h))_	| Medium | Trie + DFS |
 | [226.	Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | _O(n)_ | _O(h), O(w))_	| Easy | :alien:  不可以 ```left = invert(right); right = invert(left);```, 因为left 在invert right时候改变  |
 | [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | :pencil2:```ostringstream``` & ```istringstream ``` 用法, BFS－> pointer of pointer 存pointer 地址  |
-| [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | :pencil2: BIT & Segment Tree; BIT tree 需要arr作为参照物,每次根据val-arr\[i]的update, update过后arr\[i] = val |
+| [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | :pencil2: BIT & Segment Tree; BIT tree 需要arr作为参照物,每次根据val-arr\[i]的update, update过后arr\[i] = val <br/> Similar Question: <ul><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul> |
 | [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/) | _O(n)_ | _O(n)_	| Medium | 😍把所有的0变成-1， 所以当有sum\[i,j] = 0时 => \[i,j]中有同等的1 和 0， same as [325. Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/)  |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | 😍注意Python BFS  |
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能dfs，再比较height 会更快 |
@@ -657,10 +707,9 @@ TreeNode* helper(TreeNode** head ){
 | [1008. Construct Binary Search Tree from Preorder Traversal](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Medium | 🎅[Stack, Recursion, Morris Traversal](https://github.com/beckswu/Leetcode/blob/master/Tree/1008.%20Construct%20Binary%20Search%20Tree%20from%20Preorder%20Traversal.cpp#L1) |
 | [1110. Delete Nodes And Return Forest](https://leetcode.com/problems/delete-nodes-and-return-forest/description/) | _O(n)_ | _O(n)_	| Medium |  |
 | [1028. Recover a Tree From Preorder Traversal](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(n)_ | _O(h)_	| Hard | 😚 stack / DFS, stack逻辑类似[889. Construct Binary Tree from Preorder and Postorder Traversal	](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/) |
-| [1409. Queries on a Permutation With Key](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/) | _O(nlogn)_ | _O(n)_	| Medium | BIT, Fenwick Tree, [🎅 How to Build FenwickTree](https://github.com/beckswu/Leetcode/blob/master/Tree/1409.%20Queries%20on%20a%20Permutation%20With%20Key.py#L18)  |
+| [1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/) | _O(nlogn)_ | _O(n)_	| Medium | ⭐⭐⭐相当于问`queries[i]` 前面有几个数 思路 [ How to Build FenwickTree](https://github.com/beckswu/Leetcode/blob/master/Tree/1409.%20Queries%20on%20a%20Permutation%20With%20Key.py#L18) Double BIT tree size, move forward <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul>  |
 | [2458. Height of Binary Tree After Subtree Removal Queries](https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐  把左边高度带到右边，把右边高度带到左边, `lru_cache`, `@functools.cache`|
-| [1825. Finding MK Average
-](https://leetcode.com/problems/finding-mk-average/) | _O(nlogn)_ | _O(n)_	| Hard | BIT, Fenwick Tree |
+| [1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/) | _O(nlogn)_ | _O(n)_	| Hard | BIT, Fenwick Tree <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li></ul>  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -861,7 +910,7 @@ TreeNode* helper(TreeNode** head ){
 | [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/) | _O(n)_ | _O(1)_	|  Medium | ⭐⭐⭐sliding window: 跟[567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)思路一样 <ul><li>保持window的长度不变, 用l算p中还剩几个点没有被数过 </li><li>用right和left, 当right和left之间长度 == p的长度,append to result</li><li>用两个map 分别记录s 和p，如果s==p,append to result </li></ul> |
 | [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐sliding Window|
 | [643.	Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | _O(n)_ | _O(1)_	| Easy | 最简单的sliding window |
-| [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT </li></ul>|
+| [683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐ <ul><li>Sliding windows: 只能固定长度</li><li>MinQueue</li><li> BIT, 第`bulbs[i]`个灯泡和 第`bulbs[i]-k-1` 相差1，或第`bulbs[i]`个灯泡和 第`bulbs[i]+ k + 1`相差1  </li></ul> <br/>Similar Question<ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul>|
 | [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/) | _O(n)_ | _O(1)_	| Medium | 🔍 Sliding Window  |
 | [862. Shortest Subarray with Sum at Least K](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/) | _O(n)_ | _O(k)_	| Hard | |
 | [763.	Partition Labels](https://leetcode.com/problems/partition-labels/) | _O(n)_ | _O(n)_	| Medium | hashmap/sliding windows |
@@ -1072,7 +1121,9 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 
 
 Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array一个pointer</li><li>linked list找到middle point</li></ul>
+
 ## Two Pointer 
+
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [019. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) | _O(n)_ | _O(1)_	| Medium | 🔍two pointer, list总长l, 需要remove的index是l-n, slow要前进到l-n-1, 所以先前进n个，再前进到尾部就是l-n-1 |
@@ -1094,6 +1145,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [838. Push Dominoes](https://leetcode.com/problems/push-dominoes/) | _O(n)_ | _O(n)_	| Medium | 🎅🎅🎅 |
 | [844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | _O(m+n)_ | _O(1)_	| Easy | 两个pt，都从s,t 从后往前对比 |
 | [986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) | _O(m+n)_ | _O(1)_	| Medium |  |
+| [1750. Minimum Length of String After Deleting Similar Ends](https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/?envType=daily-question&envId=2024-03-05) | _O(n)_ | _O(1)_	| Easy |  |
 | [2337. Move Pieces to Obtain a String](https://leetcode.com/problems/move-pieces-to-obtain-a-string/) | _O(n)_ | _O(1)_	| Medium |  |
 | [2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/) | _O(n)_ | _O(1)_	| Medium |  |
 </br>
@@ -1113,7 +1165,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/) | _O(nlogn)_ | _O(logn)_	| Hard |😍😍 priority_queue or multiset(看critical point) |
 | [252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/description/) | _O(nlogn)_ | _O(1)_	| Easy |❌ |
 | [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | ❌counting Sort |
-| [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BIT |
+| [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BIT <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul>  |
 | [324. Wiggle Sort II](https://leetcode.com/problems/wiggle-sort-ii/) | _O(n) average_ | _O(1)_	| Medium | ❌(1 + 2\*index) \% (n \| 1)保证median左面数map奇数位，mediam右面的数map偶数位<ul><li>(1)elements smaller than the 'median' are put into the last even slots</li><li>(2) elements larger than the 'median' are put into the first odd slots</li><li>(3) the medians are put into the remaining slots.</li></ul> |
 | [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BIT |
 | [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | 😍 Bucket Sort, Quick Select, <ul><li> C++: n-th elements,  priority_queue (maxheap: priority_queue, minheap: multiset), </li><li> python: collections.Count, heapq, most_common(k) </li></ul> 与[451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) , [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) 类似 |

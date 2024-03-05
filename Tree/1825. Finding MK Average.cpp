@@ -62,10 +62,13 @@ public:
     
     int calculateMKAverage() {
         if(q.size() < m)return -1;
-        int lo = getIndex(k), hi =getIndex(m-k);
-        long long tot = value.getSum(hi) - value.getSum(lo);
-        tot += (index.getSum(lo) - k)*lo;
-        tot -= (index.getSum(hi) - (m-k))*hi;
+        int lo = getIndex(k), hi =getIndex(m-k); 
+        long long tot = value.getSum(hi) - value.getSum(lo); //没有算上lo的数
+        //比如[5,5,5,5,5], m=5, k =1, lo = 5, high = 5, tot = 0
+        tot += (index.getSum(lo) - k)*lo; 
+        //加上lo 少算的，没有算上重复的数, (5-1)*5 = 20, 因为lo 是至少拥有k的数的，可能含有边界值
+        tot -= (index.getSum(hi) - (m-k))*hi; //除去多算的 (5 - （5-1))*5 = 1*5 = 20
+        // 因为high 是至少拥有k的数的，可能算多了边界值
         return tot / (m - 2*k);
     }
     
