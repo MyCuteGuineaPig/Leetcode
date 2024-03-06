@@ -20,6 +20,51 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
 
 */
 
+class Solution {
+public:
+    void update(vector<long>& nums, int i){
+        while(i < nums.size()){
+            nums[i] += 1;
+            i += i & -i;
+        }
+    }
+    int getSum(vector<long>& nums,int i){
+        int tot = 0;
+        while(i){
+            tot += nums[i];
+            i -= i & -i;
+        }
+        return tot;
+    }
+
+    int countRangeSum(vector<int>& nums, int lower, int upper) {
+        int n = nums.size();
+        vector<long>vec(n+1); 
+        vector<long>sums(n+1);
+        vector<long>BIT(n+2);
+        long cur = 0;
+        for(int i = 0; i < n; ++i){
+            cur += nums[i];
+            vec[i+1] = cur;
+            sums[i+1] = cur;
+        }
+        sort(vec.begin(), vec.end());
+        int res = 0;
+        for(int i = 0; i <= n; ++i){
+            int lower_count = getSum(BIT, lower_bound(vec.begin(), vec.end(), sums[i]-upper) - vec.begin());
+            int upper_count = getSum(BIT, upper_bound(vec.begin(), vec.end(), sums[i]-lower) - vec.begin());
+            res += (upper_count - lower_count);
+            update(BIT, 1+lower_bound(vec.begin(), vec.end(), sums[i]) - vec.begin());
+            //如果不加1,  lower_bound(vec.begin(), vec.end(), sums[i])  = 0 时候就有问题了
+            //更新大于sum[i] index 的第一个点, upper_count 的时候就会算进去，因为比如upper_bound
+            //lower_count 算不算无所谓，因为 如果lower_count 算, upper_count 也算进去了
+           
+            //or  update(BIT, upper_bound(vec.begin(), vec.end(), sums[i]) - vec.begin());
+        }
+        return res;
+    }
+};
+
 
 /*
 Merge Sort的解:
