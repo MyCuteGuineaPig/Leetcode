@@ -722,6 +722,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [012. Integer to Roman](https://leetcode.com/problems/integer-to-roman/) | _O(n)_ | _O(1)_	| Medium |  |
 | [013. Roman to Integer](https://leetcode.com/problems/roman-to-integer/) | _O(n)_ | _O(1)_	| Easy |  |
 | [390. Elimination Game](https://leetcode.com/problems/elimination-game/) | _O(logn)_ | _O(1)_	| Meidum |  |
+| [782. Transform to Chessboard](https://leetcode.com/problems/transform-to-chessboard/description/) | _O(n^2)_ | _O(1)_	| Hard |  |
 | [829. Consecutive Numbers Sum](https://leetcode.com/problems/consecutive-numbers-sum/) | _O(sqrt(n))_ | _O(1)_	| Hard |  |
 | [964. Least Operators to Express Number](https://leetcode.com/problems/least-operators-to-express-number/) | _O(logn)_ | _O(logn)_	| Hard | 🎅🎅🎅  |
 | [1041. Robot Bounded In Circle](https://leetcode.com/problems/robot-bounded-in-circle/) | _O(n)_ | _O(1)_	| Medium |  |

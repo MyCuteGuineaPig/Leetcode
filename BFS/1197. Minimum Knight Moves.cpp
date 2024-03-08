@@ -58,3 +58,33 @@ public:
         return solve(x, y);
     }
 };
+
+
+class Solution {
+public:
+    int dfs(int x, int y, vector<vector<int>>&dp){
+        //cout<<" i "<<x<<" y "<<y<<endl;
+        if(x<0 || y<0){
+            return dfs(abs(x), abs(y), dp);
+        }
+        if (abs(x) + abs(y) == 2) { //必须需要他，
+        //比如(1,1) 最佳方式是 1,1 ->  -1, 2 (-2, + 1) 有加法的 -> 0, 0 (+1, -2)
+            return 2;
+        } 
+        if(x == 0 && y == 0){
+            return 0;
+        }
+        if (dp[x][y]) {
+            return dp[x][y];
+        }
+        dp[x][y] = 1 + min(dfs(x-2, y-1, dp), dfs(x-1, y-2, dp));
+        return dp[x][y];
+    }
+
+    int minKnightMoves(int x, int y) {
+        vector<vector<int>>dp(310, vector<int>(310));
+        return dfs(x, y, dp);
+    }
+};
+
+
