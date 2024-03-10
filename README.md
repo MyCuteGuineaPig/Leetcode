@@ -316,6 +316,7 @@ void init(const string& s, string& res){
 | [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/) | _O(n+m)_ | _O(1)_	| Medium | 🔍sorted matrix题目的关键是从第一行最后一个开始，如果当前数比想要的大, --col, 如果当前数比想要的小，++row|
 | [289. Game of Life](https://leetcode.com/problems/game-of-life/) | _O(m \* n)_ | _O(1)_	| Medium | 🔍跟[238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)有一点点类似，先变化matrix到想要的格式, 然后再做transform到结果: 把下一代活的| 2, 个位为1表示现在是活的，十位为1表示下代活的，res把每个cell>>=2 |
 | [334. Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/) | _O(n)_ | _O(1)_	| Medium | 🔍用两个数表示b, c, c表示当前最小, b表示当前第二小, 当i都大于这两个数，return true, 不用担心i只更新更新c, 因为答案必须要迈过b |
+| [370. Range Addition](https://leetcode.com/problems/range-addition/description//) | _O(n)_ | _O(n)_	| Medium | prefix array |
 | [384. Shuffle an Array	](https://leetcode.com/problems/shuffle-an-array/) | _O(n)_ | _O(n)_	| Medium | C++ srand(time(NULL)); rand(); uniform_int_distribution |
 | [396. Rotate Function](https://leetcode.com/problems/rotate-function/) | _O(n)_ | _O(1)_	| Medium | 🔍mathematical induction F(k) = F(k-1) + sum - nBk\[-k] |
 | [412. Fizz Buzz](https://leetcode.com/problems/fizz-buzz/) | _O(n)_ | _O(1)_	| Easy |  |
@@ -335,6 +336,7 @@ void init(const string& s, string& res){
 | [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/) | _O(n)_ | _O(n)_	| Easy |  |
 | [845. Longest Mountain in Array](https://leetcode.com/problems/longest-mountain-in-array/) | _O(n)_ | _O(1)_	| Medium | 🐸 |
 | [918. Maximum Sum Circular Subarray](https://leetcode.com/problems/maximum-sum-circular-subarray/) | _O(n)_ | _O(1)_	| Medium | 🎅🎅 [Kadane's algorithm](https://github.com/beckswu/Leetcode/blob/master/Array/918.%20Maximum%20Sum%20Circular%20Subarray.cpp#L37) |
+| [974. Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/description/) | _O(n)_ | _O(n)_	| Medium |  ⭐⭐C++ 余数可能是负数，python的余数不会是负数 |
 | [997. Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/) | _O(n+t)_ | _O(n)_	| Easy | 🎅 [In-degree, out-degree](https://github.com/beckswu/Leetcode/blob/master/Array/997.%20Find%20the%20Town%20Judge.cpp#L28)  |
 | [1375. Bulb Switcher III](https://leetcode.com/problems/bulb-switcher-iii/) | _O(n)_ | _O(1)_	| Medium |  |
 | [1380. Lucky Numbers in a Matrix](https://leetcode.com/problems/lucky-numbers-in-a-matrix/) | _O(m\*n)_ | _O(m+n)_	| Easy | [```zip(*m)```获得column in list, set intersection](https://github.com/beckswu/Leetcode/blob/master/Array/1380.%20Lucky%20Numbers%20in%20a%20Matrix.py#L35) |
@@ -885,6 +887,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [811. Subdomain Visit Count](https://leetcode.com/problems/subdomain-visit-count/) | _O(n)_ | _O(n)_	| Easy |  |
 | [822. Card Flipping Game](https://leetcode.com/problems/card-flipping-game/) | _O(n)_ | _O(n)_	| Medium | 先把front\[i]和end\[i] 一样的插入到hash set, 再loop front & end, 选取不在hash set中最小的 |
 | [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/) | _O(n+k^2)_ | _O(k)_	| Medium | 用hash map存age和count, loop两层hashmap, 判断内层和外层key是否满足条件, 满足的话更新结果 |
+| [1010. Pairs of Songs With Total Durations Divisible by 60](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/) | _O(n)_ | _O(1)_	| Medium |  |
 | [1347. Minimum Number of Steps to Make Two Strings Anagram](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/) | _O(n)_ | _O(n)_	| Medium |  |
 | [1418	Display Table of Food Orders in a Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/) | _O(n + tlogt + flogf)_ | _O(n)_	| Medium | ✏️[C++ transform]() |
 | [2347. Best Poker Hand](https://leetcode.com/problems/best-poker-hand/) | _O(1)_ | _O(1)_	| Easy | ❌ Python Switch Case |
@@ -907,6 +910,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [003. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | _O(n)_ | _O(n)_	| Medium | ⭐⭐Sliding Windows  |
 | [030. Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/) | _O((m+n)\*k)_ | _O(n\*k)_	| Hard | ⭐⭐⭐Sliding Windows |
 | [076. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | _O(n)_ | _O(k)_	| Hard | ⭐⭐⭐ |
+| [259. 3Sum Smaller](https://leetcode.com/problems/3sum-smaller/description/) | _O(n^2)_ | _O(1)_	| Medium | ⭐⭐ |
 | [424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐🔍sliding window: 记录window的初始点, 如果当前长度 - 最大count > k, ++start(保持windows的最大长度), 如果满足，start不变，结果是s.size()-start |
 | [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/) | _O(n)_ | _O(1)_	|  Medium | ⭐⭐⭐sliding window: 跟[567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)思路一样 <ul><li>保持window的长度不变, 用l算p中还剩几个点没有被数过 </li><li>用right和left, 当right和left之间长度 == p的长度,append to result</li><li>用两个map 分别记录s 和p，如果s==p,append to result </li></ul> |
 | [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐sliding Window|
@@ -1175,6 +1179,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) | _O(n)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements) O(nlogn), priority_queue O(nlogn)  |
 | [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) | _O(nlogk)_ | _O(n)_	| Medium | Bucket Sort, Quick Select(n-th elements), priority_queue  |
 | [853. Car Fleet](https://leetcode.com/problems/car-fleet/) | _O(nlogn)_ | _O(n)_	| Medium |  Greedy: sort postion又大到小，再sort到target的时间由小到大  |
+| [910. Smallest Range II](https://leetcode.com/problems/smallest-range-ii/description/) | _O(nlogn)_ | _O(1)_	| Medium |  ⭐⭐⭐  |
 | [1029. Two City Scheduling](https://leetcode.com/problems/two-city-scheduling/) | _O(n) average_ | _O(n)_	| Easy |  Greedy思想,quick select|
 | [1170. Compare Strings by Frequency of the Smallest Character](https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/) | _O(q+w)_ | _O(1)_	| Mediem | Count Sort |
 |C++priority_queue<pair<int,int>>pq 先对比first, top是first最大的，</br>constructor: greater\<int>是让top返回最小的数,大的数放后面 |  |	|  | python的heappop()先pop对比first,then second, top是first最小的  |
@@ -1494,7 +1499,7 @@ DFS 是看有没有path，DP是看有几个path
 | [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/)	|	_O(m*n)_	|	_O(m\*n)</br>~O(n)_|	Medium | Edit Distance <br/>类似的题: <ul><li>[072. Edit Distance](https://leetcode.com/problems/edit-distance/)</li><li>[583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)</li></ul>  |
 | [714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)	|	_O(n)_	|	_O(n)_|	Medium | <ul><li> [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)</li><li>[188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)	</li><li>[689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)</li></ul>   |
 | [730. Count Different Palindromic Subsequences](https://leetcode.com/problems/count-different-palindromic-subsequences/description/)	|	_O(n^2)_	|	_O(n)_ | Hard | Hard中Hard 🎅🎅🎅 |
-| [740. Delete and Earn](https://leetcode.com/problems/delete-and-earn/description/)	|	_O(n)_	|	_O(n)_|	Medium | 类似的题: <ul><li>[198. House Robber](https://leetcode.com/problems/house-robber/)</li><li>[213. House Robber II](https://leetcode.com/problems/house-robber-ii/)</li></ul> |
+| [740. Delete and Earn](https://leetcode.com/problems/delete-and-earn/description/)	|	_O(n)_	|	_O(n)_|	Medium | ⭐⭐⭐  类似的题: <ul><li>[198. House Robber](https://leetcode.com/problems/house-robber/)</li><li>[213. House Robber II](https://leetcode.com/problems/house-robber-ii/)</li></ul> |
 | [741. Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/)	|	_O(n^3)_	|	_O(n^2)_|	Hard | 🎅🎅🎅 |
 | [746. Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/)	|	_O(n)_	|	_O(1)_|	Easy | |
 | [764. Largest Plus Sign](https://leetcode.com/problems/largest-plus-sign/description/)	|	_O(n^2)_	|	_O(n^2)_|	Medium | Maximal Square, 从左到右，从上到下，从右到左，从下到上,更新最小的count 类似的题: <ul><li>[221. Maximal Square](https://leetcode.com/problems/maximal-square/)</li><li>[304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/)</li><li>[661 Image Smoother](https://leetcode.com/problems/image-smoother/)</li><li>[1277. Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones//)</li><li>[1314. Matrix Block Sum](https://leetcode.com/problems/matrix-block-sum/)</li></ul>  |
@@ -1534,6 +1539,7 @@ DFS 是看有没有path，DP是看有几个path
 | [1531. String Compression II](https://leetcode.com/problems/string-compression-ii/)	|	_O(n\^2\*k)_  |	_O(n\*k)_|	Hard | 🎅🎅  |
 | [1824. Minimum Sideway Jumps](https://leetcode.com/problems/minimum-sideway-jumps/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/)	|	_O(n)_  |	_O(1)_|	Medium |  |
+| [2533. Number of Good Binary Strings](https://leetcode.com/problems/number-of-good-binary-strings/description/)	|	_O(n)_  |	_O(n)_|	Medium |  |
 | [2370. Longest Ideal Subsequence](https://leetcode.com/problems/longest-ideal-subsequence/)	|	_O(kn)_  |	_O(1)_|	Medium | ⭐ TopDown |
 | [3003. Maximize the Number of Partitions After Operations](https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/description/)	|	_O(2^26n)_  |	_O(2^26n)_|	Hard | TopDown, Bottomup |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
@@ -1549,6 +1555,7 @@ DFS 是看有没有path，DP是看有几个path
 | [146. LRU Cache](https://leetcode.com/problems/lru-cache/) | _O(1)_ |	_O(k)_ |	Medium | <ul><li>✏️✏️[C++ List Splice](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.cpp#L1) </li><li>✏️✏️[Python OrderedDict](https://github.com/beckswu/Leetcode/blob/master/Design/146.%20LRU%20Cache.py) </li></ul> |
 | [359. Logger Rate Limiter](https://leetcode.com/problems/logger-rate-limiter/description/) | _O(1)_ |	_O(n)_ |	Easy | |
 | [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1) | _O(1)_ |	_O(1)_ |	Medium | 🎅🎅 |
+| [460. LFU Cache](https://leetcode.com/problems/lfu-cache/description/) | _O(1)_ |	_O(1)_ |	Hard | ⭐⭐⭐ remove element from list 不会invalidate iterator |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>
 push: _O(1)_ <br/>
 pop: _O(1)_ <br/>
