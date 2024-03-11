@@ -63,6 +63,36 @@ public:
 };
 
 
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int>stk; 
+        for(auto& str: tokens){
+            if(str == "*"){
+                int s2 = stk.top(); stk.pop(); 
+                int s1 = stk.top(); stk.pop();
+                stk.push(s2 * s1);
+            } else if(str == "-"){
+                int s2 = stk.top(); stk.pop(); 
+                int s1 = stk.top(); stk.pop();
+                stk.push(s1 - s2);
+            } else if(str == "+"){
+                int s2 = stk.top(); stk.pop(); 
+                int s1 = stk.top(); stk.pop();
+                stk.push(s2 + s1);
+            } else if(str == "/"){
+                int s2 = stk.top(); stk.pop(); 
+                int s1 = stk.top(); stk.pop();
+                stk.push(s1 / s2);
+            } else {
+                stk.push(stoi(str));
+            } 
+
+        }
+        return stk.top();
+    }
+};
+
 
 class Solution {
 public:

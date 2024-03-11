@@ -72,7 +72,8 @@ public:
     }
 
     void permutation(vector<int> &nums, int begin, vector<vector<int> > &ans) {
-        if (begin >= nums.size()) {
+        if (begin >= nums.size()) { 
+        //  if (begin >= nums.size() - 1) 也可以，如果 begin 是nums 最后index, swap 就是换自己
             ans.push_back(nums);
             return;
         }

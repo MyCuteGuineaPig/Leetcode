@@ -272,7 +272,7 @@ void init(const string& s, string& res){
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/Manacher/005.%20Longest%20Palindromic%20Substring.cpp#L70) |
 | [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>[马拉车(manacher)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/kmp/214.%20Shortest%20Palindrome.cpp#L151)</li></ul>  |
-| [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | ⭐ `sum(sum(dp, []))` sum 2d array <ul><li>manacher(马拉车算法) </li><li>DP</li></ul> |
+| [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | ⭐⭐⭐ `sum(sum(dp, []))` sum 2d array <ul><li>manacher(马拉车算法) </li><li>DP</li></ul> |
 
   ## Breadth-First Search
 |Title | Time  | Space | Difficulty |  Algorithm Note|
@@ -353,7 +353,6 @@ void init(const string& s, string& res){
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [011. Container With Most Water](https://leetcode.com/problems/container-with-most-water/) | _O(n)_ | _O(1)_	| Medium | |
-| [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | Greedy/Descending Stack |
 | [045. Jump Game II](https://leetcode.com/problems/jump-game-ii/) | _O(n)_ | _O(1)_	| Hard | ⭐⭐⭐ <ul><li>greedy</li><li>DP</li></ul> **Similar Question**: <ul><li>[1024. Video Stitching](https://leetcode.com/problems/video-stitching/description/)</li><li>[1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/)</li></ul>   |
 | [055. Jump Game](https://leetcode.com/problems/jump-game/) | _O(n)_ | _O(1)_	| Medium |  |
 | [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | _O(n)_ | _O(1)_	| Medium |  |
@@ -399,6 +398,7 @@ void init(const string& s, string& res){
 | [2366. Minimum Replacements to Sort the Array](https://leetcode.com/problems/minimum-replacements-to-sort-the-array/) | _O(n)_ |	_O(1)_	| Hard | ⭐ |
 | [2350. Shortest Impossible Sequence of Rolls](https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/) | _O(n)_ |	_O(K)_	| Hard |  ⭐ |
 | [2375. Construct Smallest Number From DI String](https://leetcode.com/problems/construct-smallest-number-from-di-string/) | _O(1)_ |	_O(1)_	| Medium |  |
+| [2918. Minimum Equal Sum of Two Arrays After Replacing Zeros](https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/) | _O(n)_ |	_O(1)_	| Medium |  |
 | [3002. Maximum Size of a Set After Removals](https://leetcode.com/problems/maximum-size-of-a-set-after-removals/) | _O(n)_ |	_O(n)_	| Medium | ⭐set difference  |
 | [3035. Maximum Palindromes After Operations](https://leetcode.com/problems/maximum-palindromes-after-operations/description/) | _O(nlogn)_ |	_O(n)_	| Medium | ⭐Count Pair  |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
@@ -1038,6 +1038,7 @@ DEBUG stdout
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [020. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | _O(n)_ | _O(n)_	| Easy | ❌注意return true if stack is empty |
 | [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard |  <ul><li> ⭐__DP__: dp\[i] 代表以current index结束的最大valid substring的长, 非经典dp </li><li>__Stack__</li></ul>  |
+| [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | Greedy/Descending Stack |
 | [071. Simplify Path](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Medium |  ✏️ **Split** `stringstream` + `getline` 可以处理连续的delimiter 比如delimiter是`/`, 可以parse`//c/d//` 为`c` 和`d`, `vectro<string>`的 **join** |
 | [084. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | _O(n)_ | _O(n)_	| Hard |  <ul><li>⭐__stack__: ascending stack</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
 | [085. Maximal Rectangle	](https://leetcode.com/problems/maximal-rectangle/) | _O(n\*m)_ | _O(m)_	| Hard |  ⭐  <ul><li>__stack__:与[084.](https://leetcode.com/problems/simplify-path/) 类似</li><li> __DP__ : height代表从上到下，有几个连续的1, left: 现在这个height，左侧边界位置, right:这个height,长方形的右侧边界（右侧边界不包括在长方形内，是长方形右外侧第一个点）  </li></ul>|
@@ -1360,6 +1361,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/)	|	_O(m \* n)_	|	_O(m \* n)_ |	Medium | 😍🎅 bit mask, **难点: 起点必须是四个边** |
 | [440. K-th Smallest in Lexicographical Order](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/description/)	|	_O(logn)_	|	_O(logn)_ |	Hard | 找规律, 不能一个一个算, 要跳缩减区间 |
 | [464. Can I Win](https://leetcode.com/problems/can-i-win/description//)	|	_O(n!)_	|	_O(n)_ |	Medium | 😚DFS+Memoization **难点: Memoization记录的不能是还剩多少到target, 记录是现在可选择的set能不能赢** |
+| [489. Robot Room Cleaner](https://leetcode.com/problems/robot-room-cleaner/description/)	|	_O(n\*m)_	|	_O(n\*m)_ |	Hard | ⭐⭐⭐  |
 | [515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description//)	|	_O(n)_	|	_O(h)_ |	Medium | ❌ DFS / BFS |
 | [638. Shopping Offers](https://leetcode.com/problems/shopping-offers/description/)	|	_O(n \* 2^n)_	|	_O(n)_ |	Medium | 🎅✏️ [设计一个好的DFS structure](https://github.com/beckswu/Leetcode/blob/master/DFS/638.%20Shopping%20Offers.cpp#L42]  |
 | [690. Employee Importance](https://leetcode.com/problems/employee-importance/description/)	|	_O(n)_	|	_O(h)_ |	Easy | 需要用unordered_map, 因为vector index 不等同于 id |
@@ -1397,9 +1399,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [037. Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)	|	_O((9!)^9)_	|	_O(1)_ |	Hard |  可以用bit mask |
 | [039. Combination Sum](https://leetcode.com/problems/combination-sum/)	|	_O(k \* n^k)_	|	_O(k)_ |	Medium | ✏️[Python Trick, Difference between yield and return](https://github.com/beckswu/Leetcode/blob/master/Backtracking/39.%20Combination%20Sum.py#L67) |
 | [040. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)	|	_O(n \* n!)_	|	_O(n)_ |	Medium | <ul><li>😍😍[C++ Logic](https://github.com/beckswu/Leetcode/blob/master/Backtracking/40.%20Combination%20Sum%20II.cpp#L39) 如果有重复的 只算第一个 </li><li>🔍[Python Yield Generator](https://github.com/beckswu/Leetcode/blob/master/Backtracking/40.%20Combination%20Sum%20II.py)</li></ul>  |
-| [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/description/)	|	_O(k \* C(n, k))_	|	_O(k)_ |	Medium | 🔍[Python itertools.combination](https://github.com/beckswu/Leetcode/blob/master/Backtracking/216.%20Combination%20Sum%20III.py#L65) |
-| [046. Permutations](https://leetcode.com/problems/permutations/)	|	_O(\n * n!)_	|	_O(n)_ |	Medium | <ul><li>😍😍[c++ recursive swap](https://github.com/beckswu/Leetcode/blob/master/Backtracking/46.%20Permutations.cpp#L66)</li>😍🔍🔍<li>[Python itertools.permutations, generator](https://github.com/beckswu/Leetcode/blob/master/Backtracking/46.%20Permutations.py)</li></ul> |
-| [047. Permutations II](https://leetcode.com/problems/permutations-ii/)	|	_O(\n * n!)_	|	_O(n)_ |	Medium |  <ul><li>🎅🎅 [理解check middle function逻辑](https://github.com/beckswu/Leetcode/blob/master/Backtracking/47.%20Permutations%20II.cpp#L35)</li> <li> [Python Generator/Yield](https://github.com/beckswu/Leetcode/blob/master/Backtracking/47.%20Permutations%20II.py)</li></ul>  |
+| [046. Permutations](https://leetcode.com/problems/permutations/)	|	_O(\n * n!)_	|	_O(n)_ |	Medium | <ul><li>⭐⭐⭐[c++ recursive swap](https://github.com/beckswu/Leetcode/blob/master/Backtracking/46.%20Permutations.cpp#L66)</li>😍🔍🔍<li>[Python itertools.permutations, generator](https://github.com/beckswu/Leetcode/blob/master/Backtracking/46.%20Permutations.py)</li></ul>  <br/> Similar Question <ul><li>[046. Permutations](https://leetcode.com/problems/permutations/</li><li> [47. Permutations II](https://leetcode.com/problems/permutations-ii/description/)</li><li>[78. Subsets](https://leetcode.com/problems/subsets/description/)</li><li>[90. Subsets II](https://leetcode.com/problems/subsets-ii/description/)</li><li>[39. Combination Sum](https://leetcode.com/problems/combination-sum/description/)</li><li>[40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/description/)</li><li>[131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/description/)</li></ul> |
+| [047. Permutations II](https://leetcode.com/problems/permutations-ii/)	|	_O(\n * n!)_	|	_O(n)_ |	Medium |  ⭐⭐⭐<ul><li> [理解check middle function逻辑](https://github.com/beckswu/Leetcode/blob/master/Backtracking/47.%20Permutations%20II.cpp#L35)</li> <li> [Python Generator/Yield](https://github.com/beckswu/Leetcode/blob/master/Backtracking/47.%20Permutations%20II.py)</li></ul>  |
 | [051. N-Queens	](https://leetcode.com/problems/n-queens/)	|	_O(n!)_	|	_O(n)_ |	Hard | 🔍[Python Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/51.%20N-Queens.py#L28) |
 | [052. N-Queens-II](https://leetcode.com/problems/n-queens-ii/)	|	_O(n!)_	|	_O(n)_ |	Hard | ❌ 与[051. N-Queens	](https://leetcode.com/problems/n-queens/)逻辑一样 |
 | [077. Combinations](https://leetcode.com/problems/combinations/)	|	_O(k \* C(n, k))_	|	_O(k)_ |	Medium | 😍 [Python Multiple Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/77.%20Combinations.py#L19) |
@@ -1411,6 +1412,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/description/)	|	_O(n^2) ~ O(2^n)_	|	_O(n^2)_ |	Medium | 😍[Python Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/131.%20Palindrome%20Partitioning.py)  |
 | [140. Word Break II](https://leetcode.com/problems/word-break-ii/)	|	_O(n \* l^2 + n \* r)_	|	_O(n^2)_ |	Hard | 🎅DFS with Memoization, 没有memoization TLE, ✏️[C++ Std:function](https://github.com/beckswu/Leetcode/blob/master/Backtracking/140.%20Word%20Break%20II.cpp#L103) |
 | [212. Word Search II](https://leetcode.com/problems/word-search-ii/)	|	_O(m * n * l)_	|	_O(l)_ |	Hard | Suffix Trie (backtracking 是把board 暂时改了, 省去了hashset visited), 难度medium左右, ✏️[Python Complex number 表示四个DFS 方向, Dictionary setdefault](https://github.com/beckswu/Leetcode/blob/master/Backtracking/212.%20Word%20Search%20II.py#L36) |
+| [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/description/)	|	_O(k \* C(n, k))_	|	_O(k)_ |	Medium | 🔍[Python itertools.combination](https://github.com/beckswu/Leetcode/blob/master/Backtracking/216.%20Combination%20Sum%20III.py#L65) |
 | [526. Beautiful Arrangement](https://leetcode.com/problems/beautiful-arrangement/description/)	|	_O(n!)_	|	_O(n)_ |	Medium | swap, 注意if 条件, 🔍[Python Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/526.%20Beautiful%20Arrangement.py#L6) |
 | [676. Implement Magic Dictionary](https://leetcode.com/problems/implement-magic-dictionary/description/)	|	_O(n)_	|	_O(d)_ |	Medium | <ul><li>😚[Suffix Trie](https://github.com/beckswu/Leetcode/blob/master/Backtracking/676.%20Implement%20Magic%20Dictionary.py)</li><li> instead search every chars from A-Z, search hello as *ello, h*llo</li></ul> |
 | [679. 24 Game](https://leetcode.com/problems/24-game/description/)	|	_O(1)_	|	_O(1)_ |	Hard | Complexity: upper bound of 12\* 6 \* 2 \* 4 \* 4 \* 4 = 9216 possibilities🔍🔍 [Python Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/679.%2024%20Game.py)| 
@@ -1422,7 +1424,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 ## Graph 
 
-**(注directed vs undirected 区别)**
+**(注directed vs undirected 区别)  undirected graph 设置global visited, directed graph 设置local visited**
 
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -1539,6 +1541,7 @@ DFS 是看有没有path，DP是看有几个path
 | [1531. String Compression II](https://leetcode.com/problems/string-compression-ii/)	|	_O(n\^2\*k)_  |	_O(n\*k)_|	Hard | 🎅🎅  |
 | [1824. Minimum Sideway Jumps](https://leetcode.com/problems/minimum-sideway-jumps/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/)	|	_O(n)_  |	_O(1)_|	Medium |  |
+| [2466. Count Ways To Build Good Strings](https://leetcode.com/problems/count-ways-to-build-good-strings/description/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2533. Number of Good Binary Strings](https://leetcode.com/problems/number-of-good-binary-strings/description/)	|	_O(n)_  |	_O(n)_|	Medium |  |
 | [2370. Longest Ideal Subsequence](https://leetcode.com/problems/longest-ideal-subsequence/)	|	_O(kn)_  |	_O(1)_|	Medium | ⭐ TopDown |
 | [3003. Maximize the Number of Partitions After Operations](https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/description/)	|	_O(2^26n)_  |	_O(2^26n)_|	Hard | TopDown, Bottomup |

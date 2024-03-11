@@ -83,7 +83,7 @@ public:
             // if misplaced is even
             // then the final pattern is "1010..."
             //
-            // if misplaced is odd,
+            // if misplaced is odd, (因为一次换两个，不能结果是奇数，只能是偶数)
             // then the final pattern is the inverse of "1010..."
             // i.e. "0101..."
             // and the actual count of misplaced elements is (n - misplace)

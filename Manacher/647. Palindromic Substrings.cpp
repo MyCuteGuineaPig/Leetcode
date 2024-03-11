@@ -173,10 +173,41 @@ public:
                 } else{
                     dp[j][i] =  s[i] == s[j] && dp[j+1][i-1];
                 }
-                res += dp[j][i];
+                res += dp[j][i] ? 1: 0;
             } 
         }
         return res;
+    }
+};
+
+
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n, vector<int>(n));
+        helper(s, 0, n-1, dp);
+        int res =  0;
+        for(auto d: dp)
+            for (auto c: d)
+                res += c;
+        return res;
+    }
+
+    int helper(const string& s, int i, int j, vector<vector<int>>&dp){
+        if (j < 0 || i > s.size() || j < i) {
+            return 0;
+        }
+        if (i == j) {
+            return dp[i][j] = 1;
+        }
+        else if (i + 1 == j && s[i] == s[j]){
+            return dp[i][j] == 1;
+        }
+        else if (dp[i][j]){
+            return dp[i][j];
+        }
+        return dp[i][j] = helper(s, i+1, j - 1, dp) || helper(s, i, j - 1, dp) || helper(s, i+1, j, dp);
     }
 };
 
