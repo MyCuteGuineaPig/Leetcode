@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "__split_buffer": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "iterator": "cpp"
     }
 }

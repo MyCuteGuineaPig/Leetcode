@@ -54,3 +54,25 @@ class Solution:
     def permuteUnique(self, nums):
         import functools
         return functools.reduce(lambda x, y: [p[:i]+[y]+p[i:] for p in x for i in range((p+[y]).index(y)+1) ], nums,[[]])
+
+
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = []
+        def backtrack(index):
+            if index >= len(nums) - 1:
+                res.append([i for i in nums])
+                return
+            i = index
+            st = set([])
+            while i < len(nums):
+                if (i==index or  nums[index] != nums[i]) and nums[i] not in st:
+                    st.add(nums[i])
+                    nums[index], nums[i] = nums[i], nums[index]
+                    backtrack(index+1)
+                    nums[index], nums[i] = nums[i], nums[index]
+                i+=1
+        backtrack(0)
+        return res 

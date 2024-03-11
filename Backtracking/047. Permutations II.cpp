@@ -12,6 +12,7 @@ For example,
   [2,1,1]
 ]
 
+主要逻辑是: 如果一个数被换到index 位置，那么与这个数相同的不能再被换
 
 */
 
@@ -21,6 +22,35 @@ public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         sort(nums.begin(),nums.end());
         vector<vector<int>>res;
+        backtracking(nums, res, 0);
+        return res;
+    }
+    
+private:
+    void backtracking(vector<int>& nums, vector<vector<int>>& res,int begin){
+        if(begin==nums.size()-1){
+            res.push_back(nums);
+            return;
+        }
+        unordered_set<int>st;
+        for(int i = begin; i<nums.size();i++){
+            if( st.count(nums[i])== 0 ){
+                st.insert(nums[i]);
+                swap(nums[i],nums[begin]);
+                backtracking(nums, res, begin+1);
+                swap(nums[i],nums[begin]);
+            }
+        }
+        
+    }
+};
+
+
+
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>>res; //不需要sort
         backtracking(nums, res, 0);
         return res;
     }
@@ -50,6 +80,10 @@ private:
        
        2 0 1 1 0 2   ->  index 0 和 index 3 换 -> 2 1 1 0 0 2 -> index 2 和 index 3 换 2 1 0 1 0 2 和上面重复了
     
+
+    比如 nums = [9, 0, 1, 0] 第二个0 会和第四个0 换
+
+
     */
     bool checkmiddle(vector<int>& nums, int i , int begin){
         for(int k = begin; k<i; k++)
@@ -68,14 +102,18 @@ public:
         }
         for (int k = i; k < j; k++) {
             if (i != k && num[i] == num[k]) continue;
-            cout<<" swap begin "<<i<<" i "<<k<<endl;
-            printnum(num);
+            //printnum(num);
             swap(num[i], num[k]);
-            cout<<"    after swap  "<<endl<<"    ";
-            printnum(num);
+            //printnum(num);
            
             recursion(num, i+1, j, res);
-            cout<<" back "<<i<<" i "<<k<<endl;
+            /*
+            如果换回去的话，无法保证已经proceed的数 不再proceed 比如 
+            9 0 1 0 => 0 9 1 0  (index 0 和 index 1 换)
+            如果再换回 9 0 1 0 
+            等 k = 3, index 0 和 index 3 换，又是9 0 1 0 
+            
+            */
         }
     }
     vector<vector<int> > permuteUnique(vector<int> &num) {
@@ -91,6 +129,54 @@ public:
             cout<<i<<"  ";
         }
         cout<<endl;
+    }
+};
+
+
+/*
+为什么不swap back
+for list nums = [1, 2, 2]
+() mean i, <> mean pos
+step 1
+i=0,pos=0,swap(i,pos)              |    i=1,pos=0,swap(i,pos)          |       i=2,pos=0,swap(i,pos)
+[(<1>), 2, 2]                      |    [<2>, (1), 2]                  |       [<2>, 1, (2)]
+step 2                             |                                   |
+i=1,pos=1     |  i=2,pos=1         |    i=1,pos=1     |  i=2,pos=1     |       nums[2]=nums[pos]
+[1, (<2>), 2] |  [1, <2>, (2)]     |    [2, <(1)>, 2] |  [2, <2>, (1)] |       no out put
+step 3        |                    |                  |                |
+i=2,pos=2     |                    |    i=2,pos=2     |  i=2,pos=2     |
+[1, 2, (<2>)] |  nums[2]=nums[pos] |    [2, 1, (<2>)] |  [2, 2, (<1>)] |
+     ouput    |  no output return  |    ouput         |  ouput         |
+*/
+
+
+
+//copy by reference
+class Solution {
+public:
+    void helper(vector<vector<int>>& res, vector<int>& nums, int pos) {
+        
+        if (pos == nums.size()) {
+            res.push_back(nums);
+        } else {
+            for (int i = pos; i < nums.size(); ++i) {
+                if (i > pos && nums[i] == nums[pos]) continue;
+                swap(nums[pos], nums[i]);
+                helper(res, nums, pos + 1);
+
+            }
+            // restore nums
+            for (int i = nums.size() - 1; i > pos; --i) {
+                swap(nums[pos], nums[i]);
+            }
+        }
+    }
+
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+        helper(res, nums, 0);
+        return res;
     }
 };
 

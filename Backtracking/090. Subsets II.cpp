@@ -53,21 +53,19 @@ iterative
 
 class Solution {
 public:
-    vector<vector<int>> subsetsWithDup(vector<int>& S) {
-        sort(S.begin(), S.end());
-        vector<vector<int>> ret = {{}};
-        int size = 0, startIndex = 0;
-        for (int i = 0; i < S.size(); i++) {
-            startIndex = i >= 1 && S[i] == S[i - 1] ? size : 0; //要是与之前重复的话，插入与之前一样的起始位置开始插入
-            size = ret.size();
-            //cout<<" i "<<i<<" startIndex "<<startIndex<<"  size "<<size<<endl;
-            for (int j = startIndex; j < size; j++) {
-                vector<int> temp = ret[j];
-                temp.push_back(S[i]);
-                ret.push_back(temp);
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>>res(1, vector<int>());
+        int size = 0;
+        for(int i = 0; i<nums.size(); ++i){
+            int start = i > 0 && nums[i] == nums[i-1] ? size: 0; // //要是与之前重复的话，插入与之前一样的起始位置开始插入
+            size = res.size();
+            for(int j = start; j<size; ++j){
+                res.push_back(res[j]);
+                res.back().push_back(nums[i]);
             }
         }
-        return ret;
+        return res;
     }
 };
 
