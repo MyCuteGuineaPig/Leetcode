@@ -68,10 +68,10 @@ public:
 //write by own
 class Solution {
 public:
-    vector<double> calcEquation(vector<pair<string, string>> equations, vector<double>& values, vector<pair<string, string>> queries) {
+    vector<double> calcEquation(vector<vector<string>> equations, vector<double>& values, vector<vector<string>> queries) {
         unordered_map<string, unordered_map<string, double>>mp;
         for(int i = 0; i<equations.size(); i++){
-            string a = equations[i].first, b = equations[i].second;
+            string a = equations[i][0], b = equations[i][1];
             double val = values[i];
             mp[a][b] = val;
             mp[b][a] = 1/val;
@@ -79,23 +79,67 @@ public:
         vector<double>res;
         for(auto i: queries){
             unordered_set<string>visited;
-            res.push_back(helper(mp,i.first, i.second, visited)); // a / a 是通过 a/b * b/a 算得
+            res.push_back(helper(mp,i[0], i[1], visited)); // a / a 是通过 a/b * b/a 算得
         }
         return res;
     }
-    
-    double helper(unordered_map<string, unordered_map<string, double>>& mp, string in, string out, unordered_set<string>& visited){
+    //如果 "a" -> "a", 可以通过 "a" -> "b",  "b" -> "a"
+    double helper(unordered_map<string, unordered_map<string, double>>& mp, const string& in, const string& out, unordered_set<string>& visited){
         if(mp.find(in) == mp.end()) return -1;
+        //比如 in = "x", out = "x", 没有在mp 中出现
         if( mp[in].find(out) != mp[in].end()) 
             return mp[in][out];
+        visited.insert(in);
         for(auto i: mp[in]){
             if(visited.find(i.first)!=visited.end()) continue;
-            visited.insert(i.first);
             double res = helper(mp, i.first, out, visited);
             if(res!=-1)
                 return i.second *res;
         }
         return -1;
+    }
+};
+
+
+
+class Solution {
+public:
+    double dfs(unordered_map<string, unordered_map<string, double>>& dic, const string& cur, const string& dest, unordered_set<string>&visited){
+        if(cur == dest) {
+            return 1;
+        }
+        if (dic.count(cur) == 0){ //避免刚进来的cur 不在dic里
+            return -1;
+        }
+        visited.insert(cur);
+        for(auto& next: dic[cur]){
+            if (visited.count(next.first)) continue;
+            double tmp = dfs(dic, next.first, dest, visited);
+            if (tmp != -1.0){
+                return tmp * next.second;
+            }
+        }
+        return -1;
+    }
+
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        unordered_map<string, unordered_map<string, double>> dic;
+        for(int i = 0; i <equations.size(); ++i){
+            dic[equations[i][0]][equations[i][1]] = values[i];
+            if (values[i]!= 0) dic[equations[i][1]][equations[i][0]] = 1/values[i];
+        }
+        vector<double>res;
+        for(int i = 0; i<queries.size(); ++i){
+            unordered_set<string>visited;
+            if(queries[i][0] == queries[i][1]){
+                if(dic.count(queries[i][0])) { //比如 start = "a", end = "a", 有从"a"->"b"
+                    res.push_back(1);
+                } else 
+                    res.push_back(-1);
+            } else
+                res.push_back(dfs(dic, queries[i][0], queries[i][1],visited));
+        }
+        return res;
     }
 };
 

@@ -151,3 +151,44 @@ public:
         lru.pop_back();
     }
 };
+
+
+class LRUCache {
+private:
+    int capacity = 0;
+    unordered_map<int, pair<int,list<int>::iterator>> mp;
+    list<int>li;
+    
+
+public:
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+    }
+    
+    int get(int key) {
+        if (mp.count(key) == 0){
+            return -1;
+        }
+        li.erase(mp[key].second);
+        li.emplace_front(key);
+        mp[key].second = li.begin();
+        return mp[key].first;
+    }
+    
+    void put(int key, int value) {
+        if (mp.count(key)){
+            get(key);
+            mp[key].first = value;
+            return;
+        }
+        if (li.size() == capacity){
+            int val = li.back();
+            
+            li.erase(prev(li.end()));
+            mp.erase(val);
+        }
+        li.emplace_front(key);
+        mp[key] = {value, li.begin()};
+    }
+
+};

@@ -49,7 +49,7 @@ rotate the input matrix in-place such that it becomes:
 
 /*
 
-转圈改，
+转圈改， 旋转90度 i,j =>  n-1-j, i
 
 
 （i,j) <- (n-1-j, i)  左半块

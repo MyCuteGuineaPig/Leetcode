@@ -17,6 +17,7 @@ class LRUCache:
             del self.cache[key]
         elif len(self.cache) == self.capacity:
             self.cache.popitem(last = False)
+            # The pairs are returned in LIFO order if last is true or FIFO order if false.
         self.cache[key] = value
 
 

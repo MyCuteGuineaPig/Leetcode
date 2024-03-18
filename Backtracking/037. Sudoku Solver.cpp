@@ -41,7 +41,7 @@ public:
             else return false;
         }
         for(int x = 0; x<9; x++){
-            if(!mp[9*i + x] && !mp[9*9 + j*9 + x] && !mp[9*9*2 + (i/3*3+j/3)*9 + x ]){
+            if(!mp[9*i + x] && !mp[9*9 + j*9 + x] && !mp[9*9*2b   + (i/3*3+j/3)*9 + x ]){
                 mp[9*i+x] = 1;
                 mp[9*9 + 9*j + x] = 1;
                 mp[9*9*2 + (i/3*3+j/3)*9 + x ] = 1;

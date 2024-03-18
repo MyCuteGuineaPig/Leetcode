@@ -87,3 +87,44 @@ public:
         }
     }
 };
+
+
+
+
+
+class Solution {
+public:
+    void backtrack(vector<vector<string>>& res, vector<string>& cur, int row, int n, vector<int>&vertical, vector<int>&diag1, vector<int>&diag2){
+        if (row == n){
+            res.push_back(cur);
+            return;
+        }
+        string tmp(n, '.');
+        cur.push_back(tmp);
+        for(int i = 0; i < n; ++i){
+            if(vertical[i] || diag1[i-row + n-1] ||   diag2[row + i]) continue;
+            vertical[i] = 1;
+            diag1[i-row + n-1] = 1;
+            diag2[row + i] = 1;
+            cur.back()[i] = 'Q';
+            backtrack(res, cur, row+1, n, vertical, diag1, diag2);
+            cur.back()[i] = '.';
+            vertical[i] = 0;
+            diag1[i-row + n-1] = 0;
+            diag2[row + i] = 0;
+        }
+        cur.pop_back();
+    }
+
+    vector<vector<string>> solveNQueens(int n) {
+        vector<int>vertical(n);
+        vector<int>diag1(2*n-1);
+        vector<int>diag2(2*n-1);
+        vector<vector<string>> res;
+        vector<string> cur;
+
+        backtrack(res, cur, 0,  n, vertical, diag1, diag2);
+
+        return res;
+    }
+};
