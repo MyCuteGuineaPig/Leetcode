@@ -13,6 +13,79 @@ pq 最后两个char不可能相同， 不用担心出现 pq中只有(2,'a')的�
 
 */
 
+
+
+//O(N)
+class Solution {
+public:
+    string reorganizeString(string s) {
+        vector<int>mp(26);
+        int max_count = 0; 
+        char max_chr;
+        for(auto i: s)
+        {
+            if (++mp[i-'a'] > max_count){
+                max_count = mp[i-'a'];
+                max_chr = i;
+            }
+        }
+        if (max_count > (s.size()+1)/2){return "";}
+        int index = 0;
+        while(mp[max_chr-'a']--){ //先把最大cnt的char 排完了 再排别的
+            s[index] = max_chr; 
+            index+=2;
+        }
+        for(int i = 0; i<26;++i){
+            
+            while(mp[i]>0){
+                --mp[i];
+                if(index >= s.size()){
+                    index = 1;
+                }
+                s[index] = i + 'a';
+                index += 2;
+            }
+        }
+        return s;
+    }
+};
+
+class Solution { /
+public:
+    string reorganizeString(string str) {
+        
+        int strSize = str.size();
+        if(strSize < 2)
+            return str;
+        
+        vector<int> freq(26, 0);
+        int freqChar = -1, freqCharCount = -1;
+        
+        for(int i = 0; i < strSize; i++) {
+            freq[str[i]-'a']++;
+            if(freq[str[i]-'a'] > freqCharCount) {
+                freqCharCount = freq[str[i]-'a'];
+                freqChar = str[i]-'a';
+            }
+        }
+        
+        if(freqCharCount > (strSize+1)/2)
+            return "";
+        
+        
+        int position = 0;
+        
+        for(int i = -1; i < 26; i++) {
+            int current = (i == -1) ? freqChar : i;
+            while(freq[current]-- > 0) {
+                str[position] = 'a' + current;
+                position = (position+2 >= strSize) ? 1 : position+2;
+            }
+        }
+        return str;
+    }
+};
+
 class Solution {
 public:
     string reorganizeString(string S) {
@@ -190,42 +263,4 @@ public:
 
 	return S;
 	}
-};
-
-
-
-class Solution {
-public:
-    string reorganizeString(string str) {
-        
-        int strSize = str.size();
-        if(strSize < 2)
-            return str;
-        
-        vector<int> freq(26, 0);
-        int freqChar = -1, freqCharCount = -1;
-        
-        for(int i = 0; i < strSize; i++) {
-            freq[str[i]-'a']++;
-            if(freq[str[i]-'a'] > freqCharCount) {
-                freqCharCount = freq[str[i]-'a'];
-                freqChar = str[i]-'a';
-            }
-        }
-        
-        if(freqCharCount > (strSize+1)/2)
-            return "";
-        
-        
-        int position = 0;
-        
-        for(int i = -1; i < 26; i++) {
-            int current = (i == -1) ? freqChar : i;
-            while(freq[current]-- > 0) {
-                str[position] = 'a' + current;
-                position = (position+2 >= strSize) ? 1 : position+2;
-            }
-        }
-        return str;
-    }
 };

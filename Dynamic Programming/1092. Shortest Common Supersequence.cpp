@@ -35,6 +35,31 @@ public:
 
 class Solution {
 public:
+    string shortestCommonSupersequence(string str1, string str2) {
+        int n = str1.size(), m = str2.size();
+        vector<vector<int>>dp (n + 1, vector<int>(m+1));
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m; ++j){
+                dp[i+1][j+1] = str1[i] == str2[j] ? dp[i][j] +1: max(dp[i+1][j], dp[i][j+1]);
+            }
+        }
+        string res = "";
+        while(n && m ){
+            if (dp[n][m] == dp[n-1][m]){
+                res += str1[--n];
+            } else if (dp[n][m] == dp[n][m-1]){
+                res += str2[--m];
+            } else {
+                res += str1[--n]; --m; //shared
+            }
+        }
+        return str1.substr(0, n) + str2.substr(0, m) + string(rbegin(res), rend(res));
+    }
+};
+
+
+class Solution {
+public:
     string shortestCommonSupersequence(string a, string b) {
         int dp[1001][1001] = {}, m = a.size(), n = b.size();
         for (int i = 0; i < m; ++i) // DP
