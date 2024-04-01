@@ -1,25 +1,25 @@
 class Solution {
 public:
-    vector<vector<string>> suggestedProducts(vector<string>& A, string searchWord) {
-        auto it = A.begin();
-        sort(it, A.end());
-        vector<vector<string>> res;
+    vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
+        sort(products.begin(), products.end());
+        vector<vector<string>>res;
         string cur = "";
-        for (char c : searchWord) {
+        for(char c: searchWord){
             cur += c;
-            vector<string> suggested;
-            it = lower_bound(it, A.end(), cur);
-            for (int i = 0; i < 3 && it + i != A.end(); i++) {
-                string& s = *(it + i);
-                if (s.find(cur)) break;
-                suggested.push_back(s);
+            vector<string>suggested;
+            auto it = lower_bound(products.begin(), products.end(), cur);
+            for(int i = 0; i < 3 && it != products.end(); ++i, ++it){
+                string str = *it;
+                if (str.find(cur) != 0 ){
+                    break;
+                }
+                suggested.push_back(*it);
             }
             res.push_back(suggested);
         }
         return res;
     }
 };
-
 
 
 // Custom class Trie with function to get 3 words starting with given prefix
