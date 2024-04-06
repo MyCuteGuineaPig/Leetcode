@@ -336,6 +336,7 @@ void init(const string& s, string& res){
 | [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/) | _O(n)_ | _O(n)_	| Easy |  |
 | [845. Longest Mountain in Array](https://leetcode.com/problems/longest-mountain-in-array/) | _O(n)_ | _O(1)_	| Medium | 🐸 |
 | [918. Maximum Sum Circular Subarray](https://leetcode.com/problems/maximum-sum-circular-subarray/) | _O(n)_ | _O(1)_	| Medium | 🎅🎅 [Kadane's algorithm](https://github.com/beckswu/Leetcode/blob/master/Array/918.%20Maximum%20Sum%20Circular%20Subarray.cpp#L37) |
+| [957. Prison Cells After N Days](https://leetcode.com/problems/prison-cells-after-n-days/description/) | _O(k\*(N, 2^k))_ | _O(k)_	| Medium | |
 | [974. Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/description/) | _O(n)_ | _O(n)_	| Medium |  ⭐⭐C++ 余数可能是负数，python的余数不会是负数 |
 | [997. Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/) | _O(n+t)_ | _O(n)_	| Easy | 🎅 [In-degree, out-degree](https://github.com/beckswu/Leetcode/blob/master/Array/997.%20Find%20the%20Town%20Judge.cpp#L28)  |
 | [1375. Bulb Switcher III](https://leetcode.com/problems/bulb-switcher-iii/) | _O(n)_ | _O(1)_	| Medium |  |
