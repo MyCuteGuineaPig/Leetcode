@@ -14,6 +14,8 @@ public:
                 res.push_back(0);
             } else {
                 res.push_back((candles[r]-candles[l])-1 - (r-l-1));
+                //(candles[r]-candles[l])-1 表示candles[r], candles[l]之间(不算两头)有几个candles
+                // r-l-1 表示中间有几个plates(不算l, r )
             }
         }
         return res;
