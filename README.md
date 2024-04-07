@@ -1163,6 +1163,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1750. Minimum Length of String After Deleting Similar Ends](https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/?envType=daily-question&envId=2024-03-05) | _O(n)_ | _O(1)_	| Easy |  |
 | [2337. Move Pieces to Obtain a String](https://leetcode.com/problems/move-pieces-to-obtain-a-string/) | _O(n)_ | _O(1)_	| Medium |  |
 | [2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/) | _O(n)_ | _O(1)_	| Medium |  |
+| [2825. Make String a Subsequence Using Cyclic Increments](https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/) | _O(n)_ | _O(1)_	| Medium |  |
 </br>
 
 ## Sort
@@ -1199,6 +1200,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/) | _O(hlogh + vlogv)_ | _O(1)_	| Medium |  |
 | [1840. Maximum Building Height](https://leetcode.com/problems/maximum-building-height/) | _O(nlogn)_ | _O(1)_	| Hard |  |
 | [1851. Minimum Interval to Include Each Query](https://leetcode.com/problems/minimum-interval-to-include-each-query/) | _O(nlogn + qlogq)_ | _O(n)_	| Hard |  |
+| [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/) | _O(n)_ | _O(1)_	| Medium |  |
 
 
 </br>
