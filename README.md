@@ -729,6 +729,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [829. Consecutive Numbers Sum](https://leetcode.com/problems/consecutive-numbers-sum/) | _O(sqrt(n))_ | _O(1)_	| Hard |  |
 | [964. Least Operators to Express Number](https://leetcode.com/problems/least-operators-to-express-number/) | _O(logn)_ | _O(logn)_	| Hard | 🎅🎅🎅  |
 | [1041. Robot Bounded In Circle](https://leetcode.com/problems/robot-bounded-in-circle/) | _O(n)_ | _O(1)_	| Medium |  |
+| [1359. Count All Valid Pickup and Delivery Options](https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/) | _O(n)_ | _O(1)_	| Hard |  |
 | [1360. Number of Days Between Two Dates](https://leetcode.com/problems/number-of-days-between-two-dates/) | _O(1)_ | _O(1)_	| Easy |  |
 | [1362. Closest Divisors](https://leetcode.com/problems/closest-divisors/) | _O(sqrt(n))_ | _O(1)_	| Medium |  |
 | [1363. Largest Multiple of Three](https://leetcode.com/problems/largest-multiple-of-three/) | _O(n)_ | _O(1)_	| Hard |  |
