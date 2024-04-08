@@ -896,6 +896,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [1152. Analyze User Website Visit Pattern](https://leetcode.com/problems/analyze-user-website-visit-pattern/description/) | _O(n^4)_ | _O(n)_	| Medium |  |
 | [1347. Minimum Number of Steps to Make Two Strings Anagram](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/) | _O(n)_ | _O(n)_	| Medium |  |
 | [1418	Display Table of Food Orders in a Restaurant](https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/) | _O(n + tlogt + flogf)_ | _O(n)_	| Medium | ✏️[C++ transform]() |
+| [2183. Count Array Pairs Divisible by K](https://leetcode.com/problems/count-array-pairs-divisible-by-k/description/) | _O(n^2)_ | _O(n)_	| Hard |  |
 | [2347. Best Poker Hand](https://leetcode.com/problems/best-poker-hand/) | _O(1)_ | _O(1)_	| Easy | ❌ Python Switch Case |
 | [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/) | _O(n)_ | _O(n)_	| Easy |  |
 | [[2365. Task Scheduler II](https://leetcode.com/problems/merge-similar-items/) | _O(n)_ | _O(n)_	| Easy | ⭐ Python Counter 相加  |
@@ -1535,7 +1536,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [818. Race Car](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(nlogn)_	|	_O(n)_|	Hard | 🎅🎅🎅 |
 | [823. Binary Trees With Factors](https://leetcode.com/problems/binary-trees-with-factors/)	|	_O(n^2)_	|	_O(n)_|	Medium | 类似题： <ul><li>[368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)</li></ul>  |
 | [837. New 21 Game](https://leetcode.com/problems/new-21-game/)	|	_O(n)_	|	_O(n)_|	Medium | 🎅🎅🎅  |
-| [847. Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | _O(n\*2^n)_ |	_O(n\*2^n)_	| Hard | BFS/DP🎅 |
+| [847. Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | _O(n\*2^n)_ |	_O(n\*2^n)_	| Hard | ⭐⭐⭐BFS/DP |
 | [877. Stone Game](https://leetcode.com/problems/stone-game/) | _O(n^2)_ |	_O(n)_	| Medium | Strategy |
 | [879. Profitable Schemes](https://leetcode.com/problems/profitable-schemes/) | _O(n\*g\*p)_ |	_O(g\*p)_	| Hard | 💜🎅 |
 | [903. Valid Permutations for DI Sequence](https://leetcode.com/problems/valid-permutations-for-di-sequence/) | _O(n^2)_ |	_O(n)_	| Hard | 💜🎅🎅 |
