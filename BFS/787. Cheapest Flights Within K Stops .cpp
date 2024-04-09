@@ -46,88 +46,92 @@ everytime check the nearest point
 pq. [0] step to this point, [1] distance from source, [2] point
 
 */
-//这是错的
 
 
 class Solution {
 public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
-        int m = flights.size();
-        vector<vector<pair<int,int>>>graph(n,vector<pair<int,int>>());
-        for(int i = 0; i<m; i++)
-            graph[flights[i][0]].push_back({flights[i][1],flights[i][2]});
-
-        unordered_map<int,int>dist;
-        for(int i = 0;i<n;i++)
-            dist[i] = INT_MAX;
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        unordered_map<int, unordered_map<int,int>> graph;
+        for(auto & flight: flights){
+            graph[flight[0]][flight[1]] = flight[2];
+        }
+        vector<int>dist(n, numeric_limits<int>::max());
         dist[src] = 0;
 
-        auto compare = [](vector<int>a, vector<int>b){ if (a[0]!=b[0]) return a[0]>b[0]; else return a[1] > b[1];};
-        priority_queue<vector<int>,vector<vector<int>>,decltype(compare)>pq(compare);
-        pq.push({0,0,src});
-        int stop = 0, res = INT_MAX;
-        while(pq.size() && stop<=K){
-            int cursize = pq.size();
-            stop++;
-            for(int i = 0; i<cursize; i++){
-                int curdist = pq.top()[1];
-                int curpoint = pq.top()[2];
-                pq.pop();
-                for(auto path: graph[curpoint]){
-                    if(dist[path.first]>curdist+path.second){
-                        if(dist[path.first]==INT_MAX){
-                            // 比如 A->B 500, B->C 300,   A-F 100 F-D:100 D-F 100       
-                        /*  
-                            第一次push 进B 500, F 100, 第二次push 进 C 300, D 100, 
-                            因为B 被push 过，所以最后C就是300+500 = 800，但其实C = 600
-                            test set : 
-                            5 
-                            [[0,1,500],[1,2,200],[0,3,100],[3,4,100],[4,1,100]]
-                            0 (src)
-                            2 (sink)
-                            6
-                            this code: 700, correct answer 500
-                        */
-                            pq.push({stop,curdist+path.second,path.first});
-                        }
-                            
-                        dist[path.first]=curdist+path.second;
-                        if(path.first == dst) {
-                            res = min(res,dist[path.first]);
-                        };
-                    }
+        for(int a = 0; a <= k; ++a){
+            vector<int>tmp = dist; //需要tmp 因为要只有dist 可能改变原来的
+            for(int i = 0; i < n; ++i){
+                if(dist[i] == numeric_limits<int>::max()) continue;
+                for(auto& nxt: graph[i]){
+                    tmp[nxt.first] = min(tmp[nxt.first], dist[i] + nxt.second);
                 }
             }
+            tmp.swap(dist);
         }
-        return res == INT_MAX ? -1: res;
+        return dist[dst] == numeric_limits<int>::max() ? -1: dist[dst];
     }
 };
 
 
-
 class Solution {
 public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
-        int m = flights.size();
-        vector<vector<pair<int,int>>>graph(n,vector<pair<int,int>>());
-        for(int i = 0; i<m; i++)
-            graph[flights[i][0]].push_back({flights[i][1],flights[i][2]});
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        vector<vector<pair<int, int>>> adj(n);
+        for (auto& e : flights) {
+            adj[e[0]].push_back({e[1], e[2]});
+        }
+        vector<int> dist(n, numeric_limits<int>::max());
+        queue<pair<int, int>> q;
+        q.push({src, 0});
+        int stops = 0;
 
-        auto compare = [](vector<int>a, vector<int>b){ return a[0] > b[0];};
-        priority_queue<vector<int>,vector<vector<int>>,decltype(compare)>pq(compare);
-        pq.push({0,src,0});
-        int stop = 0, res = INT_MAX;
-        while(pq.size()){
-            int price = pq.top()[0];
-            int city = pq.top()[1];
-            int stop = pq.top()[2];
-            if(city == dst) 
-                return price;
-            pq.pop();
-            if(stop<=K){
-                for(auto adj: graph[city]){
-                     pq.push({price+adj.second,adj.first,stop+1});
+        while (stops <= k && !q.empty()) {
+            int sz = q.size();
+            // Iterate on current level.
+            while (sz--) {
+                auto [node, distance] = q.front();
+                q.pop();
+                // Iterate over neighbors of popped node.
+                for (auto& [neighbour, price] : adj[node]) {
+                    if (price + distance >= dist[neighbour]) continue;
+                    dist[neighbour] = price + distance;
+                    q.push({neighbour, dist[neighbour]});
                 }
+            }
+            stops++;
+        }
+        return dist[dst] == numeric_limits<int>::max() ? -1 : dist[dst];
+    }
+};
+
+
+//TLE
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        vector<vector<pair<int, int>>> adj(n);
+        for (auto e : flights) {
+            adj[e[0]].push_back({e[1], e[2]});
+        }
+        vector<int> stops(n, numeric_limits<int>::max());
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+        // {dist_from_src_node, node, number_of_stops_from_src_node}
+        pq.push({0, src, 0});
+
+        while (!pq.empty()) {
+            auto temp = pq.top();
+            pq.pop();
+            int dist = temp[0];
+            int node = temp[1];
+            int steps = temp[2];
+            // We have already encountered a path with a lower cost and fewer stops,
+            // or the number of stops exceeds the limit.
+            if (steps > stops[node] || steps > k + 1) continue; 
+            //if visited first, cost is the minimium 
+            stops[node] = steps;
+            if (node == dst) return dist;
+            for (auto& [neighbor, price] : adj[node]) {
+                pq.push({dist + price, neighbor, steps + 1});
             }
         }
         return -1;
