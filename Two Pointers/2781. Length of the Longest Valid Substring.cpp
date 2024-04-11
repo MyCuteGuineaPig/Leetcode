@@ -13,6 +13,7 @@ public:
                 }
             }
             res = max(res, right - left + 1);
+            //每个inner loop 开始前保证 left + 1 到 right 没有substring
         }
         return res;
     }

@@ -1168,6 +1168,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1750. Minimum Length of String After Deleting Similar Ends](https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/?envType=daily-question&envId=2024-03-05) | _O(n)_ | _O(1)_	| Easy |  |
 | [2337. Move Pieces to Obtain a String](https://leetcode.com/problems/move-pieces-to-obtain-a-string/) | _O(n)_ | _O(1)_	| Medium |  |
 | [2348. Number of Zero-Filled Subarrays](https://leetcode.com/problems/number-of-zero-filled-subarrays/) | _O(n)_ | _O(1)_	| Medium |  |
+| [2781. Length of the Longest Valid Substring](https://leetcode.com/problems/length-of-the-longest-valid-substring/description/) | _O(n^2)_ | _O(k)_	| Hard |  |
 | [2825. Make String a Subsequence Using Cyclic Increments](https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/) | _O(n)_ | _O(1)_	| Medium |  |
 </br>
 

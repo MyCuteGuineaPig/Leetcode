@@ -24,7 +24,7 @@ public:
                 char c = words[i][j];
                 char p = words[i+1][j];
                 if(c != p){
-                    if(graph[c].count(p) == 0){
+                    if(graph[c].count(p) == 0){ //可能有多个 c -> p, 但是degree 只算一次
                         graph[c].insert(p);
                         degree[p]++;
                     }
