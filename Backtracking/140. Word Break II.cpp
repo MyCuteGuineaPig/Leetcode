@@ -113,3 +113,49 @@ public:
     
 
 };
+
+
+
+class Solution {
+public:
+    void build(vector<vector<int>>&dp, const string& s, vector<string>&res, vector<string>&cur, int index){
+        if(index == 0){
+            string tmp = "";
+            for(int i = cur.size()-1; i >= 0; --i){
+                tmp += cur[i]; 
+                if (i != 0) tmp += " ";
+            }
+            res.push_back(tmp);
+            return;
+        }
+        for(auto & prev: dp[index]){
+            string tmp = s.substr(prev, index-prev);
+            cur.push_back(tmp);
+            build(dp, s,res,  cur, prev);
+            cur.pop_back();
+        }
+    }
+
+
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string>seen(wordDict.begin(), wordDict.end());
+        int n = s.size();
+        vector<vector<int>>dp(n+1);
+        for(int i = 0; i < n; ++i){
+            if(i== 0 || !dp[i].empty()){
+                for(int r = i; r<n; ++r){
+                    string tmp = s.substr(i, r-i + 1);
+                    if (seen.count(tmp)){
+                        dp[r+1].push_back(i);
+                    }
+                }
+            }
+        }
+        if(dp[n].empty()) {
+            return {};
+        }
+        vector<string> res, cur;
+        build(dp, s, res, cur,n);
+        return res;
+    }
+};

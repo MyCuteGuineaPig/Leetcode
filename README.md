@@ -395,6 +395,7 @@ void init(const string& s, string& res){
 | [1386. Cinema Seat Allocation](https://leetcode.com/problems/cinema-seat-allocation/) | _O(n)_ |	_O(n)_	| Medium | ❌ |
 | [1419	Minimum Number of Frogs Croaking](https://leetcode.com/problems/minimum-number-of-frogs-croaking/) | _O(n)_ |	_O(1)_	| Medium | 需保证 counter 递增 ```c>r>o>a>k```  |
 | [1833. Maximum Ice Cream Bars](https://leetcode.com/problems/maximum-ice-cream-bars/) | _O(nlogn)_ |	_O(1)_	| Medium |  |
+| [1846. Maximum Element After Decreasing and Rearranging](https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/) | _O(n)_ |	_O(n)_	| Medium |  |
 | [1850. Minimum Adjacent Swaps to Reach the Kth Smallest Number](https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/) | _O(n^2)_ |	_O(n)_	| Medium |  |
 | [2366. Minimum Replacements to Sort the Array](https://leetcode.com/problems/minimum-replacements-to-sort-the-array/) | _O(n)_ |	_O(1)_	| Hard | ⭐ |
 | [2340. Minimum Adjacent Swaps to Make a Valid Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array/description/) | _O(n)_ |	_O(n)_	| Medium | ⭐⭐⭐ |
