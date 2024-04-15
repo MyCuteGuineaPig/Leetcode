@@ -6,6 +6,9 @@
         "iterator": "cpp",
         "algorithm": "cpp",
         "string": "cpp",
-        "__node_handle": "cpp"
+        "__node_handle": "cpp",
+        "functional": "cpp",
+        "unordered_map": "cpp",
+        "__hash_table": "cpp"
     }
 }
