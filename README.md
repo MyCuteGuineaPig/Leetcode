@@ -1449,6 +1449,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [133. Clone Graph](https://leetcode.com/problems/clone-graph/description/)	|	_O(N+M)_	 |	_O(N)_ |	Medium	|  |
+| [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	|   <br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul> |
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	| **undirected graph  connected component**, union find |
 | [332. Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/description/)	|	_O(t! / (n1! \* n2! \* ... nk!))_	 |	_O(t)_ |	Medium	|  😍⭐⭐⭐ <ul><li>Solution 1: DFS, ```Unordered_map<string, unordered_map<string,int>>```, 可能有几个一样的tickets</li> <li>Solution 2: 🔍 ```Unordered_map<string, multi_set<string>>``` [The reason we got stuck is because that we hit the exit, reverse 是解](https://github.com/beckswu/Leetcode/blob/master/DFS/332.%20Reconstruct%20Itinerary.cpp#L74)</li></ul> |
 | [529. Minesweeper](https://leetcode.com/problems/minesweeper/) | _O(m \* n)_ | _O(m + n)_	| Medium | ⭐⭐简单DFS, <br/> Similar Question <ul><li>  [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)</li><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li><li>[2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	</li></ul> |
@@ -1461,10 +1462,86 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ **directed graph**, 每个dfs 前设置`visited`, b/c A不能到B 不代表 B 不能到A , count the max number of child from a node  <br/> Similar Question <ul><li>  [529. Minesweeper](https://leetcode.com/problems/minesweeper/) </li><li>[547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)	</li><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li></ul>  |
 | [2050. Parallel Courses III](https://leetcode.com/problems/parallel-courses-iii/description/)	|	_O(n + e)_	|	_O(n + e)_ | Hard | ⭐⭐⭐  |
 | [2092. Find All People With Secret](https://leetcode.com/problems/find-all-people-with-secret/description/)	|	_O(M\*log M + N)_	|	_O(M + N)_ | Hard | ⭐⭐⭐ **undirected graph** Union Find |
-| [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	|	_O(E + n)_	|	_O(n)_ | Hard | ⭐⭐⭐ **undirected graph** 用indegree 来 detect cycle Similar Question <ul><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul>  |
+| [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	|	_O(E + n)_	|	_O(n)_ | Hard | ⭐⭐⭐ **undirected graph** 用indegree 来 detect cycle <br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul>  |
 | [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)	|	_O(M\*(V + ElogV))_	|	_O(n)_ | Hard | ⭐⭐⭐  Dijkstra's Algorithm, Floyd–Warshall algorithm <br/> Similar Question <ul><li>  [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/) </li><li> [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)</li></ul> |
 | [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/)	|	_O(n)_	|	_O(n)_ | Hard | ⭐⭐⭐ no cycle <br/> Similar Question <ul><li>  [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) </li><li> [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/) </li></ul> |
 | [3108. Minimum Cost Walk in Weighted Graph](https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ undirected graph union find |
+
+
+**undirected graph**
+
+```c++
+//undirected graph
+//detect cycle
+
+bool dfs(unordered_map<int, unordered_set<int>>&graph, vector<int>&visited, int cur, int parent){
+    //cout<<" in "<<cur<<endl;
+    visited[cur] = 1;
+    for(auto nxt: graph[cur]){
+        if(nxt == parent) continue;
+        if (visited[nxt]) return false;
+        if (!dfs(graph, visited, nxt, cur)){
+            return false;
+        }
+    }
+    return true;
+}
+
+//detect cycle node 
+int find_cycle(unordered_map<int,unordered_set<int>>&graph, int cur, int parent, vector<int>&visited, unordered_set<int>&cycle){
+    if(visited[cur]){
+        return cur;
+    }
+    visited[cur] = 1;
+    for(auto &nxt: graph[cur]){
+        if(nxt == parent) continue;
+        int cycle_node = find_cycle(graph, nxt, cur, visited, cycle);
+        if(cycle_node >= 0){
+            cout<<" find cycle node " << cur<<endl;
+            cycle.insert(cur);
+        }
+        if(cycle_node >= 0){ 
+            //比如 1-> 2 -> 3 -> 4 -> 1, 当4 ->1 返回1, 当 cur = 1 时候, cycle_node = 1是cycle 的起点
+            return cur == cycle_node? -1: cycle_node;
+        }
+    }
+    return -1;
+}
+
+
+//BFS find cycle node
+void find_cycle(int n, vector<vector<int>>& edges) {
+    unordered_map<int, unordered_set<int>>graph;
+    vector<int>degree(n,0);
+    for(auto & edge: edges){
+        graph[edge[0]].insert(edge[1]);
+        graph[edge[1]].insert(edge[0]);
+        ++degree[edge[0]]; 
+        ++degree[edge[1]];
+    }
+    queue<int>q;
+    for(int i = 0; i<n; ++i){
+        if(degree[i] == 1) {
+            q.push(i);
+        }
+    }
+    while(!q.empty()){
+        int top = q.front(); q.pop();
+        for(auto nxt: graph[top]){
+            if(--degree[nxt] == 1){
+                q.push(nxt);
+            }
+        }
+    }
+    vector<int>res(n, 2*n);
+    for(int i = 0; i < n; ++i){
+        if(degree[i]>1){
+            cout<<" find cycle node " << i<<endl;
+        }
+    }
+}
+
+```
  
 </br>
 </br>
