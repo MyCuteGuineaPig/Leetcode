@@ -1,3 +1,29 @@
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int>left_remaining;
+        stack<int>right_remaining;
+        for(int i = 0; i < s.size(); ++i){
+            if(s[i] == '(') left_remaining.push(i);
+            else if (s[i] == ')'){
+                if(!left_remaining.empty()) left_remaining.pop();
+                else right_remaining.push(i);
+            }
+        }
+        string res = "";
+        for(int i = s.size()-1; i>=0; --i){
+            if(!left_remaining.empty() && left_remaining.top() == i){
+                left_remaining.pop();
+            } else if(!right_remaining.empty() && right_remaining.top() == i){
+                right_remaining.pop();
+            } else {
+                res += s[i];
+            }
+        }
+        return string(res.rbegin(), res.rend());
+    }
+};
+
 //beat 95.49%
 class Solution {
 public:

@@ -67,6 +67,27 @@ public:
     }
 };
 
+
+//count sort 
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int min_num = *min_element(nums.begin(), nums.end());
+        int max_num = *max_element(nums.begin(), nums.end());
+        vector<int>cnt(max_num - min_num + 1);
+        for(int num: nums){
+            ++cnt[num - min_num];
+        }
+        for(int i = cnt.size()-1; i>=0; --i){
+            k -= cnt[i];
+            if(k <= 0){
+                return i + min_num;
+            }
+        }
+        return -1;
+    }
+};
+
 /*
 
 Quicksort
