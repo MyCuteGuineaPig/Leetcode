@@ -284,6 +284,7 @@ void init(const string& s, string& res){
 | [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees/description/) |	_O(n)_	| _O(n)_ |	Medium | |
 | [743. Network Delay Time](https://leetcode.com/problems/network-delay-time/) |	_O(E \*logV)_	| _O(E + V)_ |	Medium | Dijkstra's Algorithm |
 | [787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) |	_O(E \* logV)_	| _O(E + V)_ |	Medium | ⭐⭐⭐ Dijkstra's Algorithm |
+| [1091. Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/) |	_O(n^2)_	| _O(n^2)_ |	Medium  |   |
 | [1197. Minimum Knight Moves](https://leetcode.com/problems/minimum-knight-moves/) |	_O(n\*m)_	| _O(n\*m)_ |	Hard |   |
 
 
@@ -686,6 +687,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/) | _O(n)_ | _O(h)_	| Hard | :pencil2:```ostringstream``` & ```istringstream ``` 用法, BFS－> pointer of pointer 存pointer 地址  |
 | [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/) | _O(n), O(logn)_ | _O(n)_	| Medium | :pencil2: BIT & Segment Tree; BIT tree 需要arr作为参照物,每次根据val-arr\[i]的update, update过后arr\[i] = val <br/> Similar Question: <ul><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul> |
 | [314. Binary Tree Vertical Order Traversal](https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/) | _O(n)_ | _O(n)_	| Medium | minRemoveToMakeValid |
+| [426. Convert Binary Search Tree to Sorted Doubly Linked List](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/) | _O(n)_ | _O(n)_	| Medium |  |
 | [538. Convert BST to Greater Tree](https://leetcode.com/problems/convert-bst-to-greater-tree/) | _O(n)_ | _O(h)_	| Easy | 😍注意Python BFS  |
 | [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | _O(n)_ | _O(h)_	| Easy | 🔍先尽可能dfs，再比较height 会更快 |
 | [563. Binary Tree Tilt](https://leetcode.com/problems/binary-tree-tilt/) | _O(n)_ | _O(n)_	| Easy | ❌思路跟[543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) 一样|
@@ -762,6 +764,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [038. Count and Say](https://leetcode.com/problems/count-and-say/) | _O(n \* 2^n)_ | _O(n2^n)_	| Easy | C++ find_if + bind1st|
 | [043. Multiply Strings](https://leetcode.com/problems/multiply-strings/) | _O(m\*n)_ | _O(m+n)_	| Medium | C++ transform, 必须都从个位数(也就是string的最后一位开始算, 否则carry可能会超过10), back_inserter, 相当于按照原来从头到尾顺序push back|
 | [058. Length of Last Word](https://leetcode.com/problems/length-of-last-word/) | _O(n)_ | _O(1)_	| Easy | C++ find if or find if + bind1st or string find_last_not_of + find_last_of |
+| [065. Valid Number](https://leetcode.com/problems/valid-number/description/) | _O(n)_ | _O(1)_	| Hard |  |
 | [067. Add Binary	](https://leetcode.com/problems/add-binary/) | _O(n)_ | _O(1)_	| Easy | string 加法, 跟[415. Add Strings](https://leetcode.com/problems/add-strings/) 和[306. Addictive Number](https://leetcode.com/problems/additive-number/) 类似  |
 | [068. Text Justification](https://leetcode.com/problems/text-justification/) | _O(n)_ | _O(1)_	| Hard | 跟[725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/) 类似 |
 | [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/) | _O(n)_ | _O(1)_	| Easy | C++ 跳过非isalnum的 |
@@ -869,6 +872,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [205.	Isomorphic Strings ](https://leetcode.com/problems/isomorphic-strings/) | _O(n)_ | _O(1)_	| Easy | 可以记录相同位置字母出现的上一位，或者把s,t字母相互关联起来, python 可以用find+map or zip+set |
 | [217. Contains Duplicate ](https://leetcode.com/problems/contains-duplicate/) | _O(n)_ | _O(n)_	| Easy | easy one, 可以用sort + unique |
 | [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/) | _O(n)_ | _O(n)_	| Easy | easy one |
+| [249. Group Shifted Strings](https://leetcode.com/problems/group-shifted-strings/description/) | _O(n)_ | _O(n)_	| Medium |  |
 | [290. Word Pattern](https://leetcode.com/problems/word-pattern/) | _O(n)_ | _O(n)_	| Easy | 思路和[205.	Isomorphic Strings ](https://leetcode.com/problems/contains-duplicate/)一样|
 | [299. Bulls and Cows](https://leetcode.com/problems/bulls-and-cows/) | _O(n)_ | _O(1)_	| Easy | One pass: 如果guess\[i] 和 secret\[i]一样, bull++, 不一样，++m\[sec\[i]], --m\[guess\[i]] python 可以用两个collectons.Counter相减, 得到重合的set|
 | [325. Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/) | _O(n)_ | _O(1)_	| Medium | <br/> Similar Question: <ul><li>same as [325. Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/) </li><li>[525. Contiguous Array](https://leetcode.com/problems/contiguous-array/)</li><li>[560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/)</li></ul>  |
@@ -926,6 +930,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [076. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) | _O(n)_ | _O(k)_	| Hard | ⭐⭐⭐ |
 | [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/) | _O(n)_ | _O(1)_	| Medium | 🔍 <ul><li>sliding window: 到sum >= s, 移动左面, 不断减小window且sum>=s, 寻找最小 r-l+1 </li><li>binary search: l = 1, r= size, while l<=r,检查mid作为窗口size是否满足>=s  </li><li>binary search: 建一个新的vector, newsum\[i] 表示nums\[0:i]的sum, 从新的newsum的每个点作为起点找最小满足s的窗口</li></ul> |
 | [259. 3Sum Smaller](https://leetcode.com/problems/3sum-smaller/description/) | _O(n^2)_ | _O(1)_	| Medium | ⭐⭐ |
+| [346. Moving Average from Data Stream](https://leetcode.com/problems/moving-average-from-data-stream/description/) | _O(1)_ | _O(n)_	| Easy |  |
 | [424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐🔍sliding window: 记录window的初始点, 如果当前长度 - 最大count > k, ++start(保持windows的最大长度), 如果满足，start不变，结果是s.size()-start |
 | [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/) | _O(n)_ | _O(1)_	|  Medium | ⭐⭐⭐sliding window: 跟[567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)思路一样 <ul><li>保持window的长度不变, 用l算p中还剩几个点没有被数过 </li><li>用right和left, 当right和left之间长度 == p的长度,append to result</li><li>用两个map 分别记录s 和p，如果s==p,append to result </li></ul> |
 | [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐sliding Window|
@@ -1297,6 +1302,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [3048. Earliest Second to Mark Indices I](https://leetcode.com/problems/earliest-second-to-mark-indices-i) | _O(mlogm)_ |	_O(m)_	| Medium | ⭐⭐⭐ key: 根据bound，每次last_index 是需要更新的  |
 | [3049. Earliest Second to Mark Indices II](https://leetcode.com/problems/earliest-second-to-mark-indices-ii/description/) | _O(mlogm)_ |	_O(m)_	| Hard | ⭐⭐⭐  <ul><li>key: 需要看first_index, 尽早set to 0. 循环需要从后往前。 </li><li> :pencil2: c++ vector heap, 是max_heap, `std::pop_heap` 不会从vector中pop element, 需要再call `pop_back`</li></ul> |
 | [3116. Kth Smallest Amount With Single Denomination Combination](https://leetcode.com/problems/kth-smallest-amount-with-single-denomination-combination/description/) | _O(2^n \* log(k))_ |	_O(2^n)_	| Hard | `itertools.combinations`, `math.lcm` |
+| [3134. Find the Median of the Uniqueness Array](https://leetcode.com/problems/find-the-median-of-the-uniqueness-array/description/) | _O(nlogn)_ |	_O(n)_	| Hard |  |
 
 
 
@@ -1648,6 +1654,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [813. Largest Sum of Averages](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(k\*n^2)_	|	_O(n)_|	Medium | 💜🎅🎅🎅  |
 | [818. Race Car](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(nlogn)_	|	_O(n)_|	Hard | 🎅🎅🎅 |
 | [823. Binary Trees With Factors](https://leetcode.com/problems/binary-trees-with-factors/)	|	_O(n^2)_	|	_O(n)_|	Medium | 类似题： <ul><li>[368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)</li></ul>  |
+| [827. Making A Large Island](https://leetcode.com/problems/making-a-large-island/description/)	|	_O(n^2)_	|	_O(n^2)_|	Hard |  |
 | [837. New 21 Game](https://leetcode.com/problems/new-21-game/)	|	_O(n)_	|	_O(n)_|	Medium | 🎅🎅🎅  |
 | [847. Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | _O(n\*2^n)_ |	_O(n\*2^n)_	| Hard | ⭐⭐⭐BFS/DP |
 | [877. Stone Game](https://leetcode.com/problems/stone-game/) | _O(n^2)_ |	_O(n)_	| Medium | Strategy |

@@ -29,6 +29,41 @@ public:
 };
 
 
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        unordered_map<TreeNode*, TreeNode*>parent; 
+        stack<TreeNode*>stk;
+        TreeNode* cur = root;
+        while(cur || !stk.empty()){
+            if(cur){
+                stk.push(cur);
+                if(cur->left){
+                    parent[cur->left] = cur;
+                }
+                cur = cur->left;
+            } else {
+                cur = stk.top(); stk.pop();
+                if(cur->right){
+                    parent[cur->right] = cur;
+                }
+                cur = cur->right;
+            }
+        }
+        unordered_set<TreeNode*>ancestor;
+        while(p){
+            ancestor.insert(p);
+            p = parent[p];
+        }
+
+        while(ancestor.count(q) == 0){
+            q = parent[q];
+        }
+
+        return q;
+    }
+};
+
 //iterative
 class Solution {
 public:
