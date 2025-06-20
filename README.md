@@ -325,6 +325,7 @@ void init(const string& s, string& res){
 | [419. Battleships in a Board](https://leetcode.com/problems/battleships-in-a-board/) | _O(n\*m)_ | _O(1)_	| Medium | 🔍看源头，if \[i]\[j] = 'X' 且 \[i-1]\[j] 和 \[i]\[j-1] 如果都不是X，count += 1 |
 | [442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/) | _O(n)_ | _O(1)_	| Medium | <ul><li>把nums\[i]-1作为Index, 把nums\[index] 变成负数，如果即将变得已经是负数，代表重复</li><li>把nums\[i]-1作为Index,把nums\[i] 通过swap到nums\[index]上, 第二次pass, 如果nums\[i]!=i+1, 表示重复的</li></ul> |
 | [448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/) | _O(n)_ | _O(1)_	| Medium | 思路与[442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)一模一样，两种方法也一样  |
+| [498. Diagonal Traverse](https://leetcode.com/problems/diagonal-traverse/description/?envType=company&envId=facebook&favoriteSlug=facebook-all) | _O(nm)_ | _O(1)_	| Medium |   |
 | [565. Array Nesting](https://leetcode.com/problems/array-nesting/) | _O(n)_ | _O(1)_	| Medium | DFS, 把visit的点变为-1, nest array是循环，所以起点无论是哪个点进入都可以得到完整的循环, 比如 a->b->c->d->a 不会有 a->b->c->d->b |
 | [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/) | _O(m\*n)_ | _O(1)_	| Easy |  |
 | [581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/) | _O(n)_ | _O(1)_	| Easy | 🔍<ul><li>从左起, 最后一个小于左侧最大的数为 right,从右起，最后一个大于右侧最小的数为left, res = right - left + 1 </li><li> two pointer, 当有数小于current max, 往回开始找起点start, start只能减小, end只能增加,  res = end - start + 1</li></ul>  |
@@ -1295,6 +1296,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [875. Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) | _O(NlogW)_ |	_O(1)_	| Medium ||
 | [981. Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store/description/) | _O(nlogn)_ |	_O(n)_	| Medium ||
 | [1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/) | _O((logN)_ |	_O(1)_	| Medium| 🎅 |
+| [1539. Kth Missing Positive Number](https://leetcode.com/problems/kth-missing-positive-number/description/?envType=company&envId=facebook&favoriteSlug=facebook-all) | _O(logn)_ |	_O(1)_	| Easy |  |
 | [1385. Find the Distance Value Between Two Arrays](https://leetcode.com/problems/find-the-distance-value-between-two-arrays/) | _O((n + m) \* logm)_ |	_O(1)_	| Easy | 🎅[Binary Search](https://github.com/beckswu/Leetcode/blob/master/Binary%20Search/1385.%20Find%20the%20Distance%20Value%20Between%20Two%20Arrays.cpp#L23), Two pointer |
 | [1818. Minimum Absolute Sum Difference](https://leetcode.com/problems/minimum-absolute-sum-difference/) | _O((n \* logn)_ |	_O(n)_	| Medium | |
 | [2055. Plates Between Candles](https://leetcode.com/problems/plates-between-candles/description/) | _O((max(q \* logn, n))_ |	_O(n)_	| Medium | |
@@ -1317,6 +1319,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [220. Contains Duplicate III](https://leetcode.com/problems/contains-duplicate-iii/description/) | _O(nlogn)_ |	_O(n)_	| Medium | set/multiset lower_bound  或者python OrderedDict, 每次popitem(false) pop 最先insert的 |
 | [230	Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/) | _O(max(h, k))_ |	_O(min(h, k))_	| Medium | inorder traversals(从最小的travel到最大的) / stack  |
+| [270. Closest Binary Search Tree Value](https://leetcode.com/problems/closest-binary-search-tree-value/description/) | _O(N)_ |	_O(N)_	|  Easy | |
 | [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/) | _O(h)_ |	_O(1)_	| Easy | 利用 binary search tree的性质 |
 | [352. Data Stream as Disjoint Intervals](https://leetcode.com/problems/data-stream-as-disjoint-intervals/description/) | _O(logn)_ |	_O(n)_	| Hard | |
 | [449. Serialize and Deserialize BST](https://leetcode.com/problems/serialize-and-deserialize-bst/) | _O(n)_ |	_O(h)_	| Medium | preorder traversals |
