@@ -1,0 +1,17 @@
+各种Javascript function type
+
+https://leetcode.com/problems/create-hello-world-function/editorial/
+
+
+var createHelloWorld = function() {
+    
+    return function(...args) {
+        return "Hello World"
+    }
+};
+
+
+var createHelloWorld = function() {
+    
+    return () => "Hello World"
+};
