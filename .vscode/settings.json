@@ -9,6 +9,7 @@
         "__node_handle": "cpp",
         "functional": "cpp",
         "unordered_map": "cpp",
-        "__hash_table": "cpp"
+        "__hash_table": "cpp",
+        "limits": "cpp"
     }
 }

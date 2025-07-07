@@ -746,6 +746,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [1837. Sum of Digits in Base K](https://leetcode.com/problems/sum-of-digits-in-base-k/) | _O(logk)_ | _O(1)_	| Easy |  |
 | [2344. Minimum Deletions to Make Array Divisible](https://leetcode.com/problems/minimum-deletions-to-make-array-divisible/) | _O(O(nlogn + m + gcd)_  , where gcd = log(max(numsDivide)) | _O(1)_	| Hard | ⭐ gcd, python filter |
 | [2335. Minimum Amount of Time to Fill Cups](https://leetcode.com/problems/minimum-amount-of-time-to-fill-cups/) | _O(1) | _O(1)_	| Easy |  |
+| [3591. Check if Any Element Has Prime Frequency](https://leetcode.com/problems/check-if-any-element-has-prime-frequency/description/) | _O(n) | _O(n)_	| Easy |  |
 
 
 
@@ -820,6 +821,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [1410. HTML Entity Parser](https://leetcode.com/problems/html-entity-parser/) | _O(n)_ | _O(t)_	| Medium | |
 | [1417. Reformat The String](https://leetcode.com/problems/reformat-the-string/) | _O(n)_ | _O(1)_	| Easy | <ul><li>[🔍](https://github.com/beckswu/Leetcode/blob/master/String/1417.%20Reformat%20The%20String.cpp#L80)</li><li> [🔍](https://github.com/beckswu/Leetcode/blob/master/String/1417.%20Reformat%20The%20String.cpp#L111)</li></ul>  |
 | [2272. Substring With Largest Variance](https://leetcode.com/problems/substring-with-largest-variance/description/) | _O(n)_ | _O(1)_	| Hard |⭐⭐Kadane's Algorithm |
+| [3598. Longest Common Prefix Between Adjacent Strings After Removals](https://leetcode.com/problems/longest-common-prefix-between-adjacent-strings-after-removals/description/) | _O(n)_ | _O(1)_	| Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -1425,6 +1427,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2359. Find Closest Node to Given Two Nodes](https://leetcode.com/problems/find-closest-node-to-given-two-nodes/)	|	_O(n)_  |	_O(n)_|	Medium |  |
 | [2360. Longest Cycle in a Graph](https://leetcode.com/problems/longest-cycle-in-a-graph/)	|	_O(n)_  |	_O(n)_|	Hard | ⭐ |
 | [2368. Reachable Nodes With Restrictions](https://leetcode.com/problems/reachable-nodes-with-restrictions/)	|	_O(V+E)_  |	_O(V+E)_|	Medium | BFS / DFS |
+| [3593. Minimum Increments to Equalize Leaf Paths](https://leetcode.com/problems/minimum-increments-to-equalize-leaf-paths/description/)	|	_O(n)_  |	_O(n)_|	Medium | ⭐  |
 
 </br>
 </br>
@@ -1504,6 +1507,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2977. Minimum Cost to Convert String II](https://leetcode.com/problems/minimum-cost-to-convert-string-ii/description/)	|	_O(n^3)_	|	_O(n^2)_ | Hard | ⭐⭐⭐Floyd-Warshall  |
 | [3108. Minimum Cost Walk in Weighted Graph](https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ undirected graph union find |
 | [3123. Find Edges in Shortest Paths](https://leetcode.com/problems/find-edges-in-shortest-paths/description/)	|	_O(V + ElogV)_	|	_O(V+E)_ | Hard | ⭐⭐⭐ undirected graph union find |
+| [3607. Power Grid Maintenance](https://leetcode.com/problems/power-grid-maintenance/description/)	|	_O(c)_	|	_O(c + q)_ | Medium | ⭐⭐connected component |
+
 
 
 **undirected graph**
@@ -1701,6 +1706,8 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [2771. Longest Non-decreasing Subarray From Two Arrays](https://leetcode.com/problems/longest-non-decreasing-subarray-from-two-arrays/description/)	|	_O(n)_  |	_O(n)_|	Medium | ⭐⭐⭐  |
 | [3003. Maximize the Number of Partitions After Operations](https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/description/)	|	_O(2^26n)_  |	_O(2^26n)_|	Hard | TopDown, Bottomup |
 | [3149. Find the Minimum Cost Array Permutation](https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/)	|	_O(n^2\*2^n)_  |	_O(n\*2^n)_|	Hard | TopDown, Bottomup |
+| [3592. Inverse Coin Change](https://leetcode.com/problems/inverse-coin-change/description/)	|	_O(n^2)_  |	_O(n)_|	Medium | Reverse DP |
+| [3599. Partition Array to Minimize XOR](https://leetcode.com/problems/partition-array-to-minimize-xor/description/)	|	_O(n^3)_  |	_O(n^2)_|	Medium | TopDown |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>
