@@ -95,10 +95,10 @@ public:
             graph[i[0]].push_back(i[1]);
         }
         vector<int>visited(n);
-        vector<int>cur_visited(n);
+        vector<int>on_path(n);
         auto detect_cycle = [&](this auto&& detect_cycle, int cur)->bool{
             /*
-            需要cur_visited(n);
+            需要on_path(n);
 
             比如  
                1 -> 2 -> 3 
@@ -107,17 +107,17 @@ public:
                     4 -- 
                如果 1 -> 2 ->3 发现没有cycle, 再到4 开始， If(visited[3]) return true, wrong
              */
-            if(cur_visited[cur])
+            if(on_path[cur])
                 return true;
             if(visited[cur]){
                 return false;
             }
-            cur_visited[cur] = 1;
+            on_path[cur] = 1;
             visited[cur] = 1;
             for(auto nxt: graph[cur]){
                 if(detect_cycle(nxt)) return true;
             }
-            cur_visited[cur] = 0;
+            on_path[cur] = 0;
             return false;
         };
         for(int i = 0; i < n; ++i){

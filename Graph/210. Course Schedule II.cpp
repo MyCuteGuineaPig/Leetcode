@@ -113,3 +113,55 @@ public:
         return res;
     }
 };
+
+
+
+class Solution {
+public:
+    vector<int> findOrder(int n, vector<vector<int>>& pre) {
+        vector<vector<int>>graph(n);
+        vector<int>indegree(n);
+        for(auto& p: pre){
+            ++indegree[p[0]];
+            graph[p[1]].push_back(p[0]);
+        }
+        vector<int>q; 
+        for(int i = 0; i < n; ++i)
+            if(indegree[i] == 0)
+                q.push_back(i);
+        for(int i = 0; i < q.size(); ++i){
+            int cur = q[i];
+            for(const auto& nxt: graph[cur]){
+                if(--indegree[nxt] == 0)
+                    q.push_back(nxt);
+            }
+        }
+        return q.size() == n ? q : vector<int>();
+    }
+};
+
+class Solution {
+public:
+    vector<int> findOrder(int n, vector<vector<int>>& pre) {
+        vector<vector<int>>graph(n);
+        vector<int>indegree(n);
+        for(auto& p: pre){
+            ++indegree[p[0]];
+            graph[p[1]].push_back(p[0]);
+        }
+        queue<int>q; 
+        vector<int>res;
+        for(int i = 0; i < n; ++i)
+            if(indegree[i] == 0)
+                q.push(i);
+        while(!q.empty()){
+            int cur = q.front(); q.pop();
+            res.push_back(cur);
+            for(const auto& nxt: graph[cur]){
+                if(--indegree[nxt] == 0)
+                    q.push(nxt);
+            }
+        }
+        return res.size() == n ? res : vector<int>();
+    }
+};

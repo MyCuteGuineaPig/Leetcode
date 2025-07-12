@@ -1455,7 +1455,6 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [126. Word Ladder II](https://leetcode.com/problems/word-ladder-ii/description/)	|	_O(n \* d)_	|	_O(d)_ |	Hard | <ul><li>two end pointer BFS </li><li> ✏️[unordered_multimap, equal_range](https://github.com/beckswu/Leetcode/blob/master/Backtracking/126.%20Word%20Ladder%20II.cpp#L310) </li><li>🔍用DFS TLE , 不删除已走路径 TLE </li></ul> |
 | [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/description/)	|	_O(n^2) ~ O(2^n)_	|	_O(n^2)_ |	Medium | ⭐⭐⭐ [Python Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/131.%20Palindrome%20Partitioning.py) <br/> Similar Question <ul><li>[046. Permutations](https://leetcode.com/problems/permutations/)</li><li> [047. Permutations II](https://leetcode.com/problems/permutations-ii/description/)</li><li>[078. Subsets](https://leetcode.com/problems/subsets/description/)</li><li>[090. Subsets II](https://leetcode.com/problems/subsets-ii/description/)</li><li>[039. Combination Sum](https://leetcode.com/problems/combination-sum/description/)</li><li>[040. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/description/)</li><li>[131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/description/)</li></ul> |
 | [140. Word Break II](https://leetcode.com/problems/word-break-ii/)	|	_O(n \* l^2 + n \* r)_	|	_O(n^2)_ |	Hard | 🎅DFS with Memoization, 没有memoization TLE, ✏️[C++ Std:function](https://github.com/beckswu/Leetcode/blob/master/Backtracking/140.%20Word%20Break%20II.cpp#L103) |
-| [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)	|	_O(n + m)_	|	_O(n + m)_ | Medium | Undirected Graph Detect Cycle |
 | [212. Word Search II](https://leetcode.com/problems/word-search-ii/)	|	_O(m * n * l)_	|	_O(l)_ |	Hard | Suffix Trie (backtracking 是把board 暂时改了, 省去了hashset visited), 难度medium左右, ✏️[Python Complex number 表示四个DFS 方向, Dictionary setdefault](https://github.com/beckswu/Leetcode/blob/master/Backtracking/212.%20Word%20Search%20II.py#L36) |
 | [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/description/)	|	_O(k \* C(n, k))_	|	_O(k)_ |	Medium | 🔍[Python itertools.combination](https://github.com/beckswu/Leetcode/blob/master/Backtracking/216.%20Combination%20Sum%20III.py#L65) |
 | [526. Beautiful Arrangement](https://leetcode.com/problems/beautiful-arrangement/description/)	|	_O(n!)_	|	_O(n)_ |	Medium | swap, 注意if 条件, 🔍[Python Solution](https://github.com/beckswu/Leetcode/blob/master/Backtracking/526.%20Beautiful%20Arrangement.py#L6) |
@@ -1473,6 +1472,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [133. Clone Graph](https://leetcode.com/problems/clone-graph/description/)	|	_O(N+M)_	 |	_O(N)_ |	Medium	|  |
+| [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)	|	_O(n + m)_	|	_O(n + m)_ | Medium | Undirected Graph Detect Cycle <br/>Similar Question <ul><li> [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)</li></ul>  |
+| [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)	|	_O(n + m)_	|	_O(n + m)_ | Medium | Undirected Graph Detect Cycle, topological sort <br/>Similar Question <ul><li>[207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)</li></ul>  |
 | [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	|   <br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul> |
 | [277. Find the Celebrity](https://leetcode.com/problems/find-the-celebrity/description/)	|	_O(n)_	 |	_O(1)_ |	Medium	| |
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	| **undirected graph  connected component**, union find |
@@ -1517,10 +1518,10 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 ```
 207.Course Schedule
 vector<int>visited(n);
-vector<int>cur_visited(n);
+vector<int>on_path(n);
 auto detect_cycle = [&](this auto&& detect_cycle, int cur)->bool{
     /*
-    需要cur_visited(n);
+    需要on_path(n);
 
     比如  
         1 -> 2 -> 3 
@@ -1529,17 +1530,17 @@ auto detect_cycle = [&](this auto&& detect_cycle, int cur)->bool{
             4 -- 
         如果 1 -> 2 ->3 发现没有cycle, 再到4 开始， If(visited[3]) return true, wrong
         */
-    if(cur_visited[cur])
+    if(on_path[cur])
         return true;
     if(visited[cur]){
         return false;
     }
-    cur_visited[cur] = 1;
+    on_path[cur] = 1;
     visited[cur] = 1;
     for(auto nxt: graph[cur]){
         if(detect_cycle(nxt)) return true;
     }
-    cur_visited[cur] = 0;
+    on_path[cur] = 0;
     return false;
 };
 for(int i = 0; i < n; ++i){
