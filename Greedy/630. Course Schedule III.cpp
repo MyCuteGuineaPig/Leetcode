@@ -7,7 +7,7 @@ Solution 1: 移花接木
 
 先，然后用cur 记录当前时间, 如果cur + c[0] <= c[1]，pq.push(c[0])
 如果cur + c[0] <= c[1] 不成立，考虑pq.top > c[0]成立吗
-    - 若成立，可以吧top的区间用现在c[0] 代替，假设pq.top 最长的课程， 所属的course index为ind
+    - 若成立，可以把top的区间用现在c[0] 代替，假设pq.top 最长的课程， 所属的course index为ind
       我们可以把之前的ind给删了,把c[0] 放在ind的位置，因为course 按最晚结课时间排序，当
         c[1] > course[ind][1], 
         又因为c[0] < pq.top() = course[ind][1]
@@ -54,7 +54,7 @@ public:
             //cur - *s.rbegin() + courses[i][0]<=courses[i][1] 这么做可以保证学的课程数量一样，但可能cur 增加了
             // 比如之前cur = 14, 之前最长的是7， 遇到新的是【9,19], 14-7+9 < 19, 但是课程数量不变的情况下，cur 却从14 变成16
                 cur = cur- *s.rbegin()+courses[i][0];    
-                s.erase(--s.end());
+                s.erase(--s.end()); //不可以s.erase(s.rbegin());
                 s.insert(courses[i][0]);
             /*
             可以保证 course[i][0] 有位置放，*s.rbegin()所属的course index为ind
