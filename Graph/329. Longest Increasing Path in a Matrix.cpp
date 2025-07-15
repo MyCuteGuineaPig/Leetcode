@@ -67,6 +67,39 @@ public:
 
 class Solution {
 public:
+
+
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        int n = matrix.size(), m = matrix[0].size();
+        vector<vector<int>>dp(n, vector<int>(m, -1));
+        vector<int>dir = {0, -1, 0, 1, 0};
+        auto dfs = [&](this auto&& dfs, int i, int j) -> int {
+            if(dp[i][j] != -1) {
+                return dp[i][j];
+            }
+            dp[i][j] = 1; 
+            for(int k = 0; k < 4; ++k){
+                int x = i + dir[k], y = j + dir[k+1];
+                if (x < 0 || x >= n || y < 0 || y >= m || matrix[i][j] >= matrix[x][y]) 
+                    continue;
+                dp[i][j] = max(dp[i][j], 1 + dfs(x, y));
+            }
+            return dp[i][j];
+        };
+        int res = 1; 
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m ; ++j){
+                res = max(res, dfs(i, j));
+            }
+        }
+        return res;
+    }
+};
+
+
+
+class Solution {
+public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         int rows = matrix.size();
         if (!rows) return 0;

@@ -24,6 +24,8 @@ public:
                 char c = words[i][j];
                 char p = words[i+1][j];
                 if(c != p){
+                    //比如 c->p 已经insert到Indegree 了
+                    // 但是因为大小关系，需要break
                     if(graph[c].count(p) == 0){ //可能有多个 c -> p, 但是degree 只算一次
                         graph[c].insert(p);
                         degree[p]++;

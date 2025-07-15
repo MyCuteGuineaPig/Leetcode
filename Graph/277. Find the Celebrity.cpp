@@ -33,6 +33,18 @@ public:
 /*
 On the graph representation, a celebrity is a person who has exactly n - 1 directed edges going in 
 (everybody knows them) and 0 edges going out (they know nobody).
+
+Prove: 
+
+Assume there is a celebrity, then they must have 0 outdegree
+
+假设 0 不是celebrity, 0 知道i, 两种情况
+- i 是celebrity, 则i 不知道任何其他的人
+- i 不是celebrity, j 是celebrity, 则i 一定知道j, 
+    那么进入下iteration 找到j
+
+
+
 */
 
 
