@@ -90,6 +90,7 @@ public:
         while (pq.size()) {
             auto [cost, x, y] = pq.top(); pq.pop();
             if (vis[x][y]) continue;
+            //需要这个if 否则TLE
             vis[x][y] = 1;
             if (x == m - 1 && y == n - 1) return cost;
             for (int i = 0; i < 4; ++i) {
