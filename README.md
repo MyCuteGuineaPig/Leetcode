@@ -1492,6 +1492,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) 	|	_O(n)_	|	_O(n)_ | Medium | ⭐⭐⭐ no cycle <br/> Similar Question <ul><li>  [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) </li><li> [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/) </li></ul> |
 | [1494. Parallel Courses II](https://leetcode.com/problems/parallel-courses-ii/description/) 	|	_O(2^n)_	|	_O(2^n)_ | Hard |  |
 | [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/)	|	_O(M\*(V + ElogV))_	|	_O(n)_ | Hard | ⭐⭐⭐  Dijkstra's Algorithm, Floyd–Warshall algorithm <br/> Similar Question <ul><li>  [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/) </li><li> [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)</li></ul> |
+| [1857. Largest Color Value in a Directed Graph](https://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/?envType=problem-list-v2&envId=graph)	|	_O(V + E)_	|	_O(V +E)_ | Easy | ⭐Kahn's Algorithm (Topological Sort)	 |
 | [1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/description/)	|	_O(V + E)_	|	_O(V +E)_ | Easy | ⭐Union Find |
 | [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ **directed graph**, 每个dfs 前设置`visited`, b/c A不能到B 不代表 B 不能到A , count the max number of child from a node  <br/> Similar Question <ul><li>  [529. Minesweeper](https://leetcode.com/problems/minesweeper/) </li><li>[547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)	</li><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li></ul>  |
 | [2050. Parallel Courses III](https://leetcode.com/problems/parallel-courses-iii/description/)	|	_O(n + e)_	|	_O(n + e)_ | Hard | ⭐⭐⭐  |
@@ -1517,7 +1518,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 **directed graph**
 
-```
+```c++
 207.Course Schedule
 vector<int>visited(n);
 vector<int>on_path(n);
