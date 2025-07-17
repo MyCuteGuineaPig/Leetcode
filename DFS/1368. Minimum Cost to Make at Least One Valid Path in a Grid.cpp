@@ -133,3 +133,38 @@ public:
         return dp[m - 1][n - 1];
     }
 };
+
+
+
+class Solution {
+public:
+    int minCost(vector<vector<int>>& grid) {
+        int n = grid.size(), m = grid[0].size();
+        vector<vector<int>>dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        vector<vector<int>>dp(n, vector<int>(m, 1000000));
+        dp[0][0] = 0;
+        for(int k = 0;k < n + m - 1; ++k){
+
+            vector<vector<int>>org_count(dp);
+            for(int i = 0; i < n; ++i){
+                for(int j = 0; j < m; ++j){
+                    dp[i][j] = min(
+                        {dp[i][j], 
+                         (int)(i ? dp[i-1][j] + (grid[i-1][j]!=3) : 1e6),  
+                         (int)(j ? dp[i][j-1] + (grid[i][j-1]!=1) : 1e6)});
+                }
+            }
+            if (dp == org_count)
+                break;
+            for(int i = n-1; i >= 0; --i){
+                for(int j = m-1; j >= 0; --j){
+                    dp[i][j] = min({dp[i][j], 
+                                (int)(i <n-1? dp[i+1][j] + (grid[i+1][j]!=4) : 1e6),  
+                                (int)(j < m-1 ? dp[i][j+1] + (grid[i][j+1]!=2) : 1e6)});
+                }
+            }
+
+        }
+        return dp[n-1][m-1];
+    }
+};
