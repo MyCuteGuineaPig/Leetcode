@@ -10,6 +10,11 @@
         "functional": "cpp",
         "unordered_map": "cpp",
         "__hash_table": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "array": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp"
     }
 }

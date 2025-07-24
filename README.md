@@ -1492,7 +1492,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) 	|	_O(n)_	|	_O(n)_ | Medium | ⭐⭐⭐ no cycle <br/> Similar Question <ul><li>  [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) </li><li> [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/) </li></ul> |
 | [1494. Parallel Courses II](https://leetcode.com/problems/parallel-courses-ii/description/) 	|	_O(2^n)_	|	_O(2^n)_ | Hard |  |
 | [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/)	|	_O(M\*(V + ElogV))_	|	_O(n)_ | Hard | ⭐⭐⭐  Dijkstra's Algorithm, Floyd–Warshall algorithm <br/> Similar Question <ul><li>  [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/) </li><li> [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)</li></ul> |
-| [1857. Largest Color Value in a Directed Graph](https://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/?envType=problem-list-v2&envId=graph)	|	_O(V + E)_	|	_O(V +E)_ | Easy | ⭐Kahn's Algorithm (Topological Sort)	 |
+| [1857. Largest Color Value in a Directed Graph](https://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/?envType=problem-list-v2&envId=graph)	|	_O(m + n)_	|	_O(m +n)_ | Hard | ⭐Kahn's Algorithm (Topological Sort)	 |
 | [1971. Find if Path Exists in Graph](https://leetcode.com/problems/find-if-path-exists-in-graph/description/)	|	_O(V + E)_	|	_O(V +E)_ | Easy | ⭐Union Find |
 | [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ **directed graph**, 每个dfs 前设置`visited`, b/c A不能到B 不代表 B 不能到A , count the max number of child from a node  <br/> Similar Question <ul><li>  [529. Minesweeper](https://leetcode.com/problems/minesweeper/) </li><li>[547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)	</li><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li></ul>  |
 | [2050. Parallel Courses III](https://leetcode.com/problems/parallel-courses-iii/description/)	|	_O(n + e)_	|	_O(n + e)_ | Hard | ⭐⭐⭐  |
@@ -1504,6 +1504,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2316. Count Unreachable Pairs of Nodes in an Undirected Graph](https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/description/)	|	_O(V+E)_	|	_O(V + E)_ | Medium | ⭐⭐⭐ **undirected graph** Union Find |
 | [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	|	_O(E + n)_	|	_O(n)_ | Hard | ⭐⭐⭐ **undirected graph** 用indegree 来 detect cycle <br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li><li> [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	</li></ul>  |
 | [2421. Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/description/)	|	_O(E + nlogn)_	|	_O(n)_ | Hard | ⭐⭐⭐ **undirected graph** union find <br/>Similar Question Union find <ul><li> [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)</li><li>  [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/description/) </li><li>[721. Accounts Merge](https://leetcode.com/problems/accounts-merge/description/)</li><li>[947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)</li><li>[952. Largest Component Size by Common Factor](https://leetcode.com/problems/largest-component-size-by-common-factor/description/)</li><li>[990. Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/description/)</li><li>[947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)</li><li>[1202. Smallest String With Swaps](https://leetcode.com/problems/smallest-string-with-swaps/description/)</li><li>[1319. Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/)</li><li>[2421. Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/description/)</li></ul>  |
+| [2467. Most Profitable Path in a Tree](https://leetcode.com/problems/most-profitable-path-in-a-tree/description/)	|	_O(n)_	|	_O(n)_ | Medium |  |
 | [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)	|	_O(M\*(V + ElogV))_	|	_O(n)_ | Hard | ⭐⭐⭐  Dijkstra's Algorithm, Floyd–Warshall algorithm <br/> Similar Question <ul><li>  [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/) </li><li> [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)</li></ul> |
 | [2685. Count the Number of Complete Components](https://leetcode.com/problems/count-the-number-of-complete-components/description/)	|	_O(V+E)_	|	_O(V+E)_ | Medium | ⭐⭐⭐ `c++ all_of`, 如果每个都在cycle中， 每个node的outgoing size = 总共的node - 1 |
 | [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/)	|	_O(n)_	|	_O(n)_ | Hard | ⭐⭐⭐ no cycle <br/> Similar Question <ul><li>  [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) </li><li> [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/) </li></ul> |
@@ -1943,6 +1944,256 @@ bool hasCycleDirectedKahn(int n, vector<vector<int>>& edges) {
 | Directed Graph  |	DFS with Recursion Stack  |	O(V + E) |	O(V)  |	Detects cycles using a recursion stack.  |
 | Directed Graph | 	Kahn's Algorithm (Topological Sort)  |	O(V + E)  |	O(V)  |	Detects cycles by checking in-degree during topological sorting.  |
  
+
+Here are the main algorithms for **Topological Sort**:
+
+
+
+#**1. Kahn's Algorithm (BFS-based approach)**
+Kahn's Algorithm uses **in-degrees** and a **queue** to perform a topological sort.
+
+**Steps**:
+1. Calculate the in-degree of each vertex.
+2. Add all vertices with in-degree `0` to a queue.
+3. While the queue is not empty:
+   - Remove a vertex from the queue and add it to the topological order.
+   - Decrease the in-degree of its neighbors by `1`.
+   - If any neighbor's in-degree becomes `0`, add it to the queue.
+4. If all vertices are processed, return the topological order. Otherwise, the graph contains a cycle.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+vector<int> topologicalSortKahn(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    vector<int> in_degree(n, 0);
+
+    // Build the graph and calculate in-degrees
+    for (auto& edge : edges) {
+        graph[edge[0]].push_back(edge[1]);
+        in_degree[edge[1]]++;
+    }
+
+    queue<int> q;
+    vector<int> topo_order;
+
+    // Add nodes with in-degree 0 to the queue
+    for (int i = 0; i < n; ++i) {
+        if (in_degree[i] == 0) {
+            q.push(i);
+        }
+    }
+
+    // BFS for topological sort
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        topo_order.push_back(node);
+
+        for (int neighbor : graph[node]) {
+            in_degree[neighbor]--;
+            if (in_degree[neighbor] == 0) {
+                q.push(neighbor);
+            }
+        }
+    }
+
+    if (topo_order.size() != n) {
+        throw runtime_error("Graph contains a cycle, topological sort not possible.");
+    }
+
+    return topo_order;
+}
+```
+
+---
+
+**2. DFS-based Approach**
+This approach uses **Depth-First Search (DFS)** and a **stack** to perform a topological sort.
+
+**Steps**:
+1. Perform a DFS on the graph.
+2. Push each vertex onto a stack after visiting all its neighbors.
+3. Reverse the stack to get the topological order.
+
+**Code**:
+```cpp
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+void dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, stack<int>& topo_stack) {
+    visited[node] = true;
+
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, graph, visited, topo_stack);
+        }
+    }
+
+    topo_stack.push(node);
+}
+
+vector<int> topologicalSortDFS(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    for (auto& edge : edges) {
+        graph[edge[0]].push_back(edge[1]);
+    }
+
+    vector<bool> visited(n, false);
+    stack<int> topo_stack;
+
+    for (int i = 0; i < n; ++i) {
+        if (!visited[i]) {
+            dfs(i, graph, visited, topo_stack);
+        }
+    }
+
+    vector<int> topo_order;
+    while (!topo_stack.empty()) {
+        topo_order.push_back(topo_stack.top());
+        topo_stack.pop();
+    }
+
+    return topo_order;
+}
+```
+
+---
+
+**3. All Topological Sorts (Backtracking Approach)**
+This approach generates **all possible topological orders** of a graph using backtracking.
+
+**Steps**:
+1. Use an array to track the in-degree of each vertex.
+2. Use a recursive function to explore all vertices with in-degree `0`.
+3. For each vertex:
+   - Add it to the current topological order.
+   - Reduce the in-degree of its neighbors.
+   - Recurse to find the next vertex.
+   - Backtrack by restoring the in-degree and removing the vertex from the order.
+
+**Code**:
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void allTopologicalSorts(vector<vector<int>>& graph, vector<int>& in_degree, vector<bool>& visited, vector<int>& current_order, vector<vector<int>>& all_orders) {
+    bool allVisited = true;
+
+    for (int i = 0; i < graph.size(); ++i) {
+        if (!visited[i] && in_degree[i] == 0) {
+            visited[i] = true;
+            current_order.push_back(i);
+
+            for (int neighbor : graph[i]) {
+                in_degree[neighbor]--;
+            }
+
+            allTopologicalSorts(graph, in_degree, visited, current_order, all_orders);
+
+            // Backtrack
+            visited[i] = false;
+            current_order.pop_back();
+            for (int neighbor : graph[i]) {
+                in_degree[neighbor]++;
+            }
+
+            allVisited = false;
+        }
+    }
+
+    if (allVisited) {
+        all_orders.push_back(current_order);
+    }
+}
+
+vector<vector<int>> findAllTopologicalSorts(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    vector<int> in_degree(n, 0);
+
+    for (auto& edge : edges) {
+        graph[edge[0]].push_back(edge[1]);
+        in_degree[edge[1]]++;
+    }
+
+    vector<bool> visited(n, false);
+    vector<int> current_order;
+    vector<vector<int>> all_orders;
+
+    allTopologicalSorts(graph, in_degree, visited, current_order, all_orders);
+
+    return all_orders;
+}
+```
+
+---
+
+**4. Recursive DFS with Post-order Traversal**
+This is a variation of the DFS-based approach where we use **post-order traversal** to determine the topological order.
+
+**Steps**:
+1. Perform a DFS on the graph.
+2. Add each vertex to the result list after visiting all its neighbors (post-order).
+3. Reverse the result list to get the topological order.
+
+**Code**:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void postOrderDFS(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<int>& topo_order) {
+    visited[node] = true;
+
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            postOrderDFS(neighbor, graph, visited, topo_order);
+        }
+    }
+
+    topo_order.push_back(node);
+}
+
+vector<int> topologicalSortPostOrder(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    for (auto& edge : edges) {
+        graph[edge[0]].push_back(edge[1]);
+    }
+
+    vector<bool> visited(n, false);
+    vector<int> topo_order;
+
+    for (int i = 0; i < n; ++i) {
+        if (!visited[i]) {
+            postOrderDFS(i, graph, visited, topo_order);
+        }
+    }
+
+    reverse(topo_order.begin(), topo_order.end());
+    return topo_order;
+}
+```
+
+---
+
+**Summary of Algorithms**
+| **Algorithm**               | **Approach**                | **Time Complexity** | **Space Complexity** | **Notes**                                                                 |
+|------------------------------|-----------------------------|----------------------|-----------------------|---------------------------------------------------------------------------|
+| **Kahn's Algorithm**         | BFS-based                  | \(O(V + E)\)         | \(O(V)\)              | Simple and efficient for finding one topological order.                  |
+| **DFS-based Approach**       | DFS + Stack                | \(O(V + E)\)         | \(O(V)\)              | Uses recursion and stack to find one topological order.                  |
+| **All Topological Sorts**    | Backtracking               | \(O(V! \cdot V)\)    | \(O(V)\)              | Finds all possible topological orders.                                   |
+| **Post-order DFS**           | Recursive DFS + Post-order | \(O(V + E)\)         | \(O(V)\)              | Variation of DFS-based approach using post-order traversal.              |
+
+Choose the algorithm based on your requirements (e.g., finding one order vs. all orders).
+
 </br>
 </br>
 
