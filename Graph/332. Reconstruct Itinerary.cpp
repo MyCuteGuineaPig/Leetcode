@@ -156,30 +156,25 @@ The reason we got stuck is because that we hit the exit
 
 In your given example, nodes A is the exit node, we hit it and it’s the exit. So we put it to the result as the last node.
 */
-
 class Solution {
 public:
-    vector<string> findItinerary(vector<pair<string, string>> tickets) {
-        unordered_map<string, priority_queue<string, vector<string>, greater<string>>>m; 
-        vector<string>res;
-        for(auto t: tickets){
-            m[t.first].push(t.second);
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        unordered_map<string, priority_queue<string, vector<string>, greater<>>>graph;
+        for(auto &t:tickets){
+            graph[t[0]].push(t[1]);
         }
-        dfs("JFK", res, m);
-        reverse(res.begin(),res.end());
+        vector<string>res;
+        dfs(graph, "JFK", res);
+        reverse(res.begin(), res.end());
         return res;
     }
 
-     void dfs(string cur, vector<string>& res, unordered_map<string, priority_queue<string, vector<string>, greater<string>>>& m)      {
-        //cout<<"cur " << cur <<endl;
-        while(!m[cur].empty()){
-            string s = m[cur].top();
-            m[cur].pop();
-            //cout<<"before dsf cur "<<cur<<" size "<<m[cur].size()<<endl;
-            dfs(s, res, m);
-            //cout<<"after dfs "<<cur<<" size "<<m[cur].size()<<endl;
+    void dfs(unordered_map<string, priority_queue<string, vector<string>, greater<>>>&graph, const string& cur, vector<string>&res){
+        auto& q = graph[cur];
+        while (!q.empty()){
+            string nxt = q.top(); q.pop();
+            dfs(graph, nxt, res);
         }
-        //cout<<"push back "<<cur<<endl;
         res.push_back(cur);
     }
 };

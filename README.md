@@ -1513,6 +1513,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2977. Minimum Cost to Convert String II](https://leetcode.com/problems/minimum-cost-to-convert-string-ii/description/)	|	_O(n^3)_	|	_O(n^2)_ | Hard | ⭐⭐⭐Floyd-Warshall  |
 | [3108. Minimum Cost Walk in Weighted Graph](https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ undirected graph union find |
 | [3123. Find Edges in Shortest Paths](https://leetcode.com/problems/find-edges-in-shortest-paths/description/)	|	_O(V + ElogV)_	|	_O(V+E)_ | Hard | ⭐⭐⭐ undirected graph union find |
+| [3481. Apply Substitutions](https://leetcode.com/problems/apply-substitutions/description/?envType=problem-list-v2&envId=graph)	|		|	| Medium |  |
 | [3607. Power Grid Maintenance](https://leetcode.com/problems/power-grid-maintenance/description/)	|	_O(c)_	|	_O(c + q)_ | Medium | ⭐⭐connected component |
 |[3608. Minimum Time for K Connected Components](https://leetcode.com/problems/minimum-time-for-k-connected-components/description/)	|	_O(eloge)_	|	_O(n)_ | Medium | ⭐⭐ <br/> 类似的题: <ul><li>[3613. Minimize Maximum Component Cost](https://leetcode.com/problems/minimize-maximum-component-cost/description/)</li></ul> |
 | [3613. Minimize Maximum Component Cost](https://leetcode.com/problems/minimize-maximum-component-cost/description/)	|	_O(eloge)_	|	_O(n)_ | Medium | ⭐⭐ <br/> 类似的题: <ul><li>[3608. Minimum Time for K Connected Components](https://leetcode.com/problems/minimum-time-for-k-connected-components/description/)</li></ul> |
