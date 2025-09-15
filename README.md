@@ -2319,6 +2319,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [3592. Inverse Coin Change](https://leetcode.com/problems/inverse-coin-change/description/)	|	_O(n^2)_  |	_O(n)_|	Medium | Reverse DP |
 | [3599. Partition Array to Minimize XOR](https://leetcode.com/problems/partition-array-to-minimize-xor/description/)	|	_O(n^3)_  |	_O(n^2)_|	Medium | TopDown |
 | [3594. Minimum Time to Transport All Individuals](https://leetcode.com/problems/minimum-time-to-transport-all-individuals/description/)	|	_O(ElogE)_  |	_O(E)_|	Hard | bitmask + Dijkstra simulation |
+| [3685. Subsequence Sum After Capping Elements](https://leetcode.com/problems/subsequence-sum-after-capping-elements/description/)	|	_O(n\*k)_  |	_O(n)_|	Medium | bitmask + knapsack |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>
