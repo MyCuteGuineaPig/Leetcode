@@ -22,6 +22,44 @@ else if(j == 0)
     table[i][j] = (table[i-1][j] && s1[i-1] == s3[i+j-1] ) || (table[i][j-1] && s2[j-1] == s3[i+j-1] );
 
 */
+
+
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = s1.size(), n2 = s2.size(), n3 = s3.size();
+        if (n1 + n2 != n3)
+            return false;
+        vector<vector<int>>dp(n1+1, vector<int>(n2+1));
+        dp[0][0] = 1 ;
+        for(int i = 0; i < n1 && s1[i] == s3[i]; ++i){
+            dp[i+1][0] = 1;
+        }
+        for(int j = 0; j < n2 && s2[j] == s3[j]; ++j){
+            dp[0][j+1] = 1;
+        }
+        for(int i = 0; i < n1; ++i) {
+            for(int j = 0; j < n2; ++j) {
+                if(s1[i] == s3[i+j+1]) {
+                    dp[i+1][j+1] = dp[i][j+1]; 
+                }
+                if (s2[j] == s3[i+j+1])
+                    dp[i+1][j+1] |= dp[i+1][j];
+            }
+        }
+        return dp[n1][n2];
+    }
+};
+/*
+s1[i] 是 第i+1个字符
+s2[j] 是 第j+1个字符    
+
+match s3, i + j + 2 个字符
+变成index  i + j + 1 个字符
+*/
+
+
+
 class Solution {
 public:
     bool isInterleave(string s1, string s2, string s3) {
@@ -48,6 +86,8 @@ public:
         return dp[s1.length()][s2.length()];
     }
 };
+
+
 
 
 public:
@@ -91,6 +131,32 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = s1.size(), n2 = s2.size(), n3 = s3.size();
+        if (n1 + n2 != n3)
+            return false;
+        unordered_set<int>visited;
+        auto helper = [&](this auto&& helper, int i, int j){
+            if (visited.count(j*n1 + i))
+                return false;
+            if(i + j == n3) 
+                return true;
+            if (i < n1 && s1[i] == s3[i+j] && helper(i+1, j)) {
+                return true;
+            }
+            if (j < n2 && s2[j] == s3[i+j] && helper(i, j+1)){
+                return true;
+            }
+            visited.insert(j*n1 + i);
+            return false;
+        };
+        return helper(0, 0);
+    }
+};
+
 //BFS
 class Solution {
 public:
@@ -115,6 +181,34 @@ public:
                     q.push({i, j+1});
                 
             }
+        }
+        return false;
+    }
+};
+
+
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = s1.size(), n2 = s2.size(), n3 = s3.size();
+        if (n1 + n2 != n3)
+            return false;
+        unordered_set<int>visited;
+        queue<pair<int,int>>q;
+        q.push({0,0});
+        while (!q.empty()) {
+            auto [i, j] = q.front(); q.pop();
+            if (i + j == n3) 
+                return true;
+        
+            if (i < n1 && s1[i] == s3[i+j] && visited.count(j*n3 + (i+1)) == 0 ) {
+                visited.insert(j*n3 + (i+1));
+                q.push({i+1, j});
+            } 
+            if (j < n2 && s2[j] == s3[i+j] && visited.count((j+1)*n3 + i) == 0 ){
+                visited.insert((j+1)*n3 + (i));
+                q.push({i, j+1});
+            } 
         }
         return false;
     }
