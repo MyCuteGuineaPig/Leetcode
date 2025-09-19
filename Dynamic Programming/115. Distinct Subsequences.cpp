@@ -22,7 +22,7 @@ Return 3.
 Well, a dynamic programming problem. Let's first define its state dp[i][j] to be the number of distinct subsequences of t[0..i - 1] in s[0..j - 1]. 
 Then we have the following state equations:
 
-General case 1: dp[i][j] = dp[i][j - 1] if t[i - 1] != s[j - 1];
+General case 1: dp[i][j] = dp[i][j - 1] if t[i - 1] != s[j - 1]; 把前面所有match carry
 General case 2: dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1] if t[i - 1] == s[j - 1];
 Boundary case 1: dp[0][j] = 1 for all j;
 Boundary case 2: dp[i][0] = 0 for all positive i.
@@ -39,6 +39,26 @@ Non-empty string will have no subsequences in an empty string.
 
 */
 
+
+/* 
+1, 1, 1, 1, 1, 1, 1, 1, 
+0, 1, 0, 0, 0, 0, 0, 0, 
+0, 0, 1, 0, 0, 0, 0, 0, 
+0, 0, 0, 1, 1, 1, 0, 0, 
+0, 0, 0, 0, 1, 2, 0, 0, 
+0, 0, 0, 0, 0, 0, 2, 0, 
+0, 0, 0, 0, 0, 0, 0, 2, 
+
+
+      r  a  b  b  b  i  t
+   1, 1, 1, 1, 1, 1, 1, 1, 
+r  0, 1, 1, 1, 1, 1, 1, 1, 
+a  0, 0, 1, 1, 1, 1, 1, 1, 
+b  0, 0, 0, 1, 2, 3, 3, 3, 
+b  0, 0, 0, 0, 1, 3, 3, 3, 
+i  0, 0, 0, 0, 0, 0, 3, 3, 
+t  0, 0, 0, 0, 0, 0, 0, 3, 
+*/
 
 
 class Solution {
@@ -61,6 +81,48 @@ public:
         return dp[m][n];
     }
 };  
+
+/*
+     r  a  b  b  i  t
+  1, 0, 0, 0, 0, 0, 0, 
+r 1, 1, 0, 0, 0, 0, 0, 
+a 1, 1, 1, 0, 0, 0, 0, 
+b 1, 1, 1, 1, 0, 0, 0, 
+b 1, 1, 1, 2, 1, 0, 0, 
+b 1, 1, 1, 3, 3, 0, 0, 
+i 1, 1, 1, 3, 3, 3, 0, 
+t 1, 1, 1, 3, 3, 3, 3, 
+
+
+
+     r  a  b  b  i  t
+  1, 0, 0, 0, 0, 0, 0, 
+r 1, 1, 0, 0, 0, 0, 0, 
+a 1, 1, 1, 0, 0, 0, 0, 
+b 1, 1, 1, 1, 0, 0, 0, 
+i 1, 1, 1, 1, 0, 0, 0, 
+b 1, 1, 1, 2, 1, 0, 0, 
+g 1, 1, 1, 2, 1, 0, 0, 
+i 1, 1, 1, 2, 1, 1, 0, 
+t 1, 1, 1, 2, 1, 1, 1,
+
+
+ */
+
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int m = t.length(), n = s.length();
+        vector<vector<unsigned long long>> dp(n + 1, vector<unsigned long long> (m + 1, 0));
+        for (int i = 0; i <= n; i++) dp[i][0] = 1;//如果t string 长度为0，只能把所有的s全部都delete 掉才行，所以都是1
+        for (int i = 0; i < n; ++i){
+            for (int j = 0; j <m; ++j) {
+                dp[i+1][j+1] = dp[i][j + 1] + (s[i] == t[j] ? dp[i][j] : 0);
+            }
+        }
+        return dp[n][m];
+    }
+};
 
 
 class Solution {
