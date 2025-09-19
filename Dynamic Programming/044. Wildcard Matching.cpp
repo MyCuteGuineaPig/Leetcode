@@ -144,6 +144,32 @@ public:
 };
 
 
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int n = s.size(), m = p.size();
+        int stari = -1, starj = -1;
+        int i = 0, j = 0;
+        while( i < n) {
+            if (j <m && (s[i] == p[j] || p[j] == '?')){
+                ++i;
+                ++j;
+            } else if (j<m && p[j]=='*')  {
+                stari = i;
+                starj = ++j;
+            } else if(stari>=0) {
+                i = ++stari;
+                j = starj;
+            } else {
+                return false;
+            }
+        }
+        while(j<m && p[j] == '*') ++j;
+        return j == m;
+    }
+};
+
+
 //recurion, 可skip 不是很ideal的
 class Solution {
     // return value:

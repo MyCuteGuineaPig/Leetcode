@@ -217,11 +217,37 @@ public:
                     if(k == 1)
                         F[i][j][k] = s1[i] == s2[j];
                     else{
-                        for(int q = 1; q<k && !F[i][j][k]; ++q){
+                        for(int q = 1; q<k && !F[i][j][k]; ++q){ //q < k
                             F[i][j][k] = F[i][j][q] && F[i+q][j+q][k-q] || F[i][j+k-q][q] && F[i+q][j][k-q]; 
                         }
                     }
                 }
         return F[0][0][n];
+    }
+};
+
+
+
+class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        int n = s1.size();
+        vector<vector<vector<int>>> D(n, vector<vector<int>>(n, vector<int>(n+1, -1)));
+        auto topdown = [&](this auto && topdown, int i, int j, int k) -> int {
+            if (D[i][j][k] >= 0) 
+                return D[i][j][k];
+            if(k == 1) {
+                return D[i][j][1] = (s1[i] == s2[j]);
+            }
+            if (i+k > n || j + k > n) 
+                return 0;
+            int res = 0;
+            for(int q = 1; q < k && !res; q++) {
+                res = topdown(i, j, q) && topdown(i+q, j+q, k-q);
+                res = res || topdown(i, j + k - q, q) && topdown(i+q, j, k-q);
+            }
+            return D[i][j][k] = res;
+        };
+        return topdown(0, 0, n);
     }
 };

@@ -52,7 +52,7 @@ s=  1   0  0  0  0
  b  0   0  1  1 ===== > dp[i+1][j]: 表示 * 重复了0遍或者多变
  b  0   0  0 _1_ =====>  i = 2, j = 2   dp[i+1][j+1] <= take dp[i][j+1], 
  c  0   0  0  0  1        take  dp[i][j+1] 原因是, dp[i][j+1] = dp[2][3] 只考虑了 s[i-1] ('ab') 和 p[j-1] ('ab')  match 不 match, 
-                         如果 s再多考虑一位, 因为是*, t是跟之前一样的pattern,  if s[i]  == p[j-1]  s= 'abb', t='ab'  dp[i+1][j+1] = dp[i][j+1] = true;
+                         如果 s再多考虑一位, 因为是*, t是跟之前一样的pattern,  if s[i]  == p[j-1] == s[i-1]  s= 'abb', t='ab'  dp[i+1][j+1] = dp[i][j+1] = true;
 */
 
 class Solution {
@@ -88,9 +88,9 @@ Here are some conditions to figure out, then the logic can be very straightforwa
    here are two sub conditions:
                1   if p.charAt(j-1) != s.charAt(i) : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
                2   if p.charAt(j-1) == s.charAt(i) or p.charAt(j-1) == '.':
-                              dp[i][j] = dp[i-1][j]    //in this case, a* counts as multiple a 
-                           or dp[i][j] = dp[i][j-1]   // in this case, a* counts as single a
-                           or dp[i][j] = dp[i][j-2]   // in this case, a* counts as empty
+                              dp[i][j] = dp[i-1][j]    //in this case, a* counts multiple a (因为s[i] == p[j-1],)
+                           or dp[i][j] = dp[i][j-1]   // in this case, a* counts as single a (* 不match任何character)
+                           or dp[i][j] = dp[i][j-2]   // in this case, a* counts as empty (skip a)
 
 */
 
@@ -125,6 +125,7 @@ public:
                     else{
                         //cout <<"else ' i-1 "<<i<<" j "<<j+1 << " dp[i-1][j] = "<<dp[i][j+1]<<"  ' i "<<i+1<<" j- 1 "<<j-1 << "  dp[i][j-1] "<< dp[i+1][j]<<" ' i "<<i+1<<" j-2 "<<j-1 << "  dp[i][j-2] "<<dp[i+1][j-1]<<endl;
                         dp[i+1][j+1] = dp[i][j+1] || dp[i+1][j] || dp[i+1][j-1] ;
+                        //也可以是 dp[i+1][j+1] = dp[i][j+1] ||  dp[i+1][j-1] ;
                         
                     }
                 }

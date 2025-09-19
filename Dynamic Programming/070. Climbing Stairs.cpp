@@ -53,3 +53,26 @@ int climbStairs(int n) {
         a = (b += a) - a; //需要有括号，否则 b += a -a 
     return a;
 }
+
+/*
+n = 5
+ i 1 a 1 b 2
+ i 2 a 2 b 3
+ i 3 a 3 b 5
+ i 4 a 5 b 8
+ i 5 a 8 b 13
+
+ */
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        long a = 1, b = 1;
+        for(int i = 1; i<=n; ++i){
+            b += a;
+            a = b - a; //需要有括号，否则 b += a -a 
+            //cout<<" i "<<i <<" a "<<a <<" b "<<b<<endl;
+        }
+        return a;
+    }
+};

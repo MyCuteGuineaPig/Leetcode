@@ -63,6 +63,33 @@ public:
     }
 };
 
+
+//2025
+class Solution {
+public:
+    int numDecodings(string s) {
+        int n = s.size();
+        vector<int>dp(n+1, -1);
+        dp[0] = 1;
+        auto topdown = [&](this auto&& topdown, int i){
+            if(dp[i] >= 0){
+
+                return dp[i];
+            }
+            int res = 0;
+            if (s[i-1] >= '1' && s[i-1] <= '9')
+                res += topdown(i-1); 
+            if (i >= 2) {
+                int num = stoi(s.substr(i-2, 2));
+                if (num >= 10 && num <= 26)
+                    res += topdown(i-2);
+            }
+            return dp[i] = res;
+        };
+        return topdown(n);
+    }
+};
+
 //Memoization O(n)
 class Solution {
 public:
