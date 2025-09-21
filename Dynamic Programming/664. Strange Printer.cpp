@@ -76,6 +76,30 @@ public:
     }
 };
 
+class Solution {
+public:
+    int strangePrinter(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n, vector<int>(n, n+1));
+        auto f = [&](this auto&& f, int i , int j) {
+            if(i == j) {return 1;}
+            if (dp[i][j] <= n ) {
+                return dp[i][j];
+            }
+            if (s[i] == s[j]) 
+            {
+                dp[i][j] = f(i, j-1);
+            } else {
+                for(int k = i; k<j; ++k) {
+                    dp[i][j] = min(dp[i][j], f(i, k) + f(k+1, j));
+                }
+            }
+            return dp[i][j];
+        };
+        return f(0, n-1);
+    }
+};
+
 //topDown 2020
 class Solution {
 public:

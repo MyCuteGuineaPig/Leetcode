@@ -70,6 +70,31 @@ public:
     }
 };
 
+//2025
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n, vector<int>(n));
+        auto helper = [&](this auto&& helper, int i, int j)->int{
+            if(i >= j) {return i == j;}
+            if (dp[i][j]) {
+                return dp[i][j];
+            }
+            int res = 0;
+            for(int i = j-1; i>=0; --i){
+                if (s[i] == s[j]) 
+                   dp[i][j] = helper(i+1, j-1) + 2; 
+                else
+                   dp[i][j] = max(helper(i+1, j), helper(i, j-1));
+                   
+            }
+            return  dp[i][j];
+        };
+        return helper(0, n-1);
+    }
+};
+
 /*
 把space 减成O(N), O(N)比O(N*N) 快的多
 */

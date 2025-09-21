@@ -44,6 +44,8 @@ public:
                     ispal[j][i] = true;
                     if(j == 0){ //从开始到尾都是pal{
                         dp[i] = 0;
+                        //不能有break, 因为要经过每个j点 update ispal[j][i], 比如 input = “fff"
+                        // 当 j = 1, i = 0 时候如果break, ispal[1][1] = false 没有被更新
                     }  
                     else if(dp[j-1] + 1 < dp[i]){
                          dp[i] = dp[j-1]+1;
@@ -53,6 +55,38 @@ public:
             }
          }
         return dp[n];
+    }
+};
+
+
+//先build 是不是palidrome
+class Solution {
+public:
+    int minCut(string s) {
+        int n = s.size();
+        vector<vector<int>>palindrome(n, vector<int>(n));
+        for(int j = 0; j < n; ++j){
+            for(int i = 0; i <=j; ++i) {
+                if(s[i] == s[j] && (j - i < 2 || palindrome[i+1][j-1]))
+                    palindrome[i][j] = 1;
+            }
+        }
+
+        vector<int>dp(n, n); dp[0] = 0;
+        for(int j = 1; j<n; ++j){
+            for(int i = 0; i<=j; ++i) {
+                if(palindrome[i][j])
+                {
+                    if(i == 0) { 
+                        dp[j] = 0;
+                        break;
+                    } else {
+                        dp[j] = min(dp[j], dp[i-1] + 1);
+                    }
+                } 
+            }
+        }
+        return dp[n-1];
     }
 };
 
