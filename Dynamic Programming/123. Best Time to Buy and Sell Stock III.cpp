@@ -213,6 +213,28 @@ public:
     }
 };
 
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        int k = 2;
+        vector<int>cost(k, numeric_limits<int>::max());
+        vector<int>profit(k);
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < k; ++j) {
+                if(j == 0) {
+                    cost[j] = min(cost[j], prices[i]);
+                }
+                else {
+                    cost[j] = min(cost[j], prices[i] - profit[j-1]);
+                }
+                profit[j] = max(profit[j], prices[i] - cost[j]);
+            }
+        }
+        return profit.back();
+    }
+};
+
 /**
  So time complexity is O(kn), space complexity becomes O(k).
 In this case, K is 2. We can expand the array to all named variables:

@@ -7,6 +7,49 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/discuss/306282/
 
 */
 
+//2025
+// profit inherit来自于 同一次交易的上一个 index
+// cost 中的profit 来自于上一次交易的 同一个 index
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n = prices.size();
+        vector<int>profit(n);
+        for(int a = 0; a < k ; ++ a){
+            int cost = prices[0];
+            for(int i = 1; i < n; ++i){
+                if(a > 0) cost = min(cost, prices[i] - profit[i]);
+                //不可以是 cost = min(cost, prices[i] - profit[i-1]);
+                //profit[i-1] 可能是同样的a, 刚update过的profit, 就相当于带着刚计算过profit[i-1] 再次买入 而不是用上一轮的
+                else cost = min(cost, prices[i]); 
+                profit[i] = max(profit[i-1], prices[i] - cost);
+            }
+        }
+        return profit[n-1];
+    }
+};
+
+//2025
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n = prices.size();
+        vector<int>cost(k, numeric_limits<int>::max());
+        vector<int>profit(k);
+        for(int i = 0; i < prices.size(); ++i){
+            for(int j = 0; j < k; ++j){
+                if ( j == 0) {
+                    cost[j] = min(cost[j], prices[i]);
+                } else {
+                    cost[j] = min(cost[j], prices[i] - profit[j-1]);
+                }
+                profit[j] = max(profit[j], prices[i] - cost[j]);
+            }
+        }
+        return profit[k-1];
+    }
+};
+
 
 class Solution {
 public:

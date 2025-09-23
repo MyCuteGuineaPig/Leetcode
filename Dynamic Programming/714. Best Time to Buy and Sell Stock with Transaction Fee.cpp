@@ -8,6 +8,20 @@
 
 */
 
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int n = prices.size();
+        int buy = numeric_limits<int>::max();
+        int sell = 0;
+        for(int i = 0; i < prices.size(); ++i){
+            buy = min(buy, prices[i]-sell + fee);
+            sell = max(sell, prices[i]- buy);
+        }
+        return sell;
+    }
+};
+
 
 class Solution {
 public:

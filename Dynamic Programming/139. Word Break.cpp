@@ -40,6 +40,24 @@ public:
     }
 };
 
+//2025
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n  = s.size();
+        unordered_set<string>dict(wordDict.begin(), wordDict.end());
+        vector<int>dp(n);
+        for(int j = 0; j < n; ++j) {
+            for(int i = 0; i <=j && !dp[j]; ++i) {
+                string sub = s.substr(i, j-i+1);
+                if(dict.count(sub)) {
+                    dp[j] = (i == 0) ? 1: dp[i-1];
+                }
+            }
+        }
+        return dp[n-1];
+    }
+};
 
 
 /*
