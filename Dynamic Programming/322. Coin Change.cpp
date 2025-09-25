@@ -19,6 +19,50 @@ public:
     }
 };
 
+//2025 
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.begin(), coins.end());
+        vector<int>dp(amount+1, amount + 2);
+        dp[0] = 0;
+        auto helper = [&](this auto& helper, int cur){
+            if(cur == 0 || dp[cur] < amount + 2) {
+                return dp[cur];
+            }
+            for(auto& coin: coins) {
+                if (cur - coin < 0) break;
+            
+                int tmp = helper(cur - coin);
+                if (tmp != -1)
+                    dp[cur] = min(dp[cur], tmp + 1);
+            }
+            return dp[cur] = (dp[cur] >= amount + 2 ? -1: dp[cur]);
+        };
+        helper(amount);
+        return dp[amount] >= amount + 2 ? -1: dp[amount];
+    }
+};
+
+
+//2025 bottom up
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.begin(), coins.end());
+        vector<int>dp(amount+1, amount + 2);
+        dp[0] = 0;
+        for(int i = coins[0]; i <= amount; ++i){
+            for(auto coin: coins){
+                if (coin > i) break;
+                if (dp[i - coin] >= amount + 2) continue;
+                dp[i] = min(dp[i], dp[i-coin]+1);
+            }
+        }
+        return dp[amount] >= amount + 2 ? -1: dp[amount];
+    }
+};
+
 
 // Bottom-up
 class Solution {

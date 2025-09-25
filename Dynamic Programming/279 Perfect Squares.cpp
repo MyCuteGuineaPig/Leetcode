@@ -22,23 +22,41 @@ public:
 };
 
 // Bottom-up
-class Solution {  // 它的complexity是 O(sqrt(n)/2)*O(n)
+class Solution {
 public:
-    int numSquares(int n) 
-    {
-        // cntPerfectSquares[i] = the least number of perfect square numbers 
-        // which sum to i. Note that cntPerfectSquares[0] is 0.
-        vector<int> cntPerfectSquares(n + 1, INT_MAX);
-        cntPerfectSquares[0] = 0;
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j*j <= i/2; j++) // 这个不会慢，因为有重复比如 13-9 = 4 又会做13-9 = 4, 做了两回的operation
-            {
-                cntPerfectSquares[i] = 
-                    min(cntPerfectSquares[i], cntPerfectSquares[i - j*j] + 1);
+    int numSquares(int n) {
+        vector<int>dp(n+1);
+        iota(dp.begin(), dp.end(), 0);
+        for(int i = 4; i <=n; ++i){
+            for(int j = 2; j*j <= i; ++j){
+                dp[i] = min(dp[i], dp[i-j*j]+1);
             }
-        }
-        return cntPerfectSquares.back();
+        } 
+        return dp[n];
+    }
+};
+
+//Topdown 
+class Solution {
+public:
+    int numSquares(int n) {
+        vector<int>dp(n+1);
+        iota(dp.begin(), dp.end(), 0);
+        auto helper = [&](this auto&& helper, int i){
+            if(i == 1) {
+                return 1;
+            }
+            if (i == 0) {
+                return 0;
+            }
+            if(dp[i]!= i || i <= 3)
+                return dp[i];
+            for(int j = 2; j*j <= i; ++j){
+                dp[i] = min(dp[i], helper(i-j*j) + 1);
+            }
+            return dp[i];
+        };
+        return helper(n);
     }
 };
 
