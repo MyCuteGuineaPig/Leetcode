@@ -38,6 +38,28 @@ public:
 };
 
 
+//2025
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        int n = matrix.size(), m = matrix[0].size();
+        vector<vector<int>>dp(n, vector<int>(m));
+        int res = 0;
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m; ++j) {
+                if(matrix[i][j] ==  '0' ) continue;
+                if (i == 0 || j == 0) dp[i][j] = 1;
+                else 
+                    dp[i][j] = min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]}) + 1 ;
+                res = max(res, dp[i][j]*dp[i][j]);
+            } 
+        }
+        
+        return res;
+    }
+};
+
+
 
 /*
 DP(i,j) 记录的是到i,j 为止组成最大正方形的边长，只要(i-1,j),(i,j-1),(i-1,j-1)任何一个点是0，都不能在(i,j)组成边长为2的正方形
