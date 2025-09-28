@@ -1,30 +1,83 @@
 
 /*
 dp[i] 表示当以day i结束travel时，最小的cost
+
+不可以把 if(i - 7 >= 0) 这个写进 if( i< days.size() && day == days[i]) {
+
+错误的
+            dp[day] = dp[day-1];
+            if( i< days.size() && day == days[i]) {
+                ++i;
+                dp[day] = dp[day-1] + costs[0];
+                if(day >= 7) 
+                    dp[day] = min(dp[day], dp[day-7] + costs[1]);
+                if(day >= 30) 
+                    dp[day] = min(dp[day], dp[day-30] + costs[2]);
+                if(day >= n){
+                    // << n<<" dp[day] "<<dp[day]<<endl;
+                    res = min(res, dp[day]);
+                }
+            }
+
+
+比如
+days = [1, 6,7,20]
+costs = [7,2,15]
+
+用7 days pass只有在 day 7更新一次，day 14没有更新到
+
+
+
 */
 class Solution {
 public:
     int mincostTickets(vector<int>& days, vector<int>& costs) {
         int n = days.back();
-        vector<int>dp(n+31, numeric_limits<int>::max());
+        vector<long>dp(n+31, numeric_limits<int>::max());
         dp[0] = 0;
-        int res = numeric_limits<int>::max();
-        for(int i = 1, j1 = 0, j7 = 0, j30 = 0; i<=n+30; ++i){
-            dp[i] = dp[i-1];
-            if(j1 < days.size() && i == days[j1]){
-                dp[i] = dp[i-1] + costs[0];
-                ++j1;
+        long res = numeric_limits<int>::max();
+        for(int day = 1, i = 0; day<n + 30; ++day){
+            dp[day] = dp[day-1];
+            if( i< days.size() && day == days[i]) {
+                ++i;
+                dp[day] = dp[day-1] + costs[0];
             }
-            if(i - 7 >= 0)
-                dp[i] = min(dp[i], dp[i-7] + costs[1]);
-            if(i - 30 >= 0)
-                dp[i] = min(dp[i], dp[i-30] + costs[2]);
-            if(i >= n)
-                res = min(res, dp[i]);
+            if(day >= 7) 
+                dp[day] = min(dp[day], dp[day-7] + costs[1]);
+            if(day >= 30) 
+                dp[day] = min(dp[day], dp[day-30] + costs[2]);
+            if(day >= n){
+                res = min(res, dp[day]);
+            }
         }
         return res;
     }
 };
+
+
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        int n = days.back();
+        vector<long>dp(n+31, numeric_limits<int>::max());
+        dp[0] = 0;
+        long res = numeric_limits<int>::max();
+        for(int day = 1, i = 0; day <= n; ++day){
+            dp[day] = dp[day-1];
+            if( i< days.size() && day == days[i]) {
+                ++i;
+                dp[day] = dp[day-1] + costs[0];
+            }
+            dp[day] = min(dp[day], dp[day >=7 ? (day-7) : 0] + costs[1]);
+            dp[day] = min(dp[day], dp[day >=30 ? (day-30) : 0] + costs[2]);
+            if(day == n){
+                res = min(res, dp[day]);
+            }
+        }
+        return res;
+    }
+};
+
 
 
 

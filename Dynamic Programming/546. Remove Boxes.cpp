@@ -105,7 +105,7 @@ Let dp(i, j, k) = the maximum value of removing boxes if we have k extra boxes o
 1. dp[i][i-1][k] = 0, no boxes, so no point 
 2. dp[i][i][k] = (k+1)*(k+1):  only one box left in the subarray, 左侧有k个一样颜色的盒子, number是(k+1)*(k+1)
 3. dp[i][j][k] 如果 boxes[i] = boxes[m] (i < m < k): 
-              = max(dp[i][j][k], dp[i+1][m-1][0], dp[m][j][k+1])
+              = max(dp[i][j][k], dp[i+1][m-1][0] + dp[m][j][k+1])
 
  */
 class Solution {
@@ -149,7 +149,7 @@ public:
     	
     for (int l = 1; l < n; l++) {
     	for (int j = l; j < n; j++) {
-    	    int i = j - l;
+    	    int i = j安全· - l;
     	        
     	    for (int k = 0; k <= i; k++) {
     	        int res = (k + 1) * (k + 1) + dp[i + 1][j][0];
@@ -166,5 +166,51 @@ public:
     }
     
     return (n == 0 ? 0 : dp[0][n - 1][0]);
+    }
+};
+
+
+
+/*
+
+dp[i][j][k] 代表从boxes[i:j] 之后k个与boxes[j] 一样color ball，所得最大的count数
+The idea is to use a 3D DP array dp[i][j][k] to represent the maximum points that
+ can be obtained by removing boxes from index i to j (inclusive) with k boxes of 
+ the same color as boxes[j] adjacent to the right of j.
+
+
+ https://leetcode.com/problems/remove-boxes/editorial/
+
+dp[l][r][k]=dp[l][r−1][0]+(k+1)∗(k+1)
+
+ dp[l][r][k]=max(dp[l][r][k],dp[l][i][k+1]+dp[i+1][r-1][0]).
+
+ */
+
+
+//2025 top-down
+class Solution {
+public:
+    int removeBoxes(vector<int>& boxes) {
+    int n = boxes.size();
+    vector<vector<vector<int>>>dp(n, vector<vector<int>>(n, vector<int>(n,0)));
+
+    auto f = [&](this auto&& f, int i, int j, int k){
+        if (i > j) 
+            return 0;
+        while (i < j && boxes[j] == boxes[j-1]){
+            --j;
+            ++k;
+        }
+        if (dp[i][j][k] != 0) return dp[i][j][k];
+        dp[i][j][k] = f(i, j-1, 0) + (k+1)*(k+1);
+
+        for(int m = i; m < j; ++m){
+            if (boxes[m] == boxes[j]) 
+                dp[i][j][k] = max(dp[i][j][k], f(m+1, j-1, 0) + f(i, m, k+1));
+        }
+        return dp[i][j][k];
+    };
+    return f(0, n-1, 0);
     }
 };
