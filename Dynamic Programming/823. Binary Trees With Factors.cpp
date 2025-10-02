@@ -20,7 +20,7 @@ public:
         sort(A.begin(), A.end());
         unordered_map<int, long> dp;
         for (int i = 0; i < A.size(); ++i) {
-            dp[A[i]] = 1;
+            dp[A[i]] = 1; // single node tree
             for (int j = 0; j < i; ++j)
                 if (A[i] % A[j] == 0)
                     dp[A[i]] = (dp[A[i]] + dp[A[j]] * dp[A[i] / A[j]]) % mod;
@@ -29,6 +29,38 @@ public:
         return res;
     }
 };
+
+
+//top-down
+class Solution {
+public:
+    int numFactoredBinaryTrees(vector<int>& arr) {
+        sort(arr.begin(), arr.end());
+        unordered_map<int, long>mp;
+        unordered_map<int, int> index_mp;
+        for(int i = 0; i < arr.size(); ++i)
+            index_mp[arr[i]] = i;
+        long mod = 1e9 + 7;
+        long res  = 0;
+        auto f = [&](this auto && f, int i) -> long {
+            if (mp.count(arr[i])) {
+                return mp[arr[i]];
+            }
+            mp[arr[i]] = 1;
+            for(int j = 0; j < i; ++j){
+                if (arr[i] % arr[j] == 0 && index_mp.count(arr[i] / arr[j]))
+                    mp[arr[i]] = (mp[arr[i]] + f(index_mp[arr[i] / arr[j]])*f(j)) % mod;
+            }
+            res = (res + mp[arr[i]]) % mod;
+            return mp[arr[i]];
+        };
+        for(int i = 0; i < arr.size(); ++i){
+            f(i);
+        }
+        return res;
+    }
+};
+
 
 class Solution {
 public:

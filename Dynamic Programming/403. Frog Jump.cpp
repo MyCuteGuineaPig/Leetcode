@@ -157,6 +157,29 @@ public:
     }
 };
 
+//2025
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int n = stones.size();
+        if (stones[1] != 1) return false;
+        unordered_map<int, unordered_set<int>> visited;
+        unordered_set<int>stones_dict(stones.begin(), stones.end());
+        auto f = [&](this auto&& f, int cur, int step) {
+            if(cur == stones.back())
+                return true;
+            if (visited.count(cur) && visited[cur].count(step)) return false;
+            for(auto move : {step -1, step, step + 1}) {
+                if ( move > 0 &&  stones_dict.count(cur + move) && f(cur + move, move))
+                    return true;
+            }
+            visited[cur].insert(step);
+            return false;
+        };
+        return f(1, 1);
+    }
+};
+
 //2020 BFS
 class Solution {
 public:

@@ -32,6 +32,24 @@ public:
     }
 };
 
+class Solution {
+public:
+    int countNumbersWithUniqueDigits(int n) {
+        if (n==0) return 1;
+        vector<int>dp(n, 1);
+        dp[0] = 10;
+        for(int i = 1; i < n; ++i){
+            for (int num = 9, j = i; j >= 0; --j) {
+                dp[i] *= num;
+                if (j < i) num--;//比如两位数, 有1-9可以选择为leading number 
+                //第二个除去 第一个已经选择的，还有0，所以又变成9个数
+            }
+            dp[i] += dp[i-1];
+        }
+        return dp[n-1];
+    }
+};
+
 /*Static Dynamic Programming */
 
 class Solution {

@@ -89,6 +89,85 @@ public:
 };
 
 
+/*
+dp[i][j] 表示从 i 到 j 最小cost
+当 dp[i][i] cost = 0
+dp[i][i+1] cost = i  比如 2-3, 先猜2, 如果错了，知道是3, cost = 2   
+
+dp[i][j] = max(dp[i][k-1], dp[k+1][j]) + k,  k 是猜的数
+
+ */
+
+class Solution {
+public:
+    int getMoneyAmount(int n) {
+        vector<vector<int>>dp(n+1, vector<int>(n+1, numeric_limits<int>::max()));
+        //dp[1] = 0; dp[0] = 0;
+        for(int i = 1; i <=n; ++i )
+            dp[i][i] = 0;
+        for(int i = 1; i <n; ++i)
+            dp[i][i+1] = i;
+
+        for(int len = 2; len < n; ++len){
+            for(int i = 1; i + len <= n; ++i){
+                for (int k = i + 1; k < i + len; ++k)
+                    dp[i][i+len] = min(dp[i][i+len], max(dp[i][k-1], dp[k+1][i+len])+k);
+            }
+        }
+    
+        return dp[1][n];
+    }
+};
+
+//or 
+class Solution {
+public:
+    int getMoneyAmount(int n) {
+        vector<vector<int>>dp(n+1, vector<int>(n+1, numeric_limits<int>::max()));
+        //dp[1] = 0; dp[0] = 0;
+        for(int i = 1; i <=n; ++i )
+            dp[i][i] = 0;
+        for(int i = 1; i <n; ++i)
+            dp[i][i+1] = i;
+
+        for(int j = 3; j <= n; ++j){
+            for(int i = j - 2; i >= 1; --i){
+                for (int k = i + 1; k < j; ++k){
+                    dp[i][j] = min(dp[i][j], max(dp[i][k-1], dp[k+1][j])+k);
+                }
+            }
+        }
+    
+        return dp[1][n];
+    }
+};
+
+
+// top-down
+class Solution {
+public:
+    int getMoneyAmount(int n) {
+        vector<vector<int>>dp(n+1, vector<int>(n+1, numeric_limits<int>::max()));
+        auto f = [&](this auto && f, int i, int j){
+            if (i == j ) {
+                return 0; 
+            }
+            if (i == j -1) {
+                return i;
+            }
+            if (dp[i][j] != numeric_limits<int>::max())
+                return dp[i][j];
+            for(int k = i + 1 ; k < j; ++k){
+                dp[i][j] = min(dp[i][j], max(f(i, k-1), f(k+1, j)) + k);
+                
+            }
+                
+            return dp[i][j];
+        };
+        return f(1, n);
+    }
+};
+
 
 // 2020 Botton-up
 class Solution {
