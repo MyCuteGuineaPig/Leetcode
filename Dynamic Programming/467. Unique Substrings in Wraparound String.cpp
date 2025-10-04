@@ -45,6 +45,22 @@ dp[i] 表示到字母i, 最长的距离，e.g. dp['d'] = 3 表示 bcd 都已经�
  */
 class Solution {
 public:
+    int findSubstringInWraproundString(string s) {
+        int res = 0;
+        vector<int>dp(26);
+        int len = 0; 
+        for(int i = 0; i < s.size(); ++i){
+            if (i == 0 || ((s[i]-'a') - (s[i-1] - 'a') + 26) % 26 != 1)
+                len = 0;
+            dp[s[i]-'a'] = max(dp[s[i]-'a'], ++len);
+        }
+        return accumulate(dp.begin(), dp.end(), 0);
+    }
+};
+
+ 
+class Solution {
+public:
     int findSubstringInWraproundString(string p) {
         vector<int>letters(26,0);
         int len = 0, res = 0;
