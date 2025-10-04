@@ -70,7 +70,8 @@ vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         for (int i = 0; i < n; i++) {
             if (dp[i] == 0) continue;
             for (int j = i+1; j <= n; j++) {
-                if (j - i < n && s.count(w.substr(i, j-i))) dp[j] = 1; // j - i < n 控制避免word只是来自于字典中的一个词，而不是多个词合成.
+                if (j - i < n && s.count(w.substr(i, j-i))) dp[j] = 1; 
+                // j - i < n 控制避免word只是来自于字典中的一个词，而不是多个词合成.
             }
             if (dp[n]) { res.push_back(w); break; }
         }
