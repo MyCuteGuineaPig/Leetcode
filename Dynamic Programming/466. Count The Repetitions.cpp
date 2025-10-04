@@ -1,4 +1,35 @@
 
+
+class Solution {
+public:
+    int getMaxRepetitions(string s1, int n1, string s2, int n2) {
+        int s1Len = s1.size(), s2Len = s2.size(), index1 = 0, index2 = 0;
+        unordered_map<int,pair<int,int>>nextIndex;
+        while(index1<n1*s1Len){
+            int i = index1 % s1Len, j = index2 % s2Len;
+            if(s1[i] == s2[j]){
+                if(j==s2Len-1){
+                    if(nextIndex.count(i)==0){
+                        nextIndex[i] = {index1, index2};
+                    }
+                    else{
+                        int l1 = index1-nextIndex[i].first, l2 = index2 - nextIndex[i].second;
+                        //l1 是s1 pattern的长度
+                        index2 += (n1*s1Len-1 - index1)/l1*l2;  //跳过match 的 pattern
+                        // 最后一位到现在这边 还有多少个l1, 乘以 l2
+                        //(n1*s1Len-1 - index1)/l1 表示剩下s1*n1的长度中，有多少个pattern存在
+                        index1 += (n1*s1Len-1 - index1)/l1*l1;  //跳过match 的 pattern
+                    }
+                }
+                index2++;
+            }
+            index1++;
+        }
+        return index2/n2/s2Len;
+    }
+};
+
+
 /*
 
 Count[k]: 记录当k个s1结束后, 有几个s2可以form
@@ -75,6 +106,39 @@ public:
 };
 
 
+
+class Solution {
+public:
+    int getMaxRepetitions(string s1, int n1, string s2, int n2) {
+        if(s1.size() * n1 < s2.size() * n2) return false;
+        unordered_map<int, int> k_s2_count;
+        unordered_map<int, int> j_to_k;
+        int j = 0, cnt = 0;
+        for(int k = 1; k <=n1; ++k) {
+            for(int i = 0; i < s1.size(); ++i){
+                if (s1[i] == s2[j]) { 
+                    if (++j == s2.size()) {
+                        j = 0; 
+                        ++cnt;
+                    }     
+                }
+            }
+
+            if(j_to_k.count(j)) {
+                int prev_k = j_to_k[j];
+                int prefix_count = k_s2_count[prev_k];
+                int pattern = (n1 - prev_k) / (k - prev_k) * (cnt - prefix_count);
+                int suffix_count = k_s2_count[prev_k + (n1 - prev_k) % (k - prev_k)] - prefix_count;
+                return (prefix_count + pattern +  suffix_count) / n2;
+            }
+            j_to_k[j] = k;
+            k_s2_count[k] = cnt;
+        }
+        return  k_s2_count[n1]/n2;
+    }
+};
+
+
 class Solution {
 public:
     int getMaxRepetitions(string s1, int n1, string s2, int n2) {
@@ -105,33 +169,6 @@ public:
 };
 
 
-
-
-class Solution {
-public:
-    int getMaxRepetitions(string s1, int n1, string s2, int n2) {
-        int s1Len = s1.size(), s2Len = s2.size(), index1 = 0, index2 = 0;
-        unordered_map<int,pair<int,int>>nextIndex;
-        while(index1<n1*s1Len){
-            int i = index1 % s1Len, j = index2 % s2Len;
-            if(s1[i] == s2[j]){
-                if(j==s2Len-1){
-                    if(nextIndex.count(i)==0){
-                        nextIndex[i] = {index1, index2};
-                    }
-                    else{
-                        int l1 = index1-nextIndex[i].first, l2 = index2 - nextIndex[i].second;
-                        index2 += (n1*s1Len-1 - index1)/l1*l2;  //跳过match 的 pattern
-                        index1 += (n1*s1Len-1 - index1)/l1*l1;  //跳过match 的 pattern
-                    }
-                }
-                index2++;
-            }
-            index1++;
-        }
-        return index2/n2/s2Len;
-    }
-};
 
 
 //aslo work but slow, 找循环

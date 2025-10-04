@@ -2242,7 +2242,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/description/)	|	_O(n\*s)_	|	_O(s)_ |	Medium | 👀backtracking / DP |
 | [446. Arithmetic Slices II - Subsequence](https://leetcode.com/problems/arithmetic-slices-ii-subsequence/description/)	|	_O(n^2)_	|	_O(n\*d)_ |	Hard | 👀[🎅](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/446.%20Arithmetic%20Slices%20II%20-%20Subsequence%20.cpp#L23)  |
 | [466. Count The Repetitions](https://leetcode.com/problems/count-the-repetitions/description/)	|	_O(s1 \* min(s2, n1))_	|	_O(s2)_ |	Hard | 🎅🎅 |
-| [467. Unique Substrings in Wraparound String](https://leetcode.com/problems/unique-substrings-in-wraparound-string/)	|	_O(n)_	|	_O(1)_ |	Medium | 经典🎅🎅 |
+| [467. Unique Substrings in Wraparound String](https://leetcode.com/problems/unique-substrings-in-wraparound-string/)	|	_O(n)_	|	_O(1)_ |	Medium | 👀经典🎅🎅 |
 | [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/)	|	_O(n \* l^2)_	|	_O(l)_ |	hard | suffix Trie  |
 | [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)	|	_O(s \*m \* n)_	|	_O(s \*m \* n)_|	Medium | 经典🎅, [Top-Down](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/474.%20Ones%20and%20Zeroes.cpp#L77), Bottom-up |
 | [486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/)	|	_O(n^2)_	|	_O(n)_|	Medium | 经典🎅🎅, [DP解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/486.%20Predict%20the%20Winner.cpp#L33), DFS |
