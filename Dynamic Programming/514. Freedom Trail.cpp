@@ -1,34 +1,3 @@
-/*
-dp[i][j] 代表key中第i个char 是由ring中第j个过来的，上一个是j，到i需要的距离
-但是这个solution 比较慢
-
-dp[i][j]代表当key[i] = ring[k],从j到k的需要步数
-
-*/
-
-class Solution {
-public:
-    int findRotateSteps(string ring, string key) {
-        int n = ring.size(), m = key.size();
-        vector<vector<int>>dp(m,vector<int>(n,100000000));
-        for(int i = m-1; i>=0; i--){
-            for(int j = 0; j<n; j++){
-                for(int k = 0; k<n; k++){
-                    if(ring[k] == key[i]){
-                        int diff = abs(k-j);
-                        int steps = min(n-diff,diff);
-                        if(i == m-1)
-                            dp[i][j] = min(dp[i][j],steps);
-                        else 
-                            dp[i][j] = min(dp[i][j],steps+dp[i+1][k]); //steps+dp[i+1][k]，  dp[i+1][k]表示key的i+1从ring中k位置来的，steps表示从j到k，让现在ring 和key的imatch
-                    }
-                }   
-            }
-        }
-        return dp[0][0]+m;
-    }
-};
-
 
 /*
 下面的比较快，先记录每个字母的位置，然后loop key，用loopup发现现在key的char的位置减去旧的位置作为step + 过去的minstep
@@ -39,6 +8,61 @@ public:
 找到i位置最小移动距离，如果ring[k] = key[i], update dp[k]的值，
 
 */
+
+class Solution {
+public:
+    int findRotateSteps(string ring, string key) {
+        int n = ring.size();
+        int m  = key.size();
+        unordered_map<char, vector<int>> mp; 
+        for (int i = 0; i < n; ++i) {
+            mp[ring[i]].push_back(i);
+        }
+        vector<int>dp(n, numeric_limits<int>::max());
+        dp[0] = 0;
+        vector<int>prev_indices(1, 0);
+        for (int i = 0; i < m; ++i) {
+            vector<int>newDp(n, numeric_limits<int>::max());
+            for(auto cur_index: mp[key[i]]) {
+                for(auto prev_index: prev_indices){
+                    int diff = abs(cur_index - prev_index);
+                    int steps = min(diff, n - diff);
+                    newDp[cur_index] = min(newDp[cur_index], steps + dp[prev_index]);
+                }
+            }
+            dp = newDp;
+            prev_indices= mp[key[i]];
+        }
+        return *min_element(dp.begin(), dp.end()) + m;
+    }
+};
+
+
+//Top-downE
+class Solution {
+public:
+    int findRotateSteps(string ring, string key) {
+        int n = ring.size();
+        int m  = key.size();
+        unordered_map<char, vector<int>> mp; 
+        for (int i = 0; i < n; ++i) {
+            mp[ring[i]].push_back(i);
+        }
+        vector<vector<int>>dp(m, vector<int>(n, numeric_limits<int>::max()));
+        auto f = [&](this auto && f, int k, int cur_index) {
+            if ( k == m) return 0;
+            if (dp[k][cur_index]!= numeric_limits<int>::max()) 
+                return dp[k][cur_index];
+            for(auto nxt: mp[key[k]]) {
+                int diff = abs(nxt - cur_index);
+                int steps = min(diff, n - diff);
+                dp[k][cur_index] = min(dp[k][cur_index], steps + f(k +1, nxt));
+            }
+            return dp[k][cur_index];
+        };
+        return f(0, 0) + m;
+    }
+};
 
 class Solution {
 public:
@@ -70,6 +94,40 @@ public:
 
     }
 };
+
+/*
+dp[i][j] 代表key中第i个char 是由ring中第j个过来的，上一个是j，到i需要的距离
+但是这个solution 比较慢
+
+dp[i][j]代表当key[i] = ring[k],从j到k的需要步数
+
+*/
+
+class Solution {
+public:
+    int findRotateSteps(string ring, string key) {
+        int n = ring.size(), m = key.size();
+        vector<vector<int>>dp(m,vector<int>(n,100000000));
+        for(int i = m-1; i>=0; i--){
+            for(int j = 0; j<n; j++){
+                for(int k = 0; k<n; k++){
+                    if(ring[k] == key[i]){
+                        int diff = abs(k-j);
+                        int steps = min(n-diff,diff);
+                        if(i == m-1)
+                            dp[i][j] = min(dp[i][j],steps);
+                        //这里需要min, 因为对于一个k 会有多个k match
+                        else 
+                            dp[i][j] = min(dp[i][j],steps+dp[i+1][k]); //steps+dp[i+1][k]，  dp[i+1][k]表示key的i+1从ring中k位置来的，steps表示从j到k，让现在ring 和key的imatch
+                    }
+                }   
+            }
+        }
+        return dp[0][0]+m;
+    }
+};
+
+
 
 
 class Solution {
