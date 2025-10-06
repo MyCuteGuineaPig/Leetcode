@@ -18,7 +18,9 @@ A(n-1) + A(n-2) + A(n-3)  相当于把最后一位的A换成P
 A(1) = 1    A
 A(2) = 2    PA, LA
 A(3) = 4    PPA, LPA, PLA, LLA
-A(4) = 1+2+4 = 7   把A(3)最后一位变成P， PPPA, LPPA, PLPA, LLPA, 把A(2) 最后一位变成P再加一个L，PPLA, LPLA, 把A(1)最后一位变成p，加两个L，PLLA
+A(4) = 1+2+4 = 7   把A(3)最后一位变成P， PPPA, LPPA, PLPA, LLPA, 
+                   把A(2) 最后一位变成P再加一个L，PPLA, LPLA, 
+                   把A(1)最后一位变成p，加两个L，PLLA
 
 */
 

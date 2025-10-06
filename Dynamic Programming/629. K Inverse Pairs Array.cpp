@@ -10,10 +10,11 @@
  5  1  4  9  15  20  22  20  15  9
  6  1  5  14 29  49  71  90  101 101
 
+ dp[i][j] 表示 1~i 组成的数组，有j个inverse pair的数组个数
  dp[i][j] = dp[i-1][j](交换i 与前一个数的位置) + dp[i][j-1] (append i 到原有数组后)
  if j >= i: 
       dp[i][j] -= dp[i-1][j-i] (表示i已经到最左侧，无法交换)
-       dp[i-1][j-i]产生dp[i][j-i]时。 把i append 到最右侧，通过i-1个switch, i已经到最左侧
+      dp[i-1][j-i]产生dp[i][j-i]时。 把i append 到最右侧，通过i-1个switch, i已经到最左侧
 
 
 
@@ -59,6 +60,7 @@
  假设 n = i, k = i*(i-1)/2 时没有重复
  那么 当 n = i+ 1, 所有的数都是从 n = i 过来的，只不过是把i + 1 append 到n = i 右侧，然后不断左移动，所以不会有重复
 
+i*(i-1) /2 是 C n, 2 的结果, 表示从i里选择2对 有多少对
 */
 class Solution {
 public:

@@ -202,3 +202,41 @@ public:
         return res;
     }
 };
+
+
+
+
+class Solution {
+public:
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        if (maxMove == 0) return 0;
+        vector<vector<long>>dp(m, vector<long>(n));
+        dp[startRow][startColumn] = 1;
+        long mod = 1e9 + 7, res = 0;
+        vector<int>dir =  {-1, 0, 1, 0, -1};
+        if(startRow == 0)  res += 1;
+        if(startRow == m-1) res += 1;
+        if(startColumn == 0) res += 1;
+        if (startColumn == n-1) res += 1;
+        for(int k = 0; k <maxMove-1; ++k) {
+            vector<vector<long>>tmp(m, vector<long>(n));
+            for(int i = 0; i < m; ++i) {
+                for(int j = 0; j < n; ++j){
+                    for(int l = 0; l < 4; ++l) {
+                        int x = i + dir[l];
+                        int y = j + dir[l+1]; 
+                        if (x < 0 || y < 0 || x >= m || y >= n ) continue;
+                        tmp[i][j] = (tmp[i][j] +  dp[x][y] ) % mod;
+                    }
+
+                    if (i == 0)  res = (res + tmp[i][j]) % mod;
+                    if (i == m-1) res = (res + tmp[i][j]) % mod;
+                    if (j == 0) res = (res + tmp[i][j]) % mod;
+                    if (j == n-1) res = (res + tmp[i][j]) % mod;
+                }
+            }
+            dp = tmp;
+        }
+        return res % mod;
+    }
+};
