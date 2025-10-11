@@ -1,3 +1,52 @@
+/*
+
+
+dp[i][0] = min(
+              dp[i-1][0],  i-1 no swap, i no swap,  A[i]>A[i-1], B[i] > B[i-1]
+              dp[i-1][1]   i-1 swap,  i no swap,  A[i] > B[i-1], B[i] > A[i-1], 因为 i-1 位的 A,B 交换了
+              )
+
+
+dp[i][1] = min(
+              dp[i-1][0] +1,  i-1 no swap, i swap,  A[i]>B[i-1], B[i] > A[i-1]
+              dp[i-1][1] + 1,   i-1 swap,  i swap,  A[i] > A[i-1], B[i] > B[i-1], 因为 i-1 位的 A,B 都交换了
+           
+              )
+
+          [0,  3,  5,  8,  9]
+          [2,  1,  4,  6,  9]
+dp[i][0]   0   1   1   1   1  i位不换
+dp[i][1]   1   1   2   2   2  i位 换
+
+
+           [0,  7,  8,  10,  10,  11]
+           [4,  4,  5,  7,   11,  14]
+dp[i][0]    0   1   1   1    3    3
+dp[i][1]    1   1   2   3    2    3
+
+ */
+
+class Solution {
+public:
+    int minSwap(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums1.size();
+        vector<vector<int>>dp(n, vector<int>(2, n));
+        dp[0] = {0, 1};
+        for(int i = 1; i < n; ++i){
+            if (nums1[i] > nums1[i-1] &&  nums2[i] > nums2[i-1]) {
+                dp[i][0] = dp[i-1][0];
+                dp[i][1] = dp[i-1][1] + 1;
+            }
+            if (nums1[i] > nums2[i-1] && nums2[i] > nums1[i-1]){
+                dp[i][0] = min(dp[i][0], dp[i-1][1]);
+                dp[i][1] = min (dp[i][1], dp[i-1][0] + 1);
+            }
+            //cout<<" i " << i << " dp[i][0]  "<<dp[i][0] <<" dp[i][1] "<<dp[i][1]<<endl;
+        }
+        return min(dp[n-1][0], dp[n-1][1]);
+    }
+};
+
 
 /*
 A[i]>A[i-1] && B[i] > B[i-1】 

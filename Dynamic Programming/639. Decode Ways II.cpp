@@ -72,6 +72,38 @@ public:
 };
 
 
+class Solution {
+public:
+    int numDecodings(string s) {
+        int n = s.size();
+        vector<unsigned long long>dp(n+1);
+        dp[0] = 1; 
+        unsigned long long mod = 1e9 + 7;
+        for(int i = 0; i < n; ++i){
+            if(s[i] == '0') {
+                dp[i+1] = 0;
+                if (i > 0 && (s[i-1] == '1' || s[i-1] == '2')) dp[i+1] = dp[i-1];
+                else if (i >0 && s[i-1] == '*') dp[i+1] = 2*dp[i-1] % mod;
+                //可以是 10， 或者20 
+            } else if (s[i] >= '1' && s[i] <= '9'){
+                dp[i+1] = dp[i];
+                if (i > 0 && (s[i-1] == '1' || s[i-1] == '2' && s[i] <= '6' || s[i-1] == '*' && s[i] >= '7' ))
+                    dp[i+1] = ( dp[i+1] + dp[i-1]) % mod;
+                else if (i> 0 && s[i-1] == '*' && s[i] <= '6') {
+                    dp[i+1] = (dp[i+1] + 2*dp[i-1]) % mod;
+                }
+            } else {
+                dp[i+1] = 9*dp[i] % mod;
+                if (i > 0 && s[i-1] == '1') dp[i+1] = (dp[i+1] + 9*dp[i-1]) % mod;
+                else if(i > 0 && s[i-1] == '2' ) dp[i+1] = (dp[i+1] + 6*dp[i-1]) % mod;
+                else if (i > 0 && s[i-1] == '*') dp[i+1] = (dp[i+1] + 15*dp[i-1]) % mod;
+            }
+            //cout<<i<<" dp "<<dp[i+1] << endl;
+        }
+        return dp.back();
+    }
+};
+
 
 /**
 endingAny = current number of ways we could decode, ending on any number;

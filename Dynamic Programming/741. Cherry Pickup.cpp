@@ -20,6 +20,7 @@ public:
         vector<vector<int>> dp(N, vector<int>(N, -1));
         dp[0][0] = grid[0][0];
         for (int k = 1, maxK = 2*N-2; k <= maxK; ++k) {
+            // k-N+1 是 k - (N-1), n-1是i,j 最大的index
             for (int i = min(N-1, k); i >= max(0, k-N+1); --i) { //只能是倒叙 不能是正序, 
             //比如 k = 5,  dp[2][3] = grid[2][3] + grid[3][2] + max(dp[2][3], dp[1][3], dp[2][2], dp[1][2])
             // 大的i,j 取决于小的i,j (上次k的结果)
@@ -45,7 +46,6 @@ public:
         }
         return max(0, dp[N-1][N-1]);
     }
-
 };
 
 // Top-Down

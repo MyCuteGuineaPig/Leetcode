@@ -1,3 +1,11 @@
+/*
+
+      1,   100,   1,   1,   1,   100,   1,   1,   100,   1
+take  1    100    2    3    3    103    4    5    104   6
+skip  0     1    100   2    3     3    103   4     5  104
+
+ */
+
 class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {

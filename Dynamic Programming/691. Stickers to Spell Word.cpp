@@ -114,10 +114,10 @@ private:
             if (s.find(t[0]) != -1) { //如果set_difference == t, 陷入无限循环
                 string n;
                 set_difference(t.begin(), t.end(), s.begin(), s.end(), back_inserter(n));
-                num = min(num, getNum(n, v, dp));
+                num = min(num, getNum(n, v, dp) + 1);
             }
         }
-        return dp[t] = ++num;
+        return dp[t] = num;
     }
 };
 
