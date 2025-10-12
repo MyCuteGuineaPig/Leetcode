@@ -43,22 +43,28 @@ public:
     for (int i = 1; i <= target; i++) {
         dp[i] = numeric_limits<int>::max();
         
-        int m = 1, j = 1;  //前进m个A 到 J, 再后退 q 个 A 到 p
+        int j = 1, j_pos = 1;  //前进m个A 到 j_pos, 再后退 q 个 A 到 q_pos
         
-        for (; j < i; j = (1 << ++m) - 1) {
-            for (int q = 0, p = 0; p < j; p = (1 << ++q) - 1) {
-                dp[i] = min(dp[i], m + 1 + q + 1 + dp[i - (j - p)]);
+        for (; j_pos < i; j_pos = (1 << ++j) - 1) {
+            for (int q = 0, q_pos = 0; q_pos < j_pos; q_pos = (1 << ++q) - 1) {
+                /*
+                需要q = 0 开始, 比如 到4, 需要5步 
+                先走1步，  j = 1, j_pos = 1,   +1
+                停1步, speed = -1             +1  
+                再停1步, speed = 1,            +1  -> q = 0
+                再走3pos, 需要2 steps         +2
+                                    total = 5 steps
+                 */
+                dp[i] = min(dp[i], j + 1 + q + 1 + dp[i - (j_pos - q_pos)]);
             }
         }
         
-        dp[i] = min(dp[i], m + (i == j ? 0 : 1 + dp[j - i]));
+        dp[i] = min(dp[i], j + (i == j_pos ? 0 : 1 + dp[j_pos - i]));
     }
     
     return dp[target];
     }
 };
-
-
 
 
 class Solution {

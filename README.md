@@ -2279,7 +2279,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [808. Soup Servings](https://leetcode.com/problems/soup-servings/description/)	|	_O(1)_	|	_O(1)_|	Medium | 👀  |
 | [813. Largest Sum of Averages](https://leetcode.com/problems/largest-sum-of-averages/)	|	_O(k\*n^2)_	|	_O(n)_|	Medium | 👀 |
 | [818. Race Car](https://leetcode.com/problems/race-car/)	|	_O(nlogn)_	|	_O(n)_|	Hard | 👀 |
-| [823. Binary Trees With Factors](https://leetcode.com/problems/binary-trees-with-factors/)	|	_O(n^2)_	|	_O(n)_|	Medium | 类似题： <ul><li>[368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)</li></ul>  |
+| [823. Binary Trees With Factors](https://leetcode.com/problems/binary-trees-with-factors/)	|	_O(n^2)_	|	_O(n)_|	Medium | 👀 类似题： <ul><li>[368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/)</li></ul>  |
 | [827. Making A Large Island](https://leetcode.com/problems/making-a-large-island/description/)	|	_O(n^2)_	|	_O(n^2)_|	Hard |  |
 | [837. New 21 Game](https://leetcode.com/problems/new-21-game/)	|	_O(n)_	|	_O(n)_|	Medium | 🎅🎅🎅  |
 | [847. Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) | _O(n\*2^n)_ |	_O(n\*2^n)_	| Hard | ⭐⭐⭐BFS/DP |
