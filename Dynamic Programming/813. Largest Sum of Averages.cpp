@@ -44,6 +44,32 @@ public:
 };
 
 
+/* 
+2025
+dp[i][k]  表示在 A[0..i] 中分成 k 组 (包括i点) 所能得到的最大平均值和
+*/
+class Solution {
+public:
+    double largestSumOfAverages(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int>presum(n);
+        vector<vector<double>>dp (n, vector<double>(k));
+        for(int i = 0; i < n; ++i) {
+            presum[i] = (i == 0? 0 : presum[i-1]) + nums[i];
+            dp[i][0] = (double)presum[i] / (i+1);
+        }
+
+        for(int m = 1; m < k; ++m) {
+            for(int i = 1; i < n; ++i) {
+                for(int j = 0; j <i; ++j) {
+                    dp[i][m] = max(dp[i][m], dp[j][m-1] + (double)(presum[i]-presum[j])/(i-j) );
+                }
+            }
+        }
+        return dp[n-1][k-1];
+    }
+};
+
 class Solution {
 public:
    
