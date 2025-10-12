@@ -55,6 +55,30 @@ s=  1   0  0  0  0
                          如果 s再多考虑一位, 因为是*, t是跟之前一样的pattern,  if s[i]  == p[j-1] == s[i-1]  s= 'abb', t='ab'  dp[i+1][j+1] = dp[i][j+1] = true;
 */
 
+/*        
+dp[i+1][j+1] = dp[i][j+1] 
+
+if dp[i][j+1]是来自于skip的, 那么说明dp[i][j+1] 没有考虑到s[i] == p[j-1]
+if dp[i][j+1]是来自于dp[i-1][j+1]的, 说明s[i-1] == p[j-1]
+                                    且 s[i] == p[j-1] 也成立, s[i] == s[i-1]
+                                    这样dp[i+1][j+1] = dp[i][j+1] 
+
+          m  i  s * i s * i p * .
+       1
+    m     1
+    i       1     1  -> 表示 mi 和 mis* match
+    s           1 1 -> 表示 mis 和 mis* match, 加上 p的s 和 s的s match
+    s             1
+    i               1   1
+    s                 1 1
+    s                   1 
+    i                     1   1
+    p                       1 1
+    p                         1
+    i                            1
+*/
+
+
 class Solution {
 public:
     bool isMatch(string s, string p) {
@@ -177,5 +201,3 @@ public:
         return dp[p.size()][s.size()];
     }
 };
-
-

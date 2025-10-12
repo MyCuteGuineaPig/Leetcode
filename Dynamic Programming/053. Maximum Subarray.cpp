@@ -31,6 +31,19 @@ public:
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>dp(n+1);
+        int res = numeric_limits<int>::min();
+        for(int i = 0; i < n; ++i){
+            res = max(res, dp[i+1] = (nums[i] > nums[i] + dp[i] ? nums[i]: nums[i] + dp[i]));
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
         if(nums.empty()) return 0;
         int mi = 0, res = nums[0], sum =0; //mi sum 需要是0, 不能是nums[0], e.g. [1,2] 的maxsum = 3
         for(int i = 0; i<nums.size(); ++i){

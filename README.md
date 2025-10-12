@@ -2206,16 +2206,16 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [010. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/description/)	|	_O(m\*n)_	|	_O(n)_ |	Hard | 🎅🎅 |
-| [044. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/) | _O(n\*m)_ | _O(1)_	| Hard | dp or greedy (Greedy也是 _O(n\*m)_ ) |
-| [053. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)	|	_O(n)_	|	_O(1)_ |	Easy | 😍 更新res, minsum 的顺序 |
+| [010. Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/description/)	|	_O(m\*n)_	|	_O(n)_ |	Hard | 👀👀 |
+| [044. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/) | _O(n\*m)_ | _O(1)_	| Hard | 👀dp or greedy (Greedy也是 _O(n\*m)_ ) |
+| [053. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)	|	_O(n)_	|	_O(1)_ |	Easy | 👀 |
 | [062. Unique Paths](https://leetcode.com/problems/unique-paths/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [063. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium |  |
 | [064. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)	|	_O(m \* n)_	|	_O(m + n)_ |	Medium | |
 | [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)	|	_O(n)_	|	_O(1)_ |	Easy |  |
 | [072. Edit Distance](https://leetcode.com/problems/edit-distance/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | 类似的题: <ul><li>[583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)</li><li>[712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/)</li></ul> |
-| [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | 🎅 Memoization |
-| [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | 😍😍🎅 similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/) [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) |
+| [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | 👀 Memoization |
+| [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | similar question: <ul><li>[062. Unique Paths](https://leetcode.com/problems/unique-paths/)</li><li> [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)</li><li> [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)</li></ul> |
 | [097. Interleaving String](https://leetcode.com/problems/interleaving-string/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | 🎅 👀 DP(注意index), DFS, BFS |
 | [115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)	|	_O(n^2)_	|	_O(n)_ |	Hard | 👀  <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li></ul> |
 | [120. Triangle](https://leetcode.com/problems/triangle/)	|	_O(m\*n)_	|	_O(n)_ |	Medium | Bottom-up DP  |
