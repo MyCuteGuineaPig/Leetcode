@@ -39,6 +39,12 @@ public:
 
 
 //2025
+/*
+需要 dp[i-1][j-1]
+比如 [["0","0","1"],["0","1","1"],["1","1","1"]]
+
+
+ */
 class Solution {
 public:
     int maximalSquare(vector<vector<char>>& matrix) {

@@ -22,6 +22,21 @@ public:
     }
 };
 
+//2025
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int n  = prices.size();
+        int buy = prices[0];
+        int sell = 0;
+        for(int i = 1; i < n; ++i){
+            buy = min(buy, prices[i] - sell);
+            sell = max(sell, prices[i] - buy - fee);
+        }
+        return sell;
+    }
+};
+
 
 class Solution {
 public:

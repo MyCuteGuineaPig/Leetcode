@@ -29,6 +29,52 @@ public:
     }
 };
 
+/*
+
+               [3,  3,  5,  0,  0,   3,  1,  4]
+第一轮  cost =   3   3,  3,  0 , 0,   0,  0,  0
+      profit=   0,  0,  2,  2,  2,   3,  3,  4 
+
+第二轮  cost =   3   3,  3, -2, -2, -2, -2,  -2
+      profit=   0,  0,  2,  2,  2,   5,  5,  6     
+
+*/
+
+
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n = prices.size();
+        vector<int>profit(n);
+        for(int p = 0; p < k; ++p){
+            int cost = prices[0];
+            for(int i = 1; i < n; ++i){
+                cost = min(cost, prices[i]-profit[i]); //当 p == 0, profit[i] = 0
+                profit[i] = max(profit[i-1], prices[i]-cost);
+            }
+        }
+        return profit.back();
+    }
+};
+
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n = prices.size();
+        vector<int>profit(n);
+        for(int p = 0; p < k; ++p){
+            int cost = prices[0];
+            int tmp = profit[0];
+            for(int i = 1; i < n; ++i){
+                cost = min(cost, prices[i]-tmp); //prices[i] - profit[i-1]
+                tmp = profit[i];
+                profit[i] = max(profit[i-1], prices[i]-cost);
+            }
+        }
+        return profit.back();
+    }
+};
+
 //2025
 class Solution {
 public:

@@ -36,7 +36,16 @@ I'd be happy to know if anyone can do this from left-top (not trying different i
 /**
  * 
  * dp[i,j] 代表进入这个点前需要的豆子 min(dp[i+1,j],dp[i,j+1])- point[i,j] 用减法原因是因为点是负的，需要消耗的点，减减负负得正，就加回去
- * 
+ 
+
+dungeon =  [[-2,-3, 3],
+           [-5,-10,1],
+           [10,30,-5]]
+
+dp                   
+            7    5,  2
+            6,  11,  5
+            1,  1 , 6
  * */
 
 
