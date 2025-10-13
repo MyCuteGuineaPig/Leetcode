@@ -45,7 +45,7 @@ public:
 };
 
 
-//2025 bottom up
+//2025 bottom up, 外层是amount
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
@@ -60,6 +60,25 @@ public:
             }
         }
         return dp[amount] >= amount + 2 ? -1: dp[amount];
+    }
+};
+
+
+//2025， 外层是coins
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.begin(), coins.end());
+        vector<int>dp(amount+1, amount + 2);
+        dp[0] = 0;
+        for(int i = 0; i<coins.size(); ++i){
+            for(int j = coins[i]; j<=amount; ++j){
+                if(dp[j-coins[i]] > amount ) continue;
+                dp[j] = min(dp[j], dp[j-coins[i]] + 1);
+            }
+        }
+
+        return dp[amount] < amount + 2? dp[amount]:-1;
     }
 };
 
