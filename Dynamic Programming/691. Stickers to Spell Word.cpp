@@ -7,26 +7,27 @@ class Solution {
 public:
     int minStickers(vector<string>& stickers, string target) {
         int n = target.size(), N = 1 << n;
-        vector<uint> dp(N, -1); dp[0] = 0; //用 vector<int>dp(N, N+1); TLE
-        for(int i = 0; i<N; i++){
-            if(dp[i]==-1) continue;
-            for(auto sticker: stickers){
+        vector<uint> dp(N, -1); dp[0] = 0;
+        for(int i = 0; i < N; ++i){
+            if(dp[i] == -1) continue;
+
+            for(auto& word: stickers) {
                 int now = i;
-                for(char s: sticker){
-                    for(int r = 0; r<n; r++){
-                        if(target[r] != s || (now>>r) & 1) continue; //r位被set了
-                        now |= 1<<r;
-                        break; //每个sticker中字母在target中只能用一次
+                for (auto &c: word){
+                    for(int j = 0; j < n; ++j){
+                        if(target[j] != c || now & (1<<j)) continue;
+                        // now & (1<<j) means j's th bit already set by now 
+                        now |= (1<<j);
+                        break; //记得break 
                     }
                 }
-                dp[now] = min(dp[now], dp[i]+1);
+                dp[now] = min(dp[now], dp[i] + 1);
             }
             
         }
         return dp.back();
     }
 };
-
 
 /*
 并没有speed up

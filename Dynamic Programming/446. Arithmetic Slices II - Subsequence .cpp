@@ -27,8 +27,46 @@ dp[i][diff] 表示到i为止，长度大于等于2个(注：不是3个) 差为di
     dp[2][1]( 3的位置) = 2 表示 (1,2,3), (2,3), 后面的4 直接接上这两个就可以组成新的Arithmetic subsequence, (1,2,3,4), (2,3,4)
     dp[3][1] = 3 表示 (1,2,3,4), (2,3,4), (3,4)
 
+[2,4,6,8,10]
+i = 1 : 
+    dp[1][2] = 1  (2,4)
+i = 2
+    dp[2][2] = 1 + dp[1][2] = 2  (2,4,6), (4,6)              res += dp[1][2] = 1
+    dp[2][4] = 1  (2,6) 
+
+i = 3 
+    dp[3][2] = 1 + dp[2][2] = 3  (2,4,6,8), (4,6,8), (6,8)   res += dp[2][2] = 2
+    dp[3][4] = 1  (4,8), (6,8)             
+    dp[3][6] = 1  (2,8)
+
+i = 4 
+    dp[4][2] = 1 + dp[3][2] = 4  (2,4,6,8,10), (4,6,8,10), (6,8,10), (8,10)   res += dp[3][2] = 3
+    dp[4][4] = 1 + dp[2][4] = 3  (2,6,10), (6,10),                            res += dp[3][4] = 1
+    dp[4][6] = 1                 (4,10)              
+    dp[4][8] = 1  (2,10)    
 
 */
+
+
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        int result = 0;
+        int n = nums.size();
+        vector<unordered_map<long, int>>dp(n);
+        for(int j = 1; j < n; ++j) {
+            for(int i = 0; i < j; ++i) {
+                long diff = (long)(nums[i]) - nums[j];
+                result += dp[i][diff];
+                dp[j][diff] += dp[i][diff] + 1;
+                /*
+                +1 表示 (A[i], A[j]) 这两个数本身也可以作为一个pair, 作为后续的起点
+                 */
+            }
+        }
+        return result;
+    }
+};
 
 class Solution {
 public:
@@ -51,19 +89,3 @@ public:
 
 
 
-
-class Solution {
-public:
-    int numberOfArithmeticSlices(vector<int>& A) {
-        vector<unordered_map<long long,int>>dp(A.size());
-        int res = 0;
-        for(int i = 0; i<A.size(); ++i){
-            for(int j = 0; j<i; ++j){
-                long long diff = static_cast<long long>(A[i]) - A[j];
-                res +=  dp[j][diff];
-                dp[i][diff] += dp[j][diff]+1;
-            }
-        }
-        return res;
-    }
-};

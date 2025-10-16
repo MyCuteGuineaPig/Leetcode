@@ -60,25 +60,28 @@ DP solution much slower, 慢的原因是比如dogcatsdog，找到0，3 是dog了
 
 */
 
-vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
-    unordered_set<string> s(words.begin(), words.end());
-    vector<string> res;
-    for (auto w : words) {
-        int n = w.size();
-        vector<int> dp(n+1);
-        dp[0] = 1;
-        for (int i = 0; i < n; i++) {
-            if (dp[i] == 0) continue;
-            for (int j = i+1; j <= n; j++) {
-                if (j - i < n && s.count(w.substr(i, j-i))) dp[j] = 1; 
-                // j - i < n 控制避免word只是来自于字典中的一个词，而不是多个词合成.
-            }
-            if (dp[n]) { res.push_back(w); break; }
-        }
-    }
-    return res;
-}
 
+class Solution {
+public:
+    vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        unordered_set<string>wordDict(words.begin(), words.end());
+        vector<string>res;
+        for(auto word: words) {
+            int n  = word.size();
+            vector<int>dp(n+1); // j - i < n 控制避免word只是来自于字典中的一个词，而不是多个词合成
+            dp[0] = 1;
+            for(int i = 0; i < n && !dp[n]; ++i) {
+                if (!dp[i]) continue;
+                for(int j = i + 1; j <=n && !dp[n]; ++j)
+                    if (j - i < n && wordDict.count(word.substr(i, j-i)))
+                        dp[j] = 1;
+            }
+            if (dp[n])
+                res.push_back(word);
+        }
+        return res;
+    }
+};
 
 
 /*

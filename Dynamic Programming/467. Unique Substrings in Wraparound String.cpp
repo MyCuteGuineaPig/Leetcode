@@ -53,6 +53,13 @@ public:
             if (i == 0 || ((s[i]-'a') - (s[i-1] - 'a') + 26) % 26 != 1)
                 len = 0;
             dp[s[i]-'a'] = max(dp[s[i]-'a'], ++len);
+            /*
+            不可以用 dp[s[i]-'a'] = max(dp[s[i]-'a'], dp[s[i-1]-'a']+1 )
+            比如"abcecde"
+                      ^
+                      | 这个d 如果根据上面的logic, 连接上的会是abc  而不是c
+
+             */
         }
         return accumulate(dp.begin(), dp.end(), 0);
     }

@@ -97,6 +97,8 @@ public:
 
 /*
 log(n)
+如果是prime number 只能一个一个复制
+比如 n  = 13, res = 13
 */
 
 class Solution {
