@@ -96,6 +96,21 @@ public:
     }
 };
 
+//2025
+class Solution {
+public:
+    bool predictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n);
+        for(int j = 0; j < n; ++j){
+            dp[j] = nums[j];
+            for(int i = j - 1; i >= 0 ; --i) {
+                dp[i] = max(nums[i] - dp[i+1], nums[j] - dp[i]);
+            }
+        }
+        return dp[0] >= 0;
+    }
+};
 
 /*
 
