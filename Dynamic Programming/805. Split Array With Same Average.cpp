@@ -1,4 +1,42 @@
 /*
+
+dp[i] = cur : 表示组成i的sum 的方式有cur bitset 种
+        比如 cur = 5, 110, 可以是 2个数相加， 也可以是3个数相加
+        比如 cur = 7, 111, 可以是1个数，也可以是两个数相加，也可以是3个数相加
+ */
+
+class Solution {
+public:
+    bool splitArraySameAverage(vector<int>& nums) {
+        int n = nums.size(), tot = accumulate(nums.begin(), nums.end(), 0), m = n/2;
+        bool hassolution = false;
+        for(int i = 0; i <=m; ++i)
+            if (tot * i % n == 0) {
+                hassolution = true;
+                break;
+            }
+        if (!hassolution) return false;
+        vector<int>dp(tot+1);
+        dp[0] = 1; 
+        for(int i = 0; i < n; ++i){
+            for(int cur = tot - nums[i]; cur>=0; --cur){
+                if (!dp[cur]) continue; 
+                dp[cur + nums[i]] |= (dp[cur] << 1);  
+                //假如dp[10] = 5 (110)  到10的可以是两个数相加，也可以是三个数
+            }
+            dp[nums[i]] |= (1 << 1);
+        }
+        
+        for(int len = 1; len <= m; ++len) {
+            if (tot *len % n == 0 && (dp[tot * len / n] & (1 << len)))
+                return true; 
+        }
+        return false;
+    }
+};
+
+
+/*
   totalSum/n = Asum/k = Bsum/(n-k), where k = A.size() and 1 <= k <= n/2;
   Asum = totalSum*k/n, which is an integer. So we have totalSum*k%n == 0;
   不要求 Asum, 和 Bsum一样, 只要totalSum*k%n == 0  --》 totalSum*(n-k)%n == 0;
