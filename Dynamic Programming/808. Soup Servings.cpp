@@ -29,6 +29,24 @@ So if N>= 4800, just return 1 and it will be enough.
 
 class Solution {
 public:
+    double soupServings(int n) {
+        if (n >= 4800) return 1.0;
+        n = (n + 24) /25;
+        vector<vector<double>>dp (n + 1, vector<double>(n+1));
+        dp[0][0] = 0.5;
+        for(int i = 1; i<=n; ++i)
+            dp[0][i] = 1;
+        for(int i = 1; i<=n; ++i){
+            for(int j = 1; j <= n; ++j) {
+                dp[i][j] = 0.25 * (dp[max(i-4, 0)][j] + dp[max(i-3, 0)][j-1] + + dp[max(i-2, 0)][max(j-2, 0)] + dp[i-1][max(j-3, 0)]);
+            }
+        }
+        return dp[n][n];
+    }
+};
+
+class Solution {
+public:
     unordered_map<int,unordered_map<int,double>>dp;
     double soupServings(int N) {
         return N>4800 ? 1.0 : helper(N,N);

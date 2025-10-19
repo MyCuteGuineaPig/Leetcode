@@ -61,7 +61,7 @@ public:
 
         for(int m = 1; m < k; ++m) {
             for(int i = 1; i < n; ++i) {
-                for(int j = 0; j <i; ++j) {
+                for(int j = m-1; j <i; ++j) {
                     dp[i][m] = max(dp[i][m], dp[j][m-1] + (double)(presum[i]-presum[j])/(i-j) );
                 }
             }
