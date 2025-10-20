@@ -19,6 +19,27 @@ public:
 };
 */
 
+
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
+        if (!node) return nullptr;
+        unordered_map<int, Node*> mp;
+        auto f = [&](this auto && f, Node* cur){
+            if (mp.count(cur->val))
+                return mp[cur->val];
+            Node* res = new Node(cur->val);
+            mp[cur->val] = res;
+            for(auto& nei: cur->neighbors){
+                res->neighbors.push_back(f(nei));
+            }
+            return res;
+        };
+       
+        return f(node);
+    }
+};
+
 class Solution {
 public:
     Node* helper(Node* node, unordered_map<int, Node*>&visited){
@@ -48,28 +69,28 @@ public:
 
 
 //BFS
+
 class Solution {
 public:
     Node* cloneGraph(Node* node) {
-        if (!node) return {};
-        unordered_map<int,Node*> visited;
-        queue<Node*>q;
-        int root_val = node->val;
-        visited[root_val] = new Node(node->val);
-        q.push(node); //Queue里要存原来的 node, 否则新的node 还没有neighbor
-        while(!q.empty()){
-            int size = q.size(); 
-            for(int i = 0; i < size; ++i){
-                Node* top = q.front(); q.pop();
-                for(auto& neighbor: top->neighbors){
-                    if (visited.count(neighbor->val) == 0){
-                        visited[neighbor->val] = new Node(neighbor->val);
-                        q.push(neighbor);
-                    }
-                    visited[top->val]->neighbors.push_back(visited[neighbor->val]);
+        if (!node) return nullptr;
+        unordered_map<int, Node*> visited;
+        visited[node->val] = new Node(node->val); //存的copy
+        queue<Node*> q; q.push(node); //存的original node
+        while (!q.empty()) {
+            int size = q.size();
+            for(int i = 0; i < size; ++i) {
+                auto top = q.front(); q.pop();
+                for(auto& nei: top->neighbors) {
+                    if (visited.count(nei->val) == 0){
+                        visited[nei->val] = new Node(nei->val); 
+                        q.push(nei);
+                    } 
+                    visited[top->val]->neighbors.push_back(visited[nei->val]);
                 }
             }
         }
-        return visited[root_val];
+       
+        return visited[node->val];
     }
 };
