@@ -957,6 +957,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [1493. Longest Subarray of 1's After Deleting One Element](https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/) | _O(n)_ | _O(1)_	| Medium | |
 | [1838. Frequency of the Most Frequent Element](https://leetcode.com/problems/frequency-of-the-most-frequent-element/) | _O(logn)_ | _O(1)_	| Medium | |
 | [1839. Longest Substring Of All Vowels in Order](https://leetcode.com/problems/longest-substring-of-all-vowels-in-order) | _O(n)_ | _O(1)_	| Medium | |
+| [3346. Maximum Frequency of an Element After Performing Operations I](https://leetcode.com/problems/maximum-frequency-of-an-element-after-performing-operations-i/description) | _O(nlogn)_ | _O(n)_	| Medium | 👀  <br/> 类似的题: <ul><li>[209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)</li><li></li></ul> |
 
 
 ```c++
