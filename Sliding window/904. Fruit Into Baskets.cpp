@@ -15,6 +15,25 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        int n = fruits.size();
+        int res = 0, l = 0;
+        unordered_map<int, int> counter;
+        int cnt = 0;
+        for(int  i = 0 ; i<n; ++i) {
+            if (counter[fruits[i]]++ == 0 ) ++cnt;
+            while (cnt > 2) {
+                if (--counter[fruits[l++]] == 0) --cnt;
+            }
+            res = max(res, i - l + 1);
+        }
+        return res;
+    }
+};
+
 // keep the maxmize the windows size, 比如 之前最大windows size 是3， 现在windows size = 5 (start 会停住)
 class Solution {
 public:
