@@ -14,6 +14,47 @@ public:
         return res;
     }
 };
+
+//2025
+class Solution {
+public:
+    int maxFrequency(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int l = 0; 
+        long diff = 0;
+        int res = 0;
+        for(int i = 0; i < n; ++i){
+            if(i > 0 && nums[i] != nums[i-1])
+                diff += (long)(nums[i]-nums[i-1])*(i-l);
+            while (diff > k) {
+                diff -= nums[i] - nums[l++];
+            }
+            res = max(res, i-l+1);
+        }
+        return res;
+    }
+};
+
+//2025
+class Solution {
+public:
+    int maxFrequency(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int l = 0; 
+        long diff = 0;
+        int res = 0;
+        for(int i = 0; i < n; ++i){
+            if(i > 0 && nums[i] != nums[i-1])
+                diff += (long)(nums[i]-nums[i-1])*(i-l);
+            if (diff > k) {
+                diff -= nums[i] - nums[l++];
+            }
+        }
+        return n-l;
+    }
+};
 /*
 
 valid windows
@@ -21,6 +62,12 @@ valid windows
 k  >= windows_size * max - sum
 
 k + sum >= windows_size * max
+
+
+For every new element A[j] to the sliding window,
+Add it to the sum by sum += A[j].
+Check if it'a valid window by
+sum + k < (long)A[j] * (j - i + 1)
 
 */
 
