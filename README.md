@@ -1161,6 +1161,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [1834. Single-Threaded CPU](https://leetcode.com/problems/single-threaded-cpu/) | _O(nlogn)_ | _O(n)_	| Medium |  |
 | [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/) | _O(mlogm + n + mlogn)_ | _O(n)_	| Hard |  |
 | [2519. Count the Number of K-Big Indices](https://leetcode.com/problems/count-the-number-of-k-big-indices/description/) | _O(nlogn)_ | _O(n)_	| Hard |  |
+| [3771. Total Score of Dungeon Runs](https://leetcode.com/problems/total-score-of-dungeon-runs/) | _O(nlogn)_ | _O(n)_	| Medium | 数学变换公式 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | |   |
 
 
@@ -1480,10 +1481,10 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
  |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [133. Clone Graph](https://leetcode.com/problems/clone-graph/description/)	|	_O(N+M)_	 |	_O(N)_ |	Medium	|  |
+| [133. Clone Graph](https://leetcode.com/problems/clone-graph/description/)	|	_O(N+M)_	 |	_O(N)_ |	Medium	| 👀 |
 | [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)	|	_O(n + m)_	|	_O(n + m)_ | Medium | Undirected Graph Detect Cycle  👀 <br/>Similar Question <ul><li> [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)</li></ul>  |
 | [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)	|	_O(n + m)_	|	_O(n + m)_ | Medium | Undirected Graph Detect Cycle, topological sort <br/>Similar Question <ul><li>[207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)</li></ul>  |
-| [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	|   <br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul> |
+| [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	|   👀<br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul> |
 | [269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) |	_O(n)_	| _O(1)_ |	Medium |  ⭐⭐⭐Topological sort |
 | [277. Find the Celebrity](https://leetcode.com/problems/find-the-celebrity/description/)	|	_O(n)_	 |	_O(1)_ |	Medium	| |
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	| **undirected graph  connected component**, union find |
@@ -1528,6 +1529,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [3607. Power Grid Maintenance](https://leetcode.com/problems/power-grid-maintenance/description/)	|	_O(c)_	|	_O(c + q)_ | Medium | ⭐⭐connected component |
 |[3608. Minimum Time for K Connected Components](https://leetcode.com/problems/minimum-time-for-k-connected-components/description/)	|	_O(eloge)_	|	_O(n)_ | Medium | ⭐⭐ <br/> 类似的题: <ul><li>[3613. Minimize Maximum Component Cost](https://leetcode.com/problems/minimize-maximum-component-cost/description/)</li></ul> |
 | [3613. Minimize Maximum Component Cost](https://leetcode.com/problems/minimize-maximum-component-cost/description/)	|	_O(eloge)_	|	_O(n)_ | Medium | ⭐⭐ <br/> 类似的题: <ul><li>[3608. Minimum Time for K Connected Components](https://leetcode.com/problems/minimum-time-for-k-connected-components/description/)</li></ul> |
+| [3772. Maximum Subgraph Score in a Tree](https://leetcode.com/problems/maximum-subgraph-score-in-a-tree/description/)	|	_O(E)_	|	_O(V)_ | Hard | Assumption: no cycle => no need visited counter |
 
 
 **directed graph**
