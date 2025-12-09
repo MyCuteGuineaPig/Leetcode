@@ -1749,9 +1749,115 @@ bool hasCycleUnionFind(int n, vector<vector<int>>& edges) {
 }
 ```
 
+**2. Cycle Detection in a Directed Graph (True of False)**
+
+**Algorithm 1: Depth-First Search (DFS)**
+
+problem: 207.Course Schedule
+
+- Use DFS and maintain a recursion stack to track nodes in the current path.
+- If a node is visited and is already in the recursion stack, a cycle exists.
+
+Time Complexity: O(V + E)
+
+Space Complexity: O(V) (for visited and recursion stack arrays)
+
+
+```c++
+bool dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& recStack) {
+    visited[node] = true;
+    recStack[node] = true;
+
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            if (dfs(neighbor, graph, visited, recStack)) {
+                return true;
+            }
+        } else if (recStack[neighbor]) {
+            return true; // Cycle detected
+        }
+    }
+
+    recStack[node] = false;
+    return false;
+}
+
+bool hasCycleDirected(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    for (auto& edge : edges) {
+        graph[edge[0]].push_back(edge[1]);
+    }
+
+    vector<bool> visited(n, false);
+    vector<bool> recStack(n, false);
+
+    for (int i = 0; i < n; ++i) {
+        if (!visited[i]) {
+            if (dfs(i, graph, visited, recStack)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+```
+
+**Algorithm 2: Kahn's Algorithm (Topological Sort)** (Only require in-degree)
+
+- Use Kahn's Algorithm for topological sorting.
+- If all nodes are not processed (i.e., there are nodes with non-zero in-degree), a cycle exists.
+
+
+Time Complexity: O(V + E)
+
+Space Complexity: O(V)
+
+```c++
+bool hasCycleDirectedKahn(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    vector<int> in_degree(n, 0);
+
+    for (auto& edge : edges) {
+        graph[edge[0]].push_back(edge[1]);
+        in_degree[edge[1]]++;
+    }
+
+    queue<int> q;
+    for (int i = 0; i < n; ++i) {
+        if (in_degree[i] == 0) {
+            q.push(i);
+        }
+    }
+
+    int count = 0;
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        count++;
+
+        for (int neighbor : graph[node]) {
+            if (--in_degree[neighbor] == 0) {
+                q.push(neighbor);
+            }
+        }
+    }
+
+    return count != n; // If not all nodes are processed, a cycle exists
+}
+```
+
+| Graph Type  |	Algorithm	  | Time Complexity  | 	Space Complexity	 | Notes  |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| Undirected Graph  | 	DFS	 | O(V + E)	 | O(V)  |	Simple and effective for undirected graphs.  |
+| Undirected Graph	  | Union-Find	 | O(E * α(V))  |	O(V)  |	Efficient for edge-based cycle detection.  |
+| Directed Graph  |	DFS with Recursion Stack  |	O(V + E) |	O(V)  |	Detects cycles using a recursion stack.  |
+| Directed Graph | 	Kahn's Algorithm (Topological Sort)  |	O(V + E)  |	O(V)  |	Detects cycles by checking in-degree during topological sorting.  |
+ 
+
 ---
 
-**2. Cycle Detection in an Undirected Graph (Find all Cycle Nodes)** 
+**3. Cycle Detection in an Undirected Graph (Find all Cycle Nodes)** 
 
 Method 1: using **Kahn’s Algorithm**
 
@@ -1857,112 +1963,6 @@ int find_cycle(unordered_map<int,unordered_set<int>>&graph, int cur, int parent,
 | **Detects First Cycle Early?** | Yes (as soon as back-edge found) | No, must process entire graph |
 
 ---
-
-**3. Cycle Detection in a Directed Graph (True of False)**
-
-**Algorithm 1: Depth-First Search (DFS)**
-
-problem: 207.Course Schedule
-
-- Use DFS and maintain a recursion stack to track nodes in the current path.
-- If a node is visited and is already in the recursion stack, a cycle exists.
-
-Time Complexity: O(V + E)
-
-Space Complexity: O(V) (for visited and recursion stack arrays)
-
-
-```c++
-bool dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& recStack) {
-    visited[node] = true;
-    recStack[node] = true;
-
-    for (int neighbor : graph[node]) {
-        if (!visited[neighbor]) {
-            if (dfs(neighbor, graph, visited, recStack)) {
-                return true;
-            }
-        } else if (recStack[neighbor]) {
-            return true; // Cycle detected
-        }
-    }
-
-    recStack[node] = false;
-    return false;
-}
-
-bool hasCycleDirected(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> graph(n);
-    for (auto& edge : edges) {
-        graph[edge[0]].push_back(edge[1]);
-    }
-
-    vector<bool> visited(n, false);
-    vector<bool> recStack(n, false);
-
-    for (int i = 0; i < n; ++i) {
-        if (!visited[i]) {
-            if (dfs(i, graph, visited, recStack)) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-```
-
-**Algorithm 2: Kahn's Algorithm (Topological Sort)** (Only require in-degree)
-
-- Use Kahn's Algorithm for topological sorting.
-- If all nodes are not processed (i.e., there are nodes with non-zero in-degree), a cycle exists.
-
-
-Time Complexity: O(V + E)
-
-Space Complexity: O(V)
-
-```c++
-bool hasCycleDirectedKahn(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> graph(n);
-    vector<int> in_degree(n, 0);
-
-    for (auto& edge : edges) {
-        graph[edge[0]].push_back(edge[1]);
-        in_degree[edge[1]]++;
-    }
-
-    queue<int> q;
-    for (int i = 0; i < n; ++i) {
-        if (in_degree[i] == 0) {
-            q.push(i);
-        }
-    }
-
-    int count = 0;
-    while (!q.empty()) {
-        int node = q.front();
-        q.pop();
-        count++;
-
-        for (int neighbor : graph[node]) {
-            if (--in_degree[neighbor] == 0) {
-                q.push(neighbor);
-            }
-        }
-    }
-
-    return count != n; // If not all nodes are processed, a cycle exists
-}
-```
-
-| Graph Type  |	Algorithm	  | Time Complexity  | 	Space Complexity	 | Notes  |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| Undirected Graph  | 	DFS	 | O(V + E)	 | O(V)  |	Simple and effective for undirected graphs.  |
-| Undirected Graph	  | Union-Find	 | O(E * α(V))  |	O(V)  |	Efficient for edge-based cycle detection.  |
-| Directed Graph  |	DFS with Recursion Stack  |	O(V + E) |	O(V)  |	Detects cycles using a recursion stack.  |
-| Directed Graph | 	Kahn's Algorithm (Topological Sort)  |	O(V + E)  |	O(V)  |	Detects cycles by checking in-degree during topological sorting.  |
- 
 
 
 
