@@ -1510,6 +1510,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2101. Detonate the Maximum Bombs](https://leetcode.com/problems/detonate-the-maximum-bombs/description/)	|	_O(V\*(V+E))_	|	_O(V+E)_ | Medium | ⭐⭐⭐ **directed graph**, 每个dfs 前设置`visited`, b/c A不能到B 不代表 B 不能到A , count the max number of child from a node  <br/> Similar Question <ul><li>  [529. Minesweeper](https://leetcode.com/problems/minesweeper/) </li><li>[547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)	</li><li>[695. Max Area of Island](https://leetcode.com/problems/max-area-of-island/)</li><li>[994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/description/)</li></ul>  |
 | [2050. Parallel Courses III](https://leetcode.com/problems/parallel-courses-iii/description/)	|	_O(n + e)_	|	_O(n + e)_ | Hard | ⭐⭐⭐  |
 | [2065. Maximum Path Quality of a Graph](https://leetcode.com/problems/maximum-path-quality-of-a-graph/description/) | _O(V+E + 4^10)_ | _O(V + E)_	| Medium |  |
+| [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/) | _O(n^3)_ | _O(V)_	| Medium |  👀 <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li><li> [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	</li></ul>   |
 | [2092. Find All People With Secret](https://leetcode.com/problems/find-all-people-with-secret/description/)	|	_O(M\*log M + N)_	|	_O(M + N)_ | Hard | ⭐⭐⭐ **undirected graph** Union Find |
 | [2097. Valid Arrangement of Pairs](https://leetcode.com/problems/valid-arrangement-of-pairs/description/)	|	_O(M+N)_	|	_O(M + N)_ | Hard | ⭐⭐⭐ **directed graph Eulerian Path** <br/> Similar Question <ul><li>  [332. Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/description/)</li><li> [2097. Valid Arrangement of Pairs](https://leetcode.com/problems/valid-arrangement-of-pairs/description/)</li></ul> |
 | [2115. Find All Possible Recipes from Given Supplies](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/description/)	|	_O(V+E)_	|	_O(V + E)_ | Medium | ⭐⭐⭐ **directed graph** Union Find，topoloigical sort |
@@ -1532,116 +1533,6 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [3772. Maximum Subgraph Score in a Tree](https://leetcode.com/problems/maximum-subgraph-score-in-a-tree/description/)	|	_O(E)_	|	_O(V)_ | Hard | Assumption: no cycle => no need visited counter |
 
 
-**directed graph**
-
-```c++
-207.Course Schedule
-vector<int>visited(n);
-vector<int>on_path(n);
-auto detect_cycle = [&](this auto&& detect_cycle, int cur)->bool{
-    /*
-    需要on_path(n);
-
-    比如  
-        1 -> 2 -> 3 
-                    ^
-                    |
-            4 -- 
-        如果 1 -> 2 ->3 发现没有cycle, 再到4 开始， If(visited[3]) return true, wrong
-        */
-    if(on_path[cur])
-        return true;
-    if(visited[cur]){
-        return false;
-    }
-    on_path[cur] = 1;
-    visited[cur] = 1;
-    for(auto nxt: graph[cur]){
-        if(detect_cycle(nxt)) return true;
-    }
-    on_path[cur] = 0;
-    return false;
-};
-for(int i = 0; i < n; ++i){
-    if(detect_cycle(i)) return false;
-}
-```
-
-
-**undirected graph**
-
-```c++
-//undirected graph
-//detect cycle
-
-bool dfs(unordered_map<int, unordered_set<int>>&graph, vector<int>&visited, int cur, int parent){
-    //cout<<" in "<<cur<<endl;
-    visited[cur] = 1;
-    for(auto nxt: graph[cur]){
-        if(nxt == parent) continue;
-        if (visited[nxt]) return false;
-        if (!dfs(graph, visited, nxt, cur)){
-            return false;
-        }
-    }
-    return true;
-}
-
-//detect cycle node 
-int find_cycle(unordered_map<int,unordered_set<int>>&graph, int cur, int parent, vector<int>&visited, unordered_set<int>&cycle){
-    if(visited[cur]){
-        return cur;
-    }
-    visited[cur] = 1;
-    for(auto &nxt: graph[cur]){
-        if(nxt == parent) continue;
-        int cycle_node = find_cycle(graph, nxt, cur, visited, cycle);
-        if(cycle_node >= 0){
-            cout<<" find cycle node " << cur<<endl;
-            cycle.insert(cur);
-        }
-        if(cycle_node >= 0){ 
-            //比如 1-> 2 -> 3 -> 4 -> 1, 当4 ->1 返回1, 当 cur = 1 时候, cycle_node = 1是cycle 的起点
-            return cur == cycle_node? -1: cycle_node;
-        }
-    }
-    return -1;
-}
-
-
-//BFS find cycle node
-void find_cycle(int n, vector<vector<int>>& edges) {
-    unordered_map<int, unordered_set<int>>graph;
-    vector<int>degree(n,0);
-    for(auto & edge: edges){
-        graph[edge[0]].insert(edge[1]);
-        graph[edge[1]].insert(edge[0]);
-        ++degree[edge[0]]; 
-        ++degree[edge[1]];
-    }
-    queue<int>q;
-    for(int i = 0; i<n; ++i){
-        if(degree[i] == 1) {
-            q.push(i);
-        }
-    }
-    while(!q.empty()){
-        int top = q.front(); q.pop();
-        for(auto nxt: graph[top]){
-            if(--degree[nxt] == 1){
-                q.push(nxt);
-            }
-        }
-    }
-    vector<int>res(n, 2*n);
-    for(int i = 0; i < n; ++i){
-        if(degree[i]>1){
-            cout<<" find cycle node " << i<<endl;
-        }
-    }
-}
-
-```
 
 **Dijkstra's Algorithm**: priority queue
 
@@ -1679,9 +1570,7 @@ vector<int> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {
 }
 
 ```
-
-
-
+---
 
 **Bellman–Ford Algorithm (detect negative cycle)**: dp: Finds the shortest path from a **single source** to all other vertices.
 
@@ -1714,6 +1603,9 @@ bool bellmanFord(int n, vector<tuple<int, int, int>>& edges, int source, vector<
     return true; // No negative weight cycle
 }
 ```
+
+---
+
 
 **Floyd-Warshall** Finds the shortest paths between **all pairs of vertices** in a graph.	
  
@@ -1761,13 +1653,13 @@ floydWarshall(dist);
 | Negative Weight Edges |  negative weights ✅   but cannot handle negative weight cycles❌ . | Handles negative weights and can detect negative weight cycles.✅  | Does **not handle negative weights** ❌  (may give incorrect results if negative weights exist). | 
 | Example Scenarios | Finding shortest travel times between all cities in a transportation network. | Finding shortest paths in a graph with currency exchange rates (negative weights possible). |  Finding the shortest route in a road network with non-negative weights (e.g., distances or costs). |
 
+---
 
+**1. Cycle Detection in an Undirected Graph (True of Flase)** 
 
-**Detect Cycle**
+---
 
-
-1. Cycle Detection in an **Undirected Graph**
-Algorithm: Depth-First Search (DFS)
+Method 1: Algorithm: **Depth-First Search (DFS)**
 
 - Use DFS to traverse the graph.
 - Keep track of visited nodes and their parent nodes.
@@ -1815,7 +1707,9 @@ bool hasCycleUndirected(int n, vector<vector<int>>& edges) {
 }
 ```
 
-Cycle Detection Using Union-Find (Disjoint Set Union)
+---
+
+Method 2: Cycle Detection Using **Union-Find** (Disjoint Set Union)
 
 - Applicable for undirected graphs.
 - Use the Union-Find algorithm to detect cycles:
@@ -1855,10 +1749,120 @@ bool hasCycleUnionFind(int n, vector<vector<int>>& edges) {
 }
 ```
 
+---
 
-2.**Cycle Detection in a Directed Graph**
+**2. Cycle Detection in an Undirected Graph (Find all Cycle Nodes)** 
 
-Algorithm 1: Depth-First Search (DFS)
+Method 1: using **Kahn’s Algorithm**
+
+Khan algorithm 需要both in and out node degree + 1，因为 不知道方向
+
+
+```c++
+void CycleUndirectedKahn(int n, vector<vector<int>>& edges) {
+    vector<vector<int>> graph(n);
+    vector<int> degree(n, 0);
+
+    // Build graph
+    for (auto& e : edges) {
+        int u = e[0], v = e[1];
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+        degree[u]++;
+        degree[v]++;
+    }
+
+    queue<int> q;
+
+    // 1) push all leaf nodes (degree == 1)
+    for (int i = 0; i < n; i++) {
+        if (degree[i] == 1) {
+            q.push(i);
+        }
+    }
+
+    // 2) Remove leaf nodes
+    while (!q.empty()) {
+        int node = q.front(); q.pop();
+        for (int nei : graph[node]) {
+            if (--degree[nei] == 1) {
+                q.push(nei);
+            }
+        }
+    }
+
+    // 3) If any node has degree >= 2, it is part of a cycle
+    for (int i = 0; i < n; i++) {
+        if (degree[i] >= 2) {
+            cout<<" find cycle node " << i<<endl;
+        }
+    }
+}
+
+/*
+比如
+
+
+1 -- 2
+|    |
+4 -- 3  - 5 
+
+    node  degree 初始   degree after leaf removal
+     1       2               2
+     2       2               2
+     3       3               2
+     4       3               2
+     5       1               0
+
+只有 5 被process, 随后 --degree[3]， 但degree[3]!=1, 无法加进q
+*/
+```
+
+
+
+---
+
+**Method 2: DFS Back-Edge Finding Cycle Nodes**
+
+```c++
+
+//detect cycle node 
+int find_cycle(unordered_map<int,unordered_set<int>>&graph, int cur, int parent, vector<int>&visited, unordered_set<int>&cycle){
+    if(visited[cur]){
+        return cur;
+    }
+    visited[cur] = 1;
+    for(auto &nxt: graph[cur]){
+        if(nxt == parent) continue;
+        int cycle_node = find_cycle(graph, nxt, cur, visited, cycle);
+        if(cycle_node >= 0){
+            cout<<" find cycle node " << cur<<endl;
+            cycle.insert(cur);
+        }
+        if(cycle_node >= 0){ 
+            //比如 1-> 2 -> 3 -> 4 -> 1, 当4 ->1 返回1, 当 cur = 1 时候, cycle_node = 1是cycle 的起点
+            return cur == cycle_node? -1: cycle_node;
+        }
+    }
+    return -1;
+}
+```
+
+| Aspect | DFS Cycle Detection | Kahn’s Algorithm (Topological Sort) |
+|-------|----------------------|-------------------------------------|
+| **Can Identify All Cycle Nodes?** | Yes (by marking nodes involved in back-edges) | Yes, leftover nodes after processing are cycle nodes |
+| **Can Identify Exact Cycle Structure?** | Yes (via parent pointers) | No (only returns nodes in cycles, not exact cycles) |
+| **Time Complexity** | **O(V + E)** | **O(V + E)** |
+| **Space Complexity** | **O(V)** recursion + visited arrays | **O(V)** for in-degree + queue |
+| **Detects First Cycle Early?** | Yes (as soon as back-edge found) | No, must process entire graph |
+
+---
+
+**3. Cycle Detection in a Directed Graph (True of False)**
+
+**Algorithm 1: Depth-First Search (DFS)**
+
+problem: 207.Course Schedule
 
 - Use DFS and maintain a recursion stack to track nodes in the current path.
 - If a node is visited and is already in the recursion stack, a cycle exists.
@@ -1908,7 +1912,7 @@ bool hasCycleDirected(int n, vector<vector<int>>& edges) {
 }
 ```
 
-Algorithm 2: Kahn's Algorithm (Topological Sort)
+**Algorithm 2: Kahn's Algorithm (Topological Sort)** (Only require in-degree)
 
 - Use Kahn's Algorithm for topological sorting.
 - If all nodes are not processed (i.e., there are nodes with non-zero in-degree), a cycle exists.
@@ -1959,6 +1963,8 @@ bool hasCycleDirectedKahn(int n, vector<vector<int>>& edges) {
 | Directed Graph  |	DFS with Recursion Stack  |	O(V + E) |	O(V)  |	Detects cycles using a recursion stack.  |
 | Directed Graph | 	Kahn's Algorithm (Topological Sort)  |	O(V + E)  |	O(V)  |	Detects cycles by checking in-degree during topological sorting.  |
  
+
+
 
 Here are the main algorithms for **Topological Sort**:
 
@@ -2026,61 +2032,8 @@ vector<int> topologicalSortKahn(int n, vector<vector<int>>& edges) {
 
 ---
 
-**2. DFS-based Approach**
-This approach uses **Depth-First Search (DFS)** and a **stack** to perform a topological sort.
 
-**Steps**:
-1. Perform a DFS on the graph.
-2. Push each vertex onto a stack after visiting all its neighbors.
-3. Reverse the stack to get the topological order.
-
-**Code**:
-```cpp
-#include <iostream>
-#include <vector>
-#include <stack>
-using namespace std;
-
-void dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, stack<int>& topo_stack) {
-    visited[node] = true;
-
-    for (int neighbor : graph[node]) {
-        if (!visited[neighbor]) {
-            dfs(neighbor, graph, visited, topo_stack);
-        }
-    }
-
-    topo_stack.push(node);
-}
-
-vector<int> topologicalSortDFS(int n, vector<vector<int>>& edges) {
-    vector<vector<int>> graph(n);
-    for (auto& edge : edges) {
-        graph[edge[0]].push_back(edge[1]);
-    }
-
-    vector<bool> visited(n, false);
-    stack<int> topo_stack;
-
-    for (int i = 0; i < n; ++i) {
-        if (!visited[i]) {
-            dfs(i, graph, visited, topo_stack);
-        }
-    }
-
-    vector<int> topo_order;
-    while (!topo_stack.empty()) {
-        topo_order.push_back(topo_stack.top());
-        topo_stack.pop();
-    }
-
-    return topo_order;
-}
-```
-
----
-
-**3. All Topological Sorts (Backtracking Approach)**
+**2. All Topological Sorts (Backtracking Approach)**
 This approach generates **all possible topological orders** of a graph using backtracking.
 
 **Steps**:
@@ -2149,7 +2102,7 @@ vector<vector<int>> findAllTopologicalSorts(int n, vector<vector<int>>& edges) {
 
 ---
 
-**4. Recursive DFS with Post-order Traversal**
+**3. Recursive DFS with Post-order Traversal**
 This is a variation of the DFS-based approach where we use **post-order traversal** to determine the topological order.
 
 **Steps**:
@@ -2203,7 +2156,6 @@ vector<int> topologicalSortPostOrder(int n, vector<vector<int>>& edges) {
 | **Algorithm**               | **Approach**                | **Time Complexity** | **Space Complexity** | **Notes**                                                                 |
 |------------------------------|-----------------------------|----------------------|-----------------------|---------------------------------------------------------------------------|
 | **Kahn's Algorithm**         | BFS-based                  | \(O(V + E)\)         | \(O(V)\)              | Simple and efficient for finding one topological order.                  |
-| **DFS-based Approach**       | DFS + Stack                | \(O(V + E)\)         | \(O(V)\)              | Uses recursion and stack to find one topological order.                  |
 | **All Topological Sorts**    | Backtracking               | \(O(V! \cdot V)\)    | \(O(V)\)              | Finds all possible topological orders.                                   |
 | **Post-order DFS**           | Recursive DFS + Post-order | \(O(V + E)\)         | \(O(V)\)              | Variation of DFS-based approach using post-order traversal.              |
 
