@@ -51,3 +51,63 @@ public:
         return res.size() == degree.size() ? res: "";
     }
 };
+
+
+
+
+class Solution {
+public:
+    string alienOrder(vector<string>& words) {
+        unordered_map<char, unordered_set<char>>graph;
+        unordered_map<char, int> visited;
+        unordered_map<char, int> on_path;
+
+        for(auto w: words)
+            for(auto i: w){
+                visited[i] = 0;
+                on_path[i] = 0;
+            }
+for(int i = 0; i < words.size() - 1; ++i){
+            int size = min(words[i].size(), words[i+1].size());
+            for(int k = 0; k< size; ++k){
+                char s1 = words[i][k], s2 = words[i+1][k];
+                if(s1!=s2) {
+                    if (graph[s1].count(s2) == 0){
+                        graph[s1].insert(s2);
+                    }
+                    break;
+                } else if (k == size - 1 && words[i].size() > words[i+1].size()) {
+                    //like 'ab' is before 'a'
+                    return "";
+                }
+            }
+        }
+
+        string res = "";
+        auto find_cycle = [&](this auto&& find_cycle, int cur, int parent) -> bool {
+            visited[cur] = 1;
+            on_path[cur] = 1;
+            for(auto & nxt: graph[cur]){
+                if(!visited[nxt]) {
+                    if(find_cycle(nxt, cur)) {
+                        return true;
+                    }
+                } else if(on_path[nxt]) 
+                    return true;
+            }
+            res += cur;
+             on_path[cur] = 0;
+            return false;
+        };  
+
+        for(auto c: visited){
+            if(visited[c.first] == 0) {
+                if (find_cycle(c.first, -1)) {
+                    return "";
+                }
+            }
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};

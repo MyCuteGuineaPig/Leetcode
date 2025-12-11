@@ -1486,7 +1486,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)	|	_O(n + m)_	|	_O(n + m)_ | Medium | Undirected Graph Detect Cycle, topological sort <br/>Similar Question <ul><li>[207. Course Schedule](https://leetcode.com/problems/course-schedule/description/)</li></ul>  |
 | [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	|   👀<br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li>[2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	<li> </li></ul> |
 | [269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) |	_O(n)_	| _O(1)_ |	Medium |  ⭐⭐⭐Topological sort |
-| [277. Find the Celebrity](https://leetcode.com/problems/find-the-celebrity/description/)	|	_O(n)_	 |	_O(1)_ |	Medium	| |
+| [277. Find the Celebrity](https://leetcode.com/problems/find-the-celebrity/description/)	|	_O(n)_	 |	_O(1)_ |	Medium	| 👀 |
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/)	|	_O(V+E)_	 |	_O(V+E)_ |	Medium	| **undirected graph  connected component**, union find |
 | [329. Longest Increasing Path in a Matrix](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/)	| _O(m \* n)_ | _O(m \* n)_ | Hard | 😍 <ul><li> DFS + DP ✏️[C++ lambda function](https://github.com/beckswu/Leetcode/blob/master/DFS/329.%20Longest%20Increasing%20Path%20in%20a%20Matrix.cpp#L68) </li><li> 🔍[BFS: 一层一层移走周围点中最大的, 移走多少回就是结果](https://github.com/beckswu/Leetcode/blob/master/DFS/329.%20Longest%20Increasing%20Path%20in%20a%20Matrix.cpp#L100)</li></ul> |
 | [332. Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/description/)	|	_O(t! / (n1! \* n2! \* ... nk!))_	 |	_O(t)_ |	Medium	|  😍⭐⭐⭐ <ul><li>Solution 1: DFS, ```Unordered_map<string, unordered_map<string,int>>```, 可能有几个一样的tickets</li> <li>Solution 2: 🔍 ```Unordered_map<string, multi_set<string>>``` [The reason we got stuck is because that we hit the exit, reverse 是解](https://github.com/beckswu/Leetcode/blob/master/DFS/332.%20Reconstruct%20Itinerary.cpp#L74)</li></ul> <br/> Similar Question <ul><li>  [332. Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/description/)</li><li> [2097. Valid Arrangement of Pairs](https://leetcode.com/problems/valid-arrangement-of-pairs/description/)</li></ul> |
@@ -1764,21 +1764,21 @@ Space Complexity: O(V) (for visited and recursion stack arrays)
 
 
 ```c++
-bool dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& recStack) {
+bool dfs(int node, vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& on_path) {
     visited[node] = true;
-    recStack[node] = true;
+    on_path[node] = true;
 
     for (int neighbor : graph[node]) {
         if (!visited[neighbor]) {
-            if (dfs(neighbor, graph, visited, recStack)) {
+            if (dfs(neighbor, graph, visited, on_path)) {
                 return true;
             }
-        } else if (recStack[neighbor]) {
+        } else if (on_path[neighbor]) {
             return true; // Cycle detected
         }
     }
 
-    recStack[node] = false;
+    on_path[node] = false;
     return false;
 }
 
@@ -1789,11 +1789,11 @@ bool hasCycleDirected(int n, vector<vector<int>>& edges) {
     }
 
     vector<bool> visited(n, false);
-    vector<bool> recStack(n, false);
+    vector<bool> on_path(n, false);
 
     for (int i = 0; i < n; ++i) {
         if (!visited[i]) {
-            if (dfs(i, graph, visited, recStack)) {
+            if (dfs(i, graph, visited, on_path)) {
                 return true;
             }
         }
