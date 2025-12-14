@@ -70,28 +70,63 @@ public:
 };
 
 
+/**
+ * 
+ * some observations:
+https://leetcode.com/problems/reconstruct-itinerary/discuss/78768/Short-Ruby-Python-Java-C++
+The nodes which have odd degrees (int and out) are the entrance or exit. In your example it’s JFK and A.
+
+If there are no nodes have odd degrees, we could follow any path without stuck until hit the last exit node
+
+The reason we got stuck is because that we hit the exit
+
+In your given example, nodes A is the exit node, we hit it and it’s the exit. So we put it to the result as the last node.
+*/
+class Solution {
+public:
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        unordered_map<string, priority_queue<string, vector<string>, greater<>>>graph;
+        for(auto &t:tickets){
+            graph[t[0]].push(t[1]);
+        }
+        vector<string>res;
+        dfs(graph, "JFK", res);
+        reverse(res.begin(), res.end());
+        return res;
+    }
+
+    void dfs(unordered_map<string, priority_queue<string, vector<string>, greater<>>>&graph, const string& cur, vector<string>&res){
+        auto& q = graph[cur];
+        while (!q.empty()){ //必须是while, 不可以是if
+            string nxt = q.top(); q.pop();
+            dfs(graph, nxt, res);
+        }
+        res.push_back(cur);
+    }
+};
+
 
 class Solution {
 public:
-    vector<string> findItinerary(vector<pair<string, string>> tickets) { 
-        unordered_map<string, multiset<string>>m;
-        vector<string>route;
-        for(auto t: tickets){
-            m[t.first].insert(t.second);
-        }
-        dfs("JFK", route, m);
-        return vector<string>(route.rbegin(), route.rend());
-    }
-
-    void dfs(string cur,vector<string>& route, unordered_map<string,multiset<string>>&m){
-        while(!m[cur].empty()){
-            string next = *m[cur].begin();
-            m[cur].erase(m[cur].begin());
-            dfs(next, route, m);
-        }
-        route.push_back(cur);
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        unordered_map<string, priority_queue<string, vector<string>, greater<>>> itinerary;
+        for(auto& t: tickets)
+            itinerary[t[0]].push(t[1]);
+        vector<string>res; 
+        auto dfs = [&](this auto&& dfs, const string& cur)->void{
+            while(!itinerary[cur].empty()){ //必须是while, 不可以是if
+                string top = itinerary[cur].top();
+                itinerary[cur].pop();
+                dfs(top);
+            }
+            res.push_back(cur);
+        };
+        dfs("JFK");
+        return vector<string>(res.rbegin(), res.rend());
     }
 };
+
+
 
 //iterative solution using stk
 class Solution {
@@ -143,38 +178,3 @@ class Solution {
         }
     };
 
-
-/**
- * 
- * some observations:
-https://leetcode.com/problems/reconstruct-itinerary/discuss/78768/Short-Ruby-Python-Java-C++
-The nodes which have odd degrees (int and out) are the entrance or exit. In your example it’s JFK and A.
-
-If there are no nodes have odd degrees, we could follow any path without stuck until hit the last exit node
-
-The reason we got stuck is because that we hit the exit
-
-In your given example, nodes A is the exit node, we hit it and it’s the exit. So we put it to the result as the last node.
-*/
-class Solution {
-public:
-    vector<string> findItinerary(vector<vector<string>>& tickets) {
-        unordered_map<string, priority_queue<string, vector<string>, greater<>>>graph;
-        for(auto &t:tickets){
-            graph[t[0]].push(t[1]);
-        }
-        vector<string>res;
-        dfs(graph, "JFK", res);
-        reverse(res.begin(), res.end());
-        return res;
-    }
-
-    void dfs(unordered_map<string, priority_queue<string, vector<string>, greater<>>>&graph, const string& cur, vector<string>&res){
-        auto& q = graph[cur];
-        while (!q.empty()){
-            string nxt = q.top(); q.pop();
-            dfs(graph, nxt, res);
-        }
-        res.push_back(cur);
-    }
-};
