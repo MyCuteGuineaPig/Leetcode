@@ -5,3 +5,10 @@ for(auto aa: dp)
     }
     cout<<endl;
 }
+
+
+template<typename... Args> 
+void printt(const Args&... args) {
+    ((cout<< args << " "), ...);
+    cout <<endl;
+}
