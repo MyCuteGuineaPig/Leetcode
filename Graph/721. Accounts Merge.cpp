@@ -1,32 +1,107 @@
-/*
-721. Accounts Merge
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        unordered_map<string, string> email_to_name;
+        unordered_map<string, set<string>> chain;
+        unordered_map<string, string> parent; 
 
-Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0] is a name, 
-and the rest of the elements are emails representing emails of the account.
+        auto f = [&](this auto&& f, string i) -> string{
+            return parent[i] == i ? i: parent[i] = f(parent[i]);
+        };
 
-Now, we would like to merge these accounts. Two accounts definitely belong to the same person if there is some email that is common to both accounts. 
-Note that even if two accounts have the same name, they may belong to different people as people could have the same name. 
-A person can have any number of accounts initially, but all of their accounts definitely have the same name.
+        //initialize
+        for(int i = 0 ; i < accounts.size(); ++i){
+            string par = accounts[i][1];
+            for(int j = 1; j < accounts[i].size(); ++j) {
+                email_to_name[accounts[i][j]] = accounts[i][0];
+                parent[accounts[i][j]] = par;
+            }
+        }
 
-After merging the accounts, return the accounts in the following format: the first element of each account is the name, 
-and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.
+        //union find
+        for(int i = 0 ; i < accounts.size(); ++i){
+            string par = f(accounts[i][1]);
+            for(int j = 1; j < accounts[i].size(); ++j) {
+                email_to_name[accounts[i][j]] = accounts[i][0];
+                string this_par = f(accounts[i][j]);
+                parent[this_par] = par;
+                //cout<<" par "<<par<<" this_par "<<this_par<<endl;
+            }
+        }
 
-Example 1:
-Input: 
-accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
-Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'],  ["John", "johnnybravo@mail.com"], ["Mary", "mary@mail.com"]]
-Explanation: 
-The first and third John's are the same person as they have the common email "johnsmith@mail.com".
-The second John and Mary are different people as none of their email addresses are used by other accounts.
-We could return these lists in any order, for example the answer [['Mary', 'mary@mail.com'], ['John', 'johnnybravo@mail.com'], 
-['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
-Note:
+        for(int i = 0; i < accounts.size(); ++i){
+            for(int j = 1; j < accounts[i].size(); ++j) {
+                string par = f(accounts[i][j]);
+                chain[par].insert(accounts[i][j]);
+            }
+        }
+        vector<vector<string>>res;
+        for(auto it: chain) {
+            string name = email_to_name[*(it.second.begin())];
+            vector<string>tmp; tmp.push_back(name);
+            for(auto k: it.second){
+                tmp.push_back(k);
+            }
+            res.push_back(tmp);
+        }
+        return res;
+    }
+};
 
-The length of accounts will be in the range [1, 1000].
-The length of accounts[i] will be in the range [1, 10].
-The length of accounts[i][j] will be in the range [1, 30].
 
-*/
+
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        unordered_map<string, string> email_to_name;
+        unordered_map<string, set<string>> chain;
+        unordered_map<string, string> parent; 
+
+        unordered_map<string, unordered_set<string>>graph;
+
+        for(int i = 0; i < accounts.size(); ++i){
+            for(int j = 1; j < accounts[i].size(); ++j) {
+                email_to_name[accounts[i][j]] = accounts[i][0];
+                if (j > 1) {
+                    graph[accounts[i][1]].insert(accounts[i][j]);
+                    graph[accounts[i][j]].insert(accounts[i][1]);
+                }
+            }
+        }
+
+        unordered_set<string>visited;
+        auto dfs = [&](this auto&& dfs, const string& cur, const string& par, set<string>& this_visited) -> void {
+            visited.insert(cur);
+            this_visited.insert(cur);
+            for(auto nxt: graph[cur]){
+                if(nxt == par || visited.count(nxt)) continue;
+                dfs(nxt, cur, this_visited);
+            }
+        };
+
+        for(int i = 0; i < accounts.size(); ++i){
+            for(int j = 1; j < accounts[i].size(); ++j) {
+                if(visited.count(accounts[i][j]) == 0) {
+                    set<string>this_visited;
+                    dfs(accounts[i][j], "", this_visited);
+                    chain[accounts[i][j]] = this_visited;
+                }
+            }
+        }
+
+
+        vector<vector<string>>res;
+        for(auto it: chain) {
+            string name = email_to_name[*(it.second.begin())];
+            vector<string>tmp; tmp.push_back(name);
+            for(auto k: it.second){
+                tmp.push_back(k);
+            }
+            res.push_back(tmp);
+        }
+        return res;
+    }
+};
 
 
 /*
