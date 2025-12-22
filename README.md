@@ -407,7 +407,7 @@ void init(const string& s, string& res){
 | [2918. Minimum Equal Sum of Two Arrays After Replacing Zeros](https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/description/) | _O(n)_ |	_O(1)_	| Medium |  |
 | [3002. Maximum Size of a Set After Removals](https://leetcode.com/problems/maximum-size-of-a-set-after-removals/) | _O(n)_ |	_O(n)_	| Medium | ⭐set difference  |
 | [3035. Maximum Palindromes After Operations](https://leetcode.com/problems/maximum-palindromes-after-operations/description/) | _O(nlogn)_ |	_O(n)_	| Medium | ⭐Count Pair  |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
+| [3785. Minimum Swaps to Avoid Forbidden Values](https://leetcode.com/problems/minimum-swaps-to-avoid-forbidden-values/description/) | _O(n)_ |	_O(n)_	| Hard |  |
 
 ## Tree
 
@@ -720,6 +720,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [2458. Height of Binary Tree After Subtree Removal Queries](https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries/) | _O(n)_ | _O(n)_	| Hard | ⭐⭐⭐  把左边高度带到右边，把右边高度带到左边, `lru_cache`, `@functools.cache`|
 | [1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/) | _O(nlogn)_ | _O(n)_	| Hard | BIT, Fenwick Tree <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li></ul>  |
 | [3721. Longest Balanced Subarray II.cpp](https://leetcode.com/problems/longest-balanced-subarray-ii/description/) | _O(n)_ | _O(n)_	| Hard | |
+| [3777. Minimum Deletions to Make Alternating Substring](https://leetcode.com/problems/minimum-deletions-to-make-alternating-substring/description/) | _O(n)_ | _O(nlogn)_	| Hard | Fenwick Tree |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -1438,6 +1439,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2360. Longest Cycle in a Graph](https://leetcode.com/problems/longest-cycle-in-a-graph/)	|	_O(n)_  |	_O(n)_|	Hard | ⭐ |
 | [2368. Reachable Nodes With Restrictions](https://leetcode.com/problems/reachable-nodes-with-restrictions/)	|	_O(V+E)_  |	_O(V+E)_|	Medium | BFS / DFS |
 | [3593. Minimum Increments to Equalize Leaf Paths](https://leetcode.com/problems/minimum-increments-to-equalize-leaf-paths/description/)	|	_O(n)_  |	_O(n)_|	Medium | ⭐  |
+| [3786. Total Sum of Interaction Cost in Tree Groups](https://leetcode.com/problems/total-sum-of-interaction-cost-in-tree-groups/description/)	|	_O(n)_  |	_O(n)_|	Hard |   |
 
 </br>
 </br>

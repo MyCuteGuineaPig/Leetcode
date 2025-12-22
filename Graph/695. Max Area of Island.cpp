@@ -122,3 +122,35 @@ public:
     }
     
 };
+
+
+
+class Solution {
+public:
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> visited(n, vector<int>(m));
+        vector<int>dirs = {0, -1, 0, 1, 0};
+        auto dfs = [&](this auto&& dfs, int i, int j) -> int {
+            visited[i][j] = 1;
+            int cnt = 1; 
+            for(int a = 0; a < 4; ++a){
+                int x = i + dirs[a];
+                int y = j + dirs[a+1];
+                if ( x < 0 || y < 0 || x >= n || y >= m || grid[x][y] == 0 || visited[x][y])
+                    continue;
+                cnt += dfs(x, y);
+            }
+            return cnt;
+        };
+        int res = 0;
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m; ++j) {
+                if (grid[i][j] && !visited[i][j])
+                    res = max(res, dfs(i,j));
+            }
+        }
+        return res;
+    }
+};
