@@ -35,6 +35,103 @@ Every integer represented in the 2D-array will be between 1 and N, where N is th
 */
 
 
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n  = edges.size();
+        vector<int>parent(n+1);
+        iota(parent.begin(), parent.end(), 0);
+        
+        auto f = [&](this auto&& f, int i) -> int{
+            return parent[i] == i ? i : parent[i] = f(parent[i]);
+        };
+        vector<int>res; 
+        for(auto edge: edges) {
+            int i = edge[0], j = edge[1];
+            int p1 = f(i), p2 = f(j);
+            if(p1 == p2) res = edge; 
+            else parent[p1] = p2;
+        }
+        return res;
+    }
+};
+
+
+
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n  = edges.size();
+        unordered_map<int, unordered_set<int>>graph;
+        for(auto edge: edges){
+            graph[edge[0]].insert(edge[1]);
+            graph[edge[1]].insert(edge[0]);
+        }
+        
+        vector<int>visited(n+1);
+        vector<int>cycle(n+1);
+        auto dfs = [&](this auto&& dfs, int cur, int par) -> int {
+            visited[cur] = true;
+            for(auto nxt: graph[cur]){
+                if(!visited[nxt]) {
+                    int res = dfs(nxt, cur);
+                    if (res > 0) {
+                        cycle[cur] = 1;
+                        return cur == res ? -1: res;
+                    }
+                } else if (nxt != par) {
+                    cycle[cur] = 1;
+                    return nxt;
+                }
+            }
+            return -1;
+        };
+
+        dfs(1, -1);
+
+        for(int i = edges.size() -1; i >= 0; --i)
+            if(cycle[edges[i][0]] && cycle[edges[i][1]])
+                return edges[i];
+        return {};
+    }
+};
+
+
+
+
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n  = edges.size();
+        unordered_map<int, unordered_set<int>>graph;
+        vector<int>degree(n+1);
+        for(auto edge: edges){
+            graph[edge[0]].insert(edge[1]);
+            graph[edge[1]].insert(edge[0]);
+            degree[edge[0]]++;
+            degree[edge[1]]++;
+        }
+        queue<int>q; 
+        for(int i = 1; i<=n; ++i) {
+            if(degree[i] == 1) {
+                q.push(i);
+            }
+        }
+        while(!q.empty()) {
+            int cur = q.front(); q.pop();
+            for(auto nxt: graph[cur]){
+                if(--degree[nxt] == 1) 
+                    q.push(nxt);
+            }
+        }
+        for(int i = edges.size() -1; i>=0; --i){
+            if(degree[edges[i][0]] > 1 && degree[edges[i][1]] > 1)
+                return edges[i];
+        }
+        
+        return {};
+    }
+};
 /*
 
 UnionFind, 如果union 后发现两个parent 在join 之前已经是一样的，表示已经有路连接两个edge，两个edge 再连接肯定是cycle
@@ -145,31 +242,6 @@ public:
     }
 };
 
-
-
-
-class Solution {
-public:
-    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        int N=edges.size();
-        vector<int> res, root(N+1, 0);
-        for (int i=1; i<=N; i++) root[i]=i;
-        for (auto edge : edges) {
-            int x=find(edge[0], root), y=find(edge[1], root);
-            if(x!=y) root[x]=y;
-            else res=edge;
-        }
-        return res;
-    }
-    int find(int i, vector<int>& root) {
-        while(root[i]!=i) {
-            root[i]=root[root[i]];
-            i=root[i];
-        }
-        return i;
-        //return root[i]==i ? i : find(root[i], root);
-    }
-};
 
 
 /*
