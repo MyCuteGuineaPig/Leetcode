@@ -1,3 +1,45 @@
+class Solution {
+public:
+    vector<int> findRedundantDirectedConnection(vector<vector<int>>& edges) {
+        int n = edges.size(); 
+        vector<int>root(n+1);
+        vector<int>parent(n+1);
+        iota(root.begin(), root.end(), 0);
+
+        auto f = [&](this auto&& f, int i) -> int {
+            return root[i] == i ? i : root[i] = f(root[i]);
+        };
+
+        vector<int>dup(2, -1);
+        vector<int>org(2, -1);
+        for(auto& edge: edges){
+            if(parent[edge[1]]!= 0){
+                dup = edge;
+                org[0] = parent[edge[1]];
+                org[1] = edge[1]; 
+
+                edge[1] = 0; //把一个child 有两个parent的情况eliminate 一个parent
+            }else{
+                parent[edge[1]] = edge[0];
+            }
+        }
+        
+        for(auto& edge: edges) {
+            if(edge[1] == 0) continue;
+            int p1 = f(edge[0]);
+            int p2 = f(edge[1]);
+            if (p1 == p2 ) {
+                if (dup[0] == -1) return edge;  // [[1,2],[2,3],[3,4],[4,1]], 正好行程回环
+                return org;
+                //去掉node 后还有cycle 表示去错了，返回没有去掉cycle edge
+                //[[2,1],[3,1],[4,2],[1,4]]
+            }
+            root[p1] = p2;
+        }
+        return dup; //去除的edge edge[1] = 0; 正好是cycle edge， 比如 [[1,2],[1,3],[2,3]]，去掉[2,3]
+    }
+};
+
 /*
 685. Redundant Connection II
 
