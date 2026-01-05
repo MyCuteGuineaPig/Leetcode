@@ -36,3 +36,25 @@ public:
         return dummy.next;
     }
 };
+
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode node(0);
+        ListNode* res = &node;
+        auto mv = [&](this auto&& mv, ListNode** res, ListNode** list){
+            (*res)->next = *list;
+            *list = (*list)->next;
+        };
+        while(list1 || list2) {
+            if(!list2 || list1 && list1->val < list2->val) {
+                mv(&res, &list1);
+            } else {
+                mv(&res, &list2);
+            }
+            res = res->next;
+        }
+        return node.next;
+    }
+};
