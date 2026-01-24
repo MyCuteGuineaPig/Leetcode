@@ -1105,7 +1105,7 @@ DEBUG stdout
 | [002. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) | _O(n)_ | _O(1)_	| Medium | |
 | [021. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/) | _O(n)_ | _O(1)_	| Easy | |
 | [023.	Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) | _O(nklogk)_ | _O(1)_	| Hard | ⭐ Heap, Divide Conquer, 注: 不能用一直用0作为l 和r比，这样的话，l的size会增加的很快，到最后l size快成位nk了, :pencil2: `vector` 的 `make_heap`, `heap_push`, `pop_heap` |
-| [024. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/) | _O(n)_ | _O(1)_	| Easy |  ⭐ recursion 解|
+| [024. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/) | _O(n)_ | _O(1)_	| Easy |  📕 recursion 解|
 | [025. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/) | _O(n)_ | _O(1)_	| Hard | 类似[206	Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)|
 | [061. Rotate List](https://leetcode.com/problems/rotate-list/) | _O(n)_ | _O(1)_	| Medium | |
 | [082. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/) | _O(n)_ | _O(1)_	| Medium | |
@@ -1115,7 +1115,7 @@ DEBUG stdout
 | [148. Sort List](https://leetcode.com/problems/sort-list/description/) | _O(nlogn)_ | _O(logn)_	| Medium | Sort <ul><li>top-down,用两个pointer，一个慢，一个快，去split,然后merge, space: O(logn)</li><li> bottom-up, 第一次只把1和2顺序，3和4顺序，5和6顺序调整，第二次把1，2和3，4顺序调整，5,6和7，8顺序调整，以此类推, space: O(1) </li></ul>  |
 | [160. Intersection of Two Linked Lists](https://leetcode.com/problems/intersection-of-two-linked-lists/) | _O(n+m)_ | _O(1)_	| Easy | 利用的是 lA + lB_1 =  lA_1 + lB (lenA + B交点前的长度 = lenB + A交点前的长度),</br> pA，pB 每次都前进一步，pA到end,pA设为Bhead, pB到end,pB设为Aend, </br>这种尾对头只换一次，第二次pA 或者pB到end 返回NULL(就是没有交点) |
 | [203. Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/) | _O(n)_ | _O(1)_	| Easy | remove cur->next |
-| [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | _O(n)_ | _O(1)_	| Easy | ⭐⭐⭐ |
+| [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/) | _O(n)_ | _O(1)_	| Easy | 📕📕 |
 | [234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/) | _O(n)_ | _O(1)_	| Easy |  ⭐⭐ revese list前面部分，然后reverse之后，逐个对比前半部分是否等于后半部分的值 |
 | [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/) | _O(n)_ | _O(1)_	| Easy | 把node->next的val提到node val然后delete node->next |
 | [328. Odd Even Linked List](https://leetcode.com/problems/odd-even-linked-list/description/) | _O(n)_ | _O(1)_	| Medium | ⭐⭐⭐<ul><li>把even = head->next, odd = head, 然后逐个先断odd和下个even链 和 even和下个odd链(顺序不能反)</li><li>把even顺序保留，把odd提出来， 断even和odd的链，然后evenhead 接在odd->next上</li></ul> |

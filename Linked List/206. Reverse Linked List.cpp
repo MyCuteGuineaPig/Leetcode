@@ -153,14 +153,14 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode *res = NULL;
+        ListNode *pre = NULL;
         while (head != NULL) {
             ListNode *temp = head;
             head = head->next;
-            temp->next = res;
-            res = temp;
+            temp->next = pre;
+            pre = temp;
         }
-        return res;
+        return pre;
     }
 };
 /*
@@ -179,8 +179,18 @@ return node
 3->4<-5
 node = 4<-5;
 head->next->next = head   node:  3<-4<-5, head 3->4-3-4
-head-next = null   4-3 
+head->next = null   4-3 
 
+2 -> 3 
+      <- 4 <- 5
+node = 5 -> 4 -> 3
+head->next->next = head;   
+                    2 -> 3 -> 2 -> 3  
+                         <- 4 <- 5
+head->next = null   3 -> 2 
+                    <- 4 <- 5
+
+return 5
 
 */
 
