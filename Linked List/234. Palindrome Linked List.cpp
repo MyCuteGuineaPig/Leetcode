@@ -61,7 +61,29 @@ public:
     }
 };
 
-
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode* slow = nullptr;
+        ListNode* fast = head;
+        while(fast && fast->next) {
+            fast = fast->next->next; 
+            ListNode* tmp = head->next;
+            head->next = slow;
+            slow = head;
+            head = tmp;
+        }
+        fast = fast ? head->next: head; 
+        while (fast) {
+            if (slow->val != fast->val) {
+                return false;
+            }
+            slow = slow->next;
+            fast = fast->next;
+        }
+        return true;
+    }
+};
 
 
 class Solution {
