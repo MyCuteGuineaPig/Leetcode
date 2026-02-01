@@ -2311,6 +2311,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [3686. Number of Stable Subsequences](https://leetcode.com/problems/number-of-stable-subsequences/description/)	|	_O(n)_  |	_O(n)_|	Hard | |
 | [3699. Number of ZigZag Arrays I](https://leetcode.com/problems/number-of-zigzag-arrays-i/description/)	|	_O((r-l))_  |	_O(n)_|	Hard | |
 | [3732. Maximum Product of Three Elements After One Replacement](https://leetcode.com/problems/maximum-product-of-three-elements-after-one-replacement/description/)	|	_O(n)_  |	_O(1)_|	Medium | |
+| [3830. Longest Alternating Subarray After Removing At Most One Element](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/)	|	_O(n)_  |	_O(n)_|	hard | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>
@@ -2339,6 +2340,13 @@ find: _O(1)_  <br/>|	_O(n)_ |	Medium |  Python SortedList |
 | [2353. Design a Food Rating System](https://leetcode.com/problems/design-a-food-rating-system/) | ctor: _O(nlogn)_ <br/>
 changeRating: _O(logn)_ <br/>
 highestRated: _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
+| [3822. Design Order Management System](https://leetcode.com/problems/design-order-management-system/description/) | addOrder: _O(1)_ <br/>
+modifyOrder: _O(1)_ <br/>
+cancelOrder: _O(1)_ <br/> getOrdersAtPrice: up to _O(n)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
+| [3829. Design Ride Sharing System](https://leetcode.com/problems/design-ride-sharing-system/description/) | addRider: _O(1)_ <br/>
+addDriver: _O(1)_ <br/>
+matchDriverWithRider: _O(1)_ amortized cost <br/> cancelRider:  _O(1)_ <br/>|	_O(n)_ |	Medium |  Python SortedList |
+
 
 
 

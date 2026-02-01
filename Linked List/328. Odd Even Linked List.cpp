@@ -111,9 +111,20 @@ public:
         auto odd = head, even = head->next;
         while(even && even->next) {
             auto even_head = odd->next;
-            odd->next = even->next; 
+            odd->next = even->next; //下一个奇书位是当前最后偶数位的下一个
             even->next = even->next->next; //断奇数链
             odd->next->next = even_head;
+
+            /*
+                even->next = even->next->next; 必须先于
+                odd->next->next = even_head;
+
+                否则比如  1 -> 2 -> 3 -> 5 
+                   odd->next = even->next  odd = 1 -> 3 -> 5
+                   odd->next->next = even_head  odd = 1 -> 3 -> 2 -> 3 -> 2 -> 3 -> 2 
+                   odd->next->next = even_head;   2-> 2 -> 2 -> ... 进入循环
+
+             */
 
             odd = odd->next;
             even = even->next;
