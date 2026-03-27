@@ -2304,6 +2304,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [2771. Longest Non-decreasing Subarray From Two Arrays](https://leetcode.com/problems/longest-non-decreasing-subarray-from-two-arrays/description/)	|	_O(n)_  |	_O(n)_|	Medium | ⭐⭐⭐  |
 | [3003. Maximize the Number of Partitions After Operations](https://leetcode.com/problems/maximize-the-number-of-partitions-after-operations/description/)	|	_O(2^26n)_  |	_O(2^26n)_|	Hard | TopDown, Bottomup |
 | [3149. Find the Minimum Cost Array Permutation](https://leetcode.com/problems/find-the-minimum-cost-array-permutation/description/)	|	_O(n^2\*2^n)_  |	_O(n\*2^n)_|	Hard | TopDown, Bottomup |
+| [3186. 3186. Maximum Total Damage With Spell Casting](https://leetcode.com/problems/maximum-total-damage-with-spell-casting/description/?envType=problem-list-v2&envId=dynamic-programming)	|	_O(nlogn)_  |	_O(n)_|	Medium |  |
 | [3592. Inverse Coin Change](https://leetcode.com/problems/inverse-coin-change/description/)	|	_O(n^2)_  |	_O(n)_|	Medium | Reverse DP |
 | [3599. Partition Array to Minimize XOR](https://leetcode.com/problems/partition-array-to-minimize-xor/description/)	|	_O(n^3)_  |	_O(n^2)_|	Medium | TopDown |
 | [3594. Minimum Time to Transport All Individuals](https://leetcode.com/problems/minimum-time-to-transport-all-individuals/description/)	|	_O(ElogE)_  |	_O(E)_|	Hard | bitmask + Dijkstra simulation |
