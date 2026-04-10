@@ -1070,7 +1070,7 @@ DEBUG stdout
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [020. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) | _O(n)_ | _O(n)_	| Easy | ❌注意return true if stack is empty |
-| [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard |  <ul><li> ⭐__DP__: dp\[i] 代表以current index结束的最大valid substring的长, 非经典dp </li><li>__Stack__</li></ul>  |
+| [032. Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/) | _O(1)_ | _O(n)_	| Hard |  📕 <ul><li> ⭐__DP__ </li><li>__Stack__: smart insert - 1</li></ul>  |
 | [042. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) | _O(n)_ | _O(1)_	| Hard | Greedy/Descending Stack |
 | [071. Simplify Path](https://leetcode.com/problems/simplify-path/) | _O(n)_ | _O(n)_	| Medium |  ✏️ **Split** `stringstream` + `getline` 可以处理连续的delimiter 比如delimiter是`/`, 可以parse`//c/d//` 为`c` 和`d`, `vectro<string>`的 **join** |
 | [084. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/) | _O(n)_ | _O(n)_	| Hard |  <ul><li>⭐__stack__: ascending stack</li><li> __Divide Conquer__:最小的area来自左面，或者来自右面，或者来自area contain middle point</li></ul> |
@@ -1138,6 +1138,12 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 
 ## Heap
 
+When using `ListNode**:`
+
+| Goal	| Correct Way |
+| ------------- | ------------- |
+| Move pointer |	fast = &(*fast)->next |
+| Remove node	| *fast = (*fast)->next |
 
 
 
@@ -1148,7 +1154,7 @@ two pointer 1.whiLe(fast->next && fast->Next->next) 是找中点, 比如1-2-3-4-
 | [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) | _O(n)_ | _O(1)_	| Medium | 😍🎅🎅<ul><li>__dp__: loop n 而不是 loop 1 到 n-th ugly number</li><li> __heap__ 的解：:alien: 避免heap中出现重复数 </li></ul>|
 | [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) | _O(nlogn)_ | _O(1)_	| Medium | 虽是hard, 逻辑简单, 两个heap, minheap, maxheap, <br/> ✏️可以看看[**python heapq用法**](https://github.com/beckswu/Leetcode/blob/master/Heap/295.%20Find%20Median%20from%20Data%20Stream.py) ```heappushpop```  |
 | [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/) | _O(n\*k)_ | _O(n+k)_	| Medium | 类似 [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) |
-| [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | 🔍注: 不用hashset, 可不重复push 进heap <br/> 🎅不能用two pointer, 比如```[1,7], [2,6]```, 结果是```[1,2],[1,6],[2,7]```, two pointer给的是```[1,2],[1,6],[6,7]``` <br/>✏️: [python](https://github.com/beckswu/Leetcode/blob/master/Heap/373.%20Find%20K%20Pairs%20with%20Smallest%20Sums.py)  ```itertools.product, itertools.islice``` <br/> [O(k) solution](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84577/O(k)-solution) |
+| [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | 📕📕注: 不用hashset, 可不重复push 进heap <br/> 🎅不能用two pointer, 比如```[1,7], [2,6]```, 结果是```[1,2],[1,6],[2,7]```, two pointer给的是```[1,2],[1,6],[6,7]``` <br/>✏️: [python](https://github.com/beckswu/Leetcode/blob/master/Heap/373.%20Find%20K%20Pairs%20with%20Smallest%20Sums.py)  ```itertools.product, itertools.islice``` <br/> [O(k) solution](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/discuss/84577/O(k)-solution) |
 | [378. Kth Smallest Element in a Sorted Matrix](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/) | _O(k * log(min(n, m, k)))_ | _O(min(n, m, k))_	| Medium | Binary Search, Heap, ZigZag Search |
 | [407. Trapping Rain Water II](https://leetcode.com/problems/trapping-rain-water-ii/) | _O(m \* n \* (logm + logn))_ | _O(m\*n)_	| Hard | 😍🎅 <ul><li>**难点**: 点hold水的高度 取决于 min(周围四个方向上最大高度), 而不是min(四个邻居的高度), 再push进queue(push的height是当前height和cell的最大值) </li><li> 先把长方形四条边 push进min heap; 要**heap top高度是递增的**！**途径**: BFS push 时候push max(heap top 高度, heights\[i]\[j]) </li> <li> [visualization](https://www.youtube.com/watch?time_continue=80&v=cJayBq38VYw) </li></ul> |
 | [632. Smallest Range Covering Elements from K Lists](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/) | _O(nklogk)_ | _O(k)_	| Hard | 😍🎅 <ul><li>**难点**: 缩小windows, windows需要包含每个list内一个数</li><li> 用heap, heap中包含每个list中当前最小数 </li><li> 不能用two pointer, two pointer: **每个list每个数** 包含在windwos内, 此题是 **每个list至少一个数** 含在windwos内 </li> <li> ```vector[i][0]```的数push进minheap, 一个int 记录最大值, heap top 当前最小值 </li></ul> |

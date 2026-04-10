@@ -53,6 +53,19 @@ public:
 One pass solution
 最后前进N-1位，N是linked list length
 先前进n，再前进只能是N-1-n, 正好到倒数第n位的前一位
+
+answer is to remove at  L - n + 1 position, 
+we need to reach L - n node to remove L - n + 1  position 
+
+To arrive (L - n)'th node, we need L - n - 1 steps,
+
+At beginning, we move n steps, so we need to move n + L - n - 1 = L - 1 steps to reach
+(L - n)'th node, which is the node before the one we want to remove.
+
+L - n - 1  is from nth node to the last node 
+for example, n = 2, L = 5 
+1-> 2 -> 3 -> 4 -> 5, we need 2 more steps to move from 3 to 5
+
 */
 
 class Solution {
@@ -64,6 +77,8 @@ public:
             fast = fast->next;
         }
         if(!fast) return slow->next;
+        //return for [1,2]. n = 2
+
         while(fast->next){ //slow 前两个1-2-3
             fast = fast->next;
             slow = slow->next;

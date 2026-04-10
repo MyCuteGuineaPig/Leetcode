@@ -49,59 +49,7 @@ data structure: minHeap;
 
 */
 
-
-//Self
-class Solution {
-public:
-    vector<int> smallestRange(vector<vector<int>>& nums) {
-        if(nums.empty()) 
-            return {};
-        using IT = vector<int>::const_iterator;
-        auto cmp = [](const pair<IT,IT>&a, const pair<IT,IT>&b){return *(a.first)>*(b.first); };
-        priority_queue<pair<IT,IT>, vector<pair<IT,IT>>, decltype(cmp)>pq(cmp);
-        int curmax = 0;
-        for(auto& num: nums){//必须用reference, 否则报错,因为auto num是copy, 没有reference,
-            //在for loop 在这个for loop后destroy
-            curmax = max(curmax,num.front());
-            pq.push({num.begin(), num.end()});
-        }
-        int range = curmax - *(pq.top().first);
-        vector<int>res = {*(pq.top().first),curmax };
-        while(true){
-            IT begin, end; 
-            tie(begin,end) = pq.top(); pq.pop();
-            if(curmax - *begin < range)
-            {
-                range = curmax - *begin;
-                res = {*begin, curmax};
-            }
-            
-            if(begin+1 == end)
-                break;
-            curmax = max(curmax, *next(begin));
-            pq.push({begin+1, end});
-        }
-        /*
-        //while 也可以这么写
-        while(true){
-            IT begin, end; 
-            tie(begin,end) = pq.top(); pq.pop();
-            if(++begin == end)
-                break;
-            pq.push({begin, end});
-            curmax = max(curmax, *begin);
-            if(curmax - *(pq.top().first) < range)
-            {
-                range = curmax - *(pq.top().first);
-                res = {*(pq.top().first), curmax};
-            }
-        */
-        return res;
-    }
-};
-
-
-
+// fastest solution
 class Solution {
 public:
     vector<int> smallestRange(vector<vector<int>>& nums) {
@@ -138,6 +86,75 @@ public:
         return result;
     }
 };
+
+// not fastest solution
+class Solution {
+public:
+    vector<int> smallestRange(vector<vector<int>>& nums) {
+        priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
+        int curmax = numeric_limits<int>::min();
+        for(int i = 0; i < nums.size(); ++i) {
+            pq.push({nums[i][0], 0, i});
+            curmax = max(nums[i][0], curmax);
+        }
+        vector<int> res = {pq.top()[0], curmax};
+        while(!pq.empty()) {
+            auto top = pq.top(); pq.pop();
+            int val = top[0];
+            int index = top[1]; 
+            int i = top[2];
+            
+            if (curmax - val < res[1] - res[0]) {
+                res = {val, curmax};
+            }
+
+            if (index == nums[i].size() -1) 
+                break;
+            curmax = max(curmax, nums[i][index+1]);
+            pq.push({nums[i][index+1], index+1, i});
+        }
+        return res;
+    }
+};
+
+
+
+class Solution {
+public:
+    vector<int> smallestRange(vector<vector<int>>& nums) {
+        using VIT = vector<int>::iterator;
+        
+        const auto comp = [](const pair<VIT, VIT>& p1, const pair<VIT, VIT>& p2) {
+                              return *p1.first > *p2.first;
+                          };
+        
+        int right = numeric_limits<int>::min();
+        priority_queue<pair<VIT, VIT>, vector<pair<VIT, VIT>>, decltype(comp)> min_heap(comp);
+        for (auto &row : nums) {
+            right = max(right, row[0]);
+            min_heap.emplace(row.begin(), row.end());
+        }
+        
+        vector<int> result = {*(min_heap.top().first), right};
+        while (!min_heap.empty()) {
+            auto p = min_heap.top();
+            min_heap.pop();
+            ++p.first;
+            if (p.first == p.second) {
+                break;
+            }
+            min_heap.emplace(p);
+            
+            int left = *min_heap.top().first;//现有的最小
+            right = max(right, *p.first);
+            if (right - left < result[1] - result[0]) {
+                result = {left, right};
+            }
+        }
+        return result;
+    }
+};
+
 
 
 

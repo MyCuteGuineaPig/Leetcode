@@ -48,7 +48,7 @@ public:
             }
             else if(s[i]==')' && s[i-1] == ')'){  
                 int start = i - dp[i] - 1;
-                if(s[start] == '(')
+                if(start >= 0 && s[start] == '(')
                     dp[i+1] = dp[start]+dp[i]+2;
                 /*
                 s[i] = ')', s[i-1] == ')' start代表与s[i]对应的起点
@@ -104,7 +104,7 @@ public:
     int longestValidParentheses(string s) {
         int n = s.size(), maxres = 0;
         stack<int>stk;
-        stk.push(-1);
+        stk.push(-1);  //很巧妙的push -1
         for(int i = 0; i<n; i++){
             if(s[i]=='(') stk.push(i);
             else{

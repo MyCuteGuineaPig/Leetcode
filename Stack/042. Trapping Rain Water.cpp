@@ -205,6 +205,27 @@ public:
     }
 };
 
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int water = 0;
+        stack<int>stk;
+        for(int i = 0; i < height.size(); ++i) {
+            while(stk.size() && height[stk.top()] <  height[i]) {
+                int base = height[stk.top()];
+                stk.pop();
+                if (stk.size()) {
+                    int h = min(height[stk.top()], height[i]);
+                    int l = i - stk.top() - 1;
+                    water += (h - base) * l;
+                }
+            }
+            stk.push(i);
+            
+        }
+        return water;
+    }
+};
 
 //2020
 class Solution {
