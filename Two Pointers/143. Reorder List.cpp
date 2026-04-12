@@ -75,6 +75,44 @@ public:
 
 class Solution {
 public:
+    void reorderList(ListNode* head) {
+        if (!head || !head->next) return;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast->next && fast->next->next) {
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        ListNode* cur = slow->next;
+        ListNode* second = nullptr;
+        slow->next = nullptr;
+
+        // Step 2: reverse second half
+        while (cur) {
+            ListNode* tmp = cur;
+            cur = cur->next;
+            tmp->next = second;
+            second = tmp;
+        }
+        
+        // Step 3: merge
+        ListNode* first = head;
+        while (second) {
+            ListNode* t1 = first->next;
+            ListNode* t2 = second->next;
+
+            first->next = second;
+            second->next = t1;
+            first = t1;
+            second = t2;
+        }
+    }
+};
+
+
+
+class Solution {
+public:
     void reorderList(ListNode* head){
         if(!head ||!head->next) return ;
         ListNode *fast = head;
