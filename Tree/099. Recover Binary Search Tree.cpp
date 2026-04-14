@@ -138,6 +138,60 @@ public:
     }
 };
 
+class Solution {
+public:
+    void recoverTree(TreeNode* root) {
+        TreeNode* first = nullptr;
+        TreeNode* last = nullptr;
+        TreeNode* prev = nullptr;
+        auto helper = [&](this auto&& helper, TreeNode* cur) {
+            if(!cur) return;
+            helper(cur->left);
+            cout<<" cur "<<cur->val<<endl;
+            if (prev && prev->val > cur->val){
+                last = cur;
+                if (!first) first = prev;
+                else return;
+            } 
+            prev = cur;
+            
+            helper(cur->right);
+        };
+        helper(root);
+        swap(first->val, last->val);
+    }
+};
+
+
+
+class Solution {
+public:
+    void recoverTree(TreeNode* root) {
+        TreeNode* prev = nullptr;
+        stack<TreeNode*> stk;
+        TreeNode* cur = root;
+        TreeNode* first = nullptr;
+        TreeNode* last = nullptr;
+        while(cur || !stk.empty()) {
+            if(cur) {
+                stk.push(cur);
+                cur = cur->left;
+            } else {
+                cur = stk.top(); stk.pop();
+                if(prev && cur->val < prev->val) {
+                    if (!first) first = prev;
+                    last = cur;
+                }
+                else 
+                    prev = cur;
+                cur = cur->right;
+            }
+        }
+        int val = first->val;
+        first->val = last->val;
+        last->val = val;
+    }
+};
 
 //write by self
 class Solution {

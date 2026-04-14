@@ -681,7 +681,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | [094. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/) | _O(n)_ | _O(1)_	| Medium | 😍🔍Morris Traversal, 现在点连在 left-child 最右侧的node 右侧, 因为最右侧的node 最后visit |
-| [099	Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/) | _O(n)_ | _O(1)_	| Hard | 🔍😚 调换node 之间第一个最错误的（也是最大的prev），和最后一个错误（也是最小的cur），💡顺序一定是inorder，由小到大 |
+| [099	Recover Binary Search Tree](https://leetcode.com/problems/recover-binary-search-tree/) | _O(n)_ | _O(1)_	| Hard | 📕 调换node 之间第一个最错误的（也是最大的prev），和最后一个错误（也是最小的cur），💡顺序一定是inorder，由小到大 |
 | [144. Binary Tree Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/) | _O(n)_ | _O(1)_	| Medium | Morris Traversal,注意preorder 与inorder push 进vector的顺序的区别 |
 | [145. Binary Tree Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/) | _O(n)_ | _O(1)_	| Hard | = 先right 再left 的 inorder traversal  🔍Morris Traversal |
 | [208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/) | _O(n)_ | _O(1)_	| Medium | Trie |
@@ -1182,7 +1182,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [141. Linked List Cycle	](https://leetcode.com/problems/linked-list-cycle/) | _O(n)_ | _O(1)_	| Easy | ❌ |
 | [142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) | _O(n)_ | _O(1)_	| Medium | 🔍[具体数学解释](https://github.com/beckswu/Leetcode/blob/master/Two%20Pointers/142.%20Linked%20List%20Cycle%20II.cpp), 类似[287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) |
 | [143. Reorder List](https://leetcode.com/problems/reorder-list/) | _O(n)_ | _O(1)_	| Medium | 📕📕 用fast & slow先找到medium的点，slow到结尾所有的点reverse, 然后p1 = head, p2 = middle后一点，一个p1, 一个p2 插进pointer，就是结果 |
-| [167.Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | _O(n)_ | _O(1)_	| Easy |❌  two pointer, 一个从开始位置，一个从末尾的位置 |
+| [167.Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | _O(n)_ | _O(1)_	| Easy |📕  two pointer, 一个从开始位置，一个从末尾的位置 |
 | [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/) | _O(n)_ | _O(1)_	| Easy | ❌ 记录swap后第一个0位置 |
 | [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/) | _O(n)_ | _O(1)_	| Easy | 😍🎅 类似[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) ,有duplicate一定会有cycle, **难点: 找起点**<ul><li> 所有数都在\[0,n], ```nextIndex = num-1```,从n+1(index为n)开始，就不会上来进入循环 </li><li> 从0开始进入,```nextIndex = num```  </li><li>每个数数都在\[1,n],从0开始</li></ul> |
 | [344. Reverse String](https://leetcode.com/problems/reverse-string/) | _O(n)_ | _O(1)_	| Easy | 🔍[bit来进行swap](https://github.com/beckswu/Leetcode/blob/master/Two%20Pointers/344.%20Reverse%20String.cpp#L31) |
@@ -1251,8 +1251,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [095. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/) | _O(4^n / n^(3/2))_ |	_O(4^n / n^(3/2))_	| Medium | 😍 🔍loop start -> end. Generate vector of left subtree 和right subtree, 然后排列组合把他们弄在一起 |
-| [096. Unique Binary Search Trees	](https://leetcode.com/problems/unique-binary-search-trees/description/)	|	_O(n)_	|	_O(1)_ |	Medium |  DP, cartesian product</br> 作为root，sum(#left + #right) Catalan number |
+| [095. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/) | _O(4^n / n^(3/2))_ |	_O(4^n / n^(3/2))_	| Medium | 📕 🔍loop start -> end. Generate vector of left subtree 和right subtree, 然后排列组合把他们弄在一起 |
+| [096. Unique Binary Search Trees	](https://leetcode.com/problems/unique-binary-search-trees/description/)	|	_O(n)_	|	_O(1)_ |	Medium |  📕 DP, cartesian product</br> 作为root，sum(#left + #right) Catalan number |
 | [098. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/description/) | _O(n)_ |	_O(1)_	| Medium | 用prev 点, iterative + recurssion |
 | [100. Same Tree](https://leetcode.com/problems/same-tree/) | _O(n)_ |	_O(h)_	| Easy | ❌ |
 | [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/) | _O(n)_ |	_O(h)_	| Easy | ❌ |
@@ -1656,7 +1656,7 @@ floydWarshall(dist);
 
  |  | Floyd-Warshall  | Bellman-Ford	 | Dijkstra's	|
 | ------------- | :------------- | :------------- | :------------- |
-| Purpose | Finds the shortest paths between **all pairs of vertices** in a graph. | Finds the shortest path from a **single source** to all other vertices.| Finds the shortest path from a **single source **to all other vertices. | 
+| Purpose | Finds the shortest paths between **all pairs of vertices** in a graph. | Finds the shortest path from a **single source** to all other vertices.| Finds the shortest path from a **single source**to all other vertices. | 
 | Graph Type | Works on both **directed** and **undirected** graphs. Handles **negative weights but not negative weight cycles**. | Works on both **directed** and **undirected** graphs. Handles **negative weights** and **detects negative weight cycles**. | Works on both **directed** and **undirected** graphs. **Does not handle negative weights**. | 
 | Approach | Uses **dynamic programming** to iteratively improve shortest paths between all pairs of vertices. | Uses **edge relaxation** to iteratively improve shortest paths from the source vertex. | Uses a **greedy approach** with a priority queue to find the shortest paths from the source vertex. | 
 | Time Complexity | `O(V^3)` |  `O(V x E)`  | `O ((V+E)logV)`  with a priority queue (using a min-heap |

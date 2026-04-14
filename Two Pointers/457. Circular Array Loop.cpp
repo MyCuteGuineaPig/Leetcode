@@ -25,6 +25,60 @@ Can you do it in O(n) time complexity and O(1) space complexity?
 
 class Solution {
 public:
+    int nextIndex(vector<int>& nums, int i) {
+        int n = nums.size();
+        return ((i + nums[i]) % n + n) % n;
+    }
+
+    bool circularArrayLoop(vector<int>& nums) {
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) continue;
+
+            int slow = i, fast = i;
+            bool forward = nums[i] > 0;
+
+            while (true) {
+                int nextSlow = nextIndex(nums, slow);
+                int nextFast = nextIndex(nums, fast);
+                int nextFast2 = nextIndex(nums, nextFast);
+
+                // break if direction changes
+                if ((nums[nextSlow] > 0) != forward ||
+                    (nums[nextFast] > 0) != forward ||
+                    (nums[nextFast2] > 0) != forward)
+                    break;
+
+                slow = nextSlow;
+                fast = nextFast2;
+
+                if (slow == fast) {
+                    // avoid 1-length cycle
+                    if (slow == nextIndex(nums, slow)) break;
+                    return true;
+                }
+            }
+
+            // 🔥 FIX: stop when nums[j] becomes 0
+            // 优化，不用重复访问已经访问过的index
+            int j = i;
+            while (nums[j] != 0 && (nums[j] > 0) == forward) {
+                int next = nextIndex(nums, j);  
+                //先设一个值，避免j =  nextIndex(nums, j) 之后nums[j]被设为0了，nextIndex(nums, j)访问了0，导致死循环
+                nums[j] = 0;
+                j = next;
+            }
+        }
+
+        return false;
+    }
+};
+
+
+
+class Solution {
+public:
     bool circularArrayLoop(vector<int>& nums) {
         if(nums.empty()) return false;
         int slow = 0, fast = 0, n = nums.size();
