@@ -1662,7 +1662,7 @@ floydWarshall(dist);
 | Time Complexity | `O(V^3)` |  `O(V x E)`  | `O ((V+E)logV)`  with a priority queue (using a min-heap |
 | Space Complexity | `O(V²)` for the distance matrix. |  `O(V)` for the distance array. | `O(V)` for the distance array and priority queue. | 
 | Negative Weight Edges |  negative weights ✅   but cannot handle negative weight cycles❌ . | Handles negative weights and can detect negative weight cycles.✅  | Does **not handle negative weights** ❌  (may give incorrect results if negative weights exist). | 
-| Example Scenarios | Finding shortest travel times between all cities in a transportation network. | Finding shortest paths in a graph with currency exchange rates (negative weights possible). |  Finding the shortest route in a road network with non-negative weights (e.g., distances or costs). |
+| Example Scenarios | **Finding shortest travel times between all cities in a transportation network.** | **Finding shortest paths in a graph with currency exchange rates (negative weights possible).** |  **Finding the shortest route in a road network with non-negative weights (e.g., distances or costs).** |
 
 ---
 
