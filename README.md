@@ -1658,9 +1658,7 @@ floydWarshall(dist);
 
 Floyd–Warshall is **not just triple nested loops** — it is a **dynamic programming algorithm with a strict definition**:
 
-\[
-dp[k][i][j] = \text{shortest path from } i \rightarrow j \text{ using only nodes } \le k
-\]
+dp[k][i][j] = shortest path from i -> j using nodes <= k
 
 ### Meaning of variables
 
