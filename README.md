@@ -283,7 +283,7 @@ void init(const string& s, string& res){
  | [117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/) |	_O(n)_	| _O(1)_ |	Medium | Traverse through next instead of Traverse from top to down |
 | [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees/description/) |	_O(n)_	| _O(n)_ |	Medium | |
 | [743. Network Delay Time](https://leetcode.com/problems/network-delay-time/) |	_O(E \*logV)_	| _O(E + V)_ |	Medium | Dijkstra's Algorithm |
-| [787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) |	_O(E \* logV)_	| _O(E + V)_ |	Medium | ⭐⭐⭐ Dijkstra's Algorithm |
+| [787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) |	_O(E \* logV)_	| _O(E + V)_ |	Medium |  📕 📕 📕 Dijkstra's Algorithm: 记录stop 不是distances |
 | [1091. Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/) |	_O(n^2)_	| _O(n^2)_ |	Medium  |   |
 | [1197. Minimum Knight Moves](https://leetcode.com/problems/minimum-knight-moves/) |	_O(n\*m)_	| _O(n\*m)_ |	Hard |   |
 | [3690. Split and Merge Array Transformation](https://leetcode.com/problems/split-and-merge-array-transformation/description/) |	_O(n! \* n^4)_	| _O(n!\*n)_ |	Medium | C++ equal, vector insert  |
@@ -1653,6 +1653,26 @@ vector<vector<int>> dist = {
 };
 floydWarshall(dist);
 ```
+
+**Floyd–Warshall: Key Insight (DP Interpretation)**
+
+Floyd–Warshall is **not just triple nested loops** — it is a **dynamic programming algorithm with a strict definition**:
+
+\[
+dp[k][i][j] = \text{shortest path from } i \rightarrow j \text{ using only nodes } \le k
+\]
+
+### Meaning of variables
+
+- `k` → which intermediate nodes are allowed
+- `i, j` → start and end nodes
+
+### Important rule
+
+We must **fully process all paths using node `k`** before moving to `k + 1`.
+
+👉 This ensures correctness of the DP transition.
+
 
  |  | Floyd-Warshall  | Bellman-Ford	 | Dijkstra's	|
 | ------------- | :------------- | :------------- | :------------- |

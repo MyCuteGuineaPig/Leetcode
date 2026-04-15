@@ -48,3 +48,97 @@ public:
 3 dist[i]=100000
 4 dist[i]=0
 */
+
+
+
+class Solution {
+public:
+    int countRestrictedPaths(int n, vector<vector<int>>& edges) {
+        vector<int>distances(n+1, numeric_limits<int>::max());
+        unordered_map<int, unordered_map<int, int>> graph;
+        for(auto& edges: edges){
+            graph[edges[0]][edges[1]] = edges[2];
+            graph[edges[1]][edges[0]] = edges[2];
+        }
+        distances[n] = 0;
+        priority_queue<pair<int, int>, vector<pair<int,int>>, greater<>> pq;
+        pq.push({0, n});
+        while (!pq.empty()) {
+            auto [cur_dist, node] = pq.top(); pq.pop();
+            if (distances[node] < cur_dist) continue;
+            for(auto& [neighbor, dist] : graph[node]) {
+                int next_dist = cur_dist + dist;
+                if (distances[neighbor] > next_dist) {
+                    distances[neighbor] = next_dist;
+                    pq.push({next_dist, neighbor});
+                }
+            }
+        }
+        long mod = 1e9 + 7;
+
+        vector<int>dp(n+1, -1);
+        auto helper = [&](this auto&& helper, int cur) { 
+            // 即使是undirected graph 不会有循环，
+            // 因为有distances[neighbor] < distances[cur]
+            if (cur == n) {
+                return 1;
+            } 
+            if (dp[cur] >= 0) return dp[cur];
+            dp[cur] = 0;
+            for(auto& [neighbor, dist] : graph[cur]) {
+                if(distances[neighbor] < distances[cur]) {
+                    dp[cur] = (dp[cur] + helper(neighbor)) % mod;
+                }
+            }
+            return dp[cur];
+        };
+         
+        return helper(1);
+    }
+};
+
+
+
+//iterative
+class Solution {
+public:
+    int countRestrictedPaths(int n, vector<vector<int>>& edges) {
+        vector<int>distances(n+1, numeric_limits<int>::max());
+        unordered_map<int, unordered_map<int, int>> graph;
+        for(auto& edges: edges){
+            graph[edges[0]][edges[1]] = edges[2];
+            graph[edges[1]][edges[0]] = edges[2];
+        }
+        distances[n] = 0;
+        priority_queue<pair<int, int>, vector<pair<int,int>>, greater<>> pq;
+        pq.push({0, n});
+        while (!pq.empty()) {
+            auto [cur_dist, node] = pq.top(); pq.pop();
+            if (distances[node] < cur_dist) continue;
+            for(auto& [neighbor, dist] : graph[node]) {
+                int next_dist = cur_dist + dist;
+                if (distances[neighbor] > next_dist) {
+                    distances[neighbor] = next_dist;
+                    pq.push({next_dist, neighbor});
+                }
+            }
+        }
+        long mod = 1e9 + 7;
+
+        vector<long>dp(n+1);
+        dp[n] = 1;
+        for(int i = 0; i <= n; i++)
+            pq.push({distances[i], i});
+
+        while(!pq.empty()) {
+            auto [_, node] = pq.top(); pq.pop();
+            for(auto& [neighbor, _] : graph[node]) {
+                if (distances[neighbor] > distances[node]) {
+                    dp[neighbor] = (dp[neighbor]+ dp[node]) % mod;
+                }
+            }
+        }
+         
+        return dp[1];
+    }
+};

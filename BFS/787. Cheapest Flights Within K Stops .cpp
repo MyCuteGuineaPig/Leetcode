@@ -127,6 +127,8 @@ public:
             // We have already encountered a path with a lower cost and fewer stops,
             // or the number of stops exceeds the limit.
             if (steps > stops[node] || steps > k + 1) continue; 
+            // 已经经过node的点，cost更小，但step 更大
+            // 如果后面点，cost更大了，step也更大，就不需要继续了
             //if visited first, cost is the minimium 
             stops[node] = steps;
             if (node == dst) return dist;
@@ -135,5 +137,39 @@ public:
             }
         }
         return -1;
+    }
+};
+
+
+
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        unordered_map<int,unordered_map<int,int>>graph;
+        for(auto flight: flights)
+            graph[flight[0]][flight[1]] = flight[2];
+        
+        vector<int>distances(n, numeric_limits<int>::max());
+        distances[src] = 0;
+        priority_queue<vector<int>, vector<vector<int>>, greater<>>pq;
+        pq.push({-1, src, 0});
+        while (!pq.empty()) {
+            vector<int>top = pq.top(); pq.pop();
+            int cnt = top[0];
+            int node = top[1];
+            int cur_dist = top[2]; 
+            //if (distances[node] < cur_dist ) continue;  <-- 不可以有这个条件
+            for(auto & [neighbor, dist]: graph[node]) {
+                int next_dist = cur_dist + dist;
+                if (distances[neighbor] > next_dist) {
+                    distances[neighbor] = next_dist;
+                    if(cnt + 1 < k) {
+                        pq.push({cnt+1, neighbor, next_dist});
+                    }
+                }
+            }
+        }
+        return distances[dst] ==  numeric_limits<int>::max() ? -1: distances[dst];
     }
 };
