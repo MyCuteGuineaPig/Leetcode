@@ -105,3 +105,75 @@ public:
         return accumulate(root.begin(), root.end(), 0) == 0;
     }
 };
+
+
+
+class Solution {
+public:
+    bool validTree(int n, vector<vector<int>>& edges) {
+        if (n == 1) return true;
+        if (edges.size() != n - 1) return false;
+        //important for test cases like n=4, edges = [[0,1],[2,3]]
+
+        unordered_map<int, vector<int>>graph;
+        vector<int>degree(n);
+        for(auto& edge: edges){
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]);
+            degree[edge[0]] += 1;
+            degree[edge[1]] += 1;
+        }
+        queue<int>q; 
+        int cnt = 0;
+        for(int i = 0; i < n; ++i)
+            if (degree[i] == 1){
+                q.push(i);
+                ++cnt;
+            }
+        while (!q.empty()) {
+            auto cur = q.front(); q.pop();
+            for(auto nxt: graph[cur]) {
+                if(--degree[nxt] == 1) {
+                    q.push(nxt);
+                    ++cnt;
+                }
+            }
+        }
+        return cnt == n;
+    }
+};
+
+
+class Solution {
+public:
+    bool validTree(int n, vector<vector<int>>& edges) {
+        if (n == 1) return true;
+        if (edges.size() != n - 1) return false;
+        //important for test cases like n=4, edges = [[0,1],[2,3]]
+
+        unordered_map<int, vector<int>>graph;
+        for(auto& edge: edges){
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]);
+        }
+        vector<int>visited(n);
+        
+        auto has_cycle = [&](this auto&& has_cycle, int cur, int par)->bool {
+            visited[cur] = true;
+            for(auto nxt: graph[cur]) {
+                if (!visited[nxt]){
+                    if(has_cycle(nxt, cur)){ 
+                        return true;
+                    }
+                }
+                else if (nxt != par){
+                    return true;
+                }
+            }
+            return false;
+        };
+
+
+        return !has_cycle(0, -1) && all_of(visited.begin(), visited.end(), [](int i) {return i != 0;});
+    }
+};

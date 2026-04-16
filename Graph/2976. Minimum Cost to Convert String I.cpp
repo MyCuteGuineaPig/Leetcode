@@ -20,7 +20,7 @@ public:
         }
         long long res = 0; 
         for(int i = 0; i < source.size(); ++i){
-            if(source[i] == target[i]) continue;
+            if(source[i] == target[i]) continue;// <--- skip self conversion 
             if (graph[source[i]-'a'][target[i]-'a'] >= numeric_limits<int>::max()) return -1;
             res += graph[source[i]-'a'][target[i]-'a'];
             //cout<<" i "<<i<<" score "<<score<<" source[i] "<<source[i]<<" target[i] "<<target[i]<<" res "<<res<<endl;
@@ -30,6 +30,43 @@ public:
 };
 
 
+
+
+class Solution {
+public:
+    long long minimumCost(string source, string target, vector<char>& original, vector<char>& changed, vector<int>& cost) {
+        if(source.size() != target.size()){
+            return -1;
+        }
+        vector<vector<long long>>dp(26, vector<long long>(26, 1e9));
+        for(int i = 0; i <original.size(); ++i) {
+            int start = original[i] - 'a'; 
+            int end = changed[i] - 'a';
+            dp[start][end] = min(dp[start][end], (long long)cost[i]);
+        }
+
+        for(int i = 0; i < 26; ++i)
+            dp[i][i] = 0;   //<--- this is important, because we can skip conversion if source[i] == target[i]
+
+        for(int k = 0; k < 26; ++k) {
+            for(int i = 0; i < 26; ++i) {
+                for(int j = 0; j < 26; ++j) {
+                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+                }
+            }
+        }
+
+        long long res = 0;
+        for(int i = 0; i < source.size(); ++i) {
+            int start = source[i] - 'a';
+            int end = target[i] - 'a';
+            if (dp[start][end] >= 1e9 ) 
+                return -1;
+            res += dp[start][end];
+        }
+        return res;
+    }
+};
 
 
 //Dijkstra

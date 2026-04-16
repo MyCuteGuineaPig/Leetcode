@@ -1581,6 +1581,37 @@ vector<int> dijkstra(int n, vector<vector<pair<int, int>>>& graph, int source) {
 }
 
 ```
+
+
+```python
+import heapq
+from collections import defaultdict
+
+def dijkstra(n, graph, start):
+    """
+    n: number of nodes (0 to n-1)
+    graph: adjacency list -> graph[u] = [(v, weight), ...]
+    start: source node
+    """
+    dist = [ float('inf')] * n
+    dist[start] = 0
+
+    pq = [(0, start)]  # (distance, node)
+
+    while pq:
+        d, u = heapq.heappop(pq)
+
+        # Skip outdated entry
+        if d > dist[u]:
+            continue
+
+        for v, w in graph[u]:
+            if dist[v] > d + w:
+                dist[v] = d + w
+                heapq.heappush(pq, (dist[v], v))
+
+    return dist
+```
 ---
 
 **Bellman–Ford Algorithm (detect negative cycle)**: dp: Finds the shortest path from a **single source** to all other vertices.
@@ -1623,6 +1654,9 @@ bool bellmanFord(int n, vector<tuple<int, int, int>>& edges, int source, vector<
 ```c++
 void floydWarshall(vector<vector<int>> &dist) {
     int V = dist.size();
+    
+    for(int i = 0; i < V; ++i)
+        dist[i][i] = 0; // << ----- initialization
 
     // Add all vertices one by one to
     // the set of intermediate vertices.
@@ -1642,6 +1676,11 @@ void floydWarshall(vector<vector<int>> &dist) {
             }
         }
     }
+
+    for(int i = 0; i < n; ++i)
+        if (dist[i][i] < 0 )
+            cout<< " i " << " Negative cycle exists:"<<endl;
+
 }
 
 vector<vector<int>> dist = {
@@ -1679,7 +1718,7 @@ We must **fully process all paths using node `k`** before moving to `k + 1`.
 | Approach | Uses **dynamic programming** to iteratively improve shortest paths between all pairs of vertices. | Uses **edge relaxation** to iteratively improve shortest paths from the source vertex. | Uses a **greedy approach** with a priority queue to find the shortest paths from the source vertex. | 
 | Time Complexity | `O(V^3)` |  `O(V x E)`  | `O ((V+E)logV)`  with a priority queue (using a min-heap |
 | Space Complexity | `O(V²)` for the distance matrix. |  `O(V)` for the distance array. | `O(V)` for the distance array and priority queue. | 
-| Negative Weight Edges |  negative weights ✅   but cannot handle negative weight cycles❌ . | Handles negative weights and can detect negative weight cycles.✅  | Does **not handle negative weights** ❌  (may give incorrect results if negative weights exist). | 
+| Negative Weight Edges |  negative weights ✅   but cannot handle negative weight cycles❌ (not well-defined shortest paths). | Handles negative weights and can detect negative weight cycles.✅  | Does **not handle negative weights** ❌  (may give incorrect results if negative weights exist). | 
 | Example Scenarios | **Finding shortest travel times between all cities in a transportation network.** | **Finding shortest paths in a graph with currency exchange rates (negative weights possible).** |  **Finding the shortest route in a road network with non-negative weights (e.g., distances or costs).** |
 
 ---
@@ -1874,6 +1913,39 @@ bool hasCycleDirectedKahn(int n, vector<vector<int>>& edges) {
 
     return count != n; // If not all nodes are processed, a cycle exists
 }
+```
+
+```python
+from collections import deque
+
+def has_cycle_directed_kahn(n, edges):
+    graph = [[] for _ in range(n)]
+    in_degree = [0] * n
+
+    # Build graph and in-degree array
+    for u, v in edges:
+        graph[u].append(v)
+        in_degree[v] += 1
+
+    # Initialize queue with nodes having in-degree 0
+    q = deque()
+    for i in range(n):
+        if in_degree[i] == 0:
+            q.append(i)
+
+    count = 0
+    # Process nodes
+    while q:
+        node = q.popleft()
+        count += 1
+
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                q.append(neighbor)
+
+    # If not all nodes are processed, a cycle exists
+    return count != n
 ```
 
 | Graph Type  |	Algorithm	  | Time Complexity  | 	Space Complexity	 | Notes  |
