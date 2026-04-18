@@ -1,5 +1,56 @@
 class Solution {
 public:
+    int removeStones(vector<vector<int>>& stones) {
+        unordered_map<int,int>p;
+        int cnt = 0;  //<--- connected component count 
+        auto find = [&](this auto&& find, int cur) -> int {
+            if (p.count(cur) == 0) p[cur] = cur, ++cnt;
+            return p[cur] == cur ? cur : p[cur] = find(p[cur]);
+        };
+        for(auto& stone: stones) {
+            int p1 = find(stone[0]), p2 = find(stone[1] + 100001);
+            if (p1 != p2) {
+                p[p2] = p1; 
+                --cnt;
+            }
+        }
+        return stones.size() - cnt;
+    }
+};
+
+
+class Solution {
+public:
+    int removeStones(vector<vector<int>>& stones) {
+        unordered_map<int, unordered_set<int>>graph;
+        unordered_map<int, int>visited;
+        for(auto stone: stones){
+            graph[stone[0]].insert(stone[1] + 100001);
+            graph[stone[1] + 100001].insert(stone[0]);
+            visited[stone[0]] = 0; 
+            visited[stone[1] + 100001] = 0;
+        }
+
+        auto dfs = [&](this auto && dfs, int cur) -> void {
+            visited[cur] = true;
+            for(auto nxt: graph[cur]) {
+                if (!visited[nxt])
+                    dfs(nxt);
+            }
+        };
+        int cnt = 0;
+        for(auto it: visited){ 
+            if (!visited[it.first]) {
+                dfs(it.first);
+                ++cnt;
+            }
+        }
+        return stones.size() - cnt;
+    }
+};
+
+class Solution {
+public:
     int dfs(unordered_map<int, vector<pair<int,int>>>& rows, unordered_map<int, vector<pair<int,int>>>&cols, int x, int y, unordered_set<string>&visited){
         int cnt = 1;
         string tmp = to_string(x) + "#" + to_string(y);

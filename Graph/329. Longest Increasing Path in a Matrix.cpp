@@ -130,6 +130,62 @@ public:
 };
 
 
+class Solution {
+public:
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        int n = matrix.size(); 
+        int m = matrix[0].size();
+        vector<vector<int>>out_degree(n, vector<int>(m));
+        vector<int>dir = {0, 1, 0, -1, 0};
+        
+        
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m; ++j) {
+                for(int k = 0; k <4; ++k) {
+                    int x = dir[k] + i, y = dir[k+1] + j;
+                    if (x < 0 || y < 0 || x >= n || y >= m || matrix[x][y] <= matrix[i][j]) {
+                        continue;
+                    }
+                    out_degree[i][j] += 1;
+                }
+            }
+        }
+
+        vector<vector<int>>cnt(n, vector<int>(m));
+        queue<pair<int, int>> q;
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m; ++j) {
+                if (out_degree[i][j] == 0) {
+                    q.push({i, j});
+                    cnt[i][j] = 1;
+                }
+            }
+        }
+
+        int longest = 0;
+
+        while(!q.empty()){
+            auto [i, j] = q.front(); q.pop();
+            longest = max(longest, cnt[i][j]);
+            for(int k = 0; k <4; ++k) {
+                int x = dir[k] + i, y = dir[k+1] + j;
+                if (x < 0 || y < 0 || x >= n || y >= m 
+                || matrix[x][y] >= matrix[i][j]) { //这个条件和上面条件相反，out_degree是从小到大的，反向操作所以是>=
+                    continue;
+                }
+                cnt[x][y] = max(cnt[x][y], 1 + cnt[i][j]);
+                if(--out_degree[x][y] == 0) {
+                    q.push({x, y});
+                }
+
+            }
+        }
+
+        return longest;
+    }
+};
+
+
  //BFS: 一个一个移掉peak的点(peak点是：四周有任何一点比现在这个点大)，一共移动几次，就有几个最大值
 class Solution {
 public:

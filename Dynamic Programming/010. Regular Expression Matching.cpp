@@ -45,6 +45,64 @@ s=  1   0  0  0  0
                           
 3. * repeat 前面多个 character 
 
+s[i] == p[j-1] || p[j-1] == '.'
+“Can p[j-1] match s[i]?”
+Because if it doesn't match, then * cannot consume this character.
+
+
+🔁 Option A: dp[i][j+1] → consume one char from s
+Move i forward (consume s[i])
+Stay at same pattern (j+1, still at *)
+
+💡 Meaning:
+“Use * to match this character, and maybe more later”
+
+🔁 Option B: dp[i+1][j] → stop using *
+Move pattern back before * (effectively skipping it)
+Stop matching more characters
+
+💡 Meaning:
+“We used * enough times, now move on”
+
+🧩 Putting it together
+(s[i] matches p[j-1]) 
+AND 
+(we either keep using '*' OR stop using it)
+🔥 Example to make it click
+Example:
+s = "aaa"
+p = "a*"
+
+At some point:
+
+s[i] = 'a'
+p[j-1] = 'a'
+
+So:
+
+(s[i] == p[j-1]) → true
+
+Now:
+
+dp[i][j+1] → keep consuming 'a'
+dp[i+1][j] → stop using *
+
+So both paths are valid.
+
+🧠 Intuition (simplified)
+
+When you see:
+(s[i] == p[j-1] || p[j-1] == '.') && (dp[i][j+1] || dp[i+1][j])
+
+
+dp[i+1][j+1] =  dp[i+1][j-1]
+s = "b"
+p = "a*b"
+
+When evaluating "a*":
+"a*" can match empty string
+So pattern becomes "b"
+
 
    t =  a  b  *  c
 s=  1   0  0  0  0 
@@ -78,6 +136,31 @@ if dp[i][j+1]是来自于dp[i-1][j+1]的, 说明s[i-1] == p[j-1]
     i                            1
 */
 
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int n = s.size(), m = p.size();
+        vector<vector<int>>dp(n+1, vector<int>(m+1));
+        dp[0][0] = true;
+        for(int j = 1;  j < m && p[j] == '*'; j+=2 )
+            dp[0][j+1] = dp[0][j-1];
+        
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < m; ++j){
+                if(s[i] == p[j] || p[j] == '.') 
+                    dp[i+1][j+1] = dp[i][j];
+                else if (p[j] == '*') {
+                    dp[i+1][j+1] = 
+                           dp[i+1][j-1] //skip * 
+                       ||  (s[i] == p[j-1] || p[j-1] == '.') && (dp[i][j+1] //因为s[i] == p[j-1], pattern一样，consume s[i+1]
+                       ||  dp[i+1][j]); //因为s[i] == p[j-1], 已经match pattern, stop using *
+                }
+            }
+        }
+        return dp[n][m];
+    }
+};
+
 
 class Solution {
 public:
@@ -94,7 +177,7 @@ public:
                if(s[i] == p[j] || p[j] == '.')
                    dp[i+1][j+1] = dp[i][j];
                else if(p[j] == '*')
-                   dp[i+1][j+1] = dp[i+1][j-1] || ( s[i] == p[j-1] || p[j-1] == '.') && dp[i][j+1];
+                   dp[i+1][j+1] = dp[i+1][j-1] || (s[i] == p[j-1] || p[j-1] == '.') && dp[i][j+1];
            }
        }
         return dp[n1][n2];

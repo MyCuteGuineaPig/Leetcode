@@ -40,31 +40,57 @@ then JFK before the D, etc. When we're back from our cycle at D, the written rou
 Then we retreat further along the original path, prepending C, A and finally JFK to the route, 
 ending up with the route JFK -> A -> C -> D -> B -> C -> JFK -> D -> A.
 
+比如   
+          ---------
+          |        |   
+          v        |
+         JFK   --> SFO 
+          |
+          v  
+BBB <---  ATL -----> AAA 
+          ^          |
+          |          |
+           -----------
+  
+如果按照ticket 走  JFK -> ATL -> AAA --> BBB, 但是ticket != 0 因为 SFO还没有用
+
+但其BBB因为没有outgoing point， 它是end point,   
+      BBB 返回ATL， ATL 没有outgoing 了， ATL 是AAA的上一个， 
+      返回 AAA, AAA 没有outgoing了， AAA 是ATL的上一个，返回ATL,
+      一次类推
+
+
 */
+
 class Solution {
 public:
-    vector<string> findItinerary(vector<pair<string, string>> tickets) {
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
         unordered_map<string, map<string, int>> m; 
         vector<string>res={"JFK"};
         for(auto t: tickets){
-            m[t.first][t.second]++;
+            m[t[0]][t[1]]++;
         }
         dfs("JFK", res, tickets.size(), m);
         return res;
     }
 
     bool dfs( string cur,vector<string>& res, int tickets, unordered_map<string, map<string, int>>&m){
-        if(tickets == 0)
+        //cout<<" cur "<<cur<<endl;
+        if(tickets == 0) {
+            //cout<<"[True] cur "<<cur<<endl;
             return true;
+        }
         for(auto &go: m[cur]){
             if(go.second>0){
                 go.second--;
                 res.push_back(go.first);
                 if(dfs(go.first,res, tickets-1, m)) return true;
-                go.second++;
+                //cout<<" increase  "<<" go.first+ "<< go.first <<endl;
+                //go.second++;
                 res.pop_back();
             }
         }
+        //cout<<"[false] cur "<<cur<<endl;
         return false;
     }
 };
@@ -102,6 +128,29 @@ public:
             dfs(graph, nxt, res);
         }
         res.push_back(cur);
+    }
+};
+
+
+class Solution {
+public:
+    vector<string> findItinerary(vector<vector<string>>& tickets) {
+        unordered_map<string, multiset<string>>stops;
+        for(auto& ticket: tickets)
+            stops[ticket[0]].insert(ticket[1]);
+
+        vector<string>res;
+        auto dfs = [&] (this auto&& dfs, const string& cur) ->void {
+            while(!stops[cur].empty()) {
+                string nxt = *stops[cur].begin();
+                stops[cur].erase(stops[cur].begin());
+                dfs(nxt);
+            }
+            res.push_back(cur);
+        };
+        dfs("JFK");
+        reverse(res.begin(), res.end());
+        return res;
     }
 };
 

@@ -112,7 +112,7 @@ public:
             degree[edge[1]]++;
         }
         queue<int>q; 
-        for(int i = 1; i<=n; ++i) {
+        for(int i = 1; i<=n; ++i) { //<---- must from 1 to n 
             if(degree[i] == 1) {
                 q.push(i);
             }

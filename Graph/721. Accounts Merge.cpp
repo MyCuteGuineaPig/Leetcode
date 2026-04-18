@@ -54,6 +54,55 @@ class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         unordered_map<string, string> email_to_name;
+        unordered_map<string, unordered_set<string>> graph;
+        unordered_map<string, set<string>> parents_to_child;
+
+        for(auto account: accounts){
+            string name = account[0];
+            string cur_parent = account[1];
+            for(int i = 1; i < account.size(); ++i){
+                email_to_name[account[i]] = name;
+                graph[cur_parent].insert(account[i]);
+                graph[account[i]].insert(cur_parent);
+            }
+        }
+
+        unordered_set<string>visited;
+        auto dfs = [&](this auto&&dfs, const string& cur, const string& par, set<string>& this_set) -> void {
+            this_set.insert(cur);
+            visited.insert(cur);
+            for(auto& nxt: graph[cur]){
+                if (!visited.count(nxt)) {
+                    dfs(nxt, cur, this_set);
+                }
+            }
+        };
+
+        vector<vector<string>> res;
+        for(auto p: graph){
+            string parent_email = p.first;
+            if(!visited.count(parent_email)) {
+                set<string>tmp;
+                vector<string> ret;
+                
+                dfs(parent_email, "", tmp);
+
+                ret.push_back(email_to_name[p.first]);
+                ret.insert(ret.begin()+1, tmp.begin(), tmp.end());
+
+                res.push_back(ret);
+            }
+        }
+       
+        return res;
+    }
+};
+
+
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        unordered_map<string, string> email_to_name;
         unordered_map<string, set<string>> chain;
         unordered_map<string, string> parent; 
 
@@ -293,6 +342,51 @@ public:
 };
 
 
+
+
+
+
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        unordered_map<string, string> email_to_name;
+        unordered_map<string, string> parents;
+        unordered_map<string, set<string>> parents_to_child;
+        auto find = [&](this auto&& find, const string& cur) ->string {
+            return parents[cur] == cur? cur: parents[cur] = find(parents[cur]);
+        };
+
+        for(auto account: accounts){
+            string name = account[0];
+            string cur_parent = account[1];
+            for(int i = 1; i < account.size(); ++i){
+
+                if (parents.count(account[i]) == 0){ //<--- this is important 
+                    // 可能后面来的一样的account 把前面的已经找好 parent的 account 改写了parent
+                    email_to_name[account[i]] = name;
+                    parents[account[i]] = cur_parent;
+                }
+                
+                string p1 = find(cur_parent), p2 = find(account[i]);
+                parents[p2] = p1;
+            }
+        }
+
+        for(auto p: parents){
+            string cur_parent = find(p.first);
+            parents_to_child[cur_parent].insert(p.first);
+        }
+        vector<vector<string>> res;
+        for(auto p: parents_to_child) {
+            string name = email_to_name[p.first];
+            vector<string> tmp = {name};
+            for(auto child: p.second)
+                tmp.push_back(child);
+            res.push_back(tmp);
+        }
+        return res;
+    }
+};
 
 /*
 DFS 的解：
