@@ -899,8 +899,8 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 | [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/) | _O(n)_ | _O(n)_	| Easy |  |
 | [599. Minimum Index Sum of Two Lists](https://leetcode.com/problems/minimum-index-sum-of-two-lists/) | _O((m + n) \* l)_ | _O(m \* l)_	| Easy |  |
 | [609. Find Duplicate File in System](https://leetcode.com/problems/find-duplicate-file-in-system/) | _O(n \* k)_ | _O(n \* k)_	| Medium |  |
-| [705. Design HashSet](https://leetcode.com/problems/design-hashset/description/) | _O(1)_ | _O(n)_	| Easy | ⭐⭐|
-| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy | ⭐⭐⭐ [list `find_if`, `remove_if`](https://github.com/beckswu/Leetcode/blob/master/Hash%20Table/706.%20Design%20HashMap.cpp#L118)  |
+| [705. Design HashSet](https://leetcode.com/problems/design-hashset/description/) | _O(1)_ | _O(n)_	| Easy | 📕📕📕 |
+| [706. Design HashMap](https://leetcode.com/problems/design-hashmap/) | _O(1)_ | _O(n)_	| Easy | 📕📕📕 [list `find_if`, `remove_if`](https://github.com/beckswu/Leetcode/blob/master/Hash%20Table/706.%20Design%20HashMap.cpp#L118)  |
 | [748. Shortest Completing Word](https://leetcode.com/problems/shortest-completing-word/) | _O(n)_ | _O(1)_	| Medium |  |
 | [771. Jewels and Stones](https://leetcode.com/problems/jewels-and-stones/) | _O(n+m)_ | _O(n)_	| Easy |  |
 | [811. Subdomain Visit Count](https://leetcode.com/problems/subdomain-visit-count/) | _O(n)_ | _O(n)_	| Easy |  |
@@ -2429,6 +2429,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [359. Logger Rate Limiter](https://leetcode.com/problems/logger-rate-limiter/description/) | _O(1)_ |	_O(n)_ |	Easy | |
 | [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1) | _O(1)_ |	_O(1)_ |	Medium | 🎅🎅 |
 | [460. LFU Cache](https://leetcode.com/problems/lfu-cache/description/) | _O(1)_ |	_O(1)_ |	Hard | ⭐⭐⭐ remove element from list 不会invalidate iterator |
+| [1206. Design Skiplist](https://leetcode.com/problems/design-skiplist/description/) | _O(logn)_ |	_O(n)_ |	Hard | 📕📕 |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>
 push: _O(1)_ <br/>
 pop: _O(1)_ <br/>

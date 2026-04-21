@@ -1,4 +1,62 @@
 class MyHashMap {
+private: 
+    vector<list<pair<int, int>>> hashmap;
+    int num_elements = 0;
+public:
+    MyHashMap() {
+        hashmap.resize(16);
+    }
+    
+    void put(int key, int value) {
+        if((double) num_elements / hashmap.size() > 0.5 ) grow();
+        auto& li = hashmap[key % hashmap.size()];
+        for(auto& p: li) {
+            if(p.first == key) {
+                p.second = value;
+                return;
+            }
+        }
+        ++num_elements;
+        li.push_back({key, value});
+    }
+    
+    int get(int key) {
+        auto& li = hashmap[key % hashmap.size()];
+        for(auto& p : li ){
+            if(p.first == key) {
+                return p.second;
+            }
+        }
+        return -1;
+    }
+    
+    void remove(int key) {
+        auto& li = hashmap[key % hashmap.size()] ;
+        li.remove_if([&](const pair<int,int>&p) {
+            if(p.first == key) {
+                --num_elements;
+                return true;
+            }
+            return false;
+        });
+    }
+
+    void grow(){
+        num_elements = 0 ;
+        vector<list<pair<int, int>>> tmp;
+        // <--- specify size is very important, other will be zero
+        tmp.swap(hashmap);
+        hashmap.resize(hashmap.size() * 2);
+        for(auto& li: tmp){
+            for(auto& p: li) {
+                put(p.first, p.second);
+            }
+        }
+    }
+};
+
+
+class MyHashMap {
     vector<list<pair<int,int>>> m_data;
     size_t m_size = 10000;
 public:

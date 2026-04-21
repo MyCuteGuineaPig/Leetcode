@@ -251,3 +251,26 @@ public:
         return topdown(0, 0, n);
     }
 };
+
+
+class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        if(s1.size() != s2.size())
+            return false;
+        int n = s1.size();
+        vector<vector<vector<int>>>dp(n, vector<vector<int>>(n, vector<int>(n+1, -1)));
+        auto t = [&](this auto&& t, int i, int j, int k) -> int {
+            // 因为 k 从 n 开始，所以 i, j 永远不会超过n, 不用check
+            if(dp[i][j][k]!= -1) 
+                return dp[i][j][k];
+            if (k == 1) 
+                return dp[i][j][k] = (s1[i] == s2[j]); 
+            for(int q = 1; q < k && dp[i][j][k]!=1; ++q){
+                dp[i][j][k] = t(i, j, q) == 1 && t(i + q, j+q, k-q)== 1  || t(i, j + k -q, q)== 1  && t(i+q, j, k-q)== 1 ;
+            }
+            return dp[i][j][k] == 1;
+        };
+        return t(0, 0, n);
+    }
+};

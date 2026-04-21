@@ -27,3 +27,26 @@ class Solution:
         for d in s:
             v, w, p = w, (d>'0')*w + (9<int(p+d)<27)*v, d
         return w
+
+
+
+
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        n = len(s)
+
+        dp = [-1] * (n+1)
+        def t(i):
+            if i == -1 : 
+                return 1 
+            if dp[i] >= 0: 
+                return dp[i] 
+            cur = 0
+            if s[i] != '0':
+                cur += t(i-1)
+            if i > 0 and 10<=int(s[i-1:i+1])<=26:
+                cur += t(i-2)
+            dp[i] = cur 
+            return dp[i]
+
+        return t(n-1)
