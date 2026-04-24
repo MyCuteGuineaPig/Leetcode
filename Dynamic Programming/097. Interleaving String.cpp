@@ -58,7 +58,32 @@ match s3, i + j + 2 个字符
 变成index  i + j + 1 个字符
 */
 
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int n1 = s1.size(), n2 = s2.size(), n3 = s3.size();
+        if (n1+n2 != n3) {
+            return false;
+        }
+        unordered_map<int, unordered_map<int, int>> mp;
 
+        auto t = [&](this auto t, int i, int j) -> int {
+            if( i < 0 and j < 0) 
+                return 1;
+            if (mp.count(i) and mp[i].count(j))
+                return mp[i][j];
+            if (i < 0) 
+                return s2[j] == s3[j] and t(i, j-1); 
+            if (j < 0 )
+                return s1[i] == s3[i] and t(i-1,j);
+            
+            return mp[i][j] = (s1[i] == s3[i+j+1] and t(i-1, j) or s2[j] == s3[i+j+1] and t(i, j-1));
+            
+        };
+
+        return t(n1-1, n2-1);
+    }
+};
 
 class Solution {
 public:

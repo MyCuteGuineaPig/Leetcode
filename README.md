@@ -30,6 +30,7 @@
 * [Design](https://github.com/beckswu/Leetcode#design)
 * [Javascript](https://github.com/beckswu/Leetcode#Javascript)
 * [Bash](https://github.com/beckswu/Leetcode#Bash)
+* [Concurrency](https://github.com/beckswu/Leetcode#Concurrency)
  
 
 🔍 ⭐  good algorithm<br/>
@@ -2331,7 +2332,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕 经典, [DP解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/486.%20Predict%20the%20Winner.cpp#L33), DFS |
 | [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/description/)	|	_O(n)_	|	_O(1)_ |	Easy | similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/) [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)|
 | [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard | 📕📕经典, Top-Down, Bottom-up  |
-| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 👋📕📕, Bottom-up, Top-Down <br/> 类似的题: <ul>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)<li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li> [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/) </li><li> [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/) </li><li>[718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)</li><li>[1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/)</li><li>[1092. Shortest Common Supersequence ](https://leetcode.com/problems/shortest-common-supersequence/description/)</li><li>[1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/) </li></ul> |
+| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕📕, Bottom-up, Top-Down <br/> 类似的题: <ul>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)<li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li> [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/) </li><li> [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/) </li><li>[718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)</li><li>[1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/)</li><li>[1092. Shortest Common Supersequence ](https://leetcode.com/problems/shortest-common-supersequence/description/)</li><li>[1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/) </li></ul> |
 | [518. Coin Change 2 组合](https://leetcode.com/problems/coin-change-2/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕经典TopDown, Bottom-up <br/>  类似的题: <ul><li>[279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/)</li><li> [322. Coin Change](https://leetcode.com/problems/coin-change/description/) </li><li>[377. Combination Sum IV 排列](https://leetcode.com/problems/combination-sum-iv/description/)	</li><li>[983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/)</li></ul>|
 | [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 📕📕  Top-Down, Bottom-up, Similar Question: [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/) |
 | [552. Student Attendance Record II](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(n)_	|	_O(1)~O(n)_|	Hard | [Derive Relation](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/552.%20Student%20Attendance%20Record%20II.cpp#L3) |
@@ -2429,6 +2430,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [359. Logger Rate Limiter](https://leetcode.com/problems/logger-rate-limiter/description/) | _O(1)_ |	_O(n)_ |	Easy | |
 | [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1) | _O(1)_ |	_O(1)_ |	Medium | 🎅🎅 |
 | [460. LFU Cache](https://leetcode.com/problems/lfu-cache/description/) | _O(1)_ |	_O(1)_ |	Hard | ⭐⭐⭐ remove element from list 不会invalidate iterator |
+| [707. Design Linked List](https://leetcode.com/problems/design-linked-list/description/) | add head/tail: _O(1)_  rest: _O(min(k,N−k))_ |	_O(n)_ | Medium | 📕📕 |
 | [1206. Design Skiplist](https://leetcode.com/problems/design-skiplist/description/) | _O(logn)_ |	_O(n)_ |	Hard | 📕📕 |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>
 push: _O(1)_ <br/>
@@ -2475,7 +2477,7 @@ matchDriverWithRider: _O(1)_ amortized cost <br/> cancelRider:  _O(1)_ <br/>|	_O
 
 
 
-  ## Concurrency 
+## Concurrency 
 
 - **c++ parameter to thread always pass by value. need `std::ref(x)` to pass by reference. Thread cannot be copied cannot only be moved**
 - **Future .get() 只能被call 一次，call多次会crash**、

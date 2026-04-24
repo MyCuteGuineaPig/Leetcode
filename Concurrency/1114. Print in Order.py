@@ -28,33 +28,6 @@ class Foo:
             # printThird() outputs "third". Do not change or remove this line.
             printThird()
         
-""" 
-first_barrier = Barrier(2) 2表示number of thread support
-当第一个thread first_barrier.wait(), barrier internal count -= 1
-知道所有的thread .wait barrier. Barrier 才会放行  => Barrier count reset 为初始值 (2)
-
-"""
-
-from threading import Barrier
-
-class Foo:
-    def __init__(self):
-        self.first_barrier = Barrier(2)
-        self.second_barrier = Barrier(2)
-            
-    def first(self, printFirst):
-        printFirst()
-        self.first_barrier.wait()
-        
-    def second(self, printSecond):
-        self.first_barrier.wait()
-        printSecond()
-        self.second_barrier.wait()
-            
-    def third(self, printThird):
-        self.second_barrier.wait()
-        printThird()
-
 
 """
 如果状态是unlocked， 可以调用 acquire() 将状态改为locked
@@ -84,6 +57,56 @@ class Foo:
         with self.locks[1]:
             printThird()
 
+
+
+from threading import Semaphore
+
+class Foo:
+    def __init__(self):
+        self.gates = (Semaphore(0),Semaphore(0))
+        
+    def first(self, printFirst):
+        printFirst()
+        self.gates[0].release()
+        
+    def second(self, printSecond):
+        with self.gates[0]:
+            printSecond()
+            self.gates[1].release()
+            
+    def third(self, printThird):
+        with self.gates[1]:
+            printThird()
+
+
+""" 
+first_barrier = Barrier(2) 2表示number of thread support
+当第一个thread first_barrier.wait(), barrier internal count -= 1
+知道所有的thread .wait barrier. Barrier 才会放行  => Barrier count reset 为初始值 (2)
+
+"""
+
+from threading import Barrier
+
+class Foo:
+    def __init__(self):
+        self.first_barrier = Barrier(2)
+        self.second_barrier = Barrier(2)
+            
+    def first(self, printFirst):
+        printFirst()
+        self.first_barrier.wait()
+        
+    def second(self, printSecond):
+        self.first_barrier.wait()
+        printSecond()
+        self.second_barrier.wait()
+            
+    def third(self, printThird):
+        self.second_barrier.wait()
+        printThird()
+
+
 """
 
  An event manages a flag that can be set to true with the set() method and
@@ -112,26 +135,6 @@ class Foo:
         self.done[1].wait()
         printThird()
 
-
-
-from threading import Semaphore
-
-class Foo:
-    def __init__(self):
-        self.gates = (Semaphore(0),Semaphore(0))
-        
-    def first(self, printFirst):
-        printFirst()
-        self.gates[0].release()
-        
-    def second(self, printSecond):
-        with self.gates[0]:
-            printSecond()
-            self.gates[1].release()
-            
-    def third(self, printThird):
-        with self.gates[1]:
-            printThird()
 
 
 

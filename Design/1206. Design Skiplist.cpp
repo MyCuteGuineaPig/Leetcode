@@ -55,7 +55,7 @@ public:
             while(p->right and p->right->val < num) p=p->right;
             if (p->right and p->right->val == num) {
                 seen = true;
-                p->right = p->right->right;
+                p->right = p->right->right; // <-- this is important
             }
             p = p->down;
         }

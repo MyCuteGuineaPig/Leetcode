@@ -25,21 +25,6 @@ a   0 1 1 1
 b   0 0 1 2
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 """
 Here is an example:
 S = "rabbbit", T = "rabbit"
@@ -57,3 +42,21 @@ Return 3.
 
 
 """
+
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        dp = collections.defaultdict(lambda: collections.defaultdict(int))
+        def topDown(i, j):
+            if j == -1: 
+                return 1
+            if i == -1:
+                return 0
+            if i in dp and j in dp[i]:
+                return dp[i][j]
+
+            cnt = topDown(i-1, j)
+            if s[i] == t[j]:
+                cnt += topDown(i-1, j-1)
+            dp[i][j] = cnt
+            return cnt
+        return topDown(len(s)-1, len(t)-1)

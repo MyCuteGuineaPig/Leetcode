@@ -1,22 +1,3 @@
-/*
-
-115. Distinct Subsequences
-https://leetcode.com/problems/distinct-subsequences/description/
-
-
-Given a string S and a string T, count the number of distinct subsequences of S which equals T.
-
-A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
-
-Here is an example:
-S = "rabbbit", T = "rabbit"
-
-Return 3.
-
-
-
-*/
-
 
 /*
 Well, a dynamic programming problem. Let's first define its state dp[i][j] to be the number of distinct subsequences of t[0..i - 1] in s[0..j - 1]. 
@@ -59,6 +40,28 @@ b  0, 0, 0, 0, 1, 3, 3, 3,
 i  0, 0, 0, 0, 0, 0, 3, 3, 
 t  0, 0, 0, 0, 0, 0, 0, 3, 
 */
+
+
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int n = s.size(), m = t.size(); 
+        vector<vector<unsigned long long>> dp(n+1, vector<unsigned long long>(m+1, 0));
+        //dp[i][j] 表示到 s[:i-1] t[j-1]  有多少number of distinct subsequences
+        for(int i = 0; i <= n; ++i) 
+            dp[i][0] = 1;
+        
+        for(int i = 0; i < n; ++i) {
+            for(int j = 0; j < m; ++j) { 
+                dp[i+1][j+1] = dp[i][j+1]; 
+                //no matter s[i] == t[j], use match s[0:i-1],  t[0:j]
+                if(s[i] == t[j])
+                    dp[i+1][j+1] += dp[i][j];
+            }
+        }
+        return dp[n][m];
+    }
+};
 
 
 class Solution {

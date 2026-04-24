@@ -100,3 +100,31 @@ public:
     printThird();
   }
 };
+
+/*
+⚠️ Broken promise
+If the promise is destroyed without calling set_value():
+
+wait() still returns
+But the future is in a broken state
+Calling .get() will throw std::future_error
+
+
+
+1. One-shot vs reusable
+promise/future:
+    ❌ One-time only
+    After set_value(), it's done forever
+condition_variable:
+    ✅ Reusable
+    You can wait/notify many times
+
+
+promise/future:
+    Only one future per promise
+    ❌ Not good for broadcasting
+condition_variable:
+    ✅ Many threads can wait
+    notify_all() wakes everyone
+
+ */

@@ -1,3 +1,30 @@
+/*
+
+dp[i][j] 表示 s[i...j] 的最长回文子序列长度，回文可以是不连续的
+如果s[i] == s[j] dp[i][j] = dp[i+1][j-1] + 2
+否则 dp[i][j] = max(dp[i+1][j], dp[i][j-1])， 
+    因为回文可以是不连续的，所以可以取区间内的任意字符，所以如果s[i] != s[j]，可以删除s[i]或者s[j]，所以取两者的最大值
+*/
+
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        vector<vector<int>>dp(s.size(),vector<int>(s.size(),0));
+        for(int j = 0; j<s.size();j++){
+            dp[j][j] = 1;      
+            for(int i = j-1; i>=0;i--){
+                if(s[j]==s[i])
+                    dp[i][j] = dp[i+1][j-1]+2;
+                else
+                    dp[i][j] = max(dp[i][j-1],dp[i+1][j]);
+            }
+        }
+        return dp[0][s.size()-1];
+    }
+};
+
+
+
 //Bottom-up
 class Solution {
 public:
@@ -47,26 +74,6 @@ public:
             return dp[i][j] = topDown(dp, s, i+1, j-1) + 2;
         else 
             return dp[i][j] = max(topDown(dp,s,i+1,j), topDown(dp,s, i, j-1));
-    }
-};
-
-
-
-
-class Solution {
-public:
-    int longestPalindromeSubseq(string s) {
-        vector<vector<int>>dp(s.size(),vector<int>(s.size(),0));
-        for(int j = 0; j<s.size();j++){
-            dp[j][j] = 1;      
-            for(int i = j-1; i>=0;i--){
-                if(s[j]==s[i])
-                    dp[i][j] = dp[i+1][j-1]+2;
-                else
-                    dp[i][j] = max(dp[i][j-1],dp[i+1][j]);
-            }
-        }
-        return dp[0][s.size()-1];
     }
 };
 

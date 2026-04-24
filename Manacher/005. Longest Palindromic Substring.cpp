@@ -14,6 +14,29 @@ Output: "bb"
 
 */
 
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        vector<vector<int>>dp(n, vector<int>(n));
+        int res_i = 0;
+        int max_len = 1;
+
+        for(int  j = 0; j < n; ++j){
+            dp[j][j] = 1;
+            for(int i = j-1; i>=0; --i) {
+                if(s[i] == s[j] && (i == j -1 || dp[i+1][j-1])) {
+                    dp[i][j] = dp[i+1][j-1] + 2;
+                    if(dp[i][j] > max_len){
+                        res_i = i;
+                        max_len = dp[i][j];
+                    }
+                }
+            }
+        }
+        return s.substr(res_i, max_len);
+    }
+};
 
 /*
 */

@@ -109,6 +109,56 @@ public:
 
 
 // Suffix Trie + DP
+class Solution {
+
+private:
+    struct Trie{
+        unordered_map<char, Trie*> child;
+        bool is_leaf = false;
+
+        void build(const string& word) {
+            Trie* cur = this;
+            for(auto c: word){
+                if (cur->child.count(c) == 0) {
+                    cur->child[c] = new Trie();
+                } 
+                cur = cur->child[c];
+            }
+            cur->is_leaf = true;
+        }
+
+        void search(const string& s, int index, vector<int>& dp) {
+            Trie* cur = this;
+            for(int i = index; i < s.size() && (cur->child).count(s[i]) > 0; ++i) {
+                cur = cur->child[s[i]];
+                if(cur->is_leaf) 
+                    dp[i+1] = true;
+            }
+        }
+    };
+
+
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        Trie t; 
+
+        for(auto& word: wordDict) {
+            t.build(word);
+        }
+
+        int n = s.size();
+        vector<int>dp(n+1); 
+        dp[0] = true;
+        for(int i = 0; i < n; ++i) {
+            if(!dp[i]) continue;
+            t.search(s, i, dp);
+        }
+
+        return dp[n];
+    }
+};
+
+
 struct Trie{
     unordered_map<char, Trie*>mp;
     bool isleaf = false;
