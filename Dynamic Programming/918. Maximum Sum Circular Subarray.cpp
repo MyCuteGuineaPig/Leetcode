@@ -8,29 +8,23 @@ The maximum result equals to the total sum minus the minimum subarray sum.
 
 */
 
-/*
-Example-
-1, 6, -8, 4, 4, -2
-Result should be = 4 + 4 + -2 + 1 + 6 =13
-Logic-
-min sub array sum = -8,
-Total Sum = 5
-Result = 5 - (-8) = 13
+/*💡 Key trick
 
-3, 6, -8, 2, -4, 6, 4
-Result should be = 6 + 4 + 3 + 6 =19
-Logic-
-min sub array sum = -8 + 2 + -4 = -10
-Total Sum =9
-Result = 9 - (-10) = 19
+Instead of directly finding the wrap-around subarray, think:
+
+“What if I remove a minimum subarray in the middle?”
 
 
-Corner case
-Just one to pay attention:
-If all numbers are negative, maxSum = max(A) and minSum = sum(A).
-In this case, max(maxSum, total - minSum) = 0, which means the sum of an empty subarray.
-According to the deacription, We need to return the max(A), instead of sum of am empty subarray.
-So we return the maxSum to handle this corner case.
+
+If: tot == minSum
+
+It means:
+👉 the entire array is the minimum subarray
+
+➡️ So total - minSum = 0
+➡️ That would mean “take nothing” ❌ (invalid, must be non-empty)
+
+So we fall back to: maxSum (largest negative number)
 */
 
 
