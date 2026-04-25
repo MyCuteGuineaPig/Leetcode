@@ -61,3 +61,23 @@ public:
         return {left[1]+root->val+right[1],max(left[0],left[1])+max(right[0],right[1])};
     }
 };
+
+class Solution {
+public:
+    int rob(TreeNode* root) {
+        auto dfs = [&](this auto&& dfs, TreeNode* cur) -> pair<int,int> {
+            if(!cur) return {0, 0};
+            int l_take = 0, l_not_take = 0;
+            int r_take = 0, r_not_take = 0;
+            if (cur->left)
+                tie(l_take, l_not_take) = dfs(cur->left);
+            if (cur->right)
+                tie(r_take, r_not_take) = dfs(cur->right);
+            
+            return {max(l_take + r_take, cur->val + l_not_take + r_not_take), l_take + r_take};
+        };
+
+        auto res = dfs(root);
+        return max(res.first, res.second);
+    }
+};
