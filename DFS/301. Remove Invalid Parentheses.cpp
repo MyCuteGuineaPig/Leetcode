@@ -127,6 +127,41 @@ We can just remove the 0th.
 
 
 
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        queue<pair<string, int>>q;
+        vector<string>res;
+
+        auto isvalid = [&](const string& ss) -> bool {
+            int open = 0; 
+            for(int i = 0; i < ss.size(); ++i) {
+                open += ss[i] == '(' ? 1 : 0;
+                open += ss[i] == ')' ? -1 : 0;
+                if (open < 0) return false;
+            }
+            return open == 0;
+        };
+
+        q.push({s, 0});
+        while (!q.empty()) {
+            auto [ss, index] = q.front(); q.pop();
+            if (isvalid(ss)) {
+                res.push_back(ss); 
+            } else if (res.empty()) {
+                for(int i = index; i < ss.size(); ++i) {
+                   if ((ss[i] != '(' && ss[i] != ')' ) || (i != index && ss[i] == ss[i-1])) continue;
+
+                    string tmp = ss.substr(0, i) + ss.substr(i+1);
+                    q.push({tmp,i});
+                }
+            }
+        }
+        if (res.empty()) res.push_back("");
+        return res;
+    }
+};
+
 
 
 //DFS

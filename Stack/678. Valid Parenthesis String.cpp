@@ -49,6 +49,7 @@ public:
             }
         }
         while(!l.empty() && !star.empty() && l.top() <star.top()){ //因为比如 (*)( 这个是不行的
+        //avoid like *( => return false
             l.pop();
             star.pop();
         }
@@ -89,6 +90,40 @@ public:
 };
 
 
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int openCount = 0;
+        int closeCount = 0;
+        int n = s.size();
+        
+        // Traverse the string from both ends simultaneously
+        for (int i = 0, j = n-1; i <n; i++, j--) {
+            // Count open parentheses or asterisks
+            if (s[i] == '(' || s[i] == '*') {
+                openCount++;
+            } else {
+                openCount--;
+            }
+            
+            // Count close parentheses or asterisks
+            if (s[j] == ')' || s[j] == '*') {
+                closeCount++;
+            } else {
+                closeCount--;
+            }
+            
+            // If at any point open count or close count goes negative, the string is invalid
+            if (openCount < 0 || closeCount < 0) {
+                return false;
+            }
+        }
+        
+        // If open count and close count are both non-negative, the string is valid
+        return true;
+    }
+};
+
 
 /*
 Two pass solution 从左向右看是不是所有的')' 都有对应的'(' 和'*'
@@ -122,6 +157,39 @@ public:
                 else 
                     star--;
             }
+        }
+        return true;
+    }
+};
+
+
+
+class Solution {
+public:
+    bool checkValidString(string s) {
+        stack<int>left;
+        stack<int>buffer;
+        for(int i = 0; i < s.size(); ++i){
+            if(s[i] == '*') buffer.push(i); 
+            else if(s[i] == '('){
+                left.push(i);
+            } else {
+                if(left.size() == 0) {
+                    if (buffer.size() == 0) {
+                        return false;
+                    }
+                    buffer.pop();
+                } else {
+                    left.pop();
+                }
+            }
+        }
+        while(left.size()) {
+            if(buffer.empty() || left.top() > buffer.top()) { //like *(
+                return false;
+            }
+            left.pop();
+            buffer.pop();
         }
         return true;
     }

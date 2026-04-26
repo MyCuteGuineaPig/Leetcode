@@ -21,7 +21,7 @@ public:
         vector<vector<int>> dp(n+1, vector<int>(m+1));
         dp[0][0] = true;
         for(int j = 0; j < m && p[j] == '*'; ++j){
-            dp[0][j+1] = dp[0][j];
+            dp[0][j+1] = true;
         }
 
         for(int i = 0; i < n; ++i) {
@@ -30,7 +30,7 @@ public:
                     dp[i+1][j+1] = dp[i][j];
                 else if (p[j] == '*') 
                     dp[i+1][j+1] = 
-                          dp[i+1][j+1]  // * match s[i], consume both
+                          dp[i][j]  // * match s[i], consume both
                         || dp[i+1][j] // * match nothing, consume p[j] 
                         || dp[i][j+1];// * match one more extra character, consume s[i]
             }

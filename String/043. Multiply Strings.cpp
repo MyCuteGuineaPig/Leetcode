@@ -22,6 +22,38 @@ You must not use any built-in BigInteger library or convert the inputs to intege
 
 */
 
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        int n1 = num1.size(), n2 = num2.size();
+        vector<int>holder(n1 + n2);
+        for(int i = n1-1; i>=0; --i) {
+            for(int j = n2 -1; j >= 0; --j) {
+                int a = num1[i] - '0';
+                int b = num2[j] - '0';
+
+                holder[i + j + 1] += a*b;
+                holder[i+j] += holder[i+j+1] / 10;
+                holder[i + j + 1] %= 10;
+            }
+        }
+
+        string res; 
+        transform(
+            find_if(holder.begin(), holder.end(), [](int i ){return i != 0;}),  
+            //Scans the range holder, Finds the first element that is NOT 0
+            holder.end(), 
+            back_inserter(res), 
+            [](int i){return i + '0';}
+        );
+        return res.empty()? "0" : res;
+    }
+};
+
+
+
+
+
 //back_inserter, 相当于按照原来从头到尾顺序push back
 class Solution {
 public:

@@ -24,6 +24,33 @@ public:
     }
 };
 
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int>stk;
+        unordered_set<int>st; 
+        for(int i = 0; i < s.size(); ++i){
+            if(s[i] != '(' &&  s[i] != ')') continue;
+            if(s[i] == '(') stk.push(i);
+            else {
+                if (stk.empty()) st.insert(i);
+                else stk.pop();
+            }
+        }
+        while (!stk.empty()) {
+            st.insert(stk.top()); 
+            stk.pop();
+        }
+        string res("");
+        for(int i = 0; i < s.size(); ++i) {
+            if(st.count(i)) 
+                continue;
+            res.push_back(s[i]);
+        }
+        return res;
+    }
+};
+
 //beat 95.49%
 class Solution {
 public:
