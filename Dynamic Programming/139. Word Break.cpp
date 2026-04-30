@@ -107,6 +107,51 @@ public:
 
 
 
+class Solution {
+private:
+    struct Trie: enable_shared_from_this<Trie>{
+        unordered_map<char, shared_ptr<Trie>> child;
+        bool is_leaf = false;
+
+        void build(const string& s) {
+            shared_ptr<Trie> t = shared_from_this();
+            for(auto ss: s) {
+                if(t->child.count(ss) == 0) 
+                    t->child[ss] = make_shared<Trie>();
+
+                t = t->child[ss];
+            }
+            t->is_leaf = true;
+        }
+
+        void search(const string& s, int index, vector<int>&dp) {
+            shared_ptr<Trie> t = shared_from_this();
+            for(int i = index; i < s.size() && t->child.count(s[i]); ++i ) {
+                t = t->child[s[i]];
+                if (t->is_leaf) 
+                    dp[i+1] = true;
+            }
+        }
+    };
+
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        shared_ptr<Trie> t = make_shared<Trie>();
+        for(auto word: wordDict)
+            t->build(word);
+
+        int n  = s.size();
+        vector<int>dp(n+1); 
+        dp[0] = 1;
+        for(int i = 0 ; i< n && !dp[n]; ++i) {
+            if(!dp[i]) continue;
+            t->search(s, i, dp);
+        }
+        return dp[n];
+    }
+};
+
+
 
 // Suffix Trie + DP
 class Solution {
