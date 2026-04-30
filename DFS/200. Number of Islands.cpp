@@ -267,3 +267,46 @@ public:
     }
     
 };
+
+
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int n  = grid.size();
+        int m = grid[0].size();
+
+        vector<int>p(n*m);
+        iota(p.begin(), p.end(),0);
+
+        auto find = [&](this auto&& find, int i) -> int{
+            cout<<" find " << i << endl;
+            return p[i] == i ? i : p[i] = find(p[i]);
+        };
+        
+        int cnt = 0;
+
+        auto uf = [&](this auto uf, int i, int j, int x, int y) {
+            if (i < 0 || j < 0 || i >= n || j >= m || x < 0 || y < 0 || x >= n || y >= m || grid[i][j] != '1' || grid[x][y] != '1') 
+                return;
+            int p1 = find(i*m + j);
+            int p2 = find(x*m + y);
+            if (p1 != p2) {
+                p[p2] = p1;
+                --cnt;
+            }
+        };
+
+
+        for(int i = 0; i < n; ++i) {
+            for(int j = 0; j < m; ++j) {
+                if(grid[i][j] == '1') 
+                {
+                    ++cnt;
+                    uf(i, j, i-1, j);
+                    uf(i, j, i, j-1);
+                }
+            }
+        }
+        return cnt;
+    }
+};

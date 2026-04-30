@@ -97,6 +97,68 @@ public:
 
 
 
+
+class Solution {
+private: 
+    struct Trie {
+        unordered_map<char, Trie*> child;
+        bool is_leaf = false;
+
+        void build(const string& s) {
+            Trie* t = this;
+            for(int i = 0; i < s.size(); ++i) {
+                if(t->child.count(s[i]) == 0) 
+                    t->child[s[i]] = new Trie();
+                t = t->child[s[i]];
+            }
+            t->is_leaf = true;
+        }
+    };
+public:
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        Trie t; 
+        for(auto& word: words){
+            t.build(word);
+        }
+
+        string cur = "";
+        
+        int n  = board.size();
+        int m = board[0].size();
+        unordered_set<string> res;
+        vector<vector<int>> visited(n, vector<int>(m));
+        auto dfs = [&](this auto&&dfs,  int i, int j, Trie* t) -> void {
+            cur += board[i][j];
+            if (t->is_leaf) {
+                res.insert(cur);
+            }
+            static vector<int> dirs = {-1,0, 1, 0, -1};
+            visited[i][j] = 1;
+            int n = visited.size(), m = visited[0].size();
+            for(int a = 0; a < 4; ++a) {
+                int x = i + dirs[a];
+                int y = j + dirs[a+1];
+                if( x < 0 || y < 0 || x >= n || y >= m || visited[x][y] || t->child.count(board[x][y]) == 0) 
+                    continue;
+                dfs(x, y,  t->child[board[x][y]]);
+            }
+            cur.pop_back();
+            visited[i][j] = 0; // <--- important
+        };
+
+        for(int i = 0; i <n ; ++i ) {
+            for(int j = 0; j < m; ++j) {
+                if(t.child.count(board[i][j])) {
+                    dfs(i, j, t.child[board[i][j]]);
+                    visited.assign(n, vector<int>(m, 0));
+                }
+            }
+        }
+        return vector<string>(res.begin(), res.end());
+    }
+};
+
+
 class Solution {
     class Trie{
         public:

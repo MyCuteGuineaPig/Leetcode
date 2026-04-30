@@ -1,20 +1,117 @@
-"""
-307. Range Sum Query - Mutable
+/**
+ 
+Fenwick Tree (n = 16)
+| Index (i) | Binary  | i & -i | Range Covered     |
+|-----------|---------|--------|-------------------|
+| 1         | 0001    | 1      | [1, 1]            |
+| 2         | 0010    | 2      | [1, 2]            |
+| 3         | 0011    | 1      | [3, 3]            |
+| 4         | 0100    | 4      | [1, 4]            |
+| 5         | 0101    | 1      | [5, 5]            |
+| 6         | 0110    | 2      | [5, 6]            |
+| 7         | 0111    | 1      | [7, 7]            |
+| 8         | 1000    | 8      | [1, 8]            |
+| 9         | 1001    | 1      | [9, 9]            |
+| 10        | 1010    | 2      | [9, 10]           |
+| 11        | 1011    | 1      | [11, 11]          |
+| 12        | 1100    | 4      | [9, 12]           |  <-- contain number from 1000 (not included) to 1100 
+| 13        | 1101    | 1      | [13, 13]          |
+| 14        | 1110    | 2      | [13, 14]          |
+| 15        | 1111    | 1      | [15, 15]          |
+| 16        | 10000   | 16     | [1, 16]           |
 
-Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
 
-The update(i, val) function modifies nums by updating the element at index i to val.
-Example:
-Given nums = [1, 3, 5]
 
-sumRange(0, 2) -> 9
-update(1, 2)
-sumRange(0, 2) -> 8
-Note:
-The array is only modifiable by the update function.
-You may assume the number of calls to update and sumRange function is distributed evenly.
+Query (i -= i & -i) walks left/up
+Update (i += i & -i) walks right/up
 
-"""
+
+update(13): how it propagates  13 -> 14 -> 16 
+We repeatedly do:
+
+    i += (i & -i)
+    Step-by-step
+
+Start:
+
+    i = 13 (1101)
+    i & -i = 1
+    13 → 14 → 16 → (stop)
+    What ranges are being updated?
+
+From the table:
+
+| Index | Range Covered |
+|-------|---------------|
+| 13    | [13,13]       |
+| 14    | [13,14]       |
+| 16    | [1,16]        |
+
+
+
+query(13): how it decomposes     13 → 12 → 8 → 0 
+
+We repeatedly do:
+        i -= (i & -i)
+Step-by-step
+        i = 13 (1101)
+        i & -i = 1
+        13 → 12 → 8 → 0
+
+What ranges are summed?
+| Index | Range Covered |
+|-------|---------------|
+| 13    | [13,13]       |
+| 12    | [9,12]        |
+| 8     | [1,8]         |
+Combine them
+[1..13] =
+[13] + [9..12] + [1..8]
+
+ */
+
+
+class NumArray {
+private: 
+    vector<int>BIT; 
+    vector<int>nums;
+    int n;
+
+public:
+    NumArray(vector<int>& nums): nums(nums) {
+        n = nums.size();
+        BIT.resize(n+1);
+        for(int i = 0; i < n; ++i) {
+            updateBIT(i+1, nums[i]);
+        }
+    }
+
+    void updateBIT(int i, int val){
+        while(i <= n) {  // <--- important because BIT is 1-indexed, so we need to update until n, not n-1
+            BIT[i] += val;
+            i += i & (-i);
+        }
+    }
+
+    int sumBIT(int i) {
+        int res =0;
+        while (i) {
+            res += BIT[i];
+            i -= i & -i;
+        }
+        return res;
+    }
+    
+    void update(int index, int val) {
+        int delta = val - nums[index];
+        updateBIT(index + 1, delta);
+        nums[index] = val;
+    }
+    
+    int sumRange(int left, int right) {
+        return sumBIT(right+1) - sumBIT(left); 
+    }
+};
 
 /*
 

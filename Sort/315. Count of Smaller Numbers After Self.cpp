@@ -1,22 +1,68 @@
 /*
+Step-by-step update path
 
-315. Count of Smaller Numbers After Self
+Start: i = 13
+Step 1: 13 + 1 = 14
 
+Step 2:
+Now compute lowest bit of 14:
 
-You are given an integer array nums and you have to return a new counts array. 
-The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+        14 = 1110₂
+        i & -i = 0010₂ = 2
+        14 + 2 = 16
 
-Example:
+Step 3: 16 = 10000₂ i & -i = 10000₂ = 16
+        16 + 16 = 32
 
-Input: [5,2,6,1]
-Output: [2,1,1,0] 
-Explanation:
-To the right of 5 there are 2 smaller elements (2 and 1).
-To the right of 2 there is only 1 smaller element (1).
-To the right of 6 there is 1 smaller element (1).
-To the right of 1 there is 0 smaller element.
+So the full update chain is:
+
+13 → 14 → 16 → 32 → ...
+
+Example: query i = 13
+13 = 1101
+i & -i = 0001
+
+Steps:
+
+13 → 12 → 8 → 0
+
+We are decomposing:
+
+[1..13]
+= [9..13] + [1..8]
 
 */
+class Solution {
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int>BIT(2*10000 + 1);
+        vector<int>res;
+        for(int i = nums.size()-1; i>=0; --i){
+            update(BIT, nums[i]+10001);
+            res.push_back(getSum(BIT, nums[i]+10000)); //BIT Tree is 1-index based
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+
+    void update(vector<int>&BIT, int i){
+        while (i < BIT.size()){
+            BIT[i] += 1;
+            i += i & -i;
+        }
+    }
+
+    int getSum(vector<int>&BIT, int i){
+        int tot = 0;
+        //cout<<"get "<<i<<endl;
+        while (i){
+            tot += BIT[i];
+            
+            i -= i & -i; 
+        }
+        return tot;
+    }
+};
 
 
 /*

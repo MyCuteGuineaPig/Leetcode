@@ -41,6 +41,63 @@ So the total complexity is:
 
 
 
+
+// Time:  O(n * logk)
+// Space: O(k)
+// Heap solution.
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.size()==0) return NULL;
+        if(lists.size()==1) return lists[0];
+        auto comp = [](ListNode * l1, ListNode *l2){
+            return l1->val>l2->val;
+        };
+        priority_queue<ListNode *, vector<ListNode*>, decltype(comp)>pq(comp);
+        ListNode dummy(0);
+        ListNode *cur = &dummy;
+        for(auto i: lists){
+            if(i) pq.push(i); 
+        }
+        while(pq.size()){
+            auto node = pq.top();
+            pq.pop();
+            cur->next = node;
+            cur = cur->next;
+            node = node->next;
+            if(node)
+                pq.push(node);
+        }
+        return dummy.next;
+    }
+};
+
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        auto cmp=[&](ListNode* a, ListNode* b) -> bool {
+            return a->val < b->val; 
+        };
+        multiset<ListNode*, decltype(cmp)>st(cmp);
+        for(auto& l: lists){
+            if (l)
+                st.insert(l);
+        }
+        ListNode res(0);
+        ListNode* l = &res;
+        while (!st.empty()) {
+            auto top = *st.begin(); st.erase(st.begin());
+            l->next = top;
+            top = top->next;
+            l = l->next;
+            if(top) {
+                st.insert(top);
+            }
+        }
+        return res.next;
+    }
+};
+
 // Time:  O(knlogk) n是linkedlist 长度, k是list的个数
 // Space: O(1)
 
@@ -142,36 +199,6 @@ public:
 
 
 
-
-// Time:  O(n * logk)
-// Space: O(k)
-// Heap solution.
-class Solution {
-public:
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.size()==0) return NULL;
-        if(lists.size()==1) return lists[0];
-        auto comp = [](ListNode * l1, ListNode *l2){
-            return l1->val>l2->val;
-        };
-        priority_queue<ListNode *, vector<ListNode*>, decltype(comp)>pq(comp);
-        ListNode dummy(0);
-        ListNode *cur = &dummy;
-        for(auto i: lists){
-            if(i) pq.push(i); 
-        }
-        while(pq.size()){
-            auto node = pq.top();
-            pq.pop();
-            cur->next = node;
-            cur = cur->next;
-            node = node->next;
-            if(node)
-                pq.push(node);
-        }
-        return dummy.next;
-    }
-};
 
 //make_heap + pop_heap: we can access all the elements (from my answer for that solution)
     

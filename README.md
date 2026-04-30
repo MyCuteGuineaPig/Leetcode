@@ -272,7 +272,7 @@ void init(const string& s, string& res){
 
 |Title | Time  | Space | Difficulty |  Algorithm Note|
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/Manacher/005.%20Longest%20Palindromic%20Substring.cpp#L70) |
+| [005.Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/) | _O(n)_ | _O(n)_	| Medium | [⭐ manacher(马拉车算法)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/Manacher/005.%20Longest%20Palindromic%20Substring.cpp#L70) <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul>|
 | [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/) | _O(n)_ | _O(n)_	| Hard |  ⭐ 可以把此题换一种问法: 以index0 开始最长palindrome 的长度, 最长的开始最长palindrome后面的reverse +s = 答案  <ul><li>KMP </li><li>[马拉车(manacher)](https://github.com/MyCuteGuineaPig/Leetcode/blob/master/kmp/214.%20Shortest%20Palindrome.cpp#L151)</li></ul>  |
 | [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/) | _O(n)_ | _O(n)_	| Medium | ⭐⭐⭐ `sum(sum(dp, []))` sum 2d array <ul><li>manacher(马拉车算法) </li><li>DP</li></ul> |
 
@@ -631,6 +631,80 @@ TreeNode* helper(TreeNode** head ){
 
 /*
 
+
+Fenwick Tree (n = 16)
+| Index (i) | Binary  | i & -i | Range Covered     |
+|-----------|---------|--------|-------------------|
+| 1         | 0001    | 1      | [1, 1]            |
+| 2         | 0010    | 2      | [1, 2]            |
+| 3         | 0011    | 1      | [3, 3]            |
+| 4         | 0100    | 4      | [1, 4]            |
+| 5         | 0101    | 1      | [5, 5]            |
+| 6         | 0110    | 2      | [5, 6]            |
+| 7         | 0111    | 1      | [7, 7]            |
+| 8         | 1000    | 8      | [1, 8]            |
+| 9         | 1001    | 1      | [9, 9]            |
+| 10        | 1010    | 2      | [9, 10]           |
+| 11        | 1011    | 1      | [11, 11]          |
+| 12        | 1100    | 4      | [9, 12]           |  <-- contain number from 1000 (not included) to 1100 
+| 13        | 1101    | 1      | [13, 13]          |
+| 14        | 1110    | 2      | [13, 14]          |
+| 15        | 1111    | 1      | [15, 15]          |
+| 16        | 10000   | 16     | [1, 16]           |
+
+
+
+Query (i -= i & -i) walks left/up
+Update (i += i & -i) walks right/up
+
+
+update(13): how it propagates  13 -> 14 -> 16 
+We repeatedly do:
+
+    i += (i & -i)
+    Step-by-step
+
+Start:
+
+    i = 13 (1101)
+    i & -i = 1
+    13 → 14 → 16 → (stop)
+    What ranges are being updated?
+
+From the table:
+
+| Index | Range Covered |
+|-------|---------------|
+| 13    | [13,13]       |
+| 14    | [13,14]       |
+| 16    | [1,16]        |
+
+
+
+query(13): how it decomposes     13 → 12 → 8 → 0 
+
+We repeatedly do:
+        i -= (i & -i)
+Step-by-step
+        i = 13 (1101)
+        i & -i = 1
+        13 → 12 → 8 → 0
+
+What ranges are summed?
+| Index | Range Covered |
+|-------|---------------|
+| 13    | [13,13]       |
+| 12    | [9,12]        |
+| 8     | [1,8]         |
+Combine them
+[1..13] =
+[13] + [9..12] + [1..8]
+
+
+
+
+
+
 array 3 2 -1 6 5 4 -3 3 7 2 3
 index 0 1  2 3 4 5  6 7 8 9 10
 
@@ -668,6 +742,7 @@ Get Next(2) move 到最右侧的bit + 1位，且把后面bit 全部抹掉  0011 
 1) 的 2's complement 0011 的negate 是1100  + 1 = 1101
 2) 1100 & 0011 = 1
 3） 0011 + 1 = 0100
+
 
 
 */
@@ -1222,7 +1297,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [274. H-Index](https://leetcode.com/problems/h-index/) | _O(n)_ | _O(n)_	| Medium | ❌counting Sort |
 | [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort, BIT <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li></ul>  |
 | [324. Wiggle Sort II](https://leetcode.com/problems/wiggle-sort-ii/) | _O(n) average_ | _O(1)_	| Medium | ❌(1 + 2\*index) \% (n \| 1)保证median左面数map奇数位，mediam右面的数map偶数位<ul><li>(1)elements smaller than the 'median' are put into the last even slots</li><li>(2) elements larger than the 'median' are put into the first odd slots</li><li>(3) the medians are put into the remaining slots.</li></ul> |
-| [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | MergeSort with Count, BIT <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul> |
+| [327. Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/) | _O(nlogn)_ | _O(n)_	| Hard | BIT tree: update 往数大的方向，querysum 往数小的方向 <br/> Similar Question: <ul><li>[307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/)</li><li>[315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)</li><li>[683. K Empty Slots](https://leetcode.com/problems/k-empty-slots/)</li><li>[1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key/description/)</li><li>[1825. Finding MK Average](https://leetcode.com/problems/finding-mk-average/)</li></ul> |
 | [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | _O(n)_ | _O(n)_	| Medium | 😍 Bucket Sort, Quick Select, <ul><li> C++: n-th elements,  priority_queue (maxheap: priority_queue, minheap: multiset), </li><li> python: collections.Count, heapq, most_common(k) </li></ul> 与[451. Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency/) , [692. Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words/) 类似 |
 | [406. Queue Reconstruction by Height](https://leetcode.com/problems/queue-reconstruction-by-height/) | _O(n \* sqrt(n))~O(n^2)_ | _O(n)_	| Medium | 😚 关键是认清sort的顺序 先把height大的安排了，如果height一样再sort k有小到大。 sqrt(n)解是一样的sort，但是把sort之后的插入到不同的组中，每个组不超过sqrt(n)个元素 |
 | [462. Minimum Moves to Equal Array Elements II](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/) | _O(nlogn)_ | _O(n)_	| Medium | Medium是最小化Sum of Absolute Deviations; Quick Select: O(n) on average |
@@ -2299,11 +2374,11 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [087. Scramble String](https://leetcode.com/problems/scramble-string/description/)	|	_O(n^4)_	|	_O(n^3)_ |	Hard | 📕 Memoization |
 | [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)	|	_O(n)_	|	_O(1)_ |	Medium | similar question: <ul><li>[062. Unique Paths](https://leetcode.com/problems/unique-paths/)</li><li> [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/)</li><li> [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)</li></ul> |
 | [097. Interleaving String](https://leetcode.com/problems/interleaving-string/)	|	_O(m\*n)_	|	_O(m+n)_ |	Hard | 📕📕 DP(注意index), DFS, BFS |
-| [115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)	|	_O(n^2)_	|	_O(n)_ |	Hard | 👋📕📕  <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li></ul> |
+| [115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)	|	_O(n^2)_	|	_O(n)_ |	Hard | 👋📕📕  <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul> |
 | [120. Triangle](https://leetcode.com/problems/triangle/)	|	_O(m\*n)_	|	_O(n)_ |	Medium | Bottom-up DP  |
 | [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)	|	_O(n)_	|	_O(n)_ |	Hard | 📕 [Why variables order doesn't matter](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/123.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20III.cpp#L236)  <br/> 类似 <ul><li> [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)</li><li>[689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)</li><li>[714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)</li></ul> |
-| [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)	|	_O(n^2)_	|	_O(n) </br>~O(n)_ |	Hard | 📕  <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li></ul>|
-| [139. Word Break](https://leetcode.com/problems/word-break/description/)	|	_O(n^2)_	|	_O(n)_ |	Medium | <ul><li> DP </li><li>Suffix Trie + DP </li></ul> <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)</li><li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li></ul> |
+| [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)	|	_O(n^2)_	|	_O(n) </br>~O(n)_ |	Hard | 📕  <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul> |
+| [139. Word Break](https://leetcode.com/problems/word-break/description/)	|	_O(n^2)_	|	_O(n)_ |	Medium | <ul><li> DP </li><li>Suffix Trie + DP </li></ul> <br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul>  |
 | [152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)	|	_O(n)_	|	_O(1)_ |	Medium | 📕📕[Prefix Product, Suffix Product](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/152.%20Maximum%20Product%20Subarray.cpp#135) |
 | [174. Dungeon Game](https://leetcode.com/problems/dungeon-game/)	|	_O(n+m)_	|	_O(n)~O(1)_ |	Hard | 📕📕  bottom-up DP, Can't start at (0,0) |
 | [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)	|	_O(k*n)_	|	_O(n)_ |	Hard | 类似的题 <ul><li> [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)</li><li>[689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)</li><li>[714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)</li></ul> |
@@ -2331,7 +2406,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕 经典, [DP解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/486.%20Predict%20the%20Winner.cpp#L33), DFS |
 | [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/description/)	|	_O(n)_	|	_O(1)_ |	Easy | similar question: [062. Unique Paths](https://leetcode.com/problems/unique-paths/), [070. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/) [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)|
 | [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/)	|	_O(k) ~ O(k \* r^2)_	|	_O(r)_|	Hard | 📕📕经典, Top-Down, Bottom-up  |
-| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕📕, Bottom-up, Top-Down <br/> 类似的题: <ul>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)<li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li> [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/) </li><li> [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/) </li><li>[718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)</li><li>[1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/)</li><li>[1092. Shortest Common Supersequence ](https://leetcode.com/problems/shortest-common-supersequence/description/)</li><li>[1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/) </li></ul> |
+| [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕📕, Bottom-up, Top-Down <br/> 类似的题: <ul>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)<li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li> [583. Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/) </li><li> [712. Minimum ASCII Delete Sum for Two Strings](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/) </li><li>[718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)</li><li>[1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/)</li><li>[1092. Shortest Common Supersequence ](https://leetcode.com/problems/shortest-common-supersequence/description/)</li><li>[1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/) </li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul> |
 | [518. Coin Change 2 组合](https://leetcode.com/problems/coin-change-2/)	|	_O(n^2)_	|	_O(n)_|	Medium | 📕📕经典TopDown, Bottom-up <br/>  类似的题: <ul><li>[279. Perfect Squares](https://leetcode.com/problems/perfect-squares/description/)</li><li> [322. Coin Change](https://leetcode.com/problems/coin-change/description/) </li><li>[377. Combination Sum IV 排列](https://leetcode.com/problems/combination-sum-iv/description/)	</li><li>[983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/)</li></ul>|
 | [546. Remove Boxes](https://leetcode.com/problems/remove-boxes/description/)	|	_O(n^3) ~ O(n^4)_	|	_O(n^3)_|	Hard | 📕📕  Top-Down, Bottom-up, Similar Question: [312. Burst Balloons](https://leetcode.com/problems/burst-balloons/description/) |
 | [552. Student Attendance Record II](https://leetcode.com/problems/student-attendance-record-ii/description/)	|	_O(n)_	|	_O(1)~O(n)_|	Hard | [Derive Relation](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/552.%20Student%20Attendance%20Record%20II.cpp#L3) |
@@ -2342,7 +2417,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [639. Decode Ways II](https://leetcode.com/problems/decode-ways-ii/)	|	_O(n)_	|	_O(1)_|	Hard | 📕 [巧解](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/639.%20Decode%20Ways%20II.cpp#L81) <br/> 类似的题: [091. Decode Ways](https://leetcode.com/problems/decode-ways/description/)  |
 | [650. 2 Keys Keyboard](https://leetcode.com/problems/2-keys-keyboard/)	|	_O(sqrt(n))_	|	_O(1)_|	Medium | 📕 Greedy / DP [prime factoring ](https://github.com/beckswu/Leetcode/blob/master/Dynamic%20Programming/650.%202%20Keys%20Keyboard.cpp#L118) |
 | [656. Coin Path](https://leetcode.com/problems/coin-path/description/?envType=problem-list-v2&envId=dynamic-programming)	|	_O(n\*m)_	|	_O(n)_|	Hard |  |
-| [664. Strange Printer](https://leetcode.com/problems/strange-printer/)	|	_O(n^3)_	|	_O(n^2)_|	Hard | 👋📕📕<br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[115. Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)</li><li> [132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li>[516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li></ul>  |
+| [664. Strange Printer](https://leetcode.com/problems/strange-printer/)	|	_O(n^3)_	|	_O(n^2)_|	Hard | 👋📕📕<br/> 类似的题: <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul>  |
 | [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/)	|	_O(n^2)_	|	_O(n)_|	Medium |  📕 |
 | [688. Knight Probability in Chessboard](https://leetcode.com/problems/knight-probability-in-chessboard/)	|	_O(k\*n^2)_	|	_O(k\*n^2)</br>~O(n^2)_|	Medium | 💜 Bottom-up, Top-Down |
 | [689. Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)	|	_O(n)_	|	_O(n)_|	Hard | 📕📕 sliding windows/ DP similar to Stock Purchasing <br/> 类似的题 <ul><li> [123. Best Time to Buy and Sell Stock III	](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)</li><li>[188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)</li><li>[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)	</li><li>[714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)</li></ul>  |
@@ -2402,6 +2477,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [1824. Minimum Sideway Jumps](https://leetcode.com/problems/minimum-sideway-jumps/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/)	|	_O(n)_  |	_O(1)_|	Medium |  |
 | [2466. Count Ways To Build Good Strings](https://leetcode.com/problems/count-ways-to-build-good-strings/description/)	|	_O(n)_  |	_O(1)_|	Medium |  |
+| [2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)	|	_O(n*100)_  |	_O(n)_|	Hard | 类似的题<br/> <ul><li>[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)</li><li>[132. Palindrome Partitioning II](https://leetcode.com/problems/palindrome-partitioning-ii/description/)</li><li>[139. Word Break](https://leetcode.com/problems/word-break/description/)</li><li> [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/)</li><li>[664. Strange Printer](https://leetcode.com/problems/strange-printer/)</li><li>[2484. Count Palindromic Subsequences](https://leetcode.com/problems/count-palindromic-subsequences/description/)<li></ul>  |
 | [2533. Number of Good Binary Strings](https://leetcode.com/problems/number-of-good-binary-strings/description/)	|	_O(n)_  |	_O(n)_|	Medium |  |
 | [2370. Longest Ideal Subsequence](https://leetcode.com/problems/longest-ideal-subsequence/)	|	_O(kn)_  |	_O(1)_|	Medium | ⭐ TopDown |
 | [2771. Longest Non-decreasing Subarray From Two Arrays](https://leetcode.com/problems/longest-non-decreasing-subarray-from-two-arrays/description/)	|	_O(n)_  |	_O(n)_|	Medium | ⭐⭐⭐  |

@@ -18,52 +18,98 @@ Special thanks to @dietpepsi for adding this problem and creating all test cases
 
 
 
+4. Why upper_bound - lower_bound works
+
+We want:
+
+count of values in [L, R]
+Using prefix sums in BIT:
+
+count(≤ R) - count(< L)
+Which becomes:
+
+getSum(R_index) - getSum(L_index)
+
+That’s exactly:
+upper_count - lower_count
+
+
 */
 
+/*
+// BIT 的 index 是从 1 开始的，因此我们需要统计的是
+// prefix sums ∈ [sums[i] - upper, sums[i] - lower]
+
+// 我们用 vec 做坐标压缩（0-based），所以：
+int L = sums[i] - upper;
+int R = sums[i] - lower;
+
+// lower_bound(L):
+// 返回的是 vec 中第一个 >= L 的位置（0-based）
+// => 在 BIT 语义里(1 是起始index)，相当于 “第一个不小于 L 的前缀和位置”
+// => 用于找到 < L 的分界点（左边界）
+//不用Upper_bound, 因为从大于目标数 index-1, 得到的index的数可能是等于的
+//但lower_bound 是从大于等于目标数 index-1, 得到的index的数一定是小于的
+
+// upper_bound(R):
+// 返回的是 vec 中第一个 > R 的位置（0-based）
+// => 在 BIT 语义里(1 是起始index)，相当于 “最后一个 <= R 的位置 + 1”
+// => 用于统计 ≤ R 的范围（右边界）
+
+
+*/
 class Solution {
 public:
-    void update(vector<long>& nums, int i){
-        while(i < nums.size()){
-            nums[i] += 1;
+    void updateBIT(vector<long>&BIT, int i){
+        while(i < BIT.size()) {
+            BIT[i] += 1;
             i += i & -i;
         }
     }
-    int getSum(vector<long>& nums,int i){
-        int tot = 0;
-        while(i){
-            tot += nums[i];
-            i -= i & -i;
+
+    long BITsum(vector<long>&vec, int i) {
+        long res = 0;
+        while(i > 0) {
+            res += vec[i];
+            i -= (i & -i);
         }
-        return tot;
+        return res;
     }
 
     int countRangeSum(vector<int>& nums, int lower, int upper) {
-        int n = nums.size();
-        vector<long>vec(n+1); 
+        int n  = nums.size();
         vector<long>sums(n+1);
-        vector<long>BIT(n+2);
-        long cur = 0;
-        for(int i = 0; i < n; ++i){
-            cur += nums[i];
-            vec[i+1] = cur;
-            sums[i+1] = cur;
+        vector<long>sorted_sum(n+1);
+        vector<long>BIT(n+2); // <--- this is important
+
+        for(int i = 0; i < n; ++i) {
+            sums[i+1] = sums[i]+ nums[i] ;
+            sorted_sum[i+1] = sums[i]+ nums[i] ;
         }
-        sort(vec.begin(), vec.end());
+
+        sort(sorted_sum.begin(), sorted_sum.end());
+        
         int res = 0;
-        for(int i = 0; i <= n; ++i){
-            int lower_count = getSum(BIT, lower_bound(vec.begin(), vec.end(), sums[i]-upper) - vec.begin());
-            int upper_count = getSum(BIT, upper_bound(vec.begin(), vec.end(), sums[i]-lower) - vec.begin());
-            res += (upper_count - lower_count);
-            update(BIT, 1+lower_bound(vec.begin(), vec.end(), sums[i]) - vec.begin());
-            //如果不加1,  lower_bound(vec.begin(), vec.end(), sums[i])  = 0 时候就有问题了
-            //更新大于sum[i] index 的第一个点, upper_count 的时候就会算进去，因为比如upper_bound
-            //lower_count 算不算无所谓，因为 如果lower_count 算, upper_count 也算进去了
+        for(int i = 0; i<=n; ++i) {
+            int lower_count = BITsum(BIT, lower_bound(sorted_sum.begin(), sorted_sum.end(), sums[i] - upper) - sorted_sum.begin());
+            int upper_count = BITsum(BIT, upper_bound(sorted_sum.begin(), sorted_sum.end(), sums[i] - lower) - sorted_sum.begin());
+            //因为BIT Tree index start 为1， 需要找的是[sums[i]-upper, sums[i]-lower]
+            //upper_bound(sums[i]-lower) => 以0为index, 第一个大于sums[i]-lower的数 (如果以1为index，需要减1, 最后一个在sums[i]-lower范围内的数)
+            //lower_bound(sums[i]-upper) 也是以0为index, 第一个 （如果以1为index，需要减1,  第一个不在sums[i]-lower范围内的数）
+
+            res += upper_count - lower_count;
+            updateBIT(BIT, 1+lower_bound(sorted_sum.begin(), sorted_sum.end(), sums[i]) - sorted_sum.begin());
+            //+1 因为BIT index 起始值是1 
+            //update BIT 是把当前的sums[i] 插入到BIT中，
+            //后续的sums[j] (j>i) 就可以通过getSum来统计有多少个sums[j] 满足 sums[j] - sums[i] ∈ [lower, upper]
            
             //or  update(BIT, upper_bound(vec.begin(), vec.end(), sums[i]) - vec.begin());
         }
         return res;
     }
 };
+
+
 
 
 /*
