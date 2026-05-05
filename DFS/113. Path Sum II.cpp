@@ -67,7 +67,8 @@ public:
                 cur = stk.top();
                 if(!cur->left && !cur->right && sum == 0)
                     res.push_back(temp);
-                if(cur->right && pre != cur->right)
+                if(cur->right && pre != cur->right) //<-- this condition is important, 
+                // because we need to make sure we haven't visited the right child yet, otherwise we will end up in an infinite loop
                     cur = cur->right;
                 else{
                     pre = cur;

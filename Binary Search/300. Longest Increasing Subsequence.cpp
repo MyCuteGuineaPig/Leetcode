@@ -92,22 +92,67 @@ public:
 };
 
 
+/*
+
+nums = [8, 1, 6, 2, 3, 10]. 
+
+Let's try to build an increasing subsequence starting with an empty one: sub = [].
+
+8 -> sub = [8] (8 is the smallest tail of all increasing subsequences with length 1)
+1 -> sub = [1] (1 is the smallest tail of all increasing subsequences with length 1)  
+可以舍弃8，因为1更小，后续的subsequence更有可能是increasing的 
+
+6 -> sub = [1, 6] (6 is the smallest tail of all increasing subsequences with length 2)
+
+
+One thing to add: this algorithm does not always generate a valid subsequence of the input, 
+but the length of the subsequence will always equal the length of the longest increasing subsequence.
+For example, with the input [3, 4, 5, 1], at the end we will have sub = [1, 4, 5],
+ which isn't a subsequence, but the length is still correct. 
+
+
+4. Why the lower_bound replacement is safe
+You might wonder: "Does replacing an element in the middle of tail break the subsequence?"
+
+The key is that the tail vector does not store the actual LIS. 
+It is a conceptual tool. Even if we replace a value in tail that technically appeared 
+later in the original array than the values following it in tail, the length remains valid.
+
+Example of the "replacement" logic:
+Input: [10, 20, 30, 5]
+
+tail = [10]
+
+tail = [10, 20]
+
+tail = [10, 20, 30]
+
+n = 5: tail becomes [5, 20, 30]
+
+Even though [5, 20, 30] is not a valid subsequence of the input (5 came last), 
+the length 3 is still correct because the "30" was originally 
+put there by the valid sequence [10, 20, 30]. 
+Replacing the 10 with 5 just prepares the array for a potential future sequence like [5, 6, 7, 8].
+
+
+*/
+
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         vector<int>tail;
         for(int n : nums){
-            int i = 0, j = tail.size();
             if(tail.empty() || tail.back()<n)
                 tail.push_back(n);
             else {
                 auto it = lower_bound(tail.begin(),tail.end(), n);
-                tail[it-tail.begin()] = n;
+                *it = n;
             }
         }
         return tail.size();
     }
 };
+
 
 
 class Solution {

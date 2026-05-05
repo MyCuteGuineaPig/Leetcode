@@ -474,6 +474,32 @@ public:
     }
 };
 
+//Traverse each node twice, 113. Path Sum II
+class Solution {
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        TreeNode* prev = nullptr;
+        TreeNode* cur = root;
+        stack<TreeNode*>stk;
+        while (cur || !stk.empty()) {
+            if (cur) {
+                stk.push(cur);
+                cur = cur->left;
+            } else {
+                cur = stk.top();
+                if (cur->right && cur->right!= prev) {
+                    cur = cur->right;
+                } else {
+                    stk.pop();
+                    prev = cur; 
+                    cur = nullptr;
+                }
+            }
+        }
+        return res;
+    }
+};
+
 //Morris: 流程图见,  094. Binary Tree Inorder Traversal.cpp
 class Solution {
 public:
@@ -1369,8 +1395,8 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/description/) | _O((logn)^2)_ |	_O(1)_	| Medium | 注意审题 complete tree |
 | [275. H-Index II](https://leetcode.com/problems/h-index-ii/description/) | _O(logn)_ |	_O(1)_	| Medium | |
 | [278. First Bad Version](https://leetcode.com/problems/first-bad-version/) | _O(logn)_ |	_O(1)_	| Easy | |
-| [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | _O(nlogn)_ |	_O(n)_	| Medium | 💜🎅🎅🎅 similar question <ul><li>[354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) </li></ul>  |
-| [354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) | _O(nlogn)_ |	_O(n)_	| Hard | 💜🎅similar question <ul><li>[300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)</li></ul> |
+| [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) | _O(nlogn)_ |	_O(n)_	| Medium | 📕📕📕 similar question <ul> [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) </li><li>[354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) </li><li>[3920. Maximize Fixed Points After Deletions](https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/) </li></ul>  |
+| [354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) | _O(nlogn)_ |	_O(n)_	| Hard | 💜🎅similar question </br> <ul> [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) </li><li>[354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) </li><li>[3920. Maximize Fixed Points After Deletions](https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/) </li></ul> |
 | [363. Max Sum of Rectangle No Larger Than K](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/description/) | _O(min(m, n)^2 * max(m, n) * logn(max(m, n)))_ |	_O(max(m, n))_	| Hard | 💜🎅🎅, 利用Set |
 | [367. Valid Perfect Square](https://leetcode.com/problems/valid-perfect-square/) | _O(logn)_ |	_O(1)_	| Easy | Similar Question <ul><li>[069. Sqrt(x)](https://leetcode.com/problems/sqrtx/description/)</li></ul>  |
 | [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/) | _O(logn)_ |	_O(1)_	| Easy | |
@@ -1400,6 +1426,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [3116. Kth Smallest Amount With Single Denomination Combination](https://leetcode.com/problems/kth-smallest-amount-with-single-denomination-combination/description/) | _O(2^n \* log(k))_ |	_O(2^n)_	| Hard | `itertools.combinations`, `math.lcm` |
 | [3134. Find the Median of the Uniqueness Array](https://leetcode.com/problems/find-the-median-of-the-uniqueness-array/description/) | _O(nlogn)_ |	_O(n)_	| Hard |  |
 | [3733. Minimum Time to Complete All Deliveries](https://leetcode.com/problems/minimum-time-to-complete-all-deliveries/description/) | _O(logn)_ |	_O(1)_	| Medium |  |
+| [3920. Maximize Fixed Points After Deletions](https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/) | _O(logn)_ |	_O(n)_	| Hard | <ul> [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) </li><li>[354. Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/description/) </li><li>[3920. Maximize Fixed Points After Deletions](https://leetcode.com/problems/maximize-fixed-points-after-deletions/description/) </li></ul> |
 
 
 
@@ -1604,6 +1631,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	|	_O(E + n)_	|	_O(n)_ | Hard | ⭐⭐⭐ **undirected graph** 用indegree 来 detect cycle <br/>Similar Question <ul><li> [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)</li><li>  [2077. Paths in Maze That Lead to Same Room](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/) </li><li> [2204. Distance to a Cycle in Undirected Graph](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)	</li></ul>  |
 | [2421. Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/description/)	|	_O(E + nlogn)_	|	_O(n)_ | Hard | ⭐⭐⭐ **undirected graph** union find <br/>Similar Question Union find <ul><li> [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/)</li><li>  [684. Redundant Connection](https://leetcode.com/problems/redundant-connection/description/) </li><li>[721. Accounts Merge](https://leetcode.com/problems/accounts-merge/description/)</li><li>[947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)</li><li>[952. Largest Component Size by Common Factor](https://leetcode.com/problems/largest-component-size-by-common-factor/description/)</li><li>[990. Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/description/)</li><li>[947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)</li><li>[1202. Smallest String With Swaps](https://leetcode.com/problems/smallest-string-with-swaps/description/)</li><li>[1319. Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/)</li><li>[2421. Number of Good Paths](https://leetcode.com/problems/number-of-good-paths/description/)</li></ul>  |
 | [2467. Most Profitable Path in a Tree](https://leetcode.com/problems/most-profitable-path-in-a-tree/description/)	|	_O(n)_	|	_O(n)_ | Medium |  |
+| [2603. Collect Coins in a Tree](https://leetcode.com/problems/collect-coins-in-a-tree/description/)	|	_O(n)_	|	_O(n)_ | Hard | 📕 📕  |
 | [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)	|	_O(M\*(V + ElogV))_	|	_O(n)_ | Hard | ⭐⭐⭐  Dijkstra's Algorithm, Floyd–Warshall algorithm <br/> Similar Question <ul><li>  [1786. Number of Restricted Paths From First to Last Node](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/) </li><li> [2642. Design Graph With Shortest Path Calculator](https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/)</li></ul> |
 | [2685. Count the Number of Complete Components](https://leetcode.com/problems/count-the-number-of-complete-components/description/)	|	_O(V+E)_	|	_O(V+E)_ | Medium | ⭐⭐⭐ `c++ all_of`, 如果每个都在cycle中， 每个node的outgoing size = 总共的node - 1 |
 | [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/)	|	_O(n)_	|	_O(n)_ | Hard | ⭐⭐⭐ no cycle <br/> Similar Question <ul><li>  [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/) </li><li> [2858. Minimum Edge Reversals So Every Node Is Reachable](https://leetcode.com/problems/minimum-edge-reversals-so-every-node-is-reachable/solutions/4052139/java-c-python-dp-on-tree-2-solutions/) </li></ul> |
@@ -2493,6 +2521,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [3699. Number of ZigZag Arrays I](https://leetcode.com/problems/number-of-zigzag-arrays-i/description/)	|	_O((r-l))_  |	_O(n)_|	Hard | |
 | [3732. Maximum Product of Three Elements After One Replacement](https://leetcode.com/problems/maximum-product-of-three-elements-after-one-replacement/description/)	|	_O(n)_  |	_O(1)_|	Medium | |
 | [3830. Longest Alternating Subarray After Removing At Most One Element](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/)	|	_O(n)_  |	_O(n)_|	hard | |
+| [3919. Minimum Cost to Move Between Indices](https://leetcode.com/problems/minimum-cost-to-move-between-indices/description/)	|	_O(n)_  |	_O(n)_|	Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 <br/>e
@@ -2507,6 +2536,7 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [359. Logger Rate Limiter](https://leetcode.com/problems/logger-rate-limiter/description/) | _O(1)_ |	_O(n)_ |	Easy | |
 | [380. Insert Delete GetRandom O(1)](https://leetcode.com/problems/insert-delete-getrandom-o1) | _O(1)_ |	_O(1)_ |	Medium | 🎅🎅 |
 | [460. LFU Cache](https://leetcode.com/problems/lfu-cache/description/) | _O(1)_ |	_O(1)_ |	Hard | ⭐⭐⭐ remove element from list 不会invalidate iterator |
+| [622. Design Circular Queue](https://leetcode.com/problems/design-circular-queue/description/) | _O(1)_ |	_O(n)_ |	Medium | Singly-Linked List |
 | [707. Design Linked List](https://leetcode.com/problems/design-linked-list/description/) | add head/tail: _O(1)_  rest: _O(min(k,N−k))_ |	_O(n)_ | Medium | 📕📕 |
 | [1206. Design Skiplist](https://leetcode.com/problems/design-skiplist/description/) | _O(logn)_ |	_O(n)_ |	Hard | 📕📕 |
 | [1381. Design a Stack With Increment Operation](https://leetcode.com/problems/design-a-stack-with-increment-operation/) | ctor: _O(1)_ <br/>

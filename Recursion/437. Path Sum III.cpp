@@ -80,19 +80,60 @@ public:
 
 
 class Solution {
-    unordered_map<int, int> kv{{0,1}};
 public:
-    int pathSum(TreeNode* root, int sum) {
-        return rec(root, 0, sum);
+    int pathSum(TreeNode* root, int targetSum) {
+        unordered_map<long, int>mp;
+        mp[0] = 1;
+        auto dfs = [&](this auto && dfs, TreeNode* cur, long cursum) {
+            if(!cur) return 0;
+            cursum += cur->val;
+            mp[cursum] += 1;
+            int l = dfs(cur->left, cursum);
+            int r = dfs(cur->right, cursum);
+            mp[cursum] -= 1;
+            
+            return  mp[cursum - targetSum] + l + r;
+        };  
+        return dfs(root, 0);
     }
-    
-    int rec(TreeNode* root, int csum, int targ) {
-        if (!root) return 0;
-        csum+=root->val;
-        kv[csum] += 1;
-        int lc = rec(root->left, csum, targ);
-        int rc = rec(root->right, csum, targ);
-        kv[csum] -= 1;
-        return kv[csum-targ] + lc + rc;
+};
+
+
+
+class Solution {
+public:
+    int pathSum(TreeNode* root, int targetSum) {
+        unordered_map<long, int>mp;
+        mp[0] = 1;
+        stack<TreeNode*> stk;
+        TreeNode* cur = root;
+        TreeNode* prev = nullptr;
+        long cursum = 0;
+        int res = 0;
+        while (cur || !stk.empty()) {
+            if(cur) {
+                stk.push(cur);
+
+                cursum += cur->val;
+                res += mp[cursum - targetSum];
+                mp[cursum]++;
+                
+                cur = cur->left;
+            } else {
+                cur = stk.top();
+
+                if(cur->right && cur->right != prev) {
+                    cur = cur->right;
+                } else {
+                    mp[cursum] -= 1;  //表示right 已经visit过，需要pop node return to parents
+                    cursum -= cur->val; 
+
+                    stk.pop();
+                    prev = cur;
+                    cur = nullptr;
+                }
+            }
+        }
+        return res;
     }
 };
