@@ -1,3 +1,36 @@
+#include <semaphore>
+
+class FooBar {
+private:
+    int n;
+    binary_semaphore f{1};
+    binary_semaphore b{0};
+public:
+    FooBar(int n) {
+        this->n = n;
+    }
+
+    void foo(function<void()> printFoo) {
+        
+        for (int i = 0; i < n; i++) {
+            f.acquire();
+        	// printFoo() outputs "foo". Do not change or remove this line.
+        	printFoo();
+            b.release();
+        }
+    }
+
+    void bar(function<void()> printBar) {
+        
+        for (int i = 0; i < n; i++) {
+            b.acquire();
+        	// printBar() outputs "bar". Do not change or remove this line.
+        	printBar();
+            f.release();
+        }
+    }
+};
+
 class FooBar {
 private:
     int n;
@@ -99,64 +132,34 @@ pshared ==0, semaphore is shared between threads of the process
 
 
 
-
-/*
-
-atomic variables atomic<T> have mutex locks embedded in them.
-
-The idea is that, if a thread acquires the lock, no other thread can acquire it (ie. modify it) until it is released.
-
-Well just how to tell the program to lock/unlock?
-Use this_thread::yield(), which, after a job (printFoo or printBar) is done, 
-will reschedule the same job of that thread, allowing other threads to run.
-
-*/
-
 class FooBar {
 private:
-    int             n;
-    atomic<bool>    alt; // added
-
+    int n;
+    atomic<bool> f = true;
 public:
-    FooBar(int n)
-    {
+    FooBar(int n) {
         this->n = n;
-        alt = false;
     }
 
     void foo(function<void()> printFoo) {
         
-        for (int i = 0; i < n; i++)
-        {
-		/* solution part start */
-		while (alt)
-		{
-			this_thread::yield();
-		}
-		/* end */
+        for (int i = 0; i < n; i++) {
+            while (!f.load(std::memory_order_acquire)) {
 
-		// printFoo() outputs "foo". Do not change or remove this line.
-		printFoo();
-
-		alt = !alt; // added
+            }
+        	// printFoo() outputs "foo". Do not change or remove this line.
+        	printFoo();
+            f.store(false, std::memory_order_release);
         }
     }
 
     void bar(function<void()> printBar) {
         
-        for (int i = 0; i < n; i++)
-        {
-		/* solution part start */
-		while (!alt)
-		{
-			this_thread::yield();
-		}
-		/* end */
-
-		// printBar() outputs "bar". Do not change or remove this line.
-		printBar();
-
-		alt = !alt; // added
+        for (int i = 0; i < n; i++) {
+            while(f.load(std::memory_order_acquire));
+        	// printBar() outputs "bar". Do not change or remove this line.
+        	printBar();
+            f.store(true, std::memory_order_release);
         }
     }
 };

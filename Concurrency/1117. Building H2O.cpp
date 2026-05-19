@@ -155,3 +155,108 @@ private:
     int curr_ = 0;
     mutex m1_, m2_;
 };
+
+
+
+/*
+
+因为hCount 不是atomic, 可能两个thydrogen thread 同时读到 hCount = 1, 都认为自己是第二个hydrogen, 都releaseOxygen了
+race condition
+ */
+class H2O {
+public:
+
+    binary_semaphore hSem{2}; // allow 2 hydrogens
+    binary_semaphore oSem{0}; // oxygen waits
+
+    int hCount = 0;
+    mutex mu;
+
+    H2O() {
+    }
+
+    void hydrogen(function<void()> releaseHydrogen) {
+
+        hSem.acquire();
+
+        releaseHydrogen();
+
+        bool releaseO = false;
+
+        {
+            lock_guard<mutex> lock(mu);
+            hCount++;
+
+            if (hCount == 2) {
+                releaseO = true;
+            }
+        }
+
+        if (releaseO) {
+            oSem.release();
+        }
+    }
+
+    void oxygen(function<void()> releaseOxygen) {
+
+        oSem.acquire();
+
+        releaseOxygen();
+
+        {
+            lock_guard<mutex> lock(mu);
+            hCount = 0;
+        }
+
+        hSem.release();
+        hSem.release();
+    }
+};
+
+
+/*
+
+🔥 What ++count really means
+
+For:
+
+std::atomic<int> count;
+
+this:
+
+++count
+
+is internally something like:
+
+count.fetch_add(1) + 1
+*/
+class H2O {
+public:
+    counting_semaphore<2> hSem{2};
+    binary_semaphore oSem{0};
+
+    atomic<int> count{0};
+
+    void hydrogen(function<void()> releaseHydrogen) {
+
+        hSem.acquire();
+
+        releaseHydrogen();
+
+        if (++count == 2) {
+            oSem.release();
+        }
+    }
+
+    void oxygen(function<void()> releaseOxygen) {
+
+        oSem.acquire();
+
+        releaseOxygen();
+
+        count = 0;
+
+        hSem.release();
+        hSem.release();
+    }
+};

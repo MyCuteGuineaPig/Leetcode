@@ -117,6 +117,85 @@ private:
 
 
 
+class ZeroEvenOdd {
+private:
+    int n;
+    binary_semaphore z{1};
+    binary_semaphore o{0};
+    binary_semaphore e{0};
+public:
+    ZeroEvenOdd(int n) {
+        this->n = n;
+    }
+
+    // printNumber(x) outputs "x", where x is an integer.
+    void zero(function<void(int)> printNumber) {
+        for(int i = 1; i <= n; ++i) {
+            z.acquire();
+            printNumber(0);
+            if(i & 1) o.release();
+            else e.release();
+        }
+    }
+
+    void even(function<void(int)> printNumber) {
+        for(int i = 2; i <=n; i+=2) {
+            e.acquire();
+           printNumber(i);
+            z.release();
+        }
+    }
+
+    void odd(function<void(int)> printNumber) {
+        for(int i = 1; i <=n; i+=2) {
+            o.acquire();
+            printNumber(i);
+            z.release();
+        }
+    }
+};
+
+
+class ZeroEvenOdd {
+private:
+    int n;
+    atomic<int> counter;
+public:
+    ZeroEvenOdd(int n) {
+        this->n = n;
+    }
+
+    // printNumber(x) outputs "x", where x is an integer.
+    void zero(function<void(int)> printNumber) {
+        for(int i = 1; i <= n; ++i) {
+            while (counter.load(std::memory_order_acquire)!=0);
+            printNumber(0);
+            if (i & 1)
+                counter.store(1, std::memory_order_release);
+            else 
+                counter.store(2, std::memory_order_release);
+        }
+    }
+
+    void even(function<void(int)> printNumber) {
+        for(int i = 2; i <=n; i+=2) {
+            while (counter.load(std::memory_order_acquire) != 2);
+            printNumber(i);
+            counter.store(0, std::memory_order_release);
+        }
+    }
+
+    void odd(function<void(int)> printNumber) {
+        for(int i = 1; i <=n; i+=2) {
+            while (counter.load(std::memory_order_acquire) != 1);
+            printNumber(i);
+            counter.store(0, std::memory_order_release);
+        }
+    }
+};
+
+
+
 
 // Time:  O(n)
 // Space: O(1)

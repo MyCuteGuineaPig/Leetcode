@@ -68,45 +68,42 @@ public:
 class Solution {
 public:
     int countPalindromes(string s) {
-        int n  = s.size();
+        int n = s.size();
 
-        vector<int>cnt(10);
-        vector<vector<long>> prefix(10, vector<long>(10));
         vector<vector<long>> suffix(10, vector<long>(10));
+        vector<vector<long>> prefix(10, vector<long>(10));
         vector<vector<vector<long>>> suffix_at(n, vector<vector<long>>(10, vector<long>(10)));
-
-        for(int i = n-1; i >= 0; --i) {
-            int c = s[i] - '0';
-            for(int j = 0; j < 10; ++j) {
+        vector<int>cnt(10);
+        
+        for(int i = n-1; i>=0; --i){
+            int c = s[i]-'0';
+            for(int j = 0; j < 10; ++j)
                 suffix[c][j] += cnt[j];
-            }
-            for(int j = 0; j < 10 ; ++j)
-                for(int k = 0; k < 10; ++k)
+
+            for(int j = 0; j < 10; ++j)
+                for(int k = 0; k < 10; ++k) 
                     suffix_at[i][j][k] = suffix[j][k];
-            cnt[c]++;
+            ++cnt[c];
         }
 
         cnt.assign(10, 0);
+        long long mod = 1e9+ 7;
         long long res = 0;
-        long long mod = 1e9 + 7;
-        for(int i = 0; i < n - 2; ++i) {
+        for(int i = 0; i < n-2; ++i){
             int c = s[i] - '0';
             if (i > 1) {
                 for(int j = 0; j < 10; ++j)
-                    for(int k = 0; k < 10; ++k)
-                        res = (res + prefix[j][k]*suffix_at[i+1][j][k]) % mod;
+                    for(int k = 0; k < 10; ++k) 
+                        res = (res + prefix[j][k]*suffix_at[i+1][k][j]) % mod;
             }
-            
-            for(int j = 0; j < 10; ++j) 
-                prefix[c][j] += cnt[j];
 
-
-            cnt[c]++;
+            for(int j = 0; j < 10; ++j)
+                prefix[j][c] += cnt[j];
+            ++cnt[c];
         }
         return res;
     }
 };
-
 
 
 

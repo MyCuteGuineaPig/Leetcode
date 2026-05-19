@@ -96,6 +96,15 @@ private:
     int cap_;
 };
 
+
+/*
+
+Cannot use lock free atomic
+
+Atomics can protect individual counters, 
+but the queue operations and blocking semantics still require synchronization
+*/
+
 class BoundedBlockingQueue {
 public:
     BoundedBlockingQueue(int capacity) {

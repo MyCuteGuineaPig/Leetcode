@@ -128,3 +128,39 @@ condition_variable:
     notify_all() wakes everyone
 
  */
+
+
+
+class Foo {
+private: 
+    int n;
+    atomic<int>order = {1};
+public:
+    Foo() {
+        
+    }
+
+    void first(function<void()> printFirst) {
+        
+        // printFirst() outputs "first". Do not change or remove this line.
+        printFirst();
+        order.store(2, std::memory_order_release);
+    }
+
+    void second(function<void()> printSecond) {
+        
+        // printSecond() outputs "second". Do not change or remove this line.
+        while(order.load(std::memory_order_acquire) != 2) {
+
+        }
+        printSecond();
+        order.store(3, std::memory_order_release);
+    }
+
+    void third(function<void()> printThird) {
+        
+        // printThird() outputs "third". Do not change or remove this line.
+        while(order.load(std::memory_order_release) != 3);
+        printThird();
+    }
+};
