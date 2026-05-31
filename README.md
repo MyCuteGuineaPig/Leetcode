@@ -346,9 +346,12 @@ void init(const string& s, string& res){
 | [1380. Lucky Numbers in a Matrix](https://leetcode.com/problems/lucky-numbers-in-a-matrix/) | _O(m\*n)_ | _O(m+n)_	| Easy | [```zip(*m)```获得column in list, set intersection](https://github.com/beckswu/Leetcode/blob/master/Array/1380.%20Lucky%20Numbers%20in%20a%20Matrix.py#L35) |
 | [1389. Create Target Array in the Given Order](https://leetcode.com/problems/create-target-array-in-the-given-order/)	|	_O(n^2)_  |	_O(1)_|	Easy |  ❌ |
 | [1394. Find Lucky Integer in an Array	](https://leetcode.com/problems/find-lucky-integer-in-an-array/)	|	_O(n)_  |	_O(n)_|	Easy |  :pencil2: [Loop C++ Map Key Value](https://github.com/beckswu/Leetcode/blob/master/Array/1394.%20Find%20Lucky%20Integer%20in%20an%20Array.cpp#L6) |
+| [1470. Shuffle the Array](https://leetcode.com/problems/shuffle-the-array/description/)	|	_O(n)_  |	_O(1)_|	Easy | |
 | [1583. Count Unhappy Friends	](https://leetcode.com/problems/count-unhappy-friends/)	|	_O(n^2)_  |	_O(n)_|	Medium | [bad description, better description](https://leetcode.com/problems/count-unhappy-friends/discuss/844089/C%2B%2B-Easy-explanation-%3A)-for-a-bad-framed-question-%3A() |
 | [2373. Largest Local Values in a Matrix](https://leetcode.com/problems/largest-local-values-in-a-matrix/)	|	_O(n)_  |	_O(1)_|	Easy | |
 | [3030. Find the Grid of Region Average](https://leetcode.com/problems/find-the-grid-of-region-average/description/)	|	_O(9\*n\*m)_  |	_O(n\*m)_|	Medium | |
+| [3942. Minimum Operations to Sort a Permutation](https://leetcode.com/problems/minimum-operations-to-sort-a-permutation/description/)	|	_O(n)_  |	_O(1)_|	Medium | |
+| [3943. Number of Pairs After Increment](https://leetcode.com/problems/number-of-pairs-after-increment/description/)	|	<ul><li> Type1: _O(log(n))_  </li><li> Type2: _O(n\*log(n))_ </li></ul> |	_O(n\*m)_|	Hard | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
 
@@ -409,6 +412,8 @@ void init(const string& s, string& res){
 | [3002. Maximum Size of a Set After Removals](https://leetcode.com/problems/maximum-size-of-a-set-after-removals/) | _O(n)_ |	_O(n)_	| Medium | ⭐set difference  |
 | [3035. Maximum Palindromes After Operations](https://leetcode.com/problems/maximum-palindromes-after-operations/description/) | _O(nlogn)_ |	_O(n)_	| Medium | ⭐Count Pair  |
 | [3785. Minimum Swaps to Avoid Forbidden Values](https://leetcode.com/problems/minimum-swaps-to-avoid-forbidden-values/description/) | _O(n)_ |	_O(n)_	| Hard |  |
+| [3947. Maximum Number of Items From Sale II](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/description/) | _O(nlogn + mlogm)_ |	_O(n)_	| Medium | 📕📕  |
+| [3948. Lexicographically Maximum MEX Array](https://leetcode.com/problems/lexicographically-maximum-mex-array/description/) | _O(n)_ |	_O(n)_	| Hard |  |
 
 ## Tree
 
@@ -1199,6 +1204,7 @@ DEBUG stdout
 | [0901. Online Stock Span](https://leetcode.com/problems/online-stock-span//) | _O(n)_ | _O(n)_	| Medium | |
 | [1063. Number of Valid Subarrays](https://leetcode.com/problems/number-of-valid-subarrays/description/) | _O(n)_ | _O(n)_	| Hard | Ascending Stack <br/> Similar Question: <ul><li>[1063. Number of Valid Subarrays](https://leetcode.com/problems/number-of-valid-subarrays/description/) </li><li>[2281. Sum of Total Strength of Wizards](https://leetcode.com/problems/sum-of-total-strength-of-wizards/description/)</li></ul> |
 | [1762. Buildings With an Ocean View](https://leetcode.com/problems/buildings-with-an-ocean-view/description/) | _O(n)_ | _O(n)_	| Medium | |
+| [1944. Number of Visible People in a Queue](https://leetcode.com/problems/number-of-visible-people-in-a-queue/description/) | _O(n)_ | _O(n)_	| Hard | |
 |[2281. Sum of Total Strength of Wizards](https://leetcode.com/problems/sum-of-total-strength-of-wizards/description/) | _O(n)_ | _O(n)_	| Hard | <br/> Similar Question: <ul><li>[1063. Number of Valid Subarrays](https://leetcode.com/problems/number-of-valid-subarrays/description/) </li><li>[2281. Sum of Total Strength of Wizards](https://leetcode.com/problems/sum-of-total-strength-of-wizards/description/)</li></ul> |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| |  | | Ascending & Descending Stack 按照 container的顺序进行排序 |
 
@@ -1266,6 +1272,7 @@ When using `ListNode**:`
 | [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)	|	_O(n) average_	|	_O(1)_ |	Easy |  ✏️[Quick-Select](https://github.com/beckswu/Leetcode/blob/master/Heap/973.%20K%20Closest%20Points%20to%20Origin.cpp), [Multiset Comparator](https://github.com/beckswu/Leetcode/blob/master/Heap/973.%20K%20Closest%20Points%20to%20Origin.cpp#L296)|
 | [1046. Last Stone Weight](https://leetcode.com/problems/last-stone-weight/) | _O(nlogn)_ | _O(n)_	| Easy |  |
 | [1834. Single-Threaded CPU](https://leetcode.com/problems/single-threaded-cpu/) | _O(nlogn)_ | _O(n)_	| Medium |  |
+| [2054. Two Best Non-Overlapping Events](https://leetcode.com/problems/two-best-non-overlapping-events/description/) | _O(nlogn)_ | _O(n)_	| Medium | 📕📕📕 |
 | [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/) | _O(mlogm + n + mlogn)_ | _O(n)_	| Hard |  |
 | [2519. Count the Number of K-Big Indices](https://leetcode.com/problems/count-the-number-of-k-big-indices/description/) | _O(nlogn)_ | _O(n)_	| Hard |  |
 | [3771. Total Score of Dungeon Runs](https://leetcode.com/problems/total-score-of-dungeon-runs/) | _O(nlogn)_ | _O(n)_	| Medium | 数学变换公式 |
@@ -1332,6 +1339,7 @@ Two pointer 用于<ul><li>detect cycle</li><li>sorted array比大小,一个array
 | [853. Car Fleet](https://leetcode.com/problems/car-fleet/) | _O(nlogn)_ | _O(n)_	| Medium |  Greedy: sort postion又大到小，再sort到target的时间由小到大  |
 | [937. Reorder Data in Log Files](https://leetcode.com/problems/reorder-data-in-log-files/description/) | _O(nlogn)_ | _O(n)_	| Medium | `stable_partition`, `string_view`  |
 | [910. Smallest Range II](https://leetcode.com/problems/smallest-range-ii/description/) | _O(nlogn)_ | _O(1)_	| Medium |  ⭐⭐⭐  |
+| [912. Sort an Array](https://leetcode.com/problems/sort-an-array/description/) | _O(nlogn)_ | _O(n)_	| Medium |  <ul><li>Merge Sort</li><li>Counting Sort</li><li>Radix Sort</li></ul>  |
 | [1029. Two City Scheduling](https://leetcode.com/problems/two-city-scheduling/) | _O(n) average_ | _O(n)_	| Easy |  Greedy思想,quick select|
 | [1170. Compare Strings by Frequency of the Smallest Character](https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/) | _O(q+w)_ | _O(1)_	| Mediem | Count Sort |
 |C++priority_queue<pair<int,int>>pq 先对比first, top是first最大的，</br>constructor: greater\<int>是让top返回最小的数,大的数放后面 |  |	|  | python的heappop()先pop对比first,then second, top是first最小的  |
@@ -2522,9 +2530,10 @@ DFS 是看有没有path，DP是看有几个path, 如果不要连续的`dp[i][j] 
 | [3732. Maximum Product of Three Elements After One Replacement](https://leetcode.com/problems/maximum-product-of-three-elements-after-one-replacement/description/)	|	_O(n)_  |	_O(1)_|	Medium | |
 | [3830. Longest Alternating Subarray After Removing At Most One Element](https://leetcode.com/problems/longest-alternating-subarray-after-removing-at-most-one-element/description/)	|	_O(n)_  |	_O(n)_|	hard | |
 | [3919. Minimum Cost to Move Between Indices](https://leetcode.com/problems/minimum-cost-to-move-between-indices/description/)	|	_O(n)_  |	_O(n)_|	Medium | |
+| [3946. Maximum Number of Items From Sale I](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/description/)	|	_O(n\*b)_  |	_O(n)_|	Medium | |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |	|  | |
 
-<br/>e
+<br/>
 <br/>
 
 
