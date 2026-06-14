@@ -414,6 +414,8 @@ void init(const string& s, string& res){
 | [3785. Minimum Swaps to Avoid Forbidden Values](https://leetcode.com/problems/minimum-swaps-to-avoid-forbidden-values/description/) | _O(n)_ |	_O(n)_	| Hard |  |
 | [3947. Maximum Number of Items From Sale II](https://leetcode.com/problems/maximum-number-of-items-from-sale-ii/description/) | _O(nlogn + mlogm)_ |	_O(n)_	| Medium | 📕📕  |
 | [3948. Lexicographically Maximum MEX Array](https://leetcode.com/problems/lexicographically-maximum-mex-array/description/) | _O(n)_ |	_O(n)_	| Hard |  |
+| [3961. Maximize Sum of Device Ratings](https://leetcode.com/problems/maximize-sum-of-device-ratings/description/) | _O(n\*m)_ |	_O(n)_	| Medium |  |
+
 
 ## Tree
 
